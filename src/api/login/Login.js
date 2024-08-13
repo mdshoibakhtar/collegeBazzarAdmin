@@ -1830,12 +1830,106 @@ export const testimonialPost = (data) => {
 };
 
 export const testimonialPostUpdate = (data) => {
-  return axiosInstance.put(`${baseUrl}testimonial/update_testimonial/${data.id}`,data.data)
+  return axiosInstance.put(`${baseUrl}testimonial/update_testimonial/${data.id}`, data.data)
 };
 
 export const getTestimonial = (page, count) => {
   return axiosInstance.get(`${baseUrl}testimonial?page=${page}&count=${count}`);
 }
+
+
+
+export const deleteVideoGallery = (id) => {
+  return axiosInstance.delete(`${baseUrl}videoGallery/delete_videoGallery/${id}`);
+};
+
+export const getVideoGalleryById = (id) => {
+  return axiosInstance.get(`${baseUrl}videoGallery/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const postVideoGallery = (data) => {
+  return axiosInstance.post(`${baseUrl}videoGallery/addVideoGallery`, data);
+};
+
+export const updateVideoGallery = (data) => {
+  return axiosInstance.put(`${baseUrl}videoGallery/update_videoGallery/${data.id}`, data.data);
+};
+
+export const getVideoGallery = (page, count) => {
+  return axiosInstance.get(`${baseUrl}videoGallery?page=${page}&count=${count}`);
+};
+
+
+
+export const deleteBlogCategory = (id) => {
+  return axiosInstance.delete(`${baseUrl}blogCategory/delete_blogCategory/${id}`);
+};
+
+// GET a blog category by ID
+export const getBlogCategoryById = (id) => {
+  return axiosInstance.get(`${baseUrl}blogCategory/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new blog category
+export const postBlogCategory = (data) => {
+  return axiosInstance.post(`${baseUrl}blogCategory/addBlogCategory`, data);
+};
+
+// PUT (update) an existing blog category by ID
+export const updateBlogCategory = (data) => {
+  return axiosInstance.put(`${baseUrl}blogCategory/update_blogCategory/${data.id}`, data.data);
+};
+
+// GET the list of blog categories with pagination
+export const getBlogCategoryList = (page, count) => {
+  return axiosInstance.get(`${baseUrl}blogCategory?page=${page}&count=${count}`);
+};
+
+
+
+
+// DELETE a blog by ID
+export const deleteBlog = (id) => {
+  return axiosInstance.delete(`${baseUrl}blog/delete_blog/${id}`);
+};
+
+// GET a blog by ID
+export const getBlogById = (id) => {
+  return axiosInstance.get(`${baseUrl}blog/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new blog
+export const postBlog = (data) => {
+  return axiosInstance.post(`${baseUrl}blog/addBlog`, data);
+};
+
+// PUT (update) an existing blog by ID
+export const updateBlog = (data) => {
+  return axiosInstance.put(`${baseUrl}blog/update_blog/${data.id}`, data.data);
+};
+
+// GET the list of blogs with pagination
+export const getBlogList = (page, count) => {
+  return axiosInstance.get(`${baseUrl}blog?page=${page}&count=${count}`);
+};
+
+
+
 // -------------------Junaid'S APIS- END------------------------------
 
 
