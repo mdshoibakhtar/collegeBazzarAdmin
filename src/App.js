@@ -210,6 +210,12 @@ import PhotoGalleryMasterForm from "./components/topNavigationComp/masters/photo
 //---------------------JUNAID IMPORT START--------------------------
 import CreateTestimonial from "./components/testimonial/CreateTestimonial";
 import Testimoniallist from "./components/testimonialList/Testimoniallist";
+import CreateVedio from "./components/vedioadd/CreateVedio";
+import VedioList from "./components/vediolist/VedioList";
+import BlogCategoryList from "./components/blog-categoryList/BlogCategoryList";
+import BLogCategoryAdd from "./components/blog-categoryAdd/BLogCategoryAdd";
+import BlogList from "./components/blogList/BlogList";
+import BLogAdd from "./components/blog/BLogAdd";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1011,6 +1017,19 @@ function App() {
               <Route path="add-testimonial" element={<CreateTestimonial />} />
               <Route path="edit-testimonial/:id" element={<CreateTestimonial />} />
               <Route path="list-testimonial" element={<Testimoniallist />} />
+
+              <Route path="add-vedio" element={<CreateVedio />} />
+              <Route path="edit-vedio/:id" element={<CreateVedio />} />
+              <Route path="vedio-master" element={<VedioList />} />
+
+              <Route path="add-blog-category" element={<BLogCategoryAdd />} />
+              <Route path="edit-blog-category/:id" element={<BLogCategoryAdd />} />
+              <Route path="blog-category" element={<BlogCategoryList />} />
+
+              <Route path="add-blog" element={<BLogAdd />} />
+              <Route path="edit-blog/:id" element={<BLogAdd />} />
+              <Route path="blog-list" element={<BlogList />} />
+
               {/* -----------------junaid"s Route Start End--------- */}
 
               <Route path="*" element={<PageNotFound/>} />
