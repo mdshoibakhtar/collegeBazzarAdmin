@@ -2,6 +2,7 @@ import { Pagination, Popconfirm } from 'antd'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
+import { baseUrlImage } from '../../../baseUrl'
 
 function CollegesInfoList({ data, totalCount, page, count, onChangeVal, confirm, cancel }) {
     return (
@@ -34,10 +35,16 @@ function CollegesInfoList({ data, totalCount, page, count, onChangeVal, confirm,
                                                 <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Department: activate to sort column ascending" style={{ width: '156.475px' }}>
                                                     Established In
                                                 </th>
+
+                                                <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Department: activate to sort column ascending" style={{ width: '156.475px' }}>
+                                                    Logo Image
+                                                </th>
+                                                <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Department: activate to sort column ascending" style={{ width: '156.475px' }}>
+                                                    Banner Image
+                                                </th>
                                                 <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Department: activate to sort column ascending" style={{ width: '156.475px' }}>
                                                     Location
                                                 </th>
-
                                                 <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Status: activate to sort column ascending" style={{ width: '96.125px' }}>
                                                     Actions </th>
 
@@ -57,9 +64,31 @@ function CollegesInfoList({ data, totalCount, page, count, onChangeVal, confirm,
                                                         {item?.establish}
                                                     </td>
                                                     <td>
+                                                        <div className='image'>
+                                                            <picture>
+                                                                <img
+                                                                    src={`${baseUrlImage}${item?.logo_img}`}
+                                                                    alt='Logo'
+                                                                    style={{objectFit: 'cover' }}
+                                                                />
+                                                            </picture>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div className='image'>
+                                                            <picture>
+                                                                <img
+                                                                    src={`${baseUrlImage}${item?.banner_img}`}
+                                                                    alt='Logo'
+                                                                    style={{ width: "100%", height: "auto", borderRadius: "8px", objectFit: 'cover' }}
+                                                                />
+                                                            </picture>
+                                                        </div>
+                                                    </td>
+                                                    <td>
                                                         {item?.location}
                                                     </td>
-                                                   
+
                                                     <td>
                                                         <div className="d-flex">
                                                             <Link to={`/admin/update-college/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>

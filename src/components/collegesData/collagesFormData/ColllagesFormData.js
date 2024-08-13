@@ -32,8 +32,8 @@ function CollagesFormData() {
     const [content, setContent] = useState('');
     const [profileImage, setProfileImage] = useState();
     const [logoImage, setLogoImage] = useState();
+    const [metaImage, setMetaImage] = useState();
     const [bannImageState, setbannImageState] = useState();
-    const [iconImageState, setIconImageState] = useState();
     const [initialValues, setInitialValues] = useState({
         name: "",
         establish: "",
@@ -55,6 +55,10 @@ function CollagesFormData() {
         logo_img: "",
         banner_img: "",
         stream_id: [],
+        meta_title: "",
+        meta_keyword: "",
+        meta_description: "",
+        meta_image: "",
         // courses: [{ course_id, fee }]
     });
     const [selectedStreamState, setselectedStreamState] = useState([]);
@@ -88,52 +92,78 @@ function CollagesFormData() {
 
     const validate = (values) => {
         let errors = {};
-        // if (!values.name) {
-        //     errors.name = "College Name Is Required";
-        // }
-        // if (!values.establish) {
-        //     errors.establish = "Establish Is Required";
-        // }
-        // if (!values.college_type_id) {
-        //     errors.college_type_id = "College Type Is Required";
-        // }
-        // if (selectedState4.length === 0) {
-        //     errors.affiliate = "Affiliate Is Required";
-        // }
-        // if (selectedState3.length === 0) {
-        //     errors.approvedBy = "Approval Is Required";
-        // }
-        // if (selectedState2.length === 0) {
-        //     errors.facilities = "Facilities Is Required";
-        // }
-        // if (!values.location) {
-        //     errors.location = "Location Is Required";
-        // }
+    
+        // Check required fields
+        if (!values.name) {
+            errors.name = "College Name is required";
+        }
+        if (!values.establish) {
+            errors.establish = "Establishment year is required";
+        } else if (!/^\d{4}$/.test(values.establish)) {
+            errors.establish = "Establishment year must be a valid 4-digit year";
+        }
+        if (!values.college_type_id) {
+            errors.college_type_id = "College Type is required";
+        }
+        if (!values.affiliate || values.affiliate.length === 0) {
+            errors.affiliate = "At least one affiliation is required";
+        }
+        if (!values.approvedBy || values.approvedBy.length === 0) {
+            errors.approvedBy = "At least one approval is required";
+        }
+        if (!values.location) {
+            errors.location = "Location is required";
+        }
+        // Uncomment if overview is required
         // if (!values.overview) {
-        //     errors.overview = "Overview Is Required";
+        //     errors.overview = "Overview is required";
         // }
-        // if (!values.eligibilityCriteria) {
-        //     errors.eligibilityCriteria = "Eligibility Criteria Is Required";
-        // }
-        // if (!values.video_link) {
-        //     errors.video_link = "Video Url Is Required";
-        // }
-        // if (!values.placement_desc) {
-        //     errors.placement_desc = "Placement Description Is Required";
-        // }
-        // if (!values.placement_company_name) {
-        //     errors.placement_company_name = "Placement Company Name Is Required";
-        // }
-        // if (!values.Other) {
-        //     errors.Other = "Other Is Required";
-        // }
+        if (!values.facilities || values.facilities.length === 0) {
+            errors.facilities = "At least one facility is required";
+        }
+        if (!values.eligibilityCriteria) {
+            errors.eligibilityCriteria = "Eligibility criteria is required";
+        }
+        if (!values.video_link) {
+            errors.video_link = "Video link is required";
+        } else if (!/^https?:\/\/[^\s]+$/.test(values.video_link)) {
+            errors.video_link = "Video link must be a valid URL";
+        }
+        if (!values.placement_desc) {
+            errors.placement_desc = "Placement description is required";
+        }
+        if (!values.placement_company_name) {
+            errors.placement_company_name = "Placement company name is required";
+        }
+        if (!values.Other) {
+            errors.Other = "Other information is required";
+        }
+        if (!values.country) {
+            errors.country = "Country is required";
+        }
+        if (!values.state) {
+            errors.state = "State is required";
+        }
+        if (!values.city) {
+            errors.city = "City is required";
+        }
+        if (!values.stream_id || values.stream_id.length === 0) {
+            errors.stream_id = "At least one stream is required";
+        }
+        if (!values.meta_description) {
+            errors.meta_description = "Meta description is required";
+        }
+    
         return errors;
     };
+    
+
     // microphone----------------
 
 
 
     const handleChangeCountry = async (e) => {
+        console.log(e.target.value);
         setInitialValues({
             ...initialValues,
             country: e.target.value,
@@ -147,6 +177,8 @@ function CollagesFormData() {
         }
     };
     const handleChangeState = async (e) => {
+        console.log(e.target.value);
+
         setInitialValues({
             ...initialValues,
             state: e.target.value,
@@ -177,7 +209,7 @@ function CollagesFormData() {
             setTimeout(() => {
                 setProfileImage(res?.data)
                 setbannImageState(res?.data?.data?.url)
-            }, 3000)
+            }, 1000)
 
 
         } catch (error) {
@@ -186,31 +218,52 @@ function CollagesFormData() {
     }
     const logoimgs = new FormData();
     const handleImageUploadLogo = async (e, id) => {
-        imgs.append("image", e.target.files[0]);
+        logoimgs.append("image", e.target.files[0]);
         try {
             const res = await clodinaryImage(logoimgs)
+            console.log(res?.data?.data?.url);
 
             setTimeout(() => {
                 // setLogoImage(res?.data)
                 setLogoImage(res?.data?.data?.url)
-            }, 3000)
+            }, 1000)
+        } catch (error) {
+            alert(`Logo Not Upload`)
+        }
+    }
+    const metaimgs = new FormData();
+    const handleImageUploadmetaImg = async (e, id) => {
+        metaimgs.append("image", e.target.files[0]);
+        try {
+            const res = await clodinaryImage(metaimgs)
+
+            setTimeout(() => {
+                // setLogoImage(res?.data)
+                setMetaImage(res?.data?.data?.url)
+            }, 1000)
 
 
         } catch (error) {
-            alert(`Logo Not Upload`)
+            alert(`Meta Image Not Upload`)
         }
     }
 
 
     const submitForm = async (values) => {
+        console.log(values, "see Values");
+
         const submissionData = {
             ...values,
             affiliate: selectedState4.map(option => option.value),
             approvedBy: selectedState3.map(option => option.value),
             facilities: selectedState2.map(option => option.value),
             stream_id: selectedStreamState.map(option => option.value),
-            overview: content
+            overview: content,
+            banner_img: bannImageState,
+            logo_img: logoImage,
+            meta_image: metaImage,
         };
+
         try {
             if (!params?.id) {
                 const res = await addCollegescrud(submissionData);
@@ -219,7 +272,21 @@ function CollagesFormData() {
                     navigate(`/admin/list-colleges`);
                 }
             } else {
-                const res = await updateCollegescrud(params.id, submissionData);
+                const updatesubmissionData = {
+                    ...values,
+                    affiliate: selectedState4.map(option => option.value),
+                    approvedBy: selectedState3.map(option => option.value),
+                    facilities: selectedState2.map(option => option.value),
+                    stream_id: selectedStreamState.map(option => option.value),
+                    overview: content,
+                    banner_img: bannImageState,
+                    logo_img: logoImage,
+                    meta_image: metaImage,
+                    country: values.country?.id
+                };
+                console.log(updatesubmissionData);
+
+                const res = await updateCollegescrud(params.id, updatesubmissionData);
                 if (res?.statusCode === "200") {
                     toastSuccessMessage("College Successfully Updated");
                     navigate(`/admin/list-colleges`);
@@ -230,43 +297,67 @@ function CollagesFormData() {
         }
     };
 
+
+
     const toastSuccessMessage = (message) => {
         toast.success(message, {
             position: "top-right",
         });
     };
+    
 
     useEffect(() => {
-        const fetchCurrency = async () => {
+        const fetchCollegeData = async () => {
             try {
                 if (params?.id) {
                     const response = await getupdateCollegesCrudStatusId(params.id);
                     const collegeData = response?.data;
                     console.log(collegeData);
+
                     setInitialValues({
                         ...collegeData,
                         affiliate: collegeData?.affiliate?.map(item => ({ value: item?._id, label: item?.name })),
                         approvedBy: collegeData?.approvedBy?.map(item => ({ value: item?._id, label: item?.name })),
                         facilities: collegeData?.facilities?.map(item => ({ value: item?._id, label: item?.name })),
                         stream_id: collegeData?.stream_id?.map(item => ({ value: item?._id, label: item?.name })),
-                        overview: content
+                        overview: collegeData?.overview || "",  // Ensure overview is set correctly
                     });
 
                     setSelectedState4(collegeData?.affiliate?.map(item => ({ value: item?._id, label: item?.name })));
                     setSelectedState3(collegeData?.approvedBy?.map(item => ({ value: item?._id, label: item?.name })));
                     setSelectedState2(collegeData?.facilities?.map(item => ({ value: item?._id, label: item?.name })));
                     setselectedStreamState(collegeData?.stream_id?.map(item => ({ value: item?._id, label: item?.name })));
-                    setContent(collegeData?.overview)
+                    setContent(collegeData?.overview || ""); // Ensure content is set correctly
+
+                    try {
+                        if (collegeData?.country?.id) {
+                            const resState = await StateAddCollageSelectList(collegeData?.country?.id);
+                            setCountryWiseState(resState?.data);
+                        }
+                    } catch (error) {
+                        alert(`Error fetching states: ${error.message}`);
+                    }
+
+                    try {
+                        if (collegeData?.state?._id) {
+                            const resCity = await cityAddCollageSelectList(collegeData?.state?._id);
+                            setStateWisecCity(resCity?.data);
+                        }
+                    } catch (error) {
+                        alert(`Error fetching cities: ${error.message}`);
+                    }
                 }
             } catch (error) {
                 console.error("Error fetching college data:", error);
             }
         };
 
-        fetchCurrency();
+        fetchCollegeData();
+        
+        
     }, [params?.id]);
 
-    console.log(initialValues?.stream_id);
+
 
 
     useEffect(() => {
@@ -408,6 +499,81 @@ function CollagesFormData() {
                                         <form className="tbl-captionn" onSubmit={handleSubmit}>
                                             <div className="row align-items-end">
                                                 <div className="col-xl-4 mb-3">
+                                                    {/* <label className='label fs-4'>Country</label> */}
+                                                    <select
+                                                        id="country"
+                                                        name="country"
+                                                        className="form-select"
+                                                        value={values.country}
+                                                        onChange={(e) => {
+                                                            handleChangeCountry(e);
+                                                            handleChange(e);
+                                                        }}
+                                                        onBlur={handleBlur}
+                                                    >
+                                                        <option value="" disabled style={{ backgroundColor: "#235c0a", color: "white" }}>Select Country</option>
+                                                        {countryState?.map((item, index) => (
+                                                            <option key={index} value={item?.id}>
+                                                                {item?.name}
+                                                            </option>
+                                                        ))}
+                                                    </select>
+                                                    {errors.country && touched.country ? (
+                                                        <small className="error-cls">{errors.country}</small>
+                                                    ) : null}
+
+                                                </div>
+                                                {values?.country ? (<div className="col-xl-4 mb-3">
+                                                    {/* <label className='label fs-4'>State</label> */}
+                                                    <select
+                                                        id="state"
+                                                        name="state"
+                                                        className="form-select"
+                                                        value={values?.state ? values?.state : values?.state?.name}
+                                                        onChange={(e) => {
+                                                            handleChangeState(e);
+                                                        }}
+                                                        onBlur={handleBlur}
+                                                    >
+                                                        <option value="" disabled style={{ backgroundColor: "#235c0a", color: "white" }}>Select State</option>
+                                                        {countryWiseState?.map((item, index) => (
+                                                            <option key={index} value={item?._id}>
+                                                                {item?.name}
+                                                            </option>
+                                                        ))}
+                                                    </select>
+                                                    {errors.state && touched.state ? (
+                                                        <small className="error-cls">{errors.state}</small>
+                                                    ) : null}
+
+                                                </div>) : ""}
+                                                {values?.state ? (<div className="col-xl-4 mb-3">
+                                                    {/* <label className='label fs-4'>City</label> */}
+                                                    <select
+                                                        id="city"
+                                                        name="city"
+                                                        className="form-select"
+                                                        value={values?.city ? values?.city : values?.city?.name}
+                                                        onChange={(e) => {
+                                                            handleChangeCity(e);
+                                                            handleChange(e);
+                                                        }}
+                                                        onBlur={handleBlur}
+                                                    >
+                                                        <option value="" disabled style={{ backgroundColor: "#235c0a", color: "white" }}>Select City</option>
+
+                                                        {stateWiseCity?.map((item, index) => (
+                                                            <option key={index} value={item?._id}>
+                                                                {item?.name}
+                                                            </option>
+                                                        ))}
+                                                    </select>
+                                                    {errors.city && touched.city ? (
+                                                        <small className="error-cls">{errors.state}</small>
+                                                    ) : null}
+
+                                                </div>) : ""}
+                                                <div className="col-xl-4 mb-3">
                                                     <CustomInputField
                                                         type="text"
                                                         value={values.name}
@@ -442,24 +608,25 @@ function CollagesFormData() {
                                                     <select
                                                         id="college_type_id"
                                                         name="college_type_id"
-                                                        className="form-select  "
-                                                        value={values.college_type_id}
+                                                        className="form-select"
+                                                        value={values?.college_type_id?._id ? values?.college_type_id?._id : values?.college_type_id}
                                                         onChange={handleChange}
                                                         onBlur={handleBlur}
                                                     >
                                                         <option value="">College Type</option>
                                                         {state5?.map((item, index) => (
-                                                            <option key={index} value={item?._id}>
+                                                            <option key={index} value={item?.college_type_id?._id || item?._id}>
                                                                 {item?.name}
                                                             </option>
                                                         ))}
                                                     </select>
-                                                    {errors.college_type_id && touched.college_type_id ? (
+                                                    {errors.college_type_id && touched.college_type_id && (
                                                         <small className="error-cls">
                                                             {errors.college_type_id}
                                                         </small>
-                                                    ) : null}
+                                                    )}
                                                 </div>
+
                                                 <div className="col-xl-4 mb-3">
                                                     <label className='label fs-4'>Streams</label>
                                                     <Select
@@ -532,81 +699,7 @@ function CollagesFormData() {
                                                         </small>
                                                     ) : null}
                                                 </div>
-                                                <div className="col-xl-4 mb-3">
-                                                    <label className='label fs-4'>Country</label>
-                                                    <select
-                                                        id="country"
-                                                        name="country"
-                                                        className="form-select"
-                                                        value={values.country}
-                                                        onChange={(e) => {
-                                                            handleChangeCountry(e);
-                                                            handleChange(e);
-                                                        }}
-                                                        onBlur={handleBlur}
-                                                    >
-                                                        <option value="" disabled style={{ backgroundColor: "#235c0a", color: "white" }}>Select Country</option>
-                                                        {countryState?.map((item, index) => (
-                                                            <option key={index} value={item?.id}>
-                                                                {item?.name}
-                                                            </option>
-                                                        ))}
-                                                    </select>
-                                                    {errors.country && touched.country ? (
-                                                        <small className="error-cls">{errors.country}</small>
-                                                    ) : null}
 
-                                                </div>
-                                                {values?.country ? (<div className="col-xl-4 mb-3">
-                                                    <label className='label fs-4'>State</label>
-                                                    <select
-                                                        id="country"
-                                                        name="country"
-                                                        className="form-select"
-                                                        value={values.state}
-                                                        onChange={(e) => {
-                                                            handleChangeState(e);
-                                                            handleChange(e);
-                                                        }}
-                                                        onBlur={handleBlur}
-                                                    >
-                                                        <option value="" disabled style={{ backgroundColor: "#235c0a", color: "white" }}>Select State</option>
-                                                        {countryWiseState?.map((item, index) => (
-                                                            <option key={index} value={item?._id}>
-                                                                {item?.name}
-                                                            </option>
-                                                        ))}
-                                                    </select>
-                                                    {errors.country && touched.country ? (
-                                                        <small className="error-cls">{errors.country}</small>
-                                                    ) : null}
-
-                                                </div>) : ""}
-                                                {values?.state ? (<div className="col-xl-4 mb-3">
-                                                    <label className='label fs-4'>City</label>
-                                                    <select
-                                                        id="state"
-                                                        name="state"
-                                                        className="form-select"
-                                                        value={values.city}
-                                                        onChange={(e) => {
-                                                            handleChangeCity(e);
-                                                            handleChange(e);
-                                                        }}
-                                                        onBlur={handleBlur}
-                                                    >
-                                                        <option value="" disabled style={{ backgroundColor: "#235c0a", color: "white" }}>Select State</option>
-                                                        {stateWiseCity?.map((item, index) => (
-                                                            <option key={index} value={item?._id}>
-                                                                {item?.name}
-                                                            </option>
-                                                        ))}
-                                                    </select>
-                                                    {errors.state && touched.state ? (
-                                                        <small className="error-cls">{errors.state}</small>
-                                                    ) : null}
-
-                                                </div>) : ""}
                                                 <div className="col-xl-4 mb-3">
                                                     <CustomInputField
                                                         type="text"
@@ -621,7 +714,7 @@ function CollagesFormData() {
                                                         placeholder="Location"
                                                     />
                                                 </div>
-                                               
+
                                                 <div className="form-group col-md-12 mb-4">
                                                     <label htmlFor="txtUserId">Description <span style={{ color: 'red' }}>*</span></label>
                                                     <JoditEditor
@@ -684,7 +777,7 @@ function CollagesFormData() {
                                                         autoFocus={false}
                                                         id="placement_desc"
                                                         name="placement_desc"
-                                                        placeholder="Placement Description"
+                                                        placeholder="Placement  Description"
                                                     />
                                                 </div>
 
@@ -702,76 +795,216 @@ function CollagesFormData() {
                                                         placeholder="Other"
                                                     />
                                                 </div>
-                                                <div className="col-xl-6 mb-3">
+                                                <div className='col-xl-12'>
                                                     <div className='row align-items-center'>
-                                                        <div className='col-xl-8'>
+                                                        <div className="col-xl-3 mb-3">
                                                             <CustomInputField
-                                                                type="file"
-                                                                onChange={handleImageUpload}
+                                                                type="text"
+                                                                value={values.meta_keyword}
+                                                                hasError={errors.meta_keyword && touched.meta_keyword}
+                                                                onChange={handleChange}
                                                                 onBlur={handleBlur}
-                                                                value={values?.profileImage?.data?.url ?values?.profileImage?.data?.url:values.banner_img}
-                                                                id="image"
-                                                                name="image"
-                                                                placeholder="image"
-
+                                                                errorMsg={errors.meta_keyword}
+                                                                autoFocus={false}
+                                                                id="meta_keyword"
+                                                                name="meta_keyword"
+                                                                placeholder="Meta KeyWord "
                                                             />
                                                         </div>
-                                                        <div className='col-xl-4'>
-                                                            {profileImage?.data?.url && (
-                                                                <div className='image'>
-                                                                    <picture>
-                                                                        <img src={`${baseUrlImage}${profileImage?.data?.url}`} alt='profile_pic' style={{ width: "100%", height: "45px", borderRadius: "8px", objectFit: "contain" }} />
-                                                                    </picture>
+                                                        <div className="col-xl-3 mb-3">
+                                                            <CustomInputField
+                                                                type="text"
+                                                                value={values.meta_title}
+                                                                hasError={errors.meta_title && touched.meta_title}
+                                                                onChange={handleChange}
+                                                                onBlur={handleBlur}
+                                                                errorMsg={errors.meta_title}
+                                                                autoFocus={false}
+                                                                id="meta_title"
+                                                                name="meta_title"
+                                                                placeholder="Meta Title"
+                                                            />
+                                                        </div>
+
+                                                        <div className="col-xl-3 mb-3">
+                                                            <CustomInputField
+                                                                type="text"
+                                                                value={values.meta_description}
+                                                                hasError={errors.meta_description && touched.meta_description}
+                                                                onChange={handleChange}
+                                                                onBlur={handleBlur}
+                                                                errorMsg={errors.meta_description}
+                                                                autoFocus={false}
+                                                                id="meta_description"
+                                                                name="meta_description"
+                                                                placeholder="Meta Description"
+                                                            />
+                                                        </div>
+                                                        <div className="col-xl-3 mb-3">
+                                                            <div className='row align-items-center'>
+                                                                <div className='col-xl-8'>
+                                                                    <CustomInputField
+                                                                        type="file"
+                                                                        onChange={handleImageUploadmetaImg} // This should handle image upload
+                                                                        onBlur={handleBlur}
+                                                                        id="logo_img"
+                                                                        name="logo_img"
+                                                                        placeholder="Meta Image"
+                                                                    />
                                                                 </div>
-                                                            )}
-                                                            {values.banner_img && !profileImage?.data?.url && (
-                                                                <div className='image'>
-                                                                    <picture>
-                                                                        <img src={`${baseUrlImage}${values.banner_img}`} alt='profile_pic' style={{ width: "100%", height: "45px", borderRadius: "8px", objectFit: "contain" }} />
-                                                                    </picture>
+                                                                <div className='col-xl-4'>
+                                                                    {metaImage ? (
+                                                                        <div className='image'>
+                                                                            <picture>
+                                                                                <img
+                                                                                    src={`${baseUrlImage}${metaImage}`} // Display the uploaded image
+                                                                                    alt='meta_image'
+                                                                                    style={{ objectFit: 'cover' }}
+                                                                                />
+                                                                            </picture>
+                                                                        </div>
+                                                                    ) : values.meta_image ? (
+                                                                        <div className='image'>
+                                                                            <picture>
+                                                                                <img
+                                                                                    src={`${baseUrlImage}${values.meta_image}`} // Display the existing meta image
+                                                                                    alt='meta_image'
+                                                                                    style={{ objectFit: 'cover' }}
+                                                                                />
+                                                                            </picture>
+                                                                        </div>
+                                                                    ) : (
+                                                                        <div className='border p-2 rounded-circle'>
+                                                                            <img
+                                                                                id="avatar-image"
+                                                                                src="https://lh5.googleusercontent.com/proxy/t08n2HuxPfw8OpbutGWjekHAgxfPFv-pZZ5_-uTfhEGK8B5Lp-VN4VjrdxKtr8acgJA93S14m9NdELzjafFfy13b68pQ7zzDiAmn4Xg8LvsTw1jogn_7wStYeOx7ojx5h63Gliw"
+                                                                                alt="default_image"
+                                                                                style={{ objectFit: 'cover' }}
+                                                                            />
+                                                                        </div>
+                                                                    )}
                                                                 </div>
-                                                            )}
-                                                            {!values.image && !profileImage?.data?.url && (
-                                                                <div className='border  rounded'><img id="avatar-image" src="https://st4.depositphotos.com/16940446/26122/v/450/depositphotos_261227048-stock-illustration-vinyl-banner-blank-white-isolated.jpg" alt="Profile Picture" style={{ width: "100%", height: "45px", borderRadius: "8px", objectFit: "cover" }} /></div>
-                                                            )}
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div className='col-12 '>
+                                                    <div className='row align-items-center'>
+                                                        <div className="col-xl-6 mb-3">
+                                                            <div className='row align-items-end'>
+                                                                <div className='col-xl-8'>
+                                                                    <CustomInputField
+                                                                        type="file"
+                                                                        onChange={handleImageUpload}
+                                                                        onBlur={handleBlur}
+                                                                        id="image"
+                                                                        name="image"
+                                                                        placeholder="Upload Image"
+                                                                    />
+                                                                </div>
+                                                                <div className='col-xl-4'>
+                                                                    {profileImage?.data?.url ? (
+                                                                        <div className='image'>
+                                                                            <picture>
+                                                                                <img
+                                                                                    src={`${baseUrlImage}${profileImage?.data?.url}`}
+                                                                                    alt='profile_pic'
+                                                                                    style={{
+                                                                                        width: "100%",
+                                                                                        height: "45px",
+                                                                                        borderRadius: "8px",
+                                                                                        objectFit: "contain"
+                                                                                    }}
+                                                                                />
+                                                                            </picture>
+                                                                        </div>
+                                                                    ) : values.banner_img ? (
+                                                                        <div className='image'>
+                                                                            <picture>
+                                                                                <img
+                                                                                    src={`${baseUrlImage}${values.banner_img}`}
+                                                                                    alt='banner_img'
+                                                                                    style={{
+                                                                                        width: "100%",
+                                                                                        height: "45px",
+                                                                                        borderRadius: "8px",
+                                                                                        objectFit: "contain"
+                                                                                    }}
+                                                                                />
+                                                                            </picture>
+                                                                        </div>
+                                                                    ) : (
+                                                                        <div className='border rounded'>
+                                                                            <img
+                                                                                id="avatar-image"
+                                                                                src="https://st4.depositphotos.com/16940446/26122/v/450/depositphotos_261227048-stock-illustration-vinyl-banner-blank-white-isolated.jpg"
+                                                                                alt="default_image"
+                                                                                style={{
+                                                                                    width: "100%",
+                                                                                    height: "45px",
+                                                                                    borderRadius: "8px",
+                                                                                    objectFit: "cover"
+                                                                                }}
+                                                                            />
+                                                                        </div>
+                                                                    )}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="col-xl-6 mb-3">
+                                                            <div className='row align-items-center'>
+                                                                <div className='col-xl-10'>
+                                                                    <CustomInputField
+                                                                        type="file"
+                                                                        onChange={handleImageUploadLogo}
+                                                                        onBlur={handleBlur}
+                                                                        id="logo_img"
+                                                                        name="logo_img"
+                                                                        placeholder="Logo"
+                                                                    // Removed `value` attribute for file inputs as it is not required
+                                                                    />
+                                                                </div>
+                                                                <div className='col-xl-2'>
+                                                                    {logoImage ? (
+                                                                        <div className='image'>
+                                                                            <picture>
+                                                                                <img
+                                                                                    src={`${baseUrlImage}${logoImage}`}
+                                                                                    alt='logo_image'
+                                                                                    style={{ width: "100%", height: "auto", borderRadius: "8px", objectFit: 'cover' }}
+                                                                                />
+                                                                            </picture>
+                                                                        </div>
+                                                                    ) : values.logo_img ? (
+                                                                        <div className='image'>
+                                                                            <picture>
+                                                                                <img
+                                                                                    src={`${baseUrlImage}${values.logo_img}`}
+                                                                                    alt='logo_image'
+                                                                                    style={{ width: "100%", height: "auto", borderRadius: "8px", objectFit: 'cover' }}
+                                                                                />
+                                                                            </picture>
+                                                                        </div>
+                                                                    ) : (
+                                                                        <div className='border p-2 rounded-circle'>
+                                                                            <img
+                                                                                id="avatar-image"
+                                                                                src="https://lh5.googleusercontent.com/proxy/t08n2HuxPfw8OpbutGWjekHAgxfPFv-pZZ5_-uTfhEGK8B5Lp-VN4VjrdxKtr8acgJA93S14m9NdELzjafFfy13b68pQ7zzDiAmn4Xg8LvsTw1jogn_7wStYeOx7ojx5h63Gliw"
+                                                                                alt="default_image"
+                                                                                style={{ width: "100%", height: "auto", borderRadius: "8px", objectFit: 'cover' }}
+                                                                            />
+                                                                        </div>
+                                                                    )}
+                                                                </div>
+                                                            </div>
+
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className="col-xl-6 mb-3">
-                                                    <div className='row align-items-center'>
-                                                        <div className='col-xl-10'>
-                                                            <CustomInputField
-                                                                type="file"
-                                                                onChange={handleImageUploadLogo}
-                                                                onBlur={handleBlur}
-                                                                value={values?.profileImage?.data?.url ?values?.profileImage?.data?.url:values.logo_img}
-                                                                id="logo_img"
-                                                                name="logo_img"
-                                                                placeholder="Logo"
 
-                                                            />
-                                                        </div>
-                                                        <div className='col-xl-2'>
-                                                            {logoImage?.data?.url && (
-                                                                <div className='image'>
-                                                                    <picture>
-                                                                        <img src={`${baseUrlImage}${logoImage?.data?.url}`} alt='logo_pic' style={{ objectFit: "cover" }}/>
-                                                                    </picture>
-                                                                </div>
-                                                            )}
-                                                            {values.logo_img && !logoImage?.data?.url && (
-                                                                <div className='image'>
-                                                                    <picture>
-                                                                        <img src={`${baseUrlImage}${values.logo_img}`} alt='logo_pic'style={{ objectFit: "cover" }} />
-                                                                    </picture>
-                                                                </div>
-                                                            )}
-                                                            {!values.image && !logoImage?.data?.url && (
-                                                                <div className='border p-2 rounded-circle'><img id="avatar-image" src="https://lh5.googleusercontent.com/proxy/t08n2HuxPfw8OpbutGWjekHAgxfPFv-pZZ5_-uTfhEGK8B5Lp-VN4VjrdxKtr8acgJA93S14m9NdELzjafFfy13b68pQ7zzDiAmn4Xg8LvsTw1jogn_7wStYeOx7ojx5h63Gliw" alt="icon Picture" style={{ objectFit: "cover" }} /></div>
-                                                            )}
-                                                        </div>
-                                                    </div>
-                                                </div>
                                                 <div className="text-right col-12">
                                                     <Link
                                                         to="/admin/list-colleges"
