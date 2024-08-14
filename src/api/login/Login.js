@@ -1929,6 +1929,57 @@ export const getBlogList = (page, count) => {
 };
 
 
+// DELETE a partner by ID
+export const deletePartner = (id) => {
+  return axiosInstance.delete(`${baseUrl}partner/delete_partner/${id}`);
+};
+
+// GET a partner by ID
+export const getPartnerById = (id) => {
+  return axiosInstance.get(`${baseUrl}partner/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new partner
+export const postPartner = (data) => {
+  return axiosInstance.post(`${baseUrl}partner/addPartner`, data);
+};
+
+// PUT (update) an existing partner by ID
+export const updatePartner = (data) => {
+  return axiosInstance.put(`${baseUrl}partner/update_partner/${data.id}`, data.data);
+};
+
+// GET the list of partners with pagination
+export const getPartnerList = (page, count) => {
+  return axiosInstance.get(`${baseUrl}partner?page=${page}&count=${count}`);
+};
+
+export const getAboutUs = (page, count) => {
+  return axiosInstance.get(`${baseUrl}aboutus/admin`);
+};
+export const updateAboutUs = (data) => {
+  return axiosInstance.put(`${baseUrl}aboutus/update` , data);
+};
+export const getContactUs = (page, count) => {
+  return axiosInstance.get(`${baseUrl}contactus/admin`);
+};
+export const updateContactUs = (data) => {
+  return axiosInstance.put(`${baseUrl}contactus/update` , data);
+};
+export const getPrivacyPolicy = (page, count) => {
+  return axiosInstance.get(`${baseUrl}privacyNPolicy/admin`);
+};
+export const updatePrivacyPolicy = (data) => {
+  return axiosInstance.put(`${baseUrl}privacyNPolicy/update` , data);
+};
+
+
+
 
 // -------------------Junaid'S APIS- END------------------------------
 

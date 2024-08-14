@@ -3,18 +3,17 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Pagination, Popconfirm, message } from "antd";
 import Breadcrumbs from "../../common/breadcrumb/Breadcrumbs";
-import { deleteBlog, getBlogList } from "../../api/login/Login"; 
+import { deleteBlogCategory, deletePartner, getBlogCategoryList, getPartnerList } from "../../api/login/Login"; 
 import Loadar from "../../common/loader/Loader";
 import { baseUrlImage } from "../../baseUrl";
 
 const breadCrumbsTitle = {
     id: "1",
     title_1: "Master",
-    title_2: "Blog Master",
-    path_2: "/admin/blog-master"
+    title_2: "Blog Partner Master",
 };
 
-function BlogList() {
+function PartnerList() {
 
     const [data, setData] = useState();
     const [count, setCount] = useState(10);
@@ -25,7 +24,7 @@ function BlogList() {
     const getListBlogCategory = async (num) => {
         setLoading(true);
         try {
-            const data = await getBlogList(num, count);
+            const data = await getPartnerList(num, count);
             setData(data);
         } catch (error) {
             alert(error.message);
@@ -40,7 +39,7 @@ function BlogList() {
     const deleteBlogCategoryItem = async (id) => {
         setLoading(true);
         try {
-            await deleteBlog(id);
+            await deletePartner(id);
             getListBlogCategory(0);
         } catch (error) {
             alert(error.message);
@@ -73,9 +72,9 @@ function BlogList() {
                         <div className="card-body p-0">
                             <div className="table-responsive active-projects style-1">
                                 <div className="tbl-caption">
-                                    <h4 className="heading mb-0">Blog  Master</h4>
+                                    <h4 className="heading mb-0">Partner Master</h4>
                                     <div>
-                                        <Link className="btn btn-primary btn-sm" to="/admin/add-blog" role="button" aria-controls="offcanvasExample">+ Blog Master</Link>
+                                        <Link className="btn btn-primary btn-sm" to="/admin/add-partner" role="button" aria-controls="offcanvasExample">+ add partner</Link>
                                     </div>
                                 </div>
                                 <div id="empoloyees-tblwrapper_wrapper" className="dataTables_wrapper no-footer">
@@ -88,38 +87,34 @@ function BlogList() {
                                         <thead>
                                             <tr role="row">
                                                 <th style={{ width: '50px' }}>S.NO</th>
-                                                <th style={{ width: '150px' }}>Subject</th>
-                                                <th style={{ width: '150px' }}>Slug</th>
-                                                <th style={{ width: '150px' }}>Meta Title</th>
-                                                <th style={{ width: '200px' }}>Description</th>
-                                                <th style={{ width: '200px' }}>Attachment</th>
-                                                <th style={{ width: '150px' }}>Meta Image</th>
+                                                <th style={{ width: '150px' }}> Name</th>
+                                                <th style={{ width: '150px' }}>Description</th>
+                                                <th style={{ width: '150px' }}>Profile</th>
+                                                {/* <th style={{ width: '150px' }}>Image</th> */}
                                                 <th style={{ width: '100px' }}>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {data && data?.data?.map((item, i) => (
-                                                <tr role="row" className="odd" key={item.blog_id}>
+                                                <tr role="row" className="odd" key={item._id}>
                                                     <td>{i + 1}</td>
-                                                    <td>{item?.subject}</td>
-                                                    <td>{item?.slug}</td>
-                                                    <td>{item?.meta_title}</td>
+                                                    <td>{item?.name}</td>
                                                     <td>{item?.description}</td>
                                                     <td>
-                                                        <img style={{width:"100px"}} src={`${baseUrlImage}${item?.attachment}`} alt="Meta" />
+                                                        <img style={{width:"100px"}} src={`${baseUrlImage}${item?.profile}`} alt="Meta" />
                                                     </td>
-                                                    <td>
-                                                        <img style={{width:"100px"}} src={`${baseUrlImage}${item?.meta_image}`} alt="Meta" />
-                                                    </td>
+                                                    {/* <td>
+                                                        <img style={{width:"100px"}} src={`${baseUrlImage}${item?.image}`} alt="Meta" />
+                                                    </td> */}
                                                     <td>
                                                         <div className="d-flex">
-                                                            <Link to={`/admin/edit-blog/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
+                                                            <Link to={`/admin/edit-partner/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
                                                                 <i className="fa fa-pencil" />
                                                             </Link>
                                                             <Popconfirm
                                                                 title="Delete Blog Category"
                                                                 description="Are you sure to delete?"
-                                                                onConfirm={() => confirm(item?.blog_id)}
+                                                                onConfirm={() => confirm(item?._id)}
                                                                 onCancel={cancel}
                                                                 okText="Yes"
                                                                 cancelText="No"
@@ -154,4 +149,4 @@ function BlogList() {
     );
 }
 
-export default BlogList;
+export default PartnerList;
