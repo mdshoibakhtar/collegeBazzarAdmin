@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Breadcrumbs from '../../common/breadcrumb/Breadcrumbs';
-import {  getTestimonialById, getVideoGalleryById, postVideoGallery, testimonialPost, testimonialPostUpdate, updateVideoGallery } from '../../api/login/Login';
+import { collegeListss, getFaqById, postFaq, updateFaq } from '../../api/login/Login';
 import { toast, ToastContainer } from 'react-toastify';
 import Loadar from '../../common/loader/Loader';
 
-const CreateVedio = () => {
+const FAQAdd = () => {
     const breadCrumbsTitle = {
         id: "1",
         title_1: "Master",
-        title_2: "Vedio",
-        title_3: "Vedio",
+        title_2: "FAQ",
+        title_3: "FAQ Master",
     };
 
     const [formValues, setFormValues] = useState({
-        video: '',  // Video field
-        isActive: '', // 'yes' or 'no' based on selection
+        question: '',  // Question field
+        answer: '',  // Answer field
     });
 
     const [errors, setErrors] = useState({});
@@ -25,14 +25,24 @@ const CreateVedio = () => {
 
     const getDataById = async (id) => {
         try {
-            const data = await getVideoGalleryById(id);
-            setFormValues(data.data.data);
+            const data = await getFaqById(id);
+            setFormValues(data.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    const [college, setCollege] = useState([]);
+    const GetCollege = async (id) => {
+        try {
+            const data = await collegeListss();
+            setCollege(data.data);
         } catch (error) {
             console.error(error);
         }
     };
 
     useEffect(() => {
+        GetCollege()
         if (params?.id) {
             getDataById(params?.id);
         }
@@ -41,11 +51,11 @@ const CreateVedio = () => {
     const validate = () => {
         let errors = {};
 
-        if (!formValues.video) {
-            errors.video = "Video is required";
+        if (!formValues.question) {
+            errors.question = "Question is required";
         }
-        if (!formValues.isActive) {
-            errors.isActive = "Active status is required";
+        if (!formValues.answer) {
+            errors.answer = "Answer is required";
         }
 
         setErrors(errors);
@@ -53,13 +63,13 @@ const CreateVedio = () => {
     };
 
     const toastSuccessMessage = () => {
-        toast.success(`${params?.id ? "Update" : "Add"} Video Successfully.`, {
+        toast.success(`${params?.id ? "Update" : "Add"} FAQ Successfully.`, {
             position: "top-center",
         });
     };
 
     const toastErrorMessage = () => {
-        toast.error(`${params?.id ? "Update" : "Add"} Video Failed.`, {
+        toast.error(`${params?.id ? "Update" : "Add"} FAQ Failed.`, {
             position: "top-center",
         });
     };
@@ -71,12 +81,13 @@ const CreateVedio = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         if (!validate()) return;
 
         setLoader(true);
         try {
-            const res = await postVideoGallery({ ...formValues });
-            if (res?.statusCode == 200) {
+            const res = await postFaq(formValues);
+            if (res?.statusCode === 200) {
                 toastSuccessMessage();
             } else {
                 toastErrorMessage();
@@ -89,12 +100,13 @@ const CreateVedio = () => {
 
     const handleSubmitUpdate = async (e) => {
         e.preventDefault();
+
         if (!validate()) return;
 
         setLoader(true);
         try {
-            const res = await updateVideoGallery({ data: { ...formValues }, id: params?.id });
-            if (res?.statusCode == 200) {
+            const res = await updateFaq({ data: formValues, id: params?.id });
+            if (res?.statusCode === 200) {
                 toastSuccessMessage();
             } else {
                 toastErrorMessage();
@@ -116,43 +128,52 @@ const CreateVedio = () => {
                         <div className="card-body p-0">
                             <div className="table-responsive active-projects style-1">
                                 <div className="tbl-caption tbl-caption-2">
-                                    <h4 className="heading mb-0">ADD Video -</h4>
+                                    <h4 className="heading mb-0">{params?.id ? "Edit FAQ" : "Add FAQ"}</h4>
                                 </div>
                                 <form className="tbl-captionn" onSubmit={params?.id ? handleSubmitUpdate : handleSubmit}>
                                     <div className="row">
-                                        <div className="col-xl-4 mb-3">
-                                            <div className={`form-group ${errors.video ? 'has-error' : ''}`}>
-                                                <label htmlFor="video">Video</label>
+                                        <div className="col-xl-6 mb-3">
+                                            <div className={`form-group ${errors.question ? 'has-error' : ''}`}>
+                                                <label htmlFor="question">College</label>
+                                                <select  onChange={handleChange} name='college_id' className="form-select" aria-label="Default select example">
+                                                    <option selected="">Open this select menu</option>
+                                                  {college?.data?.map((item, index) => (
+                                                        <option value={item.id} key={index}>{item.college_name}</option>
+                                                    ))}
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                        <div className="col-xl-6 mb-3">
+                                            <div className={`form-group ${errors.question ? 'has-error' : ''}`}>
+                                                <label htmlFor="question">Question</label>
                                                 <input
                                                     type="text"
-                                                    id="video"
-                                                    name="video"
-                                                    value={formValues.video}
+                                                    id="question"
+                                                    name="question"
+                                                    value={formValues.question}
                                                     onChange={handleChange}
                                                     className="form-control"
-                                                    placeholder="Enter Video URL"
+                                                    placeholder="Enter Question"
                                                 />
-                                                {errors.video && (
-                                                    <div className="error">{errors.video}</div>
+                                                {errors.question && (
+                                                    <div className="error">{errors.question}</div>
                                                 )}
                                             </div>
                                         </div>
-                                        <div className="col-xl-4 mb-3">
-                                            <div className={`form-group ${errors.isActive ? 'has-error' : ''}`}>
-                                                <label htmlFor="isActive">Is Active</label>
-                                                <select
-                                                    id="isActive"
-                                                    name="isActive"
-                                                    value={formValues.isActive}
+                                        <div className="col-xl-6 mb-3">
+                                            <div className={`form-group ${errors.answer ? 'has-error' : ''}`}>
+                                                <label htmlFor="answer">Answer</label>
+                                                <textarea
+                                                    id="answer"
+                                                    name="answer"
+                                                    value={formValues.answer}
                                                     onChange={handleChange}
                                                     className="form-control"
-                                                >
-                                                    <option value="">Select Status</option>
-                                                    <option value="true">Yes</option>
-                                                    <option value="false">No</option>
-                                                </select>
-                                                {errors.isActive && (
-                                                    <div className="error">{errors.isActive}</div>
+                                                    placeholder="Enter Answer"
+                                                />
+                                                {errors.answer && (
+                                                    <div className="error">{errors.answer}</div>
                                                 )}
                                             </div>
                                         </div>
@@ -170,4 +191,4 @@ const CreateVedio = () => {
     );
 }
 
-export default CreateVedio;
+export default FAQAdd;

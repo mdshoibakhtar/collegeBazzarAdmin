@@ -14,9 +14,10 @@ import { CSVLink } from "react-csv";
 import CustomDropdown from "../../../common/CustomDropdown";
 import { ToastContainer, toast } from "react-toastify";
 import { Pagination } from "antd";
+import BulkAssigedModel from "../BulkAssigedModel";
 
 
-function DistributerList({ loading, params, state, handleChange, onChangeVal,approval }) {
+function DistributerList({ loading, params, state, handleChange, onChangeVal, approval }) {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -38,11 +39,14 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal,app
     const handleClose5 = () => setShow5(false);
     const [getItem, setGetItem] = useState()
     const handleShow5 = (item) => {
-        setGetItem({...item ,paramId:params?.id})
+        setGetItem({ ...item, paramId: params?.id })
         setTimeout(() => {
             setShow5(true)
         }, 1000);
     }
+
+
+    const [modalShow, setModalShow] = useState(false);
 
 
 
@@ -54,6 +58,13 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal,app
                 <div className="row">
                     <div className="col-xl-12">
                         <div className="card">
+                            <button className="btn btn-primary" style={{ width: "130px" }} onClick={() => setModalShow(true)}>
+                                Bulk Assigned
+                            </button>
+                            <BulkAssigedModel
+                                show={modalShow}
+                                onHide={() => setModalShow(false)}
+                            />
                             <div className="card-body p-0">
                                 <div className="table-responsive active-projects style-1">
                                     <div className="tbl-caption">
@@ -82,9 +93,9 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal,app
 
                                                         </tr> */}
                                                 <tr role="row">
-                                                    {/*  <th className="sorting_asc" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-sort="ascending" aria-label="Employee ID: activate to sort column descending" style={{ width: '122.312px' }}>
-                                                        S.NO
-                                                    </th> */}
+                                                    <th className="sorting_asc" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-sort="ascending" aria-label="Employee ID: activate to sort column descending" style={{ width: '122.312px' }}>
+                                                        #
+                                                    </th>
                                                     {/*  <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Employee Name: activate to sort column ascending" style={{ width: '203.45px' }}>
                                                         Joining Date
                                                     </th>
@@ -101,6 +112,10 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal,app
                                                     </th>
                                                     <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Department: activate to sort column ascending" style={{ width: '156.475px' }}>
                                                         Name</th>
+                                                    <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Department: activate to sort column ascending" style={{ width: '156.475px' }}>
+                                                        Streams</th>
+                                                    <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Department: activate to sort column ascending" style={{ width: '156.475px' }}>
+                                                        Courses</th>
 
                                                     {/* <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Contact Number: activate to sort column ascending" style={{ width: '161.675px' }}>
                                                         Refrence  ID
@@ -115,7 +130,7 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal,app
                                                         Main Balance</th>
 
                                                     <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Contact Number: activate to sort column ascending" style={{ width: '161.675px' }}>
-                                                    KYC Status </th>
+                                                        KYC Status </th>
                                                     <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Status: activate to sort column ascending" style={{ width: '96.125px' }} >
                                                         Approval</th>
 
@@ -128,12 +143,24 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal,app
                                             <tbody>
                                                 {state && state?.user?.map((item, i) => {
                                                     return <tr role="row" className="odd">
-                                                        {/* <td className="sorting_1"><span>{i + 1}</span></td> */}
+                                                        <td className="sorting_1">
+                                                            <div className="form-check">
+                                                                <input
+                                                                    className="form-check-input"
+                                                                    type="checkbox"
+                                                                    defaultValue=""
+                                                                    id="flexCheckDefault"
+                                                                />
+                                                            </div>
+
+                                                        </td>
                                                         {/* <td className="sorting_1"></td>
                                                         <td className="sorting_1"></td> */}
                                                         <td className="sorting_1">{item?.refer_id}</td>
                                                         <td className="sorting_1">{item?.member_type}</td>
                                                         <td>{item?.name}</td>
+                                                        <td>---</td>
+                                                        <td>---</td>
                                                         {/* <td className="sorting_1">{item?._id}</td> */}
                                                         <td>{item?.mobile}</td>
 
@@ -149,7 +176,7 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal,app
                                                             {/* <span className="badge badge-success light border-0" onChange={() => { handleApproval('active') }}>{activeState ? "Inactive" : "Active"}</span> */}
                                                             {/* <span className="badge badge-success light"> */}
                                                             {/* <div className="col-lg-4"> */}
-                                                            <select className="form-select py-0 " aria-label="Default select example" value={item?.is_approved} name="is_approved" onChange={(e) => handleChange(e, item?._id)} style={{width:"150px"}}>
+                                                            <select className="form-select py-0 " aria-label="Default select example" value={item?.is_approved} name="is_approved" onChange={(e) => handleChange(e, item?._id)} style={{ width: "150px" }}>
                                                                 <option>Status</option>
                                                                 <option value={"true"}>Approved</option>
                                                                 <option value={"false"}>Not Approved</option>
@@ -173,12 +200,12 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal,app
                                                                     <Dropdown.Item href="#" onClick={handleShow2}>Scheme</Dropdown.Item>
                                                                     <Dropdown.Item href="#" onClick={handleShow3}>Add Id Stock</Dropdown.Item>
                                                                     <Dropdown.Item href="#" onClick={handleShow4}>Permission</Dropdown.Item>
-                                                                    <Dropdown.Item href="#" onClick={()=>{handleShow5(item)}}>Locked Amount</Dropdown.Item>
+                                                                    <Dropdown.Item href="#" onClick={() => { handleShow5(item) }}>Locked Amount</Dropdown.Item>
                                                                     <Dropdown.Item href="/admin/member/profile/view/3">View Profile</Dropdown.Item>
                                                                 </Dropdown.Menu>
                                                             </Dropdown>
 
-                                                           {/*  <Dropdown>
+                                                            {/*  <Dropdown>
                                                                 <Dropdown.Toggle variant="success" id="dropdown-basic">
                                                                     Reports
                                                                 </Dropdown.Toggle>
@@ -238,7 +265,7 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal,app
             <SchemeManager show2={show2} handleClose2={handleClose2} />
             <IdStocks show3={show3} handleClose3={handleClose3} />
             <MemberPermission show4={show4} handleClose4={handleClose4} />
-            <LockAmount show5={show5} handleClose5={handleClose5} getItem={getItem}/>
+            <LockAmount show5={show5} handleClose5={handleClose5} getItem={getItem} />
         </>
     )
 }
