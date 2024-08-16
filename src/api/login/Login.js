@@ -1978,6 +1978,48 @@ export const updatePrivacyPolicy = (data) => {
   return axiosInstance.put(`${baseUrl}privacyNPolicy/update` , data);
 };
 
+export const getReturnPolicy = (page, count) => {
+  return axiosInstance.get(`${baseUrl}returnPolicy/admin`);
+};
+export const updateReturnPolicy = (data) => {
+  return axiosInstance.put(`${baseUrl}returnPolicy/update` , data);
+};
+
+export const gettermsNCondition = (page, count) => {
+  return axiosInstance.get(`${baseUrl}termsNCondtion/admin`);
+};
+export const updatetermsNCondition = (data) => {
+  return axiosInstance.put(`${baseUrl}termsNCondtion/update` , data);
+};
+
+
+export const deleteFaq = (id) => {
+  return axiosInstance.delete(`${baseUrl}faq/delete_type/${id}`);
+};
+
+export const getFaqById = (id) => {
+  return axiosInstance.get(`${baseUrl}faq/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const postFaq = (data) => {
+  return axiosInstance.post(`${baseUrl}faq/addType`, data);
+};
+
+export const updateFaq = (data) => {
+  return axiosInstance.put(`${baseUrl}faq/update_type/${data.id}`, data.data);
+};
+
+export const getFaqList = (page, count) => {
+  return axiosInstance.get(`${baseUrl}faq`);
+};
+export const collegeListss = (page, count) => {
+  return axiosInstance.get(`${baseUrl}college/admin`);
+};
 
 
 
