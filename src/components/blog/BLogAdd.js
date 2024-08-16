@@ -33,7 +33,7 @@ const BLogAdd = () => {
     const getDataById = async (id) => {
         try {
             const data = await getBlogById(id);
-            setFormValues(data.data);
+            setFormValues(data.data.data);
         } catch (error) {
             console.error(error);
         }
@@ -149,7 +149,7 @@ const BLogAdd = () => {
                                                     type="text"
                                                     id="subject"
                                                     name="subject"
-                                                    value={formValues?.subject}
+                                                    value={formValues.subject}
                                                     onChange={handleChange}
                                                     className="form-control"
                                                     placeholder="Enter Subject"

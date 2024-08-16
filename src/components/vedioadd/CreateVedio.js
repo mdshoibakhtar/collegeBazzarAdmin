@@ -14,7 +14,7 @@ const CreateVedio = () => {
     };
 
     const [formValues, setFormValues] = useState({
-        video: '',  // Video field
+        vedio: '',  // Video field
         isActive: '', // 'yes' or 'no' based on selection
     });
 
@@ -41,8 +41,8 @@ const CreateVedio = () => {
     const validate = () => {
         let errors = {};
 
-        if (!formValues.video) {
-            errors.video = "Video is required";
+        if (!formValues.vedio) {
+            errors.vedio = "Video is required";
         }
         if (!formValues.isActive) {
             errors.isActive = "Active status is required";
@@ -121,19 +121,19 @@ const CreateVedio = () => {
                                 <form className="tbl-captionn" onSubmit={params?.id ? handleSubmitUpdate : handleSubmit}>
                                     <div className="row">
                                         <div className="col-xl-4 mb-3">
-                                            <div className={`form-group ${errors.video ? 'has-error' : ''}`}>
-                                                <label htmlFor="video">Video</label>
+                                            <div className={`form-group ${errors.vedio ? 'has-error' : ''}`}>
+                                                <label htmlFor="vedio">Video</label>
                                                 <input
                                                     type="text"
-                                                    id="video"
-                                                    name="video"
-                                                    value={formValues.video}
+                                                    id="vedio"
+                                                    name="vedio"
+                                                    value={formValues.vedio}
                                                     onChange={handleChange}
                                                     className="form-control"
                                                     placeholder="Enter Video URL"
                                                 />
-                                                {errors.video && (
-                                                    <div className="error">{errors.video}</div>
+                                                {errors.vedio && (
+                                                    <div className="error">{errors.vedio}</div>
                                                 )}
                                             </div>
                                         </div>

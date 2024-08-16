@@ -216,16 +216,6 @@ import BlogCategoryList from "./components/blog-categoryList/BlogCategoryList";
 import BLogCategoryAdd from "./components/blog-categoryAdd/BLogCategoryAdd";
 import BlogList from "./components/blogList/BlogList";
 import BLogAdd from "./components/blog/BLogAdd";
-import PartnerList from "./components/partnerList/PartnerList";
-import PartnerAdd from "./components/partneradd/PartnerAdd";
-import AboutUs from "./components/aboutus/AboutUs";
-import ContactUs from "./components/contact/AboutUs";
-import PrivacyAndPolicy from "./components/privecyPolecy/PrivacyAndPolicy";
-import ReturnPolicy from "./components/return-policy/Return-Policy";
-import TermsCondition from "./components/terms-condition/TermsCondition";
-import FAQAdd from "./components/FaqAdd/FAQAdd";
-import FaqList from "./components/FaqList/FaqList";
-import WhatsaapMaster from "./components/whatsaap-master/WhatsaapMaster";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1039,26 +1029,6 @@ function App() {
               <Route path="add-blog" element={<BLogAdd />} />
               <Route path="edit-blog/:id" element={<BLogAdd />} />
               <Route path="blog-list" element={<BlogList />} />
-
-              <Route path="add-partner" element={<PartnerAdd />} />
-              <Route path="edit-partner/:id" element={<PartnerAdd />} />
-              <Route path="partner-list" element={<PartnerList />} />
-
-              <Route path="about-us-master" element={<AboutUs />} />
-              <Route path="contact-us-master" element={<ContactUs />} />
-              <Route path="privacy-policy-master" element={<PrivacyAndPolicy />} />
-              
-              <Route path="return-policy-master" element={<ReturnPolicy />} />
-              <Route path="terms-condition-master" element={<TermsCondition />} />
-
-              <Route path="add-faq" element={<FAQAdd />} />
-              <Route path="edit-faq/:id" element={<FAQAdd />} />
-              <Route path="faq-master" element={<FaqList />} />
-
-
-              <Route path="whatsaap-master" element={<WhatsaapMaster />} />
-
-
 
               {/* -----------------junaid"s Route Start End--------- */}
 
