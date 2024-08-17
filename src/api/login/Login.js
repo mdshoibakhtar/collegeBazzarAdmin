@@ -2023,6 +2023,71 @@ export const collegeListss = (page, count) => {
 
 
 
+
+// DELETE a template type by ID
+export const deleteTemplateType = (id) => {
+  return axiosInstance.delete(`${baseUrl}template-type/delete_template_type/${id}`);
+};
+
+// GET a template type by ID
+export const getTemplateTypeById = (id) => {
+  return axiosInstance.get(`${baseUrl}template-type/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new template type
+export const postTemplateType = (data) => {
+  return axiosInstance.post(`${baseUrl}template-type/addTemplateType`, data);
+};
+
+// PUT (update) an existing template type by ID
+export const updateTemplateType = (data) => {
+  return axiosInstance.put(`${baseUrl}template-type/update_template_type/${data.id}`, data.data);
+};
+
+// GET the list of template types with pagination
+export const getTemplateTypeList = (page, count) => {
+  return axiosInstance.get(`${baseUrl}template-type?page=${page}&count=${count}`);
+};
+
+
+
+// DELETE a template category by ID
+export const deleteTemplateCategory = (id) => {
+  return axiosInstance.delete(`${baseUrl}template-category/delete_template_category/${id}`);
+};
+
+// GET a template category by ID
+export const getTemplateCategoryById = (id) => {
+  return axiosInstance.get(`${baseUrl}template-category/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new template category
+export const postTemplateCategory = (data) => {
+  return axiosInstance.post(`${baseUrl}template-category/addTemplateCategory`, data);
+};
+
+// PUT (update) an existing template category by ID
+export const updateTemplateCategory = (data) => {
+  return axiosInstance.put(`${baseUrl}template-category/update_template_category/${data.id}`, data.data);
+};
+
+// GET the list of template categories with pagination
+export const getTemplateCategoryList = (page, count) => {
+  return axiosInstance.get(`${baseUrl}template-category?page=${page}&count=${count}`);
+};
+
+
+
 // -------------------Junaid'S APIS- END------------------------------
 
 

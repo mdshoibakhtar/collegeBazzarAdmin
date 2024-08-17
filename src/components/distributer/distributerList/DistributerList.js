@@ -48,6 +48,21 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal, ap
 
     const [modalShow, setModalShow] = useState(false);
 
+    const [selectedUsers, setSelectedUsers] = useState([]);
+
+    const handleCheckboxChange = (event, user) => {
+        if (event.target.checked) {
+            // Add user to selectedUsers array
+            setSelectedUsers([...selectedUsers, user]);
+        } else {
+            // Remove user from selectedUsers array
+            setSelectedUsers(selectedUsers.filter(selectedUser => selectedUser._id !== user._id));
+        }
+    };
+
+    console.log(selectedUsers)
+    
+
 
 
     return (
@@ -63,6 +78,7 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal, ap
                             </button>
                             <BulkAssigedModel
                                 show={modalShow}
+                                selectedUsers={selectedUsers}
                                 onHide={() => setModalShow(false)}
                             />
                             <div className="card-body p-0">
@@ -150,6 +166,7 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal, ap
                                                                     type="checkbox"
                                                                     defaultValue=""
                                                                     id="flexCheckDefault"
+                                                                    onChange={(e) => handleCheckboxChange(e, item)}
                                                                 />
                                                             </div>
 

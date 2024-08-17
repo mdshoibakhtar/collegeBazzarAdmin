@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Breadcrumbs from '../../common/breadcrumb/Breadcrumbs';
-import { collegeListss, getFaqById, postFaq, updateFaq } from '../../api/login/Login';
+import { getTemplateTypeById, postTemplateType, updateTemplateType } from '../../api/login/Login';
 import { toast, ToastContainer } from 'react-toastify';
-import Loadar from '../../common/loader/Loader';
+import Loader from '../../common/loader/Loader';
 
-const FAQAdd = () => {
+const TemplateTypeAdd = () => {
     const breadCrumbsTitle = {
         id: "1",
         title_1: "Master",
-        title_2: "FAQ",
-        title_3: "FAQ Master",
+        title_2: "Template",
+        title_3: "Template Master",
     };
 
     const [formValues, setFormValues] = useState({
-        question: '',  // Question field
-        answer: '',  // Answer field
+        template_name: '',  // Template Name field
+        status: '',  // Status field
     });
 
     const [errors, setErrors] = useState({});
@@ -25,24 +25,14 @@ const FAQAdd = () => {
 
     const getDataById = async (id) => {
         try {
-            const data = await getFaqById(id);
+            const data = await getTemplateTypeById(id);
             setFormValues(data.data);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-    const [college, setCollege] = useState([]);
-    const GetCollege = async (id) => {
-        try {
-            const data = await collegeListss();
-            setCollege(data);
         } catch (error) {
             console.error(error);
         }
     };
 
     useEffect(() => {
-        GetCollege()
         if (params?.id) {
             getDataById(params?.id);
         }
@@ -51,11 +41,11 @@ const FAQAdd = () => {
     const validate = () => {
         let errors = {};
 
-        if (!formValues.question) {
-            errors.question = "Question is required";
+        if (!formValues.template_name) {
+            errors.template_name = "Template Name is required";
         }
-        if (!formValues.answer) {
-            errors.answer = "Answer is required";
+        if (!formValues.status) {
+            errors.status = "Status is required";
         }
 
         setErrors(errors);
@@ -63,13 +53,13 @@ const FAQAdd = () => {
     };
 
     const toastSuccessMessage = () => {
-        toast.success(`${params?.id ? "Update" : "Add"} FAQ Successfully.`, {
+        toast.success(`${params?.id ? "Update" : "Add"} Template Successfully.`, {
             position: "top-center",
         });
     };
 
     const toastErrorMessage = () => {
-        toast.error(`${params?.id ? "Update" : "Add"} FAQ Failed.`, {
+        toast.error(`${params?.id ? "Update" : "Add"} Template Failed.`, {
             position: "top-center",
         });
     };
@@ -86,7 +76,7 @@ const FAQAdd = () => {
 
         setLoader(true);
         try {
-            const res = await postFaq(formValues);
+            const res = await postTemplateType(formValues);
             if (res?.statusCode == 200) {
                 toastSuccessMessage();
             } else {
@@ -105,7 +95,7 @@ const FAQAdd = () => {
 
         setLoader(true);
         try {
-            const res = await updateFaq({ data: formValues, id: params?.id });
+            const res = await updateTemplateType({ data: formValues, id: params?.id });
             if (res?.statusCode == 200) {
                 toastSuccessMessage();
             } else {
@@ -120,7 +110,7 @@ const FAQAdd = () => {
     return (
         <>
             <ToastContainer />
-            {loader && <Loadar />}
+            {loader && <Loader />}
             <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
             <div className="row m-4">
                 <div className="col-xl-12">
@@ -128,51 +118,43 @@ const FAQAdd = () => {
                         <div className="card-body p-0">
                             <div className="table-responsive active-projects style-1">
                                 <div className="tbl-caption tbl-caption-2">
-                                    <h4 className="heading mb-0">{params?.id ? "Edit FAQ" : "Add FAQ"}</h4>
+                                    <h4 className="heading mb-0">{params?.id ? "Edit Template" : "Add Template"}</h4>
                                 </div>
                                 <form className="tbl-captionn" onSubmit={params?.id ? handleSubmitUpdate : handleSubmit}>
                                     <div className="row">
                                         <div className="col-xl-6 mb-3">
-                                            <div className={`form-group ${errors.question ? 'has-error' : ''}`}>
-                                                <label htmlFor="question">College</label>
-                                                <select  onChange={handleChange} name='college_id' value={formValues?.college_id} className="form-select" aria-label="Default select example">
-                                                    <option selected="">Open this select menu</option>
-                                                  {college?.data?.map((item, index) => (
-                                                        <option value={item._id} key={index}>{item.name}</option>
-                                                    ))}
-                                                </select>
-
-                                            </div>
-                                        </div>
-                                        <div className="col-xl-6 mb-3">
-                                            <div className={`form-group ${errors.question ? 'has-error' : ''}`}>
-                                                <label htmlFor="question">Question</label>
-                                                <textarea
-                                                    id="question"
-                                                    name="question"
-                                                    value={formValues.question}
+                                            <div className={`form-group ${errors.template_name ? 'has-error' : ''}`}>
+                                                <label htmlFor="template_name">Template Name</label>
+                                                <input
+                                                    id="template_name"
+                                                    name="template_name"
+                                                    value={formValues.template_name}
                                                     onChange={handleChange}
                                                     className="form-control"
-                                                    placeholder="Enter Question"
+                                                    placeholder="Enter Template Name"
                                                 />
-                                                {errors.question && (
-                                                    <div className="error">{errors.question}</div>
+                                                {errors.template_name && (
+                                                    <div className="error">{errors.template_name}</div>
                                                 )}
                                             </div>
                                         </div>
                                         <div className="col-xl-6 mb-3">
-                                            <div className={`form-group ${errors.answer ? 'has-error' : ''}`}>
-                                                <label htmlFor="answer">Answer</label>
-                                                <textarea
-                                                    id="answer"
-                                                    name="answer"
-                                                    value={formValues.answer}
+                                            <div className={`form-group ${errors.status ? 'has-error' : ''}`}>
+                                                <label htmlFor="status">Status</label>
+                                                <select
+                                                    id="status"
+                                                    name="status"
+                                                    value={formValues.status}
                                                     onChange={handleChange}
-                                                    className="form-control"
-                                                    placeholder="Enter Answer"
-                                                />
-                                                {errors.answer && (
-                                                    <div className="error">{errors.answer}</div>
+                                                    className="form-select"
+                                                    aria-label="Select status"
+                                                >
+                                                    <option value="">Select Status</option>
+                                                    <option value="active">Active</option>
+                                                    <option value="inactive">Inactive</option>
+                                                </select>
+                                                {errors.status && (
+                                                    <div className="error">{errors.status}</div>
                                                 )}
                                             </div>
                                         </div>
@@ -190,4 +172,4 @@ const FAQAdd = () => {
     );
 }
 
-export default FAQAdd;
+export default TemplateTypeAdd;

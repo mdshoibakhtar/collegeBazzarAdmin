@@ -226,6 +226,13 @@ import TermsCondition from "./components/terms-condition/TermsCondition";
 import FAQAdd from "./components/FaqAdd/FAQAdd";
 import FaqList from "./components/FaqList/FaqList";
 import WhatsaapMaster from "./components/whatsaap-master/WhatsaapMaster";
+import WhatsAppManager from "./components/WhatsAppManager/WhatsAppManager";
+import { ListUtility } from "./components/WhatsAppManager/ListUtility";
+import NewTemplateForm from "./components/NewTemplateForm.js/NewTemplateForm";
+import TableTemplate from "./components/template-typeList/TemplateTypeList";
+import TemplateTypeAdd from "./components/template-typeAdd/TemplateTypeAdd";
+import TemplateCategoryList from "./components/TemplateCategoryList/TemplateCategoryList";
+import TemplateCategoryAdd from "./components/TemplateCategoryAdd/TemplateCategoryAdd";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -376,7 +383,7 @@ function App() {
                 path="update-payout-beneficiary-master/:id"
                 element={<AddPayoutBeneficiaryMaster />}
               />
-             
+
               <Route path="area" element={<AreaPage />} />
               <Route path="add-area" element={<AddArea />} />
               <Route path="update-area/:id" element={<AddArea />} />
@@ -386,7 +393,7 @@ function App() {
               />
               <Route path="country-zone" element={<CountryZoneMudle />} />
               <Route path="add-country-zone" element={<IndexZone />} />
-           
+
 
               <Route
                 path="add-agent-onboarding"
@@ -529,13 +536,13 @@ function App() {
                 path="member-list/:id/:name"
                 element={<DistributerPage />}
               />
-             
+
 
               <Route
                 path="create-user/:id"
                 element={<CreateUserDistributerPage />}
               />
-             
+
               <Route path="member/profile/view/:id" element={<ViewProfileMemberPage />} />
               <Route path="report/pancard/:id" element={<UtiPancardPage />} />
               <Route path="suspended-users" element={<SuspendedUserPage />} />
@@ -551,12 +558,12 @@ function App() {
                 path="add-not-working-user"
                 element={<AddNotWorkingUserList />}
               />
-             
+
               <Route
                 path="add-transaction-report"
                 element={<AddTransactionReport />}
               />
-             
+
               <Route
                 path="pending-transaction-report"
                 element={<PendingTransactionReport />}
@@ -565,7 +572,7 @@ function App() {
                 path="add-pending-transaction-report"
                 element={<AddPendingTransactionReport />}
               />
-             
+
               <Route
                 path="operator-wise-sale"
                 element={<OperatorWiseSalePage />}
@@ -690,7 +697,7 @@ function App() {
                 path="update-department-master/:id"
                 element={<AddDepartmentMaster />}
               />
-             
+
 
               <Route path="profile" element={<Profile />} />
               <Route
@@ -854,142 +861,142 @@ function App() {
               />
 
 
-               {/* --------------Colleges Bazzar path Routes----------------------- */}
-               <Route
+              {/* --------------Colleges Bazzar path Routes----------------------- */}
+              <Route
                 path="/admin/list-set-Attributes"
                 element={<SetGroupAttributesPages />}
               />
-               <Route
+              <Route
                 path="/admin/cities-master"
                 element={<Cities />}
               />
-               <Route
+              <Route
                 path="/admin/add-cities"
                 element={<CityForm />}
               />
-               <Route
+              <Route
                 path="/admin/update-city/:id"
                 element={<CityForm />}
               />
-               <Route
+              <Route
                 path="/admin/college_types"
                 element={<CollegetypesPage />}
               />
-               <Route
+              <Route
                 path="/admin/create-colleges"
                 element={<CollegetypeForm />}
               />
-               <Route
+              <Route
                 path="/admin/update-collage-type/:id"
                 element={<CollegetypeForm />}
               />
-               <Route
+              <Route
                 path="/admin/affilated-by"
                 element={<AffilatedBy />}
               />
-               <Route
+              <Route
                 path="/admin/create-affilated-by"
                 element={<AffilatedTypesForm />}
               />
-               <Route
+              <Route
                 path="/admin/update-affilated-by/:id"
                 element={<AffilatedTypesForm />}
               />
-               <Route
+              <Route
                 path="/admin/credit-cards"
                 element={<CreditCard />}
               />
-               <Route
+              <Route
                 path="/admin/create-credit-card"
                 element={<CreditCardMasterForm />}
               />
-               <Route
+              <Route
                 path="/admin/update-credit-card/:id"
                 element={<CreditCardMasterForm />}
               />
-               <Route
+              <Route
                 path="/admin/facilities"
                 element={<Facilities />}
               />
-               <Route
+              <Route
                 path="/admin/create-facilities"
                 element={<FacilitiesMasterForm />}
               />
-               <Route
+              <Route
                 path="/admin/update-facilities/:id"
                 element={<FacilitiesMasterForm />}
               />
 
 
-               <Route
+              <Route
                 path="/admin/approval"
                 element={<ApprovalMaster />}
               />
-               <Route
+              <Route
                 path="/admin/create-approval"
                 element={<ApprovalMasterForm />}
               />
-               <Route
+              <Route
                 path="/admin/update-approval/:id"
                 element={<ApprovalMasterForm />}
               />
-               <Route
+              <Route
                 path="/admin/lead-status"
                 element={<LeadStatusMaster />}
               />
-               <Route
+              <Route
                 path="/admin/create-lead-status"
                 element={<LeadStatusForm />}
               />
-               <Route
+              <Route
                 path="/admin/update-lead-status/:id"
                 element={<LeadStatusForm />}
               />
-               <Route
+              <Route
                 path="/admin/lead-sub-status"
                 element={<LeadSubStatusMaster />}
               />
-               <Route
+              <Route
                 path="/admin/create-lead-sub-status"
                 element={<LeadSubStatusForm />}
               />
-               <Route
+              <Route
                 path="/admin/update-lead-sub-status/:id"
                 element={<LeadSubStatusForm />}
               />
-               <Route
+              <Route
                 path="/admin/lead-source"
                 element={<LeadSourceMasterPage />}
               />
-               <Route
+              <Route
                 path="/admin/create-lead-source"
                 element={<LeadSourceMasterForm />}
               />
-               <Route
+              <Route
                 path="/admin/update-lead-source/:id"
                 element={<LeadSourceMasterForm />}
               />
-               <Route
+              <Route
                 path="/admin/list-colleges"
                 element={<CollagesData />}
               />
-               <Route
+              <Route
                 path="/admin/add-colleges"
                 element={<CollagesFormData />}
               />
-               <Route
+              <Route
                 path="/admin/update-college/:id"
                 element={<CollagesFormData />}
               />
-               <Route
+              <Route
                 path="/admin/gallery"
                 element={<GalleryDatas />}
               />
-               <Route
+              <Route
                 path="/admin/create-gallery"
                 element={<PhotoGalleryMasterForm />}
               />
-               <Route
+              <Route
                 path="/admin/update-gallery/:id"
                 element={<PhotoGalleryMasterForm />}
               />
@@ -999,7 +1006,7 @@ function App() {
                 path="disputes/welcome"
                 element={<DmtDisputesPage />}
               />
-               <Route
+              <Route
                 path="dmt-status/welcome"
                 element={<DmtStatusPage />}
               />
@@ -1047,7 +1054,7 @@ function App() {
               <Route path="about-us-master" element={<AboutUs />} />
               <Route path="contact-us-master" element={<ContactUs />} />
               <Route path="privacy-policy-master" element={<PrivacyAndPolicy />} />
-              
+
               <Route path="return-policy-master" element={<ReturnPolicy />} />
               <Route path="terms-condition-master" element={<TermsCondition />} />
 
@@ -1058,11 +1065,24 @@ function App() {
 
               <Route path="whatsaap-master" element={<WhatsaapMaster />} />
 
+              <Route path="utility-master" element={<WhatsAppManager />}>
+                <Route path="" element={<ListUtility />} />
+                <Route path="New-TemplateForm" element={<NewTemplateForm />} />
+              </Route>
+
+              <Route path="add-template-type" element={<TemplateTypeAdd />} />
+              <Route path="edit-template-type/:id" element={<TemplateTypeAdd />} />
+              <Route path="template-type" element={<TableTemplate />} />
+
+              <Route path="add-template-category" element={<TemplateCategoryAdd />} />
+              <Route path="edit-template-category/:id" element={<TemplateCategoryAdd />} />
+              <Route path="template-category" element={<TemplateCategoryList />} />
+
 
 
               {/* -----------------junaid"s Route Start End--------- */}
 
-              <Route path="*" element={<PageNotFound/>} />
+              <Route path="*" element={<PageNotFound />} />
             </Route>
           </>
         )}
