@@ -1,4 +1,4 @@
-import { Pagination, Popconfirm } from 'antd'
+import { Empty, Pagination, Popconfirm } from 'antd'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
@@ -51,63 +51,60 @@ function CollegesInfoList({ data, totalCount, page, count, onChangeVal, confirm,
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {data?.map((item, i) => {
-                                                return <tr role="row" className="odd">
-                                                    <td>
-                                                        {(i + 1) + (page * count)}
+                                            {data?.length === 0 ? (
+                                                <tr>
+                                                    <td colSpan="7">
+                                                        <Empty className='m-0' image={Empty.PRESENTED_IMAGE_SIMPLE} />
                                                     </td>
-
-                                                    <td>
-                                                        {item?.name}
-                                                    </td>
-                                                    <td>
-                                                        {item?.establish}
-                                                    </td>
-                                                    <td>
-                                                        <div className='image'>
-                                                            <picture>
+                                                </tr>
+                                            ) : (
+                                                data?.map((item, i) => (
+                                                    <tr role="row" className="odd" key={item?._id}>
+                                                        <td>{(i + 1) + (page * count)}</td>
+                                                        <td>{item?.name}</td>
+                                                        <td>{item?.establish}</td>
+                                                        <td>
+                                                            <div className='image'>
                                                                 <img
                                                                     src={`${baseUrlImage}${item?.logo_img}`}
                                                                     alt='Logo'
-                                                                    style={{objectFit: 'cover' }}
+                                                                    style={{ objectFit: 'cover' }}
                                                                 />
-                                                            </picture>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div className='image'>
-                                                            <picture>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div className='image'>
                                                                 <img
                                                                     src={`${baseUrlImage}${item?.banner_img}`}
-                                                                    alt='Logo'
-                                                                    style={{ width: "100%", height: "auto", borderRadius: "8px", objectFit: 'cover' }}
+                                                                    alt='Banner'
+                                                                    style={{ width: "80%", height: "auto", borderRadius: "8px", objectFit: 'cover' }}
                                                                 />
-                                                            </picture>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        {item?.location}
-                                                    </td>
+                                                            </div>
+                                                        </td>
+                                                        <td>{item?.location}</td>
+                                                        <td>
+                                                            <div className="d-flex">
+                                                                <Link to={`/admin/update-college/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
+                                                                    <i className="fa fa-pencil" />
+                                                                </Link>
+                                                                <Popconfirm
+                                                                    title="Delete College!"
+                                                                    description="Are you sure you want to delete this college?"
+                                                                    onConfirm={() => confirm(item?._id)}
+                                                                    onCancel={cancel}
+                                                                    okText="Yes"
+                                                                    cancelText="No"
+                                                                >
+                                                                    <Link to="#" className="btn btn-danger shadow btn-xs sharp">
+                                                                        <i className="fa fa-trash" />
+                                                                    </Link>
+                                                                </Popconfirm>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                ))
+                                            )}
 
-                                                    <td>
-                                                        <div className="d-flex">
-                                                            <Link to={`/admin/update-college/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
-                                                            <Popconfirm
-                                                                title="Delete College!"
-                                                                description="Are you sure to delete ?"
-                                                                onConfirm={() => confirm(item?._id)}
-                                                                onCancel={cancel}
-                                                                okText="Yes"
-                                                                cancelText="No"
-                                                            >
-                                                                <Link to="#" className="btn btn-danger shadow btn-xs sharp"><i className="fa fa-trash" /></Link>
-                                                            </Popconfirm>
-                                                        </div>
-
-                                                    </td>
-
-                                                </tr>
-                                            })}
 
                                         </tbody>
                                     </table>

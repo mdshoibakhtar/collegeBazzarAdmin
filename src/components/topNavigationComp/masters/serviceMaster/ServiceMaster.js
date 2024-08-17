@@ -1,4 +1,3 @@
-import { FaRegEdit } from "react-icons/fa"
 import { Link } from "react-router-dom"
 import Breadcrumbs from "../../../../common/breadcrumb/Breadcrumbs"
 import { deleteServiceMasterList, getServiceCategory, getServiceMaster, getServiceMasterFilter } from "../../../../api/login/Login"

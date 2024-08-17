@@ -1,7 +1,7 @@
 import { Link, useNavigate, useParams } from "react-router-dom"
 import Breadcrumbs from "../../../../../common/breadcrumb/Breadcrumbs";
 import { useEffect, useState } from "react";
-import { addServiceMaster, clodinaryImage, getServiceCategory, getServiceMaster, getServiceMasterId, languageList, updateServiceMaster } from "../../../../../api/login/Login";
+import { addServiceMaster, clodinaryImage, getCourseTypeForCombo, getServiceCategory, getServiceMaster, getServiceMasterId, languageList, updateServiceMaster } from "../../../../../api/login/Login";
 import { Tab, Tabs } from "react-bootstrap";
 import TabAddServiceMaster from "./tabAddServicemaster/TabAddServiceMaster";
 import { ToastContainer, toast } from "react-toastify";
@@ -18,7 +18,7 @@ const breadCrumbsTitle = {
 function AddServiceMaster() {
     const [language, setLanguage] = useState(null);
     const [service_category, set_serviceCateg] = useState(null);
-    console.log(service_category);
+    const [course_type, setCourseTypeState] = useState();
     const [tab, setTab] = useState();
     const [selectData, setSelectData] = useState([]);
     const [profileImage, setProfileImage] = useState();
@@ -44,7 +44,10 @@ function AddServiceMaster() {
         meta_keyword: "",
         meta_image: "",
         language_id: "",
-        is_active: null
+        is_active: "",
+        course_type: "",
+        duration_type: "",/* ["Day", "Week", "Month", "Year"] */
+        duration: null,
     }
 
 
@@ -83,6 +86,9 @@ function AddServiceMaster() {
         if (!values.service_category) {
             errors.service_category = "service category   is required";
         }
+        if (!values.course_type) {
+            errors.course_type = "Course Type   is required";
+        }
         /* if (!values.meta_image) {
             errors.meta_image = "Meta Image  is required";
         } */
@@ -101,12 +107,12 @@ function AddServiceMaster() {
                 return { ...initialValues, language_id: item?._id, langName: item?.name };
             });
             setSelectData(data);
-            
+
         } else {
             const data = [{ ...initialValues, language_id: 22, langName: 'English' }];
             setSelectData(data);
         }
-       
+
     };
 
     const submitForm = async (formData) => {
@@ -115,7 +121,7 @@ function AddServiceMaster() {
                 ...item,
                 ...formData[item.language_id]
             }));
-            
+
             if (!params?.id) {
                 const res = await addServiceMaster({ list: dataToSend });
                 if (res?.statusCode == "200") {
@@ -158,12 +164,18 @@ function AddServiceMaster() {
         const _serviceCategoery = await getServiceCategory()
         set_serviceCateg(_serviceCategoery?.data);
     }
+    const getCourseType = async () => {
+        const CourseType = await getCourseTypeForCombo()
+        setCourseTypeState(CourseType?.data);
+    }
 
 
     useEffect(() => {
         getLanguageIdTab();
         getServicesCategory()
+        getCourseType()
     }, []);
+
 
 
     useEffect(() => {
@@ -173,7 +185,7 @@ function AddServiceMaster() {
                     const response = await getServiceMasterId(params.id);
                     const serviceData = response.data;
                     const data = serviceData?.map((item, i) => {
-                        return { id: item.id, service_name: item.service_name, meta_title: item.meta_title, full_description: item.full_description, short_description: item.short_description, meta_keyword: item.meta_keyword, language_id: item?.language_id, is_active: item.is_active ? item.is_active : false, langName: language[i].name,...item }
+                        return { id: item.id, service_name: item.service_name, meta_title: item.meta_title, full_description: item.full_description, short_description: item.short_description, meta_keyword: item.meta_keyword, language_id: item?.language_id, is_active: item.is_active ? item.is_active : false, langName: language[i].name, ...item }
                     })
                     setSelectData(data)
                 } else {
@@ -242,7 +254,7 @@ function AddServiceMaster() {
                                     {selectData && selectData?.map((item, i) => {
                                         return <Tab eventKey={item?.language_id} title={item?.langName}>
                                             {/* <TabAddServiceMaster i={i} colodinaryImage={colodinaryImage} language={language} item={item} languageId={item?.language_id} submitForm={submitForm} handleChangeCus={handleChangeCus} service_category={service_category} params={params} validate={validate} /> */}
-                                            <NewtabAddServiceMaster i={i} colodinaryImage={colodinaryImage} language={language} item={formData[item.language_id] || item} languageId={item?.language_id} submitForm={submitForm} handleChangeCus={handleChangeCus} service_category={service_category} params={params} validate={validate} />
+                                            <NewtabAddServiceMaster i={i} colodinaryImage={colodinaryImage} language={language} item={formData[item.language_id] || item} languageId={item?.language_id} submitForm={submitForm} handleChangeCus={handleChangeCus} service_category={service_category} params={params} validate={validate} course_type={course_type} />
                                         </Tab>
                                     })}
 

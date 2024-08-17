@@ -581,6 +581,9 @@ export const serviceCategoryAdd = (data) => {
 export const getServiceCategory = () => {
   return axiosInstance.get(`${baseUrl}stream`);
 };
+export const getCourseTypeForCombo = () => {
+  return axiosInstance.get(`${baseUrl}coursetype/admin`);
+};
 export const getServiceCategoryByPagination = (count, page) => {
   return axiosInstance.get(`${baseUrl}stream/admin?&count=${count}&page=${page}`);
 };
@@ -1777,10 +1780,23 @@ export const getupdatePhotosGalleryStatusId = (id) => {
 };
 
 
+//  ------------------------------Course Degree Type  APIS-------------------------
+export const CourseDegreeList = (page, count) => {
+  return axiosInstance.get(`${baseUrl}courseType?page=${page}&count=${count}`);
+};
 
-
-
-
+export const addCourseDegree = (data) => {
+  return axiosInstance.post(`${baseUrl}courseType/addType`, data);
+};
+export const deleteCourseDegree = (id) => {
+  return axiosInstance.delete(`${baseUrl}courseType/delete_Type/${id}`);
+};
+export const updateCourseDegree = (id, value) => {
+  return axiosInstance.put(`${baseUrl}courseType/update_Type/${id}`, value);
+};
+export const getupdateCourseDegreeStatusId = (id) => {
+  return axiosInstance.get(`${baseUrl}courseType/${id}`);
+};
 
 
 // ---------------------Apis for Add Colleges Selector N combo ====================
@@ -1802,6 +1818,9 @@ export const getFacilitiesListSelect = () => {
 };
 export const getStreamListSelect = () => {
   return axiosInstance.get(`${baseUrl}stream/admin`);
+};
+export const getCourseListSelect = (id) => {
+  return axiosInstance.get(`${baseUrl}course/service_category?ids=${JSON.stringify(id)}`);
 };
 
 
