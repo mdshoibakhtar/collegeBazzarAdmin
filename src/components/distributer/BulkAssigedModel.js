@@ -1,74 +1,30 @@
-import chroma from 'chroma-js';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import Select from 'react-select';
-const colourStyles = {
-    control: (styles) => ({ ...styles, backgroundColor: 'white' }),
-    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-        const color = chroma(data.color);
-        return {
-            ...styles,
-            backgroundColor: isDisabled
-                ? undefined
-                : isSelected
-                    ? data.color
-                    : isFocused
-                        ? color.alpha(0.1).css()
-                        : undefined,
-            color: isDisabled
-                ? '#ccc'
-                : isSelected
-                    ? chroma.contrast(color, 'white') > 2
-                        ? 'white'
-                        : 'black'
-                    : data.color,
-            cursor: isDisabled ? 'not-allowed' : 'default',
+import Table from 'react-bootstrap/Table';
+import Form from 'react-bootstrap/Form';
+import Container from 'react-bootstrap/Container';
 
-            ':active': {
-                ...styles[':active'],
-                backgroundColor: !isDisabled
-                    ? isSelected
-                        ? data.color
-                        : color.alpha(0.3).css()
-                    : undefined,
-            },
-        };
-    },
-    multiValue: (styles, { data }) => {
-        const color = chroma(data.color);
-        return {
-            ...styles,
-            backgroundColor: color.alpha(0.1).css(),
-        };
-    },
-    multiValueLabel: (styles, { data }) => ({
-        ...styles,
-        color: data.color,
-    }),
-    multiValueRemove: (styles, { data }) => ({
-        ...styles,
-        color: data.color,
-        ':hover': {
-            backgroundColor: data.color,
-            color: 'white',
-        },
-    }),
-};
+function BulkAssignedModel(props) {
+    const [data, setData] = useState(props.selectedUsers);
+    console.log(props.selectedUsers);
 
-function BulkAssigedModel(props) {
-    const [relateData, setRelateData] = useState([
-        { value: 1, label: 'Staff 1', color: '#f50' },
-        { value: 2, label: 'B', color: '#0f5' },
-        { value: 3, label: 'C', color: '#50f' },
-    ]);
-    const handleChange22 = (selectedOption) => {
+    useEffect(() => {
+        setData(props.selectedUsers)
+    }, [props])
 
+
+    const handleInputChange = (index, key, value) => {
+        const updatedData = [...data];
+        updatedData[index][key] = value;
+        setData(updatedData);
     };
+
     return (
         <Modal
             {...props}
-            size="lg"
+            size="xl"
+            fullscreen={true}
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
@@ -77,23 +33,100 @@ function BulkAssigedModel(props) {
                     Bulk Assigned
                 </Modal.Title>
             </Modal.Header>
-            <Modal.Body>
-                <h4>Select Staff</h4>
-                <Select
-                    closeMenuOnSelect={false}
-                    isMulti
-                    options={relateData}
-                    styles={colourStyles}
-                    onChange={handleChange22}
-                />
+            <Modal.Body style={{ overflow: "auto" }}>
+                <Container fluid>
+                    <Table responsive bordered>
+                        <thead className="table-dark" style={{ width: "1500px" }}>
+                            <tr>
+                                <th>Created At</th>
+                                <th>Member Type</th>
+                                <th>Name</th>
+                                <th>Streams</th>
+                                <th>Courses</th>
+                                <th>Mobile</th>
+                                <th>Email</th>
+                                <th>Main Balance</th>
+                                <th>KYC Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {data?.map((row, index) => (
+                                <tr key={index}>
+                                    <td>
+                                        <Form.Control
+                                            type="text"
+                                            value={row.createdAt}
+                                            readOnly
+                                        // onChange={(e) => handleInputChange(index, 'createdAt', e.target.value)}
+                                        />
+                                    </td>
+                                    <td>
+                                        <Form.Control
+                                            type="text"
+                                            value={row.member_type}
+                                        // onChange={(e) => handleInputChange(index, 'member_type', e.target.value)}
+                                        />
+                                    </td>
+                                    <td>
+                                        <Form.Control
+                                            type="text"
+                                            value={row.name}
+                                            onChange={(e) => handleInputChange(index, 'name', e.target.value)}
+                                        />
+                                    </td>
+                                    <td>
+                                        <Form.Control
+                                            type="text"
+                                            value={row.streams}
+                                            onChange={(e) => handleInputChange(index, 'streams', e.target.value)}
+                                        />
+                                    </td>
+                                    <td>
+                                        <Form.Control
+                                            type="text"
+                                            value={row.courses}
+                                            onChange={(e) => handleInputChange(index, 'courses', e.target.value)}
+                                        />
+                                    </td>
+                                    <td>
+                                        <Form.Control
+                                            type="text"
+                                            value={row.mobile}
+                                            onChange={(e) => handleInputChange(index, 'mobile', e.target.value)}
+                                        />
+                                    </td>
+                                    <td>
+                                        <Form.Control
+                                            type="email"
+                                            value={row.email}
+                                            onChange={(e) => handleInputChange(index, 'email', e.target.value)}
+                                        />
+                                    </td>
+                                    <td>
+                                        <Form.Control
+                                            type="text"
+                                            value={row.main_wallet}
+                                            onChange={(e) => handleInputChange(index, 'main_wallet', e.target.value)}
+                                        />
+                                    </td>
+                                    <td>
+                                        <Form.Control
+                                            type="text"
+                                            value={row.kycStatus}
+                                            onChange={(e) => handleInputChange(index, 'kycStatus', e.target.value)}
+                                        />
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                </Container>
             </Modal.Body>
             <Modal.Footer>
-                <Button
-                    // onClick={props.onHide}
-                >Send</Button>
+                <Button variant="primary" onClick={props.onHide}>Send</Button>
             </Modal.Footer>
         </Modal>
     );
 }
 
-export default BulkAssigedModel
+export default BulkAssignedModel;
