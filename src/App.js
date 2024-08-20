@@ -233,6 +233,8 @@ import TableTemplate from "./components/template-typeList/TemplateTypeList";
 import TemplateTypeAdd from "./components/template-typeAdd/TemplateTypeAdd";
 import TemplateCategoryList from "./components/TemplateCategoryList/TemplateCategoryList";
 import TemplateCategoryAdd from "./components/TemplateCategoryAdd/TemplateCategoryAdd";
+import FlowBuilder from "./components/flow-builderList/FlowBuildList";
+import FlowBuilderAdd from "./components/flow-builderAdd/FlowBuilderAdd";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1077,6 +1079,10 @@ function App() {
               <Route path="add-template-category" element={<TemplateCategoryAdd />} />
               <Route path="edit-template-category/:id" element={<TemplateCategoryAdd />} />
               <Route path="template-category" element={<TemplateCategoryList />} />
+
+              <Route path="add-flow-builder" element={<FlowBuilderAdd />} />
+              <Route path="edit-flow-builder/:id" element={<FlowBuilderAdd />} />
+              <Route path="flow-builder" element={<FlowBuilder />} />
 
 
 

@@ -2087,6 +2087,38 @@ export const getTemplateCategoryList = (page, count) => {
 };
 
 
+// DELETE a flow by ID
+export const deleteFlowCategory = (id) => {
+  return axiosInstance.delete(`${baseUrl}flow-builder/delete_flow_category/${id}`);
+};
+
+// GET a flow by ID
+export const getFlowCategoryById = (id) => {
+  return axiosInstance.get(`${baseUrl}flow-builder/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new flow category
+export const postFlowCategory = (data) => {
+  return axiosInstance.post(`${baseUrl}flow-builder/addFlowCategory`, data);
+};
+
+// PUT (update) an existing flow category by ID
+export const updateFlowCategory = (data) => {
+  return axiosInstance.put(`${baseUrl}flow-builder/update_flow_category/${data.id}`, data.data);
+};
+
+// GET the list of flow categories with pagination
+export const getFlowCategoryList = (page, count) => {
+  return axiosInstance.get(`${baseUrl}flow-builder?page=${page}&count=${count}`);
+};
+
+
+
 
 // -------------------Junaid'S APIS- END------------------------------
 
