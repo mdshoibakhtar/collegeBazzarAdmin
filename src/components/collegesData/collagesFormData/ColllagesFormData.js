@@ -266,6 +266,8 @@ function CollagesFormData() {
         }
     }
 
+    // console.log(selectedCourseState, "see you soon");
+    // console.log(courseState, "see you ");
 
     const submitForm = async (values) => {
         const submissionData = {
@@ -276,7 +278,7 @@ function CollagesFormData() {
             stream_id: selectedStreamState.map(option => option.value),
             courses: selectedCourseState.map(option => ({
                 course_id: option.value,
-                fee: option.fee
+                fee: option.fee,
             })),
             overview: content,
             banner_img: bannImageState,
@@ -297,7 +299,7 @@ function CollagesFormData() {
                 } catch (error) {
                     toastErrorMessage(error.message)
                     console.log(error.message);
-                    
+
                 }
             } else {
                 const updatesubmissionData = {
@@ -317,55 +319,59 @@ function CollagesFormData() {
     };
 
     useEffect(() => {
-    const fetchCollegeData = async () => {
-        try {
-            if (params?.id) {
-                const response = await getupdateCollegesCrudStatusId(params.id);
-                const collegeData = response?.data;
-                console.log(collegeData);
+        const fetchCollegeData = async () => {
+            try {
+                if (params?.id) {
+                    const response = await getupdateCollegesCrudStatusId(params.id);
+                    const collegeData = response?.data;
+                    console.log(collegeData);
 
-                setInitialValues({
-                    ...collegeData,
-                    affiliate: collegeData?.affiliate?.map(item => ({ value: item?._id, label: item?.name })),
-                    approvedBy: collegeData?.approvedBy?.map(item => ({ value: item?._id, label: item?.name })),
-                    facilities: collegeData?.facilities?.map(item => ({ value: item?._id, label: item?.name })),
-                    stream_id: collegeData?.stream_id?.map(item => ({ value: item?._id, label: item?.name })),
-                    overview: collegeData?.overview || "",
-                });
+                    setInitialValues({
+                        ...collegeData,
+                        affiliate: collegeData?.affiliate?.map(item => ({ value: item?._id, label: item?.name })),
+                        approvedBy: collegeData?.approvedBy?.map(item => ({ value: item?._id, label: item?.name })),
+                        facilities: collegeData?.facilities?.map(item => ({ value: item?._id, label: item?.name })),
+                        stream_id: collegeData?.stream_id?.map(item => ({ value: item?._id, label: item?.name })),
+                        overview: collegeData?.overview || "",
+                    });
 
-                setSelectedState4(collegeData?.affiliate?.map(item => ({ value: item?._id, label: item?.name })));
-                setSelectedState3(collegeData?.approvedBy?.map(item => ({ value: item?._id, label: item?.name })));
-                setSelectedState2(collegeData?.facilities?.map(item => ({ value: item?._id, label: item?.name })));
-                setselectedStreamState(collegeData?.stream_id?.map(item => ({ value: item?._id, label: item?.name })));
-                setContent(collegeData?.overview || "");
+                    setSelectedState4(collegeData?.affiliate?.map(item => ({ value: item?._id, label: item?.name })));
+                    setSelectedState3(collegeData?.approvedBy?.map(item => ({ value: item?._id, label: item?.name })));
+                    setSelectedState2(collegeData?.facilities?.map(item => ({ value: item?._id, label: item?.name })));
+                    setselectedStreamState(collegeData?.stream_id?.map(item => ({ value: item?._id, label: item?.name })));
+                    setContent(collegeData?.overview || "");
 
-                if (collegeData?.country?.id) {
-                    const resState = await StateAddCollageSelectList(collegeData?.country?.id);
-                    setCountryWiseState(resState?.data);
+                    if (collegeData?.country?.id) {
+                        const resState = await StateAddCollageSelectList(collegeData?.country?.id);
+                        setCountryWiseState(resState?.data);
+                    }
+                    if (collegeData?.state?._id) {
+                        const resCity = await cityAddCollageSelectList(collegeData?.state?._id);
+                        setStateWisecCity(resCity?.data);
+                    }
+
+                    const streamIds = collegeData?.stream_id?.map(item => item?._id);
+                    if (streamIds.length > 0) {
+                        await courseTypeDataForSelect(streamIds);
+                    }
+                    console.log(collegeData,"see u soon");
+                    
+
+                    setselectedCourseState(collegeData?.courses.map(item => ({
+                        value: item?._id,
+                        label: item?.service_name,
+                        fee: item?.fee || null,
+                    })));
+                    
+
                 }
-                if (collegeData?.state?._id) {
-                    const resCity = await cityAddCollageSelectList(collegeData?.state?._id);
-                    setStateWisecCity(resCity?.data);
-                }
-
-                const streamIds = collegeData?.stream_id?.map(item => item?._id);
-                if (streamIds.length > 0) {
-                    await courseTypeDataForSelect(streamIds);  // Fetch courses based on streams
-                }
-                
-                setselectedCourseState(collegeData?.courses.map(item => ({
-                    value: item?.course_id,
-                    label: item?.course_name,  // Assuming 'course_name' is available
-                    fee: item?.fee || null,
-                })));
+            } catch (error) {
+                console.error("Error fetching college data:", error);
             }
-        } catch (error) {
-            console.error("Error fetching college data:", error);
-        }
-    };
+        };
 
-    fetchCollegeData();
-}, [params?.id]);
+        fetchCollegeData();
+    }, [params?.id]);
 
 
 
@@ -706,7 +712,7 @@ function CollagesFormData() {
                                                         </small>
                                                     ) : null}
                                                 </div>
-                                               
+
                                                 <div className="col-xl-4 mb-3">
                                                     <label className='label fs-4'>Course</label>
                                                     <Select
@@ -1146,7 +1152,7 @@ function CollagesFormData() {
                         </div>
                     </div>
                 </div>
-                <ToastContainer className={"text-center"}/>
+                <ToastContainer className={"text-center"} />
             </div>
         </>
     );
