@@ -83,7 +83,7 @@ function TopTenCountries() {
                                             </td>
                                             <td>
                                                 <div className="d-flex">
-                                                    {/* <Link to={`/admin/update-bank/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                    {/* <Link to={`/update-bank/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                     <Popconfirm
                                                         title="Delete bank master !"
                                                         description="Are you sure to delete ?"

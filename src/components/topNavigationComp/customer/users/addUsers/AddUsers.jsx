@@ -158,7 +158,7 @@ const AddUsers = () => {
                     if (res?.statusCode == "200") {
                         toastSuccessMessage();
                         setTimeout(() => {
-                            navigate("/admin/user");
+                            navigate("/user");
                         }, [4000]);
                     }
                 } catch (error) { }
@@ -168,7 +168,7 @@ const AddUsers = () => {
                     if (res?.statusCode == "200") {
                         toastSuccessMessage();
                         setTimeout(() => {
-                            navigate("/admin/user");
+                            navigate("/user");
                         }, [4000]);
                     }
                 } catch (error) { }
@@ -180,7 +180,7 @@ const AddUsers = () => {
         //   // await addUsers(values);
         //   toastSuccessMessage();
         //   // setTimeout(() => {
-        //   //   navigate(`/admin/user`);
+        //   //   navigate(`/user`);
         //   // }, 5000);
         // } catch (error) {}
     };
@@ -514,7 +514,7 @@ const AddUsers = () => {
                                                 </div>
                                                 <div>
                                                     <Link
-                                                        to="/admin/user"
+                                                        to="/user"
                                                         className="btn btn-danger light ms-1"
                                                     >
                                                         Cancel

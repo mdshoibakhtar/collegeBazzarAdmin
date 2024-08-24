@@ -69,7 +69,7 @@ function StaffTypeList() {
                                     <div className="tbl-caption">
                                         <h4 className="heading mb-0"><b>STAFF TYPE LIST</b></h4>
                                         <div>
-                                            <Link className="btn btn-primary btn-sm" to="/admin/staff-type-add" role="button" aria-controls="offcanvasExample">+  STAFF LIST</Link>
+                                            <Link className="btn btn-primary btn-sm" to="/staff-type-add" role="button" aria-controls="offcanvasExample">+  STAFF LIST</Link>
                                             {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}
@@ -100,7 +100,7 @@ function StaffTypeList() {
                                                     <td className="sorting_1"><span>{item?.is_active.toString()}</span></td>
                                                     <td>
                                                         <div className="d-flex">
-                                                            <Link to={`/admin/staff-type-update/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                            <Link to={`/staff-type-update/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                             <Popconfirm
                                                                 title="Delete Currency !"
                                                                 description="Are you sure to delete ?"

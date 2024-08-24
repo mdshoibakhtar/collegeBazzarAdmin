@@ -47,7 +47,7 @@ function PasswordReset() {
                     // if (res?.statusCode == "200") {
                     //     toastSuccessMessage();
                     //     setTimeout(() => {
-                    //         navigate('/admin/bank-master')
+                    //         navigate('/bank-master')
                     //     }, [4000])
                     // }
                 } catch (error) {
@@ -60,7 +60,7 @@ function PasswordReset() {
                     // if (res?.statusCode == "200") {
                     //     toastSuccessMessage();
                     //     setTimeout(() => {
-                    //         navigate('/admin/bank-master')
+                    //         navigate('/bank-master')
                     //     }, [4000])
                     // }
                 } catch (error) {
@@ -163,7 +163,7 @@ function PasswordReset() {
                                             </div>
                                         </div>
                                         <div>
-                                            {/* <Link to='/admin/bank-master' className="btn btn-danger light ms-1">Cancel</Link> */}
+                                            {/* <Link to='/bank-master' className="btn btn-danger light ms-1">Cancel</Link> */}
                                             <button
                                                 className="btn btn-primary me-1"
                                                 type="submit"

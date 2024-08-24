@@ -84,7 +84,7 @@ function BbpsCommisionForm() {
         if (res.statusCode == 200) {
             toastSuccessMessage();
             setTimeout(() => {
-                navigate('/admin/bbps-commision');
+                navigate('/bbps-commision');
             }, 2000);
             setLoader(false);
         } else {

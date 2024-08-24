@@ -1,0 +1,7 @@
+.create-Camping-mess-bg-img {
+    background-image: url('../../../../assets/images/graph/Iphone.png');
+    background-repeat: no-repeat;
+    background-size: contain; /* 'contain' will scale the image to fit inside the container */
+    background-position: center; /* Center the background image */
+    height: 20rem; /* Ensure the container has height, or else the background won't be visible */
+}

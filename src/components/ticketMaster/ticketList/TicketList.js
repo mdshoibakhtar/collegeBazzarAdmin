@@ -13,7 +13,7 @@ function TicketList() {
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0"><b>Tickets  List</b></h4>
                                     <div>
-                                        <Link className="btn btn-primary btn-sm" to="/admin/add-tickets" role="button" aria-controls="offcanvasExample">+  Create Tickets </Link>
+                                        <Link className="btn btn-primary btn-sm" to="/add-tickets" role="button" aria-controls="offcanvasExample">+  Create Tickets </Link>
                                         {/* <button type="button" className="btn btn-secondary btn-sm" >
                             + Invite Employee
                         </button> */}

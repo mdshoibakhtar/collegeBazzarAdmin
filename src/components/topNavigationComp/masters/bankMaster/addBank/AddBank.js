@@ -12,9 +12,9 @@ function AddBank() {
         id: "1",
         title_1: "Master",
         title_2: " Bank Master",
-        path_2: "/admin/bank-master",
+        path_2: "/bank-master",
         title_3: "Add Bank Master",
-        path_3: "/admin/add-bank",
+        path_3: "/add-bank",
     }
     const [initialValues, setInitialValues] = useState({
         bank_name: "",
@@ -83,7 +83,7 @@ function AddBank() {
                     if (res?.statusCode == "200") {
                         toastSuccessMessage();
                         setTimeout(() => {
-                            navigate('/admin/bank-master')
+                            navigate('/bank-master')
                         }, [4000])
                     }
                 } catch (error) {
@@ -96,7 +96,7 @@ function AddBank() {
                     if (res?.statusCode == "200") {
                         toastSuccessMessage();
                         setTimeout(() => {
-                            navigate('/admin/bank-master')
+                            navigate('/bank-master')
                         }, [4000])
                     }
                 } catch (error) {
@@ -322,7 +322,7 @@ function AddBank() {
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <Link to='/admin/bank-master' className="btn btn-danger light ms-1">Cancel</Link>
+                                                    <Link to='/bank-master' className="btn btn-danger light ms-1">Cancel</Link>
                                                     <button
                                                         className="btn btn-primary me-1"
                                                         type="submit"

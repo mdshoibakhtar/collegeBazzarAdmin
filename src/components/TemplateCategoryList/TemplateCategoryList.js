@@ -10,7 +10,7 @@ const breadCrumbsTitle = {
     id: "1",
     title_1: "Master",
     title_2: "Template Category",
-    path_2: "/admin/template-category"
+    path_2: "/template-category"
 };
 
 function TemplateCategoryList() {
@@ -74,7 +74,7 @@ function TemplateCategoryList() {
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0">Template Category Master</h4>
                                     <div>
-                                        <Link className="btn btn-primary btn-sm" to="/admin/add-template-category" role="button" aria-controls="offcanvasExample">+ Add Template Category</Link>
+                                        <Link className="btn btn-primary btn-sm" to="/add-template-category" role="button" aria-controls="offcanvasExample">+ Add Template Category</Link>
                                     </div>
                                 </div>
                                 <div id="template-category-tblwrapper_wrapper" className="dataTables_wrapper no-footer">
@@ -100,7 +100,7 @@ function TemplateCategoryList() {
                                                     <td>{item?.is_active}</td>
                                                     <td>
                                                         <div className="d-flex">
-                                                            <Link to={`/admin/edit-template-category/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
+                                                            <Link to={`/edit-template-category/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
                                                                 <FaRegEdit />
                                                             </Link>
                                                             <Popconfirm

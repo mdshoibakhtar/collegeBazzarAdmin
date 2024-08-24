@@ -98,7 +98,7 @@ function AddPermision() {
                 if (res?.statusCode === "200") {
                     toastSuccessMessage();
                     setTimeout(() => {
-                        navigate('/admin/staff-list');
+                        navigate('/staff-list');
                     }, 4000);
                 } else if (res?.error) {
                     toastErrorMessage(res?.message);
@@ -108,7 +108,7 @@ function AddPermision() {
                 if (res?.statusCode === "200") {
                     toastSuccessMessage();
                     setTimeout(() => {
-                        navigate('/admin/staff-list');
+                        navigate('/staff-list');
                     }, 4000);
                 }
             }
@@ -313,7 +313,7 @@ function AddPermision() {
                                         </div>
                                         <div>
                                             <Link
-                                                to="/admin/staff-list"
+                                                to="/staff-list"
                                                 className="btn btn-danger light ms-1"
                                             >
                                                 Cancel

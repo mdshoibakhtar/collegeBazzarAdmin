@@ -9,7 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 function AepsLists({ onChangeVal, aepsData, getDmtTxnData,page,count }) {
     const navigate = useNavigate()
     // const ChangeRouts = (id) => {
-    //     navigate(`/admin/add-package/${id}`)
+    //     navigate(`/add-package/${id}`)
     // }
 
 
@@ -53,7 +53,7 @@ function AepsLists({ onChangeVal, aepsData, getDmtTxnData,page,count }) {
                                         <div className='d-flex'>
                                             <ExportPdf />
                                             {/* <div>
-                                                <Link to="/admin/add-package" class="btn btn-primary">Add AEPS Cash</Link>
+                                                <Link to="/add-package" class="btn btn-primary">Add AEPS Cash</Link>
                                             </div> */}
                                         </div>
 

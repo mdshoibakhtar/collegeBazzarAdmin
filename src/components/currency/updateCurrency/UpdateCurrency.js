@@ -146,7 +146,7 @@ function UpdateCurrency() {
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <Link to='/admin/currency' className="btn btn-danger light ms-1">Cancel</Link>
+                                                    <Link to='/currency' className="btn btn-danger light ms-1">Cancel</Link>
                                                     <button className="btn btn-primary me-1" type="submit" >Submit</button>
                                                 </div>
                                             </form>

@@ -32,7 +32,7 @@ function Leadgenerations() {
                                     </div>
                                 </div>
                                 <div>
-                                    <Link to={"/admin/company-staff/welcome"} className="btn btn-warning me-1">cancel</Link>
+                                    <Link to={"/company-staff/welcome"} className="btn btn-warning me-1">cancel</Link>
                                     <button className="btn btn-primary me-1">Update Now</button>
                                 </div>
                             </form>

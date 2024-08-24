@@ -47,7 +47,7 @@ function ListRole({ onChangeVal, dmtTtxn, loading, dmtExcelTtxn, getDmtTxnData, 
                                     <div className="tbl-caption">
                                         <h4 className="heading mb-0"><b> List Main Module </b></h4>
                                         <div>
-                                            {/* <Link className="btn btn-primary btn-sm" to="/admin/add-summary-report" role="button" aria-controls="offcanvasExample">+  ADD SUMMARY REPORTS </Link> */}
+                                            {/* <Link className="btn btn-primary btn-sm" to="/add-summary-report" role="button" aria-controls="offcanvasExample">+  ADD SUMMARY REPORTS </Link> */}
                                             {/* <button type="button" className="btn btn-secondary btn-sm" >
                     + Invite Employee
                 </button> */}
@@ -118,7 +118,7 @@ function ListRole({ onChangeVal, dmtTtxn, loading, dmtExcelTtxn, getDmtTxnData, 
                                                         <td>
                                                             <div className="d-flex">
 
-                                                                <Link to={`/admin/update-role/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                                <Link to={`/update-role/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                                 <Popconfirm
                                                                     title="Delete  STATUS !"
                                                                     description="Are you sure to delete ?"

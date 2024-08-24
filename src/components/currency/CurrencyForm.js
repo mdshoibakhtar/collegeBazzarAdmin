@@ -40,7 +40,7 @@ function CurrencyForm() {
         try {
           await currencyAdd(values);
           toastSuccessMessage();
-          navigate(`/admin/currency`)
+          navigate(`/currency`)
 
         } catch (error) {
           alert(error.message)
@@ -50,7 +50,7 @@ function CurrencyForm() {
       } else {
         try {
           await currencyUpdate(params.id, values);
-          navigate(`/admin/currency`)
+          navigate(`/currency`)
           toastSuccessMessage();
         } catch (error) {
 
@@ -175,7 +175,7 @@ function CurrencyForm() {
                         </div>
                         <div>
                           <Link
-                            to="/admin/currency"
+                            to="/currency"
                             className="btn btn-danger light ms-1"
                           >
                             Cancel

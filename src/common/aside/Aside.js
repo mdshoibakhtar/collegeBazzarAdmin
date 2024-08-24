@@ -40,7 +40,7 @@ function Aside({ showAsideBar }) {
   };
 
   useEffect(() => {
-    const modifiedPath = location.pathname.replace("/admin/", "");
+    const modifiedPath = location.pathname.replace("/", "");
     asideMenu.forEach((item) => {
       item?.subMenus.map((submenu) => {
         if (submenu.path === modifiedPath) {
@@ -77,7 +77,7 @@ function Aside({ showAsideBar }) {
   useEffect(() => {
    
     getCountData()
-    const modifiedPath = location.pathname.replace("/admin/", "");
+    const modifiedPath = location.pathname.replace("/", "");
 
     const foundSubMenu = asideMenu
       .flatMap((item) => item?.subMenus || [])
@@ -106,7 +106,7 @@ function Aside({ showAsideBar }) {
         <div className="deznav-scroll mm-active d-flex flex-column justify-content-between ">
           <ul className="metismenu mm-show flex-1" id="menu">
             <li className={`mm-active hideDarrow  ${!showAsideBar ? "hide" : ""}`}>
-              <Link className="" to={"/admin"} aria-expanded="false">
+              <Link className="" to={"/"} aria-expanded="false">
                 <span className="menu-icon">
                   <MdDashboard />
                 </span>

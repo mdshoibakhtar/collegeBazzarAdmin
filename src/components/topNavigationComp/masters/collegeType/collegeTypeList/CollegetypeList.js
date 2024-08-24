@@ -15,7 +15,7 @@ function CollegetypeList({data,totalCount,page,count,onChangeVal,confirm,cancel}
                                     <div className="tbl-caption">
                                         <h4 className="heading mb-0"> TYPES OF COLLEGES </h4>
                                         <div>
-                                            <Link className="btn btn-primary btn-sm" to="/admin/create-colleges" role="button" aria-controls="offcanvasExample">+ CREATE COLLEGES</Link>
+                                            <Link className="btn btn-primary btn-sm" to="/create-colleges" role="button" aria-controls="offcanvasExample">+ CREATE COLLEGES</Link>
                                             {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}
@@ -54,7 +54,7 @@ function CollegetypeList({data,totalCount,page,count,onChangeVal,confirm,cancel}
                                                     </td>
                                                     <td>
                                                         <div className="d-flex">
-                                                            <Link to={`/admin/update-collage-type/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                            <Link to={`/update-collage-type/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                             <Popconfirm
                                                                 title="Delete College!"
                                                                 description="Are you sure to delete ?"

@@ -15,7 +15,7 @@ function LeadStatusLists({ data, totalCount, page, count, onChangeVal, confirm, 
                                     <div className="tbl-caption">
                                         <h4 className="heading mb-0"> Lead Status </h4>
                                         <div>
-                                            <Link className="btn btn-primary btn-sm" to="/admin/create-lead-status" role="button" aria-controls="offcanvasExample">+ CREATE LEAD STATUS</Link>
+                                            <Link className="btn btn-primary btn-sm" to="/create-lead-status" role="button" aria-controls="offcanvasExample">+ CREATE LEAD STATUS</Link>
                                             {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}
@@ -60,7 +60,7 @@ function LeadStatusLists({ data, totalCount, page, count, onChangeVal, confirm, 
                                                     </td>
                                                     <td>
                                                         <div className="d-flex">
-                                                            <Link to={`/admin/update-lead-status/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                            <Link to={`/update-lead-status/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                             <Popconfirm
                                                                 title="Delete Lead Status!"
                                                                 description="Are you sure to delete ?"

@@ -6,7 +6,7 @@ function TopEmpList({ pendingList, getDetails }) {
     const navigate = useNavigate()
     const onRowClick = (_id) => {
         getDetails(_id)
-        navigate(`/admin/view/complaints-detail/${_id}`)
+        navigate(`/view/complaints-detail/${_id}`)
     }
     return (
         <div style={{ overflowX: "auto" }}>

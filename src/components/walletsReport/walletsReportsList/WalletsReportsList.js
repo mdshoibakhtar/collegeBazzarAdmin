@@ -20,7 +20,7 @@ function WalletsReportsList({ data, onChangeVal, totalCount, loading }) {
                                     <div className="tbl-caption">
                                         <h4 className="heading mb-0"><b>All Wallets Reports List</b></h4>
                                         <div>
-                                            <Link className="btn btn-primary btn-sm" to="/admin/add-wallets/report" role="button" aria-controls="offcanvasExample">+ ADD  Wallets  </Link>
+                                            <Link className="btn btn-primary btn-sm" to="/add-wallets/report" role="button" aria-controls="offcanvasExample">+ ADD  Wallets  </Link>
                                             {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}

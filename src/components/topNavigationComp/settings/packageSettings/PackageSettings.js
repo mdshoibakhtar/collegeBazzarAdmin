@@ -41,7 +41,7 @@ function PackageSettings() {
                                                 Distributer
                                             </td>
                                             <td>
-                                                <Link to="/admin/set-operator-commission"><span className="badge badge-success  badge-success-2">Commission Set Up</span></Link>
+                                                <Link to="/set-operator-commission"><span className="badge badge-success  badge-success-2">Commission Set Up</span></Link>
                                             </td>
 
 
@@ -50,7 +50,7 @@ function PackageSettings() {
                                             </td> */}
                                             {/* <td>
                                                 <div className="d-flex">
-                                                    <Link to="/admin/edit-service-master" className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                    <Link to="/edit-service-master" className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                     <a href="#" className="btn btn-danger shadow btn-xs sharp"><i className="fa fa-trash" /></a>
                                                 </div>
 

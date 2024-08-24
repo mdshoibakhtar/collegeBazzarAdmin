@@ -12,9 +12,9 @@ function AddRoleMaster() {
         id: "1",
         title_1: "Master",
         title_2: "Role Master",
-        path_2: "/admin/role-master",
+        path_2: "/role-master",
         title_3: "Add Role Master",
-        path_3: "/admin/add-role-master"
+        path_3: "/add-role-master"
     }
     const [initialValues, setInitialValues] = useState({
         name: "",
@@ -51,7 +51,7 @@ function AddRoleMaster() {
                     if (response?.statusCode === "200") {
                         toastSuccessMessage();
                         setTimeout(() => {
-                            navigate('/admin/role-master')
+                            navigate('/role-master')
                         }, 5000);
                     }else{
                         toastErrorMessage()
@@ -65,7 +65,7 @@ function AddRoleMaster() {
                     await updateRole(params.id, values);
                     toastSuccessMessage();
                     setTimeout(() => {
-                        navigate('/admin/role-master')
+                        navigate('/role-master')
                     }, 5000);
                 } catch (error) {
 
@@ -145,7 +145,7 @@ function AddRoleMaster() {
                                                     </div>
                                                     <div className="col-xl-6 mb-4 mt-2">
                                                         <div>
-                                                            <Link to='/admin/role-master' className="btn btn-danger light ms-1">Cancel</Link>
+                                                            <Link to='/role-master' className="btn btn-danger light ms-1">Cancel</Link>
                                                             <button
                                                                 className="btn btn-primary me-1"
                                                                 type="submit"

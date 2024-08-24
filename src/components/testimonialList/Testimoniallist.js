@@ -10,7 +10,7 @@ const breadCrumbsTitle = {
     id: "1",
     title_1: "Master",
     title_2: "Testimonial Master",
-    path_2: "/admin/Testimonial-master"
+    path_2: "/Testimonial-master"
 }
 function Testimoniallist() {
 
@@ -69,7 +69,7 @@ function Testimoniallist() {
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0">Testimonial MASTER</h4>
                                     <div>
-                                        <Link className="btn btn-primary btn-sm" to="/admin/add-testimonial" role="button" aria-controls="offcanvasExample">+ Testimonial MASTER</Link>
+                                        <Link className="btn btn-primary btn-sm" to="/add-testimonial" role="button" aria-controls="offcanvasExample">+ Testimonial MASTER</Link>
                                         {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}
@@ -107,7 +107,7 @@ function Testimoniallist() {
                                                 <td>
                                                     <div className="d-flex">
 
-                                                        <Link to={`/admin/edit-testimonial/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                        <Link to={`/edit-testimonial/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                         <Popconfirm
                                                             title="Delete Testimonial !"
                                                             description="Are you sure to delete ?"

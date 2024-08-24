@@ -78,7 +78,7 @@ function AddSubModule() {
                     if (res?.statusCode == "200") {
                         toastSuccessMessage();
                         setTimeout(() => {
-                            navigate('/admin/list-sub-module')
+                            navigate('/list-sub-module')
                         }, [4000])
                     }
                 } catch (error) {
@@ -91,7 +91,7 @@ function AddSubModule() {
                     if (res?.statusCode == "200") {
                         toastSuccessMessage();
                         setTimeout(() => {
-                            navigate('/admin/list-sub-module')
+                            navigate('/list-sub-module')
                         }, [4000])
                     }
                 } catch (error) {
@@ -264,7 +264,7 @@ function AddSubModule() {
 
 
                                                     <div className="col-xl-4 mb-3">
-                                                        <Link to='/admin/list-sub-module' className="btn btn-danger light ms-1">Cancel</Link>
+                                                        <Link to='/list-sub-module' className="btn btn-danger light ms-1">Cancel</Link>
                                                         <button
                                                             className="btn btn-primary me-1"
                                                             type="submit"

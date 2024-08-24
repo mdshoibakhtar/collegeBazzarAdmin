@@ -45,7 +45,7 @@ function AffilatedTypesForm
                     const res = await addTypes_Of_AffilatedBy_Master(values);
                     if (res?.statusCode == "200") {
                         toastSuccessMessage(" Affilated Successfully");
-                        navigate(`/admin/affilated-by`)
+                        navigate(`/affilated-by`)
                     }
                     blankBtn()
                 } catch (error) {
@@ -59,7 +59,7 @@ function AffilatedTypesForm
                     if (res?.statusCode == "200") {
                         toastSuccessMessage("Affilated Successfully");
                         blankBtn()
-                        navigate(`/admin/affilated-by`)
+                        navigate(`/affilated-by`)
                     }
                     if (res?.statusCode == "403") {
                         toastSuccessMessage("Affilated Successfully");
@@ -168,7 +168,7 @@ function AffilatedTypesForm
                                                 </div>
 
                                                 <div className="col-xl-2 mb-3">
-                                                    <Link to='/admin/affilated-by' type='submit' className="btn btn-danger light ms-1">Cancel</Link>
+                                                    <Link to='/affilated-by' type='submit' className="btn btn-danger light ms-1">Cancel</Link>
                                                     {/* <Button className="btn btn-danger light ms-1" onClick={() => cancelBtn()}>Cancel</Button> */}
                                                     <button
                                                         className="btn btn-primary me-1"

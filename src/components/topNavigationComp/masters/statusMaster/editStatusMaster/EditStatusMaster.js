@@ -6,9 +6,9 @@ const breadCrumbsTitle = {
     id: "1",
     title_1: "Master",
     title_2: "status Master",
-    path_2:"/admin/status-master",
+    path_2:"/status-master",
     title_3: "Update status Master",
-    path_3:"/admin/edit-status-master",
+    path_3:"/edit-status-master",
 }
 function EditStatusMaster() {
     const initialValues = {
@@ -111,7 +111,7 @@ function EditStatusMaster() {
                                                     </div>
                                                     <div className="col-xl-6 mb-4 mt-2">
                                                         <div>
-                                                            <Link to='/admin/status-master' className="btn btn-danger light ms-1">Cancel</Link>
+                                                            <Link to='/status-master' className="btn btn-danger light ms-1">Cancel</Link>
                                                             <button className="btn btn-primary me-1">Submit</button>
                                                         </div>
                                                     </div>

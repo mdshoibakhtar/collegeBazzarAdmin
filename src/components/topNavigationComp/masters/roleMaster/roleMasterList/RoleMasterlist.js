@@ -9,7 +9,7 @@ const breadCrumbsTitle = {
     id: "1",
     title_1: "Master",
     title_2: "Role Master",
-    path_2: "/admin/role-master"
+    path_2: "/role-master"
 }
 function RoleMasterList() {
 
@@ -67,7 +67,7 @@ function RoleMasterList() {
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0">ROLE MASTER</h4>
                                     <div>
-                                        <Link className="btn btn-primary btn-sm" to="/admin/add-role-master" role="button" aria-controls="offcanvasExample">+ ROLE MASTER</Link>
+                                        <Link className="btn btn-primary btn-sm" to="/add-role-master" role="button" aria-controls="offcanvasExample">+ ROLE MASTER</Link>
                                         {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}
@@ -98,7 +98,7 @@ function RoleMasterList() {
                                                 <td>
                                                     <div className="d-flex">
 
-                                                        <Link to={`/admin/update-role-master/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                        <Link to={`/update-role-master/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                         <Popconfirm
                                                             title="Delete Role !"
                                                             description="Are you sure to delete ?"

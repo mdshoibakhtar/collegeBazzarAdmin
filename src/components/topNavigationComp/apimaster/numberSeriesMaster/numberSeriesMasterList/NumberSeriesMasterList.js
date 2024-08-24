@@ -11,7 +11,7 @@ function NumberSeriesMasterList() {
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0">NUMBER SERIES MASTER</h4>
                                     <div>
-                                        <Link className="btn btn-primary btn-sm" to="/admin/add-number-series-master" role="button" aria-controls="offcanvasExample">+ NUMBER SERIES MASTER</Link>
+                                        <Link className="btn btn-primary btn-sm" to="/add-number-series-master" role="button" aria-controls="offcanvasExample">+ NUMBER SERIES MASTER</Link>
                                         {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}
@@ -56,7 +56,7 @@ function NumberSeriesMasterList() {
                                             </td>
                                             <td>
                                                 <div className="d-flex">
-                                                    <Link to="/admin/update-number-series-master" className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                    <Link to="/update-number-series-master" className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                     <a href="#" className="btn btn-danger shadow btn-xs sharp"><i className="fa fa-trash" /></a>
                                                 </div>
 

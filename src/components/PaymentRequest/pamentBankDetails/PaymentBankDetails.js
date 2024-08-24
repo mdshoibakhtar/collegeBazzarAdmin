@@ -11,7 +11,7 @@ function PaymentBankDetails() {
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0">BANK DETAILS</h4>
                                     <div>
-                                        {/* <Link className="btn btn-primary btn-sm" to="/admin/add-service-master" role="button" aria-controls="offcanvasExample">+ SERVICE MASTER</Link> */}
+                                        {/* <Link className="btn btn-primary btn-sm" to="/add-service-master" role="button" aria-controls="offcanvasExample">+ SERVICE MASTER</Link> */}
                                         {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}

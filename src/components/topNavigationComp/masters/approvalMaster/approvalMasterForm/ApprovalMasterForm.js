@@ -45,7 +45,7 @@ function ApprovalMasterForm
                     const res = await addTypes_Of_ApprovedBy_Master(values);
                     if (res?.statusCode == "200") {
                         toastSuccessMessage(" Approval Successfully");
-                        navigate(`/admin/approval`)
+                        navigate(`/approval`)
                     }
                     blankBtn()
                 } catch (error) {
@@ -59,7 +59,7 @@ function ApprovalMasterForm
                     if (res?.statusCode == "200") {
                         toastSuccessMessage("pproval Successfully");
                         blankBtn()
-                        navigate(`/admin/approval`)
+                        navigate(`/approval`)
                     }
                     if (res?.statusCode == "403") {
                         toastSuccessMessage("pproval Successfully");
@@ -171,7 +171,7 @@ function ApprovalMasterForm
                                                 </div>
 
                                                 <div className="col-xl-2 mb-3">
-                                                    <Link to='/admin/approval' type='submit' className="btn btn-danger light ms-1">Cancel</Link>
+                                                    <Link to='/approval' type='submit' className="btn btn-danger light ms-1">Cancel</Link>
                                                     {/* <Button className="btn btn-danger light ms-1" onClick={() => cancelBtn()}>Cancel</Button> */}
                                                     <button
                                                         className="btn btn-primary me-1"

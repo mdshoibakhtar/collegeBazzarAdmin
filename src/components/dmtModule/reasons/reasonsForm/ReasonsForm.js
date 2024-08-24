@@ -41,7 +41,7 @@ function ReasonForms() {
                     await addReasons(values);
                     toastSuccessMessage();
                     setTimeout(() => {
-                        navigate('/admin/reasons-data')
+                        navigate('/reasons-data')
                     }, 5000);
                 } catch (error) {
                     alert.error("NOT SUCCESS :", error);
@@ -52,7 +52,7 @@ function ReasonForms() {
                     await updateReasons(params.id, values);
                     toastSuccessMessage();
                     setTimeout(() => {
-                        navigate('/admin/reasons-data')
+                        navigate('/reasons-data')
                     }, 4000);
                 } catch (error) {
 
@@ -136,7 +136,7 @@ function ReasonForms() {
                                                     </div>
                                                     <div className="col-xl-4 mb-4 mt-2">
                                                         <div>
-                                                            <Link to='/admin/role-master' className="btn btn-danger light ms-1">Cancel</Link>
+                                                            <Link to='/role-master' className="btn btn-danger light ms-1">Cancel</Link>
                                                             <button
                                                                 className="btn btn-primary me-1"
                                                                 type="submit"

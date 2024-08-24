@@ -7,7 +7,6 @@ import Container from 'react-bootstrap/Container';
 
 function BulkAssignedModel(props) {
     const [data, setData] = useState(props.selectedUsers);
-    console.log(props.selectedUsers);
 
     useEffect(() => {
         setData(props.selectedUsers)

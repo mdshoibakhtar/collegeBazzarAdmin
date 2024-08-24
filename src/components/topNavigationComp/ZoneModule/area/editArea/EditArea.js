@@ -116,7 +116,7 @@ function EditArea() {
                                                     
                                                 </div>
                                                 <div>
-                                                    <Link to='/admin/area' className="btn btn-danger light ms-1">Cancel</Link>
+                                                    <Link to='/area' className="btn btn-danger light ms-1">Cancel</Link>
                                                     <button className="btn btn-primary me-1">Submit</button>
                                                 </div>
                                             </form>

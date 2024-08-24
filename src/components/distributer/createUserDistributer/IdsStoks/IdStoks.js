@@ -17,7 +17,7 @@ function IdStocks({ show3, handleClose3 }) {
                                         {/* <div className="tbl-caption">
                                             <h4 className="heading mb-0">BANK MASTER</h4>
                                             <div>
-                                                <Link className="btn btn-primary btn-sm" to="/admin/add-bank" role="button" aria-controls="offcanvasExample">+ BANK MASTER</Link>
+                                                <Link className="btn btn-primary btn-sm" to="/add-bank" role="button" aria-controls="offcanvasExample">+ BANK MASTER</Link>
                                                 <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button>

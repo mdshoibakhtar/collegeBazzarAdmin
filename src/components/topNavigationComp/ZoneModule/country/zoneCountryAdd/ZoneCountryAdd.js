@@ -257,7 +257,7 @@ function CountryAddZone({ i, language, languageId, submitForm, handleChangeCus, 
                                 </div>
                             </div>
                             <div>
-                                <Link to='/admin/country' className="btn btn-danger light ms-1">Cancel</Link>
+                                <Link to='/country' className="btn btn-danger light ms-1">Cancel</Link>
                                 {i == language?.length - 1 && <button type="button" onClick={submitForm} className="btn btn-primary me-1">
                                     Submit
                                 </button>}

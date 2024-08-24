@@ -61,12 +61,12 @@ function CityForm() {
                 const res = await cityAdd(values);
                 if (res?.statusCode === "200") {
                     toastSuccessMessage();
-                    navigate(`/admin/cities-master`);
+                    navigate(`/cities-master`);
                 }
             } else {
                 await cityUpdate(params.id, values);
                 toastSuccessMessage();
-                navigate(`/admin/cities-master`);
+                navigate(`/cities-master`);
             }
         } catch (error) {
             console.error("Error in submitForm:", error);
@@ -257,7 +257,7 @@ function CityForm() {
                                             </div>
                                             <div>
                                                 <Link
-                                                    to="/admin/cities-master"
+                                                    to="/cities-master"
                                                     className="btn btn-danger light ms-1"
                                                 >
                                                     Cancel

@@ -63,7 +63,7 @@ function BlockPermissionForm({ initialValues, submitForm, params,validate,cancel
                                                     </select>
                                                 </div>
                                                 <div className="col-xl-2 mb-3">
-                                                    <Link to='/admin/block-master' className="btn btn-danger light ms-1">Cancel</Link>
+                                                    <Link to='/block-master' className="btn btn-danger light ms-1">Cancel</Link>
                                                     <button
                                                         className="btn btn-primary me-1"
                                                         type="submit"

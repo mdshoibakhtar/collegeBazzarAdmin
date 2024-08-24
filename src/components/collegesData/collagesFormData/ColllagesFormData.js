@@ -1,7 +1,7 @@
 import { Formik } from 'formik';
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import Select from 'react-select';
 import CustomInputField from '../../../common/CustomInputField';
 import Breadcrumbs from '../../../common/breadcrumb/Breadcrumbs';
@@ -13,6 +13,7 @@ import {
     getAffiliatedListSelect,
     getApproveListSelect,
     getCollegeTypeListSelect,
+    getCourseListSelect,
     getFacilitiesListSelect,
     getStreamListSelect,
     getupdateCollegesCrudStatusId,
@@ -22,6 +23,7 @@ import {
 import JoditEditor from 'jodit-react';
 import CustomTextArea from '../../../common/CustomTextArea';
 import { baseUrlImage } from '../../../baseUrl';
+// import { textAlign } from 'html2canvas/dist/types/css/property-descriptors/text-align';
 
 function CollagesFormData() {
     const breadCrumbsTitle = {
@@ -59,8 +61,16 @@ function CollagesFormData() {
         meta_keyword: "",
         meta_description: "",
         meta_image: "",
-        // courses: [{ course_id, fee }]
+        course_type: "",
+        courses: [{ course_id: "", fee: null }]
     });
+
+
+
+    const [selectedCourseState, setselectedCourseState] = useState([]);
+    const [courseState, SetCourseState] = useState();
+    const [selectedOptions2, SetSelectedOptions2] = useState();
+    // --------------------------------------------------------------------------------
     const [selectedStreamState, setselectedStreamState] = useState([]);
     const [streamState, SetStreamState] = useState();
     // --------------------------------------------------------------------------------
@@ -92,8 +102,7 @@ function CollagesFormData() {
 
     const validate = (values) => {
         let errors = {};
-    
-        // Check required fields
+
         if (!values.name) {
             errors.name = "College Name is required";
         }
@@ -105,20 +114,19 @@ function CollagesFormData() {
         if (!values.college_type_id) {
             errors.college_type_id = "College Type is required";
         }
-        if (!values.affiliate || values.affiliate.length === 0) {
+        if (!values.affiliate) {
             errors.affiliate = "At least one affiliation is required";
         }
-        if (!values.approvedBy || values.approvedBy.length === 0) {
+        if (!values.approvedBy) {
             errors.approvedBy = "At least one approval is required";
         }
         if (!values.location) {
             errors.location = "Location is required";
         }
-        // Uncomment if overview is required
-        // if (!values.overview) {
-        //     errors.overview = "Overview is required";
-        // }
-        if (!values.facilities || values.facilities.length === 0) {
+        if (!values.overview) {
+            errors.overview = "Overview is required";
+        }
+        if (!values.facilities) {
             errors.facilities = "At least one facility is required";
         }
         if (!values.eligibilityCriteria) {
@@ -147,19 +155,29 @@ function CollagesFormData() {
         if (!values.city) {
             errors.city = "City is required";
         }
-        if (!values.stream_id || values.stream_id.length === 0) {
+        if (!values.stream_id) {
             errors.stream_id = "At least one stream is required";
         }
         if (!values.meta_description) {
             errors.meta_description = "Meta description is required";
         }
-    
+
         return errors;
     };
-    
+
 
     // microphone----------------
 
+    const toastSuccessMessage = (message) => {
+        toast.success(message, {
+            position: "top-right",
+        });
+    };
+    const toastErrorMessage = (message) => {
+        toast.error(message, {
+            position: "top-right",
+        });
+    };
 
 
     const handleChangeCountry = async (e) => {
@@ -248,63 +266,57 @@ function CollagesFormData() {
         }
     }
 
+    // console.log(selectedCourseState, "see you soon");
+    // console.log(courseState, "see you ");
 
     const submitForm = async (values) => {
-        console.log(values, "see Values");
-
         const submissionData = {
             ...values,
             affiliate: selectedState4.map(option => option.value),
             approvedBy: selectedState3.map(option => option.value),
             facilities: selectedState2.map(option => option.value),
             stream_id: selectedStreamState.map(option => option.value),
+            courses: selectedCourseState.map(option => ({
+                course_id: option.value,
+                fee: option.fee,
+            })),
             overview: content,
             banner_img: bannImageState,
             logo_img: logoImage,
             meta_image: metaImage,
         };
+        console.log(submissionData, "see Values");
 
         try {
             if (!params?.id) {
-                const res = await addCollegescrud(submissionData);
-                if (res?.statusCode === "200") {
-                    toastSuccessMessage("College Successfully Added");
-                    navigate(`/admin/list-colleges`);
+                try {
+                    const res = await addCollegescrud(submissionData);
+                    if (res?.statusCode === "200") {
+                        toastSuccessMessage("College Successfully Added");
+                        navigate(`/list-colleges`);
+                    }
+                    toastErrorMessage(res.message)
+                } catch (error) {
+                    toastErrorMessage(error.message)
+                    console.log(error.message);
+
                 }
             } else {
                 const updatesubmissionData = {
-                    ...values,
-                    affiliate: selectedState4.map(option => option.value),
-                    approvedBy: selectedState3.map(option => option.value),
-                    facilities: selectedState2.map(option => option.value),
-                    stream_id: selectedStreamState.map(option => option.value),
-                    overview: content,
-                    banner_img: bannImageState,
-                    logo_img: logoImage,
-                    meta_image: metaImage,
+                    ...submissionData,
                     country: values.country?.id
                 };
-                console.log(updatesubmissionData);
 
                 const res = await updateCollegescrud(params.id, updatesubmissionData);
                 if (res?.statusCode === "200") {
                     toastSuccessMessage("College Successfully Updated");
-                    navigate(`/admin/list-colleges`);
+                    navigate(`/list-colleges`);
                 }
             }
         } catch (error) {
             console.error("Error:", error);
         }
     };
-
-
-
-    const toastSuccessMessage = (message) => {
-        toast.success(message, {
-            position: "top-right",
-        });
-    };
-    
 
     useEffect(() => {
         const fetchCollegeData = async () => {
@@ -320,32 +332,38 @@ function CollagesFormData() {
                         approvedBy: collegeData?.approvedBy?.map(item => ({ value: item?._id, label: item?.name })),
                         facilities: collegeData?.facilities?.map(item => ({ value: item?._id, label: item?.name })),
                         stream_id: collegeData?.stream_id?.map(item => ({ value: item?._id, label: item?.name })),
-                        overview: collegeData?.overview || "",  // Ensure overview is set correctly
+                        overview: collegeData?.overview || "",
                     });
 
                     setSelectedState4(collegeData?.affiliate?.map(item => ({ value: item?._id, label: item?.name })));
                     setSelectedState3(collegeData?.approvedBy?.map(item => ({ value: item?._id, label: item?.name })));
                     setSelectedState2(collegeData?.facilities?.map(item => ({ value: item?._id, label: item?.name })));
                     setselectedStreamState(collegeData?.stream_id?.map(item => ({ value: item?._id, label: item?.name })));
-                    setContent(collegeData?.overview || ""); // Ensure content is set correctly
+                    setContent(collegeData?.overview || "");
 
-                    try {
-                        if (collegeData?.country?.id) {
-                            const resState = await StateAddCollageSelectList(collegeData?.country?.id);
-                            setCountryWiseState(resState?.data);
-                        }
-                    } catch (error) {
-                        alert(`Error fetching states: ${error.message}`);
+                    if (collegeData?.country?.id) {
+                        const resState = await StateAddCollageSelectList(collegeData?.country?.id);
+                        setCountryWiseState(resState?.data);
+                    }
+                    if (collegeData?.state?._id) {
+                        const resCity = await cityAddCollageSelectList(collegeData?.state?._id);
+                        setStateWisecCity(resCity?.data);
                     }
 
-                    try {
-                        if (collegeData?.state?._id) {
-                            const resCity = await cityAddCollageSelectList(collegeData?.state?._id);
-                            setStateWisecCity(resCity?.data);
-                        }
-                    } catch (error) {
-                        alert(`Error fetching cities: ${error.message}`);
+                    const streamIds = collegeData?.stream_id?.map(item => item?._id);
+                    if (streamIds.length > 0) {
+                        await courseTypeDataForSelect(streamIds);
                     }
+                    console.log(collegeData,"see u soon");
+                    
+
+                    setselectedCourseState(collegeData?.courses.map(item => ({
+                        value: item?._id,
+                        label: item?.service_name,
+                        fee: item?.fee || null,
+                    })));
+                    
+
                 }
             } catch (error) {
                 console.error("Error fetching college data:", error);
@@ -353,8 +371,6 @@ function CollagesFormData() {
         };
 
         fetchCollegeData();
-        
-        
     }, [params?.id]);
 
 
@@ -424,6 +440,19 @@ function CollagesFormData() {
                 alert(error.message);
             }
         };
+        /* const getCourseDataForSelect = async () => {
+            try {
+                const response = await getCourseListSelect();
+                console.log(response);
+
+                SetCourseState(response?.data.map(item => ({
+                    value: item?._id,
+                    label: item?.name,
+                })));
+            } catch (error) {
+                alert(error.message);
+            }
+        }; */
 
         getCollegesDataForSelect();
         getAffiliateDataForSelect();
@@ -431,6 +460,7 @@ function CollagesFormData() {
         getFacilitiesDataForSelect();
         getStreamDataForSelect()
         getCountryDataForSelect()
+
     }, []);
 
     const affiliatedHandler = (selectedOptions) => {
@@ -444,9 +474,46 @@ function CollagesFormData() {
     const facilitiesHandler = (selectedOptions) => {
         setSelectedState2(selectedOptions);
     };
+    const courseTypeDataForSelect = async (ids) => {
+        try {
+            const response = await getCourseListSelect(ids)
+
+            SetCourseState(response?.data.map(item => ({
+                value: item?._id,
+                label: item?.service_name,
+                fee: null,
+            })));
+        } catch (error) {
+            alert(error.message)
+        }
+    }
     const streamsHandler = (selectedOptions) => {
         setselectedStreamState(selectedOptions);
+        const ids = selectedOptions.map((itemn) => itemn.value)
+        courseTypeDataForSelect(ids)
     };
+
+    const courseHandler = (selectedOptions) => {
+        setselectedCourseState(selectedOptions);
+    };
+
+    /* const removeOption2 = (index) => {
+        const updatedOptions = selectedOptions2.filter((item, idx) => idx !== index);
+        setselectedCourseState(updatedOptions);
+    } */
+    console.log(selectedCourseState);
+
+    const handleControlFee = (e, id) => {
+        const updatedOptions = selectedCourseState.map((item) => {
+            if (item.value === id) {
+                return { ...item, fee: e.target.value };
+            }
+            return item;
+        });
+        setselectedCourseState(updatedOptions);
+    };
+
+
 
 
     function handleTagKeyDown(e) {
@@ -600,8 +667,8 @@ function CollagesFormData() {
                                                         id="establish"
                                                         name="establish"
                                                         placeholder="Establish Year"
-                                                        min="1800"  // Set a reasonable minimum year
-                                                        max={new Date().getFullYear()}  // Set the maximum year to the current year
+                                                        min="1800"
+                                                        max={new Date().getFullYear()}
                                                     />
                                                 </div>
                                                 <div className="col-xl-4 mb-3">
@@ -637,13 +704,71 @@ function CollagesFormData() {
                                                         options={streamState}
                                                         className="basic-multi-select"
                                                         classNamePrefix="select"
-                                                        placeholder="select Streams"
+                                                        placeholder="Select Streams"
                                                     />
                                                     {errors.stream_id && touched.stream_id ? (
                                                         <small className="error-cls">
                                                             {errors.stream_id}
                                                         </small>
                                                     ) : null}
+                                                </div>
+
+                                                <div className="col-xl-4 mb-3">
+                                                    <label className='label fs-4'>Course</label>
+                                                    <Select
+                                                        name="course_type"
+                                                        isMulti
+                                                        value={selectedCourseState}
+                                                        onChange={courseHandler}
+                                                        options={courseState}
+                                                        className="basic-multi-select"
+                                                        classNamePrefix="select"
+                                                        placeholder="Select Course"
+                                                    />
+                                                    {errors.course_type && touched.course_type ? (
+                                                        <small className="error-cls">
+                                                            {errors.course_type}
+                                                        </small>
+                                                    ) : null}
+                                                </div>
+
+                                                <div className="row cusformsnew">
+                                                    <div className="form-group col-md-12">
+                                                        {selectedCourseState && selectedCourseState.map((item, i) => (
+                                                            <div
+                                                                key={item.value}
+                                                                className="row cusformsnew"
+                                                                style={{
+                                                                    marginBottom: '10px',
+                                                                    backgroundColor: "#9d9fd4",
+                                                                    padding: "10px 0",
+                                                                    margin: "5px 0"
+                                                                }}
+                                                            >
+                                                                <div className="form-group col-md-4">
+                                                                    <label className='text-center'>Course</label>
+                                                                    <input
+                                                                        placeholder="Course"
+                                                                        value={item.label}
+                                                                        disabled
+                                                                        className="form-control"
+                                                                        style={{ fontWeight: "900" }}
+                                                                    />
+                                                                </div>
+                                                                <div className="form-group col-md-4">
+                                                                    <label className='text-center'>Fee</label>
+                                                                    <input
+                                                                        type='number'
+                                                                        placeholder="Fee"
+                                                                        value={item.fee || ''}
+                                                                        className="form-control"
+                                                                        style={{ fontWeight: "900" }}
+                                                                        onChange={(e) => handleControlFee(e, item.value)}
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        ))}
+                                                    </div>
                                                 </div>
                                                 <div className="col-xl-4 mb-3">
                                                     <label className='label fs-4'>Affiliate BY</label>
@@ -994,7 +1119,7 @@ function CollagesFormData() {
                                                                                 id="avatar-image"
                                                                                 src="https://lh5.googleusercontent.com/proxy/t08n2HuxPfw8OpbutGWjekHAgxfPFv-pZZ5_-uTfhEGK8B5Lp-VN4VjrdxKtr8acgJA93S14m9NdELzjafFfy13b68pQ7zzDiAmn4Xg8LvsTw1jogn_7wStYeOx7ojx5h63Gliw"
                                                                                 alt="default_image"
-                                                                                style={{ width: "100%", height: "auto", borderRadius: "8px", objectFit: 'cover' }}
+                                                                                style={{ objectFit: 'cover' }}
                                                                             />
                                                                         </div>
                                                                     )}
@@ -1007,7 +1132,7 @@ function CollagesFormData() {
 
                                                 <div className="text-right col-12">
                                                     <Link
-                                                        to="/admin/list-colleges"
+                                                        to="/list-colleges"
                                                         className="btn btn-outline-primary mr-2"
                                                     >
                                                         Close
@@ -1027,6 +1152,7 @@ function CollagesFormData() {
                         </div>
                     </div>
                 </div>
+                <ToastContainer className={"text-center"} />
             </div>
         </>
     );

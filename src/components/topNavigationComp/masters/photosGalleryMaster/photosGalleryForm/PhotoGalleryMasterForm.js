@@ -57,7 +57,7 @@ function PhotoGalleryMasterForm
                     const res = await addPhotosGallery(updatedValues);
                     if (res?.statusCode === "200") {
                         toastSuccessMessage("Image Successfully");
-                        navigate(`/admin/gallery`);
+                        navigate(`/gallery`);
                     }
                 } catch (error) {
                     alert(error.message);
@@ -69,7 +69,7 @@ function PhotoGalleryMasterForm
                     if (res?.statusCode === "200") {
                         toastSuccessMessage("Gallery Updated Successfully");
                         blankBtn(); // Clear form values
-                        navigate(`/admin/Gallery`);
+                        navigate(`/Gallery`);
                     } else if (res?.statusCode === "403") {
                         toastSuccessMessage("Gallery Access Forbidden");
                         blankBtn(); // Clear form values
@@ -212,7 +212,7 @@ function PhotoGalleryMasterForm
                                                 </div>
 
                                                 <div className="col-xl-2 mb-3">
-                                                    <Link to='/admin/gallery' type='submit' className="btn btn-danger light ms-1">Cancel</Link>
+                                                    <Link to='/gallery' type='submit' className="btn btn-danger light ms-1">Cancel</Link>
                                                     {/* <Button className="btn btn-danger light ms-1" onClick={() => cancelBtn()}>Cancel</Button> */}
                                                     <button
                                                         className="btn btn-primary me-1"

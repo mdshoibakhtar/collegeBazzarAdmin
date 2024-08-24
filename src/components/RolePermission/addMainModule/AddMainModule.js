@@ -64,7 +64,7 @@ function AddMainModule() {
                     if (res?.statusCode == "200") {
                         toastSuccessMessage();
                         setTimeout(() => {
-                            navigate('/admin/listMainModule')
+                            navigate('/listMainModule')
                         }, [4000])
                     }
                 } catch (error) {
@@ -77,7 +77,7 @@ function AddMainModule() {
                     if (res?.statusCode == "200") {
                         toastSuccessMessage();
                         setTimeout(() => {
-                            navigate('/admin/listMainModule')
+                            navigate('/listMainModule')
                         }, [4000])
                     }
                 } catch (error) {
@@ -187,7 +187,7 @@ function AddMainModule() {
 
 
                                                     <div className="col-xl-4 mb-3">
-                                                        <Link to='/admin/listMainModule' className="btn btn-danger light ms-1">Cancel</Link>
+                                                        <Link to='/listMainModule' className="btn btn-danger light ms-1">Cancel</Link>
                                                         <button
                                                             className="btn btn-primary me-1"
                                                             type="submit"

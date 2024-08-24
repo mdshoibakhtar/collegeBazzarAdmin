@@ -24,9 +24,9 @@ const DashboardCards = ({ count, dasboradData }) => {
   }, []);
 
   const memberCards = [
-    { icon: <FaUsers />, color: '#FFA500', navigateTo: '/admin/member-list' },
-    { icon: <FaUsers />, color: '#32CD32', navigateTo: '/admin/member-list' },
-    { icon: <FaUserTie />, color: '#9370DB', navigateTo: '/admin/member-list' },
+    { icon: <FaUsers />, color: '#FFA500', navigateTo: '/member-list' },
+    { icon: <FaUsers />, color: '#32CD32', navigateTo: '/member-list' },
+    { icon: <FaUserTie />, color: '#9370DB', navigateTo: '/member-list' },
   ];
   const transactionCards = [
     { icon: <FaMoneyBillWave />, color: '#3498db', title: 'Domestic Money Transfer', data: dasboradData?.dmt?.success|| 0,  },
@@ -37,10 +37,10 @@ const DashboardCards = ({ count, dasboradData }) => {
   ];
 
   const reportCards = [
-    { icon: <FaFileAlt />, color: '#f39c12', title: 'Commission Report', navigateTo: '/admin/business-report' },
-    { icon: <FaCalculator />, color: '#d35400', title: 'TDS Report', navigateTo: '/admin/tds-report' },
-    { icon: <FaChartBar />, color: '#16a085', title: 'Charge Report', navigateTo: '/admin/charge-report' },
-    { icon: <FaBook />, color: '#2980b9', title: 'Ledger Report', navigateTo: '/admin/ledger-report' }, // New Ledger Report Card
+    { icon: <FaFileAlt />, color: '#f39c12', title: 'Commission Report', navigateTo: '/business-report' },
+    { icon: <FaCalculator />, color: '#d35400', title: 'TDS Report', navigateTo: '/tds-report' },
+    { icon: <FaChartBar />, color: '#16a085', title: 'Charge Report', navigateTo: '/charge-report' },
+    { icon: <FaBook />, color: '#2980b9', title: 'Ledger Report', navigateTo: '/ledger-report' }, // New Ledger Report Card
   ];
 
   const renderCards = (cardData, items) => {
@@ -55,7 +55,7 @@ const DashboardCards = ({ count, dasboradData }) => {
                 className="dashboard-card" 
                 style={{ backgroundColor: card?.color }}
                 onClick={() => {
-                  if (card?.navigateTo === '/admin/member-list') {
+                  if (card?.navigateTo === '/member-list') {
                     navigate(`${card?.navigateTo}/${item?._id}/${encodeURIComponent(item?.memeberType)}`);
                   } else {
                     navigate(card?.navigateTo);

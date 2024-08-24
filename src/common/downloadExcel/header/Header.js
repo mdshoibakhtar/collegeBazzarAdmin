@@ -81,7 +81,7 @@ function Header({ showAsideBar, toggle, setToggle }) {
   };
   const navigate = useNavigate()
   const changeRoute = (route) => {
-    navigate('/admin/notification')
+    navigate('/notification')
   };
 
   const [show, setShow] = useState(false);

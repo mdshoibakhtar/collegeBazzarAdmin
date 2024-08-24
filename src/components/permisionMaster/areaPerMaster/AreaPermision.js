@@ -81,7 +81,7 @@ function AreaPermision() {
           toastSuccessMessage("Area Successfully");
           if (res?.statusCode == "200") {
             getAreaMasters(page)
-            navigate(`/admin/area-master`)
+            navigate(`/area-master`)
             blankBtn()
           }
         } catch (error) {
@@ -147,7 +147,7 @@ function AreaPermision() {
   const cancelBtn = () => {
     setInitialValues({ name: "", isActive: "" });
     message.error('Cancel Successful!');
-    navigate(`/admin/area-master`)
+    navigate(`/area-master`)
   };
 
   useEffect(() => {

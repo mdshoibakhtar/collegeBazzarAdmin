@@ -11,7 +11,7 @@ const breadCrumbsTitle = {
     id: "1",
     title_1: "Master",
     title_2: "Blog Category Master",
-    path_2: "/admin/blog-category-master"
+    path_2: "/blog-category-master"
 };
 
 function BlogCategoryList() {
@@ -75,7 +75,7 @@ function BlogCategoryList() {
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0">Blog Category Master</h4>
                                     <div>
-                                        <Link className="btn btn-primary btn-sm" to="/admin/add-blog-category" role="button" aria-controls="offcanvasExample">+ Blog Category</Link>
+                                        <Link className="btn btn-primary btn-sm" to="/add-blog-category" role="button" aria-controls="offcanvasExample">+ Blog Category</Link>
                                     </div>
                                 </div>
                                 <div id="empoloyees-tblwrapper_wrapper" className="dataTables_wrapper no-footer">
@@ -109,7 +109,7 @@ function BlogCategoryList() {
                                                     </td>
                                                     <td>
                                                         <div className="d-flex">
-                                                            <Link to={`/admin/edit-blog-category/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
+                                                            <Link to={`/edit-blog-category/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
                                                                 <i className="fa fa-pencil" />
                                                             </Link>
                                                             <Popconfirm

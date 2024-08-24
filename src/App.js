@@ -204,7 +204,8 @@ import Facilities from "./pages/facilities";
 import FacilitiesMasterForm from "./components/topNavigationComp/masters/facilitiesMaster/facilitiesMasterForm/FacilitiesMasterForm";
 import GalleryDatas from "./pages/Gallery";
 import PhotoGalleryMasterForm from "./components/topNavigationComp/masters/photosGalleryMaster/photosGalleryForm/PhotoGalleryMasterForm";
-
+import MoveMember from "./pages/move-member";
+import UpgradeMember from "./pages/upgrade-member";
 //---------------------end--------------------------
 
 //---------------------JUNAID IMPORT START--------------------------
@@ -235,6 +236,16 @@ import TemplateCategoryList from "./components/TemplateCategoryList/TemplateCate
 import TemplateCategoryAdd from "./components/TemplateCategoryAdd/TemplateCategoryAdd";
 import FlowBuilder from "./components/flow-builderList/FlowBuildList";
 import FlowBuilderAdd from "./components/flow-builderAdd/FlowBuilderAdd";
+import Coursedegree from "./pages/topNavigationPages/Master/courseTypesdegree";
+import CourceDegreeTypeForm from "./components/topNavigationComp/masters/courseDegreeType/courseDegreeTypeForm/CourceDegreeTypeForm";
+import ListnumberWhatsaap from "./components/whatsApp/addNumberWhatsapp/listNumberWhatsapp/ListNumberWhatsApp";
+import AddNumber from "./components/whatsApp/addNumberWhatsapp/addNumber/AddNumber";
+import AgentList from "./components/whatsApp/agent/agentList/AgentList";
+import SharedTeamWhatsapp from "./components/whatsApp/sharedTeamInbox/SharedTeamWhatsapp";
+import CreateAgent from "./components/whatsApp/agent/createAgent/CreateAgent";
+import EmailSettings from "./pages/emailSetings";
+import CreateCampingMessages from "./components/messagesApps/CreateCamping/CreateCamping";
+import UtilityManager from "./components/messagesApps/utilityManager/UtilityManager";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -312,7 +323,7 @@ function App() {
         ) : (
           <>
             <Route
-              path="admin"
+              path="/"
               element={<PrivateRoute isAuthenticated={isAuthenticated} />}
             >
               <Route path="" element={<DasBoardRight />} />
@@ -703,303 +714,303 @@ function App() {
 
               <Route path="profile" element={<Profile />} />
               <Route
-                path="/admin/statement/report/:id"
+                path="/statement/report/:id"
                 element={<Statement />}
               />
               <Route
-                path="/admin/statementwallet/report/:id"
+                path="/statementwallet/report/:id"
                 element={<StatementWallet />}
               />
               <Route
-                path="/admin/statement/apes/report/:id"
+                path="/statement/apes/report/:id"
                 element={<Transactions />}
               />
               <Route
-                path="/admin/add-tickets"
+                path="/add-tickets"
                 element={<TicketForm />}
               />
               <Route
-                path="/admin/staff-list"
+                path="/staff-list"
                 element={<ListStaffPermision />}
               />
               <Route
-                path="/admin/add-staff"
+                path="/add-staff"
                 element={<AddPermision />}
               />
               <Route
-                path="/admin/update-staff/:id"
+                path="/update-staff/:id"
                 element={<AddPermision />}
               />
               <Route
-                path="/admin/building-master"
+                path="/building-master"
                 element={<BuildingMaster />}
               />
               <Route
-                path="/admin/building-master/:id"
+                path="/building-master/:id"
                 element={<BuildingMaster />}
               />
               <Route
-                path="/admin/block-master"
+                path="/block-master"
                 element={<BlockMaster />}
               />
               <Route
-                path="/admin/block-master/:id"
+                path="/block-master/:id"
                 element={<BlockMaster />}
               />
               <Route
-                path="/admin/area-master"
+                path="/area-master"
                 element={<AreaPermision />}
               />
               <Route
-                path="/admin/area-master/:id"
+                path="/area-master/:id"
                 element={<AreaPermision />}
               />
               <Route
-                path="/admin/floor-master"
+                path="/floor-master"
                 element={<FloorPermission />}
               />
               <Route
-                path="/admin/floor-master/:id"
+                path="/floor-master/:id"
                 element={<FloorPermission />}
               />
               <Route
-                path="/admin/ward-master"
+                path="/ward-master"
                 element={<WardMaster />}
               />
               <Route
-                path="/admin/ward-master/:id"
+                path="/ward-master/:id"
                 element={<WardMaster />}
               />
               <Route
-                path="/admin/office-master"
+                path="/office-master"
                 element={<OfficeMaster />}
               />
               <Route
-                path="/admin/office-master/:id"
+                path="/office-master/:id"
                 element={<OfficeMaster />}
               />
               <Route
-                path="/admin/departments-master"
+                path="/departments-master"
                 element={<DepartmentMaster />}
               />
               <Route
-                path="/admin/departments-master/:id"
+                path="/departments-master/:id"
                 element={<DepartmentMaster />}
               />
               <Route
-                path="/admin/designation-master"
+                path="/designation-master"
                 element={<DesignationMaster />}
               />
               <Route
-                path="/admin/designation-master/:id"
+                path="/designation-master/:id"
                 element={<DesignationMaster />}
               />
               <Route
-                path="/admin/staff-kyc_details"
+                path="/staff-kyc_details"
                 element={<StaffKycMaster />}
               />
               <Route
-                path="/admin/staff-kyc_details/:id"
+                path="/staff-kyc_details/:id"
                 element={<StaffKycDetailsMasterByid />}
               />
 
               {/* ----------mustafa routes ------ */}
               <Route
-                path="/admin/add-main-module"
+                path="/add-main-module"
                 element={<AddMainModulePage />}
               />
               <Route
-                path="/admin/update-main-module/:id"
+                path="/update-main-module/:id"
                 element={<AddMainModulePage />}
               />
               <Route
-                path="/admin/listMainModule"
+                path="/listMainModule"
                 element={<MainListModule />}
               />
 
               <Route
-                path="/admin/add-sub-module"
+                path="/add-sub-module"
                 element={<AddSubModule />}
               />
               <Route
-                path="/admin/update-sub-module/:id"
+                path="/update-sub-module/:id"
                 element={<AddSubModule />}
               />
               <Route
-                path="/admin/list-sub-module"
+                path="/list-sub-module"
                 element={<MainSubListModule />}
               />
 
               <Route
-                path="/admin/add-role"
+                path="/add-role"
                 element={<AddRole />}
               />
               <Route
-                path="/admin/list-role"
+                path="/list-role"
                 element={<ListMainRole />}
               />
               <Route
-                path="/admin/update-role/:id"
+                path="/update-role/:id"
                 element={<AddRole />}
               />
               {/* Create-Complaint */}
 
               <Route
-                path="/admin/employees-complaints-dashboard"
+                path="/employees-complaints-dashboard"
                 element={<ComplaintsDashboardPages />}
               />
 
               <Route
-                path="/admin/Create-Complaint"
+                path="/Create-Complaint"
                 element={<AddCompalnePage />}
               />
               <Route
-                path="/admin/update-Complaint/:id"
+                path="/update-Complaint/:id"
                 element={<AddCompalnePage />}
               />
               <Route
-                path="/admin/list-Complaint"
+                path="/list-Complaint"
                 element={<MainListComplane />}
               />
 
 
               {/* --------------Colleges Bazzar path Routes----------------------- */}
               <Route
-                path="/admin/list-set-Attributes"
+                path="/list-set-Attributes"
                 element={<SetGroupAttributesPages />}
               />
               <Route
-                path="/admin/cities-master"
+                path="/cities-master"
                 element={<Cities />}
               />
               <Route
-                path="/admin/add-cities"
+                path="/add-cities"
                 element={<CityForm />}
               />
               <Route
-                path="/admin/update-city/:id"
+                path="/update-city/:id"
                 element={<CityForm />}
               />
               <Route
-                path="/admin/college_types"
+                path="/college_types"
                 element={<CollegetypesPage />}
               />
               <Route
-                path="/admin/create-colleges"
+                path="/create-colleges"
                 element={<CollegetypeForm />}
               />
               <Route
-                path="/admin/update-collage-type/:id"
+                path="/update-collage-type/:id"
                 element={<CollegetypeForm />}
               />
               <Route
-                path="/admin/affilated-by"
+                path="/affilated-by"
                 element={<AffilatedBy />}
               />
               <Route
-                path="/admin/create-affilated-by"
+                path="/create-affilated-by"
                 element={<AffilatedTypesForm />}
               />
               <Route
-                path="/admin/update-affilated-by/:id"
+                path="/update-affilated-by/:id"
                 element={<AffilatedTypesForm />}
               />
               <Route
-                path="/admin/credit-cards"
+                path="/credit-cards"
                 element={<CreditCard />}
               />
               <Route
-                path="/admin/create-credit-card"
+                path="/create-credit-card"
                 element={<CreditCardMasterForm />}
               />
               <Route
-                path="/admin/update-credit-card/:id"
+                path="/update-credit-card/:id"
                 element={<CreditCardMasterForm />}
               />
               <Route
-                path="/admin/facilities"
+                path="/facilities"
                 element={<Facilities />}
               />
               <Route
-                path="/admin/create-facilities"
+                path="/create-facilities"
                 element={<FacilitiesMasterForm />}
               />
               <Route
-                path="/admin/update-facilities/:id"
+                path="/update-facilities/:id"
                 element={<FacilitiesMasterForm />}
               />
 
 
               <Route
-                path="/admin/approval"
+                path="/approval"
                 element={<ApprovalMaster />}
               />
               <Route
-                path="/admin/create-approval"
+                path="/create-approval"
                 element={<ApprovalMasterForm />}
               />
               <Route
-                path="/admin/update-approval/:id"
+                path="/update-approval/:id"
                 element={<ApprovalMasterForm />}
               />
               <Route
-                path="/admin/lead-status"
+                path="/lead-status"
                 element={<LeadStatusMaster />}
               />
               <Route
-                path="/admin/create-lead-status"
+                path="/create-lead-status"
                 element={<LeadStatusForm />}
               />
               <Route
-                path="/admin/update-lead-status/:id"
+                path="/update-lead-status/:id"
                 element={<LeadStatusForm />}
               />
               <Route
-                path="/admin/lead-sub-status"
+                path="/lead-sub-status"
                 element={<LeadSubStatusMaster />}
               />
               <Route
-                path="/admin/create-lead-sub-status"
+                path="/create-lead-sub-status"
                 element={<LeadSubStatusForm />}
               />
               <Route
-                path="/admin/update-lead-sub-status/:id"
+                path="/update-lead-sub-status/:id"
                 element={<LeadSubStatusForm />}
               />
               <Route
-                path="/admin/lead-source"
+                path="/lead-source"
                 element={<LeadSourceMasterPage />}
               />
               <Route
-                path="/admin/create-lead-source"
+                path="/create-lead-source"
                 element={<LeadSourceMasterForm />}
               />
               <Route
-                path="/admin/update-lead-source/:id"
+                path="/update-lead-source/:id"
                 element={<LeadSourceMasterForm />}
               />
               <Route
-                path="/admin/list-colleges"
+                path="/list-colleges"
                 element={<CollagesData />}
               />
               <Route
-                path="/admin/add-colleges"
+                path="/add-colleges"
                 element={<CollagesFormData />}
               />
               <Route
-                path="/admin/update-college/:id"
+                path="/update-college/:id"
                 element={<CollagesFormData />}
               />
               <Route
-                path="/admin/gallery"
+                path="/gallery"
                 element={<GalleryDatas />}
               />
               <Route
-                path="/admin/create-gallery"
+                path="/create-gallery"
                 element={<PhotoGalleryMasterForm />}
               />
               <Route
-                path="/admin/update-gallery/:id"
+                path="/update-gallery/:id"
                 element={<PhotoGalleryMasterForm />}
               />
 
@@ -1032,6 +1043,47 @@ function App() {
                 path="update-dmt-status/welcome/:id"
                 element={<DmtStatusForm />}
               />
+              <Route
+                path="move-member"
+                element={<MoveMember/>}
+              />
+              <Route
+                path="upgrade-member"
+                element={<UpgradeMember />}
+              />
+{/* -------------------------------------- */}
+
+              <Route
+                path="course-degree-list"
+                element={<Coursedegree />}
+              />
+              <Route
+                path="add-course-degree-type"
+                element={<CourceDegreeTypeForm />}
+              />
+              <Route
+                path="update-course-degree-type/:id"
+                element={<CourceDegreeTypeForm />}
+              />
+              <Route
+                path="mail-settings"
+                element={<EmailSettings />}
+              />
+              <Route
+                path="create-camping-mess"
+                element={<CreateCampingMessages />}
+              />
+              <Route
+                path="utility-manager"
+                element={<UtilityManager />}
+              />
+              {/* mustafa Routes -------------------- */}
+              <Route path="number-list" element={<ListnumberWhatsaap />} />
+              <Route path='add-numbers' element={<AddNumber />} />
+              <Route path='team-inbox' element={<SharedTeamWhatsapp name="Mustafa Ashraf" message="Hello" />} />
+              <Route path='agent_List' element={<AgentList />} />
+              <Route path='create-agent' element={<CreateAgent />} />
+              <Route path='chat' element={<SharedTeamWhatsapp name="Anshika Kumari" message="Hello" />} />
               {/* -----------------junaid"s Route Start--------- */}
               <Route path="add-testimonial" element={<CreateTestimonial />} />
               <Route path="edit-testimonial/:id" element={<CreateTestimonial />} />

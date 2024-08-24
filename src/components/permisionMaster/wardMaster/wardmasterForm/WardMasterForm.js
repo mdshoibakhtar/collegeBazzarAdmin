@@ -62,7 +62,7 @@ function WardMasterForm({ initialValues, submitForm, params, cancelBtn ,validate
                                                     </select>
                                                 </div>
                                                 <div className="col-xl-2 mb-3">
-                                                    {/* <Link to='/admin/floor-master' type='submit' className="btn btn-danger light ms-1">Cancel</Link> */}
+                                                    {/* <Link to='/floor-master' type='submit' className="btn btn-danger light ms-1">Cancel</Link> */}
                                                     <Button className="btn btn-danger light ms-1" onClick={() => cancelBtn()}>Cancel</Button>
                                                     <button
                                                         className="btn btn-primary me-1"

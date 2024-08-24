@@ -196,7 +196,7 @@ function CountryForm() {
                                                 </div>
                                                 <div>
                                                     <Link
-                                                        to="/admin/country"
+                                                        to="/country"
                                                         className="btn btn-danger light ms-1"
                                                     >
                                                         Cancel

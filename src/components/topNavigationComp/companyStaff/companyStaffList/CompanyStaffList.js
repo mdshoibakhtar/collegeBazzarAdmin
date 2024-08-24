@@ -14,7 +14,7 @@ function CompanyStaffList() {
                                         <h4 className="heading mb-0"><b>Company Staff Permission
 - </b></h4>
                                         <div>
-                                            <Link className="btn btn-primary btn-sm" to="/admin/add-company-staff/welcome" role="button" aria-controls="offcanvasExample">+ ADD  Company Staff </Link>
+                                            <Link className="btn btn-primary btn-sm" to="/add-company-staff/welcome" role="button" aria-controls="offcanvasExample">+ ADD  Company Staff </Link>
                                             {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}
@@ -74,7 +74,7 @@ function CompanyStaffList() {
                                                     
                                                         <div class="d-flex">
                                                         <div><span style={{fontSize:"10px"}}>perm..</span></div>
-                                                            <Link class="btn btn-primary shadow btn-xs sharp me-1" to="/admin/company-staff-permission"><i class="fa fa-plus"></i> </Link>
+                                                            <Link class="btn btn-primary shadow btn-xs sharp me-1" to="/company-staff-permission"><i class="fa fa-plus"></i> </Link>
                                                         <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a></div>
                                                     </td>
                                                 </tr>

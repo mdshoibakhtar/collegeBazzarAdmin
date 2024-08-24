@@ -137,7 +137,7 @@ function AddCurrency() {
                         </div>
                         <div>
                           <Link
-                            to="/admin/currency"
+                            to="/currency"
                             className="btn btn-danger light ms-1"
                           >
                             Cancel

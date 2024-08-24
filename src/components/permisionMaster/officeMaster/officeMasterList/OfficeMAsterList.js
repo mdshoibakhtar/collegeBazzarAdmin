@@ -16,7 +16,7 @@ function OfficeMAsterList({ data, page, count, cancel, confirm, loading, onChang
                                     <div className="tbl-caption">
                                         <h4 className="heading mb-0"> Office List </h4>
                                         <div>
-                                            {/* <Link className="btn btn-primary btn-sm" to="/admin/add-staff-prmision" role="button" aria-controls="offcanvasExample">+ ADD STAFF</Link> */}
+                                            {/* <Link className="btn btn-primary btn-sm" to="/add-staff-prmision" role="button" aria-controls="offcanvasExample">+ ADD STAFF</Link> */}
                                             {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}
@@ -55,7 +55,7 @@ function OfficeMAsterList({ data, page, count, cancel, confirm, loading, onChang
                                                     </td>
                                                     <td>
                                                         <div className="d-flex">
-                                                            <Link to={`/admin/office-master/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                            <Link to={`/office-master/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                             <Popconfirm
                                                                 title="Delete Office!"
                                                                 description="Are you sure to delete ?"

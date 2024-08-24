@@ -62,7 +62,7 @@ function DmtcommschList() {
                                     <div className="tbl-caption">
                                         <h4 className="heading mb-0"><b>BBPS COMMISION SCHEME LIST</b></h4>
                                         <div>
-                                            <Link className="btn btn-primary btn-sm" to="/admin/add-bbps-commision" role="button" aria-controls="offcanvasExample">+BBPS COMMISION SCHEME</Link>
+                                            <Link className="btn btn-primary btn-sm" to="/add-bbps-commision" role="button" aria-controls="offcanvasExample">+BBPS COMMISION SCHEME</Link>
                                             <ExportPdf />
                                             {/* <button type="button" className="btn btn-secondary btn-sm" >
                                 + Invite Employee
@@ -111,7 +111,7 @@ function DmtcommschList() {
                                                                 <span className="badge badge-success text-light border-0" style={{ backgroundColor: `${item?.isActive === true ? 'blue' : '#bc3922ab'}`, fontSize: `${item?.isActive === false ? '0.8rem' : ''}` }}>{item?.isActive == true ? 'active' : 'Inactive'}</span>
                                                             </td>
                                                             <td>
-                                                                <Link to={`/admin/add-bbps-commision/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                                <Link to={`/add-bbps-commision/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                                 <Popconfirm
                                                                     title="Delete commission scheme !"
                                                                     description="Are you sure to delete ?"

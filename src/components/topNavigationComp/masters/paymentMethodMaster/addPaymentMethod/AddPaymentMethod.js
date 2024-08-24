@@ -56,7 +56,7 @@ function AddPaymentMethod() {
                     if (res?.statusCode == "200") {
                         toastSuccessMessage();
                         setTimeout(() => {
-                            navigate('/admin/payment-method')
+                            navigate('/payment-method')
                         }, [4000])
                     }
                 } catch (error) {
@@ -157,7 +157,7 @@ function AddPaymentMethod() {
                                                     </div>
                                                     <div className="col-xl-6 mb-4 mt-2">
                                                         <div>
-                                                            <Link to='/admin/payment-method' className="btn btn-danger light ms-1">Cancel</Link>
+                                                            <Link to='/payment-method' className="btn btn-danger light ms-1">Cancel</Link>
                                                             <button
                                                                 className="btn btn-primary me-1"
                                                                 type="submit"

@@ -11,7 +11,7 @@ const breadCrumbsTitle = {
     id: "1",
     title_1: "Master",
     title_2: "Blog Master",
-    path_2: "/admin/blog-master"
+    path_2: "/blog-master"
 };
 
 function BlogList() {
@@ -75,7 +75,7 @@ function BlogList() {
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0">Blog  Master</h4>
                                     <div>
-                                        <Link className="btn btn-primary btn-sm" to="/admin/add-blog" role="button" aria-controls="offcanvasExample">+ Blog Master</Link>
+                                        <Link className="btn btn-primary btn-sm" to="/add-blog" role="button" aria-controls="offcanvasExample">+ Blog Master</Link>
                                     </div>
                                 </div>
                                 <div id="empoloyees-tblwrapper_wrapper" className="dataTables_wrapper no-footer">
@@ -113,7 +113,7 @@ function BlogList() {
                                                     </td>
                                                     <td>
                                                         <div className="d-flex">
-                                                            <Link to={`/admin/edit-blog/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
+                                                            <Link to={`/edit-blog/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
                                                                 <i className="fa fa-pencil" />
                                                             </Link>
                                                             <Popconfirm
