@@ -14,21 +14,50 @@ import { FaEye } from 'react-icons/fa';
 import { Modal } from 'react-bootstrap';
 import { ModalImgShow } from './ModalImgShow';
 
-
 function KycDetails({ initialValues, state }) {
     const [open, setOpen] = useState(false);
-    console.log(state.kycVideo);
-
     const [show, setShow] = useState(false);
+    const [cantain, setcantain] = useState({})
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const [cantain, setcantain] = useState({})
 
     const CLickImgShow = (url, str) => {
         handleShow()
         setcantain({ url: url, str: str })
     }
+
+    const renderDocumentCard = (title, docUrl, dummyImg, docName) => (
+        <div className='col-xl-3'>
+            <div className="card-body p-0 m-4">
+                <div className="table-responsive active-projects style-1 style-11">
+                    <div className="tbl-caption justify-content-center">
+                        <h4 className="heading mb-0 border p-1 rounded udtfont"><b>{title}</b></h4>
+                    </div>
+                    <div className="card mt-3" onClick={() => { CLickImgShow(docUrl, title) }}>
+                        {docUrl ? (
+                            <div className="preferably-square">
+                                <picture>
+                                    <img src={`${baseUrlImage}${docUrl}`} alt='document' width={100 + "%"} />
+                                </picture>
+                            </div>
+                        ) : (
+                            <div className="preferably-square">
+                                <picture>
+                                    <img src={dummyImg} alt='document' width={100 + "%"} />
+                                </picture>
+                                <figcaption className='text-center p-2'>
+                                    <strong>{title} Not Found</strong>
+                                </figcaption>
+                            </div>
+                        )}
+                        <div className="eyeV"><FaEye /></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+
     return (
         <section className="ListDistributer m-4">
             <div className="row">
@@ -39,294 +68,28 @@ function KycDetails({ initialValues, state }) {
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0"><b>KYC DETAILS LIST</b></h4>
                                 </div>
-                                <div id="empoloyees-tblwrapper_wrapper" className="dataTables_wrapper no-footer"><div className="dt-buttons"></div>
+                                <div id="empoloyees-tblwrapper_wrapper" className="dataTables_wrapper no-footer">
+                                    <div className="dt-buttons"></div>
                                     <div className='row'>
-                                        <div className='col-xl-3'>
-                                            <div className="card-body p-0 m-4">
-                                                <div className="table-responsive active-projects style-1 style-11">
-                                                    <div className="tbl-caption  justify-content-center">
-                                                        <h4 className="heading mb-0 border p-1 rounded udtfont"><b>Aadhar Card  Front</b></h4>
-                                                    </div>
-                                                    <div className="card mt-3" style={{}} onClick={() => { CLickImgShow(initialValues?.docs?.adhaar_front_card, 'Aadhaar Front') }}>
-                                                        {initialValues?.docs?.adhaar_front_card ? (
-                                                            <div className="preferably-square" >
-                                                                <picture>
-                                                                    <img src={`${baseUrlImage}${initialValues?.docs?.adhaar_front_card}`} alt='document' width={100 + "%"} />
-                                                                </picture>
-                                                            </div>
-                                                        ) : (
-                                                            <div className="preferably-square" >
-                                                                <picture>
-                                                                    <img src={dummyAdhaarFront} alt='document' width={100 + "%"} />
-                                                                </picture>
-                                                                <figcaption className='text-center p-2'><strong>Aadhar Front Not Found</strong></figcaption>
-                                                            </div>
-                                                        )}
-                                                        <div className="eyeV"><FaEye /></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className='col-xl-3'>
-                                            <div className="card-body p-0 m-4">
-                                                <div className="table-responsive active-projects style-1 style-11">
-                                                    <div className="tbl-caption  justify-content-center">
-                                                        <h4 className="heading mb-0 border p-1 rounded udtfont"><b>Aadhar Card Back</b></h4>
-                                                    </div>
-                                                    <div className="card mt-3" style={{}} onClick={() => { CLickImgShow(initialValues?.docs?.adhaar_back_card, 'Aadhar Card Back') }}>
-
-                                                        {initialValues?.docs?.adhaar_back_card ? (
-                                                            <div className="preferably-square" >
-                                                                <picture>
-                                                                    <img src={`${baseUrlImage}${initialValues?.docs?.adhaar_back_card}`} alt='document' width={100 + "%"} />
-                                                                </picture>
-                                                            </div>
-                                                        ) : (
-                                                            <div className="preferably-square" >
-                                                                <picture>
-                                                                    <img src={dummyAdhaarBack} alt='document' width={100 + "%"} />
-                                                                </picture>
-                                                                <figcaption className='text-center p-2'>
-                                                                    <strong>Aadhar Back Not Found</strong>
-                                                                </figcaption>
-                                                            </div>
-                                                        )}
-                                                        <div className="eyeV"><FaEye /></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className='col-xl-3'>
-                                            <div className="card-body p-0 m-4">
-                                                <div className="table-responsive active-projects style-1 style-11">
-                                                    <div className="tbl-caption  justify-content-center">
-                                                        <h4 className="heading mb-0 border p-1 rounded udtfont"><b>Pan Card</b></h4>
-                                                    </div>
-                                                    <div className="card mt-3" style={{}} onClick={() => { CLickImgShow(initialValues?.docs?.pan_card, 'Pan Card') }}>
-
-                                                        {initialValues?.docs?.pan_card ? (
-                                                            <div className="preferably-square" >
-                                                                <picture>
-                                                                    <img src={`${baseUrlImage}${initialValues?.docs?.pan_card
-                                                                        }`} alt='document' width={100 + "%"} />
-                                                                </picture>
-                                                            </div>
-                                                        ) : (
-                                                            <div className="preferably-square" >
-                                                                <picture>
-                                                                    <img src={pancard} alt='document' width={100 + "%"} />
-                                                                </picture>
-                                                                <figcaption className='text-center p-2'>
-                                                                    <strong>PAN CardNot Found</strong>
-                                                                </figcaption>
-                                                            </div>
-                                                        )}
-                                                        <div className="eyeV"><FaEye /></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className='col-xl-3'>
-                                            <div className="card-body p-0 m-4">
-                                                <div className="table-responsive active-projects style-1 style-11">
-                                                    <div className="tbl-caption  justify-content-center">
-                                                        <h4 className="heading mb-0 border p-1 rounded udtfont"><b>Bank Proof</b></h4>
-                                                    </div>
-                                                    <div className="card mt-3" style={{}} onClick={() => { CLickImgShow(initialValues?.docs?.bank_proof, 'Bank Proof') }}>
-
-                                                        {initialValues?.docs?.bank_proof ? (
-                                                            <div className="preferably-square" >
-                                                                <picture>
-                                                                    <img src={`${baseUrlImage}${initialValues?.docs?.bank_proof}`} alt='document' width={100 + "%"} />
-                                                                </picture>
-                                                            </div>
-                                                        ) : (
-                                                            <div className="preferably-square" >
-                                                                <picture>
-                                                                    <img src={bankProof} alt='document' width={100 + "%"} />
-                                                                </picture>
-                                                                <figcaption className='text-center p-2'>
-                                                                    <strong>Bank Proof Not Found</strong>
-                                                                </figcaption>
-                                                            </div>
-                                                        )}
-                                                        <div className="eyeV"><FaEye /></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {initialValues?.docs?.gst ? (<div className='col-xl-3'>
-                                            <div className="card-body p-0 m-4">
-                                                <div className="table-responsive active-projects style-1 style-11">
-                                                    <div className="tbl-caption  justify-content-center">
-                                                        <h4 className="heading mb-0 border p-1 rounded udtfont"><b>GST Cirtificate</b></h4>
-                                                    </div>
-                                                    <div className="card mt-3" style={{}} onClick={() => { CLickImgShow(initialValues?.docs?.gst, 'GST Cirtificate') }}>
-
-                                                        {initialValues?.docs?.gst ? (
-                                                            <div className="preferably-square" >
-                                                                <picture>
-                                                                    <img src={`${baseUrlImage}${initialValues?.docs?.gst}`} alt='document' width={100 + "%"} />
-                                                                </picture>
-                                                            </div>
-                                                        ) : (
-                                                            <div className="preferably-square" >
-                                                                <picture>
-                                                                    <img src={gst} alt='document' width={100 + "%"} />
-                                                                </picture>
-                                                                <figcaption className='text-center p-2'>
-                                                                    <strong>GST Cirtificate Not Found</strong>
-                                                                </figcaption>
-                                                            </div>
-                                                        )}
-                                                        <div className="eyeV"><FaEye /></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>) : ""}
-
-                                        <div className='col-xl-3'>
-                                            <div className="card-body p-0 m-4">
-                                                <div className="table-responsive active-projects style-1 style-11">
-                                                    <div className="tbl-caption  justify-content-center">
-                                                        <h4 className="heading mb-0 border p-1 rounded udtfont"><b> Shop Inside</b></h4>
-                                                    </div>
-                                                    <div className="card mt-3" style={{}} onClick={() => { CLickImgShow(initialValues?.docs?.shop_internal_photo, 'shop_internal_photo Cirtificate') }}>
-
-                                                        {initialValues?.docs?.shop_internal_photo ? (
-                                                            <div className="preferably-square" >
-                                                                <picture>
-                                                                    <img src={`${baseUrlImage}${initialValues?.docs?.shop_internal_photo}`} alt='document' width={100 + "%"} />
-                                                                </picture>
-                                                            </div>
-                                                        ) : (
-                                                            <div className="preferably-square" >
-                                                                <picture>
-                                                                    <img src={shopinside} alt='document' width={100 + "%"} />
-                                                                </picture>
-                                                                <figcaption className='text-center p-2'>
-                                                                    <strong>Shop Internal Not Found</strong>
-                                                                </figcaption>
-                                                            </div>
-                                                        )}
-                                                        <div className="eyeV"><FaEye /></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className='col-xl-3'>
-                                            <div className="card-body p-0 m-4">
-                                                <div className="table-responsive active-projects style-1 style-11">
-                                                    <div className="tbl-caption  justify-content-center">
-                                                        <h4 className="heading mb-0 border p-1 rounded udtfont"><b>Shop Outside</b></h4>
-                                                    </div>
-                                                    <div className="card mt-3" style={{}} onClick={() => { CLickImgShow(initialValues?.docs?.shop_outside_photo, 'GST Cirtificate') }}>
-
-                                                        {initialValues?.docs?.shop_outside_photo ? (
-                                                            <div className="preferably-square" >
-                                                                <picture>
-                                                                    <img src={`${baseUrlImage}${initialValues?.docs?.shop_outside_photo}`} alt='document' width={100 + "%"} />
-                                                                </picture>
-                                                            </div>
-                                                        ) : (
-                                                            <div className="preferably-square" >
-                                                                <picture>
-                                                                    <img src={shopoutside} alt='document' width={100 + "%"} />
-                                                                </picture>
-                                                                <figcaption className='text-center p-2'>
-                                                                    <strong>Shop Outside Not Found</strong>
-                                                                </figcaption>
-                                                            </div>
-                                                        )}
-                                                        <div className="eyeV"><FaEye /></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className='col-xl-3'>
-                                            <div className="card-body p-0 m-4">
-                                                <div className="table-responsive active-projects style-1 style-11">
-                                                    <div className="tbl-caption  justify-content-center">
-                                                        <h4 className="heading mb-0 border p-1 rounded udtfont"><b>KYC Video</b></h4>
-                                                    </div>
-                                                    {/* <div className="card mt-3" style={{}}>
-                                                        {state?.kycVideo ? (
-                                                            <div className="preferably-square" >
-                                                                <picture>
-                                                                    <video src={`${baseUrlImage}${state?.kycVideo}`} alt='document' width={100 + "%"} muted autoPlay />
-                                                                    <img src={kycVid} alt='document' width={100 + "%"} />
-                                                                </picture>
-                                                            </div>
-                                                        ) : (
-                                                            <div className="preferably-square" >
-                                                                <picture>
-                                                                    <img src={kycVid} alt='document' width={100 + "%"} />
-                                                                </picture>
-                                                                <figcaption className='text-center p-2'>
-                                                                    <strong>KYC Video Not Found</strong>
-                                                                </figcaption>
-                                                            </div>
-                                                        )}
-                                                    </div> */}
-                                                    <div className="card mt-3" style={{ height: "100px" }}>
-                                                        {state?.kycVideo ? (
-                                                            <div className="preferably-square" style={{ height: "100%" }}>
-                                                                {/* <video src={`${baseUrlImage}${state?.kycVideo}`} alt='document' width={100 + "%"} muted autoPlay /> */}
-                                                                {/* <video src={`${baseUrVideos}${state?.kycVideo}`} width={100 + "%"} /> */}
-                                                                <video src={`${baseUrVideos}${state?.kycVideo}`} height={100 + "%"} />
-                                                                <span class="play-btn playPosition" onClick={() => setOpen(true)}></span>
-                                                            </div>
-                                                        ) : (
-                                                            <div className="preferably-square" >
-                                                                <picture>
-                                                                    <img src={kycVid} alt='document' width={100 + "%"} />
-                                                                </picture>
-                                                                <figcaption className='text-center p-2'>
-                                                                    <strong>KYC Video Not Found</strong>
-                                                                </figcaption>
-                                                            </div>
-                                                        )}
-
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className='col-xl-3'>
-                                            <div className="card-body p-0 m-4">
-                                                <div className="table-responsive active-projects style-1 style-11">
-                                                    <div className="tbl-caption  justify-content-center">
-                                                        <h4 className="heading mb-0 border p-1 rounded udtfont"><b>Location</b></h4>
-                                                    </div>
-                                                    <div className="card mt-3">
-
-                                                        {initialValues?.docs ? (
-                                                            <div className="preferably-square" >
-                                                                <div className='text-nowrap mb-2'>
-                                                                    <strong>
-                                                                        <span>longitude:</span>
-                                                                        &nbsp;
-                                                                        <span>{initialValues?.docs?.longitude}</span>
-                                                                    </strong>
-                                                                </div>
-                                                                <div className='text-nowrap mb-2'>
-                                                                    <strong>
-                                                                        <span>latitude:</span>
-                                                                        &nbsp;
-                                                                        <span>{initialValues?.docs?.latitude}</span>
-                                                                    </strong>
-                                                                </div>
-                                                            </div>
-                                                        ) : (
-                                                            <div className="preferably-square" >
-                                                                <strong>Location Not Found</strong>
-                                                            </div>
-                                                        )}
-                                                        {/* <div className="eyeV"><FaEye /></div> */}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        {renderDocumentCard("Aadhar Card Front", initialValues?.docs?.adhaar_front_card, dummyAdhaarFront, 'adhaar_front_card')}
+                                        {renderDocumentCard("Aadhar Card Back", initialValues?.docs?.adhaar_back_card, dummyAdhaarBack, 'adhaar_back_card')}
+                                        {renderDocumentCard("Pan Card", initialValues?.docs?.pan_card, pancard, 'pan_card')}
+                                        {renderDocumentCard("Bank Proof", initialValues?.docs?.bank_proof, bankProof, 'bank_proof')}
+                                        {renderDocumentCard("NEET Mark Sheet", initialValues?.docs?.neet_mark_sheet, dummyAdhaarFront, 'neet_mark_sheet')}
+                                        {renderDocumentCard("NEET Admit Card", initialValues?.docs?.neet_admit_card, dummyAdhaarFront, 'neet_admit_card')}
+                                        {renderDocumentCard("10th Class Marksheet", initialValues?.docs?.tenth_class_marksheet, dummyAdhaarFront, 'tenth_class_marksheet')}
+                                        {renderDocumentCard("12th Class Marksheet", initialValues?.docs?.twelfth_class_marksheet, dummyAdhaarFront, 'twelfth_class_marksheet')}
+                                        {renderDocumentCard("Transfer Certificate", initialValues?.docs?.transfer_certificate, dummyAdhaarFront, 'transfer_certificate')}
+                                        {renderDocumentCard("Migration Certificate", initialValues?.docs?.migration_certificate, dummyAdhaarFront, 'migration_certificate')}
+                                        {renderDocumentCard("Character Certificate", initialValues?.docs?.character_certificate, dummyAdhaarFront, 'character_certificate')}
+                                        {renderDocumentCard("Domicile Certificate", initialValues?.docs?.domicile_certificate, dummyAdhaarFront, 'domicile_certificate')}
+                                        {renderDocumentCard("Income Certificate", initialValues?.docs?.income_certificate, dummyAdhaarFront, 'income_certificate')}
+                                        {renderDocumentCard("Gap Year Affidavit", initialValues?.docs?.gap_year_affidavit, dummyAdhaarFront, 'gap_year_affidavit')}
+                                        {renderDocumentCard("Original ID", initialValues?.docs?.original_id, dummyAdhaarFront, 'original_id')}
+                                        {renderDocumentCard("Bonds", initialValues?.docs?.bonds, dummyAdhaarFront, 'bonds')}
+                                        {renderDocumentCard("Passport Size Photos", initialValues?.docs?.passport_size_photos, dummyAdhaarFront, 'passport_size_photos')}
+                                        {renderDocumentCard("Post Card Size Photo", initialValues?.docs?.post_card_size_photo, dummyAdhaarFront, 'post_card_size_photo')}
+                                        {/* Add more document cards as needed */}
                                     </div>
                                     <div className="dataTables_paginate paging_simple_numbers" id="empoloyees-tblwrapper_paginate">
                                     </div>
@@ -335,26 +98,14 @@ function KycDetails({ initialValues, state }) {
                         </div>
                     </div>
                 </div>
-            </div >
-            <KycModals open={open} setOpen={setOpen}
-                // kycVideo={kycVideo} 
-                kycVideo={state?.kycVideo ? state?.kycVideo : "KYC Videos Not Found"}
-            />
+            </div>
+            <KycModals open={open} setOpen={setOpen} kycVideo={state?.kycVideo ? state?.kycVideo : "KYC Videos Not Found"} />
 
-            <Modal
-                show={show}
-                onHide={handleClose}
-                keyboard={false}
-                size='sm'
-                centered
-                className='naomedClass'
-            // style={{width:"500px" , margin:"auto"}}
-            >
+            <Modal show={show} onHide={handleClose} keyboard={false} size='sm' centered className='naomedClass'>
                 <ModalImgShow handleClose={handleClose} cantain={cantain} />
             </Modal>
-
         </section>
     )
 }
 
-export default KycDetails
+export default KycDetails;

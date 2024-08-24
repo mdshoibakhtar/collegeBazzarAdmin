@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Loadar from "../../../common/loader/Loader";
 
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -10,11 +10,10 @@ import MemberPermission from "../createUserDistributer/memberPermission/MemberPe
 import LockAmount from "../createUserDistributer/lockAmount/LockAmount";
 import ExportPdf from "../../../common/exportPdf/ExportPdf";
 import "../distributer.css"
-import { CSVLink } from "react-csv";
-import CustomDropdown from "../../../common/CustomDropdown";
 import { ToastContainer, toast } from "react-toastify";
 import { Pagination } from "antd";
 import BulkAssigedModel from "../BulkAssigedModel";
+import { getServiceCategory } from "../../../api/login/Login";
 
 
 function DistributerList({ loading, params, state, handleChange, onChangeVal, approval }) {
@@ -61,7 +60,8 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal, ap
     };
 
     console.log(selectedUsers)
-    
+
+   
 
 
 
@@ -74,7 +74,8 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal, ap
                     <div className="col-xl-12">
                         <div className="card">
                             <button className="btn btn-primary" style={{ width: "130px" }} onClick={() => setModalShow(true)}>
-                                Bulk Assigned
+                                 Bulk Edit 
+
                             </button>
                             <BulkAssigedModel
                                 show={modalShow}

@@ -311,6 +311,7 @@ function App() {
           </>
         ) : (
           <>
+           <Route path="/" element={<Navigate to={"/admin"} />} />
             <Route
               path="admin"
               element={<PrivateRoute isAuthenticated={isAuthenticated} />}
