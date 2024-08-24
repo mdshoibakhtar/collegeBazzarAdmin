@@ -4,13 +4,21 @@ import { Steps } from "antd";
 import { FirstForm } from './FirstForm';
 import { SecStep } from './SecStep';
 import mobile from '../../assets/icons/mobile.png'
+import Breadcrumbs from '../../common/breadcrumb/Breadcrumbs';
 const items = [
     { title: "Step 1" },
     { title: "Step 1" },
 ];
 function WhatsaapMaster() {
+    const breadCrumbsTitle= {
+        title_1:"WhatsApp",
+        title_2:"Create Campaingn",
+        
+    }
     const [state, setState] = React.useState(1);
     return (
+        <>
+        <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle}/>
         <div className="container card">
             <div className='row'>
                 <div className='col-8'>
@@ -25,6 +33,7 @@ function WhatsaapMaster() {
 
 
         </div>
+        </>
     );
 }
 

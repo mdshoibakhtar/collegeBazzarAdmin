@@ -137,7 +137,7 @@ function AddComplane() {
                     if (res?.statusCode == "200") {
                         toastSuccessMessage();
                         setTimeout(() => {
-                            navigate('/admin/list-Complaint')
+                            navigate('/list-Complaint')
                         }, [4000])
                     }
                 } catch (error) {
@@ -150,7 +150,7 @@ function AddComplane() {
                     if (res?.statusCode == "200") {
                         toastSuccessMessage();
                         setTimeout(() => {
-                            navigate('/admin/list-Complaint')
+                            navigate('/list-Complaint')
                         }, [4000])
                     }
                 } catch (error) {
@@ -397,7 +397,7 @@ function AddComplane() {
 
 
                                                     <div className="col-xl-4 mb-3">
-                                                        <Link to='/admin/employees-complaints-dashboard' className="btn btn-danger light ms-1">Cancel</Link>
+                                                        <Link to='/employees-complaints-dashboard' className="btn btn-danger light ms-1">Cancel</Link>
                                                         <button
                                                             className="btn btn-primary me-1"
                                                             type="submit"

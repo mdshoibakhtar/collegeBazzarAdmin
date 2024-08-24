@@ -6,7 +6,7 @@ function BankMaster() {
   const breadCrumbsTitle = {
     id:"1",
     title_1:"Master",
-    path_1:"/admin/bank-master",
+    path_1:"/bank-master",
     title_2:"Bank Master",
 }
   return (

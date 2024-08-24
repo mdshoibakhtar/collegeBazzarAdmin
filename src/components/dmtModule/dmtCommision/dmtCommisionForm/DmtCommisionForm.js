@@ -105,7 +105,7 @@ function DmtCommisionForm() {
         if (res.statusCode == 200) {
             toastSuccessMessage();
             setTimeout(() => {
-                navigate('/admin/dmt-commision-scheme');
+                navigate('/dmt-commision-scheme');
             }, 2000);
         } else {
             toastErrorMessage();
@@ -488,7 +488,7 @@ function DmtCommisionForm() {
                                         </button>
                                         <div>
                                             <Link
-                                                to="/admin/dmt-commision-scheme"
+                                                to="/dmt-commision-scheme"
                                                 className="btn btn-primary me-2"
                                             >
                                                 Cancel

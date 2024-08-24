@@ -233,7 +233,7 @@ function AgentList() {
                                 </div>
                                 <div className="col-12 col-md-6 d-flex justify-content-end align-items-center">
                                     <div className="form-group">
-                                        <Link to="/admin/create-agent" className="btn btn-primary">
+                                        <Link to="/create-agent" className="btn btn-primary">
                                             Create Agent
                                         </Link>
                                     </div>

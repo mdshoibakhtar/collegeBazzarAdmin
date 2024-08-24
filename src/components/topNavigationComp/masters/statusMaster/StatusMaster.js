@@ -9,7 +9,7 @@ const breadCrumbsTitle = {
     id: "1",
     title_1: "Master",
     title_2: "Status Master",
-    path_2: "/admin/status-master",
+    path_2: "/status-master",
 }
 function StatusMaster() {
     const [data, setData] = useState()
@@ -63,7 +63,7 @@ function StatusMaster() {
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0">STATUS MASTER</h4>
                                     <div>
-                                        <Link className="btn btn-primary btn-sm" to="/admin/add-status-master" role="button" aria-controls="offcanvasExample">+ STATUS MASTER</Link>
+                                        <Link className="btn btn-primary btn-sm" to="/add-status-master" role="button" aria-controls="offcanvasExample">+ STATUS MASTER</Link>
                                         {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}
@@ -96,7 +96,7 @@ function StatusMaster() {
                                                 <td> <span className="badge badge-success light border-0">{item?.is_active.toString()}</span></td>
                                                 <td>
                                                     <div className="d-flex">
-                                                        <Link to={`/admin/update-status-master/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                        <Link to={`/update-status-master/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                         <Popconfirm
                                                             title="Delete Currency !"
                                                             description="Are you sure to delete ?"

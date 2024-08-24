@@ -55,7 +55,7 @@ function Provider() {
                                 <div className="tbl-caption tbl-caption-2">
                                     <h4 className="heading mb-0">PROVIDER MASTER</h4>
                                     <div>
-                                        <Link className="btn btn-primary btn-sm" to="/admin/add-provider" role="button" aria-controls="offcanvasExample">+ PROVIDER MASTER</Link>
+                                        <Link className="btn btn-primary btn-sm" to="/add-provider" role="button" aria-controls="offcanvasExample">+ PROVIDER MASTER</Link>
                                         {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}
@@ -122,8 +122,8 @@ function Provider() {
                                                 </td>
                                                 <td>
                                                     <div className="d-flex">
-                                                        <Link to={`/admin/update-provider/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
-                                                        {/* <Link to="/admin/add-provider-logo" className="btn btn-primary shadow btn-xss sharp me-1"><i className="fa fa-pencil" />Add Logo</Link> */}
+                                                        <Link to={`/update-provider/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                        {/* <Link to="/add-provider-logo" className="btn btn-primary shadow btn-xss sharp me-1"><i className="fa fa-pencil" />Add Logo</Link> */}
                                                         <Popconfirm
                                                             title="Delete Currency !"
                                                             description="Are you sure to delete ?"

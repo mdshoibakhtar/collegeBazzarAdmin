@@ -6,7 +6,7 @@ function UpgradeMembers() {
 
 
     return (
-        <div className='card '>
+        <div className='card m-4'>
             <form className='cusforms row'>
                 <div className="form-group col-6">
                     <label for="memberCode">Member Code</label>

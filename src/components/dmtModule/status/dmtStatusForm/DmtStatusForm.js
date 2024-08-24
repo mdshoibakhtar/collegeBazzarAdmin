@@ -43,7 +43,7 @@ function DmtStatusForm() {
                     if (!res.error) {
                         toastSuccessMessage();
                         setTimeout(() => {
-                            navigate('/admin/dmt-status/welcome')
+                            navigate('/dmt-status/welcome')
                         }, 4000);
                     } else {
 
@@ -58,7 +58,7 @@ function DmtStatusForm() {
                     if (!res.error) {
                         toastSuccessMessage();
                         setTimeout(() => {
-                            navigate('/admin/dmt-status/welcome')
+                            navigate('/dmt-status/welcome')
                         }, 4000);
                     } else {
 
@@ -143,7 +143,7 @@ function DmtStatusForm() {
 
                                                     <div className="col-xl-4 mb-4 mt-2">
                                                         <div>
-                                                            <Link to='/admin/dmt-status/welcome' className="btn btn-danger light ms-1">Cancel</Link>
+                                                            <Link to='/dmt-status/welcome' className="btn btn-danger light ms-1">Cancel</Link>
                                                             <button
                                                                 className="btn btn-primary me-1"
                                                                 type="submit"

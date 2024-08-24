@@ -293,7 +293,7 @@ function CollagesFormData() {
                     const res = await addCollegescrud(submissionData);
                     if (res?.statusCode === "200") {
                         toastSuccessMessage("College Successfully Added");
-                        navigate(`/admin/list-colleges`);
+                        navigate(`/list-colleges`);
                     }
                     toastErrorMessage(res.message)
                 } catch (error) {
@@ -310,7 +310,7 @@ function CollagesFormData() {
                 const res = await updateCollegescrud(params.id, updatesubmissionData);
                 if (res?.statusCode === "200") {
                     toastSuccessMessage("College Successfully Updated");
-                    navigate(`/admin/list-colleges`);
+                    navigate(`/list-colleges`);
                 }
             }
         } catch (error) {
@@ -1132,7 +1132,7 @@ function CollagesFormData() {
 
                                                 <div className="text-right col-12">
                                                     <Link
-                                                        to="/admin/list-colleges"
+                                                        to="/list-colleges"
                                                         className="btn btn-outline-primary mr-2"
                                                     >
                                                         Close

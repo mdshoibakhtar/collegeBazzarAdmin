@@ -80,7 +80,7 @@ function FloorPermission() {
                     const res = await updateFloorMaster(params.id, values);
                     toastSuccessMessage("Floor Successfully");
                     blankBtn()
-                    navigate(`/admin/floor-master`)
+                    navigate(`/floor-master`)
                     if (res?.statusCode == "200") {
                     }
                     if (res?.statusCode == "403") {
@@ -152,7 +152,7 @@ function FloorPermission() {
     const cancelBtn = () => {
         setInitialValues({ name: "", isActive: "" });
         message.error('Cancel Successful!');
-        navigate(`/admin/floor-master`)
+        navigate(`/floor-master`)
     };
 
 

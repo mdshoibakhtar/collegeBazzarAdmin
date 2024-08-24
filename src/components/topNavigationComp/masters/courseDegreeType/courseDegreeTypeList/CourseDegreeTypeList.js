@@ -94,7 +94,7 @@ function CourseDegreeTypeList() {
                 <div className="tbl-caption">
                   <h4 className="heading mb-0">COURSE TYPE</h4>
                   <div>
-                    <Link className="btn btn-primary btn-sm" to="/admin/add-course-degree-type" role="button" aria-controls="offcanvasExample">+CREATE COURSE DEGREE</Link>
+                    <Link className="btn btn-primary btn-sm" to="/add-course-degree-type" role="button" aria-controls="offcanvasExample">+CREATE COURSE DEGREE</Link>
                     {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}
@@ -132,7 +132,7 @@ function CourseDegreeTypeList() {
                         </td>
                         <td>
                           <div className="d-flex">
-                            <Link to={`/admin/update-course-degree-type/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                            <Link to={`/update-course-degree-type/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                             <Popconfirm
                               title="Delete Course !"
                               description="Are you sure to delete ?"

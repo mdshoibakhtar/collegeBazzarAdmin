@@ -235,7 +235,7 @@ function AddUpdateVirtualWall() {
 
                                                     <div className='col-xl-6 mb-3'>
                                                         <Link
-                                                            to="/admin/wallet/virtual-wallet"
+                                                            to="/wallet/virtual-wallet"
                                                             className="btn btn-danger light ms-1"
                                                         >
                                                             Back

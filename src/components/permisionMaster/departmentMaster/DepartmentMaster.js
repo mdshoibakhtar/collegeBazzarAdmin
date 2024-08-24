@@ -80,7 +80,7 @@ function DepartmentMaster() {
                         toastSuccessMessage(res?.data?.mesage);
                         getDepartmentMasters(page) 
                         blankBtn()
-                       navigate(`/admin/departments-master`)
+                       navigate(`/departments-master`)
                     }
                    
                 } catch (error) {
@@ -146,7 +146,7 @@ function DepartmentMaster() {
     const cancelBtn = () => {
         setInitialValues({ name: "", isActive: "" });
         message.error('Cancel Successful!');
-        navigate(`/admin/Departments-master`)
+        navigate(`/Departments-master`)
     };
 
 

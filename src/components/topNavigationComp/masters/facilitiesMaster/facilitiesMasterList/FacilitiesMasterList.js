@@ -16,7 +16,7 @@ function FacilitiesMasterList({data,totalCount,page,count,onChangeVal,confirm,ca
                                         <h4 className="heading mb-0"> Facilities
                                         </h4>
                                         <div>
-                                            <Link className="btn btn-primary btn-sm" to="/admin/create-facilities" role="button" aria-controls="offcanvasExample">+ CREATE FACILITIES</Link>
+                                            <Link className="btn btn-primary btn-sm" to="/create-facilities" role="button" aria-controls="offcanvasExample">+ CREATE FACILITIES</Link>
                                             {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}
@@ -61,7 +61,7 @@ function FacilitiesMasterList({data,totalCount,page,count,onChangeVal,confirm,ca
                                                     </td>
                                                     <td>
                                                         <div className="d-flex">
-                                                            <Link to={`/admin/update-facilities/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                            <Link to={`/update-facilities/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                             <Popconfirm
                                                                 title="Delete Facilities!"
                                                                 description="Are you sure to delete ?"

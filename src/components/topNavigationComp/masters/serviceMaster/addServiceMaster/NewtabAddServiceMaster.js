@@ -230,7 +230,7 @@ function NewtabAddServiceMaster({ i, colodinaryImage, language, service_category
                 </div>
             </div>
             <div>
-                <Link to='/admin/course-master' className="btn btn-danger light ms-1">Cancel</Link>
+                <Link to='/course-master' className="btn btn-danger light ms-1">Cancel</Link>
                 {i === language?.length - 2 && (
                     <button type="button" className="btn btn-primary me-1">
                         Next

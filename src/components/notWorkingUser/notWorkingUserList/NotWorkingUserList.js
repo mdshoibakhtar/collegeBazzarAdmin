@@ -28,7 +28,7 @@ function NotWorkingUserList() {
                                         + Invite Employee
                                     </button> */}
                                             <button className="btn btn-primary btn-sm" type="button" onClick={() => setModalShow(true)}>Download Not Working Users</button>
-                                            <Link className="btn btn-primary btn-sm" to="/admin/add-not-working-user" role="button" aria-controls="offcanvasExample">+ ADD NOT WORKING USERS LIST</Link>
+                                            <Link className="btn btn-primary btn-sm" to="/add-not-working-user" role="button" aria-controls="offcanvasExample">+ ADD NOT WORKING USERS LIST</Link>
                                         </div>
                                     </div>
                                     <div id="empoloyees-tblwrapper_wrapper" className="dataTables_wrapper no-footer">

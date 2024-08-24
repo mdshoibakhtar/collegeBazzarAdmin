@@ -150,7 +150,7 @@ function ShipingAddress() {
                     getshippingData(params.id)
                     toastSuccessMessage();
                     /* setTimeout(() => {
-                        navigate('/admin/role-master')
+                        navigate('/role-master')
                     }, 5000); */
                 } catch (error) {
 

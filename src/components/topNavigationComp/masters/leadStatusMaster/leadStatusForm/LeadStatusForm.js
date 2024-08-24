@@ -43,7 +43,7 @@ function LeadStatusForm() {
                     const res = await addenquiryStatusMaster(values);
                     if (res?.statusCode == "200") {
                         toastSuccessMessage("lead-sub-status Successfully");
-                        navigate(`/admin/lead-status`)
+                        navigate(`/lead-status`)
                     }
                     blankBtn()
                     // getFloorMasters(page)
@@ -56,7 +56,7 @@ function LeadStatusForm() {
                     const res = await updateenquiryStatusMaster(params.id, values);
                     toastSuccessMessage("Lead  Status Successfully");
                     blankBtn()
-                    navigate(`/admin/lead-status`)
+                    navigate(`/lead-status`)
                     if (res?.statusCode == "200") {
                     }
                     if (res?.statusCode == "403") {
@@ -186,7 +186,7 @@ function LeadStatusForm() {
                                                 </div>
 
                                                 <div className="col-xl-12 mb-3">
-                                                    {/* <Link to='/admin/floor-master' type='submit' className="btn btn-danger light ms-1">Cancel</Link> */}
+                                                    {/* <Link to='/floor-master' type='submit' className="btn btn-danger light ms-1">Cancel</Link> */}
                                                     {/* <Button className="btn btn-danger light ms-1" onClick={() => cancelBtn()}>Cancel</Button> */}
                                                     <button
                                                         className="btn btn-primary me-1"

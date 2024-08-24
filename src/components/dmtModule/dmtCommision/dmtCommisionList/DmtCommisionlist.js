@@ -62,7 +62,7 @@ function DmtCommisionlist() {
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0"><b>BBPS  COMMISION LIST</b></h4>
                                     <div>
-                                        <Link className="btn btn-primary btn-sm" to="/admin/add-dmt-commision-scheme" role="button" aria-controls="offcanvasExample">+ ADD  BBPS COMMISION  </Link>
+                                        <Link className="btn btn-primary btn-sm" to="/add-dmt-commision-scheme" role="button" aria-controls="offcanvasExample">+ ADD  BBPS COMMISION  </Link>
                                         {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}
@@ -114,7 +114,7 @@ function DmtCommisionlist() {
                                                         <span className="badge badge-success text-light border-0" style={{ backgroundColor: `${item?.isActive === true ? 'blue' : '#bc3922ab'}`, fontSize: `${item?.isActive === false ? '0.8rem' : ''}` }}>{item?.isActive == true ? 'active' : 'Inactive'}</span>
                                                     </td>
                                                     <td>
-                                                        <Link to={`/admin/update-dmt-commision-scheme/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                        <Link to={`/update-dmt-commision-scheme/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                         <Popconfirm
                                                             title="Delete DMT commision !"
                                                             description="Are you sure to delete ?"

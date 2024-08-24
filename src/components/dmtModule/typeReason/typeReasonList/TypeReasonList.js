@@ -60,7 +60,7 @@ function TypeReasonList() {
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0"> Reason Type List</h4>
                                     <div>
-                                        <Link className="btn btn-primary btn-sm" to="/admin/add-reason-type" role="button" aria-controls="offcanvasExample">+ ADD Type Reason</Link>
+                                        <Link className="btn btn-primary btn-sm" to="/add-reason-type" role="button" aria-controls="offcanvasExample">+ ADD Type Reason</Link>
                                     </div>
                                 </div>
                                 <div id="empoloyees-tblwrapper_wrapper" className="dataTables_wrapper no-footer"><div className="dt-buttons"><button className="dt-button buttons-excel buttons-html5 btn btn-sm border-0" tabIndex={0} aria-controls="empoloyees-tblwrapper" type="button"><span><i className="fa-solid fa-file-excel" /> Export Report</span></button> </div><table id="empoloyees-tblwrapper" className="table dataTable no-footer" role="grid" aria-describedby="empoloyees-tblwrapper_info">
@@ -94,7 +94,7 @@ function TypeReasonList() {
                                             <td>
                                                 <div className="d-flex">
                                                     
-                                                    <Link to={`/admin/update-type-reason/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                    <Link to={`/update-type-reason/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                     <Popconfirm
                                                             title="Delete Currency !"
                                                             description="Are you sure to delete ?"

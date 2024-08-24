@@ -10,7 +10,7 @@ const breadCrumbsTitle = {
     id: "1",
     title_1: "Master",
     title_2: "VedioList Master",
-    path_2: "/admin/VedioList-master"
+    path_2: "/VedioList-master"
 }
 function VedioList() {
 
@@ -69,7 +69,7 @@ function VedioList() {
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0">Vedio MASTER</h4>
                                     <div>
-                                        <Link className="btn btn-primary btn-sm" to="/admin/add-vedio" role="button" aria-controls="offcanvasExample">+ Vedio MASTER</Link>
+                                        <Link className="btn btn-primary btn-sm" to="/add-vedio" role="button" aria-controls="offcanvasExample">+ Vedio MASTER</Link>
                                         {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}
@@ -107,7 +107,7 @@ function VedioList() {
                                                 <td>
                                                     <div className="d-flex">
 
-                                                        <Link to={`/admin/edit-vedio/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                        <Link to={`/edit-vedio/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                         <Popconfirm
                                                             title="Delete Testimonial !"
                                                             description="Are you sure to delete ?"

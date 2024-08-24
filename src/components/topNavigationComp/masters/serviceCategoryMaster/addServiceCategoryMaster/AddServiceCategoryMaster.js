@@ -56,7 +56,7 @@ function AddServiceCategoryMaster() {
                 if (res?.statusCode === "200") {
                     toastSuccessMessage();
                     setTimeout(() => {
-                        navigate('/admin/stream-master');
+                        navigate('/stream-master');
                     }, 4000);
                 }
             } else {
@@ -64,7 +64,7 @@ function AddServiceCategoryMaster() {
                 if (res?.statusCode === "200") {
                     toastSuccessMessage();
                     setTimeout(() => {
-                        navigate('/admin/stream-master');
+                        navigate('/stream-master');
                     }, 4000);
                 }
             }
@@ -226,7 +226,7 @@ function AddServiceCategoryMaster() {
 
                                                             </div>
                                                             <div>
-                                                                <Link to='/admin/stream-master' className="btn btn-danger light ms-1">Cancel</Link>
+                                                                <Link to='/stream-master' className="btn btn-danger light ms-1">Cancel</Link>
                                                                 <button type="submit" className="btn btn-primary me-1">
                                                                     {params.id ? "Update" : "ADD"}
                                                                 </button>

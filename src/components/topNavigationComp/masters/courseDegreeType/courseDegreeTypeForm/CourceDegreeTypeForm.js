@@ -44,7 +44,7 @@ function CourceDegreeTypeForm() {
                     const res = await addCourseDegree(values);
                     if (res?.statusCode == "200") {
                         toastSuccessMessage("Course Type Successfully");
-                        navigate(`/admin/course-degree-list`)
+                        navigate(`/course-degree-list`)
                     }
                     blankBtn()
                 } catch (error) {
@@ -58,7 +58,7 @@ function CourceDegreeTypeForm() {
                     if (res?.statusCode == "200") {
                         toastSuccessMessage("Course Type Successfully");
                         blankBtn()
-                        navigate(`/admin/course-degree-list`)
+                        navigate(`/course-degree-list`)
                     }
                     if (res?.statusCode == "403") {
                         toastSuccessMessage("Course Type Successfully");
@@ -167,7 +167,7 @@ function CourceDegreeTypeForm() {
                                                 </div>
 
                                                 <div className="col-xl-2 mb-3">
-                                                    <Link to='/admin/course-degree-list' type='submit' className="btn btn-danger light ms-1">Cancel</Link>
+                                                    <Link to='/course-degree-list' type='submit' className="btn btn-danger light ms-1">Cancel</Link>
                                                     {/* <Button className="btn btn-danger light ms-1" onClick={() => cancelBtn()}>Cancel</Button> */}
                                                     <button
                                                         className="btn btn-primary me-1"

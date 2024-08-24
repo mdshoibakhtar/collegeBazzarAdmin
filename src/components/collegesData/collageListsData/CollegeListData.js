@@ -16,7 +16,7 @@ function CollegesInfoList({ data, totalCount, page, count, onChangeVal, confirm,
                                     <div className="tbl-caption">
                                         <h4 className="heading mb-0"> Colleges List  </h4>
                                         <div>
-                                            <Link className="btn btn-primary btn-sm" to="/admin/add-colleges" role="button" aria-controls="offcanvasExample">+ ADD COLLEGES</Link>
+                                            <Link className="btn btn-primary btn-sm" to="/add-colleges" role="button" aria-controls="offcanvasExample">+ ADD COLLEGES</Link>
                                             {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}
@@ -84,7 +84,7 @@ function CollegesInfoList({ data, totalCount, page, count, onChangeVal, confirm,
                                                         <td>{item?.location}</td>
                                                         <td>
                                                             <div className="d-flex">
-                                                                <Link to={`/admin/update-college/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
+                                                                <Link to={`/update-college/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
                                                                     <i className="fa fa-pencil" />
                                                                 </Link>
                                                                 <Popconfirm

@@ -12,7 +12,7 @@ function RetailerList() {
                                     <div className="tbl-caption">
                                         <h4 className="heading mb-0"><b>RETAILER LIST</b></h4>
                                         <div>
-                                            <Link className="btn btn-primary btn-sm" to="/admin/create-user/retailer" role="button" aria-controls="offcanvasExample">+  Create Retailer</Link>
+                                            <Link className="btn btn-primary btn-sm" to="/create-user/retailer" role="button" aria-controls="offcanvasExample">+  Create Retailer</Link>
                                             {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}

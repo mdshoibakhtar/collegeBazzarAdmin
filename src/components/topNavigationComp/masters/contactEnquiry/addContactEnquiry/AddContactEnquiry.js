@@ -70,7 +70,7 @@ const AddContactEnquiry = () => {
                     if (res?.statusCode == "200") {
                         toastSuccessMessage();
                         setTimeout(() => {
-                            navigate('/admin/contact-enquiry')
+                            navigate('/contact-enquiry')
                         }, [4000])
                     }
                 } catch (error) {
@@ -83,7 +83,7 @@ const AddContactEnquiry = () => {
                     if (res?.statusCode == "200") {
                         toastSuccessMessage();
                         setTimeout(() => {
-                            navigate('/admin/contact-enquiry')
+                            navigate('/contact-enquiry')
                         }, [4000])
                     }
                 } catch (error) {
@@ -222,7 +222,7 @@ const AddContactEnquiry = () => {
 
                                                 </div>
                                                 <div>
-                                                    <Link to='/admin/contact-enquiry' className="btn btn-danger light ms-1">Cancel</Link>
+                                                    <Link to='/contact-enquiry' className="btn btn-danger light ms-1">Cancel</Link>
                                                     <button
                                                         className="btn btn-primary me-1"
                                                         type="submit"

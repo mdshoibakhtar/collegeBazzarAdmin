@@ -102,7 +102,7 @@ function AddProvider() {
                     if (res?.statusCode == "200") {
                         toastSuccessMessage();
                         setTimeout(() => {
-                            navigate('/admin/provider')
+                            navigate('/provider')
                         }, [4000])
                     }
                 } catch (error) {
@@ -115,7 +115,7 @@ function AddProvider() {
                     if (res?.statusCode == "200") {
                         toastSuccessMessage();
                         setTimeout(() => {
-                            navigate('/admin/provider')
+                            navigate('/provider')
                         }, [4000])
                     }
                 } catch (error) {
@@ -341,7 +341,7 @@ function AddProvider() {
                                                         />
                                                     </div>
                                                     <div className="col-xl-4 mb-3">
-                                                        <Link to='/admin/provider' className="btn btn-danger light ms-1">Cancel</Link>
+                                                        <Link to='/provider' className="btn btn-danger light ms-1">Cancel</Link>
                                                         <button
                                                             className="btn btn-primary me-1"
                                                             type="submit"

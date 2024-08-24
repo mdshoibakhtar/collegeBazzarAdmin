@@ -199,7 +199,7 @@ function UpdatePaymentRequestView() {
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <Link to='/admin/payment-request-view' className="btn btn-danger light ms-1">Cancel</Link>
+                                                    <Link to='/payment-request-view' className="btn btn-danger light ms-1">Cancel</Link>
                                                     <button className="btn btn-primary me-1">Submit</button>
                                                 </div>
                                             </form>

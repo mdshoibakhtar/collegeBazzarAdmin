@@ -35,7 +35,7 @@ const FAQAdd = () => {
     const GetCollege = async (id) => {
         try {
             const data = await collegeListss();
-            setCollege(data.data);
+            setCollege(data);
         } catch (error) {
             console.error(error);
         }
@@ -87,7 +87,7 @@ const FAQAdd = () => {
         setLoader(true);
         try {
             const res = await postFaq(formValues);
-            if (res?.statusCode === 200) {
+            if (res?.statusCode == 200) {
                 toastSuccessMessage();
             } else {
                 toastErrorMessage();
@@ -106,7 +106,7 @@ const FAQAdd = () => {
         setLoader(true);
         try {
             const res = await updateFaq({ data: formValues, id: params?.id });
-            if (res?.statusCode === 200) {
+            if (res?.statusCode == 200) {
                 toastSuccessMessage();
             } else {
                 toastErrorMessage();
@@ -135,10 +135,10 @@ const FAQAdd = () => {
                                         <div className="col-xl-6 mb-3">
                                             <div className={`form-group ${errors.question ? 'has-error' : ''}`}>
                                                 <label htmlFor="question">College</label>
-                                                <select  onChange={handleChange} name='college_id' className="form-select" aria-label="Default select example">
+                                                <select  onChange={handleChange} name='college_id' value={formValues?.college_id} className="form-select" aria-label="Default select example">
                                                     <option selected="">Open this select menu</option>
                                                   {college?.data?.map((item, index) => (
-                                                        <option value={item.id} key={index}>{item.college_name}</option>
+                                                        <option value={item._id} key={index}>{item.name}</option>
                                                     ))}
                                                 </select>
 
@@ -147,8 +147,7 @@ const FAQAdd = () => {
                                         <div className="col-xl-6 mb-3">
                                             <div className={`form-group ${errors.question ? 'has-error' : ''}`}>
                                                 <label htmlFor="question">Question</label>
-                                                <input
-                                                    type="text"
+                                                <textarea
                                                     id="question"
                                                     name="question"
                                                     value={formValues.question}

@@ -175,7 +175,7 @@ function StaffTypeAdd() {
 
                                                 </div>
                                                 <div>
-                                                    <Link to='/admin/staff-type' className="btn btn-danger light ms-1">Cancel</Link>
+                                                    <Link to='/staff-type' className="btn btn-danger light ms-1">Cancel</Link>
                                                     <button
                                                         className="btn btn-primary me-1"
                                                         type="submit"

@@ -63,7 +63,7 @@ function CityList() {
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0">ADD Cities</h4>
                                     <div>
-                                        <Link className="btn btn-primary btn-sm" to="/admin/add-cities" role="button" aria-controls="offcanvasExample">+ ADD CITY</Link>
+                                        <Link className="btn btn-primary btn-sm" to="/add-cities" role="button" aria-controls="offcanvasExample">+ ADD CITY</Link>
                                     </div>
                                 </div>
                                 <div id="empoloyees-tblwrapper_wrapper" className="dataTables_wrapper no-footer">
@@ -89,7 +89,7 @@ function CityList() {
                                                     {/* <td>{item?.code}</td> */}
                                                     <td>
                                                         <div className="d-flex">
-                                                            <Link to={`/admin/update-city/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
+                                                            <Link to={`/update-city/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
                                                                 <i className="fa fa-pencil" />
                                                             </Link>
                                                             <Popconfirm

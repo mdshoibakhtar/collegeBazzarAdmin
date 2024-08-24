@@ -64,7 +64,7 @@ function ServiceCategoryMasterList() {
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0">STREAM MASTER</h4>
                                     <div>
-                                        <Link className="btn btn-primary btn-sm" to="/admin/add-stream-category" role="button" aria-controls="offcanvasExample">+ Create stream</Link>
+                                        <Link className="btn btn-primary btn-sm" to="/add-stream-category" role="button" aria-controls="offcanvasExample">+ Create stream</Link>
                                         {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}
@@ -110,7 +110,7 @@ function ServiceCategoryMasterList() {
                                                 </td>
                                                 <td>
                                                     <div className="d-flex">
-                                                        <Link to={`/admin/update-stream-category/${item?.id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                        <Link to={`/update-stream-category/${item?.id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                         <Popconfirm
                                                             title="Delete Stream !"
                                                             description="Are you sure to delete ?"

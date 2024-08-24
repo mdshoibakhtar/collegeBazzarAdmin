@@ -13,7 +13,7 @@ function PendingTranRepLists() {
                                     <h4 className="heading mb-0">Pending Transaction Report List
                                     </h4>
                                     <div>
-                                        <Link className="btn btn-primary btn-sm" to="/admin/add-pending-transaction-report" role="button" aria-controls="offcanvasExample">+ PENDING TRANSACTION REPORT</Link>
+                                        <Link className="btn btn-primary btn-sm" to="/add-pending-transaction-report" role="button" aria-controls="offcanvasExample">+ PENDING TRANSACTION REPORT</Link>
                                         {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}

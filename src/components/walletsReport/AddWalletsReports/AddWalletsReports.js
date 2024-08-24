@@ -255,7 +255,7 @@ function AddWalletsReports() {
                                                 </div>
                                                 <div>
                                                     {/* <Link
-                                                        to="/admin/member-list"
+                                                        to="/member-list"
                                                         className="btn btn-danger light ms-1"
                                                     >
                                                         Cancel

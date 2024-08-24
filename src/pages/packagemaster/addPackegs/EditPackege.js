@@ -201,7 +201,7 @@ function EditPackegs() {
             if (res.statusCode == 200) {
                 toastSuccessMessage();
                 setTimeout(() => {
-                    navigate('/admin/package-master');
+                    navigate('/package-master');
                 }, 1000);
             } else {
                 toastErrMessage(res.message);

@@ -195,7 +195,7 @@ function AddPackegs() {
             if (res.statusCode == 200) {
                 toastSuccessMessage();
                 setTimeout(() => {
-                    navigate('/admin/package-master');
+                    navigate('/package-master');
                 }, 1000);
             } else {
                 toastErrMessage(res.message);
@@ -229,7 +229,7 @@ function AddPackegs() {
             if (res.statusCode == 200) {
                 toastSuccessMessage();
                 setTimeout(() => {
-                    navigate('/admin/package-master');
+                    navigate('/package-master');
                 }, 1000);
             } else if (res.statusCode == 404) {
                 toastErrMessage("Please Add Package");

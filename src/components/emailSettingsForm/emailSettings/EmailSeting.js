@@ -1,31 +1,21 @@
 import { Formik } from "formik";
-import { Link, useNavigate, useParams } from "react-router-dom"
-import CustomInputField from "../../../../../common/CustomInputField";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import CustomInputField from "../../../common/CustomInputField";
 
 function EmailSeting() {
- 
+  const navigate = useNavigate();
 
-
-  const navigate = useNavigate()
-
-  const [conbo, setCombo] = useState(null)
+  const [emailEngine, setEmailEngine] = useState("sendEmail");
   const [initialValues, setInitialValues] = useState({
     api: "",
-    id: '',
-
+    id: "",
   });
   const params = useParams();
+
   const validate = (values) => {
     let errors = {};
-    /* if (!values.api) {
-      errors.api = "Api Name is required";
-    }
-    if (!values.id) {
-      errors.id = "Id is required and must be unique";
-    } */
-
     return errors;
   };
 
@@ -39,11 +29,10 @@ function EmailSeting() {
     try {
       // const data = await getCountryAdd()
       // setCombo(data?.data)
-
     } catch (error) {
-      alert(error.message)
+      alert(error.message);
     }
-  }
+  };
 
   const submitForm = async (values) => {
     console.log(values);
@@ -51,39 +40,30 @@ function EmailSeting() {
     try {
       if (!params?.id) {
         try {
-         /*  const res = await ApiTransactionAdd(values);
-          if (res?.statusCode == "200") {
-            toastSuccessMessage();
-            setTimeout(() => {
-              navigate('/admin/api-master')
-            }, [4000])
-          } */
-        } catch (error) {
-
-        }
-
+          /* const res = await ApiTransactionAdd(values);
+             if (res?.statusCode == "200") {
+             toastSuccessMessage();
+             setTimeout(() => {
+               navigate('/api-master')
+             }, [4000])
+           } */
+        } catch (error) { }
       } else {
         try {
-
-          const res = await apiMasterUpdate(params.id, values);
-          if (res?.statusCode == "200") {
-            toastSuccessMessage();
-            
-          }
-        } catch (error) {
-
-        }
-
+          // const res = await apiMasterUpdate(params.id, values);
+          // if (res?.statusCode == "200") {
+          //   toastSuccessMessage();
+          // }
+        } catch (error) { }
       }
-
     } catch (error) {
       console.error("Error:", error);
     }
   };
 
   useEffect(() => {
-    curencyidget()
-  }, [])
+    curencyidget();
+  }, []);
 
   useEffect(() => {
     const fetchCurrency = async () => {
@@ -106,6 +86,11 @@ function EmailSeting() {
 
     fetchCurrency();
   }, [params?.id]);
+
+  const handleEmailEngineChange = (event) => {
+    setEmailEngine(event.target.value);
+  };
+
   return (
     <>
       <Formik
@@ -127,57 +112,147 @@ function EmailSeting() {
             dirty,
           } = formik;
           return (
-            <div className="row">
+            <div className="row m-4">
               <div className="col-xl-12">
                 <div className="card">
                   <div className="card-body p-0">
                     <div className="table-responsive active-projects style-1">
                       <div className="tbl-caption tbl-caption-2">
-                        <h4 className="heading mb-0">
-                          {params?.id ? "UPDATE" : "ADD"} NEW API
-                        </h4>
+                        <h4 className="heading mb-0">Email Settings</h4>
                       </div>
                       <form className="tbl-captionn" onSubmit={handleSubmit}>
-                        <div className="row">
-                          <div className="col-xl-4 mb-3">
-                            <CustomInputField
-                              type="text"
-                              placeholder="Api Name *"
-                              value={values.api}
-                              hasError={errors.api_name && touched.api}
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                              errorMsg={errors.api}
-                              autoFocus={true}
-                              id="api"
-                            />
-                          </div>
-                          <div className="col-xl-4 mb-3">
-                            <CustomInputField
-                              type="text"
-                              placeholder="Api key *"
-                              value={values.id}
-                              hasError={errors.id && touched.id}
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                              errorMsg={errors.id}
-                              autoFocus={true}
-                              id="id"
-                            />
+                        <div className="row justify-content-center">
+                          <div className="col-xl-8 mb-3 ">
+                            <label className="m-2">
+                              <b>Email Engine</b>
+                            </label>
+                            <div className="col-xl-8 my-2">
+                              <select
+                                className="form-select"
+                                aria-label="Default select example"
+                                onChange={(e) => {
+                                  handleEmailEngineChange(e);
+                                  handleChange(e);
+                                }}
+                                value={emailEngine}
+                                name="emailEngine"
+                              >
+                                <option value="sendEmail">Send Mail</option>
+                                <option value="smtp">SMTP</option>
+                              </select>
+                            </div>
+
+                            {emailEngine === "smtp" && (
+                              <>
+                                <div className="col-xl-8 mb-3">
+                                  <CustomInputField
+                                    type="text"
+                                    value={values?.smtpUsername}
+                                    hasError={errors.smtpUsername && touched.smtpUsername}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    errorMsg={errors.smtpUsername}
+                                    id="smtpUsername"
+                                    name="smtpUsername"
+                                    placeholder="SMTP Username"
+                                  />
+                                </div>
+
+                                <div className="col-xl-8 mb-3">
+                                  <CustomInputField
+                                    type="password"
+                                    value={values?.smtpPassword}
+                                    hasError={errors.smtpPassword && touched.smtpPassword}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    errorMsg={errors.smtpPassword}
+                                    id="smtpPassword"
+                                    name="smtpPassword"
+                                    placeholder="SMTP Password"
+                                  />
+                                </div>
+
+                                <div className="col-xl-8 mb-3">
+                                  <CustomInputField
+                                    type="text"
+                                    value={values?.smtpServer}
+                                    hasError={errors.smtpServer && touched.smtpServer}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    errorMsg={errors.smtpServer}
+                                    id="smtpServer"
+                                    name="smtpServer"
+                                    placeholder="SMTP Server"
+                                  />
+                                </div>
+
+                                <div className="col-xl-8 mb-3">
+                                  <CustomInputField
+                                    type="text"
+                                    value={values?.smtpPort}
+                                    hasError={errors.smtpPort && touched.smtpPort}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    errorMsg={errors.smtpPort}
+                                    id="smtpPort"
+                                    name="smtpPort"
+                                    placeholder="SMTP Port"
+                                  />
+                                </div>
+
+                                <label className="m-2">
+                                  <b>SMTP Security</b>
+                                </label>
+                                <div className="col-xl-8 my-2">
+                                  <select
+                                    className="form-select"
+                                    aria-label="Default select example"
+                                    onChange={handleChange}
+                                    value={values?.smtpSecurity}
+                                    name="smtpSecurity"
+                                  >
+                                    <option value="off">OFF</option>
+                                    <option value="ssl">SSL</option>
+                                    <option value="tsl">TSL</option>
+                                  </select>
+                                </div>
+
+                                <label className="m-2">
+                                  <b>SMTP Auth</b>
+                                </label>
+                                <div className="col-xl-8 my-2">
+                                  <select
+                                    className="form-select"
+                                    aria-label="Default select example"
+                                    onChange={handleChange}
+                                    value={values?.smtpAuth}
+                                    name="smtpAuth"
+                                  >
+                                    <option value="off">OFF</option>
+                                    <option value="on">ON</option>
+                                  </select>
+                                </div>
+                              </>
+
+                            )}
                           </div>
                         </div>
                         <div>
-                          <Link to='/admin/api-master' className="btn btn-danger light ms-1">Cancel</Link>
+                          <Link
+                            to="#"
+                            className="btn btn-danger light ms-1"
+                          >
+                            Cancel
+                          </Link>
                           <button
                             className="btn btn-primary me-1"
                             type="submit"
                             disabled={!isValid || !dirty}
                           >
-                            {params?.id ? "Update" : "Add"}
+                            {params?.id ? "send" : "Save"}
                           </button>
                         </div>
                       </form>
-
                     </div>
                   </div>
                 </div>
@@ -189,7 +264,7 @@ function EmailSeting() {
 
       <ToastContainer />
     </>
-  )
+  );
 }
 
-export default EmailSeting
+export default EmailSeting;

@@ -277,7 +277,7 @@ function TabAddServiceMaster({ i, colodinaryImage, language, service_category, s
                             </div>
                             <div>
                                
-                                <Link to='/admin/service-master' className="btn btn-danger light ms-1">Cancel</Link>
+                                <Link to='/service-master' className="btn btn-danger light ms-1">Cancel</Link>
                                 {i === language?.length - 2 && (
                                     <button type="button" className="btn btn-primary me-1">
                                         Next

@@ -129,7 +129,7 @@ function AddTicket() {
             if (res.statusCode == 200) {
                 toastSuccessMessage();
                 setTimeout(() => {
-                    navigate('/admin/disputes/welcome')
+                    navigate('/disputes/welcome')
                 }, 1000);
 
             } else {

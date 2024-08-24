@@ -20,7 +20,7 @@ function ViewOperatorLimit() {
                                 <div className="tbl-caption tbl-caption-3">
                                     <h4 className="heading mb-0">View Operator Limit</h4>
                                     <div>
-                                        {/* <Link className="btn btn-primary btn-sm" to="/admin/add-service-master" role="button" aria-controls="offcanvasExample">+ SERVICE MASTER</Link> */}
+                                        {/* <Link className="btn btn-primary btn-sm" to="/add-service-master" role="button" aria-controls="offcanvasExample">+ SERVICE MASTER</Link> */}
                                         {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}

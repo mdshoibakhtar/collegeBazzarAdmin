@@ -11,7 +11,7 @@ import { baseUrlImage } from '../../baseUrl';
 function PackesLists({ onChangeVal, aepsData, getDmtTxnData }) {
     const navigate = useNavigate()
     // const ChangeRouts = (id) => {
-    //     navigate(`/admin/add-package/${id}`)
+    //     navigate(`/add-package/${id}`)
     // }
 
 
@@ -55,7 +55,7 @@ function PackesLists({ onChangeVal, aepsData, getDmtTxnData }) {
                                         <div className='d-flex'>
                                             <ExportPdf />
                                             <div>
-                                                <Link to="/admin/add-package" class="btn btn-primary">Add Package</Link>
+                                                <Link to="/add-package" class="btn btn-primary">Add Package</Link>
                                             </div>
                                         </div>
 
@@ -126,7 +126,7 @@ function PackesLists({ onChangeVal, aepsData, getDmtTxnData }) {
                                                         </td>
 
                                                         <td className='text-center'>
-                                                            <Link className='btn btn-warning color2' to={`/admin/add-package/${item._id}`}><i className="fa fa-pencil" /></Link>
+                                                            <Link className='btn btn-warning color2' to={`/add-package/${item._id}`}><i className="fa fa-pencil" /></Link>
                                                             <button type="button" className="btn btn-danger" onClick={() => deletePackege(item._id)}><i className="fa fa-trash" /></button>
                                                         </td>
                                                     </tr>

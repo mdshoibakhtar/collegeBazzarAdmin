@@ -15,7 +15,7 @@ function AffilatedTypeList({data,totalCount,page,count,onChangeVal,confirm,cance
                                     <div className="tbl-caption">
                                         <h4 className="heading mb-0"> Affiliated  </h4>
                                         <div>
-                                            <Link className="btn btn-primary btn-sm" to="/admin/create-affilated-by" role="button" aria-controls="offcanvasExample">+ CREATE AFFILATED</Link>
+                                            <Link className="btn btn-primary btn-sm" to="/create-affilated-by" role="button" aria-controls="offcanvasExample">+ CREATE AFFILATED</Link>
                                             {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}
@@ -54,7 +54,7 @@ function AffilatedTypeList({data,totalCount,page,count,onChangeVal,confirm,cance
                                                     </td>
                                                     <td>
                                                         <div className="d-flex">
-                                                            <Link to={`/admin/update-affilated-by/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                            <Link to={`/update-affilated-by/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                             <Popconfirm
                                                                 title="Delete Affilated!"
                                                                 description="Are you sure to delete ?"

@@ -53,7 +53,7 @@ function ApiMasterList() {
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0">API MASTER</h4>
                                     <div>
-                                        <Link className="btn btn-primary btn-sm" to="/admin/add-api-master" role="button" aria-controls="offcanvasExample">+ API MASTER</Link>
+                                        <Link className="btn btn-primary btn-sm" to="/add-api-master" role="button" aria-controls="offcanvasExample">+ API MASTER</Link>
                                         {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}
@@ -92,7 +92,7 @@ function ApiMasterList() {
                                             </td> */}
                                                 <td>
                                                     <div className="d-flex">
-                                                        <Link to={`/admin/update-api-master/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                        <Link to={`/update-api-master/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                         <Popconfirm
                                                             title="Delete Currency !"
                                                             description="Are you sure to delete ?"

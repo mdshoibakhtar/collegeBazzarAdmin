@@ -294,7 +294,7 @@ function ListnumberWhatsaap() {
                                         buttonText="Download Excel sheet" /> */}
                                 </div>
                                 <div className="form-group col-md-2">
-                                    <Link to="/admin/add-numbers" className="btn btn-primary">Add Number</Link>
+                                    <Link to="/add-numbers" className="btn btn-primary">Add Number</Link>
                                 </div>
                                 {/* <div className="form-group col-md-2">
                                     <label >

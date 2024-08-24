@@ -6,7 +6,7 @@ function Breadcrumbs({breadCrumbsTitle}) {
         <div className="page-titles">
             <ol className="breadcrumb">
                 {/* <li><h5 className="bc-title">PayPanda</h5></li> */}
-                <li className="breadcrumb-item"><Link to={"/admin"}>
+                <li className="breadcrumb-item"><Link to={"/"}>
                     Home
                 </Link>
                 </li>

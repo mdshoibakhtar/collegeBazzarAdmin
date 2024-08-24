@@ -53,7 +53,7 @@ function FacilitiesMasterForm
                     const res = await addfacilitiesMaster(values);
                     if (res?.statusCode == "200") {
                         toastSuccessMessage(" Facilities Successfully");
-                        navigate(`/admin/facilities`)
+                        navigate(`/facilities`)
                     }
                     blankBtn()
                 } catch (error) {
@@ -67,7 +67,7 @@ function FacilitiesMasterForm
                     if (res?.statusCode == "200") {
                         toastSuccessMessage("Affilated Successfully");
                         blankBtn()
-                        navigate(`/admin/facilities`)
+                        navigate(`/facilities`)
                     }
                     if (res?.statusCode == "403") {
                         toastSuccessMessage("Facilities Successfully");
@@ -191,7 +191,7 @@ function FacilitiesMasterForm
                                                 </div>
 
                                                 <div className="col-xl-2 mb-3">
-                                                    <Link to='/admin/facilities' type='submit' className="btn btn-danger light ms-1">Cancel</Link>
+                                                    <Link to='/facilities' type='submit' className="btn btn-danger light ms-1">Cancel</Link>
                                                     {/* <Button className="btn btn-danger light ms-1" onClick={() => cancelBtn()}>Cancel</Button> */}
                                                     <button
                                                         className="btn btn-primary me-1"

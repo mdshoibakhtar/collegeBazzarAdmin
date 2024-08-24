@@ -127,14 +127,14 @@ function AddServiceMaster() {
                 if (res?.statusCode == "200") {
                     toastSuccessMessage();
                     setTimeout(() => {
-                        navigate('/admin/course-master')
+                        navigate('/course-master')
                     }, 4000)
                 }
             } else {
                 await updateServiceMaster(params?.id, { list: dataToSend });
                 toastSuccessMessage();
                 setTimeout(() => {
-                    navigate('/admin/course-master')
+                    navigate('/course-master')
                 }, 4000)
             }
         } catch (error) {

@@ -267,7 +267,7 @@ function FormServicePermission() {
                         </div>
                         <div>
                           <Link
-                            to="/admin/service-area-permision"
+                            to="/service-area-permision"
                             className="btn btn-danger light ms-1"
                           >
                             Cancel

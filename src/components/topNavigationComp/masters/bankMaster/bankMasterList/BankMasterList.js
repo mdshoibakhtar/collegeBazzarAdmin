@@ -64,7 +64,7 @@ function BankMasterList() {
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0">BANK MASTER</h4>
                                     <div>
-                                        <Link className="btn btn-primary btn-sm" to="/admin/add-bank" role="button" aria-controls="offcanvasExample">+ BANK MASTER</Link>
+                                        <Link className="btn btn-primary btn-sm" to="/add-bank" role="button" aria-controls="offcanvasExample">+ BANK MASTER</Link>
                                         {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}
@@ -126,7 +126,7 @@ function BankMasterList() {
                                                 </td>
                                                 <td>
                                                     <div className="d-flex">
-                                                        <Link to={`/admin/update-bank/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                        <Link to={`/update-bank/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                         <Popconfirm
                                                             title="Delete bank master !"
                                                             description="Are you sure to delete ?"

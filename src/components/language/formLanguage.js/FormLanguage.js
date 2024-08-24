@@ -166,7 +166,7 @@ function FormLanguage() {
                                                 </div>
                                                 <div>
                                                     <Link
-                                                        to="/admin/language"
+                                                        to="/language"
                                                         className="btn btn-danger light ms-1"
                                                     >
                                                         Cancel

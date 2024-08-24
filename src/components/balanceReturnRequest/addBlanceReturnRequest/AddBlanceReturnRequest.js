@@ -126,7 +126,7 @@ function AddBlanceReturnRequest() {
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <Link to='/admin/balance-return-request' className="btn btn-danger light ms-1">Cancel</Link>
+                                                        <Link to='/balance-return-request' className="btn btn-danger light ms-1">Cancel</Link>
                                                         <button className="btn btn-primary me-1">Submit</button>
                                                     </div>
                                                 </form>

@@ -10,9 +10,9 @@ const breadCrumbsTitle = {
     id: "1",
     title_1: "Master",
     title_2: "Department Master",
-    path_2: "/admin/department-master",
+    path_2: "/department-master",
     title_3: "Add Department Master",
-    path_3: "/admin/add-department-master"
+    path_3: "/add-department-master"
 };
 
 function AddDepartmentMaster() {
@@ -49,7 +49,7 @@ function AddDepartmentMaster() {
             }
             toastSuccessMessage();
             setTimeout(() => {
-                navigate('/admin/department-master');
+                navigate('/department-master');
             }, 5000);
         } catch (error) {
             toast.error(`Error: ${error.message}`, {

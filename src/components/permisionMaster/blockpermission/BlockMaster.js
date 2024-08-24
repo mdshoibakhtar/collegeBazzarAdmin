@@ -80,7 +80,7 @@ function BlockMaster() {
           if (res?.statusCode == "200") {
             toastSuccessMessage(res?.data?.mesage);
             getBlockMasters(page)
-            navigate(`/admin/block-master`)
+            navigate(`/block-master`)
             blankBtn()
           }
         } catch (error) {
@@ -146,7 +146,7 @@ function BlockMaster() {
   const cancelBtn = () => {
     setInitialValues({ name: "", isActive: "" });
     message.error('Cancel Successful!');
-    navigate(`/admin/block-master`)
+    navigate(`/block-master`)
 };
 
   useEffect(() => {

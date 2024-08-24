@@ -104,7 +104,7 @@ function EditPaymentMethod() {
                                                     </div>
                                                     <div className="col-xl-6 mb-4 mt-2">
                                                         <div>
-                                                            <Link to='/admin/payment-method' className="btn btn-danger light ms-1">Cancel</Link>
+                                                            <Link to='/payment-method' className="btn btn-danger light ms-1">Cancel</Link>
                                                             <button className="btn btn-primary me-1">Submit</button>
                                                         </div>
                                                     </div>

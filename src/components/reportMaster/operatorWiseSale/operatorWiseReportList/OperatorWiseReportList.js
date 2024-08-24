@@ -13,7 +13,7 @@ function OperatorWiseReportList() {
                                     <div className="tbl-caption">
                                         <h4 className="heading mb-0"><b>Operator Wise List</b></h4>
                                         <div>
-                                            <Link className="btn btn-primary btn-sm" to="/admin/add-operator-wise-sale" role="button" aria-controls="offcanvasExample">+  ADD Operator Wise Report
+                                            <Link className="btn btn-primary btn-sm" to="/add-operator-wise-sale" role="button" aria-controls="offcanvasExample">+  ADD Operator Wise Report
                                             </Link>
                                             {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee

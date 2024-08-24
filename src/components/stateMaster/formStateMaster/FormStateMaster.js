@@ -53,7 +53,7 @@ function FormStateMaster() {
                     if (res?.statusCode == "200") {
                         toastSuccessMessage();
                         setTimeout(() => {
-                            navigate('/admin/state-master')
+                            navigate('/state-master')
                         }, [4000])
                     }
                 } catch (error) {
@@ -66,7 +66,7 @@ function FormStateMaster() {
                     if (res?.statusCode == "200") {
                         toastSuccessMessage();
                         setTimeout(() => {
-                            navigate('/admin/state-master')
+                            navigate('/state-master')
                         }, [4000])
                     }
                 } catch (error) {
@@ -201,7 +201,7 @@ function FormStateMaster() {
                                                 </div>
                                                 <div>
                                                     <Link
-                                                        to="/admin/state-master"
+                                                        to="/state-master"
                                                         className="btn btn-danger light ms-1"
                                                     >
                                                         Cancel

@@ -47,7 +47,7 @@ function DmtcommschForm() {
                         return
                     }
                     setTimeout(() => {
-                        navigate('/admin/dmt-commision')
+                        navigate('/dmt-commision')
                     }, 2000);
                 } catch (error) {
 
@@ -58,7 +58,7 @@ function DmtcommschForm() {
                     await updatedmtcommschemeagId2(params.id, values);
                     toastSuccessMessage();
                     setTimeout(() => {
-                        navigate('/admin/dmt-commision')
+                        navigate('/dmt-commision')
                     }, 2000);
                 } catch (error) {
 
@@ -184,7 +184,7 @@ function DmtcommschForm() {
 
                                                     <div>
                                                         <Link
-                                                            to="/admin/dmt-commision"
+                                                            to="/dmt-commision"
                                                             className="btn btn-danger light ms-1"
                                                         >
                                                             Cancel
