@@ -18,6 +18,7 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
             mobile: '',
             email: '',
             refer_id: '',
+            leadStatus: '',
             kycStatus: ''
         });
     }, [params]);
@@ -63,6 +64,7 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
             mobile: '',
             email: '',
             refer_id: '',
+            leadStatus: '',
             kycStatus: ''
         });
         getReailerDistIdAgainst(0);
@@ -70,151 +72,103 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
 
     return (
         <>
-            <div className="container-fluid">
-                <div className="row">
-                    <div className="col-12">
-                        <div className="card">
-                            <div className="card-body p-3">
-                                <div className="table-responsive active-projects style-1">
-                                    <div className="tbl-caption tbl-caption-2">
-                                        <h4 className="heading mb-0">
-                                            <b>
-                                                Filter &nbsp; &nbsp;
-                                                {`${params?.name}`}
-                                            </b>
-                                        </h4>
-                                    </div>
-                                    <form className="row g-3" onSubmit={handleSubmit}>
-                                        <div className="col-md-3">
-                                            <label htmlFor="name" className="form-label">
-                                                Name
-                                            </label>
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                id="name"
-                                                placeholder="Enter name"
-                                                value={formData.name}
-                                                onChange={handleChange}
-                                            />
-                                        </div>
-                                        <div className="col-md-3">
-                                            <label htmlFor="mobile" className="form-label">
-                                                Mobile Number
-                                            </label>
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                id="mobile"
-                                                placeholder="Enter mobile number with country code"
-                                                value={formData.mobile}
-                                                onChange={handlePhoneChange}
-                                            />
-                                        </div>
-                                        <div className="col-md-3">
-                                            <label htmlFor="email" className="form-label">
-                                                Email
-                                            </label>
-                                            <input
-                                                type="email"
-                                                className="form-control"
-                                                id="email"
-                                                placeholder="Enter email"
-                                                value={formData.email}
-                                                onChange={handleChange}
-                                            />
-                                        </div>
-                                        <div className="col-md-3">
-                                            <label htmlFor="refer_id" className="form-label">
-                                                {params?.name} Ref id
-                                            </label>
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                id="refer_id"
-                                                placeholder={`Enter ${params?.name} ref id`}
-                                                value={formData.refer_id}
-                                                onChange={handleChange}
-                                            />
-                                        </div>
-                                        <div className="col-md-3">
-                                            <label htmlFor="refer_id" className="form-label">
-                                                Streams
-                                            </label>
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                id="refer_id"
-                                                placeholder={`Enter Stream`}
-                                                value={formData.streams}
-                                                onChange={handleChange}
-                                            />
-                                        </div>
-                                        <div className="col-md-3">
-                                            <label htmlFor="refer_id" className="form-label">
-                                                Course
-                                            </label>
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                id="refer_id"
-                                                placeholder={`Enter course`}
-                                                value={formData.streams}
-                                                onChange={handleChange}
-                                            />
-                                        </div>
-                                        <div className="col-md-3">
-                                            <label htmlFor="kycStatus" className="form-label">
-                                                KYC Status
-                                            </label>
-                                            <select
-                                                className="form-control"
-                                                id="kycStatus"
-                                                value={formData.kycStatus}
-                                                onChange={handleChange}
-                                            >
-                                                <option value="" disabled>
-                                                    Select Status
-                                                </option>
-                                                <option value="verified">Verified</option>
-                                                <option value="unverified">Unverified</option>
-                                            </select>
-                                        </div>
-                                        <div className="col-12">
-                                            {error && (
-                                                <Alert
-                                                    message="Warning"
-                                                    description={error}
-                                                    type="warning"
-                                                    showIcon
-                                                    closable
-                                                />
-                                            )}
-                                        </div>
-                                        <div className="col-12 d-flex justify-content-between">
-                                            <button
-                                                type="submit"
-                                                className="btn btn-primary"
-                                                disabled={isSearchDisabled}
-                                            >
-                                                SEARCH
-                                            </button>
-                                            <button
-                                                type="button"
-                                                className="btn btn-warning"
-                                                onClick={resetForm}
-                                            >
-                                                RESET
-                                            </button>
-                                        </div>
-                                    </form>
+            <div className="row m-4">
+                <div className="col-xl-12" style={{ padding: "0" }}>
+                    <div className="card">
+                        <div className="card-body p-0">
+                            <div className="table-responsive active-projects style-1">
+                                <div className="tbl-caption tbl-caption-2">
+                                    <h4 className="heading mb-0"><b>Filter &nbsp; &nbsp;{`${params?.name}`}  </b></h4>
                                 </div>
+                                <form className="row cusforms" style={{ padding: "20px" }} onSubmit={handleSubmit}>
+                                    <div className="form-group col-4">
+                                        <label htmlFor="name">Name</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="name"
+                                            placeholder="Enter name"
+                                            value={formData.name}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                    <div className="form-group col-4">
+                                        <label htmlFor="mobile">Mobile Number</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="mobile"
+                                            placeholder="Enter mobile number with country code"
+                                            value={formData.mobile}
+                                            onChange={handlePhoneChange}
+                                        />
+                                    </div>
+                                    <div className="form-group col-4">
+                                        <label htmlFor="email">Email</label>
+                                        <input
+                                            type="email"
+                                            className="form-control"
+                                            id="email"
+                                            placeholder="Enter email"
+                                            value={formData.email}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                    <div className="form-group col-4">
+                                        <label htmlFor="refer_id">{params?.name} Ref id</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="refer_id"
+                                            placeholder={`Enter ${params?.name} ref id`}
+                                            value={formData.refer_id}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                    <div className="form-group col-4">
+                                        <label htmlFor="kycStatus">KYC Status</label>
+                                        <select
+                                            className="form-control"
+                                            id="kycStatus"
+                                            value={formData.kycStatus}
+                                            onChange={handleChange}
+                                        >
+                                            <option value="" disabled>Select Status </option>
+                                            <option value="verified">verified </option>
+                                            <option value="unverified">unverified </option>
+                                        </select>
+                                    </div>
+                                    <div className="form-group col-4">
+                                        <label htmlFor="kycStatus">Lead Status</label>
+                                        <select
+                                            className="form-control"
+                                            id="leadStatus"
+                                            value={formData.leadStatus}
+                                            onChange={handleChange}
+                                        >
+                                            <option value="" disabled>Select Status </option>
+                                            <option value="verified">verified </option>
+                                            <option value="unverified">unverified </option>
+                                        </select>
+                                    </div>
+                                    {error &&  <div className="form-group col-12">
+                                        {error ? (<Alert message="Warning" description={error} type="warning" showIcon closable />) : ""}
+                                    </div>}
+                                   
+                                    <div className="form-group col-12">
+                                        <button type="submit" className="btn btn-primary" disabled={isSearchDisabled}>
+                                            SEARCH
+                                        </button>
+                                        <button type="button" className="btn btn-warning" onClick={resetForm}>
+                                            RESET
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </>
     );
 }

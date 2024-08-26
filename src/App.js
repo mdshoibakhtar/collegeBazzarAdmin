@@ -236,6 +236,7 @@ import TemplateCategoryList from "./components/TemplateCategoryList/TemplateCate
 import TemplateCategoryAdd from "./components/TemplateCategoryAdd/TemplateCategoryAdd";
 import FlowBuilder from "./components/flow-builderList/FlowBuildList";
 import FlowBuilderAdd from "./components/flow-builderAdd/FlowBuilderAdd";
+import LeadDetail from "./pages/lead-detail/LeadDetail";
 import Coursedegree from "./pages/topNavigationPages/Master/courseTypesdegree";
 import CourceDegreeTypeForm from "./components/topNavigationComp/masters/courseDegreeType/courseDegreeTypeForm/CourceDegreeTypeForm";
 import ListnumberWhatsaap from "./components/whatsApp/addNumberWhatsapp/listNumberWhatsapp/ListNumberWhatsApp";
@@ -323,6 +324,7 @@ function App() {
           </>
         ) : (
           <>
+           <Route path="/" element={<Navigate to={"/admin"} />} />
             <Route
               path="/"
               element={<PrivateRoute isAuthenticated={isAuthenticated} />}
@@ -555,6 +557,10 @@ function App() {
               <Route
                 path="create-user/:id"
                 element={<CreateUserDistributerPage />}
+              />
+              <Route
+                path="/admin/detail-lead/:id"
+                element={<LeadDetail />}
               />
 
               <Route path="member/profile/view/:id" element={<ViewProfileMemberPage />} />

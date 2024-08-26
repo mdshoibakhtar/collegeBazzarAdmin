@@ -747,7 +747,9 @@ export const paginationCountryMaster = (page, count) => {
 
 
 // pagination
-
+export const reailerDistIdAgainstAll = (page, count, id) => {
+  return axiosInstance.get(`${baseUrl}course`)
+}
 // Distributor Retailer
 
 export const reailerDistIdAgainst = (page, count, id) => {

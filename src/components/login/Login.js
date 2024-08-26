@@ -86,7 +86,8 @@ function Login() {
         // console.log(result.data.token, "result.data.token");
         SaveUserDeatilsLocalStorage(result.data.token);
         dispatch(setIsLogin({ isLogin: !!result.data.token }));
-        navigate("/", { state: result.data.token });
+        navigate("/admin");
+
       } else {
         // throw new Error(result.data.message);
         alert(result?.message)
