@@ -1,7 +1,7 @@
 import { useState } from "react";
-import AddTempleteModal from "./addTemplete/AddTempleteModal";
+import BlockNumber from "./blockedNumber/BlockNumber";
 
-function ManageTemplete() {
+function BlockListNumber() {
     const [selectAll, setSelectAll] = useState(false);
     const [selectedUsers, setSelectedUsers] = useState([]);
     const [show, setShow] = useState(false);
@@ -87,7 +87,7 @@ function ManageTemplete() {
             <div className="card">
                 <div className="mb-3 text-end">
                     <button type="button" className="btn btn-secondary" onClick={() => setShow(!show)}>
-                        <span className="me-2 fs-4"><i class="fas fa-text-height"></i></span>Add Templete
+                        <span className="me-2 fs-4"><i class="fas fa-ban"></i></span>Block Number
                     </button>
                 </div>
                 <table className='table'>
@@ -105,14 +105,10 @@ function ManageTemplete() {
                                     />
                                 </div>
                             </th>
-                            <th>User Name</th>
-                            <th>Template Name</th>
-                            <th>Phone Number</th>
-                            <th>Template Type</th>
-                            <th>Header Type</th>
-                            <th>Language</th>
-                            <th>Status</th>
-                            <th className="text-center">Action</th>
+                            <th>Mobile Number</th>
+                            <th>CreatedAt</th>
+                            
+                            <th className="">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -130,15 +126,10 @@ function ManageTemplete() {
                                             />
                                         </div>
                                     </td>
-                                    <td>{template.userName}</td>
-                                    <td>{template.templateName}</td>
                                     <td>{template.phoneNumber}</td>
-                                    <td>{template.templateType}</td>
-                                    <td>{template.headerType}</td>
-                                    <td>{template.language}</td>
-                                    <td>{template.status}</td>
-                                    <td>
-                                        <button type="button" class="btn btn-outline-primary btn-sm"><i class="fas fa-eye"></i></button>
+                                    <td>{template.createdAt}</td>
+                                    
+                                    <td className="text-start">
                                         <button type="button" class="btn btn-outline-primary btn-sm"><i class="fas fa-pencil-alt"></i></button>
                                         <button type="button" class="btn btn-outline-primary btn-sm"><i class="fas fa-trash"></i></button>
                                     </td>
@@ -148,9 +139,9 @@ function ManageTemplete() {
                     </tbody>
                 </table>
             </div>
-            <AddTempleteModal show={show} setShow={setShow} />
+            <BlockNumber show={show} setShow={setShow} />
         </>
     );
 }
 
-export default ManageTemplete;
+export default BlockListNumber

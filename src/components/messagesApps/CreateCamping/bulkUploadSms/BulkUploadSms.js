@@ -14,6 +14,7 @@ import { IoIosSend } from "react-icons/io";
 function BulkUploadSms() {
     const [countryData, setCountryData] = useState([]);
     const [stateData, setStateData] = useState([]);
+    const [messageText, setMessageText] = useState('');
     const [initialValues, setInitialValues] = useState({
         name: "",
         description: "",
@@ -46,7 +47,9 @@ function BulkUploadSms() {
             position: "top-center",
         });
     };
-
+    const handleTextMessage = (e) => {
+        setMessageText(e.target.value);
+    };
     const getCountryData = async () => {
         // try {
         //     const countryResponse = await countryList();
@@ -222,15 +225,15 @@ function BulkUploadSms() {
                                                         <div className="">
                                                             <CustomTextArea
                                                                 type="text"
-                                                                value={values.meta_title}
+                                                                value={messageText}
                                                                 hasError={errors.meta_title && touched.meta_title}
-                                                                onChange={handleChange}
+                                                                onChange={handleTextMessage}
                                                                 onBlur={handleBlur}
                                                                 errorMsg={touched.meta_title && errors.meta_title}
                                                                 id="meta_title"
                                                                 name="meta_title"
                                                                 placeholder="TYPE MESSAGE HERE"
-                                                                className="flex-grow-1 me-2"
+                                                                className="flex-grow-1 me-2 forTextAreaHeight"
                                                             />
                                                             <div className="d-flex align-items-center justify-content-between">
                                                                 <div className="d-flex"
@@ -257,9 +260,17 @@ function BulkUploadSms() {
                                                 </div>
                                                 <div className="col-xl-4 mb-3">
                                                     <div className="create-Camping-mess-bg-img text-center position-relative">
-                                                        <div className="position-absolute  " style={{ left: "145px", top: "45px" }}>  Hello</div>
+                                                        {messageText ? (
+                                                            <div className="position-absolute border p-3 responsive-box text-start"
+                                                                style={{ left: "45px", top: "145px", borderRadius: "0 0.5rem 0.5rem 0.5rem", backgroundColor: "#fff" }}>
+                                                                {messageText}
+                                                                <div className="triangle"></div>
+                                                            </div>
+                                                        ) : ""}
                                                     </div>
                                                 </div>
+
+
                                                 <div className="col-xl-6 mb-3">
                                                     <Button className="btn btn-outline-primary d-flex align-items-center">
                                                         <IoIosSend /> Send Now

@@ -49,7 +49,7 @@ function CmposeSms() {
             position: "top-center",
         });
     };
-    
+
 
     const handleTextMessage = (e) => {
         setMessageText(e.target.value);
@@ -324,7 +324,7 @@ function CmposeSms() {
                                                                 id="meta_title"
                                                                 name="meta_title"
                                                                 placeholder="TYPE MESSAGE HERE"
-                                                                className="flex-grow-1 me-2"
+                                                                className="flex-grow-1 me-2 forTextAreaHeight"
                                                             />
                                                             <div className="d-flex align-items-center justify-content-between">
                                                                 <div className="d-flex"
@@ -351,11 +351,13 @@ function CmposeSms() {
                                                 </div>
                                                 <div className="col-xl-4 mb-3">
                                                     <div className="create-Camping-mess-bg-img text-center position-relative">
-                                                        <div className="position-absolute" style={{ left: "145px", top: "45px" }}>
+                                                        {messageText ? <div className="position-absolute border p-3 w-75 text-start" style={{ left: "45px", top: "145px", borderRadius: "0 0.5rem 0.5rem 0.5rem", backgroundColor: "#fff" }}>
                                                             {messageText}
-                                                        </div>
+                                                            <div className="triangle"></div>
+                                                        </div> : ""}
                                                     </div>
                                                 </div>
+
                                                 <div className="col-xl-6 mb-3">
                                                     <Button className="btn btn-outline-primary d-flex align-items-center">
                                                         <IoIosSend /> Send Now
