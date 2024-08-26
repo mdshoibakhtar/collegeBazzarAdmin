@@ -116,7 +116,7 @@ function AddAgentOnbording() {
                     await addAgentOnboarding(values);
                     toastSuccessMessage();
                     setTimeout(() => {
-                        navigate('/admin/agent-onboarding-list')
+                        navigate('/agent-onboarding-list')
                     }, 5000);
                 } catch (error) {
                     alert.error("NOT SUCCESS :", error);
@@ -127,7 +127,7 @@ function AddAgentOnbording() {
                     await updateAgentOnboarding(params.id, values);
                     toastSuccessMessage();
                     setTimeout(() => {
-                        navigate('/admin/agent-onboarding-list')
+                        navigate('/agent-onboarding-list')
                     }, 5000);
                 } catch (error) {
 
@@ -430,7 +430,7 @@ function AddAgentOnbording() {
 
                                                 </div>
                                                 <div>
-                                                    <Link to='/admin/agent-onboarding-list' className="btn btn-danger light ms-1">Cancel</Link>
+                                                    <Link to='/agent-onboarding-list' className="btn btn-danger light ms-1">Cancel</Link>
                                                     <button
                                                         className="btn btn-primary me-1"
                                                         type="submit"

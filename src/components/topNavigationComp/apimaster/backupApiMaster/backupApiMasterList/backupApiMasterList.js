@@ -12,7 +12,7 @@ function BackupApiMasterList() {
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0">BACKUP API MASTER</h4>
                                     <div>
-                                        <Link className="btn btn-primary btn-sm" to="/admin/add-backup-api-master" role="button" aria-controls="offcanvasExample">+ BACKUP API MASTER</Link>
+                                        <Link className="btn btn-primary btn-sm" to="/add-backup-api-master" role="button" aria-controls="offcanvasExample">+ BACKUP API MASTER</Link>
                                         {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}
@@ -45,7 +45,7 @@ function BackupApiMasterList() {
                                             </td>
                                             <td>
                                                 <div className="d-flex">
-                                                    <Link to="/admin/update-backup-api-master" className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                    <Link to="/update-backup-api-master" className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                     <a href="#" className="btn btn-danger shadow btn-xs sharp"><i className="fa fa-trash" /></a>
                                                 </div>
 
@@ -62,7 +62,7 @@ function BackupApiMasterList() {
                                             </td>
                                             <td>
                                                 <div className="d-flex">
-                                                    <Link to="/admin/update-backup-api-master" className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                    <Link to="/update-backup-api-master" className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                     <a href="#" className="btn btn-danger shadow btn-xs sharp"><i className="fa fa-trash" /></a>
                                                 </div>
 

@@ -101,7 +101,7 @@ const [retailerInfo,setRetailerInfo]=useState("")
       if (res?.statusCode == "200") {
         toastSuccessMessage();
         /* āsetTimeout(() => {
-          navigate(`/admin/member-list/${params.id}/${params.name}`)
+          navigate(`/member-list/${params.id}/${params.name}`)
         }, [4000]) */
       }
     } catch (error) {
@@ -121,7 +121,7 @@ const [retailerInfo,setRetailerInfo]=useState("")
       if (res?.statusCode == "200") {
         toastSuccessMessage();
         /* āsetTimeout(() => {
-          navigate(`/admin/member-list/${params.id}/${params.name}`)
+          navigate(`/member-list/${params.id}/${params.name}`)
         }, [4000]) */
       }
     } catch (error) {

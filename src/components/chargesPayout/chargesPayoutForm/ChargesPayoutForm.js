@@ -61,7 +61,7 @@ function ChargesPayoutForm() {
                     if (response?.statusCode === "200") {
                         toastSuccessMessage();
                         setTimeout(() => {
-                            navigate('/admin/role-master')
+                            navigate('/role-master')
                         }, 5000);
                     } else {
                         toastErrorMessage()
@@ -75,7 +75,7 @@ function ChargesPayoutForm() {
                     await updateRole(params.id, values);
                     toastSuccessMessage();
                     setTimeout(() => {
-                        navigate('/admin/role-master')
+                        navigate('/role-master')
                     }, 5000);
                 } catch (error) {
 
@@ -209,7 +209,7 @@ function ChargesPayoutForm() {
                                                     </div>
                                                     <div className="col-xl-6 mb-4 mt-2">
                                                         <div>
-                                                            <Link to='/admin/payout-charges' className="btn btn-danger light ms-1">Cancel</Link>
+                                                            <Link to='/payout-charges' className="btn btn-danger light ms-1">Cancel</Link>
                                                             <button
                                                                 className="btn btn-primary me-1"
                                                                 type="submit"

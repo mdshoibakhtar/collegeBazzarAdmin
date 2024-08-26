@@ -25,7 +25,7 @@ function CountryList() {
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0">ZONE MASTER</h4>
                                     <div>
-                                        <Link className="btn btn-primary btn-sm" to="/admin/add-country-zone" role="button" aria-controls="offcanvasExample">+ ZONE MASTER</Link>
+                                        <Link className="btn btn-primary btn-sm" to="/add-country-zone" role="button" aria-controls="offcanvasExample">+ ZONE MASTER</Link>
                                         {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}
@@ -85,7 +85,7 @@ function CountryList() {
                                             </td>
                                             <td>
                                                 <div className="d-flex">
-                                                    <Link to="/admin/update-country" className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                    <Link to="/update-country" className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                     <a href="#" className="btn btn-danger shadow btn-xs sharp"><i className="fa fa-trash" /></a>
                                                 </div>
 

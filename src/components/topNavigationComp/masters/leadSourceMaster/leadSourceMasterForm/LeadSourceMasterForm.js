@@ -45,7 +45,7 @@ function LeadStatusForm() {
                 const res = await addenquiryStatusMaster(values);
                 if (res?.statusCode === "200") {
                     toastSuccessMessage("Lead Status Added Successfully");
-                    navigate('/admin/lead-status');
+                    navigate('/lead-status');
                 }
                 blankBtn();
             } else {
@@ -53,7 +53,7 @@ function LeadStatusForm() {
                 if (res?.statusCode === "200") {
                     toastSuccessMessage("Lead Status Updated Successfully");
                     blankBtn();
-                    navigate('/admin/lead-status');
+                    navigate('/lead-status');
                 }
             }
         } catch (error) {

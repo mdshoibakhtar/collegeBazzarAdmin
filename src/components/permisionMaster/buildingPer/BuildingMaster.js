@@ -85,7 +85,7 @@ function BuildingMaster() {
                         toastSuccessMessage();
                         getBuildingMaster(page)
                         setTimeout(() => {
-                            navigate(`/admin/building-master`)
+                            navigate(`/building-master`)
                         }, 1000);
                         blankBtn()
                     }
@@ -151,7 +151,7 @@ function BuildingMaster() {
     const cancelBtn = () => {
         setInitialValues({ name: "", isActive: "" });
         message.error('Cancel Successful!');
-        navigate(`/admin/building-master`)
+        navigate(`/building-master`)
     };
 
     useEffect(() => {

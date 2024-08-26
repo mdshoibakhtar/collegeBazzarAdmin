@@ -69,7 +69,7 @@ const UserType = () => {
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0">User Type</h4>
                                     <div>
-                                        {/* <Link className="btn btn-primary btn-sm" to="/admin/add/user-type" role="button" aria-controls="offcanvasExample">+ Add User Type</Link> */}
+                                        {/* <Link className="btn btn-primary btn-sm" to="/add/user-type" role="button" aria-controls="offcanvasExample">+ Add User Type</Link> */}
                                         {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}
@@ -114,7 +114,7 @@ const UserType = () => {
                                                     </span></td>
                                                 <td>
                                                     <div className="d-flex justify-content-end">
-                                                        <Link to={`/admin/update/user-type/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                        <Link to={`/update/user-type/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                         {/* <Popconfirm
                                                             title="Delete Currency !"
                                                             description="Are you sure to delete ?"

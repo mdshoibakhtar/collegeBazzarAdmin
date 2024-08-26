@@ -80,9 +80,9 @@ function OfficeMaster() {
                     if (res?.statusCode == "200") {
                         toastSuccessMessage();
                         getOfficeMasters(page)
-                        navigate(`/admin/office-master`)
+                        navigate(`/office-master`)
                     }
-                    navigate(`/admin/office-master`)
+                    navigate(`/office-master`)
                     blankBtn()
                 } catch (error) {
 
@@ -147,7 +147,7 @@ function OfficeMaster() {
     const cancelBtn = () => {
         setInitialValues({ name: "", isActive: "" });
         message.error('Cancel Successful!');
-        navigate(`/admin/office-master`)
+        navigate(`/office-master`)
     };
 
 

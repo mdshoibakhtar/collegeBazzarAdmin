@@ -69,7 +69,7 @@ function ListStaffPermision() {
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0">Staff List</h4>
                                     <div>
-                                        <Link className="btn btn-primary btn-sm" to="/admin/add-staff" role="button" aria-controls="offcanvasExample">+ ADD STAFF</Link>
+                                        <Link className="btn btn-primary btn-sm" to="/add-staff" role="button" aria-controls="offcanvasExample">+ ADD STAFF</Link>
                                     </div>
                                 </div>
                                 <div id="empoloyees-tblwrapper_wrapper" className="dataTables_wrapper no-footer">
@@ -116,18 +116,18 @@ function ListStaffPermision() {
                                                     <td>{item?.designation_id}</td>
                                                     <td>
                                                         {item?.is_approved ? (
-                                                            <Link to={`/admin/staff-kyc_details/${item?._id}`} className='btn btn-warning'>
+                                                            <Link to={`/staff-kyc_details/${item?._id}`} className='btn btn-warning'>
                                                                 {item.is_approved}
                                                             </Link>
                                                         ) : (
-                                                            <Link to={`/admin/staff-kyc_details/${item?._id}`} className='btn btn-warning'>
+                                                            <Link to={`/staff-kyc_details/${item?._id}`} className='btn btn-warning'>
                                                                 Verify Your Kyc
                                                             </Link>
                                                         )}
                                                     </td>
                                                     <td>
                                                         <div className="d-flex">
-                                                            <Link to={`/admin/update-staff/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                            <Link to={`/update-staff/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                             <Popconfirm
                                                                 title="Delete Staff !"
                                                                 description="Are you sure to delete ?"

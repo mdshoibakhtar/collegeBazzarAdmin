@@ -10,7 +10,7 @@ function DisputeLists({ onChangeVal, aepsData,loading }) {
     const [modalShow, setModalShow] = useState(false);  
     const navigate = useNavigate()
     const ChangeRouts = (id) => {
-        navigate(`/admin/disputes/view/${id}`)
+        navigate(`/disputes/view/${id}`)
     }
     return (
         <>
@@ -94,7 +94,7 @@ function DisputeLists({ onChangeVal, aepsData,loading }) {
 
                                                         <td className='text-center'>
 
-                                                            <Link className='btn btn-warning color2' to={`/admin/disputes/view/${item._id}`}>Reply</Link>
+                                                            <Link className='btn btn-warning color2' to={`/disputes/view/${item._id}`}>Reply</Link>
                                                         </td>
                                                     </tr>
                                                 })}

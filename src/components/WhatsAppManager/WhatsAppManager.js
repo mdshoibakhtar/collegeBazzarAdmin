@@ -11,7 +11,6 @@ function WhatsAppManager() {
         <div className="whatsapp-manager card-body">
             <Sidebar />
             <Outlet>
-
             </Outlet>
            
         </div>

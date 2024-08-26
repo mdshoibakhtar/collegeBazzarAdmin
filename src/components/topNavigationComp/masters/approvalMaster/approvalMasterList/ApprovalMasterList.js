@@ -15,7 +15,7 @@ function ApprovalMasterList({data,totalCount,page,count,onChangeVal,confirm,canc
                                     <div className="tbl-caption">
                                         <h4 className="heading mb-0"> Approval   </h4>
                                         <div>
-                                            <Link className="btn btn-primary btn-sm" to="/admin/create-approval" role="button" aria-controls="offcanvasExample">+ ADD APPROVAL</Link>
+                                            <Link className="btn btn-primary btn-sm" to="/create-approval" role="button" aria-controls="offcanvasExample">+ ADD APPROVAL</Link>
                                             {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}
@@ -54,7 +54,7 @@ function ApprovalMasterList({data,totalCount,page,count,onChangeVal,confirm,canc
                                                     </td>
                                                     <td>
                                                         <div className="d-flex">
-                                                            <Link to={`/admin/update-approval/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                            <Link to={`/update-approval/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                             <Popconfirm
                                                                 title="Delete Approval!"
                                                                 description="Are you sure to delete ?"

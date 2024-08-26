@@ -13,7 +13,7 @@ function AllTransactionReportList() {
                                     <div className="tbl-caption">
                                         <h4 className="heading mb-0"><b>All Transaction List</b></h4>
                                         <div>
-                                            <Link className="btn btn-primary btn-sm" to="/admin/add-transaction-report" role="button" aria-controls="offcanvasExample">+  ADD TRANSACTION REPORT </Link>
+                                            <Link className="btn btn-primary btn-sm" to="/add-transaction-report" role="button" aria-controls="offcanvasExample">+  ADD TRANSACTION REPORT </Link>
                                             {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}

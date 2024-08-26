@@ -36,7 +36,7 @@ const AddUsertType = () => {
                     await addUserType(values);
                     toastSuccessMessage();
                     setTimeout(() => {
-                        navigate('/admin/user-type')
+                        navigate('/user-type')
                     }, 5000);
                 } catch (error) {
 
@@ -47,7 +47,7 @@ const AddUsertType = () => {
                     await UserTypeUpdate(params.id, values);
                     toastSuccessMessage();
                     setTimeout(() => {
-                        navigate('/admin/user-type')
+                        navigate('/user-type')
                     }, 5000);
                 } catch (error) {
 
@@ -167,7 +167,7 @@ const AddUsertType = () => {
                                                 </div>
                                                 <div>
                                                     <Link
-                                                        to="/admin/user-type"
+                                                        to="/user-type"
                                                         className="btn btn-danger light ms-1"
                                                     >
                                                         Cancel

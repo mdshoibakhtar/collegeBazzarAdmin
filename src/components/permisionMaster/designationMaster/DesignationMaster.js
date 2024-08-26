@@ -80,7 +80,7 @@ function DesignationMaster() {
                     if (res?.statusCode == "200") {
                         toastSuccessMessage();
                         getdesignationMasters(page)
-                        navigate(`/admin/designation-master`)
+                        navigate(`/designation-master`)
                         blankBtn()
                     }
                 } catch (error) {
@@ -147,7 +147,7 @@ function DesignationMaster() {
     const cancelBtn = () => {
         setInitialValues({ name: "", isActive: "" });
         message.error('Cancel Successful!');
-        navigate(`/admin/designation-master`)
+        navigate(`/designation-master`)
     };
 
 

@@ -13,7 +13,7 @@ function CashfreeGateWayList() {
                             <h4 className="heading mb-0"><b>CASHFREE GATEWAY MASTER
 - </b></h4>
                             <div>
-                                <Link className="btn btn-primary btn-sm" to="/admin/add-cashfree-gateway-master" role="button" aria-controls="offcanvasExample">+ ADD  CASHFREE GATEWAY  </Link>
+                                <Link className="btn btn-primary btn-sm" to="/add-cashfree-gateway-master" role="button" aria-controls="offcanvasExample">+ ADD  CASHFREE GATEWAY  </Link>
                                 {/* <button type="button" className="btn btn-secondary btn-sm" >
                             + Invite Employee
                         </button> */}
@@ -69,7 +69,7 @@ function CashfreeGateWayList() {
                                         </td>
                                         <td>
                                             <div class="d-flex">
-                                                <Link class="btn btn-primary shadow btn-xs sharp me-1" to="/admin/cashfree-gateway-master"><i class="fa fa-pencil"></i> </Link>
+                                                <Link class="btn btn-primary shadow btn-xs sharp me-1" to="/cashfree-gateway-master"><i class="fa fa-pencil"></i> </Link>
                                             <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a></div>
                                         </td>
                                     </tr>

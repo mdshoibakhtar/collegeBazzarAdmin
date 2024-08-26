@@ -9,7 +9,7 @@ const breadCrumbsTitle = {
     id: "1",
     title_1: "Master",
     title_2: "Department  Master",
-    path_2: "/admin/department-master"
+    path_2: "/department-master"
 }
 function DepartmentMasterList() {
 
@@ -68,7 +68,7 @@ function DepartmentMasterList() {
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0">Department Master</h4>
                                     <div>
-                                        <Link className="btn btn-primary btn-sm" to="/admin/add-department-master" role="button" aria-controls="offcanvasExample">+ DEPARTMENT MASTER</Link>
+                                        <Link className="btn btn-primary btn-sm" to="/add-department-master" role="button" aria-controls="offcanvasExample">+ DEPARTMENT MASTER</Link>
                                     </div>
                                 </div>
                                 <div id="empoloyees-tblwrapper_wrapper" className="dataTables_wrapper no-footer"><div className="dt-buttons"><button className="dt-button buttons-excel buttons-html5 btn btn-sm border-0" tabIndex={0} aria-controls="empoloyees-tblwrapper" type="button"><span><i className="fa-solid fa-file-excel" /> Export Report</span></button> </div><table id="empoloyees-tblwrapper" className="table dataTable no-footer" role="grid" aria-describedby="empoloyees-tblwrapper_info">
@@ -103,7 +103,7 @@ function DepartmentMasterList() {
                                                 <td>
                                                     <div className="d-flex">
 
-                                                        <Link to={`/admin/update-department-master/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                        <Link to={`/update-department-master/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                         <Popconfirm
                                                             title="Delete Department !"
                                                             description="Are you sure to delete ?"

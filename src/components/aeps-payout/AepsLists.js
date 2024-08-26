@@ -21,7 +21,7 @@ function AepsLists({ onChangeVal, aepsData, getDmtTxnData,count,page }) {
                                         <div className='d-flex'>
                                             <ExportPdf />
                                             {/* <div>
-                                                <Link to="/admin/add-package" class="btn btn-primary">Add AEPS Cash</Link>
+                                                <Link to="/add-package" class="btn btn-primary">Add AEPS Cash</Link>
                                             </div> */}
                                         </div>
 

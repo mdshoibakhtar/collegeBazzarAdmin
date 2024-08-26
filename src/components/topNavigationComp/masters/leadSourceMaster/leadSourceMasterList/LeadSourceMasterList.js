@@ -15,7 +15,7 @@ function LeadSourceMasterList({data,totalCount,page,count,onChangeVal,confirm,ca
                                     <div className="tbl-caption">
                                         <h4 className="heading mb-0"> Lead Source </h4>
                                         <div>
-                                            <Link className="btn btn-primary btn-sm" to="/admin/create-lead-source" role="button" aria-controls="offcanvasExample">+ CREATE LEAD SOURCE</Link>
+                                            <Link className="btn btn-primary btn-sm" to="/create-lead-source" role="button" aria-controls="offcanvasExample">+ CREATE LEAD SOURCE</Link>
                                             {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}
@@ -60,7 +60,7 @@ function LeadSourceMasterList({data,totalCount,page,count,onChangeVal,confirm,ca
                                                     </td>
                                                     <td>
                                                         <div className="d-flex">
-                                                            <Link to={`/admin/update-lead-source/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                            <Link to={`/update-lead-source/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                             <Popconfirm
                                                                 title="Delete Lead Source!"
                                                                 description="Are you sure to delete ?"

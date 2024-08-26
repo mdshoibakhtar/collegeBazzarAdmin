@@ -5,9 +5,10 @@ import WithoutAtricCustomInputField from '../../../../../common/withoutAtrricCus
 import CustomTextArea from '../../../../../common/CustomTextArea';
 import { baseUrlImage } from '../../../../../baseUrl';
 
-
-function NewtabAddServiceMaster({ i, colodinaryImage, language, service_category, submitForm, handleChangeCus, item, params }) {
+function NewtabAddServiceMaster({ i, colodinaryImage, language, service_category, course_type, submitForm, handleChangeCus, item, params }) {
     const [formData, setFormData] = useState(item);
+    console.log(formData);
+
     const [errors, setErrors] = useState({});
 
     useEffect(() => {
@@ -77,30 +78,7 @@ function NewtabAddServiceMaster({ i, colodinaryImage, language, service_category
 
                     </div>
                 </div>
-                <div className="col-xl-6 mb-3">
-                    <CustomTextArea
-                        placeholder="Short Description "
-                        value={formData.short_description}
-                        hasError={!!errors.short_description}
-                        onChange={handleChange}
-                        errorMsg={errors.short_description}
-                        rows="3"
-                        id="short_description"
-                        name="short_description"
-                    />
-                </div>
-                <div className="col-xl-6 mb-3">
-                    <CustomTextArea
-                        placeholder="Full Description "
-                        value={formData.full_description}
-                        hasError={!!errors.full_description}
-                        onChange={handleChange}
-                        errorMsg={errors.full_description}
-                        rows="3"
-                        id="full_description"
-                        name="full_description"
-                    />
-                </div>
+
                 <div className="col-xl-6 mb-3">
                     <div className="d-flex">
                         {formData.banner_img && (
@@ -123,11 +101,27 @@ function NewtabAddServiceMaster({ i, colodinaryImage, language, service_category
                 <div className="col-xl-6 mb-3">
                     <select
                         className="form-select"
+                        name="course_type"
+                        value={formData?.course_type}
+                        onChange={handleChange}
+                    >
+                        <option value="" disabled>Select Course Type</option>
+                        {course_type && course_type.map((courseType, i) => (
+                            <option key={i} value={courseType._id}>
+                                {courseType?.course_type_name}
+                            </option>
+                        ))}
+                    </select>
+                    {errors.course_type && <div className="invalid-feedback d-block">{errors.course_type}</div>}
+                </div>
+                <div className="col-xl-6 mb-3">
+                    <select
+                        className="form-select"
                         name="service_category"
                         value={formData?.service_category}
                         onChange={handleChange}
                     >
-                        <option value="">Select Stream</option>
+                        <option value="" disabled>Select Stream</option>
                         {service_category && service_category.map((category) => (
                             <option key={category._id} value={category._id}>
                                 {category.name}
@@ -135,6 +129,22 @@ function NewtabAddServiceMaster({ i, colodinaryImage, language, service_category
                         ))}
                     </select>
                     {errors.service_category && <div className="invalid-feedback d-block">{errors.service_category}</div>}
+                </div>
+                <div className="col-xl-6 mb-3">
+                    <select
+                        className="form-select"
+                        name="duration_type"
+                        value={formData?.duration_type}
+                        onChange={handleChange}
+                    >
+                        <option value="" disabled>Select Durations</option>
+                        <option value="Day" >Day</option>
+                        <option value="Week" >Week</option>
+                        <option value="Month" >Month</option>
+                        <option value="Year" >Year</option>
+
+                    </select>
+                    {errors.duration_type && <div className="invalid-feedback d-block">{errors.service_category}</div>}
                 </div>
                 <div className="col-xl-6 mb-3">
                     <select
@@ -162,6 +172,18 @@ function NewtabAddServiceMaster({ i, colodinaryImage, language, service_category
                     />
                 </div>
                 <div className="col-xl-6 mb-3">
+                    <CustomInputField
+                        type="number"
+                        value={formData.duration}
+                        hasError={!!errors.duration}
+                        onChange={handleChange}
+                        errorMsg={errors.duration}
+                        id="duration"
+                        name="duration"
+                        placeholder="Durations"
+                    />
+                </div>
+                <div className="col-xl-6 mb-3">
                     <WithoutAtricCustomInputField
                         type="file"
                         onChange={(e) => colodinaryImage(e, formData.language_id)}
@@ -182,9 +204,33 @@ function NewtabAddServiceMaster({ i, colodinaryImage, language, service_category
                         placeholder="Meta Keyword"
                     />
                 </div>
+                <div className="col-xl-6 mb-3">
+                    <CustomTextArea
+                        placeholder="Short Description "
+                        value={formData.short_description}
+                        hasError={!!errors.short_description}
+                        onChange={handleChange}
+                        errorMsg={errors.short_description}
+                        rows="3"
+                        id="short_description"
+                        name="short_description"
+                    />
+                </div>
+                <div className="col-xl-6 mb-3">
+                    <CustomTextArea
+                        placeholder="Full Description "
+                        value={formData.full_description}
+                        hasError={!!errors.full_description}
+                        onChange={handleChange}
+                        errorMsg={errors.full_description}
+                        rows="3"
+                        id="full_description"
+                        name="full_description"
+                    />
+                </div>
             </div>
             <div>
-                <Link to='/admin/course-master' className="btn btn-danger light ms-1">Cancel</Link>
+                <Link to='/course-master' className="btn btn-danger light ms-1">Cancel</Link>
                 {i === language?.length - 2 && (
                     <button type="button" className="btn btn-primary me-1">
                         Next

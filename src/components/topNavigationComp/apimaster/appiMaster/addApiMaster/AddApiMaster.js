@@ -62,7 +62,7 @@ function AddApiMaster() {
                     if (res?.statusCode == "200") {
                         toastSuccessMessage();
                         setTimeout(() => {
-                            navigate('/admin/api-master')
+                            navigate('/api-master')
                         }, [4000])
                     }
                 } catch (error) {
@@ -76,7 +76,7 @@ function AddApiMaster() {
                     if (res?.statusCode == "200") {
                         toastSuccessMessage();
                         setTimeout(() => {
-                            navigate('/admin/api-master')
+                            navigate('/api-master')
                         }, [4000])
                     }
                 } catch (error) {
@@ -178,7 +178,7 @@ function AddApiMaster() {
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <Link to='/admin/api-master' className="btn btn-danger light ms-1">Cancel</Link>
+                                                    <Link to='/api-master' className="btn btn-danger light ms-1">Cancel</Link>
                                                     <button
                                                         className="btn btn-primary me-1"
                                                         type="submit"

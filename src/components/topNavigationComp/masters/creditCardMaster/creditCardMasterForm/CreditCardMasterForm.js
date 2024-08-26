@@ -45,7 +45,7 @@ function CreditCardMasterForm
                     const res = await addTypes_Of_creditCardMaster(values);
                     if (res?.statusCode == "200") {
                         toastSuccessMessage(" Credit Card Successfully");
-                        navigate(`/admin/credit-cards`)
+                        navigate(`/credit-cards`)
                     }
                     blankBtn()
                 } catch (error) {
@@ -59,7 +59,7 @@ function CreditCardMasterForm
                     if (res?.statusCode == "200") {
                         toastSuccessMessage("Credit Card Successfully");
                         blankBtn()
-                        navigate(`/admin/credit-cards`)
+                        navigate(`/credit-cards`)
                     }
                     if (res?.statusCode == "403") {
                         toastSuccessMessage("Credit Card Successfully");
@@ -168,7 +168,7 @@ function CreditCardMasterForm
                                                 </div>
 
                                                 <div className="col-xl-2 mb-3">
-                                                    <Link to='/admin/credit-card' type='submit' className="btn btn-danger light ms-1">Cancel</Link>
+                                                    <Link to='/credit-card' type='submit' className="btn btn-danger light ms-1">Cancel</Link>
                                                     {/* <Button className="btn btn-danger light ms-1" onClick={() => cancelBtn()}>Cancel</Button> */}
                                                     <button
                                                         className="btn btn-primary me-1"

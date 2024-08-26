@@ -9,9 +9,9 @@ const breadCrumbsTitle = {
     id: "1",
     title_1: "Master",
     title_2: "status Master",
-    path_2: "/admin/status-master",
+    path_2: "/status-master",
     title_3: "Add status Master",
-    path_3: "/admin/add-status-master",
+    path_3: "/add-status-master",
 }
 function AddStatusMaster() {
     const [initialValues, setInitialValues] = useState({
@@ -58,7 +58,7 @@ function AddStatusMaster() {
                     if (res?.statusCode == "200") {
                         toastSuccessMessage();
                         setTimeout(() => {
-                            navigate('/admin/status-master')
+                            navigate('/status-master')
                         }, [4000])
                     }
                 } catch (error) {
@@ -71,7 +71,7 @@ function AddStatusMaster() {
                     if (res?.statusCode == "200") {
                         toastSuccessMessage();
                         setTimeout(() => {
-                            navigate('/admin/status-master')
+                            navigate('/status-master')
                         }, [4000])
                     }
                 } catch (error) {
@@ -164,7 +164,7 @@ function AddStatusMaster() {
                                                     </div>
                                                     <div className="col-xl-6 mb-4 mt-2">
                                                         <div>
-                                                            <Link to='/admin/status-master' className="btn btn-danger light ms-1">Cancel</Link>
+                                                            <Link to='/status-master' className="btn btn-danger light ms-1">Cancel</Link>
                                                             <button
                                                                 className="btn btn-primary me-1"
                                                                 type="submit"

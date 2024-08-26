@@ -14,9 +14,9 @@ function EditAddBank() {
         id:"1",
         title_1:"Master",
         title_2:"Bank Master",
-        path_2:"/admin/bank-master",
+        path_2:"/bank-master",
         title_3:"Update Bank Master",
-        path_3:"/admin/edit-add-bank",
+        path_3:"/edit-add-bank",
     }
 
 
@@ -148,7 +148,7 @@ function EditAddBank() {
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <Link to='/admin/bank-master' className="btn btn-danger light ms-1">Cancel</Link>
+                                                    <Link to='/bank-master' className="btn btn-danger light ms-1">Cancel</Link>
                                                     <button className="btn btn-primary me-1">Submit</button>
                                                 </div>
                                             </form>

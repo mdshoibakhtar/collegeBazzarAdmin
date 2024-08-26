@@ -15,7 +15,7 @@ function CreditCardList({data,totalCount,page,count,onChangeVal,confirm,cancel})
                                     <div className="tbl-caption">
                                         <h4 className="heading mb-0"> Credit Card  </h4>
                                         <div>
-                                            <Link className="btn btn-primary btn-sm" to="/admin/create-credit-card" role="button" aria-controls="offcanvasExample">+ ADD CREDIT CARD</Link>
+                                            <Link className="btn btn-primary btn-sm" to="/create-credit-card" role="button" aria-controls="offcanvasExample">+ ADD CREDIT CARD</Link>
                                             {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}
@@ -54,7 +54,7 @@ function CreditCardList({data,totalCount,page,count,onChangeVal,confirm,cancel})
                                                     </td>
                                                     <td>
                                                         <div className="d-flex">
-                                                            <Link to={`/admin/update-credit-card/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                            <Link to={`/update-credit-card/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                             <Popconfirm
                                                                 title="Delete Credit Card!"
                                                                 description="Are you sure to delete ?"

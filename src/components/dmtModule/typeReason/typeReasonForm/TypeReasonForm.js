@@ -43,7 +43,7 @@ function TypeReasonForm() {
                     await adddmtPriority(values);
                     toastSuccessMessage();
                     setTimeout(() => {
-                        navigate('/admin/priority-master/welcome')
+                        navigate('/priority-master/welcome')
                     }, 5000);
                 } catch (error) {
                     alert.error("NOT SUCCESS :", error);
@@ -54,7 +54,7 @@ function TypeReasonForm() {
                     await updatePriority(params.id, values);
                     toastSuccessMessage();
                     setTimeout(() => {
-                        navigate('/admin/priority-master/welcome')
+                        navigate('/priority-master/welcome')
                     }, 4000);
                 } catch (error) {
 
@@ -138,7 +138,7 @@ function TypeReasonForm() {
                                                     </div>
                                                     <div className="col-xl-4 mb-4 mt-2">
                                                         <div>
-                                                            <Link to='/admin/type-reason-data' className="btn btn-danger light ms-1">Cancel</Link>
+                                                            <Link to='/type-reason-data' className="btn btn-danger light ms-1">Cancel</Link>
                                                             <button
                                                                 className="btn btn-primary me-1"
                                                                 type="submit"

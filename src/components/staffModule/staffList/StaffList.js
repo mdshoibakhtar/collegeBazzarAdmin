@@ -69,7 +69,7 @@ function StaffList() {
                                     <div className="tbl-caption">
                                         <h4 className="heading mb-0"><b>STAFF LIST</b></h4>
                                         <div>
-                                            <Link className="btn btn-primary btn-sm" to="/admin/add-satff" role="button" aria-controls="offcanvasExample">+  Staff</Link>
+                                            <Link className="btn btn-primary btn-sm" to="/add-satff" role="button" aria-controls="offcanvasExample">+  Staff</Link>
                                             {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}
@@ -128,7 +128,7 @@ function StaffList() {
                                                     </td>
                                                     <td>
                                                         <div className="d-flex">
-                                                            <Link to={`/admin/update-satff/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                            <Link to={`/update-satff/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                             <Popconfirm
                                                                 title="Delete Currency !"
                                                                 description="Are you sure to delete ?"

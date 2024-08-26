@@ -6,9 +6,9 @@ const breadCrumbsTitle = {
     id: "1",
     title_1: "Master",
     title_2: "Role Master",
-    path_2:"/admin/role-master",
+    path_2:"/role-master",
     title_3: "Edit Role Master",
-    path_3:"/admin/edit-role-master"
+    path_3:"/edit-role-master"
 }
 function EditRoleMaster() {
     const initialValues = {
@@ -111,7 +111,7 @@ function EditRoleMaster() {
                                                     </div>
                                                     <div className="col-xl-6 mb-4 mt-2">
                                                         <div>
-                                                            <Link to='/admin/role-master' className="btn btn-danger light ms-1">Cancel</Link>
+                                                            <Link to='/role-master' className="btn btn-danger light ms-1">Cancel</Link>
                                                             <button className="btn btn-primary me-1">Submit</button>
                                                         </div>
                                                     </div>

@@ -9,7 +9,7 @@ function StaffKycModal({ show, setShow, kycState }) {
     const forOkBtn = () => {
         setShow(false)
         if (kycState?.error) {
-            navigate(`/admin/staff-kyc_details`)
+            navigate(`/staff-kyc_details`)
         } else {
             navigate(`/admin`)
         }

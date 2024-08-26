@@ -1,7 +1,6 @@
 import { Link, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import Loadar from "../../../common/loader/Loader";
-
 import Dropdown from 'react-bootstrap/Dropdown';
 import FundTransfer from "../createUserDistributer/fundTrnsfer/FundTrnasfer";
 import SchemeManager from "../createUserDistributer/schemeManager/SchemeManager";
@@ -14,47 +13,41 @@ import { ToastContainer, toast } from "react-toastify";
 import { Pagination } from "antd";
 import BulkAssigedModel from "../BulkAssigedModel";
 import { getServiceCategory } from "../../../api/login/Login";
+import { FaBroadcastTower } from "react-icons/fa";
+import BroadCasterModal from "./broadCasterModal/BroadCasterModal";
 
 
 function DistributerList({ loading, params, state, handleChange, onChangeVal, approval }) {
     const [show, setShow] = useState(false);
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [show2, setShow2] = useState(false);
-
     const handleClose2 = () => setShow2(false);
     const handleShow2 = () => setShow2(true);
     const [show3, setShow3] = useState(false);
-
     const handleClose3 = () => setShow3(false);
     const handleShow3 = () => setShow3(true)
     const [show4, setShow4] = useState(false);
-
     const handleClose4 = () => setShow4(false);
     const handleShow4 = () => setShow4(true)
     const [show5, setShow5] = useState(false);
-
     const handleClose5 = () => setShow5(false);
     const [getItem, setGetItem] = useState()
     const handleShow5 = (item) => {
-        setGetItem({ ...item, paramId: params?.id })
+        setGetItem({ ...item, paramId: params?.id });
         setTimeout(() => {
             setShow5(true)
         }, 1000);
     }
-
-
+    const [showbroadcast, setShowbroadcast] = useState(false);
     const [modalShow, setModalShow] = useState(false);
-
     const [selectedUsers, setSelectedUsers] = useState([]);
+    const [selectAll, setSelectAll] = useState(false);
 
     const handleCheckboxChange = (event, user) => {
         if (event.target.checked) {
-            // Add user to selectedUsers array
             setSelectedUsers([...selectedUsers, user]);
         } else {
-            // Remove user from selectedUsers array
             setSelectedUsers(selectedUsers.filter(selectedUser => selectedUser._id !== user._id));
         }
     };
@@ -62,38 +55,48 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal, ap
     console.log(selectedUsers)
 
 
+    const handleSelectAll = (event) => {
+        if (event.target.checked) {
+            setSelectedUsers(selectedUsers);
+        } else {
+            setSelectedUsers([]);
+        }
+        setSelectAll(event.target.checked);
 
+    }
 
 
     return (
         <>
             {loading && <Loadar />}
             <ToastContainer />
-            <section className="ListDistributer m-4 expdf ">
+            <section className="ListDistributer mx-4 expdf ">
+                <div className="text-end">
+                    <button className="btn btn-primary mb-3" onClick={() => setModalShow(true)}>
+                        BULK ASSIGNED
+                    </button>
+                    <button className="btn btn-info mb-3" onClick={() => setShowbroadcast(true)}>
+                        <FaBroadcastTower className="fs-3" /> Broad Caster
+                    </button>
+                </div>
                 <div className="row">
                     <div className="col-xl-12">
                         <div className="card">
                             <button className="btn btn-primary" style={{ width: "130px" }} onClick={() => setModalShow(true)}>
-                                Bulk Edit
-
+                                Bulk Assigned
                             </button>
-                            {modalShow && <BulkAssigedModel
+                            <BulkAssigedModel
                                 show={modalShow}
                                 selectedUsers={selectedUsers}
                                 onHide={() => setModalShow(false)}
-                            />}
+                            />
 
                             <div className="card-body p-0">
                                 <div className="table-responsive active-projects style-1">
                                     <div className="tbl-caption">
                                         <h4 className="heading mb-0"><b>{params?.name} LIST</b></h4>
                                         <div>
-                                            {/* <Link className="btn btn-primary btn-sm" to={`/admin/create-user/${params?.id}/${params?.name}`} role="button" aria-controls="offcanvasExample">+  Create {params?.name}</Link> */}
-                                            {/* <button type="button" className="btn btn-secondary btn-sm" >
-                                        + Invite Employee
-                                    </button> */}
                                             <ExportPdf />
-                                            {/* <CSVLink  className="btn btn-succes" data={state}>Export Excel</CSVLink>*/}
                                         </div>
                                     </div>
                                     <div id="empoloyees-tblwrapper_wrapper" className="dataTables_wrapper no-footer ">
@@ -104,58 +107,29 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal, ap
                                         </div>
                                         <table id="empoloyees-tblwrapper" className="table dataTable no-footer exppdf" role="grid" aria-describedby="empoloyees-tblwrapper_info">
                                             <thead>
-                                                {/* <tr className="">
-                                                            <th className="expth"><div className="tbl-caption pe-3 expdiv">
-                                                                <h4 className="heading mb-0"><b>{params?.name} LIST</b></h4>
-                                                            </div></th>
-
-                                                        </tr> */}
                                                 <tr role="row">
-                                                    <th className="sorting_asc" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-sort="ascending" aria-label="Employee ID: activate to sort column descending" style={{ width: '122.312px' }}>
-                                                        #
+                                                    <th>
+                                                        <div className="form-check">
+                                                            <input
+                                                                className="form-check-input"
+                                                                type="checkbox"
+                                                                id="selectAll"
+                                                                checked={selectAll}
+                                                                onChange={handleSelectAll}
+                                                            />
+                                                        </div>
                                                     </th>
-                                                    {/*  <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Employee Name: activate to sort column ascending" style={{ width: '203.45px' }}>
-                                                        Joining Date
-                                                    </th>
-                                                    <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Employee Name: activate to sort column ascending" style={{ width: '203.45px' }}>
-                                                        Joining time
-                                                    </th> */}
-                                                    <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Employee Name: activate to sort column ascending" style={{ width: '203.45px' }}>
-                                                        Reff Code
-
-                                                    </th>
-                                                    <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Employee Name: activate to sort column ascending" style={{ width: '203.45px' }}>
-                                                        Member type
-
-                                                    </th>
-                                                    <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Department: activate to sort column ascending" style={{ width: '156.475px' }}>
-                                                        Name</th>
-                                                    <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Department: activate to sort column ascending" style={{ width: '156.475px' }}>
-                                                        Streams</th>
-                                                    <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Department: activate to sort column ascending" style={{ width: '156.475px' }}>
-                                                        Courses</th>
-
-                                                    {/* <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Contact Number: activate to sort column ascending" style={{ width: '161.675px' }}>
-                                                        Refrence  ID
-                                                    </th> */}
-                                                    <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Contact Number: activate to sort column ascending" style={{ width: '161.675px' }}>
-                                                        Mobile</th>
-
-                                                    <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Status: activate to sort column ascending" style={{ width: '96.125px' }}>
-                                                        Email</th>
-
-                                                    <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Status: activate to sort column ascending" style={{ width: '96.125px' }}>
-                                                        Main Balance</th>
-
-                                                    <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Contact Number: activate to sort column ascending" style={{ width: '161.675px' }}>
-                                                        KYC Status </th>
-                                                    <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Status: activate to sort column ascending" style={{ width: '96.125px' }} >
-                                                        Approval</th>
-
-                                                    <th className="sorting text-center" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Status: activate to sort column ascending" style={{ width: '96.125px' }}>
-                                                        Action
-                                                    </th>
-
+                                                    <th>Reff Code</th>
+                                                    <th>Member type</th>
+                                                    <th>Name</th>
+                                                    <th>Streams</th>
+                                                    <th>Courses</th>
+                                                    <th>Mobile</th>
+                                                    <th>Email</th>
+                                                    <th>Main Balance</th>
+                                                    <th>KYC Status</th>
+                                                    <th>Approval</th>
+                                                    <th className="text-center">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -240,9 +214,9 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal, ap
                                                                     <Dropdown.Item href={`/admin/wallets/report/${item?._id}`}>Wallets Reports</Dropdown.Item>
                                                                 </Dropdown.Menu>
                                                             </Dropdown> */}
+
                                                             <Link to={`/admin/detail-lead/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-refresh" /></Link>
                                                             <Link to={`/admin/create-user/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
-
                                                             {/* <Popconfirm
                                                             title="Delete Currency !"
                                                             description="Are you sure to delete ?"
@@ -257,37 +231,24 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal, ap
 
                                                     </tr>
                                                 })}
-
                                             </tbody>
                                         </table>
-                                        <div className="dataTables_info" id="empoloyees-tblwrapper_info" role="status" aria-live="polite">
-                                            Total {state?.totalCount} entries
-                                        </div>
-                                        <div className="dataTables_paginate paging_simple_numbers" id="empoloyees-tblwrapper_paginate">
-                                            <Pagination
-                                                // showSizeChanger
-                                                // onShowSizeChange={''}
-
-                                                defaultCurrent={1}
-                                                onChange={onChangeVal}
-                                                total={state?.totalCount}
-                                            />
-                                        </div>
+                                        <Pagination className="pagination_gutter pagination_primary pagination_sm" />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div >
-
+                </div>
+                <FundTransfer show={show} handleClose={handleClose} />
+                <SchemeManager show={show2} handleClose={handleClose2} />
+                <IdStocks show={show3} handleClose={handleClose3} />
+                <MemberPermission show={show4} handleClose={handleClose4} />
+                <LockAmount show={show5} handleClose={handleClose5} getItem={getItem} />
+                <BroadCasterModal show={showbroadcast} onHide={() => setShowbroadcast(false)} />
             </section>
-            <FundTransfer show={show} handleClose={handleClose} />
-            <SchemeManager show2={show2} handleClose2={handleClose2} />
-            <IdStocks show3={show3} handleClose3={handleClose3} />
-            <MemberPermission show4={show4} handleClose4={handleClose4} />
-            <LockAmount show5={show5} handleClose5={handleClose5} getItem={getItem} />
         </>
-    )
+    );
 }
-export default DistributerList
 
+export default DistributerList;

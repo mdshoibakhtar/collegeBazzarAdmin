@@ -57,7 +57,7 @@ function ServiceAreaPermission() {
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0">Service Area Permision</h4>
                                     <div>
-                                        <Link className="btn btn-primary btn-sm" to="/admin/add-service-area-permision" role="button" aria-controls="offcanvasExample">+ Service Area Permision</Link>
+                                        <Link className="btn btn-primary btn-sm" to="/add-service-area-permision" role="button" aria-controls="offcanvasExample">+ Service Area Permision</Link>
                                         {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}
@@ -91,7 +91,7 @@ function ServiceAreaPermission() {
                                                 </td>
                                                 <td>
                                                     <div className="d-flex">
-                                                        <Link to={`/admin/update-country/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                        <Link to={`/update-country/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                         <Popconfirm
                                                             title="Delete Currency !"
                                                             description="Are you sure to delete ?"

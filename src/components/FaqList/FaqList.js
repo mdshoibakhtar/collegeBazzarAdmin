@@ -10,7 +10,7 @@ const breadCrumbsTitle = {
     id: "1",
     title_1: "Master",
     title_2: "FAQ Master",
-    path_2: "/admin/faq-master"
+    path_2: "/faq-master"
 };
 
 function FaqList() {
@@ -74,7 +74,7 @@ function FaqList() {
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0">FAQ Master</h4>
                                     <div>
-                                        <Link className="btn btn-primary btn-sm" to="/admin/add-faq" role="button" aria-controls="offcanvasExample">+ Add FAQ</Link>
+                                        <Link className="btn btn-primary btn-sm" to="/add-faq" role="button" aria-controls="offcanvasExample">+ Add FAQ</Link>
                                     </div>
                                 </div>
                                 <div id="faq-tblwrapper_wrapper" className="dataTables_wrapper no-footer">
@@ -100,7 +100,7 @@ function FaqList() {
                                                     <td>{item?.answer}</td>
                                                     <td>
                                                         <div className="d-flex">
-                                                            <Link to={`/admin/edit-faq/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
+                                                            <Link to={`/edit-faq/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
                                                                 <i className="fa fa-pencil" />
                                                             </Link>
                                                             <Popconfirm

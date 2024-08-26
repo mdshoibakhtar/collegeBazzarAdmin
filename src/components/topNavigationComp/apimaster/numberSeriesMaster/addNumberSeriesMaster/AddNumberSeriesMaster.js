@@ -82,7 +82,7 @@ function AddNumberSeriesMaster() {
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <Link to='/admin/number-series-master' className="btn btn-danger light ms-1">Cancel</Link>
+                                                    <Link to='/number-series-master' className="btn btn-danger light ms-1">Cancel</Link>
                                                     <button className="btn btn-primary me-1">Submit</button>
                                                 </div>
                                             </form>

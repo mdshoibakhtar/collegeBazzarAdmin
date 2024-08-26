@@ -12,7 +12,7 @@ function PerformanceReportList() {
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0"><b>PERFORMANCE  Report List</b></h4>
                                     <div>
-                                        <Link className="btn btn-primary btn-sm" to="/admin/add-performance-reports" role="button" aria-controls="offcanvasExample">+  ADD PERFORMANCE REPORTS </Link>
+                                        <Link className="btn btn-primary btn-sm" to="/add-performance-reports" role="button" aria-controls="offcanvasExample">+  ADD PERFORMANCE REPORTS </Link>
                                         {/* <button type="button" className="btn btn-secondary btn-sm" >
                             + Invite Employee
                         </button> */}

@@ -45,7 +45,7 @@ function ComplaintsDashboard() {
     const params = useParams()
     const onRowClick = (_id) => {
         // getDetails(_id)
-        navigate(`/admin/view/complaints-detail/${_id}`)
+        navigate(`/view/complaints-detail/${_id}`)
     }
 
     const handleSearch = async () => {

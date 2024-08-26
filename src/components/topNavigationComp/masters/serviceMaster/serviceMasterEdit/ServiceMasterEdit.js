@@ -277,7 +277,7 @@ function EditServiceMaster() {
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <Link to='/admin/service-master' className="btn btn-danger light ms-1">Cancel</Link>
+                                                    <Link to='/service-master' className="btn btn-danger light ms-1">Cancel</Link>
                                                     <button className="btn btn-primary me-1">Submit</button>
                                                 </div>
                                             </form>

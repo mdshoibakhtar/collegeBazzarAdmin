@@ -38,7 +38,7 @@ const NewTemplateForm = () => {
 
                 <button type="submit" className="btn-next">Next</button>
             </form>
-            <Link to="/admin/utility-master" className="back-link">Go back to template list</Link>
+            <Link to="/utility-master" className="back-link">Go back to template list</Link>
         </div>
     );
 };

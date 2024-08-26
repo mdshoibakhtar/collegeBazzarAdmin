@@ -80,7 +80,7 @@ function WardMaster() {
                         toastSuccessMessage();
                         getWardMasters(page)
                         blankBtn()
-                        navigate(`/admin/ward-master`)
+                        navigate(`/ward-master`)
                     }
                 } catch (error) {
 
@@ -145,7 +145,7 @@ function WardMaster() {
     const cancelBtn = () => {
         setInitialValues({ name: "", isActive: "" });
         message.error('Cancel Successful!');
-        navigate(`/admin/ward-master`)
+        navigate(`/ward-master`)
     };
 
 

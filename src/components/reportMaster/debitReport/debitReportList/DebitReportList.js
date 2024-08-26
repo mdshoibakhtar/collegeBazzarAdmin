@@ -12,7 +12,7 @@ function DebitReportList() {
                                     <div className="tbl-caption">
                                         <h4 className="heading mb-0"><b>Debit Report</b></h4>
                                         <div>
-                                            <Link className="btn btn-primary btn-sm" to="/admin/add-debit-report" role="button" aria-controls="offcanvasExample">+  Add Debit Report
+                                            <Link className="btn btn-primary btn-sm" to="/add-debit-report" role="button" aria-controls="offcanvasExample">+  Add Debit Report
  </Link>
                                             {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee

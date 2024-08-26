@@ -106,7 +106,7 @@ function UpdateBackupApiMaster() {
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <Link to='/admin/backup-api-master' className="btn btn-danger light ms-1">Cancel</Link>
+                                                    <Link to='/backup-api-master' className="btn btn-danger light ms-1">Cancel</Link>
                                                     <button className="btn btn-primary me-1">Submit</button>
                                                 </div>
                                             </form>

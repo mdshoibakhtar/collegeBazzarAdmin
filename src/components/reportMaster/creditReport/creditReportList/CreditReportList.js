@@ -12,7 +12,7 @@ function CreditReportList() {
                             <div className="tbl-caption">
                                 <h4 className="heading mb-0"><b>Credit Report</b></h4>
                                 <div>
-                                    <Link className="btn btn-primary btn-sm" to="/admin/add-credit-report" role="button" aria-controls="offcanvasExample">+  Add Credit Report
+                                    <Link className="btn btn-primary btn-sm" to="/add-credit-report" role="button" aria-controls="offcanvasExample">+  Add Credit Report
 </Link>
                                     {/* <button type="button" className="btn btn-secondary btn-sm" >
                                 + Invite Employee

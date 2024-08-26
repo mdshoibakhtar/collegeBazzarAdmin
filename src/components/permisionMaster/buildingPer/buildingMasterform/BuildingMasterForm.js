@@ -61,7 +61,7 @@ function BuildingMasterForm({ initialValues, submitForm, params, cancelBtn,valid
                                                     </select>
                                                 </div>
                                                 <div className="col-xl-2 mb-3">
-                                                    {/* <Link to='/admin/building-master' className="btn btn-danger light ms-1">Cancel</Link> */}
+                                                    {/* <Link to='/building-master' className="btn btn-danger light ms-1">Cancel</Link> */}
                                                     <Button className="btn btn-danger light ms-1" onClick={() => cancelBtn()}>Cancel</Button>
                                                     <button
                                                         className="btn btn-primary me-1"

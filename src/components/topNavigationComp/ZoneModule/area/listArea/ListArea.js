@@ -75,7 +75,7 @@ function ListArea() {
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0">AREA MASTER</h4>
                                     <div>
-                                        <Link className="btn btn-primary btn-sm" to="/admin/add-area" role="button" aria-controls="offcanvasExample">+ AREA MASTER</Link>
+                                        <Link className="btn btn-primary btn-sm" to="/add-area" role="button" aria-controls="offcanvasExample">+ AREA MASTER</Link>
                                         {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}
@@ -111,7 +111,7 @@ function ListArea() {
                                                 </td>
                                                 <td>
                                                     <div className="d-flex">
-                                                        <Link to={`/admin/update-area/${item?.id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                        <Link to={`/update-area/${item?.id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                         <Popconfirm
                                                             title="Delete Currency !"
                                                             description="Are you sure to delete ?"

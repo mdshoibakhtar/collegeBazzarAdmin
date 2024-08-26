@@ -64,7 +64,7 @@ function AreaPermisionForm({ initialValues, submitForm, params,validate, cancelB
                                                 </div>
                                                 <div className="col-xl-2 mb-3">
                                                     <Button className="btn btn-danger light ms-1" onClick={() => cancelBtn()}>Cancel</Button>
-                                                    {/* <Link to='/admin/area-master' type='submit' className="btn btn-danger light ms-1">Cancel</Link> */}
+                                                    {/* <Link to='/area-master' type='submit' className="btn btn-danger light ms-1">Cancel</Link> */}
                                                     <button
                                                         className="btn btn-primary me-1"
                                                         type="submit"

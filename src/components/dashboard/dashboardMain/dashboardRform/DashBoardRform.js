@@ -11,7 +11,7 @@ function DashBoardRform() {
             <div className='p-3'>
                 <div className="card overflow-hidden">
                     <div className="card-body pb-3">
-                        <form action="https://merchant.paypanda.in/admin/dashboard" method="get">
+                        <form action="https://merchant.paypanda.in/dashboard" method="get">
                             <div className="row">
                                 <div className="col-lg-4 col-md-8 form-group mg-b-0">
                                     <label className="form-label">From: <span className="tx-danger">*</span></label>

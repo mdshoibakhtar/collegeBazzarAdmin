@@ -13,7 +13,7 @@ function RetailerIncomeList() {
                                     <div className="tbl-caption">
                                         <h4 className="heading mb-0"><b>Retailer INCOME REPORT LIST - </b></h4>
                                         <div>
-                                            <Link className="btn btn-primary btn-sm" to="/admin/add/retailer/income" role="button" aria-controls="offcanvasExample">+ ADD  Retailer INCOME REPORT LIST </Link>
+                                            <Link className="btn btn-primary btn-sm" to="/add/retailer/income" role="button" aria-controls="offcanvasExample">+ ADD  Retailer INCOME REPORT LIST </Link>
                                             {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}

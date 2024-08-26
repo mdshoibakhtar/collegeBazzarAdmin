@@ -10,7 +10,7 @@ const breadCrumbsTitle = {
     id: "1",
     title_1: "Master",
     title_2: "Flow Builder",
-    path_2: "/admin/flow-builder"
+    path_2: "/flow-builder"
 };
 
 function FlowBuilder() {
@@ -78,7 +78,7 @@ function FlowBuilder() {
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0">Flow Builder Master</h4>
                                     <div>
-                                        <Link className="btn btn-primary btn-sm" to="/admin/add-flow-builder" role="button" aria-controls="offcanvasExample">+ Add Flow Category</Link>
+                                        <Link className="btn btn-primary btn-sm" to="/add-flow-builder" role="button" aria-controls="offcanvasExample">+ Create Work Flow</Link>
                                     </div>
                                 </div>
                                 <div id="flow-category-tblwrapper_wrapper" className="dataTables_wrapper no-footer">
@@ -117,7 +117,7 @@ function FlowBuilder() {
                                                     </td>
                                                     <td>
                                                         <div className="d-flex">
-                                                            <Link to={`/admin/add-flow-builder/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
+                                                            <Link to={`/add-flow-builder/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
                                                                 <FaRegEdit />
                                                             </Link>
                                                             <Popconfirm
