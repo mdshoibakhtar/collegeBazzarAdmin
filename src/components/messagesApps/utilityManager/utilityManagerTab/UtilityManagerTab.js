@@ -3,6 +3,7 @@ import { Tab, Tabs } from 'react-bootstrap'
 import ManageSenderId from '../manageSenderId/ManageSenderId'
 import ManageTemplete from '../manageTemplet/ManageTemplet'
 import ManageShortUrl from '../manageShortUrl/ManageShortUrl'
+import BlockListNumber from './blockListNumber/BlockListNumber'
 
 function UtilityManagerTab() {
     return (
@@ -13,18 +14,18 @@ function UtilityManagerTab() {
             >
 
                 <Tab eventKey="ManageSenderId" title="Manage Sender ID">
-                    <ManageSenderId/>
+                    <ManageSenderId />
                 </Tab>
                 <Tab eventKey="Manage Templete" title="Manage Templete">
-                   <ManageTemplete/>
+                    <ManageTemplete />
                 </Tab>
                 <Tab eventKey="Manage Short URL" title="Manage Short URL">
-                   <ManageShortUrl/>
+                    <ManageShortUrl />
                 </Tab>
-                <Tab eventKey="Block List Number" title="Manage Short URL">
-                   
+                <Tab eventKey="BlockListNumber" title="Block List Number">
+                    <BlockListNumber />
                 </Tab>
-                
+
 
             </Tabs>
         </>

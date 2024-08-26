@@ -1,374 +1,156 @@
-import { useParams, useNavigate } from "react-router";
-import { useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import { Formik } from "formik";
-import CustomInputField from "../../../../common/CustomInputField";
-import CustomTextArea from "../../../../common/CustomTextArea";
-import { Button, Form, Tab, Tabs } from "react-bootstrap";
-import { MdDeleteSweep } from "react-icons/md";
-import { ImParagraphRight } from "react-icons/im";
-import { FaLink } from "react-icons/fa";
-import { FaLinkSlash } from "react-icons/fa6";
-import { IoIosSend } from "react-icons/io";
+import { useState } from "react";
+import AddTempleteModal from "./addTemplete/AddTempleteModal";
 
 function ManageTemplete() {
-    const [countryData, setCountryData] = useState([]);
-    const [stateData, setStateData] = useState([]);
-    const [textMessage, handleTextMessages] = useState();
-    const [initialValues, setInitialValues] = useState({
-        name: "",
-        description: "",
-        state_id: "",
-        country_id: "",
-        meta_title: "",
-        meta_description: "",
-        meta_image: "",
-    });
-    const params = useParams();
-    const navigate = useNavigate();
+    const [selectAll, setSelectAll] = useState(false);
+    const [selectedUsers, setSelectedUsers] = useState([]);
+    const [show, setShow] = useState(false);
 
-    const validate = (values) => {
-        let errors = {};
-        if (!values.name) {
-            errors.name = "City Name is required";
+    const templates = [
+        {
+            _id: "1A1212D",
+            userName: 'demo',
+            templateName: 'testadcsda',
+            phoneNumber: '+917250652850',
+            templateType: 'marketing',
+            headerType: 'IMAGE',
+            language: 'en',
+            status: 'APPROVED',
+            createdAt: 'Aug 16, 2024'
+        },
+        {
+            _id: "1B1212D",
+            userName: 'demo',
+            templateName: 'dfbnvjfbdjvf',
+            phoneNumber: '+917250652850',
+            templateType: 'marketing',
+            headerType: 'NONE',
+            language: 'ar',
+            status: 'APPROVED',
+            createdAt: 'Aug 13, 2024'
+        },
+        {
+            _id: "1C1212D",
+            userName: 'demo',
+            templateName: 'test_11_aug_24',
+            phoneNumber: '+917250652850',
+            templateType: 'marketing',
+            headerType: 'TEXT',
+            language: 'en',
+            status: 'APPROVED',
+            createdAt: 'Aug 11, 2024'
+        },
+        {
+            _id: "1D1212D",
+            userName: 'demo',
+            templateName: 'testing_with_aliya',
+            phoneNumber: '+917250652850',
+            templateType: 'marketing',
+            headerType: 'IMAGE',
+            language: 'en',
+            status: 'APPROVED',
+            createdAt: 'Aug 6, 2024'
+        },
+        {
+            _id: "1E1212D",
+            userName: 'demo_user',
+            templateName: 'welcome_message',
+            phoneNumber: '+918765432109',
+            templateType: 'customer_service',
+            headerType: 'VIDEO',
+            language: 'es',
+            status: 'PENDING',
+            createdAt: 'Aug 5, 2024'
         }
-        if (!values.state_id) {
-            errors.state_id = "State is required";
-        }
-        if (!values.country_id) {
-            errors.country_id = "Country is required";
-        }
+    ];
 
-        return errors;
-    };
-    const handleTextMessage =(e)=>{
-        handleTextMessages(e.target.value)
-    }
-
-    const toastSuccessMessage = () => {
-        toast.success(`${params?.id ? "Update" : "Add"} City Successfully.`, {
-            position: "top-center",
-        });
-    };
-
-    const getCountryData = async () => {
-        // try {
-        //     const countryResponse = await countryList();
-        //     setCountryData(countryResponse?.data || []);
-        //     const stateResponse = await getStateMaster();
-        //     setStateData(stateResponse?.data || []);
-        // } catch (error) {
-        //     console.error("Error fetching country or state data:", error);
-        //     alert(error.message);
-        // }
-    };
-
-    const submitForm = async (values) => {
-        try {
-            // if (!params?.id) {
-            //     const res = await cityAdd(values);
-            //     if (res?.statusCode === "200") {
-            //         toastSuccessMessage();
-            //         navigate(`/cities-master`);
-            //     }
-            // } else {
-            //     await cityUpdate(params.id, values);
-            //     toastSuccessMessage();
-            //     navigate(`/cities-master`);
-            // }
-        } catch (error) {
-            console.error("Error in submitForm:", error);
+    const handleCheckboxChange = (event, user) => {
+        if (event.target.checked) {
+            setSelectedUsers([...selectedUsers, user]);
+        } else {
+            setSelectedUsers(selectedUsers.filter(selectedUser => selectedUser._id !== user._id));
         }
     };
 
-    useEffect(() => {
-        getCountryData();
-    }, []);
+    const handleSelectAll = (event) => {
+        const isChecked = event.target.checked;
+        setSelectAll(isChecked);
+        if (isChecked) {
+            setSelectedUsers(templates);
+        } else {
+            setSelectedUsers([]);
+        }
+    };
 
-    useEffect(() => {
-        const fetchCityData = async () => {
-            if (params?.id) {
-                // try {
-                //     const response = await getcity(params.id);
-                //     const cityData = response.data;
-                //     setInitialValues(cityData);
-                // } catch (error) {
-                //     console.error("Error fetching city data:", error);
-                // }
-            }
-        };
-        fetchCityData();
-    }, [params?.id]);
     return (
         <>
-            <div className="row">
-                <div className="col-xl-12">
-                    <div className="card">
-                        <div className="card-body p-0">
-                            <div className="table-responsive active-projects style-1">
-
-                                <Formik
-                                    initialValues={initialValues}
-                                    validate={validate}
-                                    onSubmit={submitForm}
-                                    enableReinitialize
-                                >
-                                    {({
-                                        values,
-                                        handleChange,
-                                        handleSubmit,
-                                        errors,
-                                        touched,
-                                        isValid,
-                                        dirty,
-                                        handleBlur,
-                                    }) => (
-                                        <form className="tbl-captionn" onSubmit={handleSubmit}>
-                                            <div className="row">
-                                                <div className="col-xl-6 mb-3">
-                                                    <div className="card">
-                                                        <Tabs
-                                                            defaultActiveKey="InsertMobileNoHere"
-                                                            id="uncontrolled-tab-example"
-                                                            className=" mb-4 navTabsLink"
-                                                        >
-                                                            <Tab eventKey="InsertMobileNoHere" title="Insert Mobile No Here" id="navTabLink">
-                                                                <CustomTextArea
-                                                                    type="text"
-                                                                    value={values.name}
-                                                                    hasError={errors.name && touched.name}
-                                                                    onChange={handleChange}
-                                                                    onBlur={handleBlur}
-                                                                    errorMsg={touched.name && errors.name}
-                                                                    id="name"
-                                                                    name="name"
-                                                                    placeholder="Insert Mobile NO Here With Country Code +91"
-                                                                />
-                                                                <div className="text-end">
-                                                                    <span className="btn btn-danger"><MdDeleteSweep className="fs-3" /></span>
-                                                                    <span className="btn ">Total Numbers: (0)</span>
-                                                                </div>
-                                                            </Tab>
-                                                            <Tab eventKey="GetContacts" title="Get Contacts" className="mb-4" id="navTabLink">
-                                                                <div className="d-flex justify-content-around align-items-center">
-                                                                    <div className="">
-                                                                        <Form.Check
-                                                                            inline
-                                                                            label="Group"
-                                                                            name="group1"
-                                                                            type={"radio"}
-                                                                            id={`inline-2`}
-                                                                        />
-                                                                    </div>
-                                                                    <div className="">
-                                                                        <Form.Check
-                                                                            inline
-                                                                            label="Category"
-                                                                            name="group1"
-                                                                            type={"radio"}
-                                                                            id={`inline-2`}
-                                                                        />
-                                                                    </div>
-                                                                    <div className="">
-                                                                        <Form.Check
-                                                                            inline
-                                                                            label="Tag"
-                                                                            name="group1"
-                                                                            type={"radio"}
-                                                                            id={`inline-2`}
-                                                                        />
-                                                                    </div>
-                                                                </div>
-                                                                <div className="">
-                                                                    <span>Send To Group</span>
-                                                                    <select
-                                                                        className="form-select"
-                                                                        aria-label="Default select example"
-                                                                        id="state_id"
-                                                                        name="state_id"
-                                                                        value={""}
-                                                                        // onChange={handleChange}
-                                                                        onBlur={handleBlur}
-                                                                    >
-                                                                        <option value={""}>Test1</option>
-                                                                        <option value={""}>Test2</option>
-                                                                        <option value={""}>Test3</option>
-                                                                    </select>
-                                                                </div>
-
-                                                                {/* <div className="">
-                                                                <span>Send To Category</span>
-                                                                <select
-                                                                    className="form-select"
-                                                                    aria-label="Default select example"
-                                                                    id="state_id"
-                                                                    name="state_id"
-                                                                    value={""}
-                                                                    // onChange={handleChange}
-                                                                    onBlur={handleBlur}
-                                                                >
-                                                                    <option value={""}>Test1</option>
-                                                                    <option value={""}>Test2</option>
-                                                                    <option value={""}>Test3</option>
-                                                                </select>
-                                                            </div>
-                                                            <div className="">
-                                                                <span>Send To Tag</span>
-                                                                <select
-                                                                    className="form-select"
-                                                                    aria-label="Default select example"
-                                                                    id="state_id"
-                                                                    name="state_id"
-                                                                    value={""}
-                                                                    // onChange={handleChange}
-                                                                    onBlur={handleBlur}
-                                                                >
-                                                                    <option value={""}>Test1</option>
-                                                                    <option value={""}>Test2</option>
-                                                                    <option value={""}>Test3</option>
-                                                                </select>
-                                                            </div> */}
-                                                            </Tab>
-                                                        </Tabs>
-                                                    </div>
-                                                </div>
-
-
-                                                <div className="col-xl-6 mb-3">
-                                                    <div className="card    ">
-                                                        <div className="row">
-                                                            <div className="col-xl-6 mb-3">
-                                                                <span>Gateway Name*</span>
-                                                                <select
-                                                                    className="form-select"
-                                                                    aria-label="Default select example"
-                                                                    id="state_id"
-                                                                    name="state_id"
-                                                                    value={""}
-                                                                    // onChange={handleChange}
-                                                                    onBlur={handleBlur}
-                                                                >
-                                                                    <option value={""}>Test1</option>
-                                                                    <option value={""}>Test2</option>
-                                                                    <option value={""}>Test3</option>
-                                                                </select>
-                                                            </div>
-                                                            <div className="col-xl-6 mb-3">
-                                                                <span>Sender Id*</span>
-                                                                <select
-                                                                    className="form-select"
-                                                                    aria-label="Default select example"
-                                                                    id="state_id"
-                                                                    name="state_id"
-                                                                    value={""}
-                                                                    // onChange={handleChange}
-                                                                    onBlur={handleBlur}
-                                                                >
-                                                                    <option value={""}>Test1</option>
-                                                                    <option value={""}>Test2</option>
-                                                                    <option value={""}>Test3</option>
-                                                                </select>
-                                                            </div>
-                                                            <div className="col-xl-6 mb-3">
-                                                                <span>DLT Template</span>
-                                                                <select
-                                                                    className="form-select"
-                                                                    aria-label="Default select example"
-                                                                    id="state_id"
-                                                                    name="state_id"
-                                                                    value={""}
-                                                                    // onChange={handleChange}
-                                                                    onBlur={handleBlur}
-                                                                >
-                                                                    <option value={""}>Test1</option>
-                                                                    <option value={""}>Test2</option>
-                                                                    <option value={""}>Test3</option>
-                                                                </select>
-                                                            </div>
-                                                            <div className="col-xl-6 mb-3">
-                                                                <span>Campaign Name*</span>
-                                                                <select
-                                                                    className="form-select"
-                                                                    aria-label="Default select example"
-                                                                    id="state_id"
-                                                                    name="state_id"
-                                                                    value={""}
-                                                                    // onChange={handleChange}
-                                                                    onBlur={handleBlur}
-                                                                >
-                                                                    <option value={""}>Test1</option>
-                                                                    <option value={""}>Test2</option>
-                                                                    <option value={""}>Test3</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-xl-8 mb-3">
-                                                    <div className="card">
-                                                        <Button className="mx-0 my-3 d-flex align-items-center">
-                                                            <ImParagraphRight className="me-2" /> Text Message
-                                                        </Button>
-                                                        <div className="">
-                                                            <CustomTextArea
-                                                                type="text"
-                                                                value={values.meta_title}
-                                                                hasError={errors.meta_title && touched.meta_title}
-                                                                onChange={handleTextMessage}
-                                                                onBlur={handleBlur}
-                                                                errorMsg={touched.meta_title && errors.meta_title}
-                                                                id="meta_title"
-                                                                name="meta_title"
-                                                                placeholder="TYPE MESSAGE HERE"
-                                                                className="flex-grow-1 me-2"
-                                                            />
-                                                            <div className="d-flex align-items-center justify-content-between">
-                                                                <div className="d-flex"
-                                                                ><Button className="btn btn-outline-primary d-flex align-items-center">
-                                                                        <FaLink />
-                                                                    </Button>
-                                                                    <Button className="btn btn-outline-primary d-flex align-items-center">
-                                                                        <FaLinkSlash />
-                                                                    </Button></div>
-                                                                <span><div class="form-check form-switch">
-                                                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" />
-                                                                    <label class="form-check-label" for="flexSwitchCheckDefault">Flash
-                                                                    </label>
-                                                                </div></span>
-                                                                <div className="">
-                                                                    <span>Char (0)</span>
-                                                                    <span>SMS (0)</span>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                <div className="col-xl-4 mb-3">
-                                                    <div className="create-Camping-mess-bg-img text-center position-relative">
-                                                        <div className="position-absolute  " style={{ left: "145px", top: "45px" }}>  {textMessage}</div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-xl-6 mb-3">
-                                                    <Button className="btn btn-outline-primary d-flex align-items-center">
-                                                        <IoIosSend /> Send Now
-                                                    </Button>
-                                                </div>
-
-                                            </div>
-
-                                        </form>
-                                    )}
-                                </Formik>
-                            </div>
-                        </div>
-                    </div>
+            <div className="card">
+                <div className="mb-3 text-end">
+                    <button type="button" className="btn btn-secondary" onClick={() => setShow(!show)}>
+                        <span className="me-2 fs-4"><i class="fas fa-text-height"></i></span>Add Templete
+                    </button>
                 </div>
-                <ToastContainer />
+                <table className='table'>
+                    <thead>
+                        <tr>
+                            <th>
+                                <p className="m-0"><small style={{ fontSize: "0.8em" }}>Select All</small></p>
+                                <div className="form-check">
+                                    <input
+                                        className="form-check-input"
+                                        type="checkbox"
+                                        id="selectAll"
+                                        checked={selectAll}
+                                        onChange={handleSelectAll}
+                                    />
+                                </div>
+                            </th>
+                            <th>User Name</th>
+                            <th>Template Name</th>
+                            <th>Phone Number</th>
+                            <th>Template Type</th>
+                            <th>Header Type</th>
+                            <th>Language</th>
+                            <th>Status</th>
+                            <th className="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {templates.map((template, index) => {
+                            const isChecked = selectedUsers.some(user => user?._id === template?._id);
+                            return (
+                                <tr key={template._id}>
+                                    <td>
+                                        <div className="form-check">
+                                            <input
+                                                className="form-check-input"
+                                                type="checkbox"
+                                                checked={isChecked}
+                                                onChange={(e) => handleCheckboxChange(e, template)}
+                                            />
+                                        </div>
+                                    </td>
+                                    <td>{template.userName}</td>
+                                    <td>{template.templateName}</td>
+                                    <td>{template.phoneNumber}</td>
+                                    <td>{template.templateType}</td>
+                                    <td>{template.headerType}</td>
+                                    <td>{template.language}</td>
+                                    <td>{template.status}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-outline-primary btn-sm"><i class="fas fa-eye"></i></button>
+                                        <button type="button" class="btn btn-outline-primary btn-sm"><i class="fas fa-pencil-alt"></i></button>
+                                        <button type="button" class="btn btn-outline-primary btn-sm"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </table>
             </div>
+            <AddTempleteModal show={show} setShow={setShow} />
         </>
-    )
+    );
 }
 
-export default ManageTemplete
+export default ManageTemplete;

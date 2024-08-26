@@ -5,14 +5,15 @@ import { Pagination } from "antd";
 
 // import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import 'react-fancybox/lib/fancybox.css'
-
-
-
 import { ToastContainer, toast } from "react-toastify";
 // import { paymentRequestMemberHistoryUpdate, paymentRequestToUseradmin, paymentRequestToUseradminAll } from "../../../../../api/login/Login";
 import { Link } from "react-router-dom";
 import Loadar from "../../../../common/loader/Loader";
+import Breadcrumbs from "../../../../common/breadcrumb/Breadcrumbs";
 function AgentList() {
+    const breadCrumbsTitle = {
+        title_1:"Agent List"
+    }
     const [loading, setLoading] = useState(false);
     const [count, setCount] = useState(10)
     const [page, setPage] = useState(0)
@@ -179,9 +180,10 @@ function AgentList() {
     }, [])
     return (
         <>
+        <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle}/>
             {loading && <Loadar />}
-            <div className="PageHeading"><h1>AGENT LIST</h1></div>
-            <div className="ContentArea">
+            
+            <div className="ContentArea m-4">
                 <div className="card">
                     <div className="card-header"><span>Filter</span></div>
                     <div className="card-body">

@@ -246,6 +246,7 @@ import CreateAgent from "./components/whatsApp/agent/createAgent/CreateAgent";
 import EmailSettings from "./pages/emailSetings";
 import CreateCampingMessages from "./components/messagesApps/CreateCamping/CreateCamping";
 import UtilityManager from "./components/messagesApps/utilityManager/UtilityManager";
+import ManageReports from "./components/messagesApps/manageReports/ManageReports";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1076,6 +1077,10 @@ function App() {
               <Route
                 path="utility-manager"
                 element={<UtilityManager />}
+              />
+              <Route
+                path="messages/manage-reports"
+                element={<ManageReports />}
               />
               {/* mustafa Routes -------------------- */}
               <Route path="number-list" element={<ListnumberWhatsaap />} />
