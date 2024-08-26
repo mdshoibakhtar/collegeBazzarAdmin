@@ -18,6 +18,7 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
             mobile: '',
             email: '',
             refer_id: '',
+            leadStatus: '',
             kycStatus: ''
         });
     }, [params]);
@@ -63,6 +64,7 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
             mobile: '',
             email: '',
             refer_id: '',
+            leadStatus: '',
             kycStatus: ''
         });
         getReailerDistIdAgainst(0);
@@ -136,10 +138,24 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
                                             <option value="unverified">unverified </option>
                                         </select>
                                     </div>
-                                    <div className="form-group col-12">
-                                        {error ? (<Alert message="Warning" description={error} type="warning" showIcon closable />) : ""}
+                                    <div className="form-group col-4">
+                                        <label htmlFor="kycStatus">Lead Status</label>
+                                        <select
+                                            className="form-control"
+                                            id="leadStatus"
+                                            value={formData.leadStatus}
+                                            onChange={handleChange}
+                                        >
+                                            <option value="" disabled>Select Status </option>
+                                            <option value="verified">verified </option>
+                                            <option value="unverified">unverified </option>
+                                        </select>
                                     </div>
-                                    <div className="form-group col-12" style={{ margin: "20px 0" }}>
+                                    {error &&  <div className="form-group col-12">
+                                        {error ? (<Alert message="Warning" description={error} type="warning" showIcon closable />) : ""}
+                                    </div>}
+                                   
+                                    <div className="form-group col-12">
                                         <button type="submit" className="btn btn-primary" disabled={isSearchDisabled}>
                                             SEARCH
                                         </button>

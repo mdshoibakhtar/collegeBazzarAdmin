@@ -235,6 +235,7 @@ import TemplateCategoryList from "./components/TemplateCategoryList/TemplateCate
 import TemplateCategoryAdd from "./components/TemplateCategoryAdd/TemplateCategoryAdd";
 import FlowBuilder from "./components/flow-builderList/FlowBuildList";
 import FlowBuilderAdd from "./components/flow-builderAdd/FlowBuilderAdd";
+import LeadDetail from "./pages/lead-detail/LeadDetail";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -544,6 +545,10 @@ function App() {
               <Route
                 path="create-user/:id"
                 element={<CreateUserDistributerPage />}
+              />
+              <Route
+                path="detail-lead/:id"
+                element={<LeadDetail />}
               />
 
               <Route path="member/profile/view/:id" element={<ViewProfileMemberPage />} />

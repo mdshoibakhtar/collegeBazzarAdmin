@@ -61,7 +61,7 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal, ap
 
     console.log(selectedUsers)
 
-   
+
 
 
 
@@ -74,14 +74,15 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal, ap
                     <div className="col-xl-12">
                         <div className="card">
                             <button className="btn btn-primary" style={{ width: "130px" }} onClick={() => setModalShow(true)}>
-                                 Bulk Edit 
+                                Bulk Edit
 
                             </button>
-                            <BulkAssigedModel
+                            {modalShow && <BulkAssigedModel
                                 show={modalShow}
                                 selectedUsers={selectedUsers}
                                 onHide={() => setModalShow(false)}
-                            />
+                            />}
+
                             <div className="card-body p-0">
                                 <div className="table-responsive active-projects style-1">
                                     <div className="tbl-caption">
@@ -205,7 +206,7 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal, ap
 
                                                         <td style={{ position: 'relative' }} className="d-flex align-item-center" >
 
-                                                            <Dropdown>
+                                                            {/* <Dropdown>
                                                                 <Dropdown.Toggle variant="success" id="dropdown-basic">
                                                                     Action
                                                                 </Dropdown.Toggle>
@@ -221,7 +222,7 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal, ap
                                                                     <Dropdown.Item href="#" onClick={() => { handleShow5(item) }}>Locked Amount</Dropdown.Item>
                                                                     <Dropdown.Item href="/admin/member/profile/view/3">View Profile</Dropdown.Item>
                                                                 </Dropdown.Menu>
-                                                            </Dropdown>
+                                                            </Dropdown> */}
 
                                                             {/*  <Dropdown>
                                                                 <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -239,8 +240,9 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal, ap
                                                                     <Dropdown.Item href={`/admin/wallets/report/${item?._id}`}>Wallets Reports</Dropdown.Item>
                                                                 </Dropdown.Menu>
                                                             </Dropdown> */}
-
+                                                            <Link to={`/admin/detail-lead/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-refresh" /></Link>
                                                             <Link to={`/admin/create-user/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+
                                                             {/* <Popconfirm
                                                             title="Delete Currency !"
                                                             description="Are you sure to delete ?"
