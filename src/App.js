@@ -329,12 +329,12 @@ function App() {
           </>
         ) : (
           <>
-            <Route path="/" element={<Navigate to={"/"} />} />
+            <Route path="/" element={<Navigate to={"/admin"} />} />
             <Route
-              path="/"
+              path=""
               element={<PrivateRoute isAuthenticated={isAuthenticated} />}
             >
-              <Route path="" element={<DasBoardRight />} />
+              <Route path="admin" element={<DasBoardRight />} />
               <Route path="bank-master" element={<BankMasterP />} />
               <Route path="zoon_area" element={<ZoonArea />} />
               <Route path="add-bank" element={<AddBank />} />
