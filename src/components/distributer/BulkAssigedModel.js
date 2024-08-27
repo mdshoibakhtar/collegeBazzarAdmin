@@ -7,7 +7,7 @@ import Container from 'react-bootstrap/Container';
 import { getServiceCategory, reailerDistIdAgainstAll } from '../../api/login/Login';
 
 function BulkAssignedModel(props) {
-    const [data, setData] = useState(props.selectedUsers);
+    const [data, setData] = useState(props?.selectedUsers);
     const [stream, setStream] = useState([]);
     const [courses, setCourses] = useState([]); // Assuming you have a similar API for courses
     const [leadTypes, setLeadTypes] = useState([]); // Example state for Lead Type options
@@ -15,7 +15,7 @@ function BulkAssignedModel(props) {
     const [leadSubStatuses, setLeadSubStatuses] = useState([]); // Example state for Lead Sub Status options
 
     useEffect(() => {
-        setData(props.selectedUsers);
+        setData(props?.selectedUsers);
         getStream();
         // getCourses(); // Uncomment if you have a separate API for courses
         // getLeadTypes(); // Uncomment if you have a separate API for lead types
@@ -195,7 +195,7 @@ function BulkAssignedModel(props) {
                         </form>
                     </div>
                     <Table responsive bordered>
-                        <thead className="table-dark" style={{ width: "1500px" }}>
+                        <thead className="table" style={{ width: "1500px" }}>
                             <tr>
                                 <th>Sr. No.</th>
                                 <th>Member Type</th>
@@ -213,7 +213,7 @@ function BulkAssignedModel(props) {
 
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className='tbodyCustom'>
                             {data?.map((row, index) => (
                                 <tr key={index}>
                                     <td>

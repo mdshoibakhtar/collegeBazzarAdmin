@@ -24,9 +24,9 @@ const CostSheetTable = () => {
                                         <thead>
                                             <tr>
                                                 <th>Lead</th>
-                                                <th>Project Name</th>
-                                                <th>Unit No</th>
-                                                <th>Block No</th>
+                                                <th>Course  Name</th>
+                                                <th>Stream</th>
+                                                <th>Location</th>
                                                 <th>Floor</th>
                                             </tr>
                                         </thead>
