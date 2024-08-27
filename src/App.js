@@ -248,6 +248,11 @@ import EmailSettings from "./pages/emailSetings";
 import CreateCampingMessages from "./components/messagesApps/CreateCamping/CreateCamping";
 import UtilityManager from "./components/messagesApps/utilityManager/UtilityManager";
 import ManageReports from "./components/messagesApps/manageReports/ManageReports";
+import CreateLead from "./pages/create-lead/Index";
+import CreateCall from "./pages/createcall/Index";
+import CallList from "./pages/List-Call/Index";
+import CreateEnquiry from "./pages/Create-Enquiry/Index";
+import EnquiryList from "./pages/List-Enquiry/Index";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -324,7 +329,7 @@ function App() {
           </>
         ) : (
           <>
-           <Route path="/" element={<Navigate to={"/admin"} />} />
+            <Route path="/" element={<Navigate to={"/"} />} />
             <Route
               path="/"
               element={<PrivateRoute isAuthenticated={isAuthenticated} />}
@@ -1052,13 +1057,13 @@ function App() {
               />
               <Route
                 path="move-member"
-                element={<MoveMember/>}
+                element={<MoveMember />}
               />
               <Route
                 path="upgrade-member"
                 element={<UpgradeMember />}
               />
-{/* -------------------------------------- */}
+              {/* -------------------------------------- */}
 
               <Route
                 path="course-degree-list"
@@ -1146,6 +1151,14 @@ function App() {
               <Route path="add-flow-builder" element={<FlowBuilderAdd />} />
               <Route path="edit-flow-builder/:id" element={<FlowBuilderAdd />} />
               <Route path="flow-builder" element={<FlowBuilder />} />
+
+              <Route path="/admin/create-lead" element={<CreateLead/>} />
+              <Route path="Create-Call" element={<CreateCall/>} />
+              <Route path="List-Call" element={<CallList/>} />
+              <Route path="Create-Enquiry" element={<CreateEnquiry/>} />
+              <Route path="List-Enquiry" element={<EnquiryList/>} />
+
+
 
 
 

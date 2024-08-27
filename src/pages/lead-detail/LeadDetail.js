@@ -20,7 +20,7 @@ function LeadDetail() {
                 <div className="card-body p-0">
                     <div className="table-responsive active-projects style-1">
                         <div className="tbl-caption tbl-caption-2">
-                            <h4 className="heading mb-0">Lead Detail</h4>
+                            <h4 className="heading mb-0">Lead Detail </h4>
                         </div>
                     </div>
                     <div className="row" style={{ margin: "20px 0" }}>

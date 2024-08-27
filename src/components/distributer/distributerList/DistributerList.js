@@ -72,19 +72,20 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal, ap
             <ToastContainer />
             <section className="ListDistributer mx-4 expdf ">
                 <div className="text-end">
-                    <button className="btn btn-primary mb-3" onClick={() => setModalShow(true)}>
-                        BULK ASSIGNED
-                    </button>
-                    <button className="btn btn-info mb-3" onClick={() => setShowbroadcast(true)}>
-                        <FaBroadcastTower className="fs-3" /> Broad Caster
-                    </button>
+
                 </div>
                 <div className="row">
-                    <div className="col-xl-12">
-                        <div className="card">
-                            <button className="btn btn-primary" style={{ width: "130px" }} onClick={() => setModalShow(true)}>
-                                Bulk Assigned
-                            </button>
+                    <div className="col-xl-12" >
+                        <div className="card" >
+                            <div style={{ display: "flex", justifyContent: "space-between" }}>
+                                <button className="btn btn-primary mb-3" onClick={() => setModalShow(true)}>
+                                    BULK EDIT
+                                </button>
+                                <Link to="/admin/create-lead" className="btn btn-primary mb-3">Create Lead</Link>
+                                <button className="btn btn-info mb-3" onClick={() => setShowbroadcast(true)}>
+                                    <FaBroadcastTower className="fs-3" /> Broad Caster
+                                </button>
+                            </div>
                             <BulkAssigedModel
                                 show={modalShow}
                                 selectedUsers={selectedUsers}
@@ -119,6 +120,7 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal, ap
                                                             />
                                                         </div>
                                                     </th>
+                                                    <th>Create Date</th>
                                                     <th>Reff Code</th>
                                                     <th>Member type</th>
                                                     <th>Name</th>
@@ -147,6 +149,7 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal, ap
                                                             </div>
 
                                                         </td>
+                                                        <td className="sorting_1">{item?.createdAt}</td>
                                                         {/* <td className="sorting_1"></td>
                                                         <td className="sorting_1"></td> */}
                                                         <td className="sorting_1">{item?.refer_id}</td>
