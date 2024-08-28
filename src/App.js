@@ -247,6 +247,9 @@ import EmailSettings from "./pages/emailSetings";
 import CreateCampingMessages from "./components/messagesApps/CreateCamping/CreateCamping";
 import UtilityManager from "./components/messagesApps/utilityManager/UtilityManager";
 import ManageReports from "./components/messagesApps/manageReports/ManageReports";
+import OptinManageMent from "./components/optinMangement/OptinManageMent";
+import WaBlockNumber from "./components/waBlockNumber/WaBlockNumber";
+import WhatsAppReports from "./components/whatsAppReports/WhatsAppReports";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1126,9 +1129,13 @@ function App() {
 
               <Route path="utility-master" element={<WhatsAppManager />}>
                 <Route path="" element={<ListUtility />} />
-                <Route path="New-TemplateForm" element={<NewTemplateForm />} />
+                <Route path="add-wa-templates" element={<NewTemplateForm />} />
+                <Route path="optin-management" element={<OptinManageMent />} />
+                <Route path="whatsapp-blocklist" element={<WaBlockNumber />} />
               </Route>
 
+
+              <Route path="wa-report-download" element={<WhatsAppReports />} />
               <Route path="add-template-type" element={<TemplateTypeAdd />} />
               <Route path="edit-template-type/:id" element={<TemplateTypeAdd />} />
               <Route path="template-type" element={<TableTemplate />} />
