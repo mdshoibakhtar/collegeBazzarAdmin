@@ -233,6 +233,24 @@ const BLogCategoryAdd = () => {
 
                                             </div>
                                         </div>
+                                        <div className="col-xl-4 mb-3">
+                                            <div className={`form-group ${errors.blog_id ? 'has-error' : ''}`}>
+                                                <label htmlFor="blog_id">Active</label>
+                                                <select
+                                                    id="isActive"
+                                                    name="isActive"
+                                                    value={formValues.isActive}
+                                                    onChange={handleChange}
+                                                    className="form-control"
+                                                >
+                                                    <option value="">Select Is Active</option>
+                                                    <option value={true}>Active</option>
+                                                    <option value={false}>In Active</option>
+                                                  
+                                                </select>
+                                              
+                                            </div>
+                                        </div>
                                     </div>
                                     <div>
                                         <button className="btn btn-primary me-1" type="submit">Submit</button>
