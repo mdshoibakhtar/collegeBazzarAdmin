@@ -253,6 +253,8 @@ import CreateCall from "./pages/createcall/Index";
 import CallList from "./pages/List-Call/Index";
 import CreateEnquiry from "./pages/Create-Enquiry/Index";
 import EnquiryList from "./pages/List-Enquiry/Index";
+import LeadTypeList from "./components/LeadType/LeadTypeList";
+import LeadTypeAdd from "./components/leadtypead/LeadTypeAdd";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1159,6 +1161,9 @@ function App() {
               <Route path="List-Enquiry" element={<EnquiryList/>} />
 
 
+              <Route path="add-lead_Type" element={<LeadTypeAdd />} />
+              <Route path="edit-lead_Type/:id" element={<LeadTypeAdd />} />
+              <Route path="lead_Type" element={<LeadTypeList />} />
 
 
 
