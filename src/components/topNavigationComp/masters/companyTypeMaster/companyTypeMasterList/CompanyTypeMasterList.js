@@ -15,7 +15,7 @@ function CompanyTypeMasterList({ data, totalCount, confirm, cancel }) {
                                     <div className="tbl-caption">
                                         <h4 className="heading mb-0"> Company Master</h4>
                                         <div>
-                                            <Link className="btn btn-primary btn-sm" to="/create_company-master" role="button" aria-controls="offcanvasExample">+ CREATE COMPANY</Link>
+                                            <Link className="btn btn-primary btn-sm" to="/create_company-type-master" role="button" aria-controls="offcanvasExample">+ CREATE COMPANY</Link>
                                             {/* <button type="button" className="btn btn-secondary btn-sm" >
                                     + Invite Employee
                                 </button> */}

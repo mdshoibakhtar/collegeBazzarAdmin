@@ -13,9 +13,9 @@ function CompanyMasterList({ data, totalCount, page, count, onChangeVal, confirm
                             <div className="card-body p-0">
                                 <div className="table-responsive active-projects style-1">
                                     <div className="tbl-caption">
-                                        <h4 className="heading mb-0"> Company Type Master</h4>
+                                        <h4 className="heading mb-0"> Company  Master</h4>
                                         <div>
-                                            <Link className="btn btn-primary btn-sm" to="/create_company-type-master" role="button" aria-controls="offcanvasExample">+ CREATE COMPANY TYPE</Link>
+                                            <Link className="btn btn-primary btn-sm" to="/create_company-master" role="button" aria-controls="offcanvasExample">+ CREATE COMPANY </Link>
                                             {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}
@@ -29,7 +29,7 @@ function CompanyMasterList({ data, totalCount, page, count, onChangeVal, confirm
                                                     S.No
                                                 </th>
                                                 <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Employee Name: activate to sort column ascending" style={{ width: '203.45px' }}>
-                                                    Affilated By
+                                                    Company Name
                                                 </th>
                                                 <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Department: activate to sort column ascending" style={{ width: '156.475px' }}>
                                                     Status</th>

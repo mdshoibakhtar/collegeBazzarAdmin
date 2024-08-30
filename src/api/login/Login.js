@@ -1187,6 +1187,9 @@ export const getdesignationMasterId = (id) => {
 export const getStaffpermision = (page, count) => {
   return axiosInstance.get(`${baseUrl}staff?page=${page}&count=${count}`);
 };
+export const getStaffpermisionall = (page) => {
+  return axiosInstance.get(`${baseUrl}staff?page=${page.page}&count=${page.count}`);
+};
 
 export const addStaffpermision = (data) => {
   return axiosInstance.post(`${baseUrl}staff/addstaff`, data);
@@ -1696,6 +1699,9 @@ export const getUpdateLeadSourseId = (id) => {
 export const leadSubStatusMasterList = (page, count) => {
   return axiosInstance.get(`${baseUrl}subStatus?page=${page}&count=${count}`);
 };
+export const leadSubStatusMasterListAll = (page, count) => {
+  return axiosInstance.get(`${baseUrl}subStatus`);
+};
 
 export const addLeadSubStatusMaster = (data) => {
   return axiosInstance.post(`${baseUrl}subStatus/addType`, data);
@@ -1712,6 +1718,9 @@ export const getUpdateLeadSubStatusId = (id) => {
 //  ------------------------------Lead  Status-------------------------
 export const leadenquiryStatusMasterList = (page, count) => {
   return axiosInstance.get(`${baseUrl}enquiryStatus?page=${page}&count=${count}`);
+};
+export const leadenquiryStatusMasterListAll = (page, count) => {
+  return axiosInstance.get(`${baseUrl}enquiryStatus`);
 };
 
 export const addenquiryStatusMaster = (data) => {
@@ -2138,6 +2147,37 @@ export const getFlowCategoryList = (page, count) => {
   return axiosInstance.get(`${baseUrl}flow-builder?page=${page}&count=${count}`);
 };
 
+
+
+// DELETE a lead type by ID
+export const deleteLeadType = (id) => {
+  return axiosInstance.delete(`${baseUrl}leadType/delete_type/${id}`);
+};
+
+// GET a lead type by ID
+export const getLeadTypeById = (id) => {
+  return axiosInstance.get(`${baseUrl}leadType/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new lead type
+export const postLeadType = (data) => {
+  return axiosInstance.post(`${baseUrl}leadType/addType`, data);
+};
+
+// PUT (update) an existing lead type by ID
+export const updateLeadType = (data) => {
+  return axiosInstance.put(`${baseUrl}leadType/update_type/${data.id}`, data.data);
+};
+
+// GET the list of lead types with pagination
+export const getLeadTypeList = (page, count) => {
+  return axiosInstance.get(`${baseUrl}leadType?page=${page}&count=${count}`);
+};
 
 
 
