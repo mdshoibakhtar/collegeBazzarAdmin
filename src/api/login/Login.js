@@ -747,7 +747,9 @@ export const paginationCountryMaster = (page, count) => {
 
 
 // pagination
-
+export const reailerDistIdAgainstAll = (page, count, id) => {
+  return axiosInstance.get(`${baseUrl}course`)
+}
 // Distributor Retailer
 
 export const reailerDistIdAgainst = (page, count, id) => {
@@ -1982,33 +1984,33 @@ export const getAboutUs = (page, count) => {
   return axiosInstance.get(`${baseUrl}aboutus/admin`);
 };
 export const updateAboutUs = (data) => {
-  return axiosInstance.put(`${baseUrl}aboutus/update` , data);
+  return axiosInstance.put(`${baseUrl}aboutus/update`, data);
 };
 export const getContactUs = (page, count) => {
   return axiosInstance.get(`${baseUrl}contactus/admin`);
 };
 export const updateContactUs = (data) => {
-  return axiosInstance.put(`${baseUrl}contactus/update` , data);
+  return axiosInstance.put(`${baseUrl}contactus/update`, data);
 };
 export const getPrivacyPolicy = (page, count) => {
   return axiosInstance.get(`${baseUrl}privacyNPolicy/admin`);
 };
 export const updatePrivacyPolicy = (data) => {
-  return axiosInstance.put(`${baseUrl}privacyNPolicy/update` , data);
+  return axiosInstance.put(`${baseUrl}privacyNPolicy/update`, data);
 };
 
 export const getReturnPolicy = (page, count) => {
   return axiosInstance.get(`${baseUrl}returnPolicy/admin`);
 };
 export const updateReturnPolicy = (data) => {
-  return axiosInstance.put(`${baseUrl}returnPolicy/update` , data);
+  return axiosInstance.put(`${baseUrl}returnPolicy/update`, data);
 };
 
 export const gettermsNCondition = (page, count) => {
   return axiosInstance.get(`${baseUrl}termsNCondtion/admin`);
 };
 export const updatetermsNCondition = (data) => {
-  return axiosInstance.put(`${baseUrl}termsNCondtion/update` , data);
+  return axiosInstance.put(`${baseUrl}termsNCondtion/update`, data);
 };
 
 
@@ -2141,8 +2143,24 @@ export const getFlowCategoryList = (page, count) => {
 
 // -------------------Junaid'S APIS- END------------------------------
 
+// ----------------RELATED COMPANY APIS------------------
 
+export const CompanyTypeList = () => {
+  return axiosInstance.get(`${baseUrl}companyType`);
+};
 
+export const addCompanyType = (data) => {
+  return axiosInstance.post(`${baseUrl}companyType/addType`, data);
+};
+export const deleteCompanyType = (id) => {
+  return axiosInstance.delete(`${baseUrl}companyType/delete_type/${id}`);
+};
+export const updateCompanyType = (id, value) => {
+  return axiosInstance.put(`${baseUrl}companyType/update_type/${id}`, value);
+};
+export const getupdateCompanyTypeId = (id) => {
+  return axiosInstance.get(`${baseUrl}companyType/${id}`);
+};
 
 
 

@@ -236,6 +236,7 @@ import TemplateCategoryList from "./components/TemplateCategoryList/TemplateCate
 import TemplateCategoryAdd from "./components/TemplateCategoryAdd/TemplateCategoryAdd";
 import FlowBuilder from "./components/flow-builderList/FlowBuildList";
 import FlowBuilderAdd from "./components/flow-builderAdd/FlowBuilderAdd";
+import LeadDetail from "./pages/lead-detail/LeadDetail";
 import Coursedegree from "./pages/topNavigationPages/Master/courseTypesdegree";
 import CourceDegreeTypeForm from "./components/topNavigationComp/masters/courseDegreeType/courseDegreeTypeForm/CourceDegreeTypeForm";
 import ListnumberWhatsaap from "./components/whatsApp/addNumberWhatsapp/listNumberWhatsapp/ListNumberWhatsApp";
@@ -247,9 +248,18 @@ import EmailSettings from "./pages/emailSetings";
 import CreateCampingMessages from "./components/messagesApps/CreateCamping/CreateCamping";
 import UtilityManager from "./components/messagesApps/utilityManager/UtilityManager";
 import ManageReports from "./components/messagesApps/manageReports/ManageReports";
+import CreateLead from "./pages/create-lead/Index";
+import CreateCall from "./pages/createcall/Index";
+import CallList from "./pages/List-Call/Index";
+import CreateEnquiry from "./pages/Create-Enquiry/Index";
+import EnquiryList from "./pages/List-Enquiry/Index";
 import OptinManageMent from "./components/optinMangement/OptinManageMent";
 import WaBlockNumber from "./components/waBlockNumber/WaBlockNumber";
 import WhatsAppReports from "./components/whatsAppReports/WhatsAppReports";
+import CompanyMasters from "./pages/companyMasters";
+import CompanyFormMaster from "./components/topNavigationComp/masters/companyMaster/companyFormMaster/CompanyFormMaster";
+import CompanyTypeMasters from "./pages/companyTypeMaster";
+import CompanyTypeMasterForm from "./components/topNavigationComp/masters/companyTypeMaster/companyTypeMasterForm/CompanyTypeMasterForm";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -326,11 +336,12 @@ function App() {
           </>
         ) : (
           <>
+            <Route path="/" element={<Navigate to={"/admin"} />} />
             <Route
-              path="/"
+              path=""
               element={<PrivateRoute isAuthenticated={isAuthenticated} />}
             >
-              <Route path="" element={<DasBoardRight />} />
+              <Route path="admin" element={<DasBoardRight />} />
               <Route path="bank-master" element={<BankMasterP />} />
               <Route path="zoon_area" element={<ZoonArea />} />
               <Route path="add-bank" element={<AddBank />} />
@@ -558,6 +569,10 @@ function App() {
               <Route
                 path="create-user/:id"
                 element={<CreateUserDistributerPage />}
+              />
+              <Route
+                path="/admin/detail-lead/:id"
+                element={<LeadDetail />}
               />
 
               <Route path="member/profile/view/:id" element={<ViewProfileMemberPage />} />
@@ -912,6 +927,26 @@ function App() {
                 element={<AffilatedBy />}
               />
               <Route
+                path="/company-master"
+                element={<CompanyMasters />}
+              />
+              <Route
+                path="/create_company-master"
+                element={<CompanyFormMaster />}
+              />
+              <Route
+                path="/company-type-master"
+                element={<CompanyTypeMasters />}
+              />
+              <Route
+                path="/create_company-type-master"
+                element={<CompanyTypeMasterForm />}
+              />
+              <Route
+                path="/update_company-type-master/:id"
+                element={<CompanyTypeMasterForm />}
+              />
+              <Route
                 path="/create-affilated-by"
                 element={<AffilatedTypesForm />}
               />
@@ -1049,13 +1084,13 @@ function App() {
               />
               <Route
                 path="move-member"
-                element={<MoveMember/>}
+                element={<MoveMember />}
               />
               <Route
                 path="upgrade-member"
                 element={<UpgradeMember />}
               />
-{/* -------------------------------------- */}
+              {/* -------------------------------------- */}
 
               <Route
                 path="course-degree-list"
@@ -1147,6 +1182,14 @@ function App() {
               <Route path="add-flow-builder" element={<FlowBuilderAdd />} />
               <Route path="edit-flow-builder/:id" element={<FlowBuilderAdd />} />
               <Route path="flow-builder" element={<FlowBuilder />} />
+
+              <Route path="/admin/create-lead" element={<CreateLead/>} />
+              <Route path="Create-Call" element={<CreateCall/>} />
+              <Route path="List-Call" element={<CallList/>} />
+              <Route path="Create-Enquiry" element={<CreateEnquiry/>} />
+              <Route path="List-Enquiry" element={<EnquiryList/>} />
+
+
 
 
 

@@ -47,8 +47,8 @@ function AddPersonaliseUrlModal({ name, setShow, show, ...props }) {
                 onHide={() => setShow(!show)}
                 {...props}
                 transition={false}
-                className="no-overlay"
-                style={{ width: "25%" }}
+                className="no-overlay offCanvasWidth"
+                
             >
                 <Offcanvas.Header closeButton>
                     <Offcanvas.Title >

@@ -285,4 +285,4 @@ function BroadCasterModal(props) {
         </Modal>
     );
 }
-export default BroadCasterModal;
+export default BroadCasterModal
