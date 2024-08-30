@@ -35,12 +35,34 @@ function CollegesInfoList({ data, totalCount, page, count, onChangeVal, confirm,
                                                 <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Department: activate to sort column ascending" style={{ width: '156.475px' }}>
                                                     Established In
                                                 </th>
-
                                                 <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Department: activate to sort column ascending" style={{ width: '156.475px' }}>
-                                                    Logo Image
+                                                    Country / State / City
                                                 </th>
                                                 <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Department: activate to sort column ascending" style={{ width: '156.475px' }}>
-                                                    Banner Image
+                                                    Stream
+                                                </th>
+                                                <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Department: activate to sort column ascending" style={{ width: '156.475px' }}>
+                                                    Course
+                                                </th>
+                                                <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Department: activate to sort column ascending" style={{ width: '156.475px' }}>
+                                                    Collage Type
+                                                </th>
+                                                <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Department: activate to sort column ascending" style={{ width: '156.475px' }}>
+                                                    Approved By
+                                                </th>
+
+                                                <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Department: activate to sort column ascending" style={{ width: '156.475px' }}>
+                                                    Affilated By
+                                                </th>
+                                                
+                                                <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Department: activate to sort column ascending" style={{ width: '156.475px' }}>
+                                                    Fee
+                                                </th>
+                                                <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Department: activate to sort column ascending" style={{ width: '156.475px' }}>
+                                                    Logo
+                                                </th>
+                                                <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Department: activate to sort column ascending" style={{ width: '156.475px' }}>
+                                                    Banner Img
                                                 </th>
                                                 <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Department: activate to sort column ascending" style={{ width: '156.475px' }}>
                                                     Location
@@ -63,6 +85,13 @@ function CollegesInfoList({ data, totalCount, page, count, onChangeVal, confirm,
                                                         <td>{(i + 1) + (page * count)}</td>
                                                         <td>{item?.name}</td>
                                                         <td>{item?.establish}</td>
+                                                        <td>---</td>
+                                                        <td>---</td>
+                                                        <td>---</td>
+                                                        <td>---</td>
+                                                        <td>---</td>
+                                                        <td>---</td>
+                                                        <td>{item?.courses[0].fee}</td>
                                                         <td>
                                                             <div className='image'>
                                                                 <img

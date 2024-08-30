@@ -1,5 +1,10 @@
 import { Alert } from "antd";
 import { useEffect, useState } from "react";
+import Select from 'react-select';
+import BulkAssignedModel from "../BulkAssigedModel";
+import { FaBroadcastTower } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import BroadCasterModal from "../distributerList/broadCasterModal/BroadCasterModal";
 
 function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistIdAgainst }) {
     const todayDate = () => {
@@ -20,7 +25,9 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
 
     const [error, setError] = useState('');
     const [isSearchDisabled, setIsSearchDisabled] = useState(false);
-
+    const [showbroadcast, setShowbroadcast] = useState(false);
+    const [selectedUsers, setSelectedUsers] = useState([]);
+    const [modalShow, setModalShow] = useState(false);
     useEffect(() => {
         setFormData({
             name: '',
@@ -77,6 +84,7 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
         getReailerDistIdAgainst(0);
     };
 
+
     return (
         <>
             <div className="row m-4">
@@ -87,8 +95,8 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
                                 <div className="tbl-caption tbl-caption-2">
                                     <h4 className="heading mb-0"><b>Filter &nbsp; &nbsp;{`${params?.name}`}  </b></h4>
                                 </div>
-                                <form className="row cusforms" style={{ padding: "20px" }} onSubmit={handleSubmit}>
-                                <div className="form-group col-3">
+                                <form className="row cusforms" style={{ padding: "0 20px" }} onSubmit={handleSubmit}>
+                                    <div className="form-group col-2">
                                         <label htmlFor="fromDate">From Date</label>
                                         <input
                                             type="date"
@@ -98,7 +106,7 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
                                             onChange={handleChange}
                                         />
                                     </div>
-                                    <div className="form-group col-3">
+                                    <div className="form-group col-2">
                                         <label htmlFor="toDate">To Date</label>
                                         <input
                                             type="date"
@@ -108,7 +116,7 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
                                             onChange={handleChange}
                                         />
                                     </div>
-                                    <div className="form-group col-3">
+                                    <div className="form-group col-2">
                                         <label htmlFor="name">Name</label>
                                         <input
                                             type="text"
@@ -119,7 +127,7 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
                                             onChange={handleChange}
                                         />
                                     </div>
-                                    <div className="form-group col-3">
+                                    <div className="form-group col-2">
                                         <label htmlFor="mobile">Mobile Number</label>
                                         <input
                                             type="text"
@@ -130,7 +138,7 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
                                             onChange={handlePhoneChange}
                                         />
                                     </div>
-                                    <div className="form-group col-3">
+                                    <div className="form-group col-2">
                                         <label htmlFor="email">Email</label>
                                         <input
                                             type="email"
@@ -141,7 +149,7 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
                                             onChange={handleChange}
                                         />
                                     </div>
-                                    <div className="form-group col-3">
+                                    <div className="form-group col-2">
                                         <label htmlFor="refer_id">{params?.name} Ref id</label>
                                         <input
                                             type="text"
@@ -152,7 +160,7 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
                                             onChange={handleChange}
                                         />
                                     </div>
-                                    <div className="form-group col-3">
+                                    <div className="form-group col-2">
                                         <label htmlFor="kycStatus">KYC Status</label>
                                         <select
                                             className="form-control"
@@ -165,7 +173,7 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
                                             <option value="unverified">Unverified</option>
                                         </select>
                                     </div>
-                                    <div className="form-group col-3">
+                                    <div className="form-group col-2">
                                         <label htmlFor="leadStatus">Lead Status</label>
                                         <select
                                             className="form-control"
@@ -178,21 +186,104 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
                                             <option value="unverified">Unverified</option>
                                         </select>
                                     </div>
-                                  
+                                    <div className="form-group col-2">
+                                        <label htmlFor="leadStatus">Country</label>
+                                        <select
+                                            className="form-control"
+                                            id="leadStatus"
+                                            value={formData.leadStatus}
+                                            onChange={handleChange}
+                                        >
+                                            <option value="" disabled>Select Country </option>
+
+                                        </select>
+                                    </div>
+                                    <div className="form-group col-2">
+                                        <label htmlFor="leadStatus">State</label>
+                                        <select
+                                            className="form-control"
+                                            id="leadStatus"
+                                            value={formData.leadStatus}
+                                            onChange={handleChange}
+                                        >
+                                            <option value="" disabled>Select State </option>
+
+                                        </select>
+                                    </div>
+
+                                    <div className="col-xl-2 mb-3">
+                                        <label htmlFor="email">Stream</label>
+                                        <Select
+                                            name="stream_id"
+                                            isMulti
+                                            value={"selectedStreamState"}
+                                            onChange={"streamsHandler"}
+                                            options={"streamState"}
+                                            className="basic-multi-select"
+                                            classNamePrefix="select"
+                                            placeholder="Select Streams"
+                                        />
+                                        {/* {errors.stream_id && touched.stream_id ? (
+                                            <small className="error-cls">
+                                                {errors.stream_id}
+                                            </small>
+                                        ) : null} */}
+                                    </div>
+                                    <div className="col-xl-2 mb-3">
+                                        <label >Course</label>
+                                        <Select
+                                            name="stream_id"
+                                            isMulti
+                                            value={"selectedStreamState"}
+                                            onChange={"streamsHandler"}
+                                            options={"streamState"}
+                                            className="basic-multi-select"
+                                            classNamePrefix="select"
+                                            placeholder="Select Course"
+                                        />
+                                        {/* {errors.stream_id && touched.stream_id ? (
+                                            <small className="error-cls">
+                                                {errors.stream_id}
+                                            </small>
+                                        ) : null} */}
+                                    </div>
+
+
                                     {error && (
                                         <div className="form-group col-12">
                                             <Alert message="Warning" description={error} type="warning" showIcon closable />
                                         </div>
                                     )}
-                                    <div className="form-group col-12">
+                                    <div className="form-group col-6">
                                         <button type="submit" className="btn btn-primary" disabled={isSearchDisabled}>
                                             SEARCH
                                         </button>
                                         <button type="button" className="btn btn-warning" onClick={resetForm}>
                                             RESET
                                         </button>
+
+                                    </div>
+                                    <div className="form-group col-6">
+                                        <div className="text-center">
+                                            <button className="btn btn-primary " onClick={() => setModalShow(true)}>
+                                                BULK EDIT
+                                            </button>
+                                            <Link to="/admin/create-lead" className="btn btn-primary ">Create Lead</Link>
+                                            <button className="btn btn-info " onClick={() => setShowbroadcast(true)}>
+                                                <FaBroadcastTower className="fs-4" /> Broad Caster
+                                            </button>
+                                        </div>
+
                                     </div>
                                 </form>
+
+
+                                <BulkAssignedModel
+                                    show={modalShow}
+                                    selectedUsers={selectedUsers}
+                                    onHide={() => setModalShow(false)}
+                                />
+                                <BroadCasterModal show={showbroadcast} onHide={() => setShowbroadcast(false)} />
                             </div>
                         </div>
                     </div>

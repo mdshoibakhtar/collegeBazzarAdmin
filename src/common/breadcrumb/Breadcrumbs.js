@@ -25,8 +25,7 @@ function Breadcrumbs({breadCrumbsTitle}) {
                 {` ${breadCrumbsTitle.title_3}`}
                 </Link>
                 </li>}
-                {/* <li className="breadcrumb-item active"><Link to={"/"}>Dashboard</Link></li>
-                <li className="breadcrumb-item active"><Link to={"/"}>Member</Link></li> */}
+                
             </ol>
         </div>
     )

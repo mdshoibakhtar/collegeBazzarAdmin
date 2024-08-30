@@ -354,15 +354,15 @@ function CollagesFormData() {
                     if (streamIds.length > 0) {
                         await courseTypeDataForSelect(streamIds);
                     }
-                    console.log(collegeData,"see u soon");
-                    
+                    console.log(collegeData, "see u soon");
+
 
                     setselectedCourseState(collegeData?.courses.map(item => ({
                         value: item?._id,
                         label: item?.service_name,
                         fee: item?.fee || null,
                     })));
-                    
+
 
                 }
             } catch (error) {
@@ -922,7 +922,7 @@ function CollagesFormData() {
                                                 </div>
                                                 <div className='col-xl-12'>
                                                     <div className='row align-items-center'>
-                                                        <div className="col-xl-3 mb-3">
+                                                        <div className="col-xl-6 mb-3">
                                                             <CustomInputField
                                                                 type="text"
                                                                 value={values.meta_keyword}
@@ -933,10 +933,10 @@ function CollagesFormData() {
                                                                 autoFocus={false}
                                                                 id="meta_keyword"
                                                                 name="meta_keyword"
-                                                                placeholder="Meta KeyWord "
+                                                                placeholder="Meta Key Word "
                                                             />
                                                         </div>
-                                                        <div className="col-xl-3 mb-3">
+                                                        <div className="col-xl-6 mb-3">
                                                             <CustomInputField
                                                                 type="text"
                                                                 value={values.meta_title}
@@ -951,7 +951,7 @@ function CollagesFormData() {
                                                             />
                                                         </div>
 
-                                                        <div className="col-xl-3 mb-3">
+                                                        <div className="col-xl-6 mb-3">
                                                             <CustomInputField
                                                                 type="text"
                                                                 value={values.meta_description}
@@ -965,9 +965,9 @@ function CollagesFormData() {
                                                                 placeholder="Meta Description"
                                                             />
                                                         </div>
-                                                        <div className="col-xl-3 mb-3">
+                                                        <div className="col-xl-6 mb-3">
                                                             <div className='row align-items-center'>
-                                                                <div className='col-xl-8'>
+                                                                <div className='col-xl-10'>
                                                                     <CustomInputField
                                                                         type="file"
                                                                         onChange={handleImageUploadmetaImg} // This should handle image upload
@@ -977,7 +977,7 @@ function CollagesFormData() {
                                                                         placeholder="Meta Image"
                                                                     />
                                                                 </div>
-                                                                <div className='col-xl-4'>
+                                                                <div className='col-xl-2'>
                                                                     {metaImage ? (
                                                                         <div className='image'>
                                                                             <picture>
@@ -1064,7 +1064,7 @@ function CollagesFormData() {
                                                                         <div className='border rounded'>
                                                                             <img
                                                                                 id="avatar-image"
-                                                                                src="https://st4.depositphotos.com/16940446/26122/v/450/depositphotos_261227048-stock-illustration-vinyl-banner-blank-white-isolated.jpg"
+                                                                                src="https://lh5.googleusercontent.com/proxy/t08n2HuxPfw8OpbutGWjekHAgxfPFv-pZZ5_-uTfhEGK8B5Lp-VN4VjrdxKtr8acgJA93S14m9NdELzjafFfy13b68pQ7zzDiAmn4Xg8LvsTw1jogn_7wStYeOx7ojx5h63Gliw"
                                                                                 alt="default_image"
                                                                                 style={{
                                                                                     width: "100%",

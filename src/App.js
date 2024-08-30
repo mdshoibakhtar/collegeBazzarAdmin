@@ -255,6 +255,13 @@ import CreateEnquiry from "./pages/Create-Enquiry/Index";
 import EnquiryList from "./pages/List-Enquiry/Index";
 import LeadTypeList from "./components/LeadType/LeadTypeList";
 import LeadTypeAdd from "./components/leadtypead/LeadTypeAdd";
+import OptinManageMent from "./components/optinMangement/OptinManageMent";
+import WaBlockNumber from "./components/waBlockNumber/WaBlockNumber";
+import WhatsAppReports from "./components/whatsAppReports/WhatsAppReports";
+import CompanyMasters from "./pages/companyMasters";
+import CompanyFormMaster from "./components/topNavigationComp/masters/companyMaster/companyFormMaster/CompanyFormMaster";
+import CompanyTypeMasters from "./pages/companyTypeMaster";
+import CompanyTypeMasterForm from "./components/topNavigationComp/masters/companyTypeMaster/companyTypeMasterForm/CompanyTypeMasterForm";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -922,6 +929,26 @@ function App() {
                 element={<AffilatedBy />}
               />
               <Route
+                path="/company-master"
+                element={<CompanyMasters />}
+              />
+              <Route
+                path="/create_company-master"
+                element={<CompanyFormMaster />}
+              />
+              <Route
+                path="/company-type-master"
+                element={<CompanyTypeMasters />}
+              />
+              <Route
+                path="/create_company-type-master"
+                element={<CompanyTypeMasterForm />}
+              />
+              <Route
+                path="/update_company-type-master/:id"
+                element={<CompanyTypeMasterForm />}
+              />
+              <Route
                 path="/create-affilated-by"
                 element={<AffilatedTypesForm />}
               />
@@ -1139,9 +1166,13 @@ function App() {
 
               <Route path="utility-master" element={<WhatsAppManager />}>
                 <Route path="" element={<ListUtility />} />
-                <Route path="New-TemplateForm" element={<NewTemplateForm />} />
+                <Route path="add-wa-templates" element={<NewTemplateForm />} />
+                <Route path="optin-management" element={<OptinManageMent />} />
+                <Route path="whatsapp-blocklist" element={<WaBlockNumber />} />
               </Route>
 
+
+              <Route path="wa-report-download" element={<WhatsAppReports />} />
               <Route path="add-template-type" element={<TemplateTypeAdd />} />
               <Route path="edit-template-type/:id" element={<TemplateTypeAdd />} />
               <Route path="template-type" element={<TableTemplate />} />

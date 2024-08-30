@@ -2183,8 +2183,24 @@ export const getLeadTypeList = (page, count) => {
 
 // -------------------Junaid'S APIS- END------------------------------
 
+// ----------------RELATED COMPANY APIS------------------
 
+export const CompanyTypeList = () => {
+  return axiosInstance.get(`${baseUrl}companyType`);
+};
 
+export const addCompanyType = (data) => {
+  return axiosInstance.post(`${baseUrl}companyType/addType`, data);
+};
+export const deleteCompanyType = (id) => {
+  return axiosInstance.delete(`${baseUrl}companyType/delete_type/${id}`);
+};
+export const updateCompanyType = (id, value) => {
+  return axiosInstance.put(`${baseUrl}companyType/update_type/${id}`, value);
+};
+export const getupdateCompanyTypeId = (id) => {
+  return axiosInstance.get(`${baseUrl}companyType/${id}`);
+};
 
 
 
