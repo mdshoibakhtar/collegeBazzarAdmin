@@ -84,7 +84,7 @@ function CreateUserDistributer() {
   const [initialValues, setInitialValue] = useState({
     is_approved: null
   })
-const [retailerInfo,setRetailerInfo]=useState("")
+  const [retailerInfo, setRetailerInfo] = useState("")
   const handleChange = (e) => {
     const approved = e.target.value;
     console.log("approved----", approved);
@@ -336,54 +336,31 @@ const [retailerInfo,setRetailerInfo]=useState("")
   }, [params?.id]);
   return (
     <>
-      <section className="CreateUserDistributer m-4 ">
+      <section className="CreateUserDistributer m-4">
         <div className="row">
-          <div className="col-xl-12">
+          <div className="col-12">
             <div className="card">
               <div className="card-body p-0">
-                {/* <div className="table-responsive active-projects style-1 " >
-                  <div className="tbl-caption tbl-caption-2" id="justify-none_Tab1">
-                    {TAB.map((item, index) => (
-                      <button
-                        className={`heading mb-0 ${selectedTabPosition === index ? "active" : ""
-                          }`}
-                        // disabled={selectedTabPosition !== index}
-                        onClick={() => tabChange(index)}
-                        key={`tab_${index}`}
-                      >
-                        <b>{item}</b>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {selectedTabPosition === 0 && (
-                  <BasicDetails initialValues={initialValues.basicDetails} validate={validate} submitForm={submitForm} />
-                )}
-                {selectedTabPosition === 1 && (
-                  <Presnoaldetails
-                    initialValues={initialValues.permanentDetails}
-                  />
-                )}
-                {selectedTabPosition === 2 && (
-                  <Services initialValues={initialValues.service} />
-                )} */}
-
-                <div className="table-responsive active-projects style-1 " >
-                  <div className="tbl-caption tbl-caption-2" >
+                <div className="table-responsive active-projects style-1">
+                  <div className="tbl-caption tbl-caption-2 text-center">
                     <h4 className="heading mb-0">
                       {params?.id ? "UPDATE" : "ADD"} USER
-
                     </h4>
                   </div>
                   <Tabs
                     defaultActiveKey="IdentifyVerification"
                     id="uncontrolled-tab-example"
-                    className="mb-3"
-                  >
+                    className="mb-3 res-tab"
 
+                  >
                     <Tab eventKey="IdentifyVerification" title="Identify Verification">
-                      <DocumentDetails initialValues={documnetDetails} state={state} value={documnetDetails} handleInputDocumnetDetail={handleInputDocumnetDetail} submitForm={submitForm} />
+                      <DocumentDetails
+                        initialValues={documnetDetails}
+                        state={state}
+                        value={documnetDetails}
+                        handleInputDocumnetDetail={handleInputDocumnetDetail}
+                        submitForm={submitForm}
+                      />
                     </Tab>
 
                     <Tab eventKey="Personal Details" title="Personal Details">
@@ -393,45 +370,56 @@ const [retailerInfo,setRetailerInfo]=useState("")
                         handleInput_B={handleInput_B}
                       />
                     </Tab>
+
                     <Tab eventKey="GST & Business Details" title="GST & Business Details">
-                      <BasicDetails validate={validate} value={basicDetails} handleInput_A={handleInput_A} business={business} />
+                      <BasicDetails
+                        validate={validate}
+                        value={basicDetails}
+                        handleInput_A={handleInput_A}
+                        business={business}
+                      />
                     </Tab>
+
                     <Tab eventKey="Bank Details" title="Bank Details">
-                      <BankDetail initialValues={bankDetails} validate={validate} value={bankDetails} handleInput_A={handleInput_A} />
+                      <BankDetail
+                        initialValues={bankDetails}
+                        validate={validate}
+                        value={bankDetails}
+                        handleInput_A={handleInput_A}
+                      />
                     </Tab>
-                    <Tab eventKey=" Document | Video KYC" title=" Document | Video KYC">
+
+                    <Tab eventKey="Document | Video KYC" title="Document | Video KYC">
                       <KycDetails initialValues={kycDetails} state={state} />
                     </Tab>
+
                     <Tab eventKey="Approval" title="Approval">
-                      <ApprovedArea initialValues={initialValues} submitApproved={submitApproved} handleChange={handleChange} />
+                      <ApprovedArea
+                        initialValues={initialValues}
+                        submitApproved={submitApproved}
+                        handleChange={handleChange}
+                      />
                     </Tab>
 
-                    {/* <Tab eventKey="Services" title="Services">
-                      <Services initialValues={service} validate={validate} value={state} data={data} submitForm={submitForm} handlePermission={handlePermission} />
-                    </Tab> */}
                     <Tab eventKey="packagess" title="Package">
-                      <Package initialValues={service} validate={validate} value={state} data={data} submitForm={submitForm} handlePermission={handlePermission} retailerInfo={retailerInfo}/>
-                      {/* <Services initialValues={service} validate={validate} value={state} data={data} submitForm={submitForm} handlePermission={handlePermission} /> */}
+                      <Package
+                        initialValues={service}
+                        validate={validate}
+                        value={state}
+                        data={data}
+                        submitForm={submitForm}
+                        handlePermission={handlePermission}
+                        retailerInfo={retailerInfo}
+                      />
                     </Tab>
-
-                    {/* <Tab eventKey="Wallet" title="Wallet">
-                      <Wallet initialValues={wallet} />
-                    </Tab>
-                    <Tab eventKey="billingAddress" title="Billing Address">
-                      <BillingAddress />
-                    </Tab>
-                    <Tab eventKey="shippingAddress" title="Shipping Address">
-                      <ShipingAddress />
-                    </Tab> */}
-
                   </Tabs>
-
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
+
       <ToastContainer />
     </>
   );

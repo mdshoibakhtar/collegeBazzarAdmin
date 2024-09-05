@@ -4,9 +4,9 @@ import React from 'react';
 export const TopTenColleges = ( ) => {
 
     return (
-        <div className="container">
-            <div className="row m-4">
-                <div className="col-xl-12">
+        <div className="container" id='responsive-padding'>
+            <div className="row m-4" id='res-card'>
+                <div className="col-xl-12" id='responsive-padding'>
                     <div className="card">
                         <div className="card-body p-0">
                             <div className="table-responsive active-projects style-1">

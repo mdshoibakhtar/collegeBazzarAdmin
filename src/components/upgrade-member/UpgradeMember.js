@@ -1,76 +1,90 @@
 import React, { useState } from 'react';
 import './member.css';
-import img from '../../assets/images/logo/airtel.png'
+import img from '../../assets/images/logo/airtel.png';
+
 function UpgradeMembers() {
     const [loading, setLoading] = useState(false);
 
-
     return (
-        <div className='card m-4'>
+        <div className='card p-4'>
             <form className='cusforms row'>
-                <div className="form-group col-6">
-                    <label for="memberCode">Member Code</label>
-                    <input type="text" className="form-control" id="memberCode" name="memberCode" placeholder="Enter Member Code" required />
+                <div className="form-group col-lg-6 col-md-12">
+                    <label htmlFor="memberCode">Member Code</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="memberCode"
+                        name="memberCode"
+                        placeholder="Enter Member Code"
+                        required
+                    />
                 </div>
-                <div className="form-group">
+
+                <div className="form-group col-12">
                     <div className="row">
-                        <div className="card col-4 m-2">
-                            <h6>Member Info</h6>
-                            <div className='d-flex'>
-                                <img src={img} alt="Dilip Kumawat" />
-                                <div>
-                                    <h5>Dilip Kumawat (SH124197)</h5>
-                                    <p>MO.: 9890054659</p>
+                        <div className="col-lg-4 col-md-6 col-sm-12 mb-3">
+                            <div className="card p-3">
+                                <h6>Member Info</h6>
+                                <div className='d-flex'>
+                                    <img src={img} alt="Dilip Kumawat" className="img-fluid mr-2" />
+                                    <div>
+                                        <h5>Dilip Kumawat (SH124197)</h5>
+                                        <p>MO.: 9890054659</p>
+                                    </div>
                                 </div>
+                                <div className="state-head">State Head</div>
                             </div>
-                            <div className="state-head">State Head</div>
                         </div>
-                        <div className="card col-4 m-2">
-                            <h6>Parent Info</h6>
-                            <div className='d-flex'>
-                                <img src={img} alt="Dilip Kumawat" />
-                                <div>
-                                    <h5>Dilip Kumawat (SH124197)</h5>
-                                    <p>MO.: 9890054659</p>
+
+                        <div className="col-lg-4 col-md-6 col-sm-12 mb-3">
+                            <div className="card p-3">
+                                <h6>Parent Info</h6>
+                                <div className='d-flex'>
+                                    <img src={img} alt="Dilip Kumawat" className="img-fluid mr-2" />
+                                    <div>
+                                        <h5>Dilip Kumawat (SH124197)</h5>
+                                        <p>MO.: 9890054659</p>
+                                    </div>
                                 </div>
+                                <div className="state-head">State Head</div>
                             </div>
-                            <div className="state-head">State Head</div>
                         </div>
                     </div>
                 </div>
-                <div className="form-group  col-7">
-                    <label for="parentMemberCode">Select New Member Type</label>
-                    <select className="form-select" aria-label="Default select example">
-                        <option selected> Select New Member Type</option>
+
+                <div className="form-group col-lg-7 col-md-8 col-sm-12">
+                    <label htmlFor="newMemberType">Select New Member Type</label>
+                    <select className="form-select" aria-label="Select New Member Type">
+                        <option selected>Select New Member Type</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
                     </select>
                 </div>
-                <div className="form-group  col-7" style={{ margin: '20px 0' }}>
-                    <label for="parentMemberCode">Select New Parent Type</label>
-                    <select className="form-select" aria-label="Default select example">
-                        <option selected> Select New Parent Type</option>
+
+                <div className="form-group col-lg-7 col-md-8 col-sm-12 my-3">
+                    <label htmlFor="newParentType">Select New Parent Type</label>
+                    <select className="form-select" aria-label="Select New Parent Type">
+                        <option selected>Select New Parent Type</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
                     </select>
                 </div>
-                <div className="form-group  col-7">
-                    <label for="parentMemberCode">Select New Parent </label>
-                    <select className="form-select" aria-label="Default select example">
-                        <option selected> Select New Parent </option>
+
+                <div className="form-group col-lg-7 col-md-8 col-sm-12">
+                    <label htmlFor="newParent">Select New Parent</label>
+                    <select className="form-select" aria-label="Select New Parent">
+                        <option selected>Select New Parent</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
                     </select>
                 </div>
-             
-                <div className="form-group  col-8">
-                <button type="submit" style={{margin:"10px 0"}} className="btn btn-primary">Submit</button>
+
+                <div className="form-group col-lg-8 col-md-12 my-3">
+                    <button type="submit" className="btn btn-primary">Submit</button>
                 </div>
-             
-                
             </form>
         </div>
     );

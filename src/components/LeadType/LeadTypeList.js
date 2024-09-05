@@ -96,10 +96,10 @@ function LeadTypeList() {
                                             {data && data.map((item, i) => (
                                                 <tr role="row" className="odd" key={item._id}>
                                                     <td>{i + 1}</td>
-                                                    <td>{item?.leadType}</td>
+                                                    <td>{item?.name}</td>
                                                     <td>
                                                         <div className="d-flex">
-                                                            <Link to={`/edit-lead_Type/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
+                                                            <Link to={`/edit-lead_Type/${item?._id}`} style={{display:"flex" ,alignItems:"center" ,justifyContent:"center"}} className="btn btn-primary shadow btn-xs sharp me-1">
                                                                 <FaRegEdit />
                                                             </Link>
                                                             <Popconfirm

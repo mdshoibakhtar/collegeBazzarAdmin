@@ -4,44 +4,34 @@ import Modal from 'react-bootstrap/Modal';
 
 function CallAddModel(props) {
     const [formValues, setFormValues] = useState({
-        callerNumber: '',
-        startTime: '',
-        callDuration: '',
-        assignedTo: '',
-        convertStatus: '',
-        providerName: '',
+        call_number: '',
+        start_time: '',
+        duration: '',
+        call_direct: '',
+        call_status: '',
+        convert_status: '',
+        provider_name: '',
         callerFrom: '',
-        recordingFileName: '',
-        leadId: '',
-        requestId: '',
-        autoDialerId: '',
-        simName: '',
-        callDirection: '',
-        callStatus: '',
-        callSource: '',
-        extensionUser: '',
         callerTo: '',
-        landingNumber: '',
-        conversationUuid: '',
+        recordingFile: '',
+        landing_number: '',
+        lead_id: '',
+        request_id: '',
+        auto_Dialer_ID: '',
+        siMName: '',
+        deviceSerialNumber: '',
+        conversationUUID: '',
         leg: '',
-        deviceSerialNumber: ''
+        assignTo: [''],
+        companyId: '',
+        extension_user: '',
+        user_id: '',
     });
+
 
     const [errors, setErrors] = useState({});
 
-    const validate = () => {
-        let tempErrors = {};
-        tempErrors.callerNumber = formValues.callerNumber ? "" : "Caller Number is required.";
-        tempErrors.startTime = formValues.startTime ? "" : "Start Time is required.";
-        tempErrors.assignedTo = formValues.assignedTo ? "" : "Assigned To is required.";
-        tempErrors.convertStatus = formValues.convertStatus ? "" : "Convert Status is required.";
-        tempErrors.providerName = formValues.providerName ? "" : "Provider Name is required.";
-        tempErrors.callerFrom = formValues.callerFrom ? "" : "Caller From is required.";
-        tempErrors.leadId = formValues.leadId ? "" : "Lead ID is required.";
-        tempErrors.simName = formValues.simName ? "" : "SIM Name is required.";
-        setErrors(tempErrors);
-        return Object.values(tempErrors).every(x => x === "");
-    };
+   
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -53,10 +43,8 @@ function CallAddModel(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (validate()) {
-            console.log(formValues);
-            // Submit form logic here
-        }
+        console.log(formValues);
+        
     };
 
     return (
@@ -78,31 +66,29 @@ function CallAddModel(props) {
                             <label>Caller Number</label>
                             <input
                                 type="text"
-                                name="callerNumber"
+                                name="call_number"
                                 style={{ width: "100%" }}
-                                value={formValues.callerNumber}
+                                value={formValues.call_number}
                                 onChange={handleChange}
                                 className="form-control"
                             />
-                            {errors.callerNumber && <div className="text-danger">{errors.callerNumber}</div>}
                         </div>
                         <div className="col-md-6 mb-3">
                             <label>Start Time</label>
                             <input
                                 type="datetime-local"
-                                name="startTime"
-                                value={formValues.startTime}
+                                name="start_time"
+                                value={formValues.start_time}
                                 onChange={handleChange}
                                 className="form-control"
                             />
-                            {errors.startTime && <div className="text-danger">{errors.startTime}</div>}
                         </div>
                         <div className="col-md-6 mb-3">
-                            <label>Call Duration</label>
+                            <label>Duration</label>
                             <input
                                 type="time"
-                                name="callDuration"
-                                value={formValues.callDuration}
+                                name="duration"
+                                value={formValues.duration}
                                 onChange={handleChange}
                                 className="form-control"
                             />
@@ -110,8 +96,8 @@ function CallAddModel(props) {
                         <div className="col-md-6 mb-3">
                             <label>Call Direction</label>
                             <select
-                                name="callDirection"
-                                value={formValues.callDirection}
+                                name="call_direct"
+                                value={formValues.call_direct}
                                 onChange={handleChange}
                                 className="form-control"
                             >
@@ -123,22 +109,23 @@ function CallAddModel(props) {
                         <div className="col-md-6 mb-3">
                             <label>Assigned To</label>
                             <select
-                                name="assignedTo"
-                                value={formValues.assignedTo}
-                                onChange={handleChange}
+                                name="assignTo"
+                                value={formValues.assignTo[0]}
+                                onChange={(e) =>
+                                    setFormValues({ ...formValues, assignTo: [e.target.value] })
+                                }
                                 className="form-control"
                             >
                                 <option value="">Select An Option</option>
                                 <option value="Abdul">Abdul</option>
                                 <option value="Someone Else">Someone Else</option>
                             </select>
-                            {errors.assignedTo && <div className="text-danger">{errors.assignedTo}</div>}
                         </div>
                         <div className="col-md-6 mb-3">
                             <label>Call Status</label>
                             <select
-                                name="callStatus"
-                                value={formValues.callStatus}
+                                name="call_status"
+                                value={formValues.call_status}
                                 onChange={handleChange}
                                 className="form-control"
                             >
@@ -150,8 +137,8 @@ function CallAddModel(props) {
                         <div className="col-md-6 mb-3">
                             <label>Convert Status</label>
                             <select
-                                name="convertStatus"
-                                value={formValues.convertStatus}
+                                name="convert_status"
+                                value={formValues.convert_status}
                                 onChange={handleChange}
                                 className="form-control"
                             >
@@ -159,7 +146,6 @@ function CallAddModel(props) {
                                 <option value="Converted">Converted</option>
                                 <option value="Not Converted">Not Converted</option>
                             </select>
-                            {errors.convertStatus && <div className="text-danger">{errors.convertStatus}</div>}
                         </div>
                         <div className="col-md-6 mb-3">
                             <label>Call Source</label>
@@ -178,19 +164,18 @@ function CallAddModel(props) {
                             <label>Provider Name</label>
                             <input
                                 type="text"
-                                name="providerName"
+                                name="provider_name"
                                 style={{ width: "100%" }}
-                                value={formValues.providerName}
+                                value={formValues.provider_name}
                                 onChange={handleChange}
                                 className="form-control"
                             />
-                            {errors.providerName && <div className="text-danger">{errors.providerName}</div>}
                         </div>
                         <div className="col-md-6 mb-3">
-                            <label>Extension User</label>
+                            <label>Staff</label>
                             <select
-                                name="extensionUser"
-                                value={formValues.extensionUser}
+                                name="extension_user"
+                                value={formValues.extension_user}
                                 onChange={handleChange}
                                 className="form-control"
                             >
@@ -209,7 +194,6 @@ function CallAddModel(props) {
                                 onChange={handleChange}
                                 className="form-control"
                             />
-                            {errors.callerFrom && <div className="text-danger">{errors.callerFrom}</div>}
                         </div>
                         <div className="col-md-6 mb-3">
                             <label>Caller To</label>
@@ -227,8 +211,8 @@ function CallAddModel(props) {
                             <input
                                 style={{ width: "100%" }}
                                 type="text"
-                                name="recordingFileName"
-                                value={formValues.recordingFileName}
+                                name="recordingFile"
+                                value={formValues.recordingFile}
                                 onChange={handleChange}
                                 className="form-control"
                             />
@@ -238,8 +222,8 @@ function CallAddModel(props) {
                             <input
                                 style={{ width: "100%" }}
                                 type="text"
-                                name="landingNumber"
-                                value={formValues.landingNumber}
+                                name="landing_number"
+                                value={formValues.landing_number}
                                 onChange={handleChange}
                                 className="form-control"
                             />
@@ -249,20 +233,19 @@ function CallAddModel(props) {
                             <input
                                 style={{ width: "100%" }}
                                 type="text"
-                                name="leadId"
-                                value={formValues.leadId}
+                                name="lead_id"
+                                value={formValues.lead_id}
                                 onChange={handleChange}
                                 className="form-control"
                             />
-                            {errors.leadId && <div className="text-danger">{errors.leadId}</div>}
                         </div>
                         <div className="col-md-6 mb-3">
-                            <label>request_id</label>
+                            <label>Request ID</label>
                             <input
                                 style={{ width: "100%" }}
                                 type="text"
-                                name="requestId"
-                                value={formValues.requestId}
+                                name="request_id"
+                                value={formValues.request_id}
                                 onChange={handleChange}
                                 className="form-control"
                             />
@@ -272,8 +255,8 @@ function CallAddModel(props) {
                             <input
                                 style={{ width: "100%" }}
                                 type="text"
-                                name="autoDialerId"
-                                value={formValues.autoDialerId}
+                                name="auto_Dialer_ID"
+                                value={formValues.auto_Dialer_ID}
                                 onChange={handleChange}
                                 className="form-control"
                             />
@@ -283,12 +266,11 @@ function CallAddModel(props) {
                             <input
                                 style={{ width: "100%" }}
                                 type="text"
-                                name="simName"
-                                value={formValues.simName}
+                                name="siMName"
+                                value={formValues.siMName}
                                 onChange={handleChange}
                                 className="form-control"
                             />
-                            {errors.simName && <div className="text-danger">{errors.simName}</div>}
                         </div>
                         <div className="col-md-6 mb-3">
                             <label>Device Serial Number</label>
@@ -306,8 +288,8 @@ function CallAddModel(props) {
                             <input
                                 style={{ width: "100%" }}
                                 type="text"
-                                name="conversationUuid"
-                                value={formValues.conversationUuid}
+                                name="conversationUUID"
+                                value={formValues.conversationUUID}
                                 onChange={handleChange}
                                 className="form-control"
                             />
@@ -323,9 +305,26 @@ function CallAddModel(props) {
                                 className="form-control"
                             />
                         </div>
+                        <div className="col-md-6 mb-3">
+                            <label>Company ID</label>
+                            <input
+                                style={{ width: "100%" }}
+                                type="text"
+                                name="companyId"
+                                value={formValues.companyId}
+                                onChange={handleChange}
+                                className="form-control"
+                            />
+                        </div>
+                       
+                        <div className="col-md-12 text-center mt-4">
+                            <button type="submit" className="btn btn-primary">
+                                Submit
+                            </button>
+                        </div>
                     </div>
-                    <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
+
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={props.onHide}>Close</Button>

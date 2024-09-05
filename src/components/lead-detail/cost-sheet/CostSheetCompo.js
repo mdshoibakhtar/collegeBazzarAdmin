@@ -13,7 +13,7 @@ function CostSheetCompo() {
                         <div className="col-12 mb-2 d-flex justify-content-between">
                             <span className="pull-left" style={{alignItems:"center" , display:"flex"}} onClick={() => setModalShow(true)}>
 
-                                Create Cost Sheet  <i className="fa fa-plus" />
+                                Create Cost Sheet  <i className="fa fa-plus hide-responsive" />
 
                             </span>
                             <CostSheetAdd show={modalShow}

@@ -2174,9 +2174,14 @@ export const updateLeadType = (data) => {
   return axiosInstance.put(`${baseUrl}leadType/update_type/${data.id}`, data.data);
 };
 
+
 // GET the list of lead types with pagination
 export const getLeadTypeList = (page, count) => {
   return axiosInstance.get(`${baseUrl}leadType?page=${page}&count=${count}`);
+};
+
+export const updateLeadBulkEdit = (data) => {
+  return axiosInstance.put(`${baseUrl}user/bulkupdate` , data);
 };
 
 

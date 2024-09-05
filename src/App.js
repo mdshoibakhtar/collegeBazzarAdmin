@@ -562,7 +562,7 @@ function App() {
 
 
               <Route
-                path="create-user/:id"
+                path="/admin/create-user/:id"
                 element={<CreateUserDistributerPage />}
               />
               <Route

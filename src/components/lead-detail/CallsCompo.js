@@ -13,7 +13,7 @@ function CallsCompo() {
                         <div className="col-12 mb-2 d-flex justify-content-between">
                             <span className="pull-left" style={{alignItems:"center" , display:"flex"}} onClick={() => setModalShow(true)}>
 
-                                Create Calls  <i className="fa fa-plus" />
+                                Create Calls  <i className="fa fa-plus hide-responsive" aria-hidden="true"></i>
 
                             </span>
                             <CallAddModel show={modalShow}

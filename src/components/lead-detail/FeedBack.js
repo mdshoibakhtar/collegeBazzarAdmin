@@ -16,7 +16,7 @@ function FeedBack() {
                         <div className="col-12 mb-2 d-flex justify-content-between">
                             <span className="pull-left" style={{alignItems:"center" , display:"flex"}} onClick={() => setModalShow(true)}>
 
-                                Add FeedBack  <i className="fa fa-plus" />
+                                Add FeedBack  <i className="fa fa-plus hide-responsive" />
 
                             </span>
                             <AddFeedback show={modalShow}

@@ -1,10 +1,10 @@
-import React from 'react'
-import { Card } from 'react-bootstrap'
-import CustomInputField from '../../../../common/CustomInputField'
-import { Formik } from 'formik/dist'
+import React from 'react';
+import { Card } from 'react-bootstrap';
+import CustomInputField from '../../../../common/CustomInputField';
+import { Formik } from 'formik/dist';
 
-function DocumentDetails({ initialValues, state,  value, handleInputDocumnetDetail, submitForm }) {
-    console.log('state----', state)
+function DocumentDetails({ initialValues, state, value, handleInputDocumnetDetail, submitForm }) {
+    console.log('state----', state);
 
     const validate = (values) => {
         let errors = {};
@@ -17,8 +17,6 @@ function DocumentDetails({ initialValues, state,  value, handleInputDocumnetDeta
             errors.is_adhaar_verified = "Verified Required";
         }
 
-
-
         if (!values.pan_number) {
             errors.pan_number = "pan_number is required";
         }
@@ -30,17 +28,18 @@ function DocumentDetails({ initialValues, state,  value, handleInputDocumnetDeta
     };
 
     return (
-        <div className="row m-4">
-            <div className="col-xl-12">
+        <div className="row m-4  res-card" id='res-card'>
+            <div className="col-12">
                 <div className='row'>
-                    <div className='col-xl-6'>
+                    {/* Aadhar Details */}
+                    <div className='col-lg-6 col-md-12 mb-4'>
                         <div className="card-body p-0">
                             <div className="table-responsive active-projects style-1">
-                                <div className="tbl-caption bg-primary justify-content-center">
+                                <div className="tbl-caption bg-primary text-center">
                                     <h4 className="heading mb-0 border p-1 rounded udtfont"><b>Aadhar Details</b></h4>
                                 </div>
-                                <div className="card mt-3" style={{}}>
-                                    <div className='' >
+                                <div className="card mt-3">
+                                    <div className=''>
                                         <h2 className='text-center'>Document</h2>
                                     </div>
                                     <Formik
@@ -58,13 +57,11 @@ function DocumentDetails({ initialValues, state,  value, handleInputDocumnetDeta
                                                 errors,
                                                 touched,
                                                 handleBlur,
-                                                isValid,
-                                                dirty,
                                             } = formik;
                                             return (
                                                 <form className="tbl-captionn" onSubmit={handleSubmit}>
-                                                    <div className='row' style={{ width: '80%', marginLeft: '10px' }}>
-                                                        <div className="col-xl-12 mb-3">
+                                                    <div className='row' style={{ width: '100%', marginLeft: 'auto', marginRight: 'auto' }}>
+                                                        <div className="col-12 mb-3">
                                                             <label className='ms-2'>Adhaar Number</label>
                                                             <CustomInputField
                                                                 type="text"
@@ -80,17 +77,15 @@ function DocumentDetails({ initialValues, state,  value, handleInputDocumnetDeta
                                                                 placeholder="Adhaar Number"
                                                             />
                                                         </div>
-                                                        <div className="col-xl-12 mb-3">
+                                                        <div className="col-12 mb-3">
                                                             <div style={{ display: 'flex', alignItems: 'center' }}>
-                                                                <label className='ms-2 mb-0' style={{ fontSize: '14px' }}>Adhaar Name: </label>
-                                                                <h4 className='ms-2 mb-0' style={{ color: 'gray',textTransform:"uppercase" }}>{state?.adhaar_name}</h4>
+                                                                <label className='ms-2 mb-0'>Adhaar Name: </label>
+                                                                <h4 className='ms-2 mb-0' style={{ color: 'gray', textTransform: "uppercase" }}>{state?.adhaar_name}</h4>
                                                             </div>
                                                         </div>
-                                                        <div className="col-xl-12 mb-3">
+                                                        <div className="col-12 mb-3">
                                                             <label className='ms-2'>Is Verified</label>
-                                                            <select className="form-select" aria-label="Default select example" id="" value={values?.is_adhaar_verified} name="is_adhaar_verified" onChange={handleInputDocumnetDetail}
-                                                            >
-                                                                {/* <option selected>{values?.is_adhaar_verified}</option> */}
+                                                            <select className="form-select" aria-label="Default select example" value={values?.is_adhaar_verified} name="is_adhaar_verified" onChange={handleInputDocumnetDetail}>
                                                                 <option value={true}>Yes</option>
                                                                 <option value={false}>No</option>
                                                             </select>
@@ -101,18 +96,19 @@ function DocumentDetails({ initialValues, state,  value, handleInputDocumnetDeta
                                         }}
                                     </Formik>
                                 </div>
-
                             </div>
                         </div>
                     </div>
-                    <div className='col-xl-6'>
+
+                    {/* Pancard Details */}
+                    <div className='col-lg-6 col-md-12 mb-4'>
                         <div className="card-body p-0">
                             <div className="table-responsive active-projects style-1">
-                                <div className="tbl-caption bg-primary justify-content-center">
+                                <div className="tbl-caption bg-primary text-center">
                                     <h4 className="heading mb-0 border p-1 rounded udtfont"><b>Pancard Details</b></h4>
                                 </div>
-                                <div className="card mt-3" style={{}}>
-                                    <div className='' >
+                                <div className="card mt-3">
+                                    <div className=''>
                                         <h2 className='text-center'>Document</h2>
                                     </div>
                                     <Formik
@@ -130,14 +126,12 @@ function DocumentDetails({ initialValues, state,  value, handleInputDocumnetDeta
                                                 errors,
                                                 touched,
                                                 handleBlur,
-                                                isValid,
-                                                dirty,
                                             } = formik;
                                             return (
                                                 <form className="tbl-captionn" onSubmit={handleSubmit}>
-                                                    <div className='row' style={{ width: '80%', marginLeft: '10px' }}>
-                                                        <div className="col-xl-12 mb-3">
-                                                            <label className='ms-2' style={{ fontSize: '14px' }}>Pan Number</label>
+                                                    <div className='row' style={{ width: '100%', marginLeft: 'auto', marginRight: 'auto' }}>
+                                                        <div className="col-12 mb-3">
+                                                            <label className='ms-2'>Pan Number</label>
                                                             <CustomInputField
                                                                 type="text"
                                                                 value={values?.pan_number}
@@ -152,18 +146,16 @@ function DocumentDetails({ initialValues, state,  value, handleInputDocumnetDeta
                                                                 placeholder="PAN Number"
                                                             />
                                                         </div>
-                                                        <div className="col-xl-12 mb-3">
+                                                        <div className="col-12 mb-3">
                                                             <div style={{ display: 'flex', alignItems: 'center' }}>
-                                                                <label className='ms-2 mb-0' style={{ fontSize: '14px' }}>Pan Name: </label>
+                                                                <label className='ms-2 mb-0'>Pan Name: </label>
                                                                 <h4 className='ms-2 mb-0' style={{ color: 'gray' }}>{state?.pan_name}</h4>
                                                             </div>
                                                         </div>
-                                                        <div className="col-xl-12 mb-3">
-                                                            <label className='ms-2' style={{ fontSize: '14px' }}>Is Verified</label>
-                                                            <select className="form-select" aria-label="Default select example" id="" value={values?.is_pan_verified} name="is_pan_verified" onChange={handleInputDocumnetDetail}
-                                                            >
-                                                                {/* <option selected>{values?.is_pan_verified}</option> */}
-                                                                <option value={true}>yes</option>
+                                                        <div className="col-12 mb-3">
+                                                            <label className='ms-2'>Is Verified</label>
+                                                            <select className="form-select" aria-label="Default select example" value={values?.is_pan_verified} name="is_pan_verified" onChange={handleInputDocumnetDetail}>
+                                                                <option value={true}>Yes</option>
                                                                 <option value={false}>No</option>
                                                             </select>
                                                         </div>
@@ -177,10 +169,9 @@ function DocumentDetails({ initialValues, state,  value, handleInputDocumnetDeta
                         </div>
                     </div>
                 </div>
-
             </div>
-        </div >
-    )
+        </div>
+    );
 }
 
-export default DocumentDetails
+export default DocumentDetails;

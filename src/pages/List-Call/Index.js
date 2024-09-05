@@ -113,8 +113,8 @@ function CallList() {
     return (
         <div className="row m-4">
             <div className="col-xl-12">
-                <div className="card">
-                    <div className="card-body">
+                <div className="card" id='responsive-padding'>
+                    <div className="card-body" id='responsive-padding'>
                         {/* Filter Form */}
                         <div className="filter-form mb-4">
                             <div className="table-responsive active-projects style-1">

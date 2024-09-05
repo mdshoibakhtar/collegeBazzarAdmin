@@ -90,6 +90,7 @@ function ManageTemplete() {
                         <span className="me-2 fs-4"><i class="fas fa-text-height"></i></span>Add Templete
                     </button>
                 </div>
+                <div style={{overflow:"auto"}}>
                 <table className='table'>
                     <thead>
                         <tr>
@@ -147,6 +148,7 @@ function ManageTemplete() {
                         })}
                     </tbody>
                 </table>
+            </div>
             </div>
             <AddTempleteModal show={show} setShow={setShow} />
         </>

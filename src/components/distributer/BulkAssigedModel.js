@@ -4,7 +4,8 @@ import Modal from 'react-bootstrap/Modal';
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
-import { getServiceCategory, getStaffpermisionall, leadenquiryStatusMasterListAll, leadSubStatusMasterListAll, reailerDistIdAgainstAll } from '../../api/login/Login';
+import { getLeadTypeList, getServiceCategory, getStaffpermisionall, leadenquiryStatusMasterListAll, leadSubStatusMasterListAll, reailerDistIdAgainstAll, updateLeadBulkEdit } from '../../api/login/Login';
+import { toast, ToastContainer } from 'react-toastify';
 
 function BulkAssignedModel(props) {
     const [data, setData] = useState(props?.selectedUsers);
@@ -27,7 +28,9 @@ function BulkAssignedModel(props) {
             const res2 = await getStaffpermisionall({ page: 0, count: 100 });
             const res3 = await leadSubStatusMasterListAll();
             const res4 = await leadenquiryStatusMasterListAll();
+            const res5 = await getLeadTypeList(0, 100)
             setStream(res?.data);
+            setLeadTypes(res5.data)
             setCourses(res1.data);
             setStaff(res2.data);
             setLeadSubStatuses(res3.data);
@@ -55,6 +58,35 @@ function BulkAssignedModel(props) {
     };
 
 
+    const toastSuccessMessage = () => {
+        toast.success(`Lead Edit Updated Successfully.`, {
+            position: "top-center",
+        });
+    };
+    const errorMessage = () => {
+        toast.error(`Lead Edit Not Updated.`, {
+            position: "top-center"
+        })
+    }
+
+    const submitdata = async () => {
+
+
+        const maped = data?.map((item) => {
+            return { ...item, lead_status: item?.leadStatus, assignTo: [item?.leadAssign], lead_sub_status: item?.leadSubStatus, course_id: [item?.courses], stream_id: [item?.streams] }
+        }
+        )
+
+        const res =await updateLeadBulkEdit({ leads: maped })
+        if (res && res.statusCode == "200") {
+            toastSuccessMessage();
+        } else {
+            errorMessage();
+        }
+
+    }
+
+
     return (
         <Modal
             {...props}
@@ -63,6 +95,7 @@ function BulkAssignedModel(props) {
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
+             <ToastContainer />
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
                     Mass Lead Editing
@@ -97,9 +130,9 @@ function BulkAssignedModel(props) {
                                     onChange={(e) => handleFormChange(e.target.name, e.target.value)}
                                 >
                                     <option value="" >Select Lead Type</option>
-                                    <option value="type1">Type 1</option>
-                                    <option value="type2">Type 2</option>
-                                    <option value="type3">Type 3</option>
+                                    {leadTypes?.map((subst) => {
+                                        return <option key={subst._id} value={subst._id}>{subst.name}</option>
+                                    })}
                                 </select>
                             </div>
 
@@ -263,9 +296,9 @@ function BulkAssignedModel(props) {
                                             onChange={(e) => handleInputChange(index, 'leadType', e.target.value)}
                                         >
                                             <option value="">Select Lead Type</option>
-                                            <option value="type1">Type 1</option>
-                                            <option value="type2">Type 2</option>
-                                            <option value="type3">Type 3</option>
+                                            {leadTypes?.map((subst) => {
+                                                return <option key={subst._id} value={subst._id}>{subst.name}</option>
+                                            })}
                                         </Form.Select>
                                     </td>
                                     <td>
@@ -329,6 +362,7 @@ function BulkAssignedModel(props) {
                 </Container>
             </Modal.Body>
             <Modal.Footer>
+                <Button onClick={submitdata} > Submit</Button>
                 <Button onClick={props.onHide}>Close</Button>
             </Modal.Footer>
         </Modal>

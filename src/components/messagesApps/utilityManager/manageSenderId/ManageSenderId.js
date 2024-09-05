@@ -90,59 +90,61 @@ function ManageSenderId() {
                         <span className="me-2 fs-4"><i className="fas fa-id-card"></i></span>Add Sender ID
                     </button>
                 </div>
-                <table className='table'>
-                    <thead>
-                        <tr>
-                            <th>
-                                <p className="m-0"><small style={{ fontSize: "0.8em" }}>Select All</small></p>
-                                <div className="form-check">
-                                    <input
-                                        className="form-check-input"
-                                        type="checkbox"
-                                        id="selectAll"
-                                        checked={selectAll}
-                                        onChange={handleSelectAll}
-                                    />
-                                </div>
-                            </th>
-                            <th>Header</th>
-                            <th>User Assign To</th>
-                            <th>PE Id</th>
-                            <th>Template Type</th>
-                            <th>Header Type</th>
-                            <th>Language</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {templates.map((template) => {
-                            const isChecked = selectedUsers.some(user => user?._id === template?._id);
-                            return (
-                                <tr key={template._id}>
-                                    <td>
-                                        <div className="form-check">
-                                            <input
-                                                className="form-check-input"
-                                                type="checkbox"
-                                                checked={isChecked}
-                                                onChange={(e) => handleCheckboxChange(e, template)}
-                                            />
-                                        </div>
-                                    </td>
-                                    <td>{template.userName}</td>
-                                    <td>{template.templateName}</td>
-                                    <td>{template.phoneNumber}</td>
-                                    <td>{template.templateType}</td>
-                                    <td>{template.headerType}</td>
-                                    <td>{template.language}</td>
-                                    <td>{template.status}</td>
-                                    <td>--</td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
+                <div style={{overflow:"auto"}}>
+                    <table className='table'>
+                        <thead>
+                            <tr>
+                                <th>
+                                    <p className="m-0"><small style={{ fontSize: "0.8em" }}>Select All</small></p>
+                                    <div className="form-check">
+                                        <input
+                                            className="form-check-input"
+                                            type="checkbox"
+                                            id="selectAll"
+                                            checked={selectAll}
+                                            onChange={handleSelectAll}
+                                        />
+                                    </div>
+                                </th>
+                                <th>Header</th>
+                                <th>User Assign To</th>
+                                <th>PE Id</th>
+                                <th>Template Type</th>
+                                <th>Header Type</th>
+                                <th>Language</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {templates.map((template) => {
+                                const isChecked = selectedUsers.some(user => user?._id === template?._id);
+                                return (
+                                    <tr key={template._id}>
+                                        <td>
+                                            <div className="form-check">
+                                                <input
+                                                    className="form-check-input"
+                                                    type="checkbox"
+                                                    checked={isChecked}
+                                                    onChange={(e) => handleCheckboxChange(e, template)}
+                                                />
+                                            </div>
+                                        </td>
+                                        <td>{template.userName}</td>
+                                        <td>{template.templateName}</td>
+                                        <td>{template.phoneNumber}</td>
+                                        <td>{template.templateType}</td>
+                                        <td>{template.headerType}</td>
+                                        <td>{template.language}</td>
+                                        <td>{template.status}</td>
+                                        <td>--</td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <SenderIdModal show={show} setShow={setShow} />
         </>

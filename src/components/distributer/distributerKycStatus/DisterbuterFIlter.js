@@ -80,15 +80,15 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
     return (
         <>
             <div className="row m-4">
-                <div className="col-xl-12" style={{ padding: "0" }}>
+                <div className="col-12">
                     <div className="card">
                         <div className="card-body p-0">
                             <div className="table-responsive active-projects style-1">
                                 <div className="tbl-caption tbl-caption-2">
                                     <h4 className="heading mb-0"><b>Filter &nbsp; &nbsp;{`${params?.name}`}  </b></h4>
                                 </div>
-                                <form className="row cusforms" style={{ padding: "20px" }} onSubmit={handleSubmit}>
-                                <div className="form-group col-3">
+                                <form className="row cusforms p-4" onSubmit={handleSubmit}>
+                                    <div className="form-group col-lg-3 col-md-6 col-12">
                                         <label htmlFor="fromDate">From Date</label>
                                         <input
                                             type="date"
@@ -98,7 +98,7 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
                                             onChange={handleChange}
                                         />
                                     </div>
-                                    <div className="form-group col-3">
+                                    <div className="form-group col-lg-3 col-md-6 col-12">
                                         <label htmlFor="toDate">To Date</label>
                                         <input
                                             type="date"
@@ -108,7 +108,7 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
                                             onChange={handleChange}
                                         />
                                     </div>
-                                    <div className="form-group col-3">
+                                    <div className="form-group col-lg-3 col-md-6 col-12">
                                         <label htmlFor="name">Name</label>
                                         <input
                                             type="text"
@@ -119,7 +119,7 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
                                             onChange={handleChange}
                                         />
                                     </div>
-                                    <div className="form-group col-3">
+                                    <div className="form-group col-lg-3 col-md-6 col-12">
                                         <label htmlFor="mobile">Mobile Number</label>
                                         <input
                                             type="text"
@@ -130,7 +130,7 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
                                             onChange={handlePhoneChange}
                                         />
                                     </div>
-                                    <div className="form-group col-3">
+                                    <div className="form-group col-lg-3 col-md-6 col-12">
                                         <label htmlFor="email">Email</label>
                                         <input
                                             type="email"
@@ -141,7 +141,7 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
                                             onChange={handleChange}
                                         />
                                     </div>
-                                    <div className="form-group col-3">
+                                    <div className="form-group col-lg-3 col-md-6 col-12">
                                         <label htmlFor="refer_id">{params?.name} Ref id</label>
                                         <input
                                             type="text"
@@ -152,7 +152,7 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
                                             onChange={handleChange}
                                         />
                                     </div>
-                                    <div className="form-group col-3">
+                                    <div className="form-group col-lg-3 col-md-6 col-12">
                                         <label htmlFor="kycStatus">KYC Status</label>
                                         <select
                                             className="form-control"
@@ -165,7 +165,7 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
                                             <option value="unverified">Unverified</option>
                                         </select>
                                     </div>
-                                    <div className="form-group col-3">
+                                    <div className="form-group col-lg-3 col-md-6 col-12">
                                         <label htmlFor="leadStatus">Lead Status</label>
                                         <select
                                             className="form-control"
@@ -184,7 +184,7 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
                                             <Alert message="Warning" description={error} type="warning" showIcon closable />
                                         </div>
                                     )}
-                                    <div className="form-group col-12">
+                                    <div className="form-group col-12 d-flex justify-content-between">
                                         <button type="submit" className="btn btn-primary" disabled={isSearchDisabled}>
                                             SEARCH
                                         </button>
