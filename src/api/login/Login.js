@@ -2181,7 +2181,541 @@ export const getLeadTypeList = (page, count) => {
 };
 
 export const updateLeadBulkEdit = (data) => {
-  return axiosInstance.put(`${baseUrl}user/bulkupdate` , data);
+  return axiosInstance.put(`${baseUrl}user/bulkupdate`, data);
+};
+
+
+
+// DELETE a comment by ID
+export const deleteCommentById = (id) => {
+  return axiosInstance.delete(`/comment/delete_type/${id}`);
+};
+
+// GET comments by user ID with pagination
+export const getCommentsByUser = (userId, page = 0, count = 10) => {
+  return axiosInstance.get(`/comment/user?id=${userId}&page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET a comment by ID
+export const getCommentById = (id) => {
+  return axiosInstance.get(`/comment/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new comment
+export const postComments = (data) => {
+  return axiosInstance.post(`/comment/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing comment by ID
+export const updateCommentById = (id, data) => {
+  return axiosInstance.put(`/comment/update_type/${id}`, data);
+};
+
+
+
+
+// DELETE a call by ID
+export const deleteCallById = (id) => {
+  return axiosInstance.delete(`/call/delete_type/${id}`);
+};
+
+// GET calls by user ID with pagination
+export const getCallsByUser = (userId, page = 0, count = 10) => {
+  return axiosInstance.get(`/call/user?id=${userId}&page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET a call by ID
+export const getCallById = (id) => {
+  return axiosInstance.get(`/call/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new call
+export const postCall = (data) => {
+  return axiosInstance.post(`/call/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing call by ID
+export const updateCallById = (id, data) => {
+  return axiosInstance.put(`/call/update_type/${id}`, data);
+};
+
+
+
+
+
+// DELETE a call status by ID
+export const deleteCallStatusById = (id) => {
+  return axiosInstance.delete(`/call-status/delete_type/${id}`);
+};
+
+// GET calls by user ID with pagination
+export const getCallsStatusByUser = (userId, page = 0, count = 10) => {
+  return axiosInstance.get(`/call-status?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET a call by ID
+export const getCallByStatusId = (id) => {
+  return axiosInstance.get(`/call-status/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new call
+export const postCallStatus = (data) => {
+  return axiosInstance.post(`/call-status/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing call by ID
+export const updateCallStatusById = (id, data) => {
+  return axiosInstance.put(`/call-status/update_type/${id}`, data);
+};
+
+
+
+
+
+// DELETE a call convert status by ID
+export const deleteCallConvertStatusById = (id) => {
+  return axiosInstance.delete(`/call-convert-status/delete_type/${id}`);
+};
+
+// GET call convert statuses by user ID with pagination
+export const getCallConvertStatusByUser = (userId, page = 0, count = 10) => {
+  return axiosInstance.get(`/call-convert-status?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET a call convert status by ID
+export const getCallConvertStatusById = (id) => {
+  return axiosInstance.get(`/call-convert-status/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new call convert status
+export const postCallConvertStatus = (data) => {
+  return axiosInstance.post(`/call-convert-status/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing call convert status by ID
+export const updateCallConvertStatusById = (id, data) => {
+  return axiosInstance.put(`/call-convert-status/update_type/${id}`, data);
+};
+
+
+// DELETE a call source by ID
+export const deleteCallSourceById = (id) => {
+  return axiosInstance.delete(`/call-source/delete_type/${id}`);
+};
+
+// GET call sources by user ID with pagination
+export const getCallSourceByUser = (userId, page = 0, count = 10) => {
+  return axiosInstance.get(`/call-source?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET a call source by ID
+export const getCallSourceById = (id) => {
+  return axiosInstance.get(`/call-source/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new call source
+export const postCallSource = (data) => {
+  return axiosInstance.post(`/call-source/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing call source by ID
+export const updateCallSourceById = (id, data) => {
+  return axiosInstance.put(`/call-source/update_type/${id}`, data);
+};
+
+
+// API use in call ADD
+
+
+export const getAllAssign = (userId, page = 0, count = 10) => {
+  return axiosInstance.get(`/staff/admin`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const postCalls = (data) => {
+  return axiosInstance.post(`/call/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getCallList = (userId, page = 0, count = 10) => {
+  return axiosInstance.get(`/call/user?id=${userId}&page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const postFeedBack = (data) => {
+  return axiosInstance.post(`/feedback/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getFeedBackList = (userId, page = 0, count = 10) => {
+  return axiosInstance.get(`/feedback/user?id=${userId}&page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+export const postCost = (data) => {
+  return axiosInstance.post(`/costSheet/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const geCostSheet = (userId, page = 0, count = 10) => {
+  return axiosInstance.get(`/costSheet/user?id=${userId}&page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+export const postChatting = (data) => {
+  return axiosInstance.post(`/chat/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const geChatting = (userId, page = 0, count = 10) => {
+  return axiosInstance.get(`/chat/user?id=${userId}&page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// creud //
+
+export const deleteContestTypeById = (id) => {
+  return axiosInstance.delete(`/contestType/delete_type/${id}`);
+};
+
+export const getContestTypeByPage = (page, count) => {
+  return axiosInstance.get(`/contestType/page?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getContestTypeById = (id) => {
+  return axiosInstance.get(`/contestType/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const postContestType = (data) => {
+  return axiosInstance.post(`/contestType/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const updateContestTypeById = (id, data) => {
+  return axiosInstance.put(`/contestType/update_type/${id}`, data);
+};
+
+
+
+
+export const deleteMarketTypeById = (id) => {
+  return axiosInstance.delete(`/marketType/delete_type/${id}`);
+};
+
+export const getMarketTypeByPage = (page, count) => {
+  return axiosInstance.get(`/marketType/admin?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getMarketTypeById = (id) => {
+  return axiosInstance.get(`/marketType/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const postMarketType = (data) => {
+  return axiosInstance.post(`/marketType/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const updateMarketTypeById = (id, data) => {
+  return axiosInstance.put(`/marketType/update_type/${id}`, data);
+};
+
+
+// Delete a contest by its ID
+export const deleteContestById = (id) => {
+  return axiosInstance.delete(`/Contest/delete_type/${id}`);
+};
+
+// Get a paginated list of contests
+export const getContestByPage = (page, count) => {
+  return axiosInstance.get(`/Contest/page?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// Get details of a specific contest by its ID
+export const getContestById = (id) => {
+  return axiosInstance.get(`/Contest/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// Add a new contest
+export const postContest = (data) => {
+  return axiosInstance.post(`/Contest/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// Update an existing contest by its ID
+export const updateContestById = (id, data) => {
+  return axiosInstance.put(`/Contest/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+
+// Delete a banner by its ID
+export const deleteBannerById = (id) => {
+  return axiosInstance.delete(`/Banner/deletebanner/${id}`);
+};
+
+// Get a paginated list of banners
+export const getBannerByPage = (page, count) => {
+  return axiosInstance.get(`/Banner?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// Get all banners (admin access)
+export const getAllBanners = () => {
+  return axiosInstance.get(`/Banner/admin`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// Get details of a specific banner by its ID
+export const getBannerById = (id) => {
+  return axiosInstance.get(`/Banner/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// Add a new banner
+export const postBanner = (data) => {
+  return axiosInstance.post(`/Banner/addBanner`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// Update an existing banner by its ID
+export const updateBannerById = (id, data) => {
+  return axiosInstance.put(`/Banner/updatebanner/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// Delete a prize distribution type by its ID
+export const deletePrizeDistributionById = (id) => {
+  return axiosInstance.delete(`/prizeDistribution/delete_type/${id}`);
+};
+
+// Get a paginated list of prize distributions
+export const getPrizeDistributionByPage = (page, count) => {
+  return axiosInstance.get(`/prizeDistribution/page?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// Get all prize distributions (admin access)
+export const getAllPrizeDistributions = () => {
+  return axiosInstance.get(`/prizeDistribution/admin`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// Get details of a specific prize distribution by its ID
+export const getPrizeDistributionById = (id) => {
+  return axiosInstance.get(`/prizeDistribution/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// Add a new prize distribution type
+export const postPrizeDistribution = (data) => {
+  return axiosInstance.post(`/prizeDistribution/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// Update an existing prize distribution type by its ID
+export const updatePrizeDistributionById = (id, data) => {
+  return axiosInstance.put(`/prizeDistribution/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
 };
 
 

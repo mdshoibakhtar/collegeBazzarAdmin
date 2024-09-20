@@ -1,9 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CostSheetAdd from "./CostSheetAdd";
 import CostSheetTable from "./CostSheetTable";
+import { geCostSheet } from "../../../api/login/Login";
+import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCostSheet } from "../../../slice/auth";
 
 function CostSheetCompo() {
+    const [costList , setCostList] = useState()
+    const parems =useParams()
+    const dispatch = useDispatch()
+    const getFloorMasters = async () => {
+        
+        try {
+            const res = await geCostSheet(parems?.id)
+            setCostList(res.data)
+            dispatch(setCostSheet(res.data.length));
+        } catch (error) {
 
+        }
+    }
+
+    useEffect(()=>{
+        getFloorMasters()
+    },[])
     const [modalShow, setModalShow] = useState(false);
     return <div className="container mt-4">
         <div className="row">
@@ -17,6 +37,7 @@ function CostSheetCompo() {
 
                             </span>
                             <CostSheetAdd show={modalShow}
+                            getFloorMasters={getFloorMasters}
                                 onHide={() => setModalShow(false)} />
                             <nav aria-label="Page navigation example">
                                 <ul className="pagination">
@@ -42,7 +63,7 @@ function CostSheetCompo() {
 
                         </div>
                         <div className="col-12" style={{ overflowX: "auto" }}>
-                            <CostSheetTable />
+                            <CostSheetTable costList={costList}/>
                         </div>
 
                     </div>

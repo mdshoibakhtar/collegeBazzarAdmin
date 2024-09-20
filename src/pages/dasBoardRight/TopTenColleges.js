@@ -11,7 +11,7 @@ export const TopTenColleges = ( ) => {
                         <div className="card-body p-0">
                             <div className="table-responsive active-projects style-1">
                                 <div className="tbl-caption">
-                                    <h4 className="heading mb-0">Top 10 Colleges </h4>
+                                    <h4 className="heading mb-0">Top 10 Results </h4>
                                     <div>
                                         {/* <Link className="btn btn-primary btn-sm" to="#" role="button" aria-controls="offcanvasExample">+ BANK MASTER</Link> */}
                                         {/* <button type="button" className="btn btn-secondary btn-sm" >

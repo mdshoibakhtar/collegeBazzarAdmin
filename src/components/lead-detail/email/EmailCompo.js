@@ -1,5 +1,6 @@
 import { useState } from "react";
 import EmailList from "./EmailList";
+import CreateConnect from "./CreateConnect";
 
 function EmailCompo() {
 
@@ -10,7 +11,7 @@ function EmailCompo() {
                 <div className="card p-3">
                     <div className="row">
                         <div className="col-12 mb-2 d-flex justify-content-between">
-                           
+
                             <nav aria-label="Page navigation example">
                                 <ul className="pagination">
                                     <li className="page-item">
@@ -30,9 +31,15 @@ function EmailCompo() {
                                         </a>
                                     </li>
                                 </ul>
+                                <div>
+                                    <button className="btn btn-primary" onClick={() => setModalShow(true)}>Connect Account</button>
+                                </div>
                             </nav>
 
-
+                            <CreateConnect
+                                show={modalShow}
+                                onHide={() => setModalShow(false)}
+                            />
                         </div>
                         <div className="col-12" style={{ overflowX: "auto" }}>
                             <EmailList />

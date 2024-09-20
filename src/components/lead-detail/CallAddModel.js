@@ -1,37 +1,62 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { useParams } from 'react-router-dom';
+import { getAllAssign, getCallConvertStatusByUser, getCallSourceByUser, getCallsStatusByUser, postCalls } from '../../api/login/Login';
+import { toast, ToastContainer } from 'react-toastify';
+import Loadar from '../../common/loader/Loader';
 
 function CallAddModel(props) {
+    const param = useParams()
     const [formValues, setFormValues] = useState({
-        call_number: '',
-        start_time: '',
-        duration: '',
-        call_direct: '',
-        call_status: '',
-        convert_status: '',
-        provider_name: '',
-        callerFrom: '',
-        callerTo: '',
-        recordingFile: '',
-        landing_number: '',
-        lead_id: '',
-        request_id: '',
-        auto_Dialer_ID: '',
-        siMName: '',
-        deviceSerialNumber: '',
-        conversationUUID: '',
-        leg: '',
-        assignTo: [''],
-        companyId: '',
-        extension_user: '',
-        user_id: '',
+        call_number: '',               // String
+        start_time: '',                // Date (but will be treated as a string for now)
+        duration: '',                  // String
+        call_direct: '',               // Enum ["Inbound", "Outbound"]
+        call_status: '',               // String
+        convert_status: '',            // String
+        provider_name: '',             // String
+        callerFrom: '',                // String
+        callerTo: '',                  // String
+        recordingFile: '',             // String
+        landing_number: '',            // String
+        lead_id: '',                   // String
+        request_id: '',                // String
+        auto_Dialer_ID: '',            // String
+        siMName: '',                   // String
+        deviceSerialNumber: '',        // String
+        conversationUUID: '',          // String
+        leg: '',                       // String
+        assignTo: '',                  // Single value instead of an array
+        companyId: '',                 // String (kept from previous structure, assuming it's needed)
+        extension_user: '',            // String (kept from previous structure, assuming it's needed)
+        user_id: param?.id,                   // String (kept from previous structure, assuming it's needed)
     });
 
+    const [allAssign , setAllAsign] = useState()
+    const [callStatus , setCallStatus] = useState()
+    const [convertStatus , setConverStatus] = useState()
+    const [callSource , setcallSource] = useState()
+    const getFloorMasters = async () => {
+        
+        try {
+            const res = await getAllAssign()
+            const res1 = await getCallsStatusByUser()
+            const res2 = await getCallConvertStatusByUser()
+            const res3 = await getCallSourceByUser()
+            setAllAsign(res.data)
+            setCallStatus(res1.data)
+            setConverStatus(res2.data)
+            setcallSource(res3.data)
+        } catch (error) {
 
-    const [errors, setErrors] = useState({});
+        }
+    }
 
-   
+    useEffect(()=>{
+        getFloorMasters()
+    },[])
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -40,10 +65,37 @@ function CallAddModel(props) {
             [name]: value
         });
     };
+    const toastSuccessMessage = (message) => {
+        toast.success(`Add Call Successfull`, {
+            position: "top-right",
+        });
+    };
+    const toastSuccessError = (message) => {
+        toast.error(`Add Call Faild `, {
+            position: "top-right",
+        });
+    };
 
-    const handleSubmit = (e) => {
+    const [loader , setLoader] = useState(false)
+    const handleSubmit =async (e) => {
         e.preventDefault();
-        console.log(formValues);
+        setLoader(true)
+        const obj = {...formValues }
+        console.log(obj);
+        try {
+          const res =  await postCalls(formValues)
+          if (res.statusCode == '200') {
+            toastSuccessMessage()
+          } else {
+            toastSuccessError()
+          }
+          setTimeout(() => {
+            setLoader(false)
+            props.onHide()
+          }, 1000);
+        } catch (error) {
+            
+        }
         
     };
 
@@ -54,6 +106,8 @@ function CallAddModel(props) {
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
+            {loader && <Loadar/>}
+            <ToastContainer/>
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
                     Quick Create Calls
@@ -117,8 +171,9 @@ function CallAddModel(props) {
                                 className="form-control"
                             >
                                 <option value="">Select An Option</option>
-                                <option value="Abdul">Abdul</option>
-                                <option value="Someone Else">Someone Else</option>
+                                {allAssign && allAssign?.map((Item ,i)=>{
+                                    return <option key={i} value={Item._id}>{Item.name}</option>
+                                })}
                             </select>
                         </div>
                         <div className="col-md-6 mb-3">
@@ -130,8 +185,9 @@ function CallAddModel(props) {
                                 className="form-control"
                             >
                                 <option value="">Select An Option</option>
-                                <option value="Completed">Completed</option>
-                                <option value="Failed">Failed</option>
+                                {callStatus && callStatus?.map((Item ,i)=>{
+                                    return <option key={i} value={Item._id}>{Item.name}</option>
+                                })}
                             </select>
                         </div>
                         <div className="col-md-6 mb-3">
@@ -143,8 +199,9 @@ function CallAddModel(props) {
                                 className="form-control"
                             >
                                 <option value="">Select An Option</option>
-                                <option value="Converted">Converted</option>
-                                <option value="Not Converted">Not Converted</option>
+                                {convertStatus && convertStatus?.map((Item ,i)=>{
+                                    return <option key={i} value={Item._id}>{Item.name}</option>
+                                })}
                             </select>
                         </div>
                         <div className="col-md-6 mb-3">
@@ -156,8 +213,9 @@ function CallAddModel(props) {
                                 className="form-control"
                             >
                                 <option value="">Select An Option</option>
-                                <option value="Website">Website</option>
-                                <option value="App">App</option>
+                                {callSource && callSource?.map((Item ,i)=>{
+                                    return <option key={i} value={Item._id}>{Item.name}</option>
+                                })}
                             </select>
                         </div>
                         <div className="col-md-6 mb-3">
@@ -180,8 +238,9 @@ function CallAddModel(props) {
                                 className="form-control"
                             >
                                 <option value="">Select An Option</option>
-                                <option value="User1">User1</option>
-                                <option value="User2">User2</option>
+                                {allAssign && allAssign?.map((Item ,i)=>{
+                                    return <option key={i} value={Item._id}>{Item.name}</option>
+                                })}
                             </select>
                         </div>
                         <div className="col-md-6 mb-3">
@@ -316,7 +375,7 @@ function CallAddModel(props) {
                                 className="form-control"
                             />
                         </div>
-                       
+
                         <div className="col-md-12 text-center mt-4">
                             <button type="submit" className="btn btn-primary">
                                 Submit

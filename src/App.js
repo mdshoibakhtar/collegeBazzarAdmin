@@ -255,6 +255,33 @@ import CreateEnquiry from "./pages/Create-Enquiry/Index";
 import EnquiryList from "./pages/List-Enquiry/Index";
 import LeadTypeList from "./components/LeadType/LeadTypeList";
 import LeadTypeAdd from "./components/leadtypead/LeadTypeAdd";
+import CallStatusMasters from "./components/topNavigationComp/masters/callstatus/CallStatusMasters";
+import CreateCallForm from "./components/topNavigationComp/masters/callstatus/MasterForm/CreateCallForm";
+import ConvertStatus from "./components/topNavigationComp/masters/convert-status/ConvertStatus";
+import CreateConvertForm from "./components/topNavigationComp/masters/convert-status/MasterForm/CreateConvertForm";
+import ConvertCallSource from "./components/topNavigationComp/masters/convert-call-source/ConvertCallSource";
+import CreateConvertCallForm from "./components/topNavigationComp/masters/convert-call-source/MasterForm/CreateConvertCallForm";
+import CattleList from "./components/cattle/CattleList";
+import CattleAdd from "./components/cattle/CattleAdd";
+import CattleVareiant from "./components/cattle/cattleVariant/CattleVariant";
+import LiveStockVarriant from "./components/cattle/liveStockVarriant/LiveStockVarriant";
+import BuyList from "./components/buy/buyList/BuyList";
+import Addnewpurchase from "./components/buy/newPurchase/Addnewpurchase";
+import AssignToShed from "./components/buy/assignToShed/AssignToShed";
+import ContestMaster from "./components/topNavigationComp/masters/contest/ContestMaster";
+import Createcontest from "./components/topNavigationComp/masters/contest/MasterForm/CreateContext";
+import BannerMaster from "./components/topNavigationComp/masters/banner/BannerMaster";
+import ContestTypeMaster from "./components/topNavigationComp/masters/contest-type/ContestTypeMaster";
+import CreateType from "./components/topNavigationComp/masters/contest-type/MasterForm/CreateType";
+import MarketTypeMaster from "./components/topNavigationComp/masters/market-type/MarketTypeMaster";
+import CreateTypemarket from "./components/topNavigationComp/masters/market-type/MasterForm/CreateType";
+import CreateContext from "./components/topNavigationComp/masters/contest/MasterForm/CreateContext";
+import CreateBanner from "./components/topNavigationComp/masters/banner/MasterForm/CreateBanner";
+import PriceDistPage from "./components/topNavigationComp/masters/priceDistibuter/PriceDistPage";
+import CreateadDistribution from "./components/topNavigationComp/masters/priceDistibuter/MasterForm/CreateadDistribution";
+import PipeLinePage from "./components/topNavigationComp/masters/pipeline/PipeLinePage";
+import AddPipeline from "./components/topNavigationComp/masters/pipeline/MasterForm/AddPipeline";
+import DyenmicContest from "./components/topNavigationComp/masters/dynemiccontest/DyenmicContest";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1154,11 +1181,11 @@ function App() {
               <Route path="edit-flow-builder/:id" element={<FlowBuilderAdd />} />
               <Route path="flow-builder" element={<FlowBuilder />} />
 
-              <Route path="/admin/create-lead" element={<CreateLead/>} />
-              <Route path="Create-Call" element={<CreateCall/>} />
-              <Route path="List-Call" element={<CallList/>} />
-              <Route path="Create-Enquiry" element={<CreateEnquiry/>} />
-              <Route path="List-Enquiry" element={<EnquiryList/>} />
+              <Route path="/admin/create-lead" element={<CreateLead />} />
+              <Route path="Create-Call" element={<CreateCall />} />
+              <Route path="List-Call" element={<CallList />} />
+              <Route path="Create-Enquiry" element={<CreateEnquiry />} />
+              <Route path="List-Enquiry" element={<EnquiryList />} />
 
 
               <Route path="add-lead_Type" element={<LeadTypeAdd />} />
@@ -1166,6 +1193,60 @@ function App() {
               <Route path="lead_Type" element={<LeadTypeList />} />
 
 
+              <Route path="call-status-masters" element={<CallStatusMasters />} />
+              <Route path="create-call-status" element={<CreateCallForm />} />
+              <Route path="create-call-status/:id" element={<CreateCallForm />} />
+
+
+              <Route path="convert-status" element={<ConvertStatus />} />
+              <Route path="create-convert-status" element={<CreateConvertForm />} />
+              <Route path="create-convert-status/:id" element={<CreateConvertForm />} />
+             
+
+              <Route path="call-source" element={<ConvertCallSource />} />
+              <Route path="create-convert-call-source" element={<CreateConvertCallForm />} />
+              <Route path="create-convert-call-source/:id" element={<CreateConvertCallForm />} />
+
+
+              <Route path="add-cattle" element={<CattleAdd />} />
+              <Route path="edit-cattle/:id" element={<CattleAdd />} />
+              <Route path="cattle" element={<CattleList />} />
+              <Route path="cattle-variant" element={<CattleVareiant />} />
+              <Route path="live-stock-variant" element={<LiveStockVarriant />} />
+              <Route path="purchase" element={<BuyList />} />
+              <Route path="purchase/add-new-purchase" element={<Addnewpurchase />} />
+              <Route path="purchase/assign-to-shed" element={<AssignToShed />} />
+
+
+
+
+              <Route path="contest-type" element={<ContestTypeMaster />} />
+              <Route path="create-contest-type" element={<CreateType />} />
+              <Route path="create-contest-type/:id" element={<CreateType />} />
+
+              <Route path="market-type" element={<MarketTypeMaster />} />
+              <Route path="create-market-type" element={<CreateTypemarket />} />
+              <Route path="create-market-type/:id" element={<CreateTypemarket />} />
+
+              <Route path="contest" element={<ContestMaster />} />
+              <Route path="create-contest" element={<CreateContext />} />
+              <Route path="create-contest/:id" element={<CreateContext />} />
+
+              <Route path="banner-master" element={<BannerMaster />} />
+              <Route path="create-banner" element={<CreateBanner />} />
+              <Route path="create-banner/:id" element={<CreateBanner />} />
+
+              <Route path="list-prize-distribution" element={<PriceDistPage />} />
+              <Route path="add-prize-distribution" element={<CreateadDistribution />} />
+              <Route path="add-prize-distribution/:id" element={<CreateadDistribution />} />
+
+              <Route path="Pipeline-List" element={<PipeLinePage />} />
+              <Route path="Add-Pipeline" element={<AddPipeline />} />
+              <Route path="Add-Pipeline/:id" element={<AddPipeline />} />
+
+              <Route path="All-Contest" element={<DyenmicContest title='All Contest List' />} />
+              <Route path="Live-Contest/1" element={<DyenmicContest title='Live Contest List' />} />
+              <Route path="Drown-Contest/2" element={<DyenmicContest title='Drown Contest List' />} />
 
               {/* -----------------junaid"s Route Start End-w-------- */}
               {/* -----------------junaid"s Route Start End-w-------- */}

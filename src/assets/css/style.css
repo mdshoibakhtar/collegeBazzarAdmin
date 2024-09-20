@@ -45388,11 +45388,11 @@ table.dataTable thead .sorting_asc {
 }
 
 .login-media {
-  margin-top: 80px;
+  /* margin-top: 80px; */
 }
 
 .login-media img {
-  width: 70%;
+  width: 50%;
 }
 
 @media only screen and (max-width: 61.9375rem) {

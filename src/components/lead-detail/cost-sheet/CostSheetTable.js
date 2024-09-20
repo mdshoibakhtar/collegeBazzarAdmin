@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CostSheetTable = () => {
+const CostSheetTable = ({costList}) => {
     const leads = [
         {
             lead: 'L001',
@@ -23,20 +23,22 @@ const CostSheetTable = () => {
                                     <table className="table">
                                         <thead>
                                             <tr>
+                                                <th>#</th>
                                                 <th>Lead</th>
                                                 <th>Course  Name</th>
-                                                <th>Stream</th>
+                                                <th>Construction Cost</th>
                                                 <th>Location</th>
                                                 <th>Floor</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {leads.map((lead, index) => (
+                                            {costList?.map((lead, index) => (
                                                 <tr key={index}>
+                                                    <th>{index + 1}</th>
                                                     <td>{lead.lead}</td>
-                                                    <td>{lead.projectName}</td>
-                                                    <td>{lead.unitNo}</td>
-                                                    <td>{lead.blockNo}</td>
+                                                    <td>{lead.course_name}</td>
+                                                    <td>{lead.construction_cost}</td>
+                                                    <td>{lead.buildUpArea}</td>
                                                     <td>{lead.floor}</td>
                                                 </tr>
                                             ))}

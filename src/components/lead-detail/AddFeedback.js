@@ -1,17 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { toast, ToastContainer } from 'react-toastify';
+import { getAllAssign, postFeedBack } from '../../api/login/Login';
+import Loadar from '../../common/loader/Loader';
+import { useParams } from 'react-router-dom';
 
 function AddFeedback(props) {
+    const params = useParams()
     const [formValues, setFormValues] = useState({
         assignedTo: '',
         name: '',
-        phoneNumber: '',
-        satisfiedByPricing: '',
-        providedCompleteInformation: '',
-        bestPartOfVisit: '',
-        overallSatisfaction: '',
-        leadId: ''
+        phone_no: '',
+        satisfyByPrice: '',
+        complete_info: '',
+        best_part_of_visit: '',
+        overall_satisfaction: '',
+        lead_id: '',
+        user_id:params.id
     });
 
     const [errors, setErrors] = useState({});
@@ -20,12 +26,12 @@ function AddFeedback(props) {
         let tempErrors = {};
         tempErrors.assignedTo = formValues.assignedTo ? "" : "Assigned To is required.";
         tempErrors.name = formValues.name ? "" : "Name is required.";
-        tempErrors.phoneNumber = formValues.phoneNumber ? "" : "Phone Number is required.";
-        tempErrors.satisfiedByPricing = formValues.satisfiedByPricing ? "" : "This field is required.";
-        tempErrors.providedCompleteInformation = formValues.providedCompleteInformation ? "" : "This field is required.";
-        tempErrors.bestPartOfVisit = formValues.bestPartOfVisit ? "" : "This field is required.";
-        tempErrors.overallSatisfaction = formValues.overallSatisfaction ? "" : "Overall Satisfaction is required.";
-        tempErrors.leadId = formValues.leadId ? "" : "Lead ID is required.";
+        tempErrors.phone_no = formValues.phone_no ? "" : "Phone Number is required.";
+        tempErrors.satisfyByPrice = formValues.satisfyByPrice ? "" : "This field is required.";
+        tempErrors.complete_info = formValues.complete_info ? "" : "This field is required.";
+        tempErrors.best_part_of_visit = formValues.best_part_of_visit ? "" : "This field is required.";
+        tempErrors.overall_satisfaction = formValues.overall_satisfaction ? "" : "Overall Satisfaction is required.";
+        tempErrors.lead_id = formValues.lead_id ? "" : "Lead ID is required.";
         setErrors(tempErrors);
         return Object.values(tempErrors).every(x => x === "");
     };
@@ -38,12 +44,68 @@ function AddFeedback(props) {
         });
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (validate()) {
-            console.log(formValues);
-            // Submit form logic here
+
+    const [allAssign, setAllAsign] = useState()
+    const getFloorMasters = async () => {
+
+        try {
+            const res = await getAllAssign()
+            setAllAsign(res.data)
+        } catch (error) {
+
         }
+    }
+
+    useEffect(() => {
+        getFloorMasters()
+    }, [])
+
+    const toastSuccessMessage = (message) => {
+        toast.success(`Add FeedBack Successfull`, {
+            position: "top-right",
+        });
+    };
+    const toastSuccessError = (message) => {
+        toast.error(`Add FeedBack Faild `, {
+            position: "top-right",
+        });
+    };
+
+    const parem = useParams()
+
+    const [loader, setLoader] = useState(false)
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoader(true)
+        const obj = { ...formValues,assignTo:[formValues.assignedTo], user_id: parem?.id }
+        // console.log(obj);
+        try {
+            const res = await postFeedBack(obj)
+            if (res.statusCode == '200') {
+                toastSuccessMessage()
+                setTimeout(() => {
+                    setLoader(false)
+                    setFormValues({
+                        assignedTo: '',
+                        name: '',
+                        phone_no: '',
+                        satisfyByPrice: '',
+                        complete_info: '',
+                        best_part_of_visit: '',
+                        overall_satisfaction: '',
+                        lead_id: ''
+                    })
+                    props?.getFloorMasters()
+                    props.onHide()
+                }, 1000);
+            } else {
+                setLoader(false)
+                toastSuccessError()
+            }
+        } catch (error) {
+
+        }
+
     };
 
     return (
@@ -53,6 +115,8 @@ function AddFeedback(props) {
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
+            <ToastContainer />
+            {loader && <Loadar />}
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
                     Quick Create Feedback
@@ -70,8 +134,9 @@ function AddFeedback(props) {
                                 className="form-control"
                             >
                                 <option value="">Select An Option</option>
-                                <option value="Abdul">Abdul</option>
-                                <option value="Someone Else">Someone Else</option>
+                                {allAssign && allAssign?.map((Item, i) => {
+                                    return <option key={i} value={Item._id}>{Item.name}</option>
+                                })}
                             </select>
                             {errors.assignedTo && <div className="text-danger">{errors.assignedTo}</div>}
                         </div>
@@ -91,82 +156,82 @@ function AddFeedback(props) {
                             <label>Phone Number</label>
                             <input
                                 type="text"
-                                name="phoneNumber"
+                                name="phone_no"
                                 style={{ width: "100%" }}
-                                value={formValues.phoneNumber}
+                                value={formValues.phone_no}
                                 onChange={handleChange}
                                 className="form-control"
                             />
-                            {errors.phoneNumber && <div className="text-danger">{errors.phoneNumber}</div>}
+                            {errors.phone_no && <div className="text-danger">{errors.phone_no}</div>}
                         </div>
                         <div className="col-md-6 mb-3">
                             <label>Satisfied by Pricing</label>
                             <select
-                                name="satisfiedByPricing"
-                                value={formValues.satisfiedByPricing}
+                                name="satisfyByPrice"
+                                value={formValues.satisfyByPrice}
                                 onChange={handleChange}
                                 className="form-control"
                             >
                                 <option value="">Select An Option</option>
-                                <option value="Yes">Yes</option>
-                                <option value="No">No</option>
+                                <option value={true}>Yes</option>
+                                <option value={false}>No</option>
                             </select>
-                            {errors.satisfiedByPricing && <div className="text-danger">{errors.satisfiedByPricing}</div>}
+                            {errors.satisfyByPrice && <div className="text-danger">{errors.satisfyByPrice}</div>}
                         </div>
                         <div className="col-md-6 mb-3">
                             <label>Has the representative provided the complete information?</label>
                             <select
-                                name="providedCompleteInformation"
-                                value={formValues.providedCompleteInformation}
+                                name="complete_info"
+                                value={formValues.complete_info}
                                 onChange={handleChange}
                                 className="form-control"
                             >
                                 <option value="">Select An Option</option>
-                                <option value="Yes">Yes</option>
-                                <option value="No">No</option>
+                                <option value={true}>Yes</option>
+                                <option value={false}>No</option>
                             </select>
-                            {errors.providedCompleteInformation && <div className="text-danger">{errors.providedCompleteInformation}</div>}
+                            {errors.complete_info && <div className="text-danger">{errors.complete_info}</div>}
                         </div>
                         <div className="col-md-6 mb-3">
                             <label>Best Part of Visit</label>
                             <input
                                 type="text"
-                                name="bestPartOfVisit"
+                                name="best_part_of_visit"
                                 style={{ width: "100%" }}
-                                value={formValues.bestPartOfVisit}
+                                value={formValues.best_part_of_visit}
                                 onChange={handleChange}
                                 className="form-control"
                             />
-                            {errors.bestPartOfVisit && <div className="text-danger">{errors.bestPartOfVisit}</div>}
+                            {errors.best_part_of_visit && <div className="text-danger">{errors.best_part_of_visit}</div>}
                         </div>
                         <div className="col-md-6 mb-3">
                             <label>Overall Satisfaction</label>
                             <select
-                                name="overallSatisfaction"
-                                value={formValues.overallSatisfaction}
+                                name="overall_satisfaction"
+                                value={formValues.overall_satisfaction}
                                 onChange={handleChange}
                                 className="form-control"
                             >
                                 <option value="">Select An Option</option>
-                                <option value="Very Satisfied">Very Satisfied</option>
-                                <option value="Satisfied">Satisfied</option>
-                                <option value="Neutral">Neutral</option>
-                                <option value="Dissatisfied">Dissatisfied</option>
-                                <option value="Very Dissatisfied">Very Dissatisfied</option>
+                                <option value="1">Very Satisfied</option>
+                                <option value="2">Satisfied</option>
+                                <option value="3">Neutral</option>
+                                <option value="4">Dissatisfied</option>
+                                <option value="5">Very Dissatisfied</option>
                             </select>
-                            {errors.overallSatisfaction && <div className="text-danger">{errors.overallSatisfaction}</div>}
+                            {errors.overall_satisfaction && <div className="text-danger">{errors.overall_satisfaction}</div>}
                         </div>
                         <div className="col-md-6 mb-3">
                             <label>Lead ID</label>
                             <input
                                 type="text"
-                                name="leadId"
+                                name="lead_id"
                                 style={{ width: "100%" }}
-                                value={formValues.leadId}
+                                value={formValues.lead_id}
                                 onChange={handleChange}
                                 className="form-control"
                             />
-                            {errors.leadId && <div className="text-danger">{errors.leadId}</div>}
+                            {errors.lead_id && <div className="text-danger">{errors.lead_id}</div>}
                         </div>
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>

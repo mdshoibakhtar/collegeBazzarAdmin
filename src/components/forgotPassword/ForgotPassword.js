@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import login from "../../assets/images/logo/merchant.paypanda-logo.png";
+import login from "../../assets/images/logo/play.png";
 import loginimg from "../../assets/images/logo/login.jpg";
 import CustomInputField from "../../common/CustomInputField";
 import { sendOtpByEmail, sendOtpByPhone, sendVerifyEmailOtp, sendVerifyPhoneOtp } from '../../api/login/Login';
@@ -148,7 +148,7 @@ function ForgotPassword() {
                         <div className="login-form">
                             <div className="text-center">
                                 <h3 className="title">Reset Password</h3>
-                                <p>Reset your account password to start using PayPanda</p>
+                                <p>Reset your account password to start using </p>
                             </div>
                             <div className='d-flex justify-content-around'>
                                 <div className="mb-4">
@@ -306,10 +306,10 @@ function ForgotPassword() {
                         <div className="pages-left h-100">
                             <div className="login-content">
                                 <a href="#">
-                                    <img src={login} className="mb-3 logo-dark" alt="logo" />
+                                    <img src={login} className="mb-3 logo-dark" alt="logo" style={{marginTop:"40px"}}/>
                                 </a>
                                 <p>
-                                    PayPanda uses line charts to visualize customer-related
+                                     uses line charts to visualize customer-related
                                     metrics and trends over time.
                                 </p>
                             </div>

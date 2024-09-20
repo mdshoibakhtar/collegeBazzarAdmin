@@ -71,7 +71,7 @@ function DasBoardRight() {
                                     </div>
                                     <div>
                                         <h4 className="retailers-title text-center px-4 text-white my-1 ">
-                                            <span className="">Total Colleges</span>
+                                            <span className="">Total Contest</span>
                                         </h4>
                                         <h4 className="retailers-title text-center px-4 text-white my-3">
                                             <span className="">98</span>
@@ -87,7 +87,7 @@ function DasBoardRight() {
                                     </div>
                                     <div>
                                         <h4 className="retailers-title text-center px-4 text-white my-1 ">
-                                            <span className="">Total Students</span>
+                                            <span className="">Total Contest expired  </span>
                                         </h4>
                                         <h4 className="retailers-title text-center px-4 text-white my-3">
                                             <span className="">7000 +</span>
@@ -103,7 +103,7 @@ function DasBoardRight() {
                                     </div>
                                     <div>
                                         <h4 className="retailers-title text-center px-4 text-white my-1 ">
-                                            <span className="">Total  Enquiries</span>
+                                            <span className="">Total Contest upcoming </span>
                                         </h4>
                                         <h4 className="retailers-title text-center px-4 text-white my-3">
                                             <span className="">58</span>
@@ -119,7 +119,7 @@ function DasBoardRight() {
                                     </div>
                                     <div>
                                         <h4 className="retailers-title text-center px-4 text-white my-1 ">
-                                            <span className="">Total Countries</span>
+                                            <span className="">Total Customer </span>
                                         </h4>
                                         <h4 className="retailers-title text-center px-4 text-white my-3">
                                             <span className="">70 +</span>
@@ -135,7 +135,7 @@ function DasBoardRight() {
                                     </div>
                                     <div>
                                         <h4 className="retailers-title text-center px-4 text-white my-1 ">
-                                            <span className="">Total Amount Received</span>
+                                            <span className="">Total Customer Won     </span>
                                         </h4>
                                         <h4 className="retailers-title text-center px-4 text-white my-3">
                                             <span className="">98764 +</span>
@@ -151,10 +151,26 @@ function DasBoardRight() {
                                     </div>
                                     <div>
                                         <h4 className="retailers-title text-center px-4 text-white my-1 ">
-                                            <span className="">Total Courses</span>
+                                            <span className="">Total Winning Amount</span>
                                         </h4>
                                         <h4 className="retailers-title text-center px-4 text-white my-3">
                                             <span className="">70 +</span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-xl-4 col-sm-6">
+
+                                <div className="retailers-container bg-gold align-items-center">
+                                    <div className="boxicons">
+                                        <FaBookReader className="ico" />
+                                    </div>
+                                    <div>
+                                        <h4 className="retailers-title text-center px-4 text-white my-1 ">
+                                            <span className="">Total Contest Amt Received</span>
+                                        </h4>
+                                        <h4 className="retailers-title text-center px-4 text-white my-3">
+                                            <span className="">72+</span>
                                         </h4>
                                     </div>
                                 </div>
@@ -167,8 +183,8 @@ function DasBoardRight() {
                                     </div>
                                     <div className="card-body  p-0" style={{ position: 'relative' }}>
                                         <TopTenColleges dasboradData={dasboradData} />
-                                        <TopTenCourse />
-                                        <TopTenCountries/>
+                                        {/* <TopTenCourse />
+                                        <TopTenCountries/> */}
                                     </div>
                                 </div>
                             </div>
