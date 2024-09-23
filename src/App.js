@@ -322,6 +322,8 @@ import CompanyMasters from "./pages/companyMasters";
 import CompanyFormMaster from "./components/topNavigationComp/masters/companyMaster/companyFormMaster/CompanyFormMaster";
 import CompanyTypeMasters from "./pages/companyTypeMaster";
 import CompanyTypeMasterForm from "./components/topNavigationComp/masters/companyTypeMaster/companyTypeMasterForm/CompanyTypeMasterForm";
+import ContestParticipate from "./components/contest_participate/ContestParticipate";
+import CompanyDetail from "./components/companydetail/CompanyDeatail";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -997,6 +999,10 @@ function App() {
                 element={<CompanyFormMaster />}
               />
               <Route
+                path="/update-company-master/:id"
+                element={<CompanyFormMaster />}
+              />
+              <Route
                 path="/company-type-master"
                 element={<CompanyTypeMasters />}
               />
@@ -1366,6 +1372,10 @@ function App() {
               <Route path="report/notification/history" element={<NotificationHistoryPage />} />
 
               {/* -----------------junaid"s Route Start End-w-------- */}
+              
+              <Route path="contest_participate" element={<ContestParticipate/>} />
+              <Route path="company_details" element={<CompanyDetail/>} />
+
               {/* -----------------junaid"s Route Start End-w-------- */}
 
               <Route path="*" element={<PageNotFound />} />

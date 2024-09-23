@@ -3,7 +3,7 @@ import loginimg from "../../assets/images/logo/degree.png";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
-import { LoginSubmit, sendNotification } from "../../api/login/Login";
+import { getCompanyInfo, LoginSubmit, sendNotification } from "../../api/login/Login";
 import CustomInputField from "../../common/CustomInputField";
 import { SaveUserDeatilsLocalStorage } from "../../utils/localStorage";
 import { useDispatch } from "react-redux";
@@ -12,6 +12,7 @@ import { Formik } from "formik";
 import CustomPassInputField from "../../common/CustomPassInputField";
 import { getToken } from "firebase/messaging";
 import { messaging } from "../../firebase/fireBase";
+import { baseUrlImage } from "../../baseUrl";
 
 function Login() {
   const navigate = useNavigate();
@@ -98,6 +99,16 @@ function Login() {
       // alert(error.message);
     }
   };
+
+  
+  const [state , setData] = useState(null)
+  const getData = async ()=>{
+      const res = await getCompanyInfo()
+      setData(res.data);
+  }
+  useEffect(()=>{
+      getData()
+  },[])
   return (
     <>
       <div className="authincation h-100 h-100-2">
@@ -108,14 +119,15 @@ function Login() {
               <div className="pages-left h-100">
                 <div className="login-content">
                   <a href="#">
-                    <img src={login} className="mb-3 logo-dark" alt />
+                    <img src={state?.logo ? `${baseUrlImage}${state?.logo}` : login} className="mb-3 logo-dark" alt />
                   </a>
                   <p>
-                  Do you have a dream destination in mind? Let's help you choose the best option!
+                 {state?.login_left_description}
                   </p>
                 </div>
                 <div className="login-media text-center">
-                  <img src={'https://seeklogo.com/images/N/neft-logo-7222234315-seeklogo.com.gif'} alt="" />
+                <img src={state?.login_background_image ? `${baseUrlImage}${state?.login_background_image}` : `https://seeklogo.com/images/N/neft-logo-7222234315-seeklogo.com.gif`} className="mb-3 logo-dark" alt />
+                  {/* <img src={'https://seeklogo.com/images/N/neft-logo-7222234315-seeklogo.com.gif'} alt="" /> */}
                   {/* <img src={loginimg} alt="" /> */}
                 </div>
               </div>
@@ -124,7 +136,7 @@ function Login() {
               <div className="login-form">
                 <div className="text-center">
                   <h3 className="title">Sign In</h3>
-                  <p>Sign in to your account to start using College Bazzar</p>
+                  <p>{state?.login_right_desciption}</p>
                 </div>
                 <Formik
                   initialValues={formValues}
