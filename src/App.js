@@ -305,8 +305,6 @@ import SystemSettings from "./components/systemSettings/SystemSetings";
 import PaymentGateway from "./components/systemSettings/innerCardsPages/paymentGatway/PaymentGateway";
 import GeneralSettings from "./components/systemSettings/innerCardsPages/generalSettings/GeneralSettings";
 import SystemConfiguration from "./components/systemSettings/innerCardsPages/systemConfigration/SystemConfigration";
-// import SystemConfigration from "./components/systemSettings/innerCardsPages/systemConfigration"
-
 import DeclaredWinnersPage from "./pages/declaredWinners";
 import ManageUsersPage from "./pages/ManageUsers";
 import UserDetails from "./components/ManageUsers/userDetails/UserDetails";
@@ -322,6 +320,7 @@ import CompanyMasters from "./pages/companyMasters";
 import CompanyFormMaster from "./components/topNavigationComp/masters/companyMaster/companyFormMaster/CompanyFormMaster";
 import CompanyTypeMasters from "./pages/companyTypeMaster";
 import CompanyTypeMasterForm from "./components/topNavigationComp/masters/companyTypeMaster/companyTypeMasterForm/CompanyTypeMasterForm";
+import NotificationSettings from "./components/systemSettings/innerCardsPages/notificationSettings/NotificationSettings";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1365,8 +1364,9 @@ function App() {
               <Route path="report/login/history" element={<LoginHistoryPage />} />
               <Route path="report/notification/history" element={<NotificationHistoryPage />} />
 
-              {/* -----------------junaid"s Route Start End-w-------- */}
-              {/* -----------------junaid"s Route Start End-w-------- */}
+              {/* -----------------shoib"s Route Start End-w-------- */}
+              <Route path="notification/global/email" element={<NotificationSettings />} />
+              {/* -----------------shoib"s Route Start End-w-------- */}
 
               <Route path="*" element={<PageNotFound />} />
             </Route>
