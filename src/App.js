@@ -282,6 +282,39 @@ import CreateadDistribution from "./components/topNavigationComp/masters/priceDi
 import PipeLinePage from "./components/topNavigationComp/masters/pipeline/PipeLinePage";
 import AddPipeline from "./components/topNavigationComp/masters/pipeline/MasterForm/AddPipeline";
 import DyenmicContest from "./components/topNavigationComp/masters/dynemiccontest/DyenmicContest";
+import SeoConfigration from "./pages/systemsetting/Seoconfig/SeoConfigration";
+import ManagementPages from "./pages/systemsetting/managePages/ManagementPages";
+import SocialLoginCredentials from "./pages/systemsetting/sociallogin/SocialLoginCredentials";
+import CornJobs from "./pages/systemsetting/cornjobs/CornJobs";
+import CornScheduel from "./pages/systemsetting/cornSchedules/CornScheduel";
+import DealMaster from "./components/topNavigationComp/masters/dealmaster/DealMaster";
+import CreateDeal from "./components/topNavigationComp/masters/dealmaster/MasterForm/CreateDeal";
+import SendEmail from "./components/emailSetings/sendEmail/SendEmail";
+import EmailTemplet from "./components/emailSetings/emailTemplet/EmailTemplet";
+import MailSeting from "./components/emailSetings/mailSetting/MailSettings";
+import SiteMap from "./components/maped/siteMap/SiteMap";
+import HomePageCategories from "./components/homePageCategories/HomePageCategories";
+import Miscellaneous from "./components/miscellaneous/Miscellaneous";
+import ManageAddons from "./components/addons/manageAddons/ManageAddons";
+import ShopAddons from "./components/addons/shopAddons/ShopAddons";
+import CronJobViewer from "./components/jobViewer/CronJobViewer";
+import ErrorLogViewer from "./components/errorLogViewer/ErrorLogViewer";
+import PhpViewer from "./components/phpViewer/PhpViewer";
+import DataBaseBackup from "./components/dataBase/databaseBackUp/DatabaseBackup";
+import SystemSettings from "./components/systemSettings/SystemSetings";
+import PaymentGateway from "./components/systemSettings/innerCardsPages/paymentGatway/PaymentGateway";
+import GeneralSettings from "./components/systemSettings/innerCardsPages/generalSettings/GeneralSettings";
+import SystemConfiguration from "./components/systemSettings/innerCardsPages/systemConfigration/SystemConfigration";
+// import SystemConfigration from "./components/systemSettings/innerCardsPages/systemConfigration"
+
+import DeclaredWinnersPage from "./pages/declaredWinners";
+import ManageUsersPage from "./pages/ManageUsers";
+import UserDetails from "./components/ManageUsers/userDetails/UserDetails";
+import PaymentsPage from "./pages/payments";
+import { PaymentsDetails } from "./components/payments/PaymentsDetails";
+import TransactionHistoryPage from "./pages/reports/transactionHistory";
+import LoginHistoryPage from "./pages/reports/loginHistory";
+import NotificationHistoryPage from "./pages/reports/notificationHistory";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1247,6 +1280,59 @@ function App() {
               <Route path="All-Contest" element={<DyenmicContest title='All Contest List' />} />
               <Route path="Live-Contest/1" element={<DyenmicContest title='Live Contest List' />} />
               <Route path="Drown-Contest/2" element={<DyenmicContest title='Drown Contest List' />} />
+
+
+              <Route path="seo-configration" element={<SeoConfigration/>} />
+              <Route path="manegment-pages" element={<ManagementPages/>} />
+              <Route path="solcial-login" element={<SocialLoginCredentials/>} />
+              <Route path="corn-jobs" element={<CornJobs/>} />
+              
+              {/* <Route path="corn-Schedules" element={<CornScheduel/>} /> */}
+
+              <Route path="deal-list" element={<DealMaster />} />
+              <Route path="deal-create" element={<CreateDeal />} />
+              <Route path="deal-create/:id" element={<CreateDeal />} />
+
+              <Route path="system-settings" element={<SystemSettings />} />
+              <Route path="gateway/automatic" element={<PaymentGateway />} />
+              <Route path="general-settings" element={<GeneralSettings />} />
+              <Route path="system-configration" element={<SystemConfiguration/>}/>
+              <Route path="send-email" element={<SendEmail />} />
+              <Route path="mail-setings" element={<MailSeting />} />
+              <Route path="mail-templates" element={<EmailTemplet />} />
+
+              <Route path="sitemap/build" element={<SiteMap />} />
+              <Route path="category" element={<HomePageCategories />} />
+              <Route path="miscellaneous" element={<Miscellaneous />} />
+              <Route path="manage-addons" element={<ManageAddons />} />
+              <Route path="shop-addons" element={<ShopAddons />} />
+              <Route path="cron-job" element={<CronJobViewer />} />
+
+              <Route path="error-log-viewer" element={<ErrorLogViewer />} />
+              <Route path="php-info-viewer" element={<PhpViewer />} />
+              <Route path="database-backup" element={<DataBaseBackup/>}/>
+
+
+
+
+              <Route path="declared_winners" element={<DeclaredWinnersPage />} />
+              <Route path="users/active" element={<ManageUsersPage />} />
+              <Route path="users/detail" element={<UserDetails />} />
+              <Route path="users/banned" element={<ManageUsersPage />} />
+              <Route path="users/email-unverified" element={<ManageUsersPage />} />
+              <Route path="users/mobile-unverified" element={<ManageUsersPage />} />
+              <Route path="users/with-balance" element={<ManageUsersPage />} />
+              <Route path="users" element={<ManageUsersPage />} />
+              <Route path="deposit/pending" element={<PaymentsPage />} />
+              <Route path="deposit/approved" element={<PaymentsPage />} />
+              <Route path="deposit/details" element={<PaymentsDetails />} />
+              <Route path="deposit/successful" element={<PaymentsPage />} />
+              <Route path="deposit/rejected" element={<PaymentsPage />} />
+              <Route path="deposit/initiated" element={<PaymentsPage />} />
+              <Route path="deposit/all" element={<PaymentsPage />} />
+              <Route path="report/transaction" element={<TransactionHistoryPage />} />
+              <Route path="report/login/history" element={<LoginHistoryPage />} />
+              <Route path="report/notification/history" element={<NotificationHistoryPage />} />
 
               {/* -----------------junaid"s Route Start End-w-------- */}
               {/* -----------------junaid"s Route Start End-w-------- */}

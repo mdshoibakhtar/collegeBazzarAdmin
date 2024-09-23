@@ -2720,6 +2720,63 @@ export const updatePrizeDistributionById = (id, data) => {
 
 
 
+// Delete a deal type by its ID
+export const deleteDealById = (id) => {
+  return axiosInstance.delete(`/deal/deletetype/${id}`);
+};
+
+// Get a paginated list of deals
+export const getDealByPage = (page, count) => {
+  return axiosInstance.get(`/deal?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// Get all deals (admin access)
+export const getAllDeals = () => {
+  return axiosInstance.get(`/deal/admin`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// Get details of a specific deal by its ID
+export const getDealById = (id) => {
+  return axiosInstance.get(`/deal/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// Add a new deal type
+export const postDeal = (data) => {
+  return axiosInstance.post(`/deal/addtype`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// Update an existing deal type by its ID
+export const updateDealById = (id, data) => {
+  return axiosInstance.put(`/deal/updatetype/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+
 // -------------------Junaid'S APIS- END------------------------------
 
 

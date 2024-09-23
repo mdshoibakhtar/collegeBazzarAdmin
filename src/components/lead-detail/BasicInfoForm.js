@@ -81,7 +81,7 @@ const BasicInfoForm = () => {
                 </select>
             </div>
             <div className="mb-3 col-6">
-                <label>Owner</label>
+                <label>Staff</label>
                 <select
                     name="owner"
                     value={formValues.owner}
