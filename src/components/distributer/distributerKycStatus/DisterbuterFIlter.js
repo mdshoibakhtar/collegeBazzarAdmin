@@ -1,5 +1,10 @@
 import { Alert } from "antd";
 import { useEffect, useState } from "react";
+import Select from 'react-select';
+import BulkAssignedModel from "../BulkAssigedModel";
+import { FaBroadcastTower } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import BroadCasterModal from "../distributerList/broadCasterModal/BroadCasterModal";
 
 function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistIdAgainst }) {
     const todayDate = () => {
@@ -20,7 +25,9 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
 
     const [error, setError] = useState('');
     const [isSearchDisabled, setIsSearchDisabled] = useState(false);
-
+    const [showbroadcast, setShowbroadcast] = useState(false);
+    const [selectedUsers, setSelectedUsers] = useState([]);
+    const [modalShow, setModalShow] = useState(false);
     useEffect(() => {
         setFormData({
             name: '',
@@ -76,6 +83,7 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
         });
         getReailerDistIdAgainst(0);
     };
+
 
     return (
         <>
@@ -191,8 +199,29 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
                                         <button type="button" className="btn btn-warning" onClick={resetForm}>
                                             RESET
                                         </button>
+
                                     </div>
+                                    {/* <div className="form-group col-6">
+                                        <div className="text-center">
+                                            <button className="btn btn-primary " onClick={() => setModalShow(true)}>
+                                                BULK EDIT
+                                            </button>
+                                            <Link to="/admin/create-lead" className="btn btn-primary ">Create Lead</Link>
+                                            <button className="btn btn-info " onClick={() => setShowbroadcast(true)}>
+                                                <FaBroadcastTower className="fs-4" /> Broad Caster
+                                            </button>
+                                        </div>
+
+                                    </div> */}
                                 </form>
+
+
+                                <BulkAssignedModel
+                                    show={modalShow}
+                                    selectedUsers={selectedUsers}
+                                    onHide={() => setModalShow(false)}
+                                />
+                                <BroadCasterModal show={showbroadcast} onHide={() => setShowbroadcast(false)} />
                             </div>
                         </div>
                     </div>

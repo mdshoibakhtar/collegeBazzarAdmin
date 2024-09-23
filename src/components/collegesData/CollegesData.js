@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import CollegesInfoList from './collageListsData/CollegeListData'
 import { CollegescrudList, deleteCollegescrud } from '../../api/login/Login';
 import { message } from 'antd';
+import CollageDataFilter from './collageDataFilter/CollageDataFilter';
 
 function CollegesData() {
   const [data, setData] = useState()
@@ -55,6 +56,7 @@ function CollegesData() {
   }, [])
   return (
     <>
+      <CollageDataFilter />
       <CollegesInfoList totalCount={totalCount} page={page} onChangeVal={onChangeVal} data={data} count={count} confirm={confirm} cancel={cancel} loading={loading} />
     </>
   )

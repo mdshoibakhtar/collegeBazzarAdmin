@@ -40,8 +40,7 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal, ap
             setShow5(true)
         }, 1000);
     }
-    const [showbroadcast, setShowbroadcast] = useState(false);
-    const [modalShow, setModalShow] = useState(false);
+    
     const [selectedUsers, setSelectedUsers] = useState([]);
     const [selectAll, setSelectAll] = useState(false);
 
@@ -56,15 +55,19 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal, ap
     console.log(selectedUsers)
 
 
+
+
     const handleSelectAll = (event) => {
-        if (event.target.checked) {
-            setSelectedUsers(selectedUsers);
+        const isChecked = event.target.checked;
+        setSelectAll(isChecked);
+        if (isChecked) {
+            setSelectedUsers(state?.user);
         } else {
             setSelectedUsers([]);
         }
-        setSelectAll(event.target.checked);
+    };
 
-    }
+    
     const [modalShow2, setModalShow2] = useState(false);
 
     return (
@@ -78,20 +81,7 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal, ap
                 <div className="row">
                     <div className="col-xl-12" >
                         <div className="card" >
-                            <div style={{ display: "flex", justifyContent: "space-between" }}>
-                                <button className="btn btn-primary mb-3" onClick={() => setModalShow(true)}>
-                                    BULK EDIT
-                                </button>
-                                <Link to="/admin/create-lead" className="btn btn-primary mb-3">Create Lead</Link>
-                                <button className="btn btn-info mb-3" onClick={() => setShowbroadcast(true)}>
-                                    <FaBroadcastTower className="fs-3" /> Broad Caster
-                                </button>
-                            </div>
-                            <BulkAssigedModel
-                                show={modalShow}
-                                selectedUsers={selectedUsers}
-                                onHide={() => setModalShow(false)}
-                            />
+                            
 
                             <div className="card-body p-0">
                                 <div className="table-responsive active-projects style-1">
@@ -137,18 +127,17 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal, ap
                                             </thead>
                                             <tbody>
                                                 {state && state?.user?.map((item, i) => {
-                                                    return <tr role="row" className="odd">
+                                                    const isChecked = selectedUsers.some(user => user?._id === item?._id);
+                                                    return <tr role="row" className="odd" key={item?._id}>
                                                         <td className="sorting_1">
                                                             <div className="form-check">
                                                                 <input
                                                                     className="form-check-input"
                                                                     type="checkbox"
-                                                                    defaultValue=""
-                                                                    id="flexCheckDefault"
+                                                                    checked={isChecked}
                                                                     onChange={(e) => handleCheckboxChange(e, item)}
                                                                 />
                                                             </div>
-
                                                         </td>
                                                         <td className="sorting_1">{item?.createdAt}</td>
                                                         {/* <td className="sorting_1"></td>
@@ -251,7 +240,7 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal, ap
                 <IdStocks show={show3} handleClose={handleClose3} />
                 <MemberPermission show={show4} handleClose={handleClose4} />
                 <LockAmount show={show5} handleClose={handleClose5} getItem={getItem} />
-                <BroadCasterModal show={showbroadcast} onHide={() => setShowbroadcast(false)} />
+                
             </section>
         </>
     );
