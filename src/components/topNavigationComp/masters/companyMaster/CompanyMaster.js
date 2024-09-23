@@ -1,8 +1,6 @@
 import Breadcrumbs from '../../../../common/breadcrumb/Breadcrumbs'
 import React, { useEffect, useState } from 'react'
-import { deleteTypes_Of_AffilatedBy_Master, deleteTypes_Of_collegesMaster, getTypes_Of_AffilatedBy_Master, getTypes_Of_collegesMaster } from '../../../../api/login/Login'
-import { useNavigate, useParams } from 'react-router-dom'
-import { toast } from 'react-toastify'
+import { deleteCompany,  getcompanyList } from '../../../../api/login/Login'
 import { message } from 'antd'
 import CompanyMasterList from './companyMasterList/CompanyMasterList'
 
@@ -22,7 +20,7 @@ function CompanyMaster() {
     const getFloorMasters = async (page) => {
         setLoading(true)
         try {
-            const res = await getTypes_Of_AffilatedBy_Master(page, count)
+            const res = await getcompanyList()
             setTotalCount(res?.totalCount)
             setData(res?.data)
             setPage(page)
@@ -40,7 +38,7 @@ function CompanyMaster() {
     const deleteBlockAdd = async (id) => {
         setLoading(true)
         try {
-            await deleteTypes_Of_AffilatedBy_Master(id)
+            await deleteCompany(id)
             let backList = totalCount % 11 === 0 ? page - 1 : page
             getFloorMasters(backList)
         } catch (error) {
@@ -71,3 +69,4 @@ function CompanyMaster() {
 }
 
 export default CompanyMaster
+

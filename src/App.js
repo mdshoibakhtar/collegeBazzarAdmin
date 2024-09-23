@@ -320,7 +320,11 @@ import CompanyMasters from "./pages/companyMasters";
 import CompanyFormMaster from "./components/topNavigationComp/masters/companyMaster/companyFormMaster/CompanyFormMaster";
 import CompanyTypeMasters from "./pages/companyTypeMaster";
 import CompanyTypeMasterForm from "./components/topNavigationComp/masters/companyTypeMaster/companyTypeMasterForm/CompanyTypeMasterForm";
+
 import NotificationSettings from "./components/systemSettings/innerCardsPages/notificationSettings/NotificationSettings";
+import ContestParticipate from "./components/contest_participate/ContestParticipate";
+import CompanyDetail from "./components/companydetail/CompanyDeatail";
+
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -996,6 +1000,10 @@ function App() {
                 element={<CompanyFormMaster />}
               />
               <Route
+                path="/update-company-master/:id"
+                element={<CompanyFormMaster />}
+              />
+              <Route
                 path="/company-type-master"
                 element={<CompanyTypeMasters />}
               />
@@ -1363,10 +1371,13 @@ function App() {
               <Route path="report/transaction" element={<TransactionHistoryPage />} />
               <Route path="report/login/history" element={<LoginHistoryPage />} />
               <Route path="report/notification/history" element={<NotificationHistoryPage />} />
+ <Route path="contest_participate" element={<ContestParticipate/>} />
+              <Route path="company_details" element={<CompanyDetail/>} />
 
               {/* -----------------shoib"s Route Start End-w-------- */}
               <Route path="notification/global/email" element={<NotificationSettings />} />
               {/* -----------------shoib"s Route Start End-w-------- */}
+
 
               <Route path="*" element={<PageNotFound />} />
             </Route>
