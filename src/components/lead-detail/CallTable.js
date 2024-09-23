@@ -1,23 +1,7 @@
 import React from 'react';
 
-const CallTable = () => {
-    const calls = [
-        {
-            createdTime: '2024-08-26 10:00 AM',
-            leadId: 'L001',
-            callerNumber: '1234567890',
-            callerTo: '9876543210',
-            callDuration: '5:30',
-            callDirection: 'Outbound',
-            callStatus: 'Completed',
-            assignedTo: 'Agent A',
-            hungUpReason: 'Customer Hung Up',
-            recordingFileName: 'call_20240826_1000.mp3',
-            requestId: 'REQ001',
-            conversationUuid: 'UUID001'
-        },
-        // Add more call records as needed
-    ];
+const CallTable = ({callList}) => {
+    const calls = callList
 
     return (
         <div className="container mt-4">
@@ -31,35 +15,31 @@ const CallTable = () => {
                                     <table className="table">
                                         <thead>
                                             <tr>
+                                                <th>#</th>
                                                 <th>Created Time</th>
                                                 <th>Lead ID</th>
                                                 <th>Caller Number</th>
                                                 <th>Caller To</th>
-                                                <th>Call Duration</th>
                                                 <th>Call Direction</th>
                                                 <th>Call Status</th>
                                                 <th>Assigned To</th>
-                                                <th>Hung-up Reason</th>
-                                                <th>Recording File Name</th>
                                                 <th>Request ID</th>
                                                 <th>Conversation UUID</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {calls.map((call, index) => (
+                                            {calls?.map((call, index) => (
                                                 <tr key={index}>
-                                                    <td>{call.createdTime}</td>
-                                                    <td>{call.leadId}</td>
-                                                    <td>{call.callerNumber}</td>
+                                                    <td>{index + 1}</td>
+                                                    <td>{call.createdAt}</td>
+                                                    <td>{call.lead_id}</td>
+                                                    <td>{call.call_number}</td>
                                                     <td>{call.callerTo}</td>
-                                                    <td>{call.callDuration}</td>
-                                                    <td>{call.callDirection}</td>
-                                                    <td>{call.callStatus}</td>
-                                                    <td>{call.assignedTo}</td>
-                                                    <td>{call.hungUpReason}</td>
-                                                    <td>{call.recordingFileName}</td>
-                                                    <td>{call.requestId}</td>
-                                                    <td>{call.conversationUuid}</td>
+                                                    <td>{call.call_direct}</td>
+                                                    <td>{call.call_status?.name}</td>
+                                                    <td>{call.assignTo[0]?.name}</td>
+                                                    <td>{call.request_id}</td>
+                                                    <td>{call.conversationUUID}</td>
                                                 </tr>
                                             ))}
                                         </tbody>

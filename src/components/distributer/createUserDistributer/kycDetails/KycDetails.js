@@ -29,7 +29,7 @@ function KycDetails({ initialValues, state }) {
 
     const renderDocumentCard = (title, docUrl, dummyImg, docName) => (
         <div className='col-xl-3'>
-            <div className="card-body p-0 m-4">
+            <div className="card-body p-0 m-4" id='res-card'>
                 <div className="table-responsive active-projects style-1 style-11">
                     <div className="tbl-caption justify-content-center">
                         <h4 className="heading mb-0 border p-1 rounded udtfont"><b>{title}</b></h4>

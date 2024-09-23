@@ -158,7 +158,7 @@ const Package = ({retailerInfo}) => {
     <div className="package-selector-container" style={{ maxWidth: '100%' }}>
       <h1>Package Selector</h1>
       <div className="row" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <div className='col-3'>
+        <div className=''style={{marginBottom:"10px"}}>
           <Button type="primary" onClick={handleAssignPackage} className="assign-button" disabled={loading}>
             {loading ? <Spin /> : 'Assign Package'}
           </Button>
@@ -206,7 +206,7 @@ const Package = ({retailerInfo}) => {
       )}
 
       <div className="row" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <div className='col-3'>
+        <div className=''style={{marginBottom:"10px"}}>
           <Button type="primary" onClick={handleAssignPackage} className="assign-button" disabled={loading}>
             {loading ? <Spin /> : 'Assign Package'}
           </Button>

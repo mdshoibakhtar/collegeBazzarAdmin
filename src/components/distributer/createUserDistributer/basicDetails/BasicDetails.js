@@ -47,7 +47,7 @@ function BasicDetails({ validate, business, value, handleInput_A }) {
           return (
             <>
               {value?.gst ? (<form className="tbl-captionn" onSubmit={handleSubmit}>
-                <div className="row">
+                <div className="row" id='res-card'>
                   <div className="col-xl-4 mb-3">
                     <CustomInputField
                       type="text"
@@ -225,7 +225,7 @@ function BasicDetails({ validate, business, value, handleInput_A }) {
               </div> */}
               </form>) : (
                 <section className="ListDistributer exppdf">
-                  <div className="row m-4">
+                  <div className="row m-4"  id='res-card'>
                     <div className="col-xl-12">
                       <div className="card">
                         <div className="card-body p-0">

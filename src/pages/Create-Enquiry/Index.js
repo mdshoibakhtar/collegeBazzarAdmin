@@ -26,9 +26,9 @@ function CreateEnquiry() {
                                 </div>
 
                             </div>
-                            <div>
+                            {/* <div>
                                 <button className="btn btn-primary me-1" type="submit">Submit</button>
-                            </div>
+                            </div> */}
                         </form>
                     </div>
                 </div>

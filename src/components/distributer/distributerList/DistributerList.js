@@ -15,6 +15,7 @@ import BulkAssigedModel from "../BulkAssigedModel";
 import { getServiceCategory } from "../../../api/login/Login";
 import { FaBroadcastTower } from "react-icons/fa";
 import BroadCasterModal from "./broadCasterModal/BroadCasterModal";
+import ModelLeadFollowUp from "./ModelLeadFollowUp";
 
 
 function DistributerList({ loading, params, state, handleChange, onChangeVal, approval }) {
@@ -66,7 +67,8 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal, ap
         }
     };
 
-
+    
+    const [modalShow2, setModalShow2] = useState(false);
 
     return (
         <>
@@ -208,6 +210,7 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal, ap
 
                                                             <Link to={`/admin/detail-lead/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-refresh" /></Link>
                                                             <Link to={`/admin/create-user/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                            <Link to="#" onClick={() => setModalShow2(true)}  className="btn btn-danger shadow btn-xs sharp"><i className="fa fa-home" /></Link>
                                                             {/* <Popconfirm
                                                             title="Delete Currency !"
                                                             description="Are you sure to delete ?"
@@ -224,6 +227,7 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal, ap
                                                 })}
                                             </tbody>
                                         </table>
+                                        <ModelLeadFollowUp show={modalShow2} onHide={() => setModalShow2(false)} />
                                         <Pagination className="pagination_gutter pagination_primary pagination_sm" />
                                     </div>
                                 </div>

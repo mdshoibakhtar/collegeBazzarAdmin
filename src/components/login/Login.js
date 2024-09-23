@@ -1,4 +1,4 @@
-import login from "../../assets/images/logo/logo.png";
+import login from "../../assets/images/logo/play.png";
 import loginimg from "../../assets/images/logo/degree.png";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -115,7 +115,8 @@ function Login() {
                   </p>
                 </div>
                 <div className="login-media text-center">
-                  <img src={loginimg} alt="" />
+                  <img src={'https://seeklogo.com/images/N/neft-logo-7222234315-seeklogo.com.gif'} alt="" />
+                  {/* <img src={loginimg} alt="" /> */}
                 </div>
               </div>
             </div>

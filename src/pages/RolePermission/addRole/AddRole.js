@@ -15,7 +15,7 @@ const moduleOptions = [
 
 function AddRole() {
     const [page, setPage] = useState(0);
-    const [count, setCount] = useState(30);
+    const [count, setCount] = useState(50);
     const navigate = useNavigate();
 
     const [dataconntriler, setDataconntriler] = useState(null);

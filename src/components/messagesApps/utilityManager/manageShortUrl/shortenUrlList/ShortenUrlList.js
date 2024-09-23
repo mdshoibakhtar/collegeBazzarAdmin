@@ -3,7 +3,8 @@ import React from 'react'
 function ShortenUrlList({templates}) {
   return (
     <>
-      <div className="card">
+      <div className="card" style={{overflow:"auto"}}>
+        
                 <table className='table'>
                     <thead>
                         <tr>

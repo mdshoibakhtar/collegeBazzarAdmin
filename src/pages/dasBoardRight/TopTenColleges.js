@@ -4,14 +4,14 @@ import React from 'react';
 export const TopTenColleges = ( ) => {
 
     return (
-        <div className="container">
-            <div className="row m-4">
-                <div className="col-xl-12">
+        <div className="container" id='responsive-padding'>
+            <div className="row m-4" id='res-card'>
+                <div className="col-xl-12" id='responsive-padding'>
                     <div className="card">
                         <div className="card-body p-0">
                             <div className="table-responsive active-projects style-1">
                                 <div className="tbl-caption">
-                                    <h4 className="heading mb-0">Top 10 Colleges </h4>
+                                    <h4 className="heading mb-0">Top 10 Results </h4>
                                     <div>
                                         {/* <Link className="btn btn-primary btn-sm" to="#" role="button" aria-controls="offcanvasExample">+ BANK MASTER</Link> */}
                                         {/* <button type="button" className="btn btn-secondary btn-sm" >

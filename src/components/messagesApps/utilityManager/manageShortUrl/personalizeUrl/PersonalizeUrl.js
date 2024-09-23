@@ -8,6 +8,7 @@ function PersonalizeUrl({ templates }) {
 
             <div className="card">
                 <div className="text-end"><button className=" btn-sm mb-4 mx-3 btn  btn-success"onClick={()=>setShow(!show)} > + ADD PERSONALISE URL</button></div>
+                <div style={{overflow:"auto"}}>
                 <table className='table'>
                     <thead>
                         <tr>
@@ -38,6 +39,7 @@ function PersonalizeUrl({ templates }) {
                         })}
                     </tbody>
                 </table>
+            </div>
             </div>
             {['end'].map((placement, idx) => (
                 <AddPersonaliseUrlModal key={idx} placement={placement} name={placement} show={show} setShow={setShow} />

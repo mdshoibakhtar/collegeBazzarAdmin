@@ -1,47 +1,62 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { useParams } from 'react-router-dom';
+import { getAllAssign, getCallConvertStatusByUser, getCallSourceByUser, getCallsStatusByUser, postCalls } from '../../api/login/Login';
+import { toast, ToastContainer } from 'react-toastify';
+import Loadar from '../../common/loader/Loader';
 
 function CallAddModel(props) {
+    const param = useParams()
     const [formValues, setFormValues] = useState({
-        callerNumber: '',
-        startTime: '',
-        callDuration: '',
-        assignedTo: '',
-        convertStatus: '',
-        providerName: '',
-        callerFrom: '',
-        recordingFileName: '',
-        leadId: '',
-        requestId: '',
-        autoDialerId: '',
-        simName: '',
-        callDirection: '',
-        callStatus: '',
-        callSource: '',
-        extensionUser: '',
-        callerTo: '',
-        landingNumber: '',
-        conversationUuid: '',
-        leg: '',
-        deviceSerialNumber: ''
+        call_number: '',               // String
+        start_time: '',                // Date (but will be treated as a string for now)
+        duration: '',                  // String
+        call_direct: '',               // Enum ["Inbound", "Outbound"]
+        call_status: '',               // String
+        convert_status: '',            // String
+        provider_name: '',             // String
+        callerFrom: '',                // String
+        callerTo: '',                  // String
+        recordingFile: '',             // String
+        landing_number: '',            // String
+        lead_id: '',                   // String
+        request_id: '',                // String
+        auto_Dialer_ID: '',            // String
+        siMName: '',                   // String
+        deviceSerialNumber: '',        // String
+        conversationUUID: '',          // String
+        leg: '',                       // String
+        assignTo: '',                  // Single value instead of an array
+        companyId: '',                 // String (kept from previous structure, assuming it's needed)
+        extension_user: '',            // String (kept from previous structure, assuming it's needed)
+        user_id: param?.id,                   // String (kept from previous structure, assuming it's needed)
     });
 
-    const [errors, setErrors] = useState({});
+    const [allAssign , setAllAsign] = useState()
+    const [callStatus , setCallStatus] = useState()
+    const [convertStatus , setConverStatus] = useState()
+    const [callSource , setcallSource] = useState()
+    const getFloorMasters = async () => {
+        
+        try {
+            const res = await getAllAssign()
+            const res1 = await getCallsStatusByUser()
+            const res2 = await getCallConvertStatusByUser()
+            const res3 = await getCallSourceByUser()
+            setAllAsign(res.data)
+            setCallStatus(res1.data)
+            setConverStatus(res2.data)
+            setcallSource(res3.data)
+        } catch (error) {
 
-    const validate = () => {
-        let tempErrors = {};
-        tempErrors.callerNumber = formValues.callerNumber ? "" : "Caller Number is required.";
-        tempErrors.startTime = formValues.startTime ? "" : "Start Time is required.";
-        tempErrors.assignedTo = formValues.assignedTo ? "" : "Assigned To is required.";
-        tempErrors.convertStatus = formValues.convertStatus ? "" : "Convert Status is required.";
-        tempErrors.providerName = formValues.providerName ? "" : "Provider Name is required.";
-        tempErrors.callerFrom = formValues.callerFrom ? "" : "Caller From is required.";
-        tempErrors.leadId = formValues.leadId ? "" : "Lead ID is required.";
-        tempErrors.simName = formValues.simName ? "" : "SIM Name is required.";
-        setErrors(tempErrors);
-        return Object.values(tempErrors).every(x => x === "");
-    };
+        }
+    }
+
+    useEffect(()=>{
+        getFloorMasters()
+    },[])
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -50,13 +65,38 @@ function CallAddModel(props) {
             [name]: value
         });
     };
+    const toastSuccessMessage = (message) => {
+        toast.success(`Add Call Successfull`, {
+            position: "top-right",
+        });
+    };
+    const toastSuccessError = (message) => {
+        toast.error(`Add Call Faild `, {
+            position: "top-right",
+        });
+    };
 
-    const handleSubmit = (e) => {
+    const [loader , setLoader] = useState(false)
+    const handleSubmit =async (e) => {
         e.preventDefault();
-        if (validate()) {
-            console.log(formValues);
-            // Submit form logic here
+        setLoader(true)
+        const obj = {...formValues }
+        console.log(obj);
+        try {
+          const res =  await postCalls(formValues)
+          if (res.statusCode == '200') {
+            toastSuccessMessage()
+          } else {
+            toastSuccessError()
+          }
+          setTimeout(() => {
+            setLoader(false)
+            props.onHide()
+          }, 1000);
+        } catch (error) {
+            
         }
+        
     };
 
     return (
@@ -66,6 +106,8 @@ function CallAddModel(props) {
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
+            {loader && <Loadar/>}
+            <ToastContainer/>
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
                     Quick Create Calls
@@ -78,31 +120,29 @@ function CallAddModel(props) {
                             <label>Caller Number</label>
                             <input
                                 type="text"
-                                name="callerNumber"
+                                name="call_number"
                                 style={{ width: "100%" }}
-                                value={formValues.callerNumber}
+                                value={formValues.call_number}
                                 onChange={handleChange}
                                 className="form-control"
                             />
-                            {errors.callerNumber && <div className="text-danger">{errors.callerNumber}</div>}
                         </div>
                         <div className="col-md-6 mb-3">
                             <label>Start Time</label>
                             <input
                                 type="datetime-local"
-                                name="startTime"
-                                value={formValues.startTime}
+                                name="start_time"
+                                value={formValues.start_time}
                                 onChange={handleChange}
                                 className="form-control"
                             />
-                            {errors.startTime && <div className="text-danger">{errors.startTime}</div>}
                         </div>
                         <div className="col-md-6 mb-3">
-                            <label>Call Duration</label>
+                            <label>Duration</label>
                             <input
                                 type="time"
-                                name="callDuration"
-                                value={formValues.callDuration}
+                                name="duration"
+                                value={formValues.duration}
                                 onChange={handleChange}
                                 className="form-control"
                             />
@@ -110,8 +150,8 @@ function CallAddModel(props) {
                         <div className="col-md-6 mb-3">
                             <label>Call Direction</label>
                             <select
-                                name="callDirection"
-                                value={formValues.callDirection}
+                                name="call_direct"
+                                value={formValues.call_direct}
                                 onChange={handleChange}
                                 className="form-control"
                             >
@@ -123,43 +163,46 @@ function CallAddModel(props) {
                         <div className="col-md-6 mb-3">
                             <label>Assigned To</label>
                             <select
-                                name="assignedTo"
-                                value={formValues.assignedTo}
-                                onChange={handleChange}
+                                name="assignTo"
+                                value={formValues.assignTo[0]}
+                                onChange={(e) =>
+                                    setFormValues({ ...formValues, assignTo: [e.target.value] })
+                                }
                                 className="form-control"
                             >
                                 <option value="">Select An Option</option>
-                                <option value="Abdul">Abdul</option>
-                                <option value="Someone Else">Someone Else</option>
+                                {allAssign && allAssign?.map((Item ,i)=>{
+                                    return <option key={i} value={Item._id}>{Item.name}</option>
+                                })}
                             </select>
-                            {errors.assignedTo && <div className="text-danger">{errors.assignedTo}</div>}
                         </div>
                         <div className="col-md-6 mb-3">
                             <label>Call Status</label>
                             <select
-                                name="callStatus"
-                                value={formValues.callStatus}
+                                name="call_status"
+                                value={formValues.call_status}
                                 onChange={handleChange}
                                 className="form-control"
                             >
                                 <option value="">Select An Option</option>
-                                <option value="Completed">Completed</option>
-                                <option value="Failed">Failed</option>
+                                {callStatus && callStatus?.map((Item ,i)=>{
+                                    return <option key={i} value={Item._id}>{Item.name}</option>
+                                })}
                             </select>
                         </div>
                         <div className="col-md-6 mb-3">
                             <label>Convert Status</label>
                             <select
-                                name="convertStatus"
-                                value={formValues.convertStatus}
+                                name="convert_status"
+                                value={formValues.convert_status}
                                 onChange={handleChange}
                                 className="form-control"
                             >
                                 <option value="">Select An Option</option>
-                                <option value="Converted">Converted</option>
-                                <option value="Not Converted">Not Converted</option>
+                                {convertStatus && convertStatus?.map((Item ,i)=>{
+                                    return <option key={i} value={Item._id}>{Item.name}</option>
+                                })}
                             </select>
-                            {errors.convertStatus && <div className="text-danger">{errors.convertStatus}</div>}
                         </div>
                         <div className="col-md-6 mb-3">
                             <label>Call Source</label>
@@ -170,33 +213,34 @@ function CallAddModel(props) {
                                 className="form-control"
                             >
                                 <option value="">Select An Option</option>
-                                <option value="Website">Website</option>
-                                <option value="App">App</option>
+                                {callSource && callSource?.map((Item ,i)=>{
+                                    return <option key={i} value={Item._id}>{Item.name}</option>
+                                })}
                             </select>
                         </div>
                         <div className="col-md-6 mb-3">
                             <label>Provider Name</label>
                             <input
                                 type="text"
-                                name="providerName"
+                                name="provider_name"
                                 style={{ width: "100%" }}
-                                value={formValues.providerName}
+                                value={formValues.provider_name}
                                 onChange={handleChange}
                                 className="form-control"
                             />
-                            {errors.providerName && <div className="text-danger">{errors.providerName}</div>}
                         </div>
                         <div className="col-md-6 mb-3">
-                            <label>Extension User</label>
+                            <label>Staff</label>
                             <select
-                                name="extensionUser"
-                                value={formValues.extensionUser}
+                                name="extension_user"
+                                value={formValues.extension_user}
                                 onChange={handleChange}
                                 className="form-control"
                             >
                                 <option value="">Select An Option</option>
-                                <option value="User1">User1</option>
-                                <option value="User2">User2</option>
+                                {allAssign && allAssign?.map((Item ,i)=>{
+                                    return <option key={i} value={Item._id}>{Item.name}</option>
+                                })}
                             </select>
                         </div>
                         <div className="col-md-6 mb-3">
@@ -209,7 +253,6 @@ function CallAddModel(props) {
                                 onChange={handleChange}
                                 className="form-control"
                             />
-                            {errors.callerFrom && <div className="text-danger">{errors.callerFrom}</div>}
                         </div>
                         <div className="col-md-6 mb-3">
                             <label>Caller To</label>
@@ -227,8 +270,8 @@ function CallAddModel(props) {
                             <input
                                 style={{ width: "100%" }}
                                 type="text"
-                                name="recordingFileName"
-                                value={formValues.recordingFileName}
+                                name="recordingFile"
+                                value={formValues.recordingFile}
                                 onChange={handleChange}
                                 className="form-control"
                             />
@@ -238,8 +281,8 @@ function CallAddModel(props) {
                             <input
                                 style={{ width: "100%" }}
                                 type="text"
-                                name="landingNumber"
-                                value={formValues.landingNumber}
+                                name="landing_number"
+                                value={formValues.landing_number}
                                 onChange={handleChange}
                                 className="form-control"
                             />
@@ -249,20 +292,19 @@ function CallAddModel(props) {
                             <input
                                 style={{ width: "100%" }}
                                 type="text"
-                                name="leadId"
-                                value={formValues.leadId}
+                                name="lead_id"
+                                value={formValues.lead_id}
                                 onChange={handleChange}
                                 className="form-control"
                             />
-                            {errors.leadId && <div className="text-danger">{errors.leadId}</div>}
                         </div>
                         <div className="col-md-6 mb-3">
-                            <label>request_id</label>
+                            <label>Request ID</label>
                             <input
                                 style={{ width: "100%" }}
                                 type="text"
-                                name="requestId"
-                                value={formValues.requestId}
+                                name="request_id"
+                                value={formValues.request_id}
                                 onChange={handleChange}
                                 className="form-control"
                             />
@@ -272,8 +314,8 @@ function CallAddModel(props) {
                             <input
                                 style={{ width: "100%" }}
                                 type="text"
-                                name="autoDialerId"
-                                value={formValues.autoDialerId}
+                                name="auto_Dialer_ID"
+                                value={formValues.auto_Dialer_ID}
                                 onChange={handleChange}
                                 className="form-control"
                             />
@@ -283,12 +325,11 @@ function CallAddModel(props) {
                             <input
                                 style={{ width: "100%" }}
                                 type="text"
-                                name="simName"
-                                value={formValues.simName}
+                                name="siMName"
+                                value={formValues.siMName}
                                 onChange={handleChange}
                                 className="form-control"
                             />
-                            {errors.simName && <div className="text-danger">{errors.simName}</div>}
                         </div>
                         <div className="col-md-6 mb-3">
                             <label>Device Serial Number</label>
@@ -306,8 +347,8 @@ function CallAddModel(props) {
                             <input
                                 style={{ width: "100%" }}
                                 type="text"
-                                name="conversationUuid"
-                                value={formValues.conversationUuid}
+                                name="conversationUUID"
+                                value={formValues.conversationUUID}
                                 onChange={handleChange}
                                 className="form-control"
                             />
@@ -323,9 +364,26 @@ function CallAddModel(props) {
                                 className="form-control"
                             />
                         </div>
+                        <div className="col-md-6 mb-3">
+                            <label>Company ID</label>
+                            <input
+                                style={{ width: "100%" }}
+                                type="text"
+                                name="companyId"
+                                value={formValues.companyId}
+                                onChange={handleChange}
+                                className="form-control"
+                            />
+                        </div>
+
+                        <div className="col-md-12 text-center mt-4">
+                            <button type="submit" className="btn btn-primary">
+                                Submit
+                            </button>
+                        </div>
                     </div>
-                    <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
+
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={props.onHide}>Close</Button>

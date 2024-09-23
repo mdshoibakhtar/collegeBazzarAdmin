@@ -23,10 +23,10 @@ function ComplaintForm({ setShow, show }) {
                         <Form>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <div className='border-1'>
-                                    <div className="aiz-main-content">
+                                    <div className="aiz-main-content" id='responsive-padding'>
                                         <div className="px-15px px-lg-25px">
                                             <div className="card-body">
-                                                <div className="card">
+                                                <div className="card" id='responsive-padding'>
                                                     <section className="form-section">
                                                         <div className='card-body'>
                                                             <h6><strong>Informations</strong></h6>
