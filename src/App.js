@@ -1473,6 +1473,26 @@ function App() {
               <Route path="visa-group-request-list" element={<VisaGroupReq />} />
               <Route path="visa-list" element={<VisaRList />} />
               <Route path="visa-list/add-visa" element={<VisaRForm />} />
+
+              {/* ---------------------Junaid Goatx Routes----------------------- */}
+              <Route path="Deposit-Request" element={<AccountManagement />} />
+              <Route path="distributor-deposite-request" element={<DistributorRequest />} />
+              <Route path="/flight-booking-txn-list/payment-remark" element={<RemarkPayment />} />
+              <Route path="/viewInvoice" element={<RemarkPayment />} />
+              <Route path="/flight-booking-txn-list/payment-remark/viewInvoice" element={<ViewInvoice />} />
+
+
+              <Route path="balance-ledger" element={<BalanceLedger />} />
+              <Route path="Vendor-Account-Logs" element={<VenderLogs />} />
+              <Route path="api-management" element={<ApiManage />} />
+              <Route path="api-manage" element={<ApiOffOnManage />} />
+
+              <Route path="holiday-markup-list" element={<HolidayMarkup />} />
+              <Route path="Holiday-Discount" element={<HolidayDIscount />} />
+              <Route path="Holiday-List" element={<HolidayListPage />} />
+              <Route path="Add-Holiday" element={<AddHoliday />} />
+
+
               {/* -----------------Goatx Routes-------- */}
               {/* -----------------shoib"s Route Start End-w-------- */}
               <Route path="notification/global/email" element={<NotificationSettings />} />
