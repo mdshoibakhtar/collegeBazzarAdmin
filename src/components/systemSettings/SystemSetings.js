@@ -93,25 +93,25 @@ const SystemSettings = () => {
             title: 'GDPR Cookie',
             description: 'Set GDPR Cookie policy if required. It will ask visitors of the system to accept if enabled.',
             icon: <i className="fa-solid fa-cookie-bite"></i>,
-            link:"#"
+            link:"/gdpr-cookie"
             },
         {
             title: 'Custom CSS',
             description: 'Write custom CSS here to modify some styles of frontend of the system if you need to.',
             icon: <i className="fa-brands fa-css3-alt"></i>,
-            link:"#"
+            link:"/custom-css"
             },
         {
             title: 'Sitemap XML',
             description: 'Insert the sitemap XML here to enhance SEO performance.',
             icon: <i className="fa-solid fa-sitemap"></i>,
-            link:"#"
+            link:"/sitemap-XML"
             },
         {
             title: 'Robots txt',
             description: 'Insert the robots.txt content here to enhance bot web crawlers and instruct them on how to interact with certain areas of the website.',
             icon: <i className="fa-solid fa-robot"></i>,
-            link:"#"
+            link:"/robots-txt"
             }
     ];
     
