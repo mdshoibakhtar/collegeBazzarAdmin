@@ -409,6 +409,15 @@ import GDPRCookies from "./components/systemSettings/gdpr/GDPRCookies";
 import CustomCss from "./components/systemSettings/customcss/CustomCss";
 import SiteMapXml from "./components/systemSettings/sitemap-XML/SiteMapXml";
 import RobotsTxt from "./components/systemSettings/robots-txt/RobotsTxt";
+import VaccineMonitorPage from "./pages/cowMonitor/vaccineMonitor";
+import { AddVaccineMonitor } from "./components/cowMonitor/vaccineMonitor/addVaccineMonitor/AddVaccineMonitor";
+import AnimalPregnancyPage from "./pages/cowMonitor/animalPregnancy";
+import SaleListPage from "./pages/cowSale/saleList";
+import CowSaleAdd from "./components/cowSale/saleList/cowSaleAdd/CowSaleAdd";
+import { SaleInvoice } from "./components/cowSale/saleList/saleInvoice/SaleInvoice";
+import SaleDueCollectionnPage from "./pages/cowSale/saleDueCollection";
+import ExpenseListPage from "./pages/farmExpense/expenseList";
+import { ExpenseListAdd } from "./components/farmExpense/expenseList/expenseListAdd/ExpenseListAdd";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -442,9 +451,9 @@ function App() {
         setNavigateState(`/${data?.data?.dashboard}`);
 
         if (isLogin) {
-          navigate(dashboardRoute); 
+          navigate(dashboardRoute);
         } else {
-          navigate(`/loginPage`); 
+          navigate(`/loginPage`);
         }
       } catch (error) {
         alert(`Error: ${error.message || "Dashboard Path Not Found!"}`);
@@ -452,7 +461,7 @@ function App() {
     };
 
     navigateToDashboard();
-     
+
   }, [isLogin]);
 
 
@@ -520,7 +529,7 @@ function App() {
               <Route path={`contest_dashboard`} element={<DasBoardRight />} />
               <Route path={`college_dashboard`} element={<CollegeBazzarDashboard />} />
               <Route path={`travel_dashboard`} element={<ViaggiooDashboardPage />} />
-              <Route path={`lead_dashboard`} element={<DashboardLeadPage/>} />
+              <Route path={`lead_dashboard`} element={<DashboardLeadPage />} />
               <Route path="bank-master" element={<BankMasterP />} />
               <Route path="zoon_area" element={<ZoonArea />} />
               <Route path="add-bank" element={<AddBank />} />
@@ -1496,6 +1505,16 @@ function App() {
               <Route path="company_details" element={<CompanyDetail />} />
               <Route path="cow-monitor" element={<RoutineMonitorPage />} />
               <Route path="cow-monitor/create" element={<AddRoutineMonitor />} />
+              <Route path="vaccine-monitor" element={<VaccineMonitorPage />} />
+              <Route path="vaccine-monitor/create" element={<AddVaccineMonitor />} />
+              <Route path="animal-pregnancy" element={<AnimalPregnancyPage />} />
+              <Route path="sale-cow" element={<SaleListPage />} />
+              <Route path="add-sale-cow" element={<CowSaleAdd />} />
+              <Route path="sale-invoice-cow" element={<SaleInvoice />} />
+              <Route path="sale-due-collection" element={<SaleDueCollectionnPage />} />
+              <Route path="expense-list" element={<ExpenseListPage />} />
+              <Route path="expense-add" element={<ExpenseListAdd />} />
+
 
 
 
@@ -1576,8 +1595,8 @@ function App() {
               <Route path="notification/global/email" element={<NotificationSettings />} />
               <Route path="extensions" element={<Extension />} />
 
-              <Route path="create-a-pages" element={<CreatePages/>} />
-              <Route path="manage-pages" element={<CreatePageList/>} />
+              <Route path="create-a-pages" element={<CreatePages />} />
+              <Route path="manage-pages" element={<CreatePageList />} />
               <Route path="create-a-link" element={<CreateLink />} />
               <Route path="gdpr-cookie" element={<GDPRCookies />} />
               <Route path="custom-css" element={<CustomCss />} />

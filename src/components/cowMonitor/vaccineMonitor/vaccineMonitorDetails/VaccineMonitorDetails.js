@@ -1,9 +1,7 @@
+import { Modal } from "react-bootstrap"
 
 
-
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-export const ServicesDetails = (props) => {
+export const VaccineMonitorDetails = (props) => {
     return (
         <>
             <Modal
@@ -21,20 +19,20 @@ export const ServicesDetails = (props) => {
                     <table>
                         <thead>
                             <tr style={{ color: 'white' }}>
-                                <th style={{ color: 'white' }}>Service Name</th>
-                                <th style={{ color: 'white' }}>Result</th>
-                                <th style={{ color: 'white' }}>Checkup Time</th>
+                                <th style={{ color: 'white' }}>Vaccine Name</th>
+                                <th style={{ color: 'white' }}>Remarks</th>
+                                <th style={{ color: 'white' }}>Given Time</th>
                             </tr>
 
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Monitoring</td>
+                                <td>Anthrax - ( 120 Months )</td>
                                 <td>Done</td>
                                 <td>10:20 AM</td>
                             </tr>
                             <tr>
-                                <td>Monthly Tika</td>
+                                <td>BDV - ( 60 Months )</td>
                                 <td>Done</td>
                                 <td>01:20 PM</td>
                             </tr>
