@@ -381,6 +381,9 @@ import AddHoliday from "./components/Holiday-list/AddHoliday";
 import HotelCoupon from "./components/hotelComp/hotelCoupon/HotelCoupon";
 import HotelVocherUpload from "./components/hotelComp/hotelVocherUpload/HotelVocherUpload";
 import Extension from "./components/systemSettings/Extention/Extension";
+import CreatePages from "./pages/createPage/CreatePages";
+import CreateLink from "./pages/createLink/CreateLink";
+import CreatePageList from "./pages/createPage/list/HolidayListPage";
 import CollegeBazzarDashboard from "./pages/collageBazzarsDashboad/CollegeBazzarDashboard";
 import DashboardLeadPage from "./pages/Dashboard-Lead/Index";
 
@@ -1568,6 +1571,10 @@ function App() {
               {/* -----------------shoib"s Route Start End-w-------- */}
               <Route path="notification/global/email" element={<NotificationSettings />} />
               <Route path="extensions" element={<Extension />} />
+
+              <Route path="create-a-pages" element={<CreatePages/>} />
+              <Route path="manage-pages" element={<CreatePageList/>} />
+              <Route path="create-a-link" element={<CreateLink />} />
               {/* -----------------shoib"s Route Start End-w-------- */}
 
 
