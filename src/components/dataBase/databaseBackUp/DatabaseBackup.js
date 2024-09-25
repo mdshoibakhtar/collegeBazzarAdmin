@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import Breadcrumbs from "../../../common/breadcrumb/Breadcrumbs";
 import CustomInputField from "../../../common/CustomInputField";
 import JoditEditor from "jodit-react";
-import { Pagination } from "react-bootstrap";
+import { Pagination } from "antd";
 
 function DataBaseBackup() {
     const breadCrumbsTitle = {
@@ -312,7 +312,6 @@ function DataBaseBackup() {
                     );
                 }}
             </Formik>
-
             <ToastContainer />
         </>
     )

@@ -27,7 +27,7 @@ const SystemSettings = () => {
             title: 'Notification Setting',
             description: 'Control and configure overall notification elements of the system.',
             icon: <i className="fa-solid fa-bell"></i>,
-            link:"#"
+            link:"/notification/global/email"
             },
         {
             title: 'Payment Gateways',
