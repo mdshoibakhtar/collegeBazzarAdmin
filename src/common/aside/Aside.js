@@ -10,7 +10,6 @@ import { removeItemFromLocalStorage } from "../../utils/localStorage";
 import { useDispatch } from "react-redux";
 import { setIsLogin } from "../../slice/auth";
 import { getLength, getMenusdata } from "../../api/login/Login";
-import asidemainmodicon from "../../assets/icons/aside-icon/admin.svg"
 let asideMenu = [];
 function Aside({ showAsideBar }) {
   const [parentId, setParentId] = useState(null);
@@ -106,7 +105,7 @@ function Aside({ showAsideBar }) {
         <div className="deznav-scroll mm-active d-flex flex-column justify-content-between ">
           <ul className="metismenu mm-show flex-1" id="menu">
             <li className={`mm-active hideDarrow  ${!showAsideBar ? "hide" : ""}`}>
-              <Link className="" to={"/"} aria-expanded="false">
+              <Link className="" to={mainMenus?.dashboard?.frontRoute} aria-expanded="false">
                 <span className="menu-icon">
                   <MdDashboard />
                 </span>
@@ -114,7 +113,7 @@ function Aside({ showAsideBar }) {
               </Link>
             </li>
             {mainMenus ? (<>
-              {mainMenus?.map((item, i) => {
+              {mainMenus?.role?.map((item, i) => {
                 return (
                   <li
                     className={`mm-active ${!showAsideBar ? "hide" : ""} ${parentId === item.uniqueId ? "active" : ""

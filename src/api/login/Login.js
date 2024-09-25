@@ -2799,6 +2799,13 @@ export const getupdateCompanyTypeId = (id) => {
 };
 
 
+// for selecter -------
+
+export const getDefaultDashboard = (slug) => {
+  return axiosInstance.get(`${baseUrl}subModule/main_module/slug?slug=${slug}`);
+};
+
+
 
 
 export const ContestParticipateList = (data) => {

@@ -380,6 +380,7 @@ import HolidayListPage from "./components/Holiday-list/HolidayListPage";
 import AddHoliday from "./components/Holiday-list/AddHoliday";
 import HotelCoupon from "./components/hotelComp/hotelCoupon/HotelCoupon";
 import HotelVocherUpload from "./components/hotelComp/hotelVocherUpload/HotelVocherUpload";
+import Extension from "./components/systemSettings/Extention/Extension";
 
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
@@ -457,12 +458,15 @@ function App() {
           </>
         ) : (
           <>
-            <Route path="/" element={<Navigate to={"/admin"} />} />
+            {/* <Route path="/" element={<Navigate to={`/${location?.pathname}`} />} /> */}
+            {/* <Route path="/" element={<Navigate to={`/admin`} />} /> */}
             <Route
               path=""
               element={<PrivateRoute isAuthenticated={isAuthenticated} />}
             >
-              <Route path="admin" element={<DasBoardRight />} />
+              {/* <Route path={`${location?.pathname}`} element={<DasBoardRight />} /> */}
+              <Route path={`collegesbazzar_dashboard`} element={<DasBoardRight />} />
+              <Route path={`goatx_dashboard`} element={<ViaggiooDashboardPage />} />
               <Route path="bank-master" element={<BankMasterP />} />
               <Route path="zoon_area" element={<ZoonArea />} />
               <Route path="add-bank" element={<AddBank />} />
@@ -1496,6 +1500,7 @@ function App() {
               {/* -----------------Goatx Routes-------- */}
               {/* -----------------shoib"s Route Start End-w-------- */}
               <Route path="notification/global/email" element={<NotificationSettings />} />
+              <Route path="extensions" element={<Extension />} />
               {/* -----------------shoib"s Route Start End-w-------- */}
 
 

@@ -69,7 +69,7 @@ const SystemSettings = () => {
             title: 'Extensions',
             description: 'Manage extensions of the system here to extend some extra features of the system.',
             icon: <i className="fa-solid fa-puzzle-piece"></i>,
-            link:"#"
+            link:"/extensions"
             },
         {
             title: 'Cron Job Setting',

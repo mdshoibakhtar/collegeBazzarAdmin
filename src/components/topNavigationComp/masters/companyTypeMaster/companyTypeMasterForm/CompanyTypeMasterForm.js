@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import Breadcrumbs from '../../../../../common/breadcrumb/Breadcrumbs';
 import CustomInputField from '../../../../../common/CustomInputField';
-import { addCompanyType, getupdateCompanyTypeId, updateCompanyType } from '../../../../../api/login/Login';
+import { addCompanyType, getDefaultDashboard, getupdateCompanyTypeId, updateCompanyType } from '../../../../../api/login/Login';
 function CompanyTypeMasterForm() {
     const breadCrumbsTitle = {
         title_1: "master",
@@ -15,8 +15,10 @@ function CompanyTypeMasterForm() {
         name: "",
         course: "",
         stream: "",
+        default_dashboard: "",
         isActive: "",
     });
+    const [state, setState] = useState(null)
 
     const params = useParams();
     const navigate = useNavigate();
@@ -33,6 +35,9 @@ function CompanyTypeMasterForm() {
         }
         if (!values.isActive) {
             errors.isActive = "Status Is Required";
+        }
+        if (!values.default_dashboard) {
+            errors.default_dashboard = "Dasboard Is Required";
         }
         return errors;
     };
@@ -86,6 +91,18 @@ function CompanyTypeMasterForm() {
         }
     };
 
+    const defaultDashboard = async () => {
+        try {
+            const res = await getDefaultDashboard("dashboard")
+            setState(res.data)
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+
+    useEffect(() => {
+        defaultDashboard()
+    }, [])
 
 
     useEffect(() => {
@@ -108,7 +125,6 @@ function CompanyTypeMasterForm() {
 
         fetchCurrency();
     }, [params?.id]);
-
 
     return (
         <>
@@ -144,7 +160,7 @@ function CompanyTypeMasterForm() {
                                     return (
                                         <form className="tbl-captionn" onSubmit={handleSubmit}>
                                             <div className="row">
-                                                <div className="col-xl-4 mb-3">
+                                                <div className="col-xl-6 mb-3">
                                                     <CustomInputField
                                                         type="text"
                                                         value={values?.name}
@@ -158,7 +174,7 @@ function CompanyTypeMasterForm() {
                                                         placeholder="Company Name"
                                                     />
                                                 </div>
-                                                <div className="col-xl-4 mb-3">
+                                                <div className="col-xl-6 mb-3">
                                                     <CustomInputField
                                                         type="text"
                                                         value={values?.stream}
@@ -172,7 +188,7 @@ function CompanyTypeMasterForm() {
                                                         placeholder="Stream"
                                                     />
                                                 </div>
-                                                <div className="col-xl-4 mb-3">
+                                                <div className="col-xl-6 mb-3">
                                                     <CustomInputField
                                                         type="text"
                                                         value={values?.course}
@@ -186,7 +202,29 @@ function CompanyTypeMasterForm() {
                                                         placeholder="Course"
                                                     />
                                                 </div>
-                                                <div className="col-xl-4 mb-3">
+                                                <div className="col-xl-6 mb-3">
+                                                    <select
+                                                        className="form-select"
+                                                        aria-label="Default select example"
+                                                        onChange={handleChange}
+                                                        value={values?.default_dashboard}
+                                                        name="default_dashboard"
+                                                    >
+                                                        <option value="" disabled>
+                                                            Default Dashboard
+                                                        </option>
+                                                        {state?.map((item) => {
+                                                            return <option value={item?._id} >
+                                                                {item?.name}
+                                                            </option>
+                                                        })}
+
+                                                    </select>
+                                                    {errors.isActive && touched.default_dashboard && (
+                                                        <div className="error">{errors.default_dashboard}</div>
+                                                    )}
+                                                </div>
+                                                <div className="col-xl-6 mb-3">
                                                     <select
                                                         className="form-select"
                                                         aria-label="Default select example"
