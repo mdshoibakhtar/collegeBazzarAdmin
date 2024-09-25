@@ -85,23 +85,16 @@ function Login() {
       let result = await LoginSubmit(values);
       if (result.statusCode === "200") {
         setLoading(false);
-        // console.log(result.data.token, "result.data.token");
         SaveUserDeatilsLocalStorage(result.data.token);
         dispatch(setIsLogin({ isLogin: !!result.data.token }));
         const navigateToDashboard = async () => {
           try {
-            // Await the result of getMenusdata
             const data = await getMenusdata();
-            console.log(data);
-
-            // Navigate to the dynamic route
             navigate(`/${data?.data?.dashboard?.frontRoute}`);
           } catch (error) {
             alert(error.message);
           }
         };
-
-        // You can call the async function like this
         navigateToDashboard();
 
       } else {
