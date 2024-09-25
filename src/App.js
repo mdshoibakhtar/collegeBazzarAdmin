@@ -172,7 +172,7 @@ import StaffKycDetailsMasterByid from "./components/staffKycDetailsByStaffId/Sta
 import { NotificationReport } from "./pages/Notification-Report/indexSame";
 import { getToken } from 'firebase/messaging';
 import { messaging } from "./firebase/fireBase";
-import { sendNotification } from "./api/login/Login";
+import { getMenusdata, sendNotification } from "./api/login/Login";
 import SetGroupAttributesPages from "./pages/setGroupAttributes";
 import Cities from "./pages/city";
 import CityForm from "./components/city/addCityForm/CityForm";
@@ -384,10 +384,13 @@ import Extension from "./components/systemSettings/Extention/Extension";
 import CreatePages from "./pages/createPage/CreatePages";
 import CreateLink from "./pages/createLink/CreateLink";
 import CreatePageList from "./pages/createPage/list/HolidayListPage";
+import CollegeBazzarDashboard from "./pages/collageBazzarsDashboad/CollegeBazzarDashboard";
+import DashboardLeadPage from "./pages/Dashboard-Lead/Index";
 
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [navigateState, setNavigateState] = useState(null);
   const { isLogin } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -400,12 +403,36 @@ function App() {
       dispatch(setIsLogin({ isLogin: true }));
       navigate(location?.pathname);
     }
+
   }, []);
 
   useEffect(() => {
     setIsAuthenticated(isLogin);
+    const navigateToDashboard = async () => {
+      try {
+        const data = await getMenusdata();
 
+        const dashboardRoute = data?.data?.dashboard?.frontRoute;
+        if (!dashboardRoute) {
+          throw new Error("Dashboard route not found");
+        }
+
+        setNavigateState(`/${data?.data?.dashboard}`);
+
+        if (isLogin) {
+          navigate(dashboardRoute); 
+        } else {
+          navigate(`/loginPage`); 
+        }
+      } catch (error) {
+        alert(`Error: ${error.message || "Dashboard Path Not Found!"}`);
+      }
+    };
+
+    navigateToDashboard();
+     
   }, [isLogin]);
+
 
 
 
@@ -461,15 +488,17 @@ function App() {
           </>
         ) : (
           <>
-            {/* <Route path="/" element={<Navigate to={`/${location?.pathname}`} />} /> */}
+            {/* <Route path="/" element={<Navigate to={`${navigateState?.frontRoute}`} />} /> */}
             {/* <Route path="/" element={<Navigate to={`/admin`} />} /> */}
             <Route
               path=""
               element={<PrivateRoute isAuthenticated={isAuthenticated} />}
             >
               {/* <Route path={`${location?.pathname}`} element={<DasBoardRight />} /> */}
-              <Route path={`collegesbazzar_dashboard`} element={<DasBoardRight />} />
-              <Route path={`goatx_dashboard`} element={<ViaggiooDashboardPage />} />
+              <Route path={`contest_dashboard`} element={<DasBoardRight />} />
+              <Route path={`college_dashboard`} element={<CollegeBazzarDashboard />} />
+              <Route path={`travel_dashboard`} element={<ViaggiooDashboardPage />} />
+              <Route path={`lead_dashboard`} element={<DashboardLeadPage/>} />
               <Route path="bank-master" element={<BankMasterP />} />
               <Route path="zoon_area" element={<ZoonArea />} />
               <Route path="add-bank" element={<AddBank />} />
