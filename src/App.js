@@ -320,9 +320,11 @@ import CompanyMasters from "./pages/companyMasters";
 import CompanyFormMaster from "./components/topNavigationComp/masters/companyMaster/companyFormMaster/CompanyFormMaster";
 import CompanyTypeMasters from "./pages/companyTypeMaster";
 import CompanyTypeMasterForm from "./components/topNavigationComp/masters/companyTypeMaster/companyTypeMasterForm/CompanyTypeMasterForm";
+
+import NotificationSettings from "./components/systemSettings/innerCardsPages/notificationSettings/NotificationSettings";
 import ContestParticipate from "./components/contest_participate/ContestParticipate";
 import CompanyDetail from "./components/companydetail/CompanyDeatail";
-import NotificationSettings from "./components/systemSettings/innerCardsPages/notificationSettings/NotificationSettings";
+
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1270,7 +1272,7 @@ function App() {
               <Route path="convert-status" element={<ConvertStatus />} />
               <Route path="create-convert-status" element={<CreateConvertForm />} />
               <Route path="create-convert-status/:id" element={<CreateConvertForm />} />
-             
+
 
               <Route path="call-source" element={<ConvertCallSource />} />
               <Route path="create-convert-call-source" element={<CreateConvertCallForm />} />
@@ -1318,11 +1320,11 @@ function App() {
               <Route path="Drown-Contest/2" element={<DyenmicContest title='Drown Contest List' />} />
 
 
-              <Route path="seo-configration" element={<SeoConfigration/>} />
-              <Route path="manegment-pages" element={<ManagementPages/>} />
-              <Route path="solcial-login" element={<SocialLoginCredentials/>} />
-              <Route path="corn-jobs" element={<CornJobs/>} />
-              
+              <Route path="seo-configration" element={<SeoConfigration />} />
+              <Route path="manegment-pages" element={<ManagementPages />} />
+              <Route path="solcial-login" element={<SocialLoginCredentials />} />
+              <Route path="corn-jobs" element={<CornJobs />} />
+
               {/* <Route path="corn-Schedules" element={<CornScheduel/>} /> */}
 
               <Route path="deal-list" element={<DealMaster />} />
@@ -1332,7 +1334,7 @@ function App() {
               <Route path="system-settings" element={<SystemSettings />} />
               <Route path="gateway/automatic" element={<PaymentGateway />} />
               <Route path="general-settings" element={<GeneralSettings />} />
-              <Route path="system-configration" element={<SystemConfiguration/>}/>
+              <Route path="system-configration" element={<SystemConfiguration />} />
               <Route path="send-email" element={<SendEmail />} />
               <Route path="mail-setings" element={<MailSeting />} />
               <Route path="mail-templates" element={<EmailTemplet />} />
@@ -1346,7 +1348,7 @@ function App() {
 
               <Route path="error-log-viewer" element={<ErrorLogViewer />} />
               <Route path="php-info-viewer" element={<PhpViewer />} />
-              <Route path="database-backup" element={<DataBaseBackup/>}/>
+              <Route path="database-backup" element={<DataBaseBackup />} />
 
 
 
@@ -1369,14 +1371,13 @@ function App() {
               <Route path="report/transaction" element={<TransactionHistoryPage />} />
               <Route path="report/login/history" element={<LoginHistoryPage />} />
               <Route path="report/notification/history" element={<NotificationHistoryPage />} />
+              <Route path="contest_participate" element={<ContestParticipate />} />
+              <Route path="company_details" element={<CompanyDetail />} />
 
               {/* -----------------shoib"s Route Start End-w-------- */}
               <Route path="notification/global/email" element={<NotificationSettings />} />
-              
-              <Route path="contest_participate" element={<ContestParticipate/>} />
-              <Route path="company_details" element={<CompanyDetail/>} />
-
               {/* -----------------shoib"s Route Start End-w-------- */}
+
 
               <Route path="*" element={<PageNotFound />} />
             </Route>
