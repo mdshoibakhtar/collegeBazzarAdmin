@@ -1,9 +1,8 @@
 
 
+import { Modal } from "react-bootstrap"
 
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-export const ServicesDetails = (props) => {
+export const SaleListView = (props) => {
     return (
         <>
             <Modal
@@ -14,30 +13,33 @@ export const ServicesDetails = (props) => {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        Services Details
+                        Cow Details
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <table>
                         <thead>
                             <tr style={{ color: 'white' }}>
-                                <th style={{ color: 'white' }}>Service Name</th>
-                                <th style={{ color: 'white' }}>Result</th>
-                                <th style={{ color: 'white' }}>Checkup Time</th>
+                                <th style={{ color: 'white' }}>Image</th>
+                                <th style={{ color: 'white' }}>Cow Number	</th>
+                                <th style={{ color: 'white' }}>Stall No</th>
+                                <th style={{ color: 'white' }}>Gender</th>
+                                <th style={{ color: 'white' }}>Weight (KG)	</th>
+                                <th style={{ color: 'white' }}>Height (INCH)</th>
+
                             </tr>
 
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Monitoring</td>
-                                <td>Done</td>
-                                <td>10:20 AM</td>
+                                <td>image</td>
+                                <td>000 21</td>
+                                <td>Stall-005	</td>
+                                <td>Male</td>
+                                <td>434353.00</td>
+                                <td>234.00</td>
                             </tr>
-                            <tr>
-                                <td>Monthly Tika</td>
-                                <td>Done</td>
-                                <td>01:20 PM</td>
-                            </tr>
+
                         </tbody>
                     </table>
                 </Modal.Body>
