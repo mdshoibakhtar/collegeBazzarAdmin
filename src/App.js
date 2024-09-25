@@ -305,8 +305,6 @@ import SystemSettings from "./components/systemSettings/SystemSetings";
 import PaymentGateway from "./components/systemSettings/innerCardsPages/paymentGatway/PaymentGateway";
 import GeneralSettings from "./components/systemSettings/innerCardsPages/generalSettings/GeneralSettings";
 import SystemConfiguration from "./components/systemSettings/innerCardsPages/systemConfigration/SystemConfigration";
-// import SystemConfigration from "./components/systemSettings/innerCardsPages/systemConfigration"
-
 import DeclaredWinnersPage from "./pages/declaredWinners";
 import ManageUsersPage from "./pages/ManageUsers";
 import UserDetails from "./components/ManageUsers/userDetails/UserDetails";
@@ -322,12 +320,86 @@ import CompanyMasters from "./pages/companyMasters";
 import CompanyFormMaster from "./components/topNavigationComp/masters/companyMaster/companyFormMaster/CompanyFormMaster";
 import CompanyTypeMasters from "./pages/companyTypeMaster";
 import CompanyTypeMasterForm from "./components/topNavigationComp/masters/companyTypeMaster/companyTypeMasterForm/CompanyTypeMasterForm";
+
+import NotificationSettings from "./components/systemSettings/innerCardsPages/notificationSettings/NotificationSettings";
+import ContestParticipate from "./components/contest_participate/ContestParticipate";
+import CompanyDetail from "./components/companydetail/CompanyDeatail";
+
+
+
+// -----------------goatx import -----------------
+
+import FlightRequestPages from "./pages/flightAllPages";
+import FlightAmbd from "./components/flightComp/flightAmbd/FlightAmbd";
+import FlightCancel from "./components/flightComp/flightCancel/FlightCancel";
+import FlightRefunds from "./components/flightComp/flightRefundlList/FlightRefunds";
+import FlightBookingCalender from "./components/flightComp/flightBCalender/flightBookingCalender/FlightBookingCalender";
+import HoteltAmbd from "./components/hotelComp/hotelAmbd/HotelAmbd";
+import HotelBooking from "./components/hotelComp/hotelBooking/HotelBooking";
+import HotelBCalender from "./components/hotelComp/hotelBCalender/HotelBCalender";
+import HotelCancel from "./components/hotelComp/HotelCancel/HotelCancel";
+import HotelRefunds from "./components/hotelComp/HotelRefundlList/HotelRefunds";
+import BusMarkup from "./components/busComp/busMarkup/BusMarkup";
+import BusAmendments from "./components/busComp/busAmendment/BusAmendments ";
+import BusBooking from "./components/busComp/busBooking/BusBooking";
+import BusCancel from "./components/busComp/busCancel/BusCancel";
+import BusRefunds from "./components/busComp/BusRefund/BusRefund";
+import BusGroupRequest from "./components/busComp/busGroupRequest/BusGroupRequest";
+import BusDiscount from "./components/busComp/busDiscount/BusDiscount";
+import BusUpload from "./components/busComp/busUpload/BusUpload";
+import VisaMarkup from "./components/visaComp/visaMarkup/Visamarkup";
+import VisaDiscount from "./components/visaComp/VisaDiscount/VisaDiscount";
+import VisaList from "./components/visaComp/VisaList/Visalist";
+import VisaAmendmentsList from "./components/visaComp/VisaAmendmentsList/VisaAmendmentslist";
+import VisaBooking from "./components/visaComp/visaBooking/visaBooking";
+import VisaSetings from "./components/visaComp/visaSettings/VisaSetings";
+import AccountManagement from "./components/accountmanagment/AccountManagement";
+import DistributorRequest from "./components/distributorDepositeRequest/DistributorRequest";
+import RemarkPayment from "./components/flightComp/flightRequest/flightRequestList/RemarkPayment";
+import ViewInvoice from "./components/flightComp/viewInvoice/ViewInvoice";
+import VisaGroupReq from "./components/visaComp/visaGroupReq/VisaGroupReq";
+import VisaRList from "./components/visaComp/VisaRList/VisaRlist";
+import VisaRForm from "./components/visaComp/VisaRList/visaRForm/VisaRForm";
+import FlightGroupRequest from "./components/flightComp/flightGroupRequest/FlightGroupRequest";
+import FlightOfline from "./components/flightComp/flightOfline/FlightOfline";
+import FlightMarkUp from "./components/flightComp/flightMarkup/FlightMarkUp";
+import BalanceLedger from "./components/balance-ledger/BalanceLedger";
+import VenderLogs from "./components/VenderLogs/VenderLogs";
+import ApiManage from "./components/apiManagment/ApiManage";
+import ApiOffOnManage from "./components/api-manage/ApiOffOnManage";
+import { ViaggiooDashboardPage } from "./pages/viaggiooDashBoard";
+import FlightDiscount from "./components/flightComp/flightDiscount/FlightDiscount";
+import FlightUploadTicket from "./components/flightComp/flightUploadTicket/FlightUploadTicket";
+import HotelHoldQues from "./components/hotelComp/hotelHoldQues/HotelHoldQues";
+import HotelMarkup from "./components/hotelComp/hotelMarkup/HotelMarkUp";
+import HotelDiscount from "./components/hotelComp/hotelDiscount/HotelDiscount";
+import HotelGroupRequest from "./components/hotelComp/HotelGroupRequest/HotelGroupRequest";
+import HolidayMarkup from "./components/Holiday-markup/HolidayMarkup";
+import HolidayDIscount from "./components/Holiday-discount/HolidayDIscount";
+import HolidayListPage from "./components/Holiday-list/HolidayListPage";
+import AddHoliday from "./components/Holiday-list/AddHoliday";
+import HotelCoupon from "./components/hotelComp/hotelCoupon/HotelCoupon";
+import HotelVocherUpload from "./components/hotelComp/hotelVocherUpload/HotelVocherUpload";
+import Extension from "./components/systemSettings/Extention/Extension";
+
 import CollectMilkPage from "./pages/milkParlor/collectMilk";
 import { CollectMilkAdd } from "./components/milkParlor/collectMilk/collectMilkAdd/CollectMilkAdd";
 import SaleMilkPage from "./pages/milkParlor/saleMilk";
 import { AddSaleMilk } from "./components/milkParlor/saleMilk/addSaleMilk/AddSaleMilk";
 import { SaleMilkInvoice } from "./components/milkParlor/saleMilk/saleMilkInvoice/SaleMilkInvoice";
 import SaleDueCollectionPage from "./pages/milkParlor/saleDueCollection";
+import RoutineMonitorPage from "./pages/cowMonitor/routineMonitor";
+import { AddRoutineMonitor } from "./components/cowMonitor/routineMonitor/addRoutineMonitor/AddRoutineMonitor";
+
+import OverallReportPage from "./pages/Analytics/OverallReport";
+import VisitorsLogPage from "./pages/Analytics/VisitorsLog";
+import RecentHistoryPage from "./pages/Analytics/RecentHistory";
+import OverviewPage from "./pages/Analytics/Overview";
+import WhoOnlinePage from "./pages/Analytics/WhoOnline";
+import PlayNif50Page from "./pages/playNif50";
+import { Nifty50HourlyContest } from "./components/playNif50/Nifty50/nifty50Slide/nifty50HourlyContest/Nifty50HourlyContest";
+import { SelectPlayers } from "./components/playNif50/Nifty50/nifty50Slide/nifty50HourlyContest/selectPlayers/SelectPlayers";
+import { SelectStock } from "./components/playNif50/Nifty50/nifty50Slide/nifty50HourlyContest/selectPlayers/selectStock/SelectStock";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -404,12 +476,15 @@ function App() {
           </>
         ) : (
           <>
-            <Route path="/" element={<Navigate to={"/admin"} />} />
+            {/* <Route path="/" element={<Navigate to={`/${location?.pathname}`} />} /> */}
+            {/* <Route path="/" element={<Navigate to={`/admin`} />} /> */}
             <Route
               path=""
               element={<PrivateRoute isAuthenticated={isAuthenticated} />}
             >
-              <Route path="admin" element={<DasBoardRight />} />
+              {/* <Route path={`${location?.pathname}`} element={<DasBoardRight />} /> */}
+              <Route path={`collegesbazzar_dashboard`} element={<DasBoardRight />} />
+              <Route path={`goatx_dashboard`} element={<ViaggiooDashboardPage />} />
               <Route path="bank-master" element={<BankMasterP />} />
               <Route path="zoon_area" element={<ZoonArea />} />
               <Route path="add-bank" element={<AddBank />} />
@@ -1003,6 +1078,10 @@ function App() {
                 element={<CompanyFormMaster />}
               />
               <Route
+                path="/update-company-master/:id"
+                element={<CompanyFormMaster />}
+              />
+              <Route
                 path="/company-type-master"
                 element={<CompanyTypeMasters />}
               />
@@ -1377,9 +1456,91 @@ function App() {
               <Route path="add-sale-milk" element={<AddSaleMilk />} />
               <Route path="sale-milk-invoice" element={<SaleMilkInvoice />} />
               <Route path="sale-milk-due-collection" element={<SaleDueCollectionPage />} />
+              <Route path="contest_participate" element={<ContestParticipate />} />
+              <Route path="company_details" element={<CompanyDetail />} />
+              <Route path="cow-monitor" element={<RoutineMonitorPage />} />
+              <Route path="cow-monitor/create" element={<AddRoutineMonitor />} />
 
-              {/* -----------------junaid"s Route Start End-w-------- */}
-              {/* -----------------junaid"s Route Start End-w-------- */}
+
+
+
+
+              {/* -----------------Goatx Routes-------- */}
+              <Route path="flight-booking-txn-list" element={<FlightRequestPages />} />
+              <Route path="flight-amendments-list" element={<FlightAmbd />} />
+              <Route path="flight-refunds-list" element={<FlightRefunds />} />
+              <Route path="flight-Cancellation-request" element={<FlightCancel />} />
+              <Route path="flight-booking-calendar" element={<FlightBookingCalender />} />
+              <Route path="flight-group-request" element={<FlightGroupRequest />} />
+              <Route path="offline-flight" element={<FlightOfline />} />
+              <Route path="flight-markup" element={<FlightMarkUp />} />
+              <Route path="flight-deal-dicount" element={<FlightDiscount />} />
+              <Route path="flight-upload-ticket" element={<FlightUploadTicket />} />
+              <Route path="hotel-amendments-list" element={<HoteltAmbd />} />
+              <Route path="hotel-hold-queues" element={<HotelHoldQues />} />
+              <Route path="hotels-markup" element={<HotelMarkup />} />
+              <Route path="hotel-discounts" element={<HotelDiscount />} />
+              <Route path="hotel-booking-list" element={<HotelBooking />} />
+              <Route path="hotel-group-request" element={<HotelGroupRequest />} />
+              <Route path="my-booking-hotel-calender" element={<HotelBCalender />} />
+              <Route path="hotel-cancellations-request" element={<HotelCancel />} />
+              <Route path="hotel-refunds-list" element={<HotelRefunds />} />
+              <Route path="coupon/hotel-coupon" element={<HotelCoupon />} />
+              <Route path="hotel-upload" element={<HotelVocherUpload />} />
+              <Route path="bus-markup" element={<BusMarkup />} />
+              <Route path="bus-amendments" element={<BusAmendments />} />
+              <Route path="bus-booking-list" element={<BusBooking />} />
+              <Route path="bus-cancellation-request" element={<BusCancel />} />
+              <Route path="bus-refund" element={<BusRefunds />} />
+              <Route path="bus-group-request" element={<BusGroupRequest />} />
+              <Route path="bus-discount" element={<BusDiscount />} />
+              <Route path="bus-upload" element={<BusUpload />} />
+              <Route path="visa-markup" element={<VisaMarkup />} />
+              <Route path="visa-discount" element={<VisaDiscount />} />
+              <Route path="Visa-refunds-list" element={<VisaList />} />
+              <Route path="visa-amendments-list" element={<VisaAmendmentsList />} />
+              <Route path="visa-booking-list" element={<VisaBooking />} />
+              <Route path="visa-setting-list" element={<VisaSetings />} />
+              <Route path="visa-group-request-list" element={<VisaGroupReq />} />
+              <Route path="visa-list" element={<VisaRList />} />
+              <Route path="visa-list/add-visa" element={<VisaRForm />} />
+
+              {/* ---------------------Junaid Goatx Routes----------------------- */}
+              <Route path="Deposit-Request" element={<AccountManagement />} />
+              <Route path="distributor-deposite-request" element={<DistributorRequest />} />
+              <Route path="/flight-booking-txn-list/payment-remark" element={<RemarkPayment />} />
+              <Route path="/viewInvoice" element={<RemarkPayment />} />
+              <Route path="/flight-booking-txn-list/payment-remark/viewInvoice" element={<ViewInvoice />} />
+
+
+              <Route path="balance-ledger" element={<BalanceLedger />} />
+              <Route path="Vendor-Account-Logs" element={<VenderLogs />} />
+              <Route path="api-management" element={<ApiManage />} />
+              <Route path="api-manage" element={<ApiOffOnManage />} />
+
+              <Route path="holiday-markup-list" element={<HolidayMarkup />} />
+              <Route path="Holiday-Discount" element={<HolidayDIscount />} />
+              <Route path="Holiday-List" element={<HolidayListPage />} />
+              <Route path="Add-Holiday" element={<AddHoliday />} />
+
+
+              <Route path="overall-report" element={<OverallReportPage />} />
+              <Route path="visitors-log" element={<VisitorsLogPage />} />
+              <Route path="recent-history" element={<RecentHistoryPage />} />
+              <Route path="who-online" element={<OverviewPage />} />
+              <Route path="analytics-overview" element={<WhoOnlinePage />} />
+              <Route path="/dashboard/playNif50" element={<PlayNif50Page />} />
+              <Route path="hourly-contest" element={<Nifty50HourlyContest />} />
+              <Route path="select-palyers" element={<SelectPlayers />} />
+              <Route path="select-stock" element={<SelectStock />} />
+
+
+              {/* -----------------Goatx Routes-------- */}
+              {/* -----------------shoib"s Route Start End-w-------- */}
+              <Route path="notification/global/email" element={<NotificationSettings />} />
+              <Route path="extensions" element={<Extension />} />
+              {/* -----------------shoib"s Route Start End-w-------- */}
+
 
               <Route path="*" element={<PageNotFound />} />
             </Route>

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import login from "../../assets/images/logo/play.png";
-import loginimg from "../../assets/images/logo/login.jpg";
+import loginAbarisLogo from "../../assets/images/logo/AbarisSoftectLogo.png";
+import loginAbarisBanner from "../../assets/images/kyc/abarisBanner.png";
 import CustomInputField from "../../common/CustomInputField";
-import { sendOtpByEmail, sendOtpByPhone, sendVerifyEmailOtp, sendVerifyPhoneOtp } from '../../api/login/Login';
+import { getCompanyInfo, sendOtpByEmail, sendOtpByPhone, sendVerifyEmailOtp, sendVerifyPhoneOtp } from '../../api/login/Login';
 import { ToastContainer, toast } from 'react-toastify';
 import { Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { baseUrlImage } from '../../baseUrl';
+import Loadar from '../../common/loader/Loader';
 
 function ForgotPassword() {
     const [isEmail, setIsEmail] = useState(true);
@@ -18,6 +20,7 @@ function ForgotPassword() {
     const [otpDigits, setOtpDigits] = useState(["", "", "", "", "", ""]);
     const [timeLeft, setTimeLeft] = useState(0);
     const [otpSent, setOtpSent] = useState(false);
+    const [dataLg, setDataLg] = useState(null);
     const navigate = useNavigate();
     window.localStorage.setItem("otpToken", isToken);
 
@@ -25,6 +28,16 @@ function ForgotPassword() {
         setIsEmail(!isEmail);
         setIsPhone(!isPhone);
     };
+    const getData = async () => {
+        setIsLoading(true)
+        try {
+            const res = await getCompanyInfo()
+            setDataLg(res.data);
+        } catch (error) {
+            alert(error.message)
+        }
+        setIsLoading(false)
+    }
 
     const toastErrorMessage = (message) => {
         toast.error(message);
@@ -139,189 +152,194 @@ function ForgotPassword() {
         const remainingSeconds = seconds % 60;
         return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
     };
+    useEffect(() => {
+        getData()
+    }, [])
 
     return (
-        <div className="authincation h-100 h-100-2">
-            <div className="container-fluid">
-                <div className="row h-100">
-                    <div className="col-lg-6 col-md-12 col-sm-12 mx-auto align-self-center">
-                        <div className="login-form">
-                            <div className="text-center">
-                                <h3 className="title">Reset Password</h3>
-                                <p>Reset your account password to start using </p>
-                            </div>
-                            <div className='d-flex justify-content-around'>
-                                <div className="mb-4">
-                                    <div className="form-check custom-checkbox mb-3">
-                                        <input
-                                            type="radio"
-                                            className="form-check-input"
-                                            id="customradio1"
-                                            name='forgotpassword'
-                                            onChange={handleRadio}
-                                            checked={isEmail}
-                                        />
-                                        <label
-                                            className="form-check-label"
-                                            htmlFor="customradio1"
-                                        >
-                                            Send Otp By Email
-                                        </label>
+        <>
+            {isLoading ? <Loadar /> :
+                <div className="authincation h-100 h-100-2">
+                    <div className="container-fluid">
+                        <div className="row aligns-items-center">
+                            <div className="col-lg-6 col-md-12 col-sm-12 mx-auto align-self-center">
+                                <div className="login-form">
+                                    <div className="text-center">
+                                        <h3 className="title">Reset Password</h3>
+                                        <p>Reset your account password to start using </p>
                                     </div>
-                                </div>
-                                <div className="mb-4">
-                                    <div className="form-check custom-checkbox mb-3">
-                                        <input
-                                            type="radio"
-                                            className="form-check-input"
-                                            id="customradio2"
-                                            name='forgotpassword'
-                                            onChange={handleRadio}
-                                            checked={isPhone}
-                                        />
-                                        <label
-                                            className="form-check-label"
-                                            htmlFor="customradio2"
-                                        >
-                                            Send Otp By Phone No
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            {isEmail && (
-                                <form onSubmit={handleSubmit}>
-                                    <>
+                                    <div className='d-flex justify-content-around'>
                                         <div className="mb-4">
-                                            <CustomInputField
-                                                type="email"
-                                                placeholder="Enter Email"
-                                                value={initialValues.emailId}
-                                                name="emailId"
-                                                onChange={handleInputChange}
-                                                id="email"
-                                            />
-                                        </div>
-                                        <div className="form-row d-flex justify-content-between mt-4 mb-2">
-                                            <div className="">
-                                                <button className='btn btn-success text-white' type='button' onClick={() => navigate("/loginPage")}>
-                                                    Back
-                                                </button>
-                                            </div>
-                                            <div className="">
-                                                <button
-                                                    type="submit"
-                                                    className="btn btn-primary text-white"
-                                                    disabled={!initialValues.emailId || isLoading || (otpSent && timeLeft > 0)}
-                                                >
-                                                    {isLoading ? (
-                                                        <small><Spinner animation="grow" size="sm" /> OTP SENDING...</small>
-                                                    ) : (
-                                                        otpSent ? (
-                                                            timeLeft > 0 ? (
-                                                                `Resend OTP (${formatTime(timeLeft)})`
-                                                            ) : (
-                                                                'Resend OTP'
-                                                            )
-                                                        ) : (
-                                                            'Send OTP'
-                                                        )
-                                                    )}
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </>
-                                </form>
-                            )}
-
-                            {isPhone && (
-                                <form onSubmit={handleSubmit}>
-                                    <>
-                                        <div className="mb-1">
-                                            <CustomInputField
-                                                type="text"
-                                                placeholder="Enter Mobile No"
-                                                value={initialPhone.mobileNo}
-                                                name="mobileNo"
-                                                onChange={handleInputChange}
-                                                id="number"
-                                            />
-                                        </div>
-                                        <div className='text-black text-center w-100'>Enter Your Mobile No With Country Code..! </div>
-                                        <div className="form-row d-flex justify-content-between mt-4 mb-2">
-                                            <div className="">
-                                                <button className='btn btn-success text-white' type='button' onClick={() => navigate("/loginPage")}>
-                                                    Back
-                                                </button>
-                                            </div>
-                                            <div className="">
-                                                <button
-                                                    type="submit"
-                                                    className="btn btn-primary text-white"
-                                                    disabled={!initialPhone.mobileNo || isLoading || (otpSent && timeLeft > 0)}
-                                                >
-                                                    {isLoading ? (
-                                                        <small><Spinner animation="grow" size="sm" /> OTP SENDING...</small>
-                                                    ) : (
-                                                        otpSent && timeLeft > 0 ?
-                                                            `Resend OTP (${formatTime(timeLeft)})` :
-                                                            'Send OTP'
-                                                    )}
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </>
-                                </form>
-                            )}
-
-                            {isOtpUi && (
-                                <form onSubmit={handleOtpSubmit}>
-                                    <div className="mb-4 d-flex justify-content-between">
-                                        {otpDigits.map((digit, index) => (
-                                            <div className="position-relative mx-2 otpInp" key={index}>
-                                                <CustomInputField
-                                                    id={`otp${index}`}
-                                                    type="number"
-                                                    value={digit}
-                                                    onChange={(e) => handleOtpChange(index, e.target.value, e)}
-                                                    maxLength={1}
+                                            <div className="form-check custom-checkbox mb-3">
+                                                <input
+                                                    type="radio"
+                                                    className="form-check-input"
+                                                    id="customradio1"
+                                                    name='forgotpassword'
+                                                    onChange={handleRadio}
+                                                    checked={isEmail}
                                                 />
+                                                <label
+                                                    className="form-check-label"
+                                                    htmlFor="customradio1"
+                                                >
+                                                    Send Otp By Email
+                                                </label>
                                             </div>
-                                        ))}
+                                        </div>
+                                        <div className="mb-4">
+                                            <div className="form-check custom-checkbox mb-3">
+                                                <input
+                                                    type="radio"
+                                                    className="form-check-input"
+                                                    id="customradio2"
+                                                    name='forgotpassword'
+                                                    onChange={handleRadio}
+                                                    checked={isPhone}
+                                                />
+                                                <label
+                                                    className="form-check-label"
+                                                    htmlFor="customradio2"
+                                                >
+                                                    Send Otp By Phone No
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="text-center mb-4">
-                                        <button
-                                            type="button"
-                                            className="btn btn-primary btn-block"
-                                            onClick={handleOtpSubmit}
-                                            disabled={!isAllOtpFilled}
-                                        >
-                                            Submit
-                                        </button>
+                                    {isEmail && (
+                                        <form onSubmit={handleSubmit}>
+                                            <>
+                                                <div className="mb-4">
+                                                    <CustomInputField
+                                                        type="email"
+                                                        placeholder="Enter Email"
+                                                        value={initialValues.emailId}
+                                                        name="emailId"
+                                                        onChange={handleInputChange}
+                                                        id="email"
+                                                    />
+                                                </div>
+                                                <div className="form-row d-flex justify-content-between mt-4 mb-2">
+                                                    <div className="">
+                                                        <button className='btn btn-success text-white' type='button' onClick={() => navigate("/loginPage")}>
+                                                            Back
+                                                        </button>
+                                                    </div>
+                                                    <div className="">
+                                                        <button
+                                                            type="submit"
+                                                            className="btn btn-primary text-white"
+                                                            disabled={!initialValues.emailId || isLoading || (otpSent && timeLeft > 0)}
+                                                        >
+                                                            {isLoading ? (
+                                                                <small><Spinner animation="grow" size="sm" /> OTP SENDING...</small>
+                                                            ) : (
+                                                                otpSent ? (
+                                                                    timeLeft > 0 ? (
+                                                                        `Resend OTP (${formatTime(timeLeft)})`
+                                                                    ) : (
+                                                                        'Resend OTP'
+                                                                    )
+                                                                ) : (
+                                                                    'Send OTP'
+                                                                )
+                                                            )}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </>
+                                        </form>
+                                    )}
+                                    {isPhone && (
+                                        <form onSubmit={handleSubmit}>
+                                            <>
+                                                <div className="mb-1">
+                                                    <CustomInputField
+                                                        type="text"
+                                                        placeholder="Enter Mobile No"
+                                                        value={initialPhone.mobileNo}
+                                                        name="mobileNo"
+                                                        onChange={handleInputChange}
+                                                        id="number"
+                                                    />
+                                                </div>
+                                                <div className='text-black text-center w-100'>Enter Your Mobile No With Country Code..! </div>
+                                                <div className="form-row d-flex justify-content-between mt-4 mb-2">
+                                                    <div className="">
+                                                        <button className='btn btn-success text-white' type='button' onClick={() => navigate("/loginPage")}>
+                                                            Back
+                                                        </button>
+                                                    </div>
+                                                    <div className="">
+                                                        <button
+                                                            type="submit"
+                                                            className="btn btn-primary text-white"
+                                                            disabled={!initialPhone.mobileNo || isLoading || (otpSent && timeLeft > 0)}
+                                                        >
+                                                            {isLoading ? (
+                                                                <small><Spinner animation="grow" size="sm" /> OTP SENDING...</small>
+                                                            ) : (
+                                                                otpSent && timeLeft > 0 ?
+                                                                    `Resend OTP (${formatTime(timeLeft)})` :
+                                                                    'Send OTP'
+                                                            )}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </>
+                                        </form>
+                                    )}
+
+                                    {isOtpUi && (
+                                        <form onSubmit={handleOtpSubmit}>
+                                            <div className="mb-4 d-flex justify-content-between">
+                                                {otpDigits.map((digit, index) => (
+                                                    <div className="position-relative mx-2 otpInp" key={index}>
+                                                        <CustomInputField
+                                                            id={`otp${index}`}
+                                                            type="number"
+                                                            value={digit}
+                                                            onChange={(e) => handleOtpChange(index, e.target.value, e)}
+                                                            maxLength={1}
+                                                        />
+                                                    </div>
+                                                ))}
+                                            </div>
+                                            <div className="text-center mb-4">
+                                                <button
+                                                    type="button"
+                                                    className="btn btn-primary btn-block"
+                                                    onClick={handleOtpSubmit}
+                                                    disabled={!isAllOtpFilled}
+                                                >
+                                                    Submit
+                                                </button>
+                                            </div>
+                                        </form>
+                                    )}
+                                </div>
+                            </div>
+                            <div className="col-xl-6 col-lg-6 mx-auto align-self-center">
+                                <div className="pages-left h-100">
+                                    <div className="login-content">
+                                        <a href="#">
+                                            <img src={dataLg?.logo ? `${baseUrlImage}${dataLg?.logo}` : loginAbarisLogo} className="mb-3 logo-dark" alt />
+                                        </a>
+                                        <p>
+                                            uses line charts to visualize customer-related
+                                            metrics and trends over time.
+                                        </p>
                                     </div>
-                                </form>
-                            )}
+                                    <div className="login-media text-center">
+                                        <img src={dataLg?.login_background_image ? `${baseUrlImage}${dataLg?.login_background_image}` : loginAbarisBanner} className="mb-3 logo-dark" alt />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div className="col-xl-6 col-lg-6">
-                        <div className="pages-left h-100">
-                            <div className="login-content">
-                                <a href="#">
-                                    <img src={login} className="mb-3 logo-dark" alt="logo" style={{marginTop:"40px"}}/>
-                                </a>
-                                <p>
-                                     uses line charts to visualize customer-related
-                                    metrics and trends over time.
-                                </p>
-                            </div>
-                            <div className="login-media text-center">
-                                <img src={loginimg} alt="login" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <ToastContainer className={"text-center"} />
-        </div>
+                    <ToastContainer className={"text-center"} />
+                </div>}
+        </>
     );
 };
 

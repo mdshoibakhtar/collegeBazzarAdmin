@@ -41,7 +41,7 @@ function CompanyMasterList({ data, totalCount, page, count, onChangeVal, confirm
                                         </thead>
                                         <tbody>
                                             {data?.map((item, i) => {
-                                                return <tr role="row" className="odd">
+                                                return <tr role="row" className="odd" key={i}>
                                                     <td>
                                                         {(i + 1) + (page * count)}
                                                     </td>
@@ -50,11 +50,11 @@ function CompanyMasterList({ data, totalCount, page, count, onChangeVal, confirm
                                                         {item?.name}
                                                     </td>
                                                     <td>
-                                                        <span className="badge badge-success text-light border-0" style={{ backgroundColor: `${item?.isActive === true ? 'blue' : '#bc3922ab'}`, fontSize: `${item?.isActive === false ? '0.8rem' : ''}` }}>{item?.isActive == true ? 'Active' : 'In Active'}</span>
+                                                        <span className="badge badge-success text-light border-0" style={{ backgroundColor: `${item?.isActive === true ? 'blue' : '#bc3922ab'} fontSize: ${item?.isActive === false ? '0.8rem' : ''} `}}>{item?.isActive == true ? 'Active' : 'In Active'}</span>
                                                     </td>
                                                     <td>
                                                         <div className="d-flex">
-                                                            <Link to={`/update-affilated-by/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                            <Link to={`/update-company-master/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                             <Popconfirm
                                                                 title="Delete Company Master!"
                                                                 description="Are you sure to delete ?"

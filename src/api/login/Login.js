@@ -2799,14 +2799,58 @@ export const getupdateCompanyTypeId = (id) => {
 };
 
 
+// for selecter -------
+
+export const getDefaultDashboard = (slug) => {
+  return axiosInstance.get(`${baseUrl}subModule/main_module/slug?slug=${slug}`);
+};
+
+
+
+
+export const ContestParticipateList = (data) => {
+  return axiosInstance.post(`/contestParticipate/admin`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
 
 
 
 
 
+// ----------------RELATED COMPANY Master APIS------------------
+
+export const getcompanyList = () => {
+  return axiosInstance.get(`${baseUrl}company`);
+};
+
+export const addCompany = (data) => {
+  return axiosInstance.post(`${baseUrl}company/addType`, data);
+};
+export const deleteCompany = (id) => {
+  return axiosInstance.delete(`${baseUrl}company/delete_type/${id}`);
+};
+export const updateCompany = (id, value) => {
+  return axiosInstance.put(`${baseUrl}company/update_type/${id}`, value);
+};
+export const getupdateCompanyId = (id) => {
+  return axiosInstance.get(`${baseUrl}company/${id}`);
+};
 
 
 
+
+export const getCompanyInfo = (data) => {
+  return axiosInstance.get(`/company/public`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
 
 
 
