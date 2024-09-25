@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import logo from '../../../assets/images/logo/play.png'
+import logo from '../../../assets/images/logo/AbarisSoftectLogo.png'
 import { getCompanyInfo } from '../../../api/login/Login';
 import { useEffect, useState } from 'react';
 import { baseUrlImage } from '../../../baseUrl';

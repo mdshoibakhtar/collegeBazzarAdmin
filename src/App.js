@@ -418,6 +418,8 @@ import { SaleInvoice } from "./components/cowSale/saleList/saleInvoice/SaleInvoi
 import SaleDueCollectionnPage from "./pages/cowSale/saleDueCollection";
 import ExpenseListPage from "./pages/farmExpense/expenseList";
 import { ExpenseListAdd } from "./components/farmExpense/expenseList/expenseListAdd/ExpenseListAdd";
+import PolicyPages from "./components/systemSettings/innerCardsPages/policyPages/PolicyPages";
+import Seoconfigration from "./components/systemSettings/innerCardsPages/policyPages/seoconfigrations/Seoconfigration";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1594,6 +1596,8 @@ function App() {
               {/* -----------------shoib"s Route Start End-w-------- */}
               <Route path="notification/global/email" element={<NotificationSettings />} />
               <Route path="extensions" element={<Extension />} />
+              <Route path="policy" element={<PolicyPages />} />
+              <Route path="seoconfigration" element={<Seoconfigration />} />
 
               <Route path="create-a-pages" element={<CreatePages />} />
               <Route path="manage-pages" element={<CreatePageList />} />
