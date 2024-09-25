@@ -387,6 +387,24 @@ import CreatePageList from "./pages/createPage/list/HolidayListPage";
 import CollegeBazzarDashboard from "./pages/collageBazzarsDashboad/CollegeBazzarDashboard";
 import DashboardLeadPage from "./pages/Dashboard-Lead/Index";
 
+import CollectMilkPage from "./pages/milkParlor/collectMilk";
+import { CollectMilkAdd } from "./components/milkParlor/collectMilk/collectMilkAdd/CollectMilkAdd";
+import SaleMilkPage from "./pages/milkParlor/saleMilk";
+import { AddSaleMilk } from "./components/milkParlor/saleMilk/addSaleMilk/AddSaleMilk";
+import { SaleMilkInvoice } from "./components/milkParlor/saleMilk/saleMilkInvoice/SaleMilkInvoice";
+import SaleDueCollectionPage from "./pages/milkParlor/saleDueCollection";
+import RoutineMonitorPage from "./pages/cowMonitor/routineMonitor";
+import { AddRoutineMonitor } from "./components/cowMonitor/routineMonitor/addRoutineMonitor/AddRoutineMonitor";
+
+import OverallReportPage from "./pages/Analytics/OverallReport";
+import VisitorsLogPage from "./pages/Analytics/VisitorsLog";
+import RecentHistoryPage from "./pages/Analytics/RecentHistory";
+import OverviewPage from "./pages/Analytics/Overview";
+import WhoOnlinePage from "./pages/Analytics/WhoOnline";
+import PlayNif50Page from "./pages/playNif50";
+import { Nifty50HourlyContest } from "./components/playNif50/Nifty50/nifty50Slide/nifty50HourlyContest/Nifty50HourlyContest";
+import { SelectPlayers } from "./components/playNif50/Nifty50/nifty50Slide/nifty50HourlyContest/selectPlayers/SelectPlayers";
+import { SelectStock } from "./components/playNif50/Nifty50/nifty50Slide/nifty50HourlyContest/selectPlayers/selectStock/SelectStock";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1463,8 +1481,17 @@ function App() {
               <Route path="report/transaction" element={<TransactionHistoryPage />} />
               <Route path="report/login/history" element={<LoginHistoryPage />} />
               <Route path="report/notification/history" element={<NotificationHistoryPage />} />
+
+              <Route path="collect-milk" element={<CollectMilkPage />} />
+              <Route path="add-collect-milk" element={<CollectMilkAdd />} />
+              <Route path="sale-milk" element={<SaleMilkPage />} />
+              <Route path="add-sale-milk" element={<AddSaleMilk />} />
+              <Route path="sale-milk-invoice" element={<SaleMilkInvoice />} />
+              <Route path="sale-milk-due-collection" element={<SaleDueCollectionPage />} />
               <Route path="contest_participate" element={<ContestParticipate />} />
               <Route path="company_details" element={<CompanyDetail />} />
+              <Route path="cow-monitor" element={<RoutineMonitorPage />} />
+              <Route path="cow-monitor/create" element={<AddRoutineMonitor />} />
 
 
 
@@ -1527,6 +1554,17 @@ function App() {
               <Route path="Holiday-Discount" element={<HolidayDIscount />} />
               <Route path="Holiday-List" element={<HolidayListPage />} />
               <Route path="Add-Holiday" element={<AddHoliday />} />
+
+
+              <Route path="overall-report" element={<OverallReportPage />} />
+              <Route path="visitors-log" element={<VisitorsLogPage />} />
+              <Route path="recent-history" element={<RecentHistoryPage />} />
+              <Route path="who-online" element={<OverviewPage />} />
+              <Route path="analytics-overview" element={<WhoOnlinePage />} />
+              <Route path="/dashboard/playNif50" element={<PlayNif50Page />} />
+              <Route path="hourly-contest" element={<Nifty50HourlyContest />} />
+              <Route path="select-palyers" element={<SelectPlayers />} />
+              <Route path="select-stock" element={<SelectStock />} />
 
 
               {/* -----------------Goatx Routes-------- */}

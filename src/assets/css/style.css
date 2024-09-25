@@ -56749,3 +56749,10 @@ margin:0 !important
 .ul-section li{
 margin: 10px 0;
 }
+
+.paid-stamp {
+  font-size: 30px;
+  color: red;
+  font-weight: bold;
+  text-align: center;
+}
