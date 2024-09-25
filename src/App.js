@@ -381,6 +381,9 @@ import AddHoliday from "./components/Holiday-list/AddHoliday";
 import HotelCoupon from "./components/hotelComp/hotelCoupon/HotelCoupon";
 import HotelVocherUpload from "./components/hotelComp/hotelVocherUpload/HotelVocherUpload";
 import Extension from "./components/systemSettings/Extention/Extension";
+import CreatePages from "./pages/createPage/CreatePages";
+import CreateLink from "./pages/createLink/CreateLink";
+import CreatePageList from "./pages/createPage/list/HolidayListPage";
 import CollegeBazzarDashboard from "./pages/collageBazzarsDashboad/CollegeBazzarDashboard";
 import DashboardLeadPage from "./pages/Dashboard-Lead/Index";
 
@@ -402,6 +405,10 @@ import PlayNif50Page from "./pages/playNif50";
 import { Nifty50HourlyContest } from "./components/playNif50/Nifty50/nifty50Slide/nifty50HourlyContest/Nifty50HourlyContest";
 import { SelectPlayers } from "./components/playNif50/Nifty50/nifty50Slide/nifty50HourlyContest/selectPlayers/SelectPlayers";
 import { SelectStock } from "./components/playNif50/Nifty50/nifty50Slide/nifty50HourlyContest/selectPlayers/selectStock/SelectStock";
+import GDPRCookies from "./components/systemSettings/gdpr/GDPRCookies";
+import CustomCss from "./components/systemSettings/customcss/CustomCss";
+import SiteMapXml from "./components/systemSettings/sitemap-XML/SiteMapXml";
+import RobotsTxt from "./components/systemSettings/robots-txt/RobotsTxt";
 import VaccineMonitorPage from "./pages/cowMonitor/vaccineMonitor";
 import { AddVaccineMonitor } from "./components/cowMonitor/vaccineMonitor/addVaccineMonitor/AddVaccineMonitor";
 import AnimalPregnancyPage from "./pages/cowMonitor/animalPregnancy";
@@ -1587,6 +1594,14 @@ function App() {
               {/* -----------------shoib"s Route Start End-w-------- */}
               <Route path="notification/global/email" element={<NotificationSettings />} />
               <Route path="extensions" element={<Extension />} />
+
+              <Route path="create-a-pages" element={<CreatePages />} />
+              <Route path="manage-pages" element={<CreatePageList />} />
+              <Route path="create-a-link" element={<CreateLink />} />
+              <Route path="gdpr-cookie" element={<GDPRCookies />} />
+              <Route path="custom-css" element={<CustomCss />} />
+              <Route path="sitemap-XML" element={<SiteMapXml />} />
+              <Route path="robots-txt" element={<RobotsTxt />} />
               {/* -----------------shoib"s Route Start End-w-------- */}
 
 

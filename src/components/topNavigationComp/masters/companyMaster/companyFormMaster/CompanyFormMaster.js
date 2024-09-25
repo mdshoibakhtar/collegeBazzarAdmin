@@ -191,22 +191,7 @@ function CompanyFormMaster() {
             login_font_color: formValues.login_font_color
         }
 
-        for (const key in clone) {
-            if (clone[key].size) {
-                try {
-                    const file = clone[key];
-                    const formData = new FormData();
-                    formData.append("image", file);
-                    const response = await clodinaryImage(formData);
-                    clone[key] = response.data.data.url;
-                } catch (error) {
-                    console.log(error);
-                }
-            }
-
-        }
-        console.log(clone);
-        // return
+       
 
         try {
             if (!params?.id) {
