@@ -128,9 +128,7 @@ function EmailSentTemp() {
                             <div className="col-xl-12">
                                 <div className="card-body p-0">
                                     <div className="table-responsive active-projects style-1">
-                                        <div className="tbl-caption tbl-caption-2 d-flex justify-content-between align-items-center">
-                                            <h4 className="heading mb-0">Add Manual Gateway</h4>
-                                        </div>
+                                        
                                         <form className="tbl-captionn" onSubmit={handleSubmit}>
                                             <div className="row align-items-center">
 

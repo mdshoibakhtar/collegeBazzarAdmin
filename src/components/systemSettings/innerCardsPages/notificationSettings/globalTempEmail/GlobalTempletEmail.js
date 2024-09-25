@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import EmailSentTemp from './emailSentTemp/EmailSentTemp';
+import SmsTemplet from './smsTemplet/SmsTemplet';
+import PushNotificationTemplet from './pushNotificationTemplet/PushNotificatioTemplet';
 
 function GlobalTempletEmail() {
-    const [copiedStates, setCopiedStates] = useState([false, false, false, false]); 
-    const [hoveredStates, setHoveredStates] = useState([false, false, false, false]); 
+    const [copiedStates, setCopiedStates] = useState([false, false, false, false]);
+    const [hoveredStates, setHoveredStates] = useState([false, false, false, false]);
 
     const handleCopyClick = (textToCopy, index) => {
         navigator.clipboard.writeText(textToCopy).then(() => {
             const newCopiedStates = [...copiedStates];
-            newCopiedStates[index] = true; 
+            newCopiedStates[index] = true;
             setCopiedStates(newCopiedStates);
 
             setTimeout(() => {
                 const resetCopiedStates = [...copiedStates];
-                resetCopiedStates[index] = false; 
+                resetCopiedStates[index] = false;
                 setCopiedStates(resetCopiedStates);
             }, 2000);
         });
@@ -22,13 +24,13 @@ function GlobalTempletEmail() {
 
     const handleMouseEnter = (index) => {
         const newHoveredStates = [...hoveredStates];
-        newHoveredStates[index] = true; 
+        newHoveredStates[index] = true;
         setHoveredStates(newHoveredStates);
     };
 
     const handleMouseLeave = (index) => {
         const resetHoveredStates = [...hoveredStates];
-        resetHoveredStates[index] = false; 
+        resetHoveredStates[index] = false;
         setHoveredStates(resetHoveredStates);
     };
 
@@ -67,18 +69,18 @@ function GlobalTempletEmail() {
                                                 <tr key={index}>
                                                     <td>
                                                         <span
-                                                            onMouseEnter={() => handleMouseEnter(index)} 
-                                                            onMouseLeave={() => handleMouseLeave(index)} 
+                                                            onMouseEnter={() => handleMouseEnter(index)}
+                                                            onMouseLeave={() => handleMouseLeave(index)}
                                                         >
                                                             {hoveredStates[index] ? (
                                                                 <button
                                                                     className="copy-button btn-sm"
                                                                     onClick={() => handleCopyClick(item.shortCode, index)}
                                                                 >
-                                                                    {copiedStates[index] ? 'Copied' : 'Copy'} 
+                                                                    {copiedStates[index] ? 'Copied' : 'Copy'}
                                                                 </button>
                                                             ) : (
-                                                                item.shortCode 
+                                                                item.shortCode
                                                             )}
                                                         </span>
                                                     </td>
@@ -97,8 +99,12 @@ function GlobalTempletEmail() {
                             <Tab eventKey="Email Template" title="Email Template">
                                 <EmailSentTemp />
                             </Tab>
-                            <Tab eventKey="SMS Template" title="SMS Template"></Tab>
-                            <Tab eventKey="Push Notification" title="Push Notification"></Tab>
+                            <Tab eventKey="SMS Template" title="SMS Template">
+                                <SmsTemplet />
+                            </Tab>
+                            <Tab eventKey="Push Notification" title="Push Notification">
+                                <PushNotificationTemplet />
+                            </Tab>
                         </Tabs>
                     </div>
                 </div>

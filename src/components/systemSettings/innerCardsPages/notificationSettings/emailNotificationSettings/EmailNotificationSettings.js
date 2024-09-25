@@ -11,7 +11,7 @@ function EmailNotificationSetting() {
     const [showModal, setShowModal] = useState(false);
 
 
-    const [emailEngine, setEmailEngine] = useState("sendEmail");
+    const [emailEngine, setEmailEngine] = useState("smtp");
     const [initialValues, setInitialValues] = useState({
         api: "",
         id: "",
@@ -114,7 +114,6 @@ function EmailNotificationSetting() {
                                                         value={emailEngine}
                                                         name="emailEngine"
                                                     >
-                                                        {/* <option value="sendEmail">Send Mail</option> */}
                                                         <option value="smtp">SMTP</option>
                                                         <option value="Send Grid Api">Send Grid Api</option>
                                                         <option value="Malijet Api">Malijet Api</option>
@@ -126,59 +125,58 @@ function EmailNotificationSetting() {
                                                         <div className="tbl-caption tbl-caption-2 mb-3">
                                                             <h4 className="heading mb-0">SMTP Configuration</h4>
                                                         </div>
-                                                        <CustomInputField
-                                                            type="text"
-                                                            value={values.smtpUsername}
-                                                            hasError={errors.smtpUsername && touched.smtpUsername}
-                                                            onChange={handleChange}
-                                                            onBlur={handleBlur}
-                                                            errorMsg={errors.smtpUsername}
-                                                            id="smtpUsername"
-                                                            name="smtpUsername"
-                                                            placeholder="SMTP Username"
-                                                        />
-                                                        <CustomInputField
-                                                            type="password"
-                                                            value={values.smtpPassword}
-                                                            hasError={errors.smtpPassword && touched.smtpPassword}
-                                                            onChange={handleChange}
-                                                            onBlur={handleBlur}
-                                                            errorMsg={errors.smtpPassword}
-                                                            id="smtpPassword"
-                                                            name="smtpPassword"
-                                                            placeholder="SMTP Password"
-                                                        />
-                                                        <select
-                                                            className="form-select my-2"
-                                                            onChange={handleChange}
-                                                            value={values.smtpSecurity}
-                                                            name="smtpSecurity"
-                                                        >
-                                                            <option value="ssl">SSL</option>
-                                                            <option value="tsl">TSL</option>
-                                                        </select>
-                                                        <CustomInputField
-                                                            type="text"
-                                                            value={values.smtpServer}
-                                                            hasError={errors.smtpServer && touched.smtpServer}
-                                                            onChange={handleChange}
-                                                            onBlur={handleBlur}
-                                                            errorMsg={errors.smtpServer}
-                                                            id="smtpServer"
-                                                            name="smtpServer"
-                                                            placeholder="SMTP Server"
-                                                        />
-                                                        <CustomInputField
-                                                            type="text"
-                                                            value={values.smtpPort}
-                                                            hasError={errors.smtpPort && touched.smtpPort}
-                                                            onChange={handleChange}
-                                                            onBlur={handleBlur}
-                                                            errorMsg={errors.smtpPort}
-                                                            id="smtpPort"
-                                                            name="smtpPort"
-                                                            placeholder="SMTP Port"
-                                                        />
+                                                        <div className="row">
+                                                            <div className="col-xl-6 mb-3">
+                                                                <CustomInputField
+                                                                    type="password"
+                                                                    value={values.smtpPassword}
+                                                                    hasError={errors.smtpPassword && touched.smtpPassword}
+                                                                    onChange={handleChange}
+                                                                    onBlur={handleBlur}
+                                                                    errorMsg={errors.smtpPassword}
+                                                                    id="smtpPassword"
+                                                                    name="smtpPassword"
+                                                                    placeholder="SMTP Password"
+                                                                />
+                                                            </div>
+                                                            <div className="col-xl-6 mb-3">
+                                                                <select
+                                                                    className="form-select my-2"
+                                                                    onChange={handleChange}
+                                                                    value={values.smtpSecurity}
+                                                                    name="smtpSecurity"
+                                                                >
+                                                                    <option value="ssl">SSL</option>
+                                                                    <option value="tsl">TSL</option>
+                                                                </select>
+                                                            </div>
+                                                            <div className="col-xl-6 mb-3">
+                                                                <CustomInputField
+                                                                    type="text"
+                                                                    value={values.smtpServer}
+                                                                    hasError={errors.smtpServer && touched.smtpServer}
+                                                                    onChange={handleChange}
+                                                                    onBlur={handleBlur}
+                                                                    errorMsg={errors.smtpServer}
+                                                                    id="smtpServer"
+                                                                    name="smtpServer"
+                                                                    placeholder="SMTP Server"
+                                                                />
+                                                            </div>
+                                                            <div className="col-xl-6 mb-3">
+                                                                <CustomInputField
+                                                                    type="text"
+                                                                    value={values.smtpPort}
+                                                                    hasError={errors.smtpPort && touched.smtpPort}
+                                                                    onChange={handleChange}
+                                                                    onBlur={handleBlur}
+                                                                    errorMsg={errors.smtpPort}
+                                                                    id="smtpPort"
+                                                                    name="smtpPort"
+                                                                    placeholder="SMTP Port"
+                                                                />
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 )}
 
@@ -251,10 +249,10 @@ function EmailNotificationSetting() {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div >
                     );
                 }}
-            </Formik>
+            </Formik >
 
             <ToastContainer />
             <TestMailSetup showModal={showModal} setShowModal={setShowModal} />
