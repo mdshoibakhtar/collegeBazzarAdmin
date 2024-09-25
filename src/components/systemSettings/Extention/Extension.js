@@ -42,67 +42,65 @@ function Extension() {
 
 
                                     {/* Table Section */}
-                                    <Table striped bordered hover responsive>
+                                    <Table striped bordered hover responsive style={{ width: '100%' }}>
                                         <thead>
                                             <tr style={{ backgroundColor: '#3F00FF', color: '#fff' }}>
-                                                <th>Extension</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
+                                                <th style={{ width: '25%', textAlign: 'center' }}>Extension</th>
+                                                <th style={{ width: '25%', textAlign: 'center' }}>Status</th>
+                                                <th style={{ width: '50%', textAlign: 'center' }}>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {/* First Row */}
                                             <tr>
-                                                <td>
-                                                    <div className=''>
-                                                        <span>
-                                                            <img src={exelogo} alt='text-logo' />
-                                                        </span>
+                                                <td style={{ textAlign: 'center' }}>
+                                                    <div className='d-flex align-items-center justify-content-center'>
+                                                        <img src={exelogo} alt='text-logo' style={{ marginRight: '8px' }} />
                                                         <span>Custom Captcha</span>
                                                     </div>
                                                 </td>
-                                                <td>
+                                                <td style={{ textAlign: 'center' }}>
                                                     <span className="badge bg-success">Disable</span>
-
                                                 </td>
-                                                <td>
+                                                <td style={{ textAlign: 'center' }}>
                                                     <Button variant="outline-primary" className="me-2" onClick={() => setShowModal(!showModal)}>
-                                                        <i class="fa-solid fa-gears"></i> Configure
+                                                        <i className="fa-solid fa-gears"></i> Configure
                                                     </Button>
-                                                    <Button variant="outline-warning" onClick={() => setShowLg(!showLg)}>
-                                                        <i class="fa-solid fa-circle-question"></i> Help
+                                                    <Button variant="outline-warning" className="me-2" onClick={() => setShowLg(!showLg)}>
+                                                        <i className="fa-solid fa-circle-question"></i> Help
                                                     </Button>
                                                     <Button variant="outline-danger">
-                                                        <i class="fa-solid fa-eye"></i> Enable
+                                                        <i className="fa-solid fa-eye"></i> Enable
                                                     </Button>
                                                 </td>
                                             </tr>
 
                                             {/* Second Row */}
                                             <tr>
-                                                <td>
-                                                    <div className=''><span>
-                                                        <img src={exelogo} alt='text-logo' />
-                                                    </span>
-                                                        <span>Facebook Comment</span></div>
+                                                <td style={{ textAlign: 'center' }}>
+                                                    <div className='d-flex align-items-center justify-content-center'>
+                                                        <img src={exelogo} alt='text-logo' style={{ marginRight: '8px' }} />
+                                                        <span>Facebook Comment</span>
+                                                    </div>
                                                 </td>
-                                                <td>
+                                                <td style={{ textAlign: 'center' }}>
                                                     <span className="badge bg-success">Enabled</span>
                                                 </td>
-                                                <td>
+                                                <td style={{ textAlign: 'center' }}>
                                                     <Button variant="outline-primary" className="me-2">
-                                                        <i class="fa-solid fa-gears"></i> Configure
+                                                        <i className="fa-solid fa-gears"></i> Configure
                                                     </Button>
-                                                    <Button variant="outline-warning">
-                                                        <i class="fa-solid fa-circle-question"></i> Help
+                                                    <Button variant="outline-warning" className="me-2">
+                                                        <i className="fa-solid fa-circle-question"></i> Help
                                                     </Button>
                                                     <Button variant="outline-danger">
-                                                        <i class="fa-solid fa-eye"></i> Enable
+                                                        <i className="fa-solid fa-eye"></i> Enable
                                                     </Button>
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </Table>
+
                                 </div>
                             </div>
                         </div>

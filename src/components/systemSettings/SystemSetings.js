@@ -75,13 +75,13 @@ const SystemSettings = () => {
             title: 'Cron Job Setting',
             description: 'Configure cron job to automate some operations of the system.',
             icon: <i className="fa-solid fa-clock"></i>,
-            link:"#"
+            link:"/corn-jobs"
             },
         {
             title: 'Policy Pages',
             description: 'Configure your policy and terms of the system here.',
             icon: <i className="fa-solid fa-shield-alt"></i>,
-            link:"#"
+            link:"/policy"
             },
         {
             title: 'Maintenance Mode',

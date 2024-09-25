@@ -383,6 +383,8 @@ import HotelVocherUpload from "./components/hotelComp/hotelVocherUpload/HotelVoc
 import Extension from "./components/systemSettings/Extention/Extension";
 import CollegeBazzarDashboard from "./pages/collageBazzarsDashboad/CollegeBazzarDashboard";
 import DashboardLeadPage from "./pages/Dashboard-Lead/Index";
+import PolicyPages from "./components/systemSettings/innerCardsPages/policyPages/PolicyPages";
+import Seoconfigration from "./components/systemSettings/innerCardsPages/policyPages/seoconfigrations/Seoconfigration";
 
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
@@ -1530,6 +1532,8 @@ function App() {
               {/* -----------------shoib"s Route Start End-w-------- */}
               <Route path="notification/global/email" element={<NotificationSettings />} />
               <Route path="extensions" element={<Extension />} />
+              <Route path="policy" element={<PolicyPages />} />
+              <Route path="seoconfigration" element={<Seoconfigration />} />
               {/* -----------------shoib"s Route Start End-w-------- */}
 
 
