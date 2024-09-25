@@ -263,9 +263,9 @@ const BLogAdd = () => {
                                                     <option value="">Select Is Active</option>
                                                     <option value={true}>Active</option>
                                                     <option value={false}>In Active</option>
-                                                  
+
                                                 </select>
-                                              
+
                                             </div>
                                         </div>
                                         <div className="col-xl-4 mb-3">
@@ -285,7 +285,7 @@ const BLogAdd = () => {
                                                 )}
                                             </div>
                                         </div>
-                                       
+
                                         <div className="col-xl-4 mb-3">
                                             <div className={`form-group ${errors.attachment ? 'has-error' : ''}`}>
                                                 <label htmlFor="attachment">Attachment</label>
@@ -302,7 +302,7 @@ const BLogAdd = () => {
                                                 )}
                                             </div>
                                         </div>
-                                       
+
 
                                         <div className="col-xl-4 mb-3">
                                             <div className={`form-group ${errors.description ? 'has-error' : ''}`}>

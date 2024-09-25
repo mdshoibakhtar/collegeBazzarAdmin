@@ -381,11 +381,45 @@ import AddHoliday from "./components/Holiday-list/AddHoliday";
 import HotelCoupon from "./components/hotelComp/hotelCoupon/HotelCoupon";
 import HotelVocherUpload from "./components/hotelComp/hotelVocherUpload/HotelVocherUpload";
 import Extension from "./components/systemSettings/Extention/Extension";
+import CreatePages from "./pages/createPage/CreatePages";
+import CreateLink from "./pages/createLink/CreateLink";
+import CreatePageList from "./pages/createPage/list/HolidayListPage";
 import CollegeBazzarDashboard from "./pages/collageBazzarsDashboad/CollegeBazzarDashboard";
 import DashboardLeadPage from "./pages/Dashboard-Lead/Index";
+
+import CollectMilkPage from "./pages/milkParlor/collectMilk";
+import { CollectMilkAdd } from "./components/milkParlor/collectMilk/collectMilkAdd/CollectMilkAdd";
+import SaleMilkPage from "./pages/milkParlor/saleMilk";
+import { AddSaleMilk } from "./components/milkParlor/saleMilk/addSaleMilk/AddSaleMilk";
+import { SaleMilkInvoice } from "./components/milkParlor/saleMilk/saleMilkInvoice/SaleMilkInvoice";
+import SaleDueCollectionPage from "./pages/milkParlor/saleDueCollection";
+import RoutineMonitorPage from "./pages/cowMonitor/routineMonitor";
+import { AddRoutineMonitor } from "./components/cowMonitor/routineMonitor/addRoutineMonitor/AddRoutineMonitor";
+
+import OverallReportPage from "./pages/Analytics/OverallReport";
+import VisitorsLogPage from "./pages/Analytics/VisitorsLog";
+import RecentHistoryPage from "./pages/Analytics/RecentHistory";
+import OverviewPage from "./pages/Analytics/Overview";
+import WhoOnlinePage from "./pages/Analytics/WhoOnline";
+import PlayNif50Page from "./pages/playNif50";
+import { Nifty50HourlyContest } from "./components/playNif50/Nifty50/nifty50Slide/nifty50HourlyContest/Nifty50HourlyContest";
+import { SelectPlayers } from "./components/playNif50/Nifty50/nifty50Slide/nifty50HourlyContest/selectPlayers/SelectPlayers";
+import { SelectStock } from "./components/playNif50/Nifty50/nifty50Slide/nifty50HourlyContest/selectPlayers/selectStock/SelectStock";
+import GDPRCookies from "./components/systemSettings/gdpr/GDPRCookies";
+import CustomCss from "./components/systemSettings/customcss/CustomCss";
+import SiteMapXml from "./components/systemSettings/sitemap-XML/SiteMapXml";
+import RobotsTxt from "./components/systemSettings/robots-txt/RobotsTxt";
+import VaccineMonitorPage from "./pages/cowMonitor/vaccineMonitor";
+import { AddVaccineMonitor } from "./components/cowMonitor/vaccineMonitor/addVaccineMonitor/AddVaccineMonitor";
+import AnimalPregnancyPage from "./pages/cowMonitor/animalPregnancy";
+import SaleListPage from "./pages/cowSale/saleList";
+import CowSaleAdd from "./components/cowSale/saleList/cowSaleAdd/CowSaleAdd";
+import { SaleInvoice } from "./components/cowSale/saleList/saleInvoice/SaleInvoice";
+import SaleDueCollectionnPage from "./pages/cowSale/saleDueCollection";
+import ExpenseListPage from "./pages/farmExpense/expenseList";
+import { ExpenseListAdd } from "./components/farmExpense/expenseList/expenseListAdd/ExpenseListAdd";
 import PolicyPages from "./components/systemSettings/innerCardsPages/policyPages/PolicyPages";
 import Seoconfigration from "./components/systemSettings/innerCardsPages/policyPages/seoconfigrations/Seoconfigration";
-
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -419,9 +453,9 @@ function App() {
         setNavigateState(`/${data?.data?.dashboard}`);
 
         if (isLogin) {
-          navigate(dashboardRoute); 
+          navigate(dashboardRoute);
         } else {
-          navigate(`/loginPage`); 
+          navigate(`/loginPage`);
         }
       } catch (error) {
         alert(`Error: ${error.message || "Dashboard Path Not Found!"}`);
@@ -429,7 +463,7 @@ function App() {
     };
 
     navigateToDashboard();
-     
+
   }, [isLogin]);
 
 
@@ -497,7 +531,7 @@ function App() {
               <Route path={`contest_dashboard`} element={<DasBoardRight />} />
               <Route path={`college_dashboard`} element={<CollegeBazzarDashboard />} />
               <Route path={`travel_dashboard`} element={<ViaggiooDashboardPage />} />
-              <Route path={`lead_dashboard`} element={<DashboardLeadPage/>} />
+              <Route path={`lead_dashboard`} element={<DashboardLeadPage />} />
               <Route path="bank-master" element={<BankMasterP />} />
               <Route path="zoon_area" element={<ZoonArea />} />
               <Route path="add-bank" element={<AddBank />} />
@@ -1462,8 +1496,27 @@ function App() {
               <Route path="report/transaction" element={<TransactionHistoryPage />} />
               <Route path="report/login/history" element={<LoginHistoryPage />} />
               <Route path="report/notification/history" element={<NotificationHistoryPage />} />
+
+              <Route path="collect-milk" element={<CollectMilkPage />} />
+              <Route path="add-collect-milk" element={<CollectMilkAdd />} />
+              <Route path="sale-milk" element={<SaleMilkPage />} />
+              <Route path="add-sale-milk" element={<AddSaleMilk />} />
+              <Route path="sale-milk-invoice" element={<SaleMilkInvoice />} />
+              <Route path="sale-milk-due-collection" element={<SaleDueCollectionPage />} />
               <Route path="contest_participate" element={<ContestParticipate />} />
               <Route path="company_details" element={<CompanyDetail />} />
+              <Route path="cow-monitor" element={<RoutineMonitorPage />} />
+              <Route path="cow-monitor/create" element={<AddRoutineMonitor />} />
+              <Route path="vaccine-monitor" element={<VaccineMonitorPage />} />
+              <Route path="vaccine-monitor/create" element={<AddVaccineMonitor />} />
+              <Route path="animal-pregnancy" element={<AnimalPregnancyPage />} />
+              <Route path="sale-cow" element={<SaleListPage />} />
+              <Route path="add-sale-cow" element={<CowSaleAdd />} />
+              <Route path="sale-invoice-cow" element={<SaleInvoice />} />
+              <Route path="sale-due-collection" element={<SaleDueCollectionnPage />} />
+              <Route path="expense-list" element={<ExpenseListPage />} />
+              <Route path="expense-add" element={<ExpenseListAdd />} />
+
 
 
 
@@ -1528,12 +1581,31 @@ function App() {
               <Route path="Add-Holiday" element={<AddHoliday />} />
 
 
+              <Route path="overall-report" element={<OverallReportPage />} />
+              <Route path="visitors-log" element={<VisitorsLogPage />} />
+              <Route path="recent-history" element={<RecentHistoryPage />} />
+              <Route path="who-online" element={<OverviewPage />} />
+              <Route path="analytics-overview" element={<WhoOnlinePage />} />
+              <Route path="/dashboard/playNif50" element={<PlayNif50Page />} />
+              <Route path="hourly-contest" element={<Nifty50HourlyContest />} />
+              <Route path="select-palyers" element={<SelectPlayers />} />
+              <Route path="select-stock" element={<SelectStock />} />
+
+
               {/* -----------------Goatx Routes-------- */}
               {/* -----------------shoib"s Route Start End-w-------- */}
               <Route path="notification/global/email" element={<NotificationSettings />} />
               <Route path="extensions" element={<Extension />} />
               <Route path="policy" element={<PolicyPages />} />
               <Route path="seoconfigration" element={<Seoconfigration />} />
+
+              <Route path="create-a-pages" element={<CreatePages />} />
+              <Route path="manage-pages" element={<CreatePageList />} />
+              <Route path="create-a-link" element={<CreateLink />} />
+              <Route path="gdpr-cookie" element={<GDPRCookies />} />
+              <Route path="custom-css" element={<CustomCss />} />
+              <Route path="sitemap-XML" element={<SiteMapXml />} />
+              <Route path="robots-txt" element={<RobotsTxt />} />
               {/* -----------------shoib"s Route Start End-w-------- */}
 
 
