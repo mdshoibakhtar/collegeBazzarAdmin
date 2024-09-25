@@ -405,6 +405,10 @@ import PlayNif50Page from "./pages/playNif50";
 import { Nifty50HourlyContest } from "./components/playNif50/Nifty50/nifty50Slide/nifty50HourlyContest/Nifty50HourlyContest";
 import { SelectPlayers } from "./components/playNif50/Nifty50/nifty50Slide/nifty50HourlyContest/selectPlayers/SelectPlayers";
 import { SelectStock } from "./components/playNif50/Nifty50/nifty50Slide/nifty50HourlyContest/selectPlayers/selectStock/SelectStock";
+import GDPRCookies from "./components/systemSettings/gdpr/GDPRCookies";
+import CustomCss from "./components/systemSettings/customcss/CustomCss";
+import SiteMapXml from "./components/systemSettings/sitemap-XML/SiteMapXml";
+import RobotsTxt from "./components/systemSettings/robots-txt/RobotsTxt";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1575,6 +1579,10 @@ function App() {
               <Route path="create-a-pages" element={<CreatePages/>} />
               <Route path="manage-pages" element={<CreatePageList/>} />
               <Route path="create-a-link" element={<CreateLink />} />
+              <Route path="gdpr-cookie" element={<GDPRCookies />} />
+              <Route path="custom-css" element={<CustomCss />} />
+              <Route path="sitemap-XML" element={<SiteMapXml />} />
+              <Route path="robots-txt" element={<RobotsTxt />} />
               {/* -----------------shoib"s Route Start End-w-------- */}
 
 
