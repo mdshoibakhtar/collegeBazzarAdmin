@@ -1,9 +1,9 @@
-import login from "../../assets/images/logo/play.png";
-import loginimg from "../../assets/images/logo/degree.png";
+import loginAbarisLogo from "../../assets/images/logo/AbarisSoftectLogo.png";
+import loginAbarisBanner from "../../assets/images/kyc/abarisBanner.png";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
-import { getCompanyInfo, LoginSubmit, sendNotification } from "../../api/login/Login";
+import { getCompanyInfo, getMenusdata, LoginSubmit, sendNotification } from "../../api/login/Login";
 import CustomInputField from "../../common/CustomInputField";
 import { SaveUserDeatilsLocalStorage } from "../../utils/localStorage";
 import { useDispatch } from "react-redux";
@@ -13,6 +13,7 @@ import CustomPassInputField from "../../common/CustomPassInputField";
 import { getToken } from "firebase/messaging";
 import { messaging } from "../../firebase/fireBase";
 import { baseUrlImage } from "../../baseUrl";
+import Loadar from "../../common/loader/Loader";
 
 function Login() {
   const navigate = useNavigate();
@@ -87,7 +88,21 @@ function Login() {
         // console.log(result.data.token, "result.data.token");
         SaveUserDeatilsLocalStorage(result.data.token);
         dispatch(setIsLogin({ isLogin: !!result.data.token }));
-        navigate("/admin");
+        const navigateToDashboard = async () => {
+          try {
+            // Await the result of getMenusdata
+            const data = await getMenusdata();
+            console.log(data);
+
+            // Navigate to the dynamic route
+            navigate(`/${data?.data?.dashboard?.frontRoute}`);
+          } catch (error) {
+            alert(error.message);
+          }
+        };
+
+        // You can call the async function like this
+        navigateToDashboard();
 
       } else {
         // throw new Error(result.data.message);
@@ -100,138 +115,149 @@ function Login() {
     }
   };
 
-  
-  const [state , setData] = useState(null)
-  const getData = async ()=>{
+
+  const [state, setData] = useState(null)
+  const getData = async () => {
+    setLoading(true)
+    try {
       const res = await getCompanyInfo()
       setData(res.data);
+    } catch (error) {
+      alert(error.message)
+    }
+    setLoading(false)
   }
-  useEffect(()=>{
-      getData()
-  },[])
+  useEffect(() => {
+    getData()
+  }, [])
   return (
     <>
-      <div className="authincation h-100 h-100-2">
-        <div className="container-fluid">
-          <div className="row h-100">
+      {loading ? <Loadar /> :
+        <div className="authincation h-100 h-100-2">
+          <div className="container-fluid">
+            <div className="row h-100 align-items-center">
 
-            <div className="col-xl-6 col-lg-6">
-              <div className="pages-left h-100">
-                <div className="login-content">
-                  <a href="#">
-                    <img src={state?.logo ? `${baseUrlImage}${state?.logo}` : login} className="mb-3 logo-dark" alt />
-                  </a>
-                  <p>
-                 {state?.login_left_description}
-                  </p>
+              <div className="col-xl-6 col-lg-6">
+                {/* <div className="d-flex align-items-center"> */}
+                <div className="pages-left h-100 ">
+                  <div className="login-content">
+                    <a href="#">
+                      <img src={state?.logo ? `${baseUrlImage}${state?.logo}` : loginAbarisLogo} className="mb-3 logo-dark" alt />
+                    </a>
+                    {state?.login_left_description ? (<p>
+                      {state?.login_left_description}
+                    </p>) : (<p>Sign in to your account to start using Abaris CMS with CRM Software</p>)}
+
+                  </div>
+                  <div className="login-media text-center">
+                    <img src={state?.login_background_image ? `${baseUrlImage}${state?.login_background_image}` : loginAbarisBanner} className="mb-3 logo-dark" alt />
+
+                  </div>
                 </div>
-                <div className="login-media text-center">
-                <img src={state?.login_background_image ? `${baseUrlImage}${state?.login_background_image}` : `https://seeklogo.com/images/N/neft-logo-7222234315-seeklogo.com.gif`} className="mb-3 logo-dark" alt />
-                  {/* <img src={'https://seeklogo.com/images/N/neft-logo-7222234315-seeklogo.com.gif'} alt="" /> */}
-                  {/* <img src={loginimg} alt="" /> */}
-                </div>
+                {/* </div> */}
               </div>
-            </div>
-            <div className="col-lg-6 col-md-12 col-sm-12 mx-auto align-self-center">
-              <div className="login-form">
-                <div className="text-center">
-                  <h3 className="title">Sign In</h3>
-                  <p>{state?.login_right_desciption}</p>
-                </div>
-                <Formik
-                  initialValues={formValues}
-                  validate={validate}
-                  onSubmit={submitForm}
-                  enableReinitialize
-                >
-                  {(formik) => {
-                    const {
-                      values,
-                      handleSubmit,
-                      errors,
-                      touched,
-                      handleBlur,
-                    } = formik;
-                    return (
-                      <form onSubmit={handleSubmit}>
-                        <div className="mb-4 cusformsnew">
-                          <CustomInputField
-                            type="email"
-                            placeholder="Enter Email "
-                            value={values.email}
-                            name="email"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            errorMsg={errors.email}
-                            // autoFocus={true}
-                            id="email"
-                          // autocomplete="email"
-                          />
-                        </div>
-                        <div className="mb-4 position-relative">
-                          <CustomPassInputField
-                            type="password"
-                            placeholder="Enter Password "
-                            value={values.password}
-                            name="password"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            errorMsg={errors.password}
-                            autoFocus={true}
-                            id="password"
-                          />
-                        </div>
-                        <div className="form-row d-flex justify-content-between mt-4 mb-2">
-                          <div className="mb-4">
-                            <div className="form-check custom-checkbox mb-3">
-                              <input
-                                type="checkbox"
-                                className="form-check-input"
-                                id="customCheckBox1"
-                                name="rememberMe"
-                                checked={values.rememberMe}
-                                onChange={handleCheckboxChange}
-                              />
-                              <label
-                                className="form-check-label"
-                                htmlFor="customCheckBox1"
-                              >
-                                Remember my preference
-                              </label>
-                            </div>
-                          </div>
-                          <div className="mb-4">
-                            <Link
-                              to="/forgot-password"
-                              className="btn-link text-primary"
-                            >
-                              Forgot Password?
-                            </Link>
-                          </div>
-                        </div>
-                        <div className="text-center">
-                          <button
-                            className="btn btn-dark comm-bg w-100 "
-                            disabled={!values.password || !values.email || loading}
-                          >
-                            <div className="d-flex justify-content-center align-items-center">
-                              <span style={{ fontSize: "1rem" }}>Sign In</span>
-                              &nbsp;
-                              &nbsp;
-                              {loading && <Spinner animation="border" style={{ height: "1rem", width: "1rem" }} />}
-                            </div>
-                          </button>
+              <div className="col-lg-6 col-md-12 col-sm-12 mx-auto align-self-center">
+                <div className="login-form">
+                  <div className="text-center">
 
-                        </div>
-                      </form>
-                    );
-                  }}
-                </Formik>
+                    <h3 className="title">Sign In</h3>
+
+                    {state?.login_right_desciption ? <p>{state?.login_right_desciption}</p> : <p>Abaris CMS with CRM Software uses line charts to visualize customer-related metrics and trends over time.</p>}
+                  </div>
+                  <Formik
+                    initialValues={formValues}
+                    validate={validate}
+                    onSubmit={submitForm}
+                    enableReinitialize
+                  >
+                    {(formik) => {
+                      const {
+                        values,
+                        handleSubmit,
+                        errors,
+                        touched,
+                        handleBlur,
+                      } = formik;
+                      return (
+                        <form onSubmit={handleSubmit}>
+                          <div className="mb-4 cusformsnew">
+                            <CustomInputField
+                              type="email"
+                              placeholder="Enter Email "
+                              value={values.email}
+                              name="email"
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              errorMsg={errors.email}
+                              // autoFocus={true}
+                              id="email"
+                            // autocomplete="email"
+                            />
+                          </div>
+                          <div className="mb-4 position-relative">
+                            <CustomPassInputField
+                              type="password"
+                              placeholder="Enter Password "
+                              value={values.password}
+                              name="password"
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              errorMsg={errors.password}
+                              autoFocus={true}
+                              id="password"
+                            />
+                          </div>
+                          <div className="form-row d-flex justify-content-between mt-4 mb-2">
+                            <div className="mb-4">
+                              <div className="form-check custom-checkbox mb-3">
+                                <input
+                                  type="checkbox"
+                                  className="form-check-input"
+                                  id="customCheckBox1"
+                                  name="rememberMe"
+                                  checked={values.rememberMe}
+                                  onChange={handleCheckboxChange}
+                                />
+                                <label
+                                  className="form-check-label"
+                                  htmlFor="customCheckBox1"
+                                >
+                                  Remember my preference
+                                </label>
+                              </div>
+                            </div>
+                            <div className="mb-4">
+                              <Link
+                                to="/forgot-password"
+                                className="btn-link text-primary"
+                              >
+                                Forgot Password?
+                              </Link>
+                            </div>
+                          </div>
+                          <div className="text-center">
+                            <button
+                              className="btn btn-dark comm-bg w-100 "
+                              disabled={!values.password || !values.email || loading}
+                            >
+                              <div className="d-flex justify-content-center align-items-center">
+                                <span style={{ fontSize: "1rem" }}>Sign In</span>
+                                &nbsp;
+                                &nbsp;
+                                {loading && <Spinner animation="border" style={{ height: "1rem", width: "1rem" }} />}
+                              </div>
+                            </button>
+
+                          </div>
+                        </form>
+                      );
+                    }}
+                  </Formik>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </div>}
     </>
   );
 }
