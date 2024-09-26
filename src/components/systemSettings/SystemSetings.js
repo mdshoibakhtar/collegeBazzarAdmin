@@ -11,12 +11,12 @@ const SystemSettings = () => {
             icon: <i className="fa-solid fa-gear"></i>,
             link:"/general-settings"
         },
-        {
+       /*  {
             title: 'Logo and Favicon',
             description: 'Upload your logo and favicon here.',
             icon: <i className="fa-solid fa-image"></i>,
-            link:"#"
-            },
+            link:""
+            }, */
         {
             title: 'System Configuration',
             description: 'Control all of the basic modules of the system.',
@@ -63,7 +63,7 @@ const SystemSettings = () => {
             title: 'Language',
             description: 'Configure your required languages and keywords to localize the system.',
             icon: <i className="fa-solid fa-language"></i>,
-            link:"#"
+            link:"/language"
             },
         {
             title: 'Extensions',
@@ -87,7 +87,7 @@ const SystemSettings = () => {
             title: 'Maintenance Mode',
             description: 'Enable or disable the maintenance mode of the system when required.',
             icon: <i className="fa-solid fa-robot"></i>,
-            link:"#"
+            link:"/maintenancemode"
             },
         {
             title: 'GDPR Cookie',

@@ -430,6 +430,12 @@ import { AddGeofence } from "./components/addGeofence/AddGeofence";
 import { GeofenceEvents } from "./components/geofenceEvents/GeofenceEvents";
 import GeofenceManagement from "./components/geofenceManagement/GeofenceManagement";
 import LiveLocation from "./components/liveLocation/LiveLocation";
+import MaintenanceMode from "./components/systemSettings/innerCardsPages/maintenanceMode/MaintenanceMode";
+import Vehicles from "./components/vechiles/Vehicles";
+import ExpensePurposePage from "./pages/farmExpense/expensePurpose";
+import { AddNewPurpose } from "./components/farmExpense/expensePurpose/addNewPurpose/AddNewPurpose";
+import SuppliersPage from "./pages/suppliers";
+import { AddSuplierProfile } from "./components/suppliers/addSuplier/AddSuplierProfile";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1505,6 +1511,10 @@ function App() {
               <Route path="sale-due-collection" element={<SaleDueCollectionnPage />} />
               <Route path="expense-list" element={<ExpenseListPage />} />
               <Route path="expense-add" element={<ExpenseListAdd />} />
+              <Route path="expense-purpose" element={<ExpensePurposePage />} />
+              <Route path="add-new-expense-purpose" element={<AddNewPurpose />} />
+              <Route path="supplier" element={<SuppliersPage />} />
+              <Route path="supplier/create" element={<AddSuplierProfile />} />
 
 
 
@@ -1587,6 +1597,7 @@ function App() {
               <Route path="extensions" element={<Extension />} />
               <Route path="policy" element={<PolicyPages />} />
               <Route path="seoconfigration" element={<Seoconfigration />} />
+              <Route path="maintenancemode" element={<MaintenanceMode />} />
 
               <Route path="create-a-pages" element={<CreatePages />} />
               <Route path="manage-pages" element={<CreatePageList />} />
@@ -1605,6 +1616,11 @@ function App() {
               <Route path="add-manage-cow" element={<ManageFeed />} />
               <Route path="edit-manage-cow/:id" element={<ManageFeed />} />
               {/* -----------------shoib"s Route Start End-w-------- */}
+
+
+              {/* ----------------------------vehicles-project routes ---------------------- */}
+              {/* <Route path="vms/vehicle" element={<Vehicles />} /> */}
+              {/* <Route path="vehicle/details" element={< />} /> */}
 
               <Route path="history_tracking" element={<HistoryTracking />} />
               <Route path="booking_report" element={<BookingRepoert />} />
