@@ -420,6 +420,8 @@ import ExpenseListPage from "./pages/farmExpense/expenseList";
 import { ExpenseListAdd } from "./components/farmExpense/expenseList/expenseListAdd/ExpenseListAdd";
 import PolicyPages from "./components/systemSettings/innerCardsPages/policyPages/PolicyPages";
 import Seoconfigration from "./components/systemSettings/innerCardsPages/policyPages/seoconfigrations/Seoconfigration";
+import MaintenanceMode from "./components/systemSettings/innerCardsPages/maintenanceMode/MaintenanceMode";
+import Vehicles from "./components/vechiles/Vehicles";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -447,7 +449,7 @@ function App() {
 
         const dashboardRoute = data?.data?.dashboard?.frontRoute;
         if (!dashboardRoute) {
-          throw new Error("Dashboard route not found");
+          // throw new Error("Dashboard route not found");
         }
 
         setNavigateState(`/${data?.data?.dashboard}`);
@@ -1598,6 +1600,7 @@ function App() {
               <Route path="extensions" element={<Extension />} />
               <Route path="policy" element={<PolicyPages />} />
               <Route path="seoconfigration" element={<Seoconfigration />} />
+              <Route path="maintenancemode" element={<MaintenanceMode />} />
 
               <Route path="create-a-pages" element={<CreatePages />} />
               <Route path="manage-pages" element={<CreatePageList />} />
@@ -1607,6 +1610,11 @@ function App() {
               <Route path="sitemap-XML" element={<SiteMapXml />} />
               <Route path="robots-txt" element={<RobotsTxt />} />
               {/* -----------------shoib"s Route Start End-w-------- */}
+
+
+              {/* ----------------------------vehicles-project routes ---------------------- */}
+              {/* <Route path="vms/vehicle" element={<Vehicles />} /> */}
+              {/* <Route path="vehicle/details" element={< />} /> */}
 
 
               <Route path="*" element={<PageNotFound />} />
