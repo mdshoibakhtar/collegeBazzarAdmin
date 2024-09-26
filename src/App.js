@@ -418,6 +418,10 @@ import { SaleInvoice } from "./components/cowSale/saleList/saleInvoice/SaleInvoi
 import SaleDueCollectionnPage from "./pages/cowSale/saleDueCollection";
 import ExpenseListPage from "./pages/farmExpense/expenseList";
 import { ExpenseListAdd } from "./components/farmExpense/expenseList/expenseListAdd/ExpenseListAdd";
+import ExpensePurposePage from "./pages/farmExpense/expensePurpose";
+import { AddNewPurpose } from "./components/farmExpense/expensePurpose/addNewPurpose/AddNewPurpose";
+import SuppliersPage from "./pages/suppliers";
+import { AddSuplierProfile } from "./components/suppliers/addSuplier/AddSuplierProfile";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1514,6 +1518,10 @@ function App() {
               <Route path="sale-due-collection" element={<SaleDueCollectionnPage />} />
               <Route path="expense-list" element={<ExpenseListPage />} />
               <Route path="expense-add" element={<ExpenseListAdd />} />
+              <Route path="expense-purpose" element={<ExpensePurposePage />} />
+              <Route path="add-new-expense-purpose" element={<AddNewPurpose />} />
+              <Route path="supplier" element={<SuppliersPage />} />
+              <Route path="supplier/create" element={<AddSuplierProfile />} />
 
 
 
