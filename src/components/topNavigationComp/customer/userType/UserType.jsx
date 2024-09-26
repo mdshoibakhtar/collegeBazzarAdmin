@@ -69,7 +69,7 @@ const UserType = () => {
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0">User Type</h4>
                                     <div>
-                                        {/* <Link className="btn btn-primary btn-sm" to="/add/user-type" role="button" aria-controls="offcanvasExample">+ Add User Type</Link> */}
+                                        <Link className="btn btn-primary btn-sm" to="/add/user-type" role="button" aria-controls="offcanvasExample">+ Add User Type</Link>
                                         {/* <button type="button" className="btn btn-secondary btn-sm" >
                                         + Invite Employee
                                     </button> */}

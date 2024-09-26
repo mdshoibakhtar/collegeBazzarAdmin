@@ -12,7 +12,7 @@ function BusMarkupList({ onChangeVal }) {
                         <div className="card-body p-0">
                             <div className="table-responsive active-projects style-1">
                                 <div className="tbl-caption">
-                                    <h4 className="heading mb-0"><b>Hotel Markup List
+                                    <h4 className="heading mb-0"><b>Bus Markup List
                                     </b></h4>
                                     <div>
                                         {/* <ExportPdf /> */}
