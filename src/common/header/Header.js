@@ -76,6 +76,7 @@ function Header({ showAsideBar, toggle, setToggle }) {
   const handleLogOut = () => {
     // removeItemFromLocalStorage("userToken");
     localStorage.clear()
+    window.localStorage.clear()
     dispatch(setIsLogin({ isLogin: false }));
 
   };
@@ -497,7 +498,7 @@ function Header({ showAsideBar, toggle, setToggle }) {
                     {toggle ? (
                       <div
                         className="dropdown-menu dropdown-menu-end dropdown-menu-2 cusDIv"
-                        style={{}}
+                        // style={{}}
                       >
 
                         <div className="card border-0 mb-0">

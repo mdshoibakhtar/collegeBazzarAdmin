@@ -20,9 +20,9 @@
   text-align: center;
 }
 
-.card:hover {
+/* .card:hover {
   transform: translateY(-5px);
-}
+} */
 
 .card-title {
   font-size: 18px;

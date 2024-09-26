@@ -13,8 +13,8 @@ function CompanyTypeMasterForm() {
     }
     const [initialValues, setInitialValues] = useState({
         name: "",
-        course: "",
-        stream: "",
+        field_two: "",
+        field_one: "",
         default_dashboard: "",
         isActive: "",
     });
@@ -25,13 +25,13 @@ function CompanyTypeMasterForm() {
     const validate = (values) => {
         let errors = {};
         if (!values.name) {
-            errors.name = "Company Name  Is Required";
+            errors.name = "Company Type  Is Required";
         }
-        if (!values.course) {
-            errors.course = "Course Is Required";
+        if (!values.field_two) {
+            errors.field_two = "Course Is Required";
         }
-        if (!values.stream) {
-            errors.stream = "Stream Is Required";
+        if (!values.field_one) {
+            errors.field_one = "Stream Is Required";
         }
         if (!values.isActive) {
             errors.isActive = "Status Is Required";
@@ -45,7 +45,7 @@ function CompanyTypeMasterForm() {
 
 
     const blankBtn = () => {
-        setInitialValues({ name: "", stream: "", course: "" });
+        setInitialValues({ name: "", field_one: "", field_two: "" });
     }
     const toastSuccessMessage = (message) => {
         toast.success(`${params?.id ? "Update" : "Add"} ${message}`, {
@@ -110,7 +110,7 @@ function CompanyTypeMasterForm() {
             try {
                 if (params?.id) {
                     const response = await getupdateCompanyTypeId(params.id);
-                    setInitialValues(response?.data);
+                    setInitialValues({ ...response?.data, field_one: response.data?.field_one ? response.data?.field_one : response.data?.course, field_two: response.data?.field_two ? response.data?.field_two : response.data?.stream});
 
                 } else {
                     setInitialValues({
@@ -171,35 +171,35 @@ function CompanyTypeMasterForm() {
                                                         autoFocus={true}
                                                         id="name"
                                                         name="name"
-                                                        placeholder="Company Name"
+                                                        placeholder="Company Type"
                                                     />
                                                 </div>
                                                 <div className="col-xl-6 mb-3">
                                                     <CustomInputField
                                                         type="text"
-                                                        value={values?.stream}
-                                                        hasError={errors.stream && touched.stream}
+                                                        value={values?.field_one}
+                                                        hasError={errors.field_one && touched.field_one}
                                                         onChange={handleChange}
                                                         onBlur={handleBlur}
-                                                        errorMsg={errors.stream}
+                                                        errorMsg={errors.field_one}
                                                         autoFocus={true}
-                                                        id="stream"
-                                                        name="stream"
-                                                        placeholder="Stream"
+                                                        id="field_one"
+                                                        name="field_one"
+                                                        placeholder="Mejor Field 1"
                                                     />
                                                 </div>
                                                 <div className="col-xl-6 mb-3">
                                                     <CustomInputField
                                                         type="text"
-                                                        value={values?.course}
-                                                        hasError={errors.course && touched.course}
+                                                        value={values?.field_two}
+                                                        hasError={errors.field_two && touched.field_two}
                                                         onChange={handleChange}
                                                         onBlur={handleBlur}
-                                                        errorMsg={errors.course}
+                                                        errorMsg={errors.field_two}
                                                         autoFocus={true}
-                                                        id="course"
-                                                        name="course"
-                                                        placeholder="Course"
+                                                        id="field_two"
+                                                        name="field_two"
+                                                        placeholder="Mejor Field 2"
                                                     />
                                                 </div>
                                                 <div className="col-xl-6 mb-3">

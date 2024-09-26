@@ -420,6 +420,16 @@ import ExpenseListPage from "./pages/farmExpense/expenseList";
 import { ExpenseListAdd } from "./components/farmExpense/expenseList/expenseListAdd/ExpenseListAdd";
 import PolicyPages from "./components/systemSettings/innerCardsPages/policyPages/PolicyPages";
 import Seoconfigration from "./components/systemSettings/innerCardsPages/policyPages/seoconfigrations/Seoconfigration";
+import CowFeedPage from "./components/topNavigationComp/masters/cowfeed/CowFeedPage";
+import CowFeedAdd from "./components/topNavigationComp/masters/cowfeed/MasterForm/CowFeedAdd";
+import ManageCowPage from "./components/topNavigationComp/masters/manage-cow/ManageCowPage";
+import ManageFeed from "./components/topNavigationComp/masters/manage-cow/MasterForm/ManageFeed";
+import { HistoryTracking } from "./components/historyTracking/HistoryTracking";
+import BookingRepoert from "./components/bookingReport/BookingRepoert";
+import { AddGeofence } from "./components/addGeofence/AddGeofence";
+import { GeofenceEvents } from "./components/geofenceEvents/GeofenceEvents";
+import GeofenceManagement from "./components/geofenceManagement/GeofenceManagement";
+import LiveLocation from "./components/liveLocation/LiveLocation";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -441,28 +451,7 @@ function App() {
 
   useEffect(() => {
     setIsAuthenticated(isLogin);
-    const navigateToDashboard = async () => {
-      try {
-        const data = await getMenusdata();
 
-        const dashboardRoute = data?.data?.dashboard?.frontRoute;
-        if (!dashboardRoute) {
-          throw new Error("Dashboard route not found");
-        }
-
-        setNavigateState(`/${data?.data?.dashboard}`);
-
-        if (isLogin) {
-          navigate(dashboardRoute);
-        } else {
-          navigate(`/loginPage`);
-        }
-      } catch (error) {
-        alert(`Error: ${error.message || "Dashboard Path Not Found!"}`);
-      }
-    };
-
-    navigateToDashboard();
 
   }, [isLogin]);
 
@@ -511,7 +500,7 @@ function App() {
   return (
     <>
       <Routes>
-        {!isAuthenticated ? (
+        {window.localStorage.getItem('dashRout') == null ? (
           <>
             <Route path="/" element={<Navigate to={"/loginPage"} />} />
             <Route path="/loginPage" element={<LoginPage />} />
@@ -521,7 +510,7 @@ function App() {
           </>
         ) : (
           <>
-            {/* <Route path="/" element={<Navigate to={`${navigateState?.frontRoute}`} />} /> */}
+            <Route path="/" element={<Navigate to={`${window.localStorage.getItem('dashRout')}`} />} />
             {/* <Route path="/" element={<Navigate to={`/admin`} />} /> */}
             <Route
               path=""
@@ -1606,7 +1595,23 @@ function App() {
               <Route path="custom-css" element={<CustomCss />} />
               <Route path="sitemap-XML" element={<SiteMapXml />} />
               <Route path="robots-txt" element={<RobotsTxt />} />
+
+
+              <Route path="cow-feed" element={<CowFeedPage />} />
+              <Route path="add-cow-feed" element={<CowFeedAdd />} />
+              <Route path="edit-cow-feed/:id" element={<CowFeedAdd />} />
+
+              <Route path="manage-cow" element={<ManageCowPage />} />
+              <Route path="add-manage-cow" element={<ManageFeed />} />
+              <Route path="edit-manage-cow/:id" element={<ManageFeed />} />
               {/* -----------------shoib"s Route Start End-w-------- */}
+
+              <Route path="history_tracking" element={<HistoryTracking />} />
+              <Route path="booking_report" element={<BookingRepoert />} />
+              <Route path="add_geofence" element={<AddGeofence />} />
+              <Route path="geofence_events" element={<GeofenceEvents />} />
+              <Route path="geofence_management" element={<GeofenceManagement />} />
+              <Route path="live_location" element={<LiveLocation />} />
 
 
               <Route path="*" element={<PageNotFound />} />
