@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { Button, Table } from 'react-bootstrap'
-import exelogo from "../../../assets/images/logo/airtel.png"
-import UpdateExtention from './updateExtention/UpdtateExtention'
-import NeedHelp from './needHelp/NeedHelp'
+import { Link } from 'react-router-dom'
+// import UpdateExtention from './updateExtention/UpdtateExtention'
+// import NeedHelp from './needHelp/NeedHelp'
 
-function Extension() {
+function PolicyPages() {
     const [showModal, setShowModal] = useState(false)
     const [showLg, setShowLg] = useState(false)
     return (
@@ -16,7 +16,11 @@ function Extension() {
                             <div className="card-body p-0">
                                 <div className="table-responsive active-projects style-1">
                                     <div className="tbl-caption">
-                                        <h4 className="heading mb-0">Manual Gateways</h4>
+                                        <h4 className="heading mb-0">Policy Pages
+                                        </h4>
+                                        <div className=''>
+                                            <button className='bg-primary btn btn-sm'>Add New</button>
+                                        </div>
                                     </div>
                                     <div className="search-add-new ">
                                         <div className='row align-items-center'>
@@ -45,8 +49,8 @@ function Extension() {
                                     <Table striped bordered hover responsive style={{ width: '100%' }}>
                                         <thead>
                                             <tr style={{ backgroundColor: '#3F00FF', color: '#fff' }}>
-                                                <th style={{ width: '25%', textAlign: 'center' }}>Extension</th>
-                                                <th style={{ width: '25%', textAlign: 'center' }}>Status</th>
+                                                <th style={{ width: '25%', textAlign: 'center' }}>S.No</th>
+                                                <th style={{ width: '25%', textAlign: 'center' }}>Title</th>
                                                 <th style={{ width: '50%', textAlign: 'center' }}>Action</th>
                                             </tr>
                                         </thead>
@@ -54,23 +58,20 @@ function Extension() {
                                             {/* First Row */}
                                             <tr>
                                                 <td style={{ textAlign: 'center' }}>
-                                                    <div className='d-flex align-items-center justify-content-center'>
-                                                        <img src={exelogo} alt='text-logo' style={{ marginRight: '8px' }} />
-                                                        <span>Custom Captcha</span>
-                                                    </div>
+                                                    1
                                                 </td>
                                                 <td style={{ textAlign: 'center' }}>
-                                                    <span className="badge bg-success">Disable</span>
+                                                  Refund Policy	
                                                 </td>
                                                 <td style={{ textAlign: 'center' }}>
-                                                    <Button variant="outline-primary" className="me-2" onClick={() => setShowModal(!showModal)}>
-                                                        <i className="fa-solid fa-gears"></i> Configure
-                                                    </Button>
+                                                <Link to="/seoconfigration"  className="btn btn-sm btn-primary me-2" /* onClick={() => setShowModal(!showModal)} */>
+                                                    <i class="fa-sharp fa-solid fa-gear"></i>&nbsp;Seo Configure
+                                                    </Link>
                                                     <Button variant="outline-warning" className="me-2" onClick={() => setShowLg(!showLg)}>
-                                                        <i className="fa-solid fa-circle-question"></i> Help
+                                                    <i class="fa-solid fa-pen"></i> Edit
                                                     </Button>
                                                     <Button variant="outline-danger">
-                                                        <i className="fa-solid fa-eye"></i> Enable
+                                                    <i class="fa-sharp fa-solid fa-trash"></i> Remove
                                                     </Button>
                                                 </td>
                                             </tr>
@@ -78,23 +79,20 @@ function Extension() {
                                             {/* Second Row */}
                                             <tr>
                                                 <td style={{ textAlign: 'center' }}>
-                                                    <div className='d-flex align-items-center justify-content-center'>
-                                                        <img src={exelogo} alt='text-logo' style={{ marginRight: '8px' }} />
-                                                        <span>Facebook Comment</span>
-                                                    </div>
+                                                    2
                                                 </td>
                                                 <td style={{ textAlign: 'center' }}>
-                                                    <span className="badge bg-success">Enabled</span>
+                                                    Terms of Service	
                                                 </td>
                                                 <td style={{ textAlign: 'center' }}>
-                                                    <Button variant="outline-primary" className="me-2">
-                                                        <i className="fa-solid fa-gears"></i> Configure
-                                                    </Button>
-                                                    <Button variant="outline-warning" className="me-2">
-                                                        <i className="fa-solid fa-circle-question"></i> Help
+                                                    <Link to=""  className="btn btn-sm btn-primary me-2" /* onClick={() => setShowModal(!showModal)} */>
+                                                    <i class="fa-sharp fa-solid fa-gear"></i>&nbsp;Seo Configure
+                                                    </Link>
+                                                    <Button variant="outline-warning" className="me-2" /* onClick={() => setShowLg(!showLg)} */>
+                                                    <i class="fa-solid fa-pen"></i> &nbsp;Edit
                                                     </Button>
                                                     <Button variant="outline-danger">
-                                                        <i className="fa-solid fa-eye"></i> Enable
+                                                    <i class="fa-sharp fa-solid fa-trash"></i>&nbsp; Remove
                                                     </Button>
                                                 </td>
                                             </tr>
@@ -107,10 +105,11 @@ function Extension() {
                     </div>
                 </div>
             </div>
-            <UpdateExtention showModal={showModal} setShowModal={setShowModal} />
-            <NeedHelp showLg={showLg} setShowLg={setShowLg} />
+            {/* <UpdateExtention showModal={showModal} setShowModal={setShowModal} />
+            <NeedHelp showLg={showLg} setShowLg={setShowLg} /> */}
         </>
     )
 }
 
-export default Extension
+export default PolicyPages
+
