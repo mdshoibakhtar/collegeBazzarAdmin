@@ -422,6 +422,10 @@ import PolicyPages from "./components/systemSettings/innerCardsPages/policyPages
 import Seoconfigration from "./components/systemSettings/innerCardsPages/policyPages/seoconfigrations/Seoconfigration";
 import MaintenanceMode from "./components/systemSettings/innerCardsPages/maintenanceMode/MaintenanceMode";
 import Vehicles from "./components/vechiles/Vehicles";
+import ExpensePurposePage from "./pages/farmExpense/expensePurpose";
+import { AddNewPurpose } from "./components/farmExpense/expensePurpose/addNewPurpose/AddNewPurpose";
+import SuppliersPage from "./pages/suppliers";
+import { AddSuplierProfile } from "./components/suppliers/addSuplier/AddSuplierProfile";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1518,6 +1522,10 @@ function App() {
               <Route path="sale-due-collection" element={<SaleDueCollectionnPage />} />
               <Route path="expense-list" element={<ExpenseListPage />} />
               <Route path="expense-add" element={<ExpenseListAdd />} />
+              <Route path="expense-purpose" element={<ExpensePurposePage />} />
+              <Route path="add-new-expense-purpose" element={<AddNewPurpose />} />
+              <Route path="supplier" element={<SuppliersPage />} />
+              <Route path="supplier/create" element={<AddSuplierProfile />} />
 
 
 
