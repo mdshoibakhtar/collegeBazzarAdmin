@@ -11,11 +11,11 @@ const SystemSettings = () => {
             icon: <i className="fa-solid fa-gear"></i>,
             link:"/general-settings"
         },
-        /* {
+       /*  {
             title: 'Logo and Favicon',
             description: 'Upload your logo and favicon here.',
             icon: <i className="fa-solid fa-image"></i>,
-            link:"#"
+            link:""
             }, */
         {
             title: 'System Configuration',
@@ -59,12 +59,12 @@ const SystemSettings = () => {
             icon: <i className="fa-solid fa-user-circle"></i>,
             link:"/corn-jobs"
             },
-        /* {
+        {
             title: 'Language',
             description: 'Configure your required languages and keywords to localize the system.',
             icon: <i className="fa-solid fa-language"></i>,
-            link:"#"
-            }, */
+            link:"/language"
+            },
         {
             title: 'Extensions',
             description: 'Manage extensions of the system here to extend some extra features of the system.',
