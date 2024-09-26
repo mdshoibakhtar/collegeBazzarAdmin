@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import CustomInputField from '../../../../../common/CustomInputField';
-import { toast , ToastContainer} from 'react-toastify';
+import { toast , ToastContainer } from 'react-toastify';
 import Breadcrumbs from '../../../../../common/breadcrumb/Breadcrumbs';
 import { updateMarketTypeById, postMarketType, getMarketTypeById } from '../../../../../api/login/Login';
 
@@ -16,12 +16,12 @@ function CreateTypemarket() {
     const [initialValues, setInitialValues] = useState({
         isActive: "",
         name: '',
+        slug: '',  // New slug field
     });
 
     const params = useParams();
     const navigate = useNavigate();
 
-    // Updated validate function
     const validate = (values) => {
         let errors = {};
         if (!values.isActive) {
@@ -29,6 +29,9 @@ function CreateTypemarket() {
         }
         if (!values.name) {
             errors.name = "Market Type name is required";
+        }
+        if (!values.slug) {
+            errors.slug = "Market Type slug is required";  // Validation for slug field
         }
         return errors;
     };
@@ -40,11 +43,10 @@ function CreateTypemarket() {
     };
 
     const submitForm = async (values) => {
-        console.log("Submitting form with values:", values); // Debugging log
+        console.log("Submitting form with values:", values);
 
         try {
             if (!params?.id) {
-                // POST request to create a new market type
                 const res = await postMarketType(values);
                 if (res?.statusCode == "200") {
                     toastSuccessMessage("Market Type added successfully");
@@ -53,7 +55,6 @@ function CreateTypemarket() {
                     }, 1000);
                 }
             } else {
-                // PUT request to update an existing market type
                 const res = await updateMarketTypeById(params.id, values);
                 if (res?.statusCode == "200") {
                     toastSuccessMessage("Market Type updated successfully");
@@ -82,7 +83,7 @@ function CreateTypemarket() {
 
     return (
         <>
-        <ToastContainer/>
+            <ToastContainer />
             <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
             <div style={{ margin: "14px" }}>
                 <div className="card">
@@ -118,6 +119,19 @@ function CreateTypemarket() {
                                                     )}
                                                 </div>
                                                 <div className="col-xl-4 mb-3">
+                                                    <h6>Market Type Slug</h6>
+                                                    <CustomInputField
+                                                        type="text"
+                                                        onBlur={handleBlur}
+                                                        value={values.slug}
+                                                        onChange={handleChange}
+                                                        name="slug"
+                                                    />
+                                                    {touched.slug && errors.slug && (
+                                                        <div className="text-danger">{errors.slug}</div>
+                                                    )}
+                                                </div>
+                                                <div className="col-xl-4 mb-3">
                                                     <h6>Market Type Status</h6>
                                                     <select
                                                         className="form-select"
@@ -135,17 +149,22 @@ function CreateTypemarket() {
                                                     )}
                                                 </div>
                                                 <div className="col-xl-12 mb-3">
+                                                    <h6>Note:</h6>
+                                                    <p>The API response field is called <strong>fullExchangeName</strong> and will be used for display purposes.</p>
+                                                </div>
+                                                <div className="col-xl-12 mb-3">
                                                     <Link to="/market-type" className="btn btn-danger light ms-1">
                                                         Cancel
                                                     </Link>
                                                     <button
                                                         className="btn btn-primary me-1"
                                                         type="submit"
-                                                        disabled={!(isValid && dirty)}  // Disables button if form is invalid
+                                                        disabled={!(isValid && dirty)}
                                                     >
                                                         {params?.id ? "Update" : "Add"}
                                                     </button>
                                                 </div>
+                                               
                                             </div>
                                         </form>
                                     );

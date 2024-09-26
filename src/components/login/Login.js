@@ -84,18 +84,40 @@ function Login() {
     try {
       let result = await LoginSubmit(values);
       if (result.statusCode === "200") {
-        setLoading(false);
+       
         SaveUserDeatilsLocalStorage(result.data.token);
         dispatch(setIsLogin({ isLogin: !!result.data.token }));
         const navigateToDashboard = async () => {
           try {
             const data = await getMenusdata();
-            navigate(`/${data?.data?.dashboard?.frontRoute}`);
+            // navigate(`/${data?.data?.dashboard?.frontRoute}`);
           } catch (error) {
             alert(error.message);
           }
         };
         navigateToDashboard();
+
+
+
+        try {
+          const data = await getMenusdata();
+
+          const dashboardRoute = data?.data?.dashboard?.frontRoute;
+          if (!dashboardRoute) {
+            throw new Error("Dashboard route not found");
+          }
+          window.localStorage.setItem('dashRout', dashboardRoute);
+          setTimeout(() => {
+            setLoading(false);
+            navigate(`/${dashboardRoute}`);
+          }, 1000);
+
+        } catch (error) {
+          alert(`Error: ${error.message || "Dashboard Path Not Found!"}`);
+        }
+
+
+
 
       } else {
         // throw new Error(result.data.message);
