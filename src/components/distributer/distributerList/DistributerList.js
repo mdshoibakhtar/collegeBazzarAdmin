@@ -18,7 +18,7 @@ import BroadCasterModal from "./broadCasterModal/BroadCasterModal";
 import ModelLeadFollowUp from "./ModelLeadFollowUp";
 
 
-function DistributerList({ loading, params, state, handleChange, onChangeVal, approval }) {
+function DistributerList({ loading, params, state, handleChange, onChangeVal, approval,selectedUsers ,setSelectedUsers}) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -41,7 +41,7 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal, ap
         }, 1000);
     }
     
-    const [selectedUsers, setSelectedUsers] = useState([]);
+    
     const [selectAll, setSelectAll] = useState(false);
 
     const handleCheckboxChange = (event, user) => {

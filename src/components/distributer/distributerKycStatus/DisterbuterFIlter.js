@@ -6,7 +6,7 @@ import { FaBroadcastTower } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import BroadCasterModal from "../distributerList/broadCasterModal/BroadCasterModal";
 
-function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistIdAgainst }) {
+function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistIdAgainst,selectedUsers, setSelectedUsers }) {
     const todayDate = () => {
         const today = new Date();
         return today.toISOString().split('T')[0]; // Format as YYYY-MM-DD
@@ -26,7 +26,7 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
     const [error, setError] = useState('');
     const [isSearchDisabled, setIsSearchDisabled] = useState(false);
     const [showbroadcast, setShowbroadcast] = useState(false);
-    const [selectedUsers, setSelectedUsers] = useState([]);
+    // const [selectedUsers, setSelectedUsers] = useState([]);
     const [modalShow, setModalShow] = useState(false);
     useEffect(() => {
         setFormData({
