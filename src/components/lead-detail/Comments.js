@@ -82,7 +82,7 @@ function Comments() {
                                     <ul className="list-group">
                                         {comments.map((comment, index) => (
                                             <li key={index} className="list-group-item" style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                                <span>  Comment : {comment.comment}</span>
+                                                <span style={{fontSize:"18px" , fontWeight:"600"}}>Comment : {comment.comment}</span>
                                                 <span>Comment By : {comment.createdBy?.name}</span>
                                             </li>
                                         ))}

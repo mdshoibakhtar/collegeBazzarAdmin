@@ -53,6 +53,7 @@ function CompanyTypeMasterForm() {
         });
     };
     const submitForm = async (values) => {
+        
         try {
             if (!params?.id) {
                 try {

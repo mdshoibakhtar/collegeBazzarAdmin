@@ -984,7 +984,7 @@ export const virtualWalletsFilter = (page, count, data) => {
 // -------------------------------------chargesSettings-----------------------------------
 
 export const getchargesSettings = (token) => {
-  return axiosInstance.get(`${baseUrl}setting/`, token)
+  return axiosInstance.get(`${baseUrl}setting/admin`, token)
 }
 export const chargesUpdateSettings = (token) => {
   return axiosInstance.put(`${baseUrl}setting/update/`, token)
@@ -2856,6 +2856,36 @@ export const getCompanyInfo = (data) => {
 
 
 
+export const getLeadDetail = (id) => {
+  return axiosInstance.get(`/user/basic/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+export const getContestDash = (id) => {
+  return axiosInstance.get(`/contest/dashboard/admin`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getPermissions = (id) => {
+  return axiosInstance.get(`/lead/optionPermission/admin/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+export const updatePermissions = (id, value) => {
+  return axiosInstance.put(`${baseUrl}lead/optionpermission/update/${id}`, value);
+};
 
 
 
@@ -2864,8 +2894,63 @@ export const getCompanyInfo = (data) => {
 
 
 
+// DELETE a budget master by ID
+export const deleteBudgetMasterById = (id) => {
+  return axiosInstance.delete(`/lead/budgetMaster/deleteType/${id}`);
+};
+
+// GET budget master by ID with pagination
+export const getBudgetMasterByUser = (page = 0, count = 10) => {
+  return axiosInstance.get(`/lead/budgetMaster?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET a budget master by ID
+export const getBudgetMasterById = (id) => {
+  return axiosInstance.get(`/lead/budgetMaster/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new budget master
+export const postBudgetMaster = (data) => {
+  return axiosInstance.post(`/lead/budgetMaster/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing budget master by ID
+export const updateBudgetMasterById = (id, data) => {
+  return axiosInstance.put(`/lead/budgetMaster/updateType/${id}`, data);
+};
 
 
+// PUT (update) an existing budget master by ID
+export const updateNifty = (id, data) => {
+  return axiosInstance.put(`/marketType/update_type/${id}`, data);
+};
+
+
+
+
+export const getNifty = (id) => {
+  return axiosInstance.get(`/marketType/admin`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
 
 
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import DearMearchantPopUp from "../../common/dearMearchantPopUp/DearMearchantPopUp"
 import Breadcrumbs from "../../common/breadcrumb/Breadcrumbs";
-import { DashboardGet, getLength, getMenusdata } from "../../api/login/Login";
+import { DashboardGet, getContestDash, getLength, getMenusdata } from "../../api/login/Login";
 import { FaBookReader, FaGlobeEurope } from "react-icons/fa";
 import { PiStudentBold } from "react-icons/pi";
 import { MdOutlinePayment } from "react-icons/md";
@@ -20,12 +20,16 @@ function DasBoardRight() {
     const [kycState, setKycState] = useState();
     const today = new Date();
 
+    const [data , setData] = useState();
+
     const getCountData = async () => {
         const today = new Date();
         const dates = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
         console.log(dates);
         try {
             const response = await getLength()
+            const response1 = await getContestDash()
+            setData(response1?.data)
             // const response2 = await DashboardGet({ data: JSON.stringify(dates) })
             const response2 = await DashboardGet({ data: dates });
 
@@ -74,7 +78,7 @@ function DasBoardRight() {
                                             <span className="">Total Contest</span>
                                         </h4>
                                         <h4 className="retailers-title text-center px-4 text-white my-3">
-                                            <span className="">98</span>
+                                            <span className="">{data?.ContestPart?.totalContest}</span>
                                         </h4>
                                     </div>
                                 </div>
@@ -90,7 +94,7 @@ function DasBoardRight() {
                                             <span className="">Total Contest expired  </span>
                                         </h4>
                                         <h4 className="retailers-title text-center px-4 text-white my-3">
-                                            <span className="">7000 +</span>
+                                            <span className="">{data?.ContestPart?.expired_Count}</span>
                                         </h4>
                                     </div>
                                 </div>
@@ -106,7 +110,7 @@ function DasBoardRight() {
                                             <span className="">Total Contest upcoming </span>
                                         </h4>
                                         <h4 className="retailers-title text-center px-4 text-white my-3">
-                                            <span className="">58</span>
+                                            <span className="">{data?.ContestPart?.upcomming_Count}</span>
                                         </h4>
                                     </div>
                                 </div>
@@ -122,7 +126,7 @@ function DasBoardRight() {
                                             <span className="">Total Customer </span>
                                         </h4>
                                         <h4 className="retailers-title text-center px-4 text-white my-3">
-                                            <span className="">70 +</span>
+                                            <span className="">{data?.users}</span>
                                         </h4>
                                     </div>
                                 </div>
@@ -138,7 +142,7 @@ function DasBoardRight() {
                                             <span className="">Total Customer Won     </span>
                                         </h4>
                                         <h4 className="retailers-title text-center px-4 text-white my-3">
-                                            <span className="">98764 +</span>
+                                            <span className="">{data?.customer_won}</span>
                                         </h4>
                                     </div>
                                 </div>
@@ -154,7 +158,7 @@ function DasBoardRight() {
                                             <span className="">Total Winning Amount</span>
                                         </h4>
                                         <h4 className="retailers-title text-center px-4 text-white my-3">
-                                            <span className="">70 +</span>
+                                            <span className="">{data?.ContestPart?.won_Amount}</span>
                                         </h4>
                                     </div>
                                 </div>
@@ -170,7 +174,7 @@ function DasBoardRight() {
                                             <span className="">Total Contest Amt Received</span>
                                         </h4>
                                         <h4 className="retailers-title text-center px-4 text-white my-3">
-                                            <span className="">72+</span>
+                                            <span className="">{data?.ContestPart?.amount_recived}</span>
                                         </h4>
                                     </div>
                                 </div>

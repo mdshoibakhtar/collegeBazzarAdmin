@@ -1,19 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaPencilAlt } from "react-icons/fa"; // Importing the edit icon
+import { useParams } from "react-router-dom";
+import Loadar from "../../common/loader/Loader";
+import { getPermissions, updatePermissions } from "../../api/login/Login";
 
 function PermisionOption() {
   // State to hold permission values
   const [permissions, setPermissions] = useState({
-    whatsapp: "YES",
-    sms: "YES",
-    emailOptin: "YES",
+    whatsapp: false,
+    sms: false,
+    email: false,
   });
 
   // State to manage individual edit mode for each permission
   const [isEditMode, setIsEditMode] = useState({
     whatsapp: false,
     sms: false,
-    emailOptin: false,
+    email: false,
   });
 
   // Handle permission change
@@ -23,24 +26,51 @@ function PermisionOption() {
   };
 
   // Toggle edit mode for each permission
+  const parems = useParams()
   const toggleEditMode = (field) => {
     setIsEditMode((prev) => ({ ...prev, [field]: !prev[field] }));
   };
 
   // Handle form submit (or additional logic)
-  const handleSubmit = (e) => {
+  const [loader , setLoader] = useState(false)
+  const handleSubmit =async (e) => {
     e.preventDefault();
+    setLoader(true)
+    try {
+      const res = await updatePermissions(parems.id ,permissions);
+    } catch (error) {
+      
+    }
+    setLoader(false)
     console.log("Permissions updated:", permissions);
     // Disable all inputs after submission
     setIsEditMode({
       whatsapp: false,
       sms: false,
-      emailOptin: false,
+      email: false,
     });
   };
 
+  const getData = async () => {
+    try {
+      const res = await getPermissions(parems.id);
+      setPermissions({
+        whatsapp: res.data?.whatsapp,
+        sms: res.data?.sms,
+        email: res.data?.email,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };  
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <div className="container mt-4">
+      {loader && <Loadar/>}
       <div className="row">
         <div className="col-12">
           <div className="card p-3">
@@ -59,8 +89,8 @@ function PermisionOption() {
                       onChange={handlePermissionChange}
                       disabled={!isEditMode.whatsapp}
                     >
-                      <option value="YES">YES</option>
-                      <option value="NO">NO</option>
+                      <option value={true}>YES</option>
+                      <option value={false}>NO</option>
                     </select>
                     <FaPencilAlt
                       onClick={() => toggleEditMode("whatsapp")}
@@ -89,8 +119,8 @@ function PermisionOption() {
                       onChange={handlePermissionChange}
                       disabled={!isEditMode.sms}
                     >
-                      <option value="YES">YES</option>
-                      <option value="NO">NO</option>
+                      <option value={true}>YES</option>
+                      <option value={false}>NO</option>
                     </select>
                     <FaPencilAlt
                       onClick={() => toggleEditMode("sms")}
@@ -114,23 +144,23 @@ function PermisionOption() {
                   <div className="input-container" style={{ position: "relative" }}>
                     <select
                       className="form-control"
-                      name="emailOptin"
-                      value={permissions.emailOptin}
+                      name="email"
+                      value={permissions.email}
                       onChange={handlePermissionChange}
-                      disabled={!isEditMode.emailOptin}
+                      disabled={!isEditMode.email}
                     >
-                      <option value="YES">YES</option>
-                      <option value="NO">NO</option>
+                      <option value={true}>YES</option>
+                      <option value={false}>NO</option>
                     </select>
                     <FaPencilAlt
-                      onClick={() => toggleEditMode("emailOptin")}
+                      onClick={() => toggleEditMode("email")}
                       style={{
                         position: "absolute",
                         right: "10px",
                         top: "50%",
                         transform: "translateY(-50%)",
                         cursor: "pointer",
-                        color: isEditMode.emailOptin ? "#28a745" : "#6c757d",
+                        color: isEditMode.email ? "#28a745" : "#6c757d",
                       }}
                     />
                   </div>
