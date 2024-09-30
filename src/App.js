@@ -440,6 +440,16 @@ import NiftyratePage from "./components/topNavigationComp/masters/NiftyMaster/Ni
 import CreateNiftySale from "./components/topNavigationComp/masters/NiftyMaster/MasterForm/CreateNiftySale";
 import BugetMaster from "./components/topNavigationComp/masters/bugetMaster/BugetMaster";
 import BugetForm from "./components/topNavigationComp/masters/bugetMaster/MasterForm/BugetForm";
+import ManageStallPage from "./pages/manageStall";
+import ManageStallAdd from "./components/manageStall/manageStallAdd/ManageStallAdd";
+import BranchPage from "./pages/catalog/branch";
+import AddBranch from "./components/catalog/branch/addBranch/AddBranch";
+import DesignationPage from "./pages/catalog/designation";
+import AddDesination from "./components/catalog/designation/addDesination/AddDesination";
+import ColorrPage from "./pages/catalog/colorr";
+import AddNewColor from "./components/catalog/colorr/addNewColor/AddNewColor";
+import AnimalTypePage from "./pages/catalog/animalType";
+import AddNewAnimalType from "./components/catalog/animalType/addNewAnimalType/AddNewAnimalType";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1517,6 +1527,20 @@ function App() {
               <Route path="add-new-expense-purpose" element={<AddNewPurpose />} />
               <Route path="supplier" element={<SuppliersPage />} />
               <Route path="supplier/create" element={<AddSuplierProfile />} />
+              <Route path="sheds" element={<ManageStallPage />} />
+              <Route path="add-new-stall" element={<ManageStallAdd />} />
+              <Route path="branch" element={<BranchPage />} />
+              <Route path="add-branch" element={<AddBranch />} />
+              <Route path="designation" element={<DesignationPage />} />
+              <Route path="add-designation" element={<AddDesination />} />
+              <Route path="colors" element={<ColorrPage />} />
+              <Route path="add-colors" element={<AddNewColor />} />
+              {/* <Route path="animal-type" element={<AnimalTypePage />} />
+              <Route path="add-animal-type" element={<AddNewAnimalType />} /> */}
+
+
+
+
 
 
 
