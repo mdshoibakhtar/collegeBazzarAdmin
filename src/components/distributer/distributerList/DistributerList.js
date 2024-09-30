@@ -11,14 +11,10 @@ import ExportPdf from "../../../common/exportPdf/ExportPdf";
 import "../distributer.css"
 import { ToastContainer, toast } from "react-toastify";
 import { Pagination } from "antd";
-import BulkAssigedModel from "../BulkAssigedModel";
-import { getServiceCategory } from "../../../api/login/Login";
-import { FaBroadcastTower } from "react-icons/fa";
-import BroadCasterModal from "./broadCasterModal/BroadCasterModal";
 import ModelLeadFollowUp from "./ModelLeadFollowUp";
 
 
-function DistributerList({ loading, params, state, handleChange, onChangeVal, approval,selectedUsers ,setSelectedUsers}) {
+function DistributerList({dynemicFields, loading, params, state, handleChange, onChangeVal, approval,selectedUsers ,setSelectedUsers}) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -115,8 +111,8 @@ function DistributerList({ loading, params, state, handleChange, onChangeVal, ap
                                                     <th>Reff Code</th>
                                                     <th>Member type</th>
                                                     <th>Name</th>
-                                                    <th>Streams</th>
-                                                    <th>Courses</th>
+                                                    <th>{dynemicFields?.field_one}</th>
+                                                    <th>{dynemicFields?.field_two}</th>
                                                     <th>Mobile</th>
                                                     <th>Email</th>
                                                     <th>Main Balance</th>

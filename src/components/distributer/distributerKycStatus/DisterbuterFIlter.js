@@ -6,7 +6,7 @@ import { FaBroadcastTower } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import BroadCasterModal from "../distributerList/broadCasterModal/BroadCasterModal";
 
-function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistIdAgainst,selectedUsers, setSelectedUsers }) {
+function DisterbuterFIlter({ dynemicFields, submitForm, initialValues, params, getReailerDistIdAgainst, selectedUsers, setSelectedUsers }) {
     const todayDate = () => {
         const today = new Date();
         return today.toISOString().split('T')[0]; // Format as YYYY-MM-DD
@@ -212,7 +212,7 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
                                     </div>
 
                                     <div className="col-xl-2 mb-3">
-                                        <label htmlFor="email">Stream</label>
+                                        <label htmlFor="email">{dynemicFields?.field_two}</label>
                                         <Select
                                             name="stream_id"
                                             isMulti
@@ -230,7 +230,7 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
                                         ) : null} */}
                                     </div>
                                     <div className="col-xl-2 mb-3">
-                                        <label >Course</label>
+                                        <label >{dynemicFields?.field_one}</label>
                                         <Select
                                             name="stream_id"
                                             isMulti
@@ -279,6 +279,7 @@ function DisterbuterFIlter({ submitForm, initialValues, params, getReailerDistId
 
 
                                 <BulkAssignedModel
+                                    dynemicFields={dynemicFields}
                                     show={modalShow}
                                     selectedUsers={selectedUsers}
                                     onHide={() => setModalShow(false)}
