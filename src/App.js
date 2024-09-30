@@ -436,6 +436,10 @@ import ExpensePurposePage from "./pages/farmExpense/expensePurpose";
 import { AddNewPurpose } from "./components/farmExpense/expensePurpose/addNewPurpose/AddNewPurpose";
 import SuppliersPage from "./pages/suppliers";
 import { AddSuplierProfile } from "./components/suppliers/addSuplier/AddSuplierProfile";
+import NiftyratePage from "./components/topNavigationComp/masters/NiftyMaster/NiftyratePage";
+import CreateNiftySale from "./components/topNavigationComp/masters/NiftyMaster/MasterForm/CreateNiftySale";
+import BugetMaster from "./components/topNavigationComp/masters/bugetMaster/BugetMaster";
+import BugetForm from "./components/topNavigationComp/masters/bugetMaster/MasterForm/BugetForm";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -447,7 +451,7 @@ function App() {
 
   useEffect(() => {
     // console.log(getToken());
-    requestPermissions()
+    // requestPermissions()
     if (getToken2()) {
       dispatch(setIsLogin({ isLogin: true }));
       navigate(location?.pathname);
@@ -498,14 +502,12 @@ function App() {
         });
       }
     })
-
-
-
   }
 
   return (
     <>
       <Routes>
+        {/* <Route path="/" element={<Navigate to={"/loginPage"} />} />  */}
         {window.localStorage.getItem('dashRout') == null ? (
           <>
             <Route path="/" element={<Navigate to={"/loginPage"} />} />
@@ -1628,6 +1630,16 @@ function App() {
               <Route path="geofence_events" element={<GeofenceEvents />} />
               <Route path="geofence_management" element={<GeofenceManagement />} />
               <Route path="live_location" element={<LiveLocation />} />
+
+
+              {/* <Route path="Nifty-Rate-List" element={<NiftyratePage />} /> */}
+              <Route path="Nifty-Rate-add" element={<CreateNiftySale />} />
+              <Route path="Nifty-Rate-add/:id" element={<CreateNiftySale />} />
+
+
+              <Route path="Budget-Master" element={<BugetMaster />} />
+              <Route path="Budget-add" element={<BugetForm />} />
+              <Route path="Budget-add/:id" element={<BugetForm />} />
 
 
               <Route path="*" element={<PageNotFound />} />

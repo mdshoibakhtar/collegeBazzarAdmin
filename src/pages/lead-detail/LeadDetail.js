@@ -13,11 +13,24 @@ import EmailCompo from "../../components/lead-detail/email/EmailCompo";
 import ChattingWindow from "../../components/lead-detail/ChattingWindow";
 import { useSelector } from "react-redux";
 import FilesList from "../../components/lead-detail/FilesList";
+import { getLeadDetail } from "../../api/login/Login";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function LeadDetail() {
     const datas = useSelector((state) => {
        return state.auth
     })
+
+    const [data, setData] = useState([])
+    const parems = useParams()
+    const getData =async () => {
+       const res = await getLeadDetail(parems.id)
+       setData(res.data)
+    }
+    useEffect(()=>{
+        getData()
+    },[])
     
     return (
         <div className="row m-4">
@@ -29,9 +42,9 @@ function LeadDetail() {
                                 <h4 className="heading mb-0">Lead Detail</h4>
                             </div>
                             <div className="tbl-caption tbl-caption-2 d-block" style={{ marginTop: "15px" }}>
-                                <h5 className="heading">Name : Abdul Quadir</h5>
-                                <h5 className="heading">Mobile  : 89732894289</h5>
-                                <h5 className="heading">Email : abarid@gmail.com</h5>
+                                <h5 className="heading">Name : {data?.name}</h5>
+                                <h5 className="heading">Mobile  : {data?.mobile}</h5>
+                                <h5 className="heading">Email : {data?.email}</h5>
                             </div>
                         </div>
                         <div className="row mt-4">
@@ -62,12 +75,12 @@ function LeadDetail() {
                                             <SystematicInfo />
                                         </Accordion.Body>
                                     </Accordion.Item>
-                                    <Accordion.Item eventKey="3">
+                                    {/* <Accordion.Item eventKey="3">
                                         <Accordion.Header>Description Detail</Accordion.Header>
                                         <Accordion.Body style={{ padding: "0" }}>
                                             Description Detail
                                         </Accordion.Body>
-                                    </Accordion.Item>
+                                    </Accordion.Item> */}
                                 </Accordion>
                             </div>
                             <div className="col-lg-8 col-md-12">

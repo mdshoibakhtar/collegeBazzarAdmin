@@ -137,12 +137,13 @@ function Distributer() {
         title_1: "Members",
         title_2: params?.name,
     }
+    const [selectedUsers, setSelectedUsers] = useState([]);
     return (
         <>
             <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
             {/* <DistributerKycStatus submitForm={submitForm} params={params} initialValues={initialValues} /> */}
-            <DisterbuterFIlter params={params} submitForm={submitForm} getReailerDistIdAgainst={getReailerDistIdAgainst} />
-            <DistributerList loading={loading} params={params} state={state} handleChange={handleChange} onChangeVal={onChangeVal} approval={approval} />
+            <DisterbuterFIlter params={params} selectedUsers={selectedUsers} submitForm={submitForm} getReailerDistIdAgainst={getReailerDistIdAgainst} />
+            <DistributerList selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers} loading={loading} params={params} state={state} handleChange={handleChange} onChangeVal={onChangeVal} approval={approval} />
         </>
     )
 }

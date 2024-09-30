@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaPencilAlt } from "react-icons/fa"; // Importing the edit icon
+import Select from 'react-select';
+import { getBudgetMasterByUser, getCourseTypeForCombo, reailerDistIdAgainstAll } from "../../api/login/Login";
 
 function RequirementDetail() {
   // State to hold form data
   const [formData, setFormData] = useState({
-    course: "MCA",
-    interestedCourses: "Gold Mine,Excellene",
-    courseType: "",
-    budget: "25-30 Lakhs",
+    course: [],
+    interestedCourses: [],
+    courseType: [],
+    budget: [],
     location: "",
     fbFormId: "",
     fbFormName: "",
@@ -26,17 +28,19 @@ function RequirementDetail() {
     fbPageName: false,
   });
 
-  // Handle form data change
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  // Handle multi-select change
+  const handleMultiSelectChange = (field, selectedOptions) => {
+    setFormData({ ...formData, [field]: selectedOptions });
   };
 
   // Toggle edit mode for a specific field
   const toggleEditMode = (field) => {
     setIsEditMode((prev) => ({ ...prev, [field]: !prev[field] }));
   };
-
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
   // Handle form submission (or other actions)
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,6 +58,50 @@ function RequirementDetail() {
     });
   };
 
+  // Options for multi-select
+  const [courseOptions , setCourseOptions] = useState([]);
+
+  const [interestedCoursesOptions , setInterestedCoursesOptions] = useState([]);
+
+  const [courseTypeOptions , setCourseTypeOptions] = useState([]);
+
+  const [budgetOptions , setBudgetOptions] = useState([]);
+
+  const getAllMaster = async () => {
+    try {
+      const res1 = await reailerDistIdAgainstAll()
+      const res2 = await getCourseTypeForCombo()
+      const res3 = await getBudgetMasterByUser(0,100)
+      const maped1 = res1.data.map((item) => ({
+        ...item ,
+        value: item.id,
+        label: item.service_name,
+      }));
+      setCourseOptions(maped1);
+      setInterestedCoursesOptions(maped1);
+
+      const maped2 = res2.data.map((item) => ({
+        ...item ,
+        value: item._id,
+        label: item.course_type_name,
+      }));
+      setCourseTypeOptions(maped2);
+      const maped3 = res3.data.map((item) => ({
+        ...item ,
+        value: item._id,
+        label: item.name,
+      }));
+      setBudgetOptions(maped3);
+
+    } catch (error) {
+
+    }
+  }
+
+  useEffect(() => {
+    getAllMaster();
+  }, []);
+
   return (
     <div className="container mt-4">
       <div className="row">
@@ -67,17 +115,19 @@ function RequirementDetail() {
                     <strong>Course *: </strong>
                   </label>
                   <div className="input-container" style={{ position: "relative" }}>
-                    <select
-                      className="form-control"
+                    <Select
+                      isMulti
                       name="course"
                       value={formData.course}
-                      onChange={handleInputChange}
-                      disabled={!isEditMode.course}
-                    >
-                      <option value="MCA">MCA</option>
-                      <option value="BCA">BCA</option>
-                      <option value="MBA">MBA</option>
-                    </select>
+                      options={courseOptions}
+                      closeMenuOnSelect={false}
+                      onChange={(selectedOptions) =>
+                        handleMultiSelectChange("course", selectedOptions)
+                      }
+                      placeholder="Select Course"
+                      isDisabled={!isEditMode.course}
+                      classNamePrefix="react-select"
+                    />
                     <FaPencilAlt
                       onClick={() => toggleEditMode("course")}
                       style={{
@@ -98,13 +148,18 @@ function RequirementDetail() {
                     <strong>Interested Courses: </strong>
                   </label>
                   <div className="input-container" style={{ position: "relative" }}>
-                    <input
-                      type="text"
-                      className="form-control"
+                    <Select
+                      isMulti
                       name="interestedCourses"
                       value={formData.interestedCourses}
-                      onChange={handleInputChange}
-                      disabled={!isEditMode.interestedCourses}
+                      options={interestedCoursesOptions}
+                      closeMenuOnSelect={false}
+                      onChange={(selectedOptions) =>
+                        handleMultiSelectChange("interestedCourses", selectedOptions)
+                      }
+                      placeholder="Select Interested Courses"
+                      isDisabled={!isEditMode.interestedCourses}
+                      classNamePrefix="react-select"
                     />
                     <FaPencilAlt
                       onClick={() => toggleEditMode("interestedCourses")}
@@ -126,17 +181,19 @@ function RequirementDetail() {
                     <strong>Course Type: </strong>
                   </label>
                   <div className="input-container" style={{ position: "relative" }}>
-                    <select
-                      className="form-control"
+                    <Select
+                      isMulti
                       name="courseType"
                       value={formData.courseType}
-                      onChange={handleInputChange}
-                      disabled={!isEditMode.courseType}
-                    >
-                      <option value="">Select Course Type</option>
-                      <option value="Full-time">Full-time</option>
-                      <option value="Part-time">Part-time</option>
-                    </select>
+                      options={courseTypeOptions}
+                      closeMenuOnSelect={false}
+                      onChange={(selectedOptions) =>
+                        handleMultiSelectChange("courseType", selectedOptions)
+                      }
+                      placeholder="Select Course Type"
+                      isDisabled={!isEditMode.courseType}
+                      classNamePrefix="react-select"
+                    />
                     <FaPencilAlt
                       onClick={() => toggleEditMode("courseType")}
                       style={{
@@ -157,13 +214,18 @@ function RequirementDetail() {
                     <strong>Budget: </strong>
                   </label>
                   <div className="input-container" style={{ position: "relative" }}>
-                    <input
-                      type="text"
-                      className="form-control"
+                    <Select
+                      isMulti
                       name="budget"
                       value={formData.budget}
-                      onChange={handleInputChange}
-                      disabled={!isEditMode.budget}
+                      options={budgetOptions}
+                      closeMenuOnSelect={false}
+                      onChange={(selectedOptions) =>
+                        handleMultiSelectChange("budget", selectedOptions)
+                      }
+                      placeholder="Select Budget"
+                      isDisabled={!isEditMode.budget}
+                      classNamePrefix="react-select"
                     />
                     <FaPencilAlt
                       onClick={() => toggleEditMode("budget")}
@@ -178,6 +240,7 @@ function RequirementDetail() {
                     />
                   </div>
                 </div>
+
 
                 {/* Location */}
                 <div className="col-12 mb-2">
@@ -290,13 +353,14 @@ function RequirementDetail() {
                     />
                   </div>
                 </div>
-              </div>
 
-              {Object.values(isEditMode).some((mode) => mode) && (
-                <button type="submit" className="btn btn-success mt-3">
-                  Submit
-                </button>
-              )}
+                {/* Submit Button */}
+                {Object.values(isEditMode).some((mode) => mode) && (
+                  <button type="submit" className="btn btn-success mt-3">
+                    Submit
+                  </button>
+                )}
+              </div>
             </form>
           </div>
         </div>

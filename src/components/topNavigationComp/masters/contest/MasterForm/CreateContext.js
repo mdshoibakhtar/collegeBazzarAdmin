@@ -15,6 +15,7 @@ function CreateContest() {
     };
 
     const [initialValues, setInitialValues] = useState({
+        name: "",
         contest_type: "",
         market_type: "",
         reward: 0,
@@ -32,6 +33,9 @@ function CreateContest() {
 
     const validate = (values) => {
         let errors = {};
+        if (!values.name) {
+            errors.name = "Contest Name is required";
+        }
         if (!values.contest_type) {
             errors.contest_type = "Contest Type is required";
         }
@@ -106,6 +110,7 @@ function CreateContest() {
             if (params?.id) {
                 const response = await getContestById(params.id);
                 setInitialValues({
+                    name: response?.data?.name || "",
                     contest_type: response?.data?.contest_type || "",
                     market_type: response?.data?.market_type || "",
                     reward: response?.data?.reward || 0,
@@ -113,18 +118,18 @@ function CreateContest() {
                     entryFee: response?.data?.entryFee || 0,
                     winnerPercentage: response?.data?.winnerPercentage || 0,
                     isFree: response?.data?.isFree || true,
-                    start_date: response?.data?.start_date || "",
-                    end_date: response?.data?.end_date || "",
+                    start_date: response?.data?.start_date ? new Date(response?.data?.start_date).toISOString().slice(0, 10) : "",
+                    end_date: response?.data?.end_date ? new Date(response?.data?.end_date).toISOString().slice(0, 10) : "",
                     rankingRewards: response?.data?.rankingRewards || [{ minRank: "", maxRank: "", reward: "" }],
                 });
                 // setImage('')
             }
         };
-
+    
         fetchContestData();
         getDatas();
     }, [params?.id]);
-
+    
     return (
         <>
             <ToastContainer />
@@ -147,6 +152,19 @@ function CreateContest() {
                                 {({ values, handleChange, handleSubmit, errors, touched, handleBlur }) => (
                                     <form className="tbl-captionn" onSubmit={handleSubmit}>
                                         <div className="row">
+                                        <div className="col-xl-4 mb-3">
+                                                <h6>Name</h6>
+                                                <CustomInputField
+                                                    type="text"
+                                                    value={values.name}
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                    name="name"
+                                                />
+                                                {touched.name && errors.name && (
+                                                    <div className="text-danger">{errors.name}</div>
+                                                )}
+                                            </div>
                                             <div className="col-xl-4 mb-3">
                                                 <h6>Contest Type</h6>
                                                 <select
