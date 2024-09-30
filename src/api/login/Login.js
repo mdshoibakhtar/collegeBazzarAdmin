@@ -2936,8 +2936,8 @@ export const updateBudgetMasterById = (id, data) => {
 
 
 // PUT (update) an existing budget master by ID
-export const updateNifty = (id, data) => {
-  return axiosInstance.put(`/marketType/update_type/${id}`, data);
+export const updateNifty = (data) => {
+  return axiosInstance.put(`/marketType/bulk`, data);
 };
 
 
