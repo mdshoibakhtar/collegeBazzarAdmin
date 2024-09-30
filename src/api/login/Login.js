@@ -2935,8 +2935,22 @@ export const updateBudgetMasterById = (id, data) => {
 };
 
 
+// PUT (update) an existing budget master by ID
+export const updateNifty = (id, data) => {
+  return axiosInstance.put(`/marketType/update_type/${id}`, data);
+};
 
 
+
+
+export const getNifty = (id) => {
+  return axiosInstance.get(`/marketType/admin`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
 
 
 

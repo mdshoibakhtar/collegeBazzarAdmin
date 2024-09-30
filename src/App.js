@@ -1632,7 +1632,7 @@ function App() {
               <Route path="live_location" element={<LiveLocation />} />
 
 
-              <Route path="Nifty-Rate-List" element={<NiftyratePage />} />
+              {/* <Route path="Nifty-Rate-List" element={<NiftyratePage />} /> */}
               <Route path="Nifty-Rate-add" element={<CreateNiftySale />} />
               <Route path="Nifty-Rate-add/:id" element={<CreateNiftySale />} />
 

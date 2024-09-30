@@ -4,15 +4,16 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import CustomInputField from '../../../../../common/CustomInputField';
 import Breadcrumbs from '../../../../../common/breadcrumb/Breadcrumbs';
-import { getDealById, postDeal, updateDealById } from '../../../../../api/login/Login';
+import { getDealById, getNifty, postDeal, updateDealById, updateNifty } from '../../../../../api/login/Login';
 import { toast } from 'react-toastify';
+import Loadar from '../../../../../common/loader/Loader';
 
 function CreateNiftySale() {
     const breadCrumbsTitle = {
         title_1: "master",
         title_2: "Add Niftyfy Sale",
     };
-    
+
     const [initialValues, setInitialValues] = useState({
         name: "",
         isActive: null,
@@ -27,7 +28,7 @@ function CreateNiftySale() {
 
     const validate = (values) => {
         let errors = {};
-     
+
         if (!values.current_price) {
             errors.current_price = "Current Price is Required";
         }
@@ -53,62 +54,48 @@ function CreateNiftySale() {
         });
     };
 
+    const [loader, setLoader] = useState()
     const submitForm = async (values) => {
+        setLoader(true)
         try {
             if (!params?.id) {
                 try {
-                    const res = await postDeal(values);
-                    if (res?.statusCode === "200") {
-                        toastSuccessMessage("Niftyfy Sale Added Successfully");
-                        navigate(`/Nifty-Rate-List`);
-                    }
-                    blankBtn();
-                } catch (error) {
-                    alert(error.message);
-                }
-            } else {
-                try {
-                    const res = await updateDealById(params.id, values);
+                    const res = await updateNifty(params.id, values);
                     if (res?.statusCode === "200") {
                         toastSuccessMessage("Niftyfy Sale Updated Successfully");
-                        blankBtn();
-                        navigate(`/Nifty-Rate-List`);
+                        setTimeout(() => {
+                            blankBtn();
+                            navigate(`/Nifty-Rate-List`);
+                        }, 1000);
                     }
                 } catch (error) {
                     alert(`Error: ${error}`);
                 }
+            } else {
+
             }
         } catch (error) {
             console.error("Error:", error);
         }
+        setLoader(false)
     };
 
     useEffect(() => {
         const fetchCurrency = async () => {
             try {
-                if (params?.id) {
-                    const response = await getDealById(params.id);
-                    setInitialValues(response?.data);
-                } else {
-                    setInitialValues({
-                        name: "",
-                        isActive: "",
-                        current_price: "",    // New field
-                        highest_price: "",    // New field
-                        lowest_price: "",     // New field
-                        closing_price_edit: "", // New field
-                    });
-                }
+                const response = await getNifty();
+                setInitialValues(response?.data);
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
         };
 
         fetchCurrency();
-    }, [params?.id]);
+    }, []);
 
     return (
         <>
+            {loader && <Loadar />}
             <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
             <div style={{ margin: "14px" }}>
                 <div className="card">
@@ -141,7 +128,7 @@ function CreateNiftySale() {
                                     return (
                                         <form className="tbl-captionn" onSubmit={handleSubmit}>
                                             <div className="row">
-                                               
+
                                                 <div className="col-xl-4 mb-3">
                                                     <CustomInputField
                                                         type="number"
