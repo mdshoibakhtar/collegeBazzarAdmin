@@ -58,22 +58,8 @@ function ConvertStatusMasterList({ data, totalCount, page, count, onChangeVal, c
                                                             <td>{item?.maxSpots}</td>
                                                             <td>{item?.entryFee}</td>
                                                             <td>{item?.winnerPercentage}</td>
-                                                            <td>{new Date(item?.start_date).toLocaleString('en-US', {
-                                                                year: 'numeric',
-                                                                month: 'short',
-                                                                day: 'numeric',
-                                                                hour: '2-digit',
-                                                                minute: '2-digit',
-                                                                hour12: true
-                                                            })}</td>
-                                                            <td>{new Date(item?.end_date).toLocaleString('en-US', {
-                                                                year: 'numeric',
-                                                                month: 'short',
-                                                                day: 'numeric',
-                                                                hour: '2-digit',
-                                                                minute: '2-digit',
-                                                                hour12: true
-                                                            })}</td>
+                                                            <td>{item?.start_time}</td>
+                                                            <td>{item?.end_time}</td>
 
                                                             <td>
                                                                 <div className="d-flex">
