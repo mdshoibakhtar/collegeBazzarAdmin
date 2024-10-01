@@ -450,6 +450,8 @@ import ColorrPage from "./pages/catalog/colorr";
 import AddNewColor from "./components/catalog/colorr/addNewColor/AddNewColor";
 import AnimalTypePage from "./pages/catalog/animalType";
 import AddNewAnimalType from "./components/catalog/animalType/addNewAnimalType/AddNewAnimalType";
+import VactionList from "./components/catalog/vaccination/VactionList";
+import AddVaccine from "./components/catalog/vaccination/AddVaccine";
 import DummyUsers from "./components/topNavigationComp/masters/dummy-user/BugetMaster";
 import DummyForm from "./components/topNavigationComp/masters/dummy-user/MasterForm/DummyForm";
 import FoodUnitPage from "./pages/catalog/foodUnit";
@@ -458,6 +460,7 @@ import FoodItemPage from "./pages/catalog/foodItem";
 import AddFoodItem from "./components/catalog/foodItem/addFoodItem/AddFoodItem";
 import MonitoringServicesPage from "./pages/catalog/monitoringServices";
 import { MonitoringServicesAdd } from "./components/catalog/monitoringServices/monitoringServicesAdd/MonitoringServicesAdd";
+import { GetWiseReportsetPage } from "./pages/farmReport/getWiseReportset";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1551,6 +1554,9 @@ function App() {
               <Route path="add-food-item" element={<AddFoodItem />} />
               <Route path="food-unit" element={<FoodUnitPage />} />
               <Route path="add-food-unit" element={<AddFoodItem />} />
+              <Route path="vaccine-list" element={<VactionList />} />
+              <Route path="add-vaccine" element={<AddVaccine />} />
+              <Route path="get-vaccine-wise-monitoring-report" element={<GetWiseReportsetPage />} />
 
 
 
