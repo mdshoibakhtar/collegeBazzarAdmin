@@ -450,6 +450,12 @@ import ColorrPage from "./pages/catalog/colorr";
 import AddNewColor from "./components/catalog/colorr/addNewColor/AddNewColor";
 import AnimalTypePage from "./pages/catalog/animalType";
 import AddNewAnimalType from "./components/catalog/animalType/addNewAnimalType/AddNewAnimalType";
+import FoodUnitPage from "./pages/catalog/foodUnit";
+import AddFoodUnit from "./components/catalog/foodUnit/addFoodUnit/AddFoodUnit";
+import FoodItemPage from "./pages/catalog/foodItem";
+import AddFoodItem from "./components/catalog/foodItem/addFoodItem/AddFoodItem";
+import MonitoringServicesPage from "./pages/catalog/monitoringServices";
+import { MonitoringServicesAdd } from "./components/catalog/monitoringServices/monitoringServicesAdd/MonitoringServicesAdd";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1664,6 +1670,12 @@ function App() {
               <Route path="Budget-Master" element={<BugetMaster />} />
               <Route path="Budget-add" element={<BugetForm />} />
               <Route path="Budget-add/:id" element={<BugetForm />} />
+              <Route path="food-unit" element={<FoodUnitPage />} />
+              <Route path="add-food-unit" element={<AddFoodUnit />} />
+              <Route path="food-item" element={<FoodItemPage />} />
+              <Route path="add-food-item" element={<AddFoodItem />} />
+              <Route path="monitoring-service" element={<MonitoringServicesPage />} />
+              <Route path="add-monitoring-service" element={<MonitoringServicesAdd />} />
 
 
               <Route path="*" element={<PageNotFound />} />
