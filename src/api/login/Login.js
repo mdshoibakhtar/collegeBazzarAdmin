@@ -2989,7 +2989,7 @@ export const getDummyUserById = (id) => {
 
 // POST a new dummy user
 export const postDummyUser = (data) => {
-  return axiosInstance.post(`/dummyUserMaster/addType`, data, {
+  return axiosInstance.post(`/dummy/contestParticipate`, data, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
       Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
@@ -3011,18 +3011,45 @@ export const updateDummyUserById = (id, data) => {
 
 
 
+// DELETE a default contest by ID
+export const deleteDefaultContestById = (id) => {
+  return axiosInstance.delete(`/defaultContest/deleteType/${id}`);
+};
 
+// GET default contests with pagination
+export const getDefaultContests = (page, count) => {
+  return axiosInstance.get(`/defaultContest?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
 
+// GET a default contest by ID
+export const getDefaultContestById = (id) => {
+  return axiosInstance.get(`/defaultContest/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
 
+// POST a new default contest
+export const postDefaultContest = (data) => {
+  return axiosInstance.post(`/defaultContest/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
 
-
-
-
-
-
-
-
-
+// PUT (update) an existing default contest by ID
+export const updateDefaultContestById = (id, data) => {
+  return axiosInstance.put(`/defaultContest/updateType/${id}`, data);
+};
 
 
 
