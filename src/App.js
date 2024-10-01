@@ -450,6 +450,8 @@ import ColorrPage from "./pages/catalog/colorr";
 import AddNewColor from "./components/catalog/colorr/addNewColor/AddNewColor";
 import AnimalTypePage from "./pages/catalog/animalType";
 import AddNewAnimalType from "./components/catalog/animalType/addNewAnimalType/AddNewAnimalType";
+import VactionList from "./components/catalog/vaccination/VactionList";
+import AddVaccine from "./components/catalog/vaccination/AddVaccine";
 import DummyUsers from "./components/topNavigationComp/masters/dummy-user/BugetMaster";
 import DummyForm from "./components/topNavigationComp/masters/dummy-user/MasterForm/DummyForm";
 import DefoultContestMaster from "./components/topNavigationComp/masters/contestDefoult/DefoultContestMaster";
@@ -1539,8 +1541,10 @@ function App() {
               <Route path="add-designation" element={<AddDesination />} />
               <Route path="colors" element={<ColorrPage />} />
               <Route path="add-colors" element={<AddNewColor />} />
-              {/* <Route path="animal-type" element={<AnimalTypePage />} />
-              <Route path="add-animal-type" element={<AddNewAnimalType />} /> */}
+              <Route path="animal-type" element={<AnimalTypePage />} />
+              <Route path="add-animal-type" element={<AddNewAnimalType />} />
+              <Route path="vaccine-list" element={<VactionList />} />
+              <Route path="add-vaccine" element={<AddVaccine />} />
 
 
 

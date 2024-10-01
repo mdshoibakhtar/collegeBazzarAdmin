@@ -1,6 +1,5 @@
 import Breadcrumbs from "../../../../common/breadcrumb/Breadcrumbs";
 
-
 function AddDesination() {
     const breadCrumbsTitle = {
         id: "1",
