@@ -450,6 +450,8 @@ import ColorrPage from "./pages/catalog/colorr";
 import AddNewColor from "./components/catalog/colorr/addNewColor/AddNewColor";
 import AnimalTypePage from "./pages/catalog/animalType";
 import AddNewAnimalType from "./components/catalog/animalType/addNewAnimalType/AddNewAnimalType";
+import DummyUsers from "./components/topNavigationComp/masters/dummy-user/BugetMaster";
+import DummyForm from "./components/topNavigationComp/masters/dummy-user/MasterForm/DummyForm";
 import FoodUnitPage from "./pages/catalog/foodUnit";
 import AddFoodUnit from "./components/catalog/foodUnit/addFoodUnit/AddFoodUnit";
 import FoodItemPage from "./pages/catalog/foodItem";
@@ -1541,8 +1543,14 @@ function App() {
               <Route path="add-designation" element={<AddDesination />} />
               <Route path="colors" element={<ColorrPage />} />
               <Route path="add-colors" element={<AddNewColor />} />
-              {/* <Route path="animal-type" element={<AnimalTypePage />} />
-              <Route path="add-animal-type" element={<AddNewAnimalType />} /> */}
+              <Route path="animal-type" element={<AnimalTypePage />} />
+              <Route path="add-animal-type" element={<AddNewAnimalType />} />
+              <Route path="monitoring-service" element={<MonitoringServicesPage />} />
+              <Route path="add-monitoring-service" element={<MonitoringServicesAdd />} />
+              <Route path="food-item" element={<FoodItemPage />} />
+              <Route path="add-food-item" element={<AddFoodItem />} />
+              <Route path="food-unit" element={<FoodUnitPage />} />
+              <Route path="add-food-unit" element={<AddFoodItem />} />
 
 
 
@@ -1670,15 +1678,14 @@ function App() {
               <Route path="Budget-Master" element={<BugetMaster />} />
               <Route path="Budget-add" element={<BugetForm />} />
               <Route path="Budget-add/:id" element={<BugetForm />} />
-              <Route path="food-unit" element={<FoodUnitPage />} />
-              <Route path="add-food-unit" element={<AddFoodUnit />} />
-              <Route path="food-item" element={<FoodItemPage />} />
-              <Route path="add-food-item" element={<AddFoodItem />} />
-              <Route path="monitoring-service" element={<MonitoringServicesPage />} />
-              <Route path="add-monitoring-service" element={<MonitoringServicesAdd />} />
 
 
-              <Route path="*" element={<PageNotFound />} />
+              <Route path="Dummy-users-List" element={<DummyUsers />} />
+              <Route path="Dummy-users-add" element={<DummyForm />} />
+              <Route path="Dummy-users-add/:id" element={<DummyForm />} />
+
+
+              <Route path="*" element={<PageNotFound />} />s
             </Route>
           </>
         )}

@@ -169,7 +169,7 @@ function BulkAssignedModel(props) {
                             </div>
 
                             <div className="mb-3 col-3">
-                                <label htmlFor="streams" className="form-label">Streams</label>
+                                <label htmlFor="streams" className="form-label">{props.dynemicFields?.field_one}</label>
                                 <select
                                     className="form-select"
                                     id="streams"
@@ -184,7 +184,7 @@ function BulkAssignedModel(props) {
                             </div>
 
                             <div className="mb-3 col-3">
-                                <label htmlFor="courses" className="form-label">Courses</label>
+                                <label htmlFor="courses" className="form-label">{props.dynemicFields?.field_two}</label>
                                 <select
                                     className="form-select"
                                     id="courses"
@@ -219,8 +219,8 @@ function BulkAssignedModel(props) {
                                 <th>Sr. No.</th>
                                 <th>Member Type</th>
                                 <th>Name</th>
-                                <th>Streams</th>
-                                <th>Courses</th>
+                                <th>{props.dynemicFields?.field_one}</th>
+                                <th>{props.dynemicFields?.field_two}</th>
                                 <th>Lead Assign</th>
                                 <th>Lead Type</th>
                                 <th>Lead Status</th>
