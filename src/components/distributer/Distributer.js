@@ -5,7 +5,7 @@ import '../../components/distributer/distributer.css'
 import DistributerKycStatus from './distributerKycStatus/DistributerKycStatus'
 import DistributerList from './distributerList/DistributerList'
 import { useEffect, useState } from 'react'
-import { getLength, reailerDistIdAgainst, reailerDistIdAgainstFillers, updateDistributerApproval } from '../../api/login/Login'
+import { getCompanyInfo, getLength, reailerDistIdAgainst, reailerDistIdAgainstFillers, updateDistributerApproval } from '../../api/login/Login'
 import { toast } from 'react-toastify'
 import DisterbuterFIlter from './distributerKycStatus/DisterbuterFIlter'
 function Distributer() {
@@ -130,7 +130,22 @@ function Distributer() {
         return () => {
             isMounted = false;
         };
+
     }, []);
+
+    const [dynemicFields , setDynemic] = useState()
+
+    useEffect(() => {
+      const getData = async ()=>{
+        try {
+            const res = await getCompanyInfo()
+            setDynemic(res.data.companyType)
+        } catch (error) {
+
+        }
+      }
+      getData()
+    }, [])
 
     const breadCrumbsTitle = {
         id: "1",
@@ -142,8 +157,8 @@ function Distributer() {
         <>
             <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
             {/* <DistributerKycStatus submitForm={submitForm} params={params} initialValues={initialValues} /> */}
-            <DisterbuterFIlter params={params} selectedUsers={selectedUsers} submitForm={submitForm} getReailerDistIdAgainst={getReailerDistIdAgainst} />
-            <DistributerList selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers} loading={loading} params={params} state={state} handleChange={handleChange} onChangeVal={onChangeVal} approval={approval} />
+            <DisterbuterFIlter dynemicFields={dynemicFields} params={params} selectedUsers={selectedUsers} submitForm={submitForm} getReailerDistIdAgainst={getReailerDistIdAgainst} />
+            <DistributerList dynemicFields={dynemicFields} selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers} loading={loading} params={params} state={state} handleChange={handleChange} onChangeVal={onChangeVal} approval={approval} />
         </>
     )
 }

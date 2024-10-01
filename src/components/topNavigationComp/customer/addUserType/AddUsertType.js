@@ -1,66 +1,68 @@
 import { Formik } from 'formik';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import CustomInputField from '../../../../common/CustomInputField';
 import Breadcrumbs from '../../../../common/breadcrumb/Breadcrumbs';
-import { UserTypeUpdate, addUserType, getUserType } from '../../../../api/login/Login';
+import { UserTypeUpdate, addUserType, getUserType, listUserType } from '../../../../api/login/Login';
 import { ToastContainer, toast } from 'react-toastify';
 import { useParams } from 'react-router';
 import { Link, useNavigate } from 'react-router-dom';
 
 const AddUsertType = () => {
-    const params = useParams()
-    const navigate = useNavigate()
+    const params = useParams();
+    const navigate = useNavigate();
     const [initialValues, setInitialValues] = useState({
         user_type: "",
         lockedAmount: "",
         is_active: false,
-        
+        parent_user_type: "",
+        role_prefix: "",
+        isSponsored: false,
+        s_no: ""
     });
+
     const validate = (values) => {
         let errors = {};
         if (!values.user_type) {
-            errors.user_type = "User Type  is required";
+            errors.user_type = "User Type is required";
+        }
+        if (!values.s_no) {
+            errors.s_no = "Serial Number is required";
         }
         return errors;
     };
-   
+
     const toastSuccessMessage = () => {
-        toast.success(`${params?.id ? "Update" : "Add"} Users Type Successfully.`, {
+        toast.success(`${params?.id ? "Update" : "Add"} User Type Successfully.`, {
             position: "top-center",
         });
     };
+
     const submitForm = async (values) => {
         try {
             if (!params?.id) {
-                try {
-                    await addUserType(values);
+                const res = await addUserType(values);
+                if (res.statusCode == '200') {
                     toastSuccessMessage();
-                    setTimeout(() => {
-                        navigate('/user-type')
-                    }, 5000);
-                } catch (error) {
-
                 }
-
+                setTimeout(() => {
+                    navigate('/user-type');
+                }, 5000);
             } else {
-                try {
-                    await UserTypeUpdate(params.id, values);
+                const res = await UserTypeUpdate(params.id, values);
+                if (res.statusCode == '200') {
                     toastSuccessMessage();
-                    setTimeout(() => {
-                        navigate('/user-type')
-                    }, 5000);
-                } catch (error) {
-
                 }
-
+                setTimeout(() => {
+                    navigate('/user-type');
+                }, 5000);
             }
-
         } catch (error) {
             console.error("Error:", error);
         }
+    };
 
-    }
     useEffect(() => {
+
         const fetchUserType = async () => {
             try {
                 if (params?.id) {
@@ -70,9 +72,12 @@ const AddUsertType = () => {
                 } else {
                     setInitialValues({
                         user_type: "",
-                        language_id: "65d4443e0298611d3aa96c31",
-                        id: "1",
-                        is_active: 'false',
+                        lockedAmount: "",
+                        is_active: false,
+                        parent_user_type: "",
+                        role_prefix: "",
+                        isSponsored: false,
+                        s_no: ""
                     });
                 }
             } catch (error) {
@@ -82,9 +87,25 @@ const AddUsertType = () => {
         fetchUserType();
     }, [params?.id]);
 
+
+    const [listusers ,setUsers] = useState()
+    useEffect(() => {
+
+        const fetchUserType = async () => {
+            try {
+                const response = await listUserType();
+                const userTypeData = response.data;
+                setUsers(userTypeData);
+
+            } catch (error) {
+                console.error("Error fetching User type:", error);
+            }
+        };
+        fetchUserType();
+    }, []);
+
     return (
         <>
-
             <Breadcrumbs breadCrumbsTitle={""} />
             <div className="row m-4">
                 <div className="col-xl-12">
@@ -117,17 +138,14 @@ const AddUsertType = () => {
                                             <form className="tbl-captionn" onSubmit={handleSubmit}>
                                                 <div className="row">
                                                     <div className="col-xl-4 mb-3">
+                                                        <label htmlFor="user_type">User Type</label>
                                                         <CustomInputField
                                                             type="text"
                                                             value={values.user_type}
-                                                            hasError={
-                                                                errors.user_type && touched.user_type
-                                                            }
+                                                            hasError={errors.user_type && touched.user_type}
                                                             onChange={handleChange}
                                                             onBlur={handleBlur}
-                                                            errorMsg={
-                                                                touched.user_type && errors.user_type
-                                                            }
+                                                            errorMsg={touched.user_type && errors.user_type}
                                                             autoFocus={true}
                                                             id="user_type"
                                                             name="user_type"
@@ -135,47 +153,92 @@ const AddUsertType = () => {
                                                         />
                                                     </div>
                                                     <div className="col-xl-4 mb-3">
+                                                        <label htmlFor="lockedAmount">Locked Amount</label>
                                                         <CustomInputField
                                                             type="text"
                                                             value={values.lockedAmount}
-                                                            hasError={
-                                                                errors.lockedAmount && touched.lockedAmount
-                                                            }
                                                             onChange={handleChange}
                                                             onBlur={handleBlur}
-                                                            errorMsg={
-                                                                touched.lockedAmount && errors.lockedAmount
-                                                            }
-                                                            autoFocus={true}
                                                             id="lockedAmount"
                                                             name="lockedAmount"
-                                                            placeholder="locked Amount"
+                                                            placeholder="Locked Amount"
                                                         />
                                                     </div>
-
                                                     <div className="col-xl-4 mb-3">
-                                                        <select className="form-select" aria-label="Default select example" id="is_active" name="is_active"
-                                                            defaultValue={values?.is_active}
+                                                        <label htmlFor="is_active">Is Active</label>
+                                                        <select
+                                                            className="form-select"
+                                                            id="is_active"
+                                                            name="is_active"
+                                                            value={values.is_active}
                                                             onChange={handleChange}
                                                         >
-                                                            <option selected> select Mode</option>
-                                                            <option value={'true'}> Yes</option>
-                                                            <option value={'false'}> No</option>
+                                                            <option value={false}>No</option>
+                                                            <option value={true}>Yes</option>
                                                         </select>
-
+                                                    </div>
+                                                    <div className="col-xl-4 mb-3">
+                                                        <label htmlFor="parent_user_type">Parent User Type</label>
+                                                        <select
+                                                            className="form-select"
+                                                            id="parent_user_type"
+                                                            name="parent_user_type"
+                                                            value={values.parent_user_type}
+                                                            onChange={handleChange}
+                                                        >
+                                                            <option >Select Option</option>
+                                                            {listusers && listusers?.map((item)=>{
+                                                                return <option value={item._id}>{item?.user_type}</option>
+                                                            })}
+                                                            
+                                                        </select>
+                                                    </div>
+                                                    <div className="col-xl-4 mb-3">
+                                                        <label htmlFor="role_prefix">Role Prefix</label>
+                                                        <CustomInputField
+                                                            type="text"
+                                                            value={values.role_prefix}
+                                                            onChange={handleChange}
+                                                            id="role_prefix"
+                                                            name="role_prefix"
+                                                            placeholder="Role Prefix"
+                                                        />
+                                                    </div>
+                                                    <div className="col-xl-4 mb-3">
+                                                        <label htmlFor="isSponsored">Is Sponsored</label>
+                                                        <select
+                                                            className="form-select"
+                                                            id="isSponsored"
+                                                            name="isSponsored"
+                                                            value={values.isSponsored}
+                                                            onChange={handleChange}
+                                                        >
+                                                            <option value={false}>No</option>
+                                                            <option value={true}>Yes</option>
+                                                        </select>
+                                                    </div>
+                                                    <div className="col-xl-4 mb-3">
+                                                        <label htmlFor="s_no">Serial Number</label>
+                                                        <CustomInputField
+                                                            type="text"
+                                                            value={values.s_no}
+                                                            hasError={errors.s_no && touched.s_no}
+                                                            onChange={handleChange}
+                                                            onBlur={handleBlur}
+                                                            errorMsg={touched.s_no && errors.s_no}
+                                                            id="s_no"
+                                                            name="s_no"
+                                                            placeholder="Serial Number"
+                                                        />
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <Link
-                                                        to="/user-type"
-                                                        className="btn btn-danger light ms-1"
-                                                    >
+                                                    <Link to="/user-type" className="btn btn-danger light ms-1">
                                                         Cancel
                                                     </Link>
                                                     <button
                                                         className="btn btn-primary me-1"
                                                         type="submit"
-
                                                         disabled={!isValid || !dirty}
                                                     >
                                                         {params?.id ? "Update" : "Add"}
@@ -192,7 +255,7 @@ const AddUsertType = () => {
                 <ToastContainer />
             </div>
         </>
-    )
-}
+    );
+};
 
-export default AddUsertType
+export default AddUsertType;

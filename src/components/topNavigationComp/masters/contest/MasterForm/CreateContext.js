@@ -118,11 +118,14 @@ function CreateContest() {
                     entryFee: response?.data?.entryFee || 0,
                     winnerPercentage: response?.data?.winnerPercentage || 0,
                     isFree: response?.data?.isFree || true,
-                    start_date: response?.data?.start_date ? new Date(response?.data?.start_date).toISOString().slice(0, 10) : "",
-                    end_date: response?.data?.end_date ? new Date(response?.data?.end_date).toISOString().slice(0, 10) : "",
+                    start_date: response?.data?.start_date 
+                        ? new Date(response?.data?.start_date).toISOString().slice(0, 16) 
+                        : "",
+                    end_date: response?.data?.end_date 
+                        ? new Date(response?.data?.end_date).toISOString().slice(0, 16) 
+                        : "",
                     rankingRewards: response?.data?.rankingRewards || [{ minRank: "", maxRank: "", reward: "" }],
                 });
-                // setImage('')
             }
         };
     
@@ -130,6 +133,7 @@ function CreateContest() {
         getDatas();
     }, [params?.id]);
     
+
     return (
         <>
             <ToastContainer />
@@ -152,7 +156,7 @@ function CreateContest() {
                                 {({ values, handleChange, handleSubmit, errors, touched, handleBlur }) => (
                                     <form className="tbl-captionn" onSubmit={handleSubmit}>
                                         <div className="row">
-                                        <div className="col-xl-4 mb-3">
+                                            <div className="col-xl-4 mb-3">
                                                 <h6>Name</h6>
                                                 <CustomInputField
                                                     type="text"
@@ -258,9 +262,9 @@ function CreateContest() {
                                                 </select>
                                             </div>
                                             <div className="col-xl-4 mb-3">
-                                                <h6>Start Date</h6>
+                                                <h6>Start Date & Time</h6>
                                                 <CustomInputField
-                                                    type="date"
+                                                    type="datetime-local"
                                                     value={values.start_date}
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
@@ -268,16 +272,16 @@ function CreateContest() {
                                                 />
                                             </div>
                                             <div className="col-xl-4 mb-3">
-                                                <h6>End Date</h6>
+                                                <h6>End Date & Time</h6>
                                                 <CustomInputField
-                                                    type="date"
+                                                    type="datetime-local"
                                                     value={values.end_date}
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
                                                     name="end_date"
                                                 />
                                             </div>
-                                           
+
                                             <div className="col-xl-12 mb-3">
                                                 <h6>Ranking Rewards</h6>
                                                 <FieldArray name="rankingRewards">
@@ -338,8 +342,8 @@ function CreateContest() {
                                                 </FieldArray>
                                             </div>
                                             <div className="col-xl-12 mb-3">
-                                            <h6>Description</h6>
-                                            <JoditEditor />
+                                                <h6>Description</h6>
+                                                <JoditEditor />
                                             </div>
                                             <div className="col-xl-12" style={{ marginTop: "16px" }}>
                                                 <button type="submit" className="btn btn-primary">
