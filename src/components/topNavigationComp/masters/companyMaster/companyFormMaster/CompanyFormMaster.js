@@ -191,6 +191,9 @@ function CompanyFormMaster() {
             login_font_color: formValues.login_font_color
         }
 
+
+        return console.log(clone);
+        
        
 
         try {
@@ -395,12 +398,11 @@ function CompanyFormMaster() {
     });
 
 
-
     const [loader, settLoader] = useState(false)
     const handleFileChange = async (e) => {
         settLoader(true)
         const { name, files } = e.target;
-        const clone = { ...formValues, [name]: files[0] };
+        const clone = {...initialValues ,...formValues, [name]: files[0] };
         if (files && files[0]) {
             for (const key in clone) {
                 if (clone[key].size) {
