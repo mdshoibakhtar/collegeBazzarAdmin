@@ -452,6 +452,8 @@ import AnimalTypePage from "./pages/catalog/animalType";
 import AddNewAnimalType from "./components/catalog/animalType/addNewAnimalType/AddNewAnimalType";
 import DummyUsers from "./components/topNavigationComp/masters/dummy-user/BugetMaster";
 import DummyForm from "./components/topNavigationComp/masters/dummy-user/MasterForm/DummyForm";
+import DefoultContestMaster from "./components/topNavigationComp/masters/contestDefoult/DefoultContestMaster";
+import DefultCreateContext from "./components/topNavigationComp/masters/contestDefoult/MasterForm/DefultCreateContext";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1668,9 +1670,13 @@ function App() {
               <Route path="Budget-add/:id" element={<BugetForm />} />
 
 
-              <Route path="Dummy-users-List" element={<DummyUsers />} />
+              {/* <Route path="Dummy-users-List" element={<DummyUsers />} /> */}
               <Route path="Dummy-users-add" element={<DummyForm />} />
               <Route path="Dummy-users-add/:id" element={<DummyForm />} />
+
+              <Route path="default-contest" element={<DefoultContestMaster />} />
+              <Route path="create-default-contest" element={<DefultCreateContext />} />
+              <Route path="create-default-contest/:id" element={<DefultCreateContext />} />
 
 
               <Route path="*" element={<PageNotFound />} />
