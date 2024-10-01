@@ -2962,6 +2962,45 @@ export const getNifty = (id) => {
 
 
 
+// DELETE a dummy user by ID
+export const deleteDummyUserById = (id) => {
+  return axiosInstance.delete(`/dummyUserMaster/deleteType/${id}`);
+};
+
+// GET dummy users with pagination
+export const getDummyUsersByUser = (page = 0, count = 10) => {
+  return axiosInstance.get(`/dummyUserMaster?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET a dummy user by ID
+export const getDummyUserById = (id) => {
+  return axiosInstance.get(`/dummyUserMaster/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new dummy user
+export const postDummyUser = (data) => {
+  return axiosInstance.post(`/dummyUserMaster/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing dummy user by ID
+export const updateDummyUserById = (id, data) => {
+  return axiosInstance.put(`/dummyUserMaster/updateType/${id}`, data);
+};
 
 
 
