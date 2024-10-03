@@ -7,7 +7,6 @@ function MilkSaleReport() {
         id: "1",
         title_1: "Reports",
         title_2: 'Milk Sale Report',
-        path_2: ""
     };
     return (
         <>

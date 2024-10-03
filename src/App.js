@@ -460,6 +460,8 @@ import EmployeeSalaryReport from "./components/farmsReports/employeeSalaryReport
 import MilkSaleReport from "./components/farmsReports/employeeSalaryReport/milkSaleReport/MilkSaleReport";
 import DefoultContestMaster from "./components/topNavigationComp/masters/contestDefoult/DefoultContestMaster";
 import DefultCreateContext from "./components/topNavigationComp/masters/contestDefoult/MasterForm/DefultCreateContext";
+import MilkCollectReport from "./components/farmsReports/milkCollectReport/MilkCollectReport";
+import VaccineMonitorReport from "./components/farmsReports/vaccineMonitorReport/VaccineMonitorReport";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1686,6 +1688,8 @@ function App() {
               <Route path="add-dairy-farm-management-system-reports" element={<OfficeExpenseReport />} />
               <Route path="dairy-farm-management-system/employee-salary-report" element={<EmployeeSalaryReport />} />
               <Route path="dairy-farm-management-system/milk-sale-report" element={<MilkSaleReport />} />
+              <Route path="dairy-farm-management-system/milk-collect-report" element={<MilkCollectReport />} />
+              <Route path="dairy-farm-management-system/vaccine-monitor-report" element={<VaccineMonitorReport />} />
               <Route path="default-contest" element={<DefoultContestMaster />} />
               <Route path="create-default-contest" element={<DefultCreateContext />} />
               <Route path="create-default-contest/:id" element={<DefultCreateContext />} />
