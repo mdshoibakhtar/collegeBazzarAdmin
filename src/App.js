@@ -460,6 +460,15 @@ import EmployeeSalaryReport from "./components/farmsReports/employeeSalaryReport
 import MilkSaleReport from "./components/farmsReports/employeeSalaryReport/milkSaleReport/MilkSaleReport";
 import DefoultContestMaster from "./components/topNavigationComp/masters/contestDefoult/DefoultContestMaster";
 import DefultCreateContext from "./components/topNavigationComp/masters/contestDefoult/MasterForm/DefultCreateContext";
+import ProposalListPage from "./pages/proposalListpage";
+import AddProposalPage from "./pages/addproposalPage";
+import ContractsPage from "./pages/contractsPage";
+import AddNewContractPage from "./pages/addNewContract";
+
+import VehicleList from "./components/vehicleList/VehicleList";
+import VehicleGroup from "./components/vehicleGroup/VehicleGroup";
+import VehicleDetails from "./components/vehicleDetails/VehicleDetails";
+import AddVehicle from "./components/addVehicle/AddVehicle";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1689,6 +1698,19 @@ function App() {
               <Route path="default-contest" element={<DefoultContestMaster />} />
               <Route path="create-default-contest" element={<DefultCreateContext />} />
               <Route path="create-default-contest/:id" element={<DefultCreateContext />} />
+
+
+
+              <Route path="proposal/list" element={<ProposalListPage />} />
+              <Route path="proposal/create" element={<AddProposalPage />} />
+              <Route path="contracts" element={<ContractsPage />} />
+              <Route path="contract/create" element={<AddNewContractPage />} />
+
+              <Route path="vehicle_list" element={<VehicleList />} />
+              <Route path="vehicle-details" element={<VehicleDetails />} />
+              <Route path="vehicle-group" element={<VehicleGroup />} />
+              <Route path="add-vehicle" element={<AddVehicle />} />
+              
 
 
               <Route path="*" element={<PageNotFound />} />
