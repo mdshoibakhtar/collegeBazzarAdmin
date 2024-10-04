@@ -482,7 +482,18 @@ import VehicleList from "./components/vehicleList/VehicleList";
 import VehicleGroup from "./components/vehicleGroup/VehicleGroup";
 import VehicleDetails from "./components/vehicleDetails/VehicleDetails";
 import AddVehicle from "./components/addVehicle/AddVehicle";
+import { SaleList } from "./components/cowSale/saleList/SaleList";
 //---------------------JUNAID IMPORT END --------------------------
+
+// -------------------------DAUD----IMPORT-start----------------
+import CreditNotesPage from "./pages/salesPage/creditNotes";
+import NewCreditNotes from "./components/sales/creditNotes/newCreditNotes/NewCreditNotes";
+import InvoicesPage from "./pages/salesPage/invoices";
+import CreateNewInvoice from "./components/sales/invoices/createNewInvoice/CreateNewInvoice";
+import ExpenseSubCategoryPage from "./pages/expenses/expenseSubCategory";
+// import ExpenseListPage from "./pages/expenses/expenseList";
+import AddExpense from "./components/expenses/expenseList/addExpense/AddExpense";
+// -------------------------DAUD----IMPORT-End----------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -1584,6 +1595,7 @@ function App() {
               <Route path="estimate_request" element={<Estimate_requestPage />} />
               <Route path="add_estimate_request" element={<Add_estimate_request />} />
               <Route path="delivery-challan" element={<DeliveryChallanPage />} />
+              <Route path="cow-sale-report" element={<SaleList />} />
 
 
               {/* -----------------Goatx Routes-------- */}
@@ -1729,6 +1741,26 @@ function App() {
               <Route path="vehicle-group" element={<VehicleGroup />} />
               <Route path="add-vehicle" element={<AddVehicle />} />
 
+              {/* ---Daud's Route  ---static work----*/}
+
+              <Route path="credit_notes" element={<CreditNotesPage />} />
+              <Route path="credit_notes/new-credit_notes" element={<NewCreditNotes />} />
+              <Route path="invoices" element={<InvoicesPage />} />
+              <Route
+                path="invoices/create-new-invoice"
+                element={<CreateNewInvoice />}
+              />
+
+
+              {/* ---Expenses-- */}
+
+              <Route path="expense-list" element={<ExpenseListPage />} />
+
+              <Route path="expense-list/add-expense" element={<AddExpense />} />
+              <Route
+                path="expenses-subcategory"
+                element={<ExpenseSubCategoryPage />}
+              />
 
 
               <Route path="*" element={<PageNotFound />} />
