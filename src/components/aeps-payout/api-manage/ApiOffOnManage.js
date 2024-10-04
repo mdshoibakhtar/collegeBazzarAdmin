@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Breadcrumbs from '../../common/breadcrumb/Breadcrumbs'
+// import Breadcrumbs from '../../common/breadcrumb/Breadcrumbs'
 import ApiOnnOffList from './ApiOnnOffList'
 
 function ApiOffOnManage() {
@@ -68,7 +68,7 @@ function ApiOffOnManage() {
     }, [])
     return (
         <>
-            <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
+            {/* <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} /> */}
             {/* <DistributorDepositFilter initialValues={initialValues} page={page} count={count} userData={userData} submitForm={submitForm} aepsData={aepsData} /> */}
             <ApiOnnOffList />
         </>

@@ -366,7 +366,7 @@ import FlightMarkUp from "./components/flightComp/flightMarkup/FlightMarkUp";
 import BalanceLedger from "./components/balance-ledger/BalanceLedger";
 import VenderLogs from "./components/VenderLogs/VenderLogs";
 import ApiManage from "./components/apiManagment/ApiManage";
-import ApiOffOnManage from "./components/api-manage/ApiOffOnManage";
+// import ApiOffOnManage from "./components/api-manage/ApiOffOnManage";
 import { ViaggiooDashboardPage } from "./pages/viaggiooDashBoard";
 import FlightDiscount from "./components/flightComp/flightDiscount/FlightDiscount";
 import FlightUploadTicket from "./components/flightComp/flightUploadTicket/FlightUploadTicket";
@@ -532,12 +532,13 @@ function App() {
       }
     })
   }
+console.log(window.localStorage.getItem('dashRout') == null );
 
   return (
     <>
       <Routes>
         {/* <Route path="/" element={<Navigate to={"/loginPage"} />} />  */}
-        {window.localStorage.getItem('dashRout') == null ? (
+        {!isAuthenticated ? (
           <>
             <Route path="/" element={<Navigate to={"/loginPage"} />} />
             <Route path="/loginPage" element={<LoginPage />} />
@@ -1619,7 +1620,7 @@ function App() {
               <Route path="balance-ledger" element={<BalanceLedger />} />
               <Route path="Vendor-Account-Logs" element={<VenderLogs />} />
               <Route path="api-management" element={<ApiManage />} />
-              <Route path="api-manage" element={<ApiOffOnManage />} />
+              {/* <Route path="api-manage" element={<ApiOffOnManage />} /> */}
 
               <Route path="holiday-markup-list" element={<HolidayMarkup />} />
               <Route path="Holiday-Discount" element={<HolidayDIscount />} />
