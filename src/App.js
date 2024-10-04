@@ -469,6 +469,15 @@ import VehicleList from "./components/vehicleList/VehicleList";
 import VehicleGroup from "./components/vehicleGroup/VehicleGroup";
 import VehicleDetails from "./components/vehicleDetails/VehicleDetails";
 import AddVehicle from "./components/addVehicle/AddVehicle";
+
+import TasksListPage from "./pages/taskslistpage";
+import AddNewTaskPage from "./pages/addNewTaskPage";
+import TasksOverviewPage from "./pages/tasksOverviewPage";
+import TaskTemplateListPage from "./pages/taskTemplateListPage";
+import AddNewTaskTemplatePage from "./pages/addNewTaskTemplatePage";
+import AddNewTaskFromTemplatePage from "./pages/addNewTaskFromTemplatePage";
+import Project from "./pages/project";
+import NewProject from "./pages/new-project";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1711,6 +1720,16 @@ console.log(window.localStorage.getItem('dashRout') == null );
               <Route path="vehicle-details" element={<VehicleDetails />} />
               <Route path="vehicle-group" element={<VehicleGroup />} />
               <Route path="add-vehicle" element={<AddVehicle />} />
+
+              <Route path="tasks" element={<TasksListPage />} />
+              <Route path="task/create" element={<AddNewTaskPage />} />
+              <Route path="task/overview" element={<TasksOverviewPage />} />
+              <Route path="task_templates" element={<TaskTemplateListPage />} />
+              <Route path="task_templates/create" element={<AddNewTaskTemplatePage />} />
+              <Route path="task_from_templates/create" element={<AddNewTaskFromTemplatePage/>}/>
+
+              <Route path="project" element={<Project />} />
+              <Route path="project/newproject" element={<NewProject/>}/>
               
 
 
