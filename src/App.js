@@ -462,6 +462,7 @@ import DefoultContestMaster from "./components/topNavigationComp/masters/contest
 import DefultCreateContext from "./components/topNavigationComp/masters/contestDefoult/MasterForm/DefultCreateContext";
 import MilkCollectReport from "./components/farmsReports/milkCollectReport/MilkCollectReport";
 import VaccineMonitorReport from "./components/farmsReports/vaccineMonitorReport/VaccineMonitorReport";
+import DairyDashboard from "./components/dairyDashboard/DairyDashboard";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -551,6 +552,8 @@ function App() {
               <Route path={`college_dashboard`} element={<CollegeBazzarDashboard />} />
               <Route path={`travel_dashboard`} element={<ViaggiooDashboardPage />} />
               <Route path={`lead_dashboard`} element={<DashboardLeadPage />} />
+              <Route path={`farm-dashboard`} element={<DairyDashboard />} />
+              {/* <Route path={`Agriculture_dashboard`} element={<DashboardLeadPage />} /> */}
               <Route path="bank-master" element={<BankMasterP />} />
               <Route path="zoon_area" element={<ZoonArea />} />
               <Route path="add-bank" element={<AddBank />} />

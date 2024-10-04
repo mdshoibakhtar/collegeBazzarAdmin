@@ -18,7 +18,7 @@ function HeaderLogo({showAsideBar}) {
         <>
             <div className="nav-header">
                 <Link to="/" className="brand-logo justify-content-center" style={{padding:"6px"}}>
-                    <img src={state?.logo ? `${baseUrlImage}${state?.logo}` : logo} alt="" style={{ width: '45%' }} />
+                    <img src={state?.logo ? `${baseUrlImage}${state?.logo}` : logo} alt="" style={{ width: '100%',height:"100%",objectFit:"contain" }} />
                 </Link>
                 <div className="nav-control" onClick={showAsideBar}>
                     <div className="hamburger">
