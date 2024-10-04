@@ -3018,7 +3018,7 @@ export const deleteDefaultContestById = (id) => {
 
 // GET default contests with pagination
 export const getDefaultContests = (page, count) => {
-  return axiosInstance.get(`/defaultContest?page=${page}&count=${count}`, {
+  return axiosInstance.get(`/defaultContest/page?page=${page}&count=${count}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
       Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
