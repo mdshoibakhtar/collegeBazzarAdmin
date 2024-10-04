@@ -3,7 +3,6 @@ import React from 'react'
 function MilkSaleReportSearch() {
     return (
         <>
-
             <div className="row m-4">
                 <div className="col-xl-12">
                     <div className="card">
@@ -15,6 +14,7 @@ function MilkSaleReportSearch() {
                                 </div>
                                 <form className="tbl-captionn" >
                                     <div className="row">
+                                        
                                         <div className="col-xl-3 mb-3">
                                             <div className={`form-group`}>
                                                 <label htmlFor="subject">Milk Account No </label>
@@ -58,7 +58,7 @@ function MilkSaleReportSearch() {
                                             </div>
                                         </div>
                                         <div className="col-xl-3 mt-3">
-                                            <button type="button" className="btn btn-primary mt-2 w-100">Search</button>
+                                            <button type="button" className="btn btn-primary mt-3 w-100">Search</button>
                                         </div>
                                     </div>
                                 </form>

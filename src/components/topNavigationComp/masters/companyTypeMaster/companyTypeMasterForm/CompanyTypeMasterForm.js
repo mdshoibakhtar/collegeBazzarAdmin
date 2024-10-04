@@ -17,6 +17,7 @@ function CompanyTypeMasterForm() {
         field_one: "",
         default_dashboard: "",
         isActive: "",
+        // default_user_type:""
     });
     const [state, setState] = useState(null)
 
@@ -186,7 +187,7 @@ function CompanyTypeMasterForm() {
                                                         autoFocus={true}
                                                         id="field_one"
                                                         name="field_one"
-                                                        placeholder="Mejor Field 1"
+                                                        placeholder="Major Field 1"
                                                     />
                                                 </div>
                                                 <div className="col-xl-6 mb-3">
@@ -200,7 +201,7 @@ function CompanyTypeMasterForm() {
                                                         autoFocus={true}
                                                         id="field_two"
                                                         name="field_two"
-                                                        placeholder="Mejor Field 2"
+                                                        placeholder="Major Field 2"
                                                     />
                                                 </div>
                                                 <div className="col-xl-6 mb-3">

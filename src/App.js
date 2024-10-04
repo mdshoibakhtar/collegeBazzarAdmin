@@ -454,12 +454,25 @@ import VactionList from "./components/catalog/vaccination/VactionList";
 import AddVaccine from "./components/catalog/vaccination/AddVaccine";
 import DummyUsers from "./components/topNavigationComp/masters/dummy-user/BugetMaster";
 import DummyForm from "./components/topNavigationComp/masters/dummy-user/MasterForm/DummyForm";
+import FoodUnitPage from "./pages/catalog/foodUnit";
+import AddFoodUnit from "./components/catalog/foodUnit/addFoodUnit/AddFoodUnit";
+import FoodItemPage from "./pages/catalog/foodItem";
+import AddFoodItem from "./components/catalog/foodItem/addFoodItem/AddFoodItem";
+import MonitoringServicesPage from "./pages/catalog/monitoringServices";
+import { MonitoringServicesAdd } from "./components/catalog/monitoringServices/monitoringServicesAdd/MonitoringServicesAdd";
+import { GetWiseReportsetPage } from "./pages/farmReport/getWiseReportset";
 import OfficeExpenseReportSearch from "./components/farmsReports/officeExpenseReport/officeExpenseReportSearch/OfficeExpenseReportSearch";
 import OfficeExpenseReport from "./components/farmsReports/officeExpenseReport/OfficeExpenseReport";
 import EmployeeSalaryReport from "./components/farmsReports/employeeSalaryReport/EmployeeSalaryReport";
 import MilkSaleReport from "./components/farmsReports/employeeSalaryReport/milkSaleReport/MilkSaleReport";
 import DefoultContestMaster from "./components/topNavigationComp/masters/contestDefoult/DefoultContestMaster";
 import DefultCreateContext from "./components/topNavigationComp/masters/contestDefoult/MasterForm/DefultCreateContext";
+import MilkCollectReport from "./components/farmsReports/milkCollectReport/MilkCollectReport";
+import VaccineMonitorReport from "./components/farmsReports/vaccineMonitorReport/VaccineMonitorReport";
+import DairyDashboard from "./components/dairyDashboard/DairyDashboard";
+import Estimate_requestPage from "./pages/estimate_request";
+import Add_estimate_request from "./components/estimate_request/add_estimate_request/Add_estimate_request";
+import DeliveryChallanPage from "./pages/transaction/deliveryChallan";
 import ProposalListPage from "./pages/proposalListpage";
 import AddProposalPage from "./pages/addproposalPage";
 import ContractsPage from "./pages/contractsPage";
@@ -478,7 +491,18 @@ import AddNewTaskTemplatePage from "./pages/addNewTaskTemplatePage";
 import AddNewTaskFromTemplatePage from "./pages/addNewTaskFromTemplatePage";
 import Project from "./pages/project";
 import NewProject from "./pages/new-project";
+import { SaleList } from "./components/cowSale/saleList/SaleList";
 //---------------------JUNAID IMPORT END --------------------------
+
+// -------------------------DAUD----IMPORT-start----------------
+import CreditNotesPage from "./pages/salesPage/creditNotes";
+import NewCreditNotes from "./components/sales/creditNotes/newCreditNotes/NewCreditNotes";
+import InvoicesPage from "./pages/salesPage/invoices";
+import CreateNewInvoice from "./components/sales/invoices/createNewInvoice/CreateNewInvoice";
+import ExpenseSubCategoryPage from "./pages/expenses/expenseSubCategory";
+// import ExpenseListPage from "./pages/expenses/expenseList";
+import AddExpense from "./components/expenses/expenseList/addExpense/AddExpense";
+// -------------------------DAUD----IMPORT-End----------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -541,7 +565,7 @@ function App() {
       }
     })
   }
-console.log(window.localStorage.getItem('dashRout') == null );
+  console.log(window.localStorage.getItem('dashRout') == null);
 
   return (
     <>
@@ -568,6 +592,8 @@ console.log(window.localStorage.getItem('dashRout') == null );
               <Route path={`college_dashboard`} element={<CollegeBazzarDashboard />} />
               <Route path={`travel_dashboard`} element={<ViaggiooDashboardPage />} />
               <Route path={`lead_dashboard`} element={<DashboardLeadPage />} />
+              <Route path={`farm-dashboard`} element={<DairyDashboard />} />
+              {/* <Route path={`Agriculture_dashboard`} element={<DashboardLeadPage />} /> */}
               <Route path="bank-master" element={<BankMasterP />} />
               <Route path="zoon_area" element={<ZoonArea />} />
               <Route path="add-bank" element={<AddBank />} />
@@ -1566,16 +1592,19 @@ console.log(window.localStorage.getItem('dashRout') == null );
               <Route path="add-colors" element={<AddNewColor />} />
               <Route path="animal-type" element={<AnimalTypePage />} />
               <Route path="add-animal-type" element={<AddNewAnimalType />} />
+              <Route path="monitoring-service" element={<MonitoringServicesPage />} />
+              <Route path="add-monitoring-service" element={<MonitoringServicesAdd />} />
+              <Route path="food-item" element={<FoodItemPage />} />
+              <Route path="add-food-item" element={<AddFoodItem />} />
+              <Route path="food-unit" element={<FoodUnitPage />} />
+              <Route path="add-food-unit" element={<AddFoodItem />} />
               <Route path="vaccine-list" element={<VactionList />} />
               <Route path="add-vaccine" element={<AddVaccine />} />
-
-
-
-
-
-
-
-
+              <Route path="get-vaccine-wise-monitoring-report" element={<GetWiseReportsetPage />} />
+              <Route path="estimate_request" element={<Estimate_requestPage />} />
+              <Route path="add_estimate_request" element={<Add_estimate_request />} />
+              <Route path="delivery-challan" element={<DeliveryChallanPage />} />
+              <Route path="cow-sale-report" element={<SaleList />} />
 
 
               {/* -----------------Goatx Routes-------- */}
@@ -1705,9 +1734,9 @@ console.log(window.localStorage.getItem('dashRout') == null );
               <Route path="add-dairy-farm-management-system-reports" element={<OfficeExpenseReport />} />
               <Route path="dairy-farm-management-system/employee-salary-report" element={<EmployeeSalaryReport />} />
               <Route path="dairy-farm-management-system/milk-sale-report" element={<MilkSaleReport />} />
-              <Route path="default-contest" element={<DefoultContestMaster />} />
-              <Route path="create-default-contest" element={<DefultCreateContext />} />
-              <Route path="create-default-contest/:id" element={<DefultCreateContext />} />
+              <Route path="dairy-farm-management-system/milk-collect-report" element={<MilkCollectReport />} />
+              <Route path="dairy-farm-management-system/vaccine-monitor-report" element={<VaccineMonitorReport />} />
+
 
 
 
@@ -1731,6 +1760,26 @@ console.log(window.localStorage.getItem('dashRout') == null );
               <Route path="project" element={<Project />} />
               <Route path="project/newproject" element={<NewProject/>}/>
               
+              {/* ---Daud's Route  ---static work----*/}
+
+              <Route path="credit_notes" element={<CreditNotesPage />} />
+              <Route path="credit_notes/new-credit_notes" element={<NewCreditNotes />} />
+              <Route path="invoices" element={<InvoicesPage />} />
+              <Route
+                path="invoices/create-new-invoice"
+                element={<CreateNewInvoice />}
+              />
+
+
+              {/* ---Expenses-- */}
+
+              <Route path="expense-list" element={<ExpenseListPage />} />
+
+              <Route path="expense-list/add-expense" element={<AddExpense />} />
+              <Route
+                path="expenses-subcategory"
+                element={<ExpenseSubCategoryPage />}
+              />
 
 
               <Route path="*" element={<PageNotFound />} />
