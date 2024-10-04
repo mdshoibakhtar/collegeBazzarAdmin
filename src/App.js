@@ -461,6 +461,11 @@ import AddFoodItem from "./components/catalog/foodItem/addFoodItem/AddFoodItem";
 import MonitoringServicesPage from "./pages/catalog/monitoringServices";
 import { MonitoringServicesAdd } from "./components/catalog/monitoringServices/monitoringServicesAdd/MonitoringServicesAdd";
 import { GetWiseReportsetPage } from "./pages/farmReport/getWiseReportset";
+import DefoultContestMaster from "./components/topNavigationComp/masters/contestDefoult/DefoultContestMaster";
+import DefultCreateContext from "./components/topNavigationComp/masters/contestDefoult/MasterForm/DefultCreateContext";
+import Estimate_requestPage from "./pages/estimate_request";
+import Add_estimate_request from "./components/estimate_request/add_estimate_request/Add_estimate_request";
+import DeliveryChallanPage from "./pages/transaction/deliveryChallan";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1557,6 +1562,9 @@ function App() {
               <Route path="vaccine-list" element={<VactionList />} />
               <Route path="add-vaccine" element={<AddVaccine />} />
               <Route path="get-vaccine-wise-monitoring-report" element={<GetWiseReportsetPage />} />
+              <Route path="estimate_request" element={<Estimate_requestPage />} />
+              <Route path="add_estimate_request" element={<Add_estimate_request />} />
+              <Route path="delivery-challan" element={<DeliveryChallanPage />} />
 
 
 
@@ -1686,12 +1694,14 @@ function App() {
               <Route path="Budget-add/:id" element={<BugetForm />} />
 
 
-              <Route path="Dummy-users-List" element={<DummyUsers />} />
+              {/* <Route path="Dummy-users-List" element={<DummyUsers />} /> */}
               <Route path="Dummy-users-add" element={<DummyForm />} />
               <Route path="Dummy-users-add/:id" element={<DummyForm />} />
 
 
-              <Route path="*" element={<PageNotFound />} />s
+
+
+              <Route path="*" element={<PageNotFound />} />
             </Route>
           </>
         )}
