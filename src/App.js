@@ -454,12 +454,22 @@ import VactionList from "./components/catalog/vaccination/VactionList";
 import AddVaccine from "./components/catalog/vaccination/AddVaccine";
 import DummyUsers from "./components/topNavigationComp/masters/dummy-user/BugetMaster";
 import DummyForm from "./components/topNavigationComp/masters/dummy-user/MasterForm/DummyForm";
+import FoodUnitPage from "./pages/catalog/foodUnit";
+import AddFoodUnit from "./components/catalog/foodUnit/addFoodUnit/AddFoodUnit";
+import FoodItemPage from "./pages/catalog/foodItem";
+import AddFoodItem from "./components/catalog/foodItem/addFoodItem/AddFoodItem";
+import MonitoringServicesPage from "./pages/catalog/monitoringServices";
+import { MonitoringServicesAdd } from "./components/catalog/monitoringServices/monitoringServicesAdd/MonitoringServicesAdd";
+import { GetWiseReportsetPage } from "./pages/farmReport/getWiseReportset";
 import OfficeExpenseReportSearch from "./components/farmsReports/officeExpenseReport/officeExpenseReportSearch/OfficeExpenseReportSearch";
 import OfficeExpenseReport from "./components/farmsReports/officeExpenseReport/OfficeExpenseReport";
 import EmployeeSalaryReport from "./components/farmsReports/employeeSalaryReport/EmployeeSalaryReport";
 import MilkSaleReport from "./components/farmsReports/employeeSalaryReport/milkSaleReport/MilkSaleReport";
 import DefoultContestMaster from "./components/topNavigationComp/masters/contestDefoult/DefoultContestMaster";
 import DefultCreateContext from "./components/topNavigationComp/masters/contestDefoult/MasterForm/DefultCreateContext";
+import Estimate_requestPage from "./pages/estimate_request";
+import Add_estimate_request from "./components/estimate_request/add_estimate_request/Add_estimate_request";
+import DeliveryChallanPage from "./pages/transaction/deliveryChallan";
 import ProposalListPage from "./pages/proposalListpage";
 import AddProposalPage from "./pages/addproposalPage";
 import ContractsPage from "./pages/contractsPage";
@@ -532,7 +542,7 @@ function App() {
       }
     })
   }
-console.log(window.localStorage.getItem('dashRout') == null );
+  console.log(window.localStorage.getItem('dashRout') == null);
 
   return (
     <>
@@ -1557,8 +1567,18 @@ console.log(window.localStorage.getItem('dashRout') == null );
               <Route path="add-colors" element={<AddNewColor />} />
               <Route path="animal-type" element={<AnimalTypePage />} />
               <Route path="add-animal-type" element={<AddNewAnimalType />} />
+              <Route path="monitoring-service" element={<MonitoringServicesPage />} />
+              <Route path="add-monitoring-service" element={<MonitoringServicesAdd />} />
+              <Route path="food-item" element={<FoodItemPage />} />
+              <Route path="add-food-item" element={<AddFoodItem />} />
+              <Route path="food-unit" element={<FoodUnitPage />} />
+              <Route path="add-food-unit" element={<AddFoodItem />} />
               <Route path="vaccine-list" element={<VactionList />} />
               <Route path="add-vaccine" element={<AddVaccine />} />
+              <Route path="get-vaccine-wise-monitoring-report" element={<GetWiseReportsetPage />} />
+              <Route path="estimate_request" element={<Estimate_requestPage />} />
+              <Route path="add_estimate_request" element={<Add_estimate_request />} />
+              <Route path="delivery-challan" element={<DeliveryChallanPage />} />
 
 
 
@@ -1696,9 +1716,7 @@ console.log(window.localStorage.getItem('dashRout') == null );
               <Route path="add-dairy-farm-management-system-reports" element={<OfficeExpenseReport />} />
               <Route path="dairy-farm-management-system/employee-salary-report" element={<EmployeeSalaryReport />} />
               <Route path="dairy-farm-management-system/milk-sale-report" element={<MilkSaleReport />} />
-              <Route path="default-contest" element={<DefoultContestMaster />} />
-              <Route path="create-default-contest" element={<DefultCreateContext />} />
-              <Route path="create-default-contest/:id" element={<DefultCreateContext />} />
+
 
 
 
@@ -1711,7 +1729,7 @@ console.log(window.localStorage.getItem('dashRout') == null );
               <Route path="vehicle-details" element={<VehicleDetails />} />
               <Route path="vehicle-group" element={<VehicleGroup />} />
               <Route path="add-vehicle" element={<AddVehicle />} />
-              
+
 
 
               <Route path="*" element={<PageNotFound />} />
