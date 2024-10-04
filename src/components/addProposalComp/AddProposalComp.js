@@ -7,8 +7,8 @@ import { IoSettings } from "react-icons/io5";
 import { TiTick } from "react-icons/ti";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import TagsInput from 'react-tagsinput';
-import 'react-tagsinput/react-tagsinput.css';
+// import TagsInput from 'react-tagsinput';
+// import 'react-tagsinput/react-tagsinput.css';
 import { FaTag } from "react-icons/fa6";
 
 function AddProposalComp() {
@@ -243,7 +243,7 @@ function AddProposalComp() {
 
                                                     <div className="col-lg-12 mb-3">
                                                         <h6><FaTag /> Tags</h6>
-                                                        <TagsInput value={tags} onChange={handleTagsChange} />
+                                                        {/* <TagsInput value={tags} onChange={handleTagsChange} /> */}
                                                     </div>
 
                                                     <div className="col-lg-12 mb-3">
