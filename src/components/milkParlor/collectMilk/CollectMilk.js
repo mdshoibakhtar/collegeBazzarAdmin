@@ -1,19 +1,12 @@
 import { Pagination, Popconfirm } from "antd";
-import Breadcrumbs from "../../../common/breadcrumb/Breadcrumbs";
 import { Link } from "react-router-dom";
 
 
 function CollectMilk() {
-    const breadCrumbsTitle = {
-        id: "1",
-        title_1: "Milk Parlor",
-        title_2: 'Collect Milk List',
-        path_2: ""
-    };
+
     return (
         <>
-            <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
-            <div style={{ margin: "14px" }}>
+            <section className="m-4">
                 <div className="card">
                     <div className="card-body p-0">
                         <div className="table-responsive active-projects style-1">
@@ -144,7 +137,7 @@ function CollectMilk() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </>
     )
 }

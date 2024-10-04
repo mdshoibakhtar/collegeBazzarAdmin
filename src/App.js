@@ -366,7 +366,7 @@ import FlightMarkUp from "./components/flightComp/flightMarkup/FlightMarkUp";
 import BalanceLedger from "./components/balance-ledger/BalanceLedger";
 import VenderLogs from "./components/VenderLogs/VenderLogs";
 import ApiManage from "./components/apiManagment/ApiManage";
-import ApiOffOnManage from "./components/api-manage/ApiOffOnManage";
+// import ApiOffOnManage from "./components/api-manage/ApiOffOnManage";
 import { ViaggiooDashboardPage } from "./pages/viaggiooDashBoard";
 import FlightDiscount from "./components/flightComp/flightDiscount/FlightDiscount";
 import FlightUploadTicket from "./components/flightComp/flightUploadTicket/FlightUploadTicket";
@@ -461,11 +461,24 @@ import AddFoodItem from "./components/catalog/foodItem/addFoodItem/AddFoodItem";
 import MonitoringServicesPage from "./pages/catalog/monitoringServices";
 import { MonitoringServicesAdd } from "./components/catalog/monitoringServices/monitoringServicesAdd/MonitoringServicesAdd";
 import { GetWiseReportsetPage } from "./pages/farmReport/getWiseReportset";
+import OfficeExpenseReportSearch from "./components/farmsReports/officeExpenseReport/officeExpenseReportSearch/OfficeExpenseReportSearch";
+import OfficeExpenseReport from "./components/farmsReports/officeExpenseReport/OfficeExpenseReport";
+import EmployeeSalaryReport from "./components/farmsReports/employeeSalaryReport/EmployeeSalaryReport";
+import MilkSaleReport from "./components/farmsReports/employeeSalaryReport/milkSaleReport/MilkSaleReport";
 import DefoultContestMaster from "./components/topNavigationComp/masters/contestDefoult/DefoultContestMaster";
 import DefultCreateContext from "./components/topNavigationComp/masters/contestDefoult/MasterForm/DefultCreateContext";
 import Estimate_requestPage from "./pages/estimate_request";
 import Add_estimate_request from "./components/estimate_request/add_estimate_request/Add_estimate_request";
 import DeliveryChallanPage from "./pages/transaction/deliveryChallan";
+import ProposalListPage from "./pages/proposalListpage";
+import AddProposalPage from "./pages/addproposalPage";
+import ContractsPage from "./pages/contractsPage";
+import AddNewContractPage from "./pages/addNewContract";
+
+import VehicleList from "./components/vehicleList/VehicleList";
+import VehicleGroup from "./components/vehicleGroup/VehicleGroup";
+import VehicleDetails from "./components/vehicleDetails/VehicleDetails";
+import AddVehicle from "./components/addVehicle/AddVehicle";
 //---------------------JUNAID IMPORT END --------------------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -529,12 +542,13 @@ function App() {
       }
     })
   }
+  console.log(window.localStorage.getItem('dashRout') == null);
 
   return (
     <>
       <Routes>
         {/* <Route path="/" element={<Navigate to={"/loginPage"} />} />  */}
-        {window.localStorage.getItem('dashRout') == null ? (
+        {!isAuthenticated ? (
           <>
             <Route path="/" element={<Navigate to={"/loginPage"} />} />
             <Route path="/loginPage" element={<LoginPage />} />
@@ -1626,7 +1640,7 @@ function App() {
               <Route path="balance-ledger" element={<BalanceLedger />} />
               <Route path="Vendor-Account-Logs" element={<VenderLogs />} />
               <Route path="api-management" element={<ApiManage />} />
-              <Route path="api-manage" element={<ApiOffOnManage />} />
+              {/* <Route path="api-manage" element={<ApiOffOnManage />} /> */}
 
               <Route path="holiday-markup-list" element={<HolidayMarkup />} />
               <Route path="Holiday-Discount" element={<HolidayDIscount />} />
@@ -1698,6 +1712,23 @@ function App() {
               <Route path="Dummy-users-add" element={<DummyForm />} />
               <Route path="Dummy-users-add/:id" element={<DummyForm />} />
 
+              {/* Farms Reports Routs  */}
+              <Route path="add-dairy-farm-management-system-reports" element={<OfficeExpenseReport />} />
+              <Route path="dairy-farm-management-system/employee-salary-report" element={<EmployeeSalaryReport />} />
+              <Route path="dairy-farm-management-system/milk-sale-report" element={<MilkSaleReport />} />
+
+
+
+
+              <Route path="proposal/list" element={<ProposalListPage />} />
+              <Route path="proposal/create" element={<AddProposalPage />} />
+              <Route path="contracts" element={<ContractsPage />} />
+              <Route path="contract/create" element={<AddNewContractPage />} />
+
+              <Route path="vehicle_list" element={<VehicleList />} />
+              <Route path="vehicle-details" element={<VehicleDetails />} />
+              <Route path="vehicle-group" element={<VehicleGroup />} />
+              <Route path="add-vehicle" element={<AddVehicle />} />
 
 
 
