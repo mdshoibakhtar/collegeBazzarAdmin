@@ -502,6 +502,13 @@ import CreateNewInvoice from "./components/sales/invoices/createNewInvoice/Creat
 import ExpenseSubCategoryPage from "./pages/expenses/expenseSubCategory";
 // import ExpenseListPage from "./pages/expenses/expenseList";
 import AddExpense from "./components/expenses/expenseList/addExpense/AddExpense";
+import NotFoundWithDelay from "./common/pageNotFound/pageNotFoundDelayL";
+import FormSubSubModule from "./pages/RolePermission/subSubModule/formSubSubModule/FormSubSubModule";
+import MainSubSubModule from "./pages/RolePermission/subSubModule/mainSubSubModule/MainSubSubModule";
+import Inward from "./components/logistics/inward/Inward";
+import InwardForm from "./components/logistics/inward/inwardForm/InwardForm";
+import Onward from "./components/logistics/outward/Onward";
+import OnwardForm from "./components/logistics/outward/onwardForm/OnwardForm";
 import MainCustomerrView from "./pages/CustomerView/profile/indexPage";
 import ContactTable from "./pages/CustomerView/contacts/Contacts";
 import KeepInTuch from "./pages/CustomerView/keepintuch/KeepInTuch";
@@ -1109,6 +1116,7 @@ function App() {
                 path="/add-sub-module"
                 element={<AddSubModule />}
               />
+
               <Route
                 path="/update-sub-module/:id"
                 element={<AddSubModule />}
@@ -1117,7 +1125,18 @@ function App() {
                 path="/list-sub-module"
                 element={<MainSubListModule />}
               />
-
+              <Route
+                path="/add-sub-sub-module"
+                element={<FormSubSubModule />}
+              />
+              <Route
+                path="/update-sub-sub-module/:id"
+                element={<FormSubSubModule />}
+              />
+              <Route
+                path="/list-sub-sub-module"
+                element={<MainSubSubModule />}
+              />
               <Route
                 path="/add-role"
                 element={<AddRole />}
@@ -1775,15 +1794,15 @@ function App() {
               <Route path="credit_notes" element={<CreditNotesPage />} />
               <Route path="credit_notes/new-credit_notes" element={<NewCreditNotes />} />
               <Route path="invoices" element={<InvoicesPage />} />
-              <Route
+              {/* <Route
                 path="invoices/create-new-invoice"
                 element={<CreateNewInvoice />}
-              />
+              /> */}
 
 
               {/* ---Expenses-- */}
 
-              <Route path="expense-list" element={<ExpenseListPage />} />
+              {/* <Route path="expense-list" element={<ExpenseListPage />} /> */}
 
               <Route path="expense-list/add-expense" element={<AddExpense />} />
 
@@ -1791,14 +1810,31 @@ function App() {
                 path="expenses-subcategory"
                 element={<ExpenseSubCategoryPage />}
               />
+              <Route
+                path="inward-list"
+                element={<Inward />}
+              />
+              <Route
+                path="create-inward"
+                element={<InwardForm />}
+              />
+              <Route
+                path="outward-list"
+                element={<Onward />}
+              />
+              <Route
+                path="create-outward"
+                element={<OnwardForm />}
+              />
 
+              {/* <Route path="*" element={<NotFoundWithDelay />} /> */}
               <Route path="customer-view/:id" element={<MainCustomerrView />}>
                 <Route path="" element={<h2>Tab i</h2>} />
-                <Route path="contacts" element={<ContactTable title='Contacts'/>} />
-                <Route path="keep-in-touch" element={<KeepInTuch title='Keep In Touch'/>} />
-                <Route path="keep-in-touch-configration" element={<KitConfigration title='KIT Configration'/>} />
-                <Route path="notes" element={<NotesCunstomer title='Notes'/>} />
-                <Route path="proposals-view" element={<ProposalList/>} />
+                <Route path="contacts" element={<ContactTable title='Contacts' />} />
+                <Route path="keep-in-touch" element={<KeepInTuch title='Keep In Touch' />} />
+                <Route path="keep-in-touch-configration" element={<KitConfigration title='KIT Configration' />} />
+                <Route path="notes" element={<NotesCunstomer title='Notes' />} />
+                <Route path="proposals-view" element={<ProposalList />} />
               </Route>
 
               <Route path="*" element={<PageNotFound />} />

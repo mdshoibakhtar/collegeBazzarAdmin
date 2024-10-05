@@ -20,14 +20,14 @@ function Invoices() {
                   <div className="tbl-caption">
                     <h4 className="heading mb-0">Invoices</h4>
                     <div>
-                      <Link
+                     {/*  <Link
                         className="btn btn-primary btn-sm"
                         to="create-new-invoice"
                         role="button"
                         aria-controls="offcanvasExample"
                       >
                         + Create New Invoices
-                      </Link>
+                      </Link> */}
 
                       <Button
                         className="btn btn-primary btn-sm bg-primary"
