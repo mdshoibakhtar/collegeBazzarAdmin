@@ -107,6 +107,7 @@ function DistributerList({dynemicFields, loading, params, state, handleChange, o
                                                             />
                                                         </div>
                                                     </th>
+                                                    <th>#</th>
                                                     <th>Create Date</th>
                                                     <th>Reff Code</th>
                                                     <th>Member type</th>
@@ -135,9 +136,9 @@ function DistributerList({dynemicFields, loading, params, state, handleChange, o
                                                                 />
                                                             </div>
                                                         </td>
+                                                         <td className="sorting_1"><Link to={`/customer-view/${item._id}`}>Customer View</Link></td> 
                                                         <td className="sorting_1">{item?.createdAt}</td>
-                                                        {/* <td className="sorting_1"></td>
-                                                        <td className="sorting_1"></td> */}
+                                                       
                                                         <td className="sorting_1">{item?.refer_id}</td>
                                                         <td className="sorting_1">{item?.member_type}</td>
                                                         <td>{item?.name}</td>

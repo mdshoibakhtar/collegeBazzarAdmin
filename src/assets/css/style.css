@@ -56821,3 +56821,25 @@ input[type="number"]::-webkit-inner-spin-button {
 
 
 /* mustafa */
+.main-sidebar-cs>ul>li {
+  padding: 10px 0
+}
+
+.main-sidebar-cs>ul {
+  padding: 10px;
+  margin: 0
+}
+
+.icon-sideb {
+  margin: 0 20px;
+  font-size: 22px !important
+}
+
+.main-sidebar-cs>ul>li>a {
+  text-decoration: none;
+  color: black;
+}
+
+.main-sidebar-cs>ul>li:focus>a {
+  color: blue;
+}
