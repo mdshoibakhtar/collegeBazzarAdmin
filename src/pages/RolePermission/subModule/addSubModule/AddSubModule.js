@@ -204,15 +204,13 @@ function AddSubModule() {
 
                                                     <div className="col-xl-4 mb-3">
                                                         <select className="form-select" aria-label="Default select example" value={values.main_module} name="main_module" onChange={handleChange}>
-                                                            <option selected>Open this select menu</option>
+                                                            <option selected>Open this select Main Module menu</option>
                                                             {Combo && Combo?.map((item) => {
                                                                 return <option value={item?._id}>{item?.name}</option>
                                                             })}
 
                                                         </select>
                                                     </div>
-
-
                                                     <div className="col-xl-4 mb-3">
                                                         <CustomInputField
                                                             type="text"
@@ -252,26 +250,28 @@ function AddSubModule() {
                                                         </div>
                                                     ))}
 
-                                                    <div className="col-xl-4 mb-3">
-                                                        <button
-                                                            className="btn btn-primary me-1"
-                                                            type="button"
-                                                            onClick={() => addBackEndPoint(values, setValues)}
-                                                        >
-                                                            Add More
-                                                        </button>
-                                                    </div>
-
-
-                                                    <div className="col-xl-4 mb-3">
-                                                        <Link to='/list-sub-module' className="btn btn-danger light ms-1">Cancel</Link>
-                                                        <button
-                                                            className="btn btn-primary me-1"
-                                                            type="submit"
-                                                            disabled={!isValid || !dirty}
-                                                        >
-                                                            {params?.id ? "Update" : "Add"}
-                                                        </button>
+                                                    <div className="col-xl-12 mb-3">
+                                                        <div className="d-flex justify-content-between">
+                                                            <div className="">
+                                                                <Link to='/list-sub-module' className="btn btn-danger light ms-1">Cancel</Link>
+                                                                <button
+                                                                    className="btn btn-primary me-1"
+                                                                    type="submit"
+                                                                    disabled={!isValid || !dirty}
+                                                                >
+                                                                    {params?.id ? "Update" : "Add"}
+                                                                </button>
+                                                            </div>
+                                                            <div className="text-center">
+                                                                <button
+                                                                    className="btn btn-primary me-1"
+                                                                    type="button"
+                                                                    onClick={() => addBackEndPoint(values, setValues)}
+                                                                >
+                                                                    Add More
+                                                                </button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
 
