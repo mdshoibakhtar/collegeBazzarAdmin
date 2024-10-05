@@ -41119,7 +41119,8 @@ button:focus {
   border-radius: 0px 0px 0.375rem 0.375rem;
   margin: 0;
 }
-.header-profile2 .dropdown-menu .card-header div p{
+
+.header-profile2 .dropdown-menu .card-header div p {
   font-size: 0.8em;
 }
 
@@ -56282,9 +56283,11 @@ input[type="number"]::-webkit-inner-spin-button {
   display: block;
   color: red;
 }
-.tbodyCustom tr td input{
+
+.tbodyCustom tr td input {
   width: 200px;
 }
+
 .content .time {
   display: block;
   color: gray;
@@ -56514,33 +56517,39 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 /* ---------------------------collagebazaar-css------------------------ */
-.comm-bg{
+.comm-bg {
   background-color: #5c466b;
 }
-.comm-bg:hover{
+
+.comm-bg:hover {
   background-color: #4a3f52;
   color: #fff;
 }
+
 .acorianDetail .accordion-item {
   margin-bottom: 0;
 }
+
 .acorianDetail .accordion-item .accordion-header {
   margin: 0;
   color: black;
 }
+
 .acorianDetail .accordion-item .accordion-header button {
   margin: 0;
   color: black;
   background-color: white !important;
 }
-.pull-left{
+
+.pull-left {
   background-color: #5c466b;
   padding: 7px;
   border-radius: 7px;
   color: white;
 }
+
 .pull-left i {
-  color:white !important;
+  color: white !important;
   font-size: 17px;
 }
 
@@ -56583,6 +56592,7 @@ input[type="number"]::-webkit-inner-spin-button {
 .timeline-content {
   padding-left: 40px;
 }
+
 /* Main chat window container */
 .chat-window {
   width: 100%;
@@ -56714,40 +56724,50 @@ input[type="number"]::-webkit-inner-spin-button {
   .hide-responsive {
     display: none;
   }
-  .res-tab{
-  display:"flex" !important;
-  flex-wrap:nowrap !important;
-  overflow: auto;
+
+  .res-tab {
+    display: "flex" !important;
+    flex-wrap: nowrap !important;
+    overflow: auto;
   }
-  .res-tab li button{
-    width:200px
+
+  .res-tab li button {
+    width: 200px
   }
-  .tbl-captionn{
-    padding:0
+
+  .tbl-captionn {
+    padding: 0
   }
-  #res-card{
-margin:0 !important
+
+  #res-card {
+    margin: 0 !important
   }
-  .active-projects.style-1 .heading{
-    margin:0 !important
+
+  .active-projects.style-1 .heading {
+    margin: 0 !important
   }
-  .active-projects.style-1 .tbl-caption{
-    display:flex;
-    justify-content:center
+
+  .active-projects.style-1 .tbl-caption {
+    display: flex;
+    justify-content: center
   }
-  #responsive-padding{
-    padding:0 !important
+
+  #responsive-padding {
+    padding: 0 !important
   }
-  .mainclass{
-    width:'50%' !important
+
+  .mainclass {
+    width: '50%' !important
   }
-  
+
 }
-.mainclass{
-  width:'26%'
+
+.mainclass {
+  width: '26%'
 }
-.ul-section li{
-margin: 10px 0;
+
+.ul-section li {
+  margin: 10px 0;
 }
 
 .paid-stamp {
@@ -56756,21 +56776,70 @@ margin: 10px 0;
   font-weight: bold;
   text-align: center;
 }
-.main-sidebar-cs > ul> li {
-  padding:10px 0
+
+
+/* mustafa */
+.info-card {
+  border-radius: 10px;
+  padding: 20px;
+  color: #fff;
 }
-.main-sidebar-cs > ul{
-  padding:10px;
-  margin:0
+
+.revenue-card {
+  background-color: #E3F7F5;
+  color: #1C8074;
 }
-.icon-sideb{
-  margin:0 20px;
-  font-size:22px !important
+
+.sales-card {
+  background-color: #ECE8FD;
+  color: #6B5FB5;
 }
-.main-sidebar-cs > ul> li > a{
+
+.profit-card {
+  background-color: #E3F3FE;
+  color: #0F5A8A;
+}
+
+.cost-card {
+  background-color: #FFF6D9;
+  color: #D3A13B;
+}
+
+.stat {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.icon {
+  margin-right: 5px;
+}
+
+.change {
+  font-size: 14px;
+}
+
+
+
+/* mustafa */
+.main-sidebar-cs>ul>li {
+  padding: 10px 0
+}
+
+.main-sidebar-cs>ul {
+  padding: 10px;
+  margin: 0
+}
+
+.icon-sideb {
+  margin: 0 20px;
+  font-size: 22px !important
+}
+
+.main-sidebar-cs>ul>li>a {
   text-decoration: none;
-  color : black ;
+  color: black;
 }
-.main-sidebar-cs > ul> li:focus > a {
-  color : blue;
+
+.main-sidebar-cs>ul>li:focus>a {
+  color: blue;
 }

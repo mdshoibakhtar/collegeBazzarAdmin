@@ -5,7 +5,7 @@ import "./components/upgrade-member/member.css"
 import "react-toastify/dist/ReactToastify.css";
 
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import "./assets/css/style.css";
+// import "./assets/css/style.css";
 import "./common/CustomInputField/index.module.scss";
 
 import DasBoardRight from "./pages/dasBoardRight/DasBoardRight";
@@ -482,6 +482,13 @@ import VehicleList from "./components/vehicleList/VehicleList";
 import VehicleGroup from "./components/vehicleGroup/VehicleGroup";
 import VehicleDetails from "./components/vehicleDetails/VehicleDetails";
 import AddVehicle from "./components/addVehicle/AddVehicle";
+import { DeliveryChallanAdd } from "./components/transaction/deliveryChallan/deliveryChallanAdd/DeliveryChallanAdd";
+import { DeliveryChallanDetails } from "./components/transaction/deliveryChallan/deliveryChallanDetails/DeliveryChallanDetails";
+import ElectronicsDashboardPage from "./pages/electronicsDashboard";
+import { SalesInvoiceforUpdatePage } from "./pages/transaction/salesInvoiceforUpdate";
+import { SalesInvoiceforAdd } from "./components/transaction/salesInvoiceforUpdate/salesInvoiceforAdd/SalesInvoiceforAdd";
+import { RetailPricePendingforApprovalPage } from "./pages/transaction/retailPricePendingforApproval";
+import { DistributorCreditControlPage } from "./pages/transaction/distributorCreditControl";
 
 import TasksListPage from "./pages/taskslistpage";
 import AddNewTaskPage from "./pages/addNewTaskPage";
@@ -1633,8 +1640,13 @@ function App() {
               <Route path="estimate_request" element={<Estimate_requestPage />} />
               <Route path="add_estimate_request" element={<Add_estimate_request />} />
               <Route path="delivery-challan" element={<DeliveryChallanPage />} />
-              <Route path="cow-sale-report" element={<SaleList />} />
-
+              <Route path="add-pdelivery-challan" element={<DeliveryChallanAdd />} />
+              <Route path="details-pdelivery-challan" element={<DeliveryChallanDetails />} />
+              <Route path="electronics-dashboard" element={<ElectronicsDashboardPage />} />
+              <Route path="sales-Invoice-for-Update" element={<SalesInvoiceforUpdatePage />} />
+              <Route path="add-sales-Invoice-for-Update" element={<SalesInvoiceforAdd />} />
+              <Route path="retail-price-pending-for-approval" element={<RetailPricePendingforApprovalPage />} />
+              <Route path="distributor-credit-control" element={<DistributorCreditControlPage />} />
 
               {/* -----------------Goatx Routes-------- */}
               <Route path="flight-booking-txn-list" element={<FlightRequestPages />} />
@@ -1826,6 +1838,8 @@ function App() {
                 path="create-outward"
                 element={<OnwardForm />}
               />
+
+              <Route path="cow-sale-report" element={<SaleList />} />
 
               {/* <Route path="*" element={<NotFoundWithDelay />} /> */}
               <Route path="customer-view/:id" element={<MainCustomerrView />}>
