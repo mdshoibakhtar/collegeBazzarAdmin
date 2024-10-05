@@ -1,16 +1,13 @@
-import { Pagination, Popconfirm } from "antd"
-import { Link } from "react-router-dom";
-import Breadcrumbs from "../../../common/breadcrumb/Breadcrumbs";
-import { FaEye } from "react-icons/fa";
+import { Pagination } from "antd"
+import { Link } from "react-router-dom"
+import Breadcrumbs from "../../../common/breadcrumb/Breadcrumbs"
 
 
-
-
-export const DeliveryChallan = () => {
+export const RetailPricePendingforApproval = () => {
     const breadCrumbsTitle = {
         id: "1",
         title_1: "Transaction",
-        title_2: 'Delivery Challan',
+        title_2: 'Retail Price Pending for Approval',
         path_2: ""
     };
     return (
@@ -23,10 +20,10 @@ export const DeliveryChallan = () => {
                         <div className="table-responsive active-projects style-1">
                             <div className="tbl-caption">
                                 <h4 className="heading mb-0">
-                                    Delivery Challan
+                                    Retail Price Pending for Approval
                                 </h4>
                                 <div>
-                                    <Link className="btn btn-primary btn-sm" to="/add-pdelivery-challan" role="button" aria-controls="offcanvasExample">+ Add New</Link>
+                                    <Link className="btn btn-primary btn-sm" to="/add-sales-Invoice-for-Update" role="button" aria-controls="offcanvasExample">+ Add New</Link>
                                 </div>
                             </div>
                             <div id="empoloyees-tblwrapper_wrapper" className="dataTables_wrapper no-footer">
@@ -39,29 +36,32 @@ export const DeliveryChallan = () => {
                                     <thead>
                                         <tr role="row">
                                             <th style={{ width: '150px' }}>Sr. No.</th>
-                                            <th style={{ width: '150px' }}>DC Entry No.</th>
-                                            <th style={{ width: '150px' }}>	DC Entry Date</th>
-                                            <th style={{ width: '150px' }}>Creditors / Debtors</th>
-                                            <th style={{ width: '150px' }}>Product</th>
-                                            <th style={{ width: '150px' }}>Qty.Remarks / Comments Box</th>
-                                            <th style={{ width: '150px' }}>Linking</th>
+                                            <th style={{ width: '150px' }}>Request on</th>
+                                            <th style={{ width: '150px' }}>		Inv. Date</th>
+                                            <th style={{ width: '150px' }}>	Party</th>
+                                            <th style={{ width: '150px' }}>Party</th>
+                                            <th style={{ width: '150px' }}>Sales Person</th>
+                                            <th style={{ width: '150px' }}>	Location</th>
+                                            <th style={{ width: '150px' }}>	Location.</th>
+                                            <th style={{ width: '150px' }}>	Barcode</th>
+                                            <th style={{ width: '150px' }}>	Product Name</th>
+                                            <th style={{ width: '150px' }}>MRP</th>
+                                            <th style={{ width: '150px' }}>Billed Amt.</th>
+                                            <th style={{ width: '150px' }}>Tag Price</th>
+                                            <th style={{ width: '150px' }}>Diff.</th>
+                                            <th>Add. Dis. Per.</th>
+                                            <th>Approve / Reject</th>
                                             <th style={{ width: '150px' }}>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr role="row" className="odd" >
-                                            <td>1</td>
-                                            <td>HO212206DC0007</td>
-                                            <td>17-Jun-2024</td>
-                                            <td>ROHYT ELECTRONYCC, KOROD</td>
-                                            <td>ADVANCE BILLING</td>
-                                            <td>Update</td>
+                                            <td colSpan={17} className="text-align-center">No Data Found</td>
 
-                                            <td>
+
+                                            {/* <td>
                                                 <div className="d-flex">
-                                                    <Link to={`/details-pdelivery-challan`} className="btn btn-primary shadow btn-xs sharp me-1">
-                                                        <FaEye />
-                                                    </Link>
+
                                                     <Link to={`#`} className="btn btn-primary shadow btn-xs sharp me-1">
                                                         <i className="fa fa-pencil" />
                                                     </Link>
@@ -78,7 +78,7 @@ export const DeliveryChallan = () => {
                                                         </Link>
                                                     </Popconfirm>
                                                 </div>
-                                            </td>
+                                            </td> */}
                                         </tr>
                                     </tbody>
                                 </table>
