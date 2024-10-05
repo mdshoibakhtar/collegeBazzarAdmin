@@ -502,6 +502,12 @@ import CreateNewInvoice from "./components/sales/invoices/createNewInvoice/Creat
 import ExpenseSubCategoryPage from "./pages/expenses/expenseSubCategory";
 // import ExpenseListPage from "./pages/expenses/expenseList";
 import AddExpense from "./components/expenses/expenseList/addExpense/AddExpense";
+import MainCustomerrView from "./pages/CustomerView/profile/indexPage";
+import ContactTable from "./pages/CustomerView/contacts/Contacts";
+import KeepInTuch from "./pages/CustomerView/keepintuch/KeepInTuch";
+import KitConfigration from "./pages/CustomerView/kitConfig/KitConfigration";
+import NotesCunstomer from "./pages/CustomerView/notes/NotesCunstomer";
+import ProposalList from "./components/proposalListComp/ProposalList";
 // -------------------------DAUD----IMPORT-End----------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1486,6 +1492,10 @@ function App() {
               <Route path="create-market-type" element={<CreateTypemarket />} />
               <Route path="create-market-type/:id" element={<CreateTypemarket />} />
 
+              <Route path="default-contest" element={<DefoultContestMaster />} />
+              <Route path="create-default-contest" element={<DefultCreateContext />} />
+              <Route path="create-default-contest/:id" element={<DefultCreateContext />} />
+
               <Route path="contest" element={<ContestMaster />} />
               <Route path="create-contest" element={<CreateContext />} />
               <Route path="create-contest/:id" element={<CreateContext />} />
@@ -1755,11 +1765,11 @@ function App() {
               <Route path="task/overview" element={<TasksOverviewPage />} />
               <Route path="task_templates" element={<TaskTemplateListPage />} />
               <Route path="task_templates/create" element={<AddNewTaskTemplatePage />} />
-              <Route path="task_from_templates/create" element={<AddNewTaskFromTemplatePage/>}/>
+              <Route path="task_from_templates/create" element={<AddNewTaskFromTemplatePage />} />
 
               <Route path="project" element={<Project />} />
-              <Route path="project/newproject" element={<NewProject/>}/>
-              
+              <Route path="project/newproject" element={<NewProject />} />
+
               {/* ---Daud's Route  ---static work----*/}
 
               <Route path="credit_notes" element={<CreditNotesPage />} />
@@ -1776,11 +1786,20 @@ function App() {
               <Route path="expense-list" element={<ExpenseListPage />} />
 
               <Route path="expense-list/add-expense" element={<AddExpense />} />
+
               <Route
                 path="expenses-subcategory"
                 element={<ExpenseSubCategoryPage />}
               />
 
+              <Route path="customer-view/:id" element={<MainCustomerrView />}>
+                <Route path="" element={<h2>Tab i</h2>} />
+                <Route path="contacts" element={<ContactTable title='Contacts'/>} />
+                <Route path="keep-in-touch" element={<KeepInTuch title='Keep In Touch'/>} />
+                <Route path="keep-in-touch-configration" element={<KitConfigration title='KIT Configration'/>} />
+                <Route path="notes" element={<NotesCunstomer title='Notes'/>} />
+                <Route path="proposals-view" element={<ProposalList/>} />
+              </Route>
 
               <Route path="*" element={<PageNotFound />} />
             </Route>
