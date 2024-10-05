@@ -482,6 +482,15 @@ import VehicleList from "./components/vehicleList/VehicleList";
 import VehicleGroup from "./components/vehicleGroup/VehicleGroup";
 import VehicleDetails from "./components/vehicleDetails/VehicleDetails";
 import AddVehicle from "./components/addVehicle/AddVehicle";
+
+import TasksListPage from "./pages/taskslistpage";
+import AddNewTaskPage from "./pages/addNewTaskPage";
+import TasksOverviewPage from "./pages/tasksOverviewPage";
+import TaskTemplateListPage from "./pages/taskTemplateListPage";
+import AddNewTaskTemplatePage from "./pages/addNewTaskTemplatePage";
+import AddNewTaskFromTemplatePage from "./pages/addNewTaskFromTemplatePage";
+import Project from "./pages/project";
+import NewProject from "./pages/new-project";
 import { SaleList } from "./components/cowSale/saleList/SaleList";
 //---------------------JUNAID IMPORT END --------------------------
 
@@ -500,6 +509,12 @@ import Inward from "./components/logistics/inward/Inward";
 import InwardForm from "./components/logistics/inward/inwardForm/InwardForm";
 import Onward from "./components/logistics/outward/Onward";
 import OnwardForm from "./components/logistics/outward/onwardForm/OnwardForm";
+import MainCustomerrView from "./pages/CustomerView/profile/indexPage";
+import ContactTable from "./pages/CustomerView/contacts/Contacts";
+import KeepInTuch from "./pages/CustomerView/keepintuch/KeepInTuch";
+import KitConfigration from "./pages/CustomerView/kitConfig/KitConfigration";
+import NotesCunstomer from "./pages/CustomerView/notes/NotesCunstomer";
+import ProposalList from "./components/proposalListComp/ProposalList";
 // -------------------------DAUD----IMPORT-End----------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1496,6 +1511,10 @@ function App() {
               <Route path="create-market-type" element={<CreateTypemarket />} />
               <Route path="create-market-type/:id" element={<CreateTypemarket />} />
 
+              <Route path="default-contest" element={<DefoultContestMaster />} />
+              <Route path="create-default-contest" element={<DefultCreateContext />} />
+              <Route path="create-default-contest/:id" element={<DefultCreateContext />} />
+
               <Route path="contest" element={<ContestMaster />} />
               <Route path="create-contest" element={<CreateContext />} />
               <Route path="create-contest/:id" element={<CreateContext />} />
@@ -1760,6 +1779,16 @@ function App() {
               <Route path="vehicle-group" element={<VehicleGroup />} />
               <Route path="add-vehicle" element={<AddVehicle />} />
 
+              <Route path="tasks" element={<TasksListPage />} />
+              <Route path="task/create" element={<AddNewTaskPage />} />
+              <Route path="task/overview" element={<TasksOverviewPage />} />
+              <Route path="task_templates" element={<TaskTemplateListPage />} />
+              <Route path="task_templates/create" element={<AddNewTaskTemplatePage />} />
+              <Route path="task_from_templates/create" element={<AddNewTaskFromTemplatePage />} />
+
+              <Route path="project" element={<Project />} />
+              <Route path="project/newproject" element={<NewProject />} />
+
               {/* ---Daud's Route  ---static work----*/}
 
               <Route path="credit_notes" element={<CreditNotesPage />} />
@@ -1776,6 +1805,7 @@ function App() {
               {/* <Route path="expense-list" element={<ExpenseListPage />} /> */}
 
               <Route path="expense-list/add-expense" element={<AddExpense />} />
+
               <Route
                 path="expenses-subcategory"
                 element={<ExpenseSubCategoryPage />}
@@ -1798,6 +1828,15 @@ function App() {
               />
 
               {/* <Route path="*" element={<NotFoundWithDelay />} /> */}
+              <Route path="customer-view/:id" element={<MainCustomerrView />}>
+                <Route path="" element={<h2>Tab i</h2>} />
+                <Route path="contacts" element={<ContactTable title='Contacts' />} />
+                <Route path="keep-in-touch" element={<KeepInTuch title='Keep In Touch' />} />
+                <Route path="keep-in-touch-configration" element={<KitConfigration title='KIT Configration' />} />
+                <Route path="notes" element={<NotesCunstomer title='Notes' />} />
+                <Route path="proposals-view" element={<ProposalList />} />
+              </Route>
+
               <Route path="*" element={<PageNotFound />} />
             </Route>
           </>

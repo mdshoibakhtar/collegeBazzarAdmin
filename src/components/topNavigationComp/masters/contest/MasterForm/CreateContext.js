@@ -25,6 +25,7 @@ function CreateContest() {
         isFree: true,
         start_date: "",
         end_date: "",
+        banner_image: '',
         rankingRewards: [{ minRank: "", maxRank: "", reward: "" }],
     });
 
@@ -118,21 +119,21 @@ function CreateContest() {
                     entryFee: response?.data?.entryFee || 0,
                     winnerPercentage: response?.data?.winnerPercentage || 0,
                     isFree: response?.data?.isFree || true,
-                    start_date: response?.data?.start_date 
-                        ? new Date(response?.data?.start_date).toISOString().slice(0, 16) 
+                    start_date: response?.data?.start_date
+                        ? new Date(response?.data?.start_date).toISOString().slice(0, 16)
                         : "",
-                    end_date: response?.data?.end_date 
-                        ? new Date(response?.data?.end_date).toISOString().slice(0, 16) 
+                    end_date: response?.data?.end_date
+                        ? new Date(response?.data?.end_date).toISOString().slice(0, 16)
                         : "",
                     rankingRewards: response?.data?.rankingRewards || [{ minRank: "", maxRank: "", reward: "" }],
                 });
             }
         };
-    
+
         fetchContestData();
         getDatas();
     }, [params?.id]);
-    
+
 
     return (
         <>
@@ -280,6 +281,16 @@ function CreateContest() {
                                                     onBlur={handleBlur}
                                                     name="end_date"
                                                 />
+                                            </div>
+                                            <div className="col-xl-4 mb-3">
+                                                <h6>Banner Image</h6>
+                                                <CustomInputField
+                                                    type="file"
+                                                    onChange={handleChangeImage}
+                                                    onBlur={handleBlur}
+                                                    name="end_date"
+                                                />
+                                                {image && <img src={`${baseUrlImage}${image}`} />}
                                             </div>
 
                                             <div className="col-xl-12 mb-3">
