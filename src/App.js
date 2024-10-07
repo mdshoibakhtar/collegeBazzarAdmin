@@ -522,6 +522,17 @@ import KeepInTuch from "./pages/CustomerView/keepintuch/KeepInTuch";
 import KitConfigration from "./pages/CustomerView/kitConfig/KitConfigration";
 import NotesCunstomer from "./pages/CustomerView/notes/NotesCunstomer";
 import ProposalList from "./components/proposalListComp/ProposalList";
+import { CrmElectronicPage } from "./pages/transaction/crmElectronic";
+import CrmElectronicAdd from "./components/transaction/crmElectronic/crmElectronicAdd/CrmElectronicAdd";
+import CrmElectronicDetails from "./components/transaction/crmElectronic/crmElectronicDetails/CrmElectronicDetails";
+import { LeaveApplicationPage } from "./pages/transaction/leaveApplication";
+import LeaveApplicationAdd from "./components/transaction/leaveApplication/leaveApplicationAdd/LeaveApplicationAdd";
+import ClosePendingDCManuallyPage from "./pages/transaction/closePendingDCManually";
+import { ClosePendingDCManuallyAdd } from "./components/transaction/closePendingDCManually/closePendingDCManuallyAdd/ClosePendingDCManuallyAdd";
+import CrmDistributionCollectionPage from "./pages/transaction/crmDistributionCollection";
+import CrmDistributionCollectionAdd from "./components/transaction/crmDistributionCollection/crmDistributionCollectionAdd/CrmDistributionCollectionAdd";
+import { CrmDistributionSalesPage } from "./pages/transaction/crmDistributionSales";
+import CrmDistributionSalesAdd from "./components/transaction/crmDistributionSales/crmDistributionSalesAdd/CrmDistributionSalesAdd";
 // -------------------------DAUD----IMPORT-End----------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1647,6 +1658,18 @@ function App() {
               <Route path="add-sales-Invoice-for-Update" element={<SalesInvoiceforAdd />} />
               <Route path="retail-price-pending-for-approval" element={<RetailPricePendingforApprovalPage />} />
               <Route path="distributor-credit-control" element={<DistributorCreditControlPage />} />
+              <Route path="crm-electronic" element={<CrmElectronicPage />} />
+              <Route path="crm-electronic-add" element={<CrmElectronicAdd />} />
+              <Route path="crm-electronic-details" element={<CrmElectronicDetails />} />
+              <Route path="leave-application" element={<LeaveApplicationPage />} />
+              <Route path="leave-application-add" element={<LeaveApplicationAdd />} />
+              <Route path="close-pending-dc-manually" element={<ClosePendingDCManuallyPage />} />
+              <Route path="close-pending-dc-manually-add" element={<ClosePendingDCManuallyAdd />} />
+              <Route path="crm-distribution-collection" element={<CrmDistributionCollectionPage />} />
+              <Route path="crm-distribution-collection-add" element={<CrmDistributionCollectionAdd />} />
+              <Route path="crm-distribution-sales" element={<CrmDistributionSalesPage />} />
+              <Route path="crm-distribution-sales-add" element={<CrmDistributionSalesAdd />} />
+
 
               {/* -----------------Goatx Routes-------- */}
               <Route path="flight-booking-txn-list" element={<FlightRequestPages />} />
