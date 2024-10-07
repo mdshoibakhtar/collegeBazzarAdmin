@@ -56857,38 +56857,19 @@ input[type="number"]::-webkit-inner-spin-button {
   color: blue;
 }
 
-.custom-container {
-  /* width: 80%; */
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ddd;
-}
-.custom-header {
-  text-align: left;
-}
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-th, td {
-  padding: 8px;
-  border: 1px solid #ddd;
-}
-.custom-totals {
-  text-align: right;
-  margin-top: 20px;
-}
-.custom-btn {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  text-decoration: none;
-  margin-top: 20px;
-  cursor: pointer;
+
+.set-mat-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  padding: 5px;
 }
 
-.custom-modal-width .modal-dialog {
-  max-width: 1200px;
+.set-mat-details h2 {
+  margin: 0px;
+}
+
+.set-mat-details h3 {
+  margin: 0px;
 }
