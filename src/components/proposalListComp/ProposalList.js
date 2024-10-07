@@ -3,10 +3,10 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
-function ProposalList() {
+function ProposalList({style}) {
     return (
         <>
-            <div>
+            <div style={style && {width:"1000px"}}>
                 <div className="row m-2">
                     <div className="col-xl-12">
                         <div className="card">

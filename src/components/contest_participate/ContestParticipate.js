@@ -1,8 +1,10 @@
-import { Pagination } from 'antd';
+import { message, Pagination, Popconfirm } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import { ContestParticipateList } from '../../api/login/Login';
+import { ContestParticipateList, DeleteParticipate } from '../../api/login/Login';
+import ParticipateUpdate from './ParticipateUpdate';
+import Loadar from '../../common/loader/Loader';
 
 function ContestParticipate() {
     const [data, setData] = useState([]);
@@ -32,8 +34,46 @@ function ContestParticipate() {
         getFloorMasters(0);
     }, []);
 
+
+    const deleteBlockAdd = async (id) => {
+        try {
+            await DeleteParticipate(id)
+            let backList = totalCount % 11 === 0 ? page - 1 : page
+            getFloorMasters(backList)
+        } catch (error) {
+            // toastSuccessMessage(error.message)
+        }
+        setLoading(false)
+    }
+    const confirm = (id) => {
+        console.log(id);
+        deleteBlockAdd(id)
+        message.success('Delete Successfull!');
+
+    };
+    const cancel = (e) => {
+        // console.log(e);
+        message.error('Cancle Successfull!');
+    };
+    const [modalShow, setModalShow] = useState(false);
+    const [ids, setIds] = useState(false);
+    const updateModelData = (id) => {
+        setIds(id)
+        setTimeout(() => {
+            setModalShow(true)
+        }, 1000);
+    }
+
+
     return (
         <>
+            {loading && <Loadar />}
+            <ParticipateUpdate
+                data={ids}
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+            />
+
             <div>
                 <div className="row m-2">
                     <div className="col-xl-12">
@@ -50,13 +90,14 @@ function ContestParticipate() {
                                                     <th style={{ width: '50px' }}>S.No</th>
                                                     <th style={{ width: '200px' }}>User Name</th>
                                                     <th style={{ width: '150px' }}>Contest ID</th>
-                                                    {/* <th style={{ width: '150px' }}>Prediction</th> */}
+                                                    <th style={{ width: '150px' }}>Participate</th>
                                                     <th style={{ width: '150px' }}>Ranking</th>
                                                     <th style={{ width: '100px' }}>Reward</th>
                                                     <th style={{ width: '150px' }}>Approve</th>
                                                     <th style={{ width: '150px' }}>Is Free</th>
                                                     <th style={{ width: '200px' }}>Contest From Date</th>
                                                     <th style={{ width: '200px' }}>Contest To Date</th>
+                                                    <th style={{ width: '200px' }}>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -65,14 +106,32 @@ function ContestParticipate() {
                                                         <td>{i + 1}</td>
                                                         <td>{item?.user_name}</td>
                                                         <td>{item?.contestid}</td>
-                                                        {/* <td>{item?.prediction}</td> */}
+                                                        <td>{item?.user_type}</td>
                                                         <td>{item?.ranking}</td>
                                                         <td>{item?.reward}</td>
                                                         <td>{item?.approve ? 'Yes' : 'No'}</td>
                                                         <td>{item?.isFree ? 'Yes' : 'No'}</td>
                                                         <td>{item?.contest_from_date}</td>
                                                         <td>{item?.contest_to_date}</td>
-                                                       
+                                                        <td>
+                                                            <div className="d-flex">
+                                                                <Link to={`#`} onClick={() => { updateModelData(item._id) }} className="btn btn-primary shadow btn-xs sharp me-1">
+                                                                    <i className="fa fa-pencil" />
+                                                                </Link>
+                                                                <Popconfirm
+                                                                    title="Delete Participate!"
+                                                                    description="Are you sure to delete?"
+                                                                    onConfirm={() => confirm(item?._id)}
+                                                                    onCancel={cancel}
+                                                                    okText="Yes"
+                                                                    cancelText="No"
+                                                                >
+                                                                    <Link to="#" className="btn btn-danger shadow btn-xs sharp">
+                                                                        <i className="fa fa-trash" />
+                                                                    </Link>
+                                                                </Popconfirm>
+                                                            </div>
+                                                        </td>
                                                     </tr>
                                                 ))}
                                             </tbody>

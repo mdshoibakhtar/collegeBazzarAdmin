@@ -3031,6 +3031,9 @@ export const updateDummyUserById = (id, data) => {
 export const deleteDefaultContestById = (id) => {
   return axiosInstance.delete(`/defaultContest/deleteType/${id}`);
 };
+export const DeleteParticipate = (id) => {
+  return axiosInstance.delete(`/contestParticipate/delete_participateContestant/${id}`);
+};
 
 // GET default contests with pagination
 export const getDefaultContests = (page, count) => {
@@ -3080,4 +3083,16 @@ export const getSubModuleForselect = (id) => {
 
 
 
+export const getParticipateId = (id) => {
+  return axiosInstance.get(`/contestParticipate/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
 
+// PUT (update) an existing default contest by ID
+export const updateParticipate = (id, data) => {
+  return axiosInstance.put(`/contestParticipate/update_participateContestant/${id}`, data);
+};

@@ -10,7 +10,7 @@ import 'react-tagsinput/react-tagsinput.css';
 import { FaTag } from "react-icons/fa6";
 import { Formik } from 'formik';
 
-function TasksListComp() {
+function TasksListComp({style}) {
     const [show, setShow] = useState(false);
     const [tags, setTags] = useState([]);
     const params = useParams();
@@ -52,7 +52,7 @@ function TasksListComp() {
 
     return (
         <>
-            <div>
+            <div style={style && {width:"1050px"}}>
                 <div className="row m-2">
                     <div className="col-xl-12">
                         <div className="card">

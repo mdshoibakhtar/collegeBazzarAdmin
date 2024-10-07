@@ -3,7 +3,7 @@ import Breadcrumbs from "../../../common/breadcrumb/Breadcrumbs"
 import { Link } from "react-router-dom"
 
 
-function ExpenseList() {
+function ExpenseList({style}) {
     const breadCrumbsTitle = {
         id: "1",
         title_1: "Farm Expense",
@@ -12,7 +12,7 @@ function ExpenseList() {
     };
     return (
         <>
-            <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
+          {style && <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />}  
             <div style={{ margin: "14px" }}>
                 <div className="card">
                     <div className="card-body p-0">

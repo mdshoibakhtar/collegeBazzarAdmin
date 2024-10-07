@@ -84,13 +84,13 @@ export default function ProjectList(){
                     <th key={i} className="main-th">{Item.title}</th>
                     )}
                 </tr>
-                {/* {TableTitle.map((item, i)=>
+                {TableTitle.map((item, i)=>
                 <tr key={i}>
                     {item.subtitle.map((text, y)=>
                         <td key={y} className={`sec-td`}><Link to="/" className={`${text.color}`}>{text.title}</Link></td>
                     )}
                 </tr>
-                )} */}
+                )}
             </table>
         </div>  
     )
