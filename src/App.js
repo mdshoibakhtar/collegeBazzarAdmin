@@ -5,8 +5,9 @@ import "./components/upgrade-member/member.css"
 import "react-toastify/dist/ReactToastify.css";
 
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import "./assets/css/style.css";
+// import "./assets/css/style.css";
 import "./common/CustomInputField/index.module.scss";
+import "./assets/css/project.css"
 
 import DasBoardRight from "./pages/dasBoardRight/DasBoardRight";
 import DistributerPage from "./pages/distributer";
@@ -482,6 +483,13 @@ import VehicleList from "./components/vehicleList/VehicleList";
 import VehicleGroup from "./components/vehicleGroup/VehicleGroup";
 import VehicleDetails from "./components/vehicleDetails/VehicleDetails";
 import AddVehicle from "./components/addVehicle/AddVehicle";
+import { DeliveryChallanAdd } from "./components/transaction/deliveryChallan/deliveryChallanAdd/DeliveryChallanAdd";
+import { DeliveryChallanDetails } from "./components/transaction/deliveryChallan/deliveryChallanDetails/DeliveryChallanDetails";
+import ElectronicsDashboardPage from "./pages/electronicsDashboard";
+import { SalesInvoiceforUpdatePage } from "./pages/transaction/salesInvoiceforUpdate";
+import { SalesInvoiceforAdd } from "./components/transaction/salesInvoiceforUpdate/salesInvoiceforAdd/SalesInvoiceforAdd";
+import { RetailPricePendingforApprovalPage } from "./pages/transaction/retailPricePendingforApproval";
+import { DistributorCreditControlPage } from "./pages/transaction/distributorCreditControl";
 
 import TasksListPage from "./pages/taskslistpage";
 import AddNewTaskPage from "./pages/addNewTaskPage";
@@ -502,12 +510,29 @@ import CreateNewInvoice from "./components/sales/invoices/createNewInvoice/Creat
 import ExpenseSubCategoryPage from "./pages/expenses/expenseSubCategory";
 // import ExpenseListPage from "./pages/expenses/expenseList";
 import AddExpense from "./components/expenses/expenseList/addExpense/AddExpense";
+import NotFoundWithDelay from "./common/pageNotFound/pageNotFoundDelayL";
+import FormSubSubModule from "./pages/RolePermission/subSubModule/formSubSubModule/FormSubSubModule";
+import MainSubSubModule from "./pages/RolePermission/subSubModule/mainSubSubModule/MainSubSubModule";
+import Inward from "./components/logistics/inward/Inward";
+import InwardForm from "./components/logistics/inward/inwardForm/InwardForm";
+import Onward from "./components/logistics/outward/Onward";
+import OnwardForm from "./components/logistics/outward/onwardForm/OnwardForm";
 import MainCustomerrView from "./pages/CustomerView/profile/indexPage";
 import ContactTable from "./pages/CustomerView/contacts/Contacts";
 import KeepInTuch from "./pages/CustomerView/keepintuch/KeepInTuch";
 import KitConfigration from "./pages/CustomerView/kitConfig/KitConfigration";
 import NotesCunstomer from "./pages/CustomerView/notes/NotesCunstomer";
 import ProposalList from "./components/proposalListComp/ProposalList";
+import EstimateList from "./pages/CustomerView/estimates/EstimatesPage";
+
+import OrderList from "./pages/orderlist";
+import AddNewOrder from "./pages/addneworder/addneworder";
+import BookingList from "./pages/bookinglist";
+import AddNewBooking from "./pages/addnewbooking";
+import EstimateForm from "./pages/CustomerView/estimates/EstimateForm";
+import Estimate from "./pages/CustomerView/estimates/Estimate";
+import TicketsPage from "./pages/CustomerView/tickets/TicketsPage";
+import ServiceList from "./pages/CustomerView/service/ServiceList";
 // -------------------------DAUD----IMPORT-End----------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1109,6 +1134,7 @@ function App() {
                 path="/add-sub-module"
                 element={<AddSubModule />}
               />
+
               <Route
                 path="/update-sub-module/:id"
                 element={<AddSubModule />}
@@ -1117,7 +1143,18 @@ function App() {
                 path="/list-sub-module"
                 element={<MainSubListModule />}
               />
-
+              <Route
+                path="/add-sub-sub-module"
+                element={<FormSubSubModule />}
+              />
+              <Route
+                path="/update-sub-sub-module/:id"
+                element={<FormSubSubModule />}
+              />
+              <Route
+                path="/list-sub-sub-module"
+                element={<MainSubSubModule />}
+              />
               <Route
                 path="/add-role"
                 element={<AddRole />}
@@ -1614,8 +1651,13 @@ function App() {
               <Route path="estimate_request" element={<Estimate_requestPage />} />
               <Route path="add_estimate_request" element={<Add_estimate_request />} />
               <Route path="delivery-challan" element={<DeliveryChallanPage />} />
-              <Route path="cow-sale-report" element={<SaleList />} />
-
+              <Route path="add-pdelivery-challan" element={<DeliveryChallanAdd />} />
+              <Route path="details-pdelivery-challan" element={<DeliveryChallanDetails />} />
+              <Route path="electronics-dashboard" element={<ElectronicsDashboardPage />} />
+              <Route path="sales-Invoice-for-Update" element={<SalesInvoiceforUpdatePage />} />
+              <Route path="add-sales-Invoice-for-Update" element={<SalesInvoiceforAdd />} />
+              <Route path="retail-price-pending-for-approval" element={<RetailPricePendingforApprovalPage />} />
+              <Route path="distributor-credit-control" element={<DistributorCreditControlPage />} />
 
               {/* -----------------Goatx Routes-------- */}
               <Route path="flight-booking-txn-list" element={<FlightRequestPages />} />
@@ -1775,15 +1817,15 @@ function App() {
               <Route path="credit_notes" element={<CreditNotesPage />} />
               <Route path="credit_notes/new-credit_notes" element={<NewCreditNotes />} />
               <Route path="invoices" element={<InvoicesPage />} />
-              <Route
+              {/* <Route
                 path="invoices/create-new-invoice"
                 element={<CreateNewInvoice />}
-              />
+              /> */}
 
 
               {/* ---Expenses-- */}
 
-              <Route path="expense-list" element={<ExpenseListPage />} />
+              {/* <Route path="expense-list" element={<ExpenseListPage />} /> */}
 
               <Route path="expense-list/add-expense" element={<AddExpense />} />
 
@@ -1791,19 +1833,48 @@ function App() {
                 path="expenses-subcategory"
                 element={<ExpenseSubCategoryPage />}
               />
+              <Route
+                path="inward-list"
+                element={<Inward />}
+              />
+              <Route
+                path="create-inward"
+                element={<InwardForm />}
+              />
+              <Route
+                path="outward-list"
+                element={<Onward />}
+              />
+              <Route
+                path="create-outward"
+                element={<OnwardForm />}
+              />
 
+              <Route path="cow-sale-report" element={<SaleList />} />
+
+              <Route path="orderlist" element={<OrderList />} />
+              <Route path="addneworder" element={<AddNewOrder />} />
+              <Route path="bookinglist" element={<BookingList />} />
+              <Route path="addnewbooking" element={<AddNewBooking />} />
+
+              {/* <Route path="*" element={<NotFoundWithDelay />} /> */}
               <Route path="customer-view/:id" element={<MainCustomerrView />}>
-                <Route path="" element={<LeadDetail/>} />
-                <Route path="contacts" element={<ContactTable title='Contacts'/>} />
-                <Route path="keep-in-touch" element={<KeepInTuch title='Keep In Touch'/>} />
-                <Route path="keep-in-touch-configration" element={<KitConfigration title='KIT Configration'/>} />
-                <Route path="notes" element={<NotesCunstomer title='Notes'/>} />
-                <Route path="proposals-view" element={<ProposalList style={true}/>} />
-                <Route path="expenses-view" element={<ExpenseListPage style={true}/>} />
-                <Route path="projects-view" element={<Project style={true}/>} />
-                <Route path="tasks-view" element={<TasksListPage style={true}/>} />
-                <Route path="estimates-view" element={<TasksListPage style={true}/>} />
+                <Route path="" element={<LeadDetail />} />
+                <Route path="contacts" element={<ContactTable title='Contacts' />} />
+                <Route path="keep-in-touch" element={<KeepInTuch title='Keep In Touch' />} />
+                <Route path="keep-in-touch-configration" element={<KitConfigration title='KIT Configration' />} />
+                <Route path="notes" element={<NotesCunstomer title='Notes' />} />
+                <Route path="proposals-view" element={<ProposalList style={true} />} />
+                <Route path="expenses-view" element={<ExpenseListPage style={true} />} />
+                <Route path="projects-view" element={<Project style={true} />} />
+                <Route path="tasks-view" element={<TasksListPage style={true} />} />
+                <Route path="estimates-view" element={<EstimateList style={true} title='Estimates' />} />
+                <Route path="estimates-view-listview" element={<Estimate style={true} title='Estimates' />} />
+                <Route path="tickets-view" element={<TicketsPage style={true} title='Tickets' />} />
+                <Route path="service" element={<ServiceList style={true} title='Service request' />} />
               </Route>
+              <Route path="estimates-add" element={<EstimateForm style={true} title='Estimates Add' />} />
+              <Route path="ticket-add" element={<TicketForm />} />
 
               <Route path="*" element={<PageNotFound />} />
             </Route>

@@ -95,7 +95,7 @@ function ListSubModule({ onChangeVal, dmtTtxn, loading, dmtExcelTtxn, getDmtTxnD
 
                                                                 <Link to={`/update-sub-module/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                                 <Popconfirm
-                                                                    title="Delete  STATUS !"
+                                                                    title="Delete  Sub Module  !"
                                                                     description="Are you sure to delete ?"
                                                                     onConfirm={() => confirm(item?._id)}
                                                                     onCancel={cancel}

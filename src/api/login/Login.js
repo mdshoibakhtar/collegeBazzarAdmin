@@ -1266,21 +1266,37 @@ export const mainModuleList = (page, count) => {
 export const addSubModule = (data) => {
   return axiosInstance.post(`${baseUrl}subModule/addsubModule`, data)
 };
+export const addSubSubModule = (data) => {
+  return axiosInstance.post(`${baseUrl}subSubModule/addSubModule`, data)
+};
 
 export const subModule = (page, count) => {
   // console.log(page, page);
   return axiosInstance.get(`${baseUrl}subModule?page=${page}&count=${count}`);
 }
+export const subSubModule = (page, count) => {
+  // console.log(page, page);
+  return axiosInstance.get(`${baseUrl}subSubModule?page=${page}&count=${count}`);
+}
 
 export const updatesubModule = (id, value) => {
   return axiosInstance.put(`${baseUrl}subModule/updatsubModule/${id}`, value);
+};
+export const updatesubSubModule = (id, value) => {
+  return axiosInstance.put(`${baseUrl}subSubModule/updatSubModule/${id}`, value);
 };
 
 export const updateSubMainModule = (id) => {
   return axiosInstance.get(`${baseUrl}subModule/${id}`);
 }
+export const updateSubSubMainModule = (id) => {
+  return axiosInstance.get(`${baseUrl}subSubModule/${id}`);
+}
 export const deleteSubModulee = (id) => {
   return axiosInstance.delete(`${baseUrl}subModule/deletesubModule/${id}`);
+};
+export const deleteSubSubModulee = (id) => {
+  return axiosInstance.delete(`${baseUrl}subSubModule/deleteSubModule/${id}`);
 };
 
 
@@ -3015,6 +3031,9 @@ export const updateDummyUserById = (id, data) => {
 export const deleteDefaultContestById = (id) => {
   return axiosInstance.delete(`/defaultContest/deleteType/${id}`);
 };
+export const DeleteParticipate = (id) => {
+  return axiosInstance.delete(`/contestParticipate/delete_participateContestant/${id}`);
+};
 
 // GET default contests with pagination
 export const getDefaultContests = (page, count) => {
@@ -3050,6 +3069,11 @@ export const postDefaultContest = (data) => {
 export const updateDefaultContestById = (id, data) => {
   return axiosInstance.put(`/defaultContest/updateType/${id}`, data);
 };
+export const getSubModuleForselect = (id) => {
+  console.log("arrr cheak", id);
+
+  return axiosInstance.get(`${baseUrl}subModule/main_module/id?main_module=${JSON.stringify(id)}`);
+};
 
 
 
@@ -3059,5 +3083,16 @@ export const updateDefaultContestById = (id, data) => {
 
 
 
+export const getParticipateId = (id) => {
+  return axiosInstance.get(`/contestParticipate/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
 
-
+// PUT (update) an existing default contest by ID
+export const updateParticipate = (id, data) => {
+  return axiosInstance.put(`/contestParticipate/update_participateContestant/${id}`, data);
+};
