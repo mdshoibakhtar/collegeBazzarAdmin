@@ -1793,12 +1793,16 @@ function App() {
               />
 
               <Route path="customer-view/:id" element={<MainCustomerrView />}>
-                <Route path="" element={<h2>Tab i</h2>} />
+                <Route path="" element={<LeadDetail/>} />
                 <Route path="contacts" element={<ContactTable title='Contacts'/>} />
                 <Route path="keep-in-touch" element={<KeepInTuch title='Keep In Touch'/>} />
                 <Route path="keep-in-touch-configration" element={<KitConfigration title='KIT Configration'/>} />
                 <Route path="notes" element={<NotesCunstomer title='Notes'/>} />
-                <Route path="proposals-view" element={<ProposalList/>} />
+                <Route path="proposals-view" element={<ProposalList style={true}/>} />
+                <Route path="expenses-view" element={<ExpenseListPage style={true}/>} />
+                <Route path="projects-view" element={<Project style={true}/>} />
+                <Route path="tasks-view" element={<TasksListPage style={true}/>} />
+                <Route path="estimates-view" element={<TasksListPage style={true}/>} />
               </Route>
 
               <Route path="*" element={<PageNotFound />} />

@@ -1,10 +1,10 @@
 import React from 'react'
 import ProjectPlane from '../../components/project/project'
 
-function Project() {
+function Project({style}) {
     return (
         <div className='p-4'>
-            <ProjectPlane />
+            <ProjectPlane style={style}/>
         </div>
     )
 }
