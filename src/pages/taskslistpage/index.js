@@ -1,10 +1,10 @@
 import React from 'react'
 import TasksListComp from '../../components/tasksListComp/TasksListComp'
 
-function TasksListPage() {
+function TasksListPage({style}) {
   return (
     <>
-    <TasksListComp />
+    <TasksListComp style={style}/>
     </>
   )
 }

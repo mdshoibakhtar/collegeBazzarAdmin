@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import "./assets/css/style.css";
 import "./common/CustomInputField/index.module.scss";
+import "./assets/css/project.css"
 
 import DasBoardRight from "./pages/dasBoardRight/DasBoardRight";
 import DistributerPage from "./pages/distributer";
@@ -527,6 +528,27 @@ import FormSkuMaster from "./components/logistics/inward/inwardForm/skuMaster/fo
 import TransportMaster from "./components/logistics/outward/onwardForm/transportMaster/TransportMaster";
 import FormTransportMaster from "./components/logistics/outward/onwardForm/transportMaster/formTransportMaster/FormTransportMaster";
 import PrintInvoice from "./components/logistics/printInvoice/PrintInvoice";
+import EstimateList from "./pages/CustomerView/estimates/EstimatesPage";
+
+import OrderList from "./pages/orderlist";
+import AddNewOrder from "./pages/addneworder/addneworder";
+import BookingList from "./pages/bookinglist";
+import AddNewBooking from "./pages/addnewbooking";
+import EstimateForm from "./pages/CustomerView/estimates/EstimateForm";
+import Estimate from "./pages/CustomerView/estimates/Estimate";
+import TicketsPage from "./pages/CustomerView/tickets/TicketsPage";
+import ServiceList from "./pages/CustomerView/service/ServiceList";
+import { CrmElectronicPage } from "./pages/transaction/crmElectronic";
+import CrmElectronicAdd from "./components/transaction/crmElectronic/crmElectronicAdd/CrmElectronicAdd";
+import CrmElectronicDetails from "./components/transaction/crmElectronic/crmElectronicDetails/CrmElectronicDetails";
+import { LeaveApplicationPage } from "./pages/transaction/leaveApplication";
+import LeaveApplicationAdd from "./components/transaction/leaveApplication/leaveApplicationAdd/LeaveApplicationAdd";
+import ClosePendingDCManuallyPage from "./pages/transaction/closePendingDCManually";
+import { ClosePendingDCManuallyAdd } from "./components/transaction/closePendingDCManually/closePendingDCManuallyAdd/ClosePendingDCManuallyAdd";
+import CrmDistributionCollectionPage from "./pages/transaction/crmDistributionCollection";
+import CrmDistributionCollectionAdd from "./components/transaction/crmDistributionCollection/crmDistributionCollectionAdd/CrmDistributionCollectionAdd";
+import { CrmDistributionSalesPage } from "./pages/transaction/crmDistributionSales";
+import CrmDistributionSalesAdd from "./components/transaction/crmDistributionSales/crmDistributionSalesAdd/CrmDistributionSalesAdd";
 // -------------------------DAUD----IMPORT-End----------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1652,6 +1674,18 @@ function App() {
               <Route path="add-sales-Invoice-for-Update" element={<SalesInvoiceforAdd />} />
               <Route path="retail-price-pending-for-approval" element={<RetailPricePendingforApprovalPage />} />
               <Route path="distributor-credit-control" element={<DistributorCreditControlPage />} />
+              <Route path="crm-electronic" element={<CrmElectronicPage />} />
+              <Route path="crm-electronic-add" element={<CrmElectronicAdd />} />
+              <Route path="crm-electronic-details" element={<CrmElectronicDetails />} />
+              <Route path="leave-application" element={<LeaveApplicationPage />} />
+              <Route path="leave-application-add" element={<LeaveApplicationAdd />} />
+              <Route path="close-pending-dc-manually" element={<ClosePendingDCManuallyPage />} />
+              <Route path="close-pending-dc-manually-add" element={<ClosePendingDCManuallyAdd />} />
+              <Route path="crm-distribution-collection" element={<CrmDistributionCollectionPage />} />
+              <Route path="crm-distribution-collection-add" element={<CrmDistributionCollectionAdd />} />
+              <Route path="crm-distribution-sales" element={<CrmDistributionSalesPage />} />
+              <Route path="crm-distribution-sales-add" element={<CrmDistributionSalesAdd />} />
+
 
               {/* -----------------Goatx Routes-------- */}
               <Route path="flight-booking-txn-list" element={<FlightRequestPages />} />
@@ -1863,15 +1897,29 @@ function App() {
               <Route path="cow-sale-report" element={<SaleList />} />
               <Route path="print-invoice" element={<PrintInvoice />} />
 
+              <Route path="orderlist" element={<OrderList />} />
+              <Route path="addneworder" element={<AddNewOrder />} />
+              <Route path="bookinglist" element={<BookingList />} />
+              <Route path="addnewbooking" element={<AddNewBooking />} />
+
               
               <Route path="customer-view/:id" element={<MainCustomerrView />}>
-                <Route path="" element={<h2>Tab i</h2>} />
+                <Route path="" element={<LeadDetail />} />
                 <Route path="contacts" element={<ContactTable title='Contacts' />} />
                 <Route path="keep-in-touch" element={<KeepInTuch title='Keep In Touch' />} />
                 <Route path="keep-in-touch-configration" element={<KitConfigration title='KIT Configration' />} />
                 <Route path="notes" element={<NotesCunstomer title='Notes' />} />
-                <Route path="proposals-view" element={<ProposalList />} />
+                <Route path="proposals-view" element={<ProposalList style={true} />} />
+                <Route path="expenses-view" element={<ExpenseListPage style={true} />} />
+                <Route path="projects-view" element={<Project style={true} />} />
+                <Route path="tasks-view" element={<TasksListPage style={true} />} />
+                <Route path="estimates-view" element={<EstimateList style={true} title='Estimates' />} />
+                <Route path="estimates-view-listview" element={<Estimate style={true} title='Estimates' />} />
+                <Route path="tickets-view" element={<TicketsPage style={true} title='Tickets' />} />
+                <Route path="service" element={<ServiceList style={true} title='Service request' />} />
               </Route>
+              <Route path="estimates-add" element={<EstimateForm style={true} title='Estimates Add' />} />
+              <Route path="ticket-add" element={<TicketForm />} />
 
               <Route path="*" element={<PageNotFound />} />
             </Route>

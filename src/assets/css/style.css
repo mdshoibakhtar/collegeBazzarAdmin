@@ -56776,7 +56776,20 @@ input[type="number"]::-webkit-inner-spin-button {
   font-weight: bold;
   text-align: center;
 }
-
+.upload input{
+    width: 100px;
+    height: 80px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    cursor: pointer;
+}
+.upload label svg{
+    font-size: 100px !important;
+}
+.upload{
+    line-height: 191px;
+}
 
 /* mustafa */
 .info-card {
@@ -56842,4 +56855,21 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .main-sidebar-cs>ul>li:focus>a {
   color: blue;
+}
+
+
+.set-mat-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  padding: 5px;
+}
+
+.set-mat-details h2 {
+  margin: 0px;
+}
+
+.set-mat-details h3 {
+  margin: 0px;
 }
