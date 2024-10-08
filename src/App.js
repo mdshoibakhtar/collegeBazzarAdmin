@@ -522,6 +522,11 @@ import KeepInTuch from "./pages/CustomerView/keepintuch/KeepInTuch";
 import KitConfigration from "./pages/CustomerView/kitConfig/KitConfigration";
 import NotesCunstomer from "./pages/CustomerView/notes/NotesCunstomer";
 import ProposalList from "./components/proposalListComp/ProposalList";
+import SkuMaster from "./components/logistics/inward/inwardForm/skuMaster/SkuMaster";
+import FormSkuMaster from "./components/logistics/inward/inwardForm/skuMaster/formSkuMaster/FormSkuMaster";
+import TransportMaster from "./components/logistics/outward/onwardForm/transportMaster/TransportMaster";
+import FormTransportMaster from "./components/logistics/outward/onwardForm/transportMaster/formTransportMaster/FormTransportMaster";
+import PrintInvoice from "./components/logistics/printInvoice/PrintInvoice";
 // -------------------------DAUD----IMPORT-End----------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1838,10 +1843,27 @@ function App() {
                 path="create-outward"
                 element={<OnwardForm />}
               />
+              <Route
+                path="inward-sku-master"
+                element={<SkuMaster />}
+              />
+              <Route
+                path="inward-add-sku-master"
+                element={<FormSkuMaster />}
+              />
+              <Route
+                path="transport-master"
+                element={<TransportMaster />}
+              />
+              <Route
+                path="add-transport-master"
+                element={<FormTransportMaster />}
+              />
 
               <Route path="cow-sale-report" element={<SaleList />} />
+              <Route path="print-invoice" element={<PrintInvoice />} />
 
-              {/* <Route path="*" element={<NotFoundWithDelay />} /> */}
+              
               <Route path="customer-view/:id" element={<MainCustomerrView />}>
                 <Route path="" element={<h2>Tab i</h2>} />
                 <Route path="contacts" element={<ContactTable title='Contacts' />} />
@@ -1855,6 +1877,7 @@ function App() {
             </Route>
           </>
         )}
+        {/* <Route path="*" element={<NotFoundWithDelay />} /> */}
       </Routes>
     </>
   );
