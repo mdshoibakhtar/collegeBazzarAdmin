@@ -33,9 +33,9 @@ export const ReturnManagement = () => {
                                 <h4 className="heading mb-0">
                                     Return Management
                                 </h4>
-                                <div>
+                                {/* <div>
                                     <Link className="btn btn-primary btn-sm" to="/vehicle-loading-sheet-add" role="button" aria-controls="offcanvasExample">+ Add New</Link>
-                                </div>
+                                </div> */}
                             </div>
                             <div id="empoloyees-tblwrapper_wrapper" className="dataTables_wrapper no-footer">
                                 <div className="dt-buttons">
