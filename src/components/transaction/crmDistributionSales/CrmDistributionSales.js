@@ -7,7 +7,7 @@ const CrmDistributionSales = () => {
     const breadCrumbsTitle = {
         id: "1",
         title_1: "Transaction",
-        title_2: 'CRM Distribution Sales',
+        title_2: 'CRM Distribution Sales Add',
         path_2: ""
     };
     return (
@@ -21,10 +21,10 @@ const CrmDistributionSales = () => {
                         <div className="table-responsive active-projects style-1">
                             <div className="tbl-caption">
                                 <h4 className="heading mb-0">
-                                    CRM Distribution Sales
+                                    CRM Distribution Sales Add
                                 </h4>
                                 <div>
-                                    <Link className="btn btn-primary btn-sm" to="/crm-distribution-collection-add" role="button" aria-controls="offcanvasExample">+ Add New</Link>
+                                    <Link className="btn btn-primary btn-sm" to="/crm-distribution-sales-add" role="button" aria-controls="offcanvasExample">+ Add New</Link>
                                 </div>
                             </div>
                             <div id="empoloyees-tblwrapper_wrapper" className="dataTables_wrapper no-footer">

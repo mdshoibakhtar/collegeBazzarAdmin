@@ -533,6 +533,12 @@ import CrmDistributionCollectionPage from "./pages/transaction/crmDistributionCo
 import CrmDistributionCollectionAdd from "./components/transaction/crmDistributionCollection/crmDistributionCollectionAdd/CrmDistributionCollectionAdd";
 import { CrmDistributionSalesPage } from "./pages/transaction/crmDistributionSales";
 import CrmDistributionSalesAdd from "./components/transaction/crmDistributionSales/crmDistributionSalesAdd/CrmDistributionSalesAdd";
+import StockJournalOutwardPage from "./pages/logistics/stockJournalOutward";
+import StockJournalOutwardAdd from "./components/logistics/stockJournalOutward/stockJournalOutwardAdd/StockJournalOutwardAdd";
+import VehicleLoadingSheetPage from "./pages/logistics/vehicleLoadingSheet";
+import VehicleLoadingSheetAdd from "./components/logistics/vehicleLoadingSheet/vehicleLoadingSheetAdd/VehicleLoadingSheetAdd";
+import VehicleLoadingSheetDeatils from "./components/logistics/vehicleLoadingSheet/vehicleLoadingSheetDetails/VehicleLoadingSheetDeatils";
+import { ReturnManagementPage } from "./pages/logistics/returnManagement";
 // -------------------------DAUD----IMPORT-End----------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1669,6 +1675,12 @@ function App() {
               <Route path="crm-distribution-collection-add" element={<CrmDistributionCollectionAdd />} />
               <Route path="crm-distribution-sales" element={<CrmDistributionSalesPage />} />
               <Route path="crm-distribution-sales-add" element={<CrmDistributionSalesAdd />} />
+              <Route path="stock-journal-Outward" element={<StockJournalOutwardPage />} />
+              <Route path="stock-journal-Outward-add" element={<StockJournalOutwardAdd />} />
+              <Route path="vehicle-loading-sheet" element={<VehicleLoadingSheetPage />} />
+              <Route path="vehicle-loading-sheet-add" element={<VehicleLoadingSheetAdd />} />
+              <Route path="vehicle-loading-sheet-deatils" element={<VehicleLoadingSheetDeatils />} />
+              <Route path="return-management" element={<ReturnManagementPage />} />
 
 
               {/* -----------------Goatx Routes-------- */}
