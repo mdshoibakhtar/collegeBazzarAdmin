@@ -544,6 +544,9 @@ import CrmDistributionCollectionPage from "./pages/transaction/crmDistributionCo
 import CrmDistributionCollectionAdd from "./components/transaction/crmDistributionCollection/crmDistributionCollectionAdd/CrmDistributionCollectionAdd";
 import { CrmDistributionSalesPage } from "./pages/transaction/crmDistributionSales";
 import CrmDistributionSalesAdd from "./components/transaction/crmDistributionSales/crmDistributionSalesAdd/CrmDistributionSalesAdd";
+import FilesPage from "./pages/CustomerView/files/FilesPage";
+import Vaultpage from "./pages/CustomerView/vault/Vaultpage";
+import ReminderPage from "./pages/CustomerView/reminder/ReminderPage";
 // -------------------------DAUD----IMPORT-End----------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1895,6 +1898,9 @@ function App() {
                 <Route path="estimates-view-listview" element={<Estimate style={true} title='Estimates' />} />
                 <Route path="tickets-view" element={<TicketsPage style={true} title='Tickets' />} />
                 <Route path="service" element={<ServiceList style={true} title='Service request' />} />
+                <Route path="files-view" element={<FilesPage style={true} title='Files' />} />
+                <Route path="vault-view" element={<Vaultpage style={true} title='Vault' />} />
+                <Route path="reminders-view" element={<ReminderPage style={true} title='Reminders' />} />
               </Route>
               <Route path="estimates-add" element={<EstimateForm style={true} title='Estimates Add' />} />
               <Route path="ticket-add" element={<TicketForm />} />
