@@ -1,13 +1,14 @@
-import { Pagination } from "antd";
-import { Link } from "react-router-dom";
+import { Pagination, Popconfirm } from "antd";
 import Breadcrumbs from "../../../common/breadcrumb/Breadcrumbs";
+import { Link } from "react-router-dom";
+import { IoEyeSharp } from "react-icons/io5";
 
 
-const CrmDistributionSales = () => {
+const VehicleLoadingSheet = () => {
     const breadCrumbsTitle = {
         id: "1",
-        title_1: "Transaction",
-        title_2: 'CRM Distribution Sales Add',
+        title_1: "Logistics",
+        title_2: 'Vehicle Loading Sheet',
         path_2: ""
     };
     return (
@@ -21,10 +22,10 @@ const CrmDistributionSales = () => {
                         <div className="table-responsive active-projects style-1">
                             <div className="tbl-caption">
                                 <h4 className="heading mb-0">
-                                    CRM Distribution Sales Add
+                                    Vehicle Loading Sheet
                                 </h4>
                                 <div>
-                                    <Link className="btn btn-primary btn-sm" to="/crm-distribution-sales-add" role="button" aria-controls="offcanvasExample">+ Add New</Link>
+                                    <Link className="btn btn-primary btn-sm" to="/vehicle-loading-sheet-add" role="button" aria-controls="offcanvasExample">+ Add New</Link>
                                 </div>
                             </div>
                             <div id="empoloyees-tblwrapper_wrapper" className="dataTables_wrapper no-footer">
@@ -37,24 +38,27 @@ const CrmDistributionSales = () => {
                                     <thead>
                                         <tr role="row">
                                             <th style={{ width: '150px' }}>Sr. No.</th>
-                                            <th style={{ width: '150px' }}>Entry Date</th>
-                                            <th style={{ width: '150px' }}>Dealer</th>
-                                            <th style={{ width: '150px' }}>City</th>
-                                            <th style={{ width: '150px' }}>Days</th>
-                                            <th style={{ width: '150px' }}>Update Follow up</th>
+                                            <th style={{ width: '150px' }}>Out Date</th>
+                                            <th style={{ width: '150px' }}>VLS No.</th>
+                                            <th style={{ width: '150px' }}>Transporter</th>
+                                            <th style={{ width: '150px' }}>Vehicle No.</th>
+                                            <th style={{ width: '150px' }}>Freight</th>
+                                            <th style={{ width: '150px' }}>	Advance</th>
                                             <th style={{ width: '150px' }}>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr role="row" className="odd" >
-                                            <td colSpan={7}>No Data Found !</td>
-
-
-
-
-                                            {/* <td>
+                                            <td >1</td>
+                                            <td >01-Aug-2024</td>
+                                            <td >KGM222308VLS0001</td>
+                                            <td >AMOL SHINDE</td>
+                                            <td >MH13CJ0819</td>
+                                            <td >7500.00</td>
+                                            <td >0.00</td>
+                                            <td>
                                                 <div className="d-flex">
-                                                    <Link to={`#`} className="btn btn-primary shadow btn-xs sharp me-1">
+                                                    <Link to={`/vehicle-loading-sheet-deatils`} className="btn btn-primary shadow btn-xs sharp me-1">
                                                         <IoEyeSharp />
                                                     </Link>
 
@@ -74,7 +78,7 @@ const CrmDistributionSales = () => {
                                                         </Link>
                                                     </Popconfirm>
                                                 </div>
-                                            </td> */}
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -97,4 +101,4 @@ const CrmDistributionSales = () => {
     )
 }
 
-export default CrmDistributionSales
+export default VehicleLoadingSheet

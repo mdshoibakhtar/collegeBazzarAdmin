@@ -49,12 +49,12 @@ function Profile() {
         } else if (!regexMobileNumber.test(values.mobile)) {
             errors.mobile = "Invalid Mobile Number";
         }
-        if (!values.latitude) {
+        /* if (!values.latitude) {
             errors.latitude = "Latitude is required";
         }
         if (!values.longitude) {
             errors.longitude = "Longitude is required";
-        }
+        } */
         return errors;
     };
 

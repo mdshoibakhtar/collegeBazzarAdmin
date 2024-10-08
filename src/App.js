@@ -523,6 +523,11 @@ import KeepInTuch from "./pages/CustomerView/keepintuch/KeepInTuch";
 import KitConfigration from "./pages/CustomerView/kitConfig/KitConfigration";
 import NotesCunstomer from "./pages/CustomerView/notes/NotesCunstomer";
 import ProposalList from "./components/proposalListComp/ProposalList";
+import SkuMaster from "./components/logistics/inward/inwardForm/skuMaster/SkuMaster";
+import FormSkuMaster from "./components/logistics/inward/inwardForm/skuMaster/formSkuMaster/FormSkuMaster";
+import TransportMaster from "./components/logistics/outward/onwardForm/transportMaster/TransportMaster";
+import FormTransportMaster from "./components/logistics/outward/onwardForm/transportMaster/formTransportMaster/FormTransportMaster";
+import PrintInvoice from "./components/logistics/printInvoice/PrintInvoice";
 import EstimateList from "./pages/CustomerView/estimates/EstimatesPage";
 
 import OrderList from "./pages/orderlist";
@@ -547,6 +552,12 @@ import CrmDistributionSalesAdd from "./components/transaction/crmDistributionSal
 import FilesPage from "./pages/CustomerView/files/FilesPage";
 import Vaultpage from "./pages/CustomerView/vault/Vaultpage";
 import ReminderPage from "./pages/CustomerView/reminder/ReminderPage";
+import StockJournalOutwardPage from "./pages/logistics/stockJournalOutward";
+import StockJournalOutwardAdd from "./components/logistics/stockJournalOutward/stockJournalOutwardAdd/StockJournalOutwardAdd";
+import VehicleLoadingSheetPage from "./pages/logistics/vehicleLoadingSheet";
+import VehicleLoadingSheetAdd from "./components/logistics/vehicleLoadingSheet/vehicleLoadingSheetAdd/VehicleLoadingSheetAdd";
+import VehicleLoadingSheetDeatils from "./components/logistics/vehicleLoadingSheet/vehicleLoadingSheetDetails/VehicleLoadingSheetDeatils";
+import { ReturnManagementPage } from "./pages/logistics/returnManagement";
 // -------------------------DAUD----IMPORT-End----------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1683,6 +1694,12 @@ function App() {
               <Route path="crm-distribution-collection-add" element={<CrmDistributionCollectionAdd />} />
               <Route path="crm-distribution-sales" element={<CrmDistributionSalesPage />} />
               <Route path="crm-distribution-sales-add" element={<CrmDistributionSalesAdd />} />
+              <Route path="stock-journal-Outward" element={<StockJournalOutwardPage />} />
+              <Route path="stock-journal-Outward-add" element={<StockJournalOutwardAdd />} />
+              <Route path="vehicle-loading-sheet" element={<VehicleLoadingSheetPage />} />
+              <Route path="vehicle-loading-sheet-add" element={<VehicleLoadingSheetAdd />} />
+              <Route path="vehicle-loading-sheet-deatils" element={<VehicleLoadingSheetDeatils />} />
+              <Route path="return-management" element={<ReturnManagementPage />} />
 
 
               {/* -----------------Goatx Routes-------- */}
@@ -1875,15 +1892,32 @@ function App() {
                 path="create-outward"
                 element={<OnwardForm />}
               />
+              <Route
+                path="inward-sku-master"
+                element={<SkuMaster />}
+              />
+              <Route
+                path="inward-add-sku-master"
+                element={<FormSkuMaster />}
+              />
+              <Route
+                path="transport-master"
+                element={<TransportMaster />}
+              />
+              <Route
+                path="add-transport-master"
+                element={<FormTransportMaster />}
+              />
 
               <Route path="cow-sale-report" element={<SaleList />} />
+              <Route path="print-invoice" element={<PrintInvoice />} />
 
               <Route path="orderlist" element={<OrderList />} />
               <Route path="addneworder" element={<AddNewOrder />} />
               <Route path="bookinglist" element={<BookingList />} />
               <Route path="addnewbooking" element={<AddNewBooking />} />
 
-              {/* <Route path="*" element={<NotFoundWithDelay />} /> */}
+              
               <Route path="customer-view/:id" element={<MainCustomerrView />}>
                 <Route path="" element={<LeadDetail />} />
                 <Route path="contacts" element={<ContactTable title='Contacts' />} />
@@ -1909,6 +1943,7 @@ function App() {
             </Route>
           </>
         )}
+        {/* <Route path="*" element={<NotFoundWithDelay />} /> */}
       </Routes>
     </>
   );

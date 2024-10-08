@@ -20273,7 +20273,7 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
 .deznav {
   width: 15rem;
   padding-bottom: 10px;
-  height: calc(100% - 3.125rem);
+  height: calc(100% - 6.125rem);
   position: absolute;
   padding-top: 1rem;
   z-index: 6;
@@ -20569,8 +20569,8 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
   /* width:  .5rem;
                 height: .5rem;
                 border-color: inherit; */
-  border-top: 0.3125rem solid #C8C8C8;
-  border-left: 0.3125rem solid #C8C8C8;
+  border-top: 0.3125rem solid #171515;
+  border-left: 0.3125rem solid #171515;
   border-bottom: 0.3125rem solid transparent;
   border-right: 0.3125rem solid transparent;
   right: 15px;
@@ -56943,4 +56943,13 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .vault-entry-container .vault-details p strong {
   font-weight: 600;
+}
+
+
+.vehicleLoading {
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

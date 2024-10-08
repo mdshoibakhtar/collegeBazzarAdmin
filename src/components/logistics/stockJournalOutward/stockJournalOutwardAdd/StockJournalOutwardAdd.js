@@ -1,11 +1,10 @@
 import Breadcrumbs from "../../../../common/breadcrumb/Breadcrumbs";
 
-
-const CrmDistributionCollectionAdd = () => {
+const StockJournalOutwardAdd = () => {
     const breadCrumbsTitle = {
         id: "1",
-        title_1: "Transaction",
-        title_2: 'Add CRM Distribution Collection',
+        title_1: "Logistics",
+        title_2: 'Add Stock Journal Outward',
         path_2: ""
     };
     return (
@@ -17,7 +16,7 @@ const CrmDistributionCollectionAdd = () => {
                         <div className="card-body p-0">
                             <div className="table-responsive active-projects style-1">
                                 <div className="tbl-caption tbl-caption-2">
-                                    <h4 className="heading mb-0">Add CRM Distribution Collection</h4>
+                                    <h4 className="heading mb-0">Add Stock Journal Outward</h4>
                                 </div>
                                 <form className="p-4">
                                     <div className="row">
@@ -26,7 +25,7 @@ const CrmDistributionCollectionAdd = () => {
                                             <input type="date" className="form-control" id="projectName" placeholder="Enter TransactionId" />
                                         </div>
                                         <div className="col-md-6 mb-3">
-                                            <label htmlFor="projectName"> City .  </label>
+                                            <label htmlFor="projectName"> Scanning Type  </label>
                                             <select className="form-control" aria-label="Default select example">
                                                 <option selected>Open this select menu</option>
                                                 <option value={1}>One</option>
@@ -36,33 +35,25 @@ const CrmDistributionCollectionAdd = () => {
 
                                         </div>
                                         <div className="col-md-6 mb-3">
-                                            <label htmlFor="projectName"> Dealer Name  </label>
-                                            <select className="form-control" aria-label="Default select example">
-                                                <option selected>Open this select menu</option>
-                                                <option value={1}>One</option>
-                                                <option value={2}>Two</option>
-                                                <option value={3}>Three</option>
-                                            </select>
-
+                                            <label htmlFor="projectName">Barcode</label>
+                                            <input type="text" className="form-control" id="projectName" disabled placeholder="Enter Barcode" />
                                         </div>
 
                                         <div className="col-md-6 mb-3">
-                                            <label htmlFor="projectName">Amount Commited</label>
-                                            <input type="number" className="form-control" id="projectName" placeholder="Enter Amount Commited" />
+                                            <label htmlFor="projectName">Serial No.</label>
+                                            <input type="number" className="form-control" id="projectName" placeholder="Enter Serial No." />
                                         </div>
                                         <div className="col-md-6 mb-3">
-                                            <label htmlFor="projectName">Reminder After Days</label>
-                                            <input type="number" className="form-control" id="projectName" placeholder="Enter Reminder After Days" />
+                                            <label htmlFor="projectName">Total Qty.</label>
+                                            <input type="number" className="form-control" id="projectName" placeholder="Enter Total Qty." />
                                         </div>
                                         <div className="col-md-6 mb-3">
-                                            <label htmlFor="projectName"> Status  </label>
-                                            <select className="form-control" aria-label="Default select example">
-                                                <option selected>Open this select menu</option>
-                                                <option value={1}>One</option>
-                                                <option value={2}>Two</option>
-                                                <option value={3}>Three</option>
-                                            </select>
-
+                                            <label htmlFor="projectName">ValQty</label>
+                                            <input type="number" className="form-control" id="projectName" placeholder="Enter ValQty" />
+                                        </div>
+                                        <div className="col-md-6 mb-3">
+                                            <label htmlFor="projectName">ValQty</label>
+                                            <textarea name="" id="" cols={90}></textarea>
                                         </div>
 
                                         <div className="col-md-12 mb-3">
@@ -82,4 +73,4 @@ const CrmDistributionCollectionAdd = () => {
     )
 }
 
-export default CrmDistributionCollectionAdd
+export default StockJournalOutwardAdd
