@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PageNotFound from './PageNotFound';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Commet } from 'react-loading-indicators';
+// import { Commet } from 'react-loading-indicators';
 
 const NotFoundWithDelay = () => {
     const [loading, setLoading] = useState(true);
@@ -36,7 +36,7 @@ const NotFoundWithDelay = () => {
                     transform: "translate(-50%, -50%)",
                 }}
             >
-                <Commet color="#0c0d0c" size="large" text="WAIT" textColor="#c89090" />
+                {/* <Commet color="#0c0d0c" size="large" text="WAIT" textColor="#c89090" /> */}
             </div>
         );
     }

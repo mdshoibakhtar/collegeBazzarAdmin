@@ -1,9 +1,16 @@
 
 
+import Breadcrumbs from '../../common/breadcrumb/Breadcrumbs'
 import './viaggiooDashBoard.css'
 function ViaggiooDashBoard() {
+    const breadCrumbsTitle = {
+        id: "1",
+        title_1: "Dashboard",
+        path_1: "/",
+    }
     return (
         <>
+            <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
             <div className="ContentArea">
                 <div className="dashboard-gaot">
                     <div className='set-list-Dashboard'>

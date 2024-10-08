@@ -31,15 +31,21 @@ function AddRole() {
     const [dataModule, setDataModule] = useState(null);
 
     const params = useParams();
+console.log(sortNumbers);
 
-    const handleSortNumberChange = (mainModuleId, subModuleId, value) => {
+    const handleSortNumberChange = (mainModuleId, subModuleId, subSubModuleId, value) => {
+console.log(mainModuleId, subModuleId, subSubModuleId, value);
+
+// debugger
         setSortNumbers(prev => ({
             ...prev,
             [mainModuleId]: {
                 ...prev[mainModuleId],
-                [subModuleId]: value
+                [subModuleId]: value,
+                [subSubModuleId]: value
             }
         }));
+        console.log(sortNumbers);
     };
 
     const validate = (values) => {
@@ -84,11 +90,24 @@ function AddRole() {
                     sort_no: sortNumbers[item.main_module._id]?.[''] || '',
                 },
                 sub_module: item.sub_module?.map((subItem) => {
+
+
                     return {
+                        // sub_module: {
                         _id: subItem._id,
                         name: subItem.name,
                         sort_no: sortNumbers[item.main_module._id]?.[subItem._id] || '',
+                        // },
+                        subSubModule: subItem.subSubModule?.map((subSubItem) => {
+                            console.log(subSubItem._id);
+                            return {
+                                _id: subSubItem._id,
+                                name: subSubItem.name,
+                                sort_no: sortNumbers[item.main_module._id]?.[subItem.sub_module?._id]?.[subSubItem._id] || '',
+                            };
+                        })
                     };
+
                 })
             };
         });
@@ -133,7 +152,7 @@ function AddRole() {
                     const response = await updategetId(params.id);
                     const currencyData = response.data[0];
 
-                    const initialPermits = currencyData.permits.map(permit => ({
+                    const initialPermits = currencyData?.permits?.map(permit => ({
                         ...permit,
                         main_module: {
                             ...permit.main_module,
@@ -176,7 +195,6 @@ function AddRole() {
                 console.error("Error fetching currency:", error);
             }
         };
-
         fetchCurrency();
     }, [params?.id]);
 
@@ -297,10 +315,11 @@ function AddRole() {
                                                 {selectedModules.length > 0 && (
                                                     <div className="row">
                                                         {dataconntriler && dataconntriler.map((item) => (
+                                                        
                                                             <div className="col-xl-4 mb-3" key={item.main_module._id}>
                                                                 <div className="row">
                                                                     <div className="col-md-12">
-                                                                        <h3 className="set-heading-late text-center p-2 rounded text-white" style={{background:"rgb(46 49 145)"}}>Main Module</h3>
+                                                                        <h3 className="set-heading-late text-center p-2 rounded text-white" style={{ background: "rgb(46 49 145)" }}>Main Module</h3>
                                                                         <label htmlFor="" className="form-label">{item.main_module.name}</label>
                                                                         <div className="head-combo d-flex align-items-center">
                                                                             <input
@@ -308,7 +327,7 @@ function AddRole() {
                                                                                 name={`sort_no_${item.main_module._id}`}
                                                                                 placeholder="Sort Number"
                                                                                 value={sortNumbers[item.main_module._id]?.[''] || ''}
-                                                                                onChange={(e) => handleSortNumberChange(item.main_module._id, '', e.target.value)}
+                                                                                onChange={(e) => handleSortNumberChange(item.main_module._id, '', '' , e.target.value)}
                                                                                 className="form-control"
                                                                             />
                                                                             <button
@@ -322,29 +341,67 @@ function AddRole() {
                                                                             </button>
                                                                         </div>
                                                                         <h3 className="set-heading-late bg-warning text-center p-2 rounded text-white">Sub Module</h3>
-                                                                        {item.sub_module.map((subItem) => (
-                                                                            <div className="subModule" key={subItem._id}>
-                                                                                
-                                                                                <label htmlFor="" className="form-label"><small>{subItem.name}</small></label>
-                                                                                <div className="head-combo head-combo d-flex align-items-center my-2">
-                                                                                    <input
-                                                                                        type="number"
-                                                                                        name={`sort_no_${item.main_module._id}_${subItem._id}`}
-                                                                                        placeholder="Sort Number"
-                                                                                        value={sortNumbers[item.main_module._id]?.[subItem._id] || ''}
-                                                                                        onChange={(e) => handleSortNumberChange(item.main_module._id, subItem._id, e.target.value)}
-                                                                                        className="form-control"
-                                                                                    />
-                                                                                    <button
-                                                                                        className="btn btn-danger"
-                                                                                        type="button"
-                                                                                        onClick={() => deleteSubmodule(item.main_module._id, subItem._id)}
-                                                                                    >
-                                                                                        <span className="fs-2"><MdDelete /></span>
-                                                                                    </button>
+                                                                        {item?.sub_module?.map((subItem) => {
+                                                                            return (
+                                                                                <div className="" key={subItem._id}>
+                                                                                    <div className="subModule">
+                                                                                        <label htmlFor="" className="form-label">
+                                                                                            <small>{subItem.name}</small>
+                                                                                        </label>
+                                                                                        <div className="head-combo d-flex align-items-center my-2">
+                                                                                            <input
+                                                                                                type="number"
+                                                                                                name={`sort_no_${item.main_module._id}_${subItem._id}`}
+                                                                                                placeholder="Sort Number"
+                                                                                                value={sortNumbers[item.main_module._id]?.[subItem._id] || ''}
+                                                                                                onChange={(e) => handleSortNumberChange(item.main_module._id, subItem._id, null, e.target.value)} // Pass null for subSubModuleId
+                                                                                                className="form-control"
+                                                                                            />
+                                                                                            <button
+                                                                                                className="btn btn-danger"
+                                                                                                type="button"
+                                                                                                onClick={() => deleteSubmodule(item.main_module._id, subItem._id)}
+                                                                                            >
+                                                                                                <span className="fs-2"><MdDelete /></span>
+                                                                                            </button>
+                                                                                        </div>
+
+                                                                                        {subItem?.subSubModule?.length > 0 && (
+                                                                                            <>
+
+                                                                                                <h3 className="set-heading-late bg-dark text-center p-2 rounded text-white">Sub Sub Module</h3>
+                                                                                                {subItem?.subSubModule?.map((subSubItem) => {
+                                                                                                    return (
+                                                                                                        <div className="subModule" key={subSubItem._id}>
+                                                                                                            <label htmlFor="" className="form-label">
+                                                                                                                <small>{subSubItem.name}</small>
+                                                                                                            </label>
+                                                                                                            <div className="head-combo d-flex align-items-center my-2">
+                                                                                                                 <input
+                                                                                                                    type="number"
+                                                                                                                    name={`sort_no_${item.main_module._id}_${subItem._id}_${subSubItem._id}`}
+                                                                                                                    placeholder="Sort Number"
+                                                                                                                    value={sortNumbers[item.main_module._id]?.[subItem._id]?.[subSubItem._id] || ''}
+                                                                                                                    onChange={(e) => handleSortNumberChange(item.main_module._id, subItem._id, subSubItem._id, e.target.value)} // Handle subSubModule
+                                                                                                                    className="form-control"
+                                                                                                                />
+                                                                                                                <button
+                                                                                                                    className="btn btn-danger"
+                                                                                                                    type="button"
+                                                                                                                    onClick={() => deleteSubmodule(item.main_module._id, subItem._id, subSubItem._id)}
+                                                                                                                >
+                                                                                                                    <span className="fs-2"><MdDelete /></span>
+                                                                                                                </button>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    );
+                                                                                                })}
+                                                                                            </>
+                                                                                        )}
+                                                                                    </div>
                                                                                 </div>
-                                                                            </div>
-                                                                        ))}
+                                                                            );
+                                                                        })}
                                                                     </div>
                                                                 </div>
                                                             </div>

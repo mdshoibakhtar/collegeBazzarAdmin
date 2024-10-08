@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import Breadcrumbs from '../../../common/breadcrumb/Breadcrumbs'
-import InwardList from './onwardList/OutwardList'
 import OutwardList from './onwardList/OutwardList'
 
 function Onward() {

@@ -189,7 +189,7 @@ const OnwardForm = () => {
                                                                 />
                                                             </div>
                                                             <div>
-                                                                <button className='btn btn-outline-primary'>+</button>
+                                                                <Link to="/transport-master" className='btn btn-outline-primary'>+</Link>
                                                             </div>
                                                         </div>
                                                     </div>
