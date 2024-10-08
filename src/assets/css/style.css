@@ -56776,7 +56776,20 @@ input[type="number"]::-webkit-inner-spin-button {
   font-weight: bold;
   text-align: center;
 }
-
+.upload input{
+    width: 100px;
+    height: 80px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    cursor: pointer;
+}
+.upload label svg{
+    font-size: 100px !important;
+}
+.upload{
+    line-height: 191px;
+}
 
 /* mustafa */
 .info-card {
@@ -56843,6 +56856,7 @@ input[type="number"]::-webkit-inner-spin-button {
 .main-sidebar-cs>ul>li:focus>a {
   color: blue;
 }
+
 
 .set-mat-details {
   display: flex;
