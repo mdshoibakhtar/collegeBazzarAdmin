@@ -51,7 +51,7 @@ function CollegeBazzarDashboard() {
     const breadCrumbsTitle = {
         id: "1",
         title_1: "Dashboard",
-        path_1: "/admin",
+        path_1: "/",
     }
     return (
         <>

@@ -27,6 +27,7 @@ const InwardForm = () => {
         isSponsored: false,
         s_no: ""
     });
+    
 
     const validate = (values) => {
         let errors = {};
@@ -276,7 +277,7 @@ const InwardForm = () => {
                                                                                 placeholder="Barcode"
                                                                             />
                                                                         </div>
-                                                                        <button className='btn btn-outline-primary'>+</button>
+                                                                        <Link to={"/inward-sku-master"}  className='btn btn-outline-primary'>+</Link >
                                                                     </div>
                                                                 </div>
                                                                 <div className="col-xl-6 mb-3">

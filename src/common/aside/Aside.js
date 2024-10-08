@@ -1,36 +1,42 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { getN, navigationData } from "./navigationData/NavigationData";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { MdDashboard } from "react-icons/md";
-import { useLocation } from "react-router-dom";
 import { CgLogOut } from "react-icons/cg";
 import { useTranslation } from "react-i18next";
-import { Button, Spinner } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 import { removeItemFromLocalStorage } from "../../utils/localStorage";
 import { useDispatch } from "react-redux";
 import { setIsLogin } from "../../slice/auth";
 import { getLength, getMenusdata } from "../../api/login/Login";
+import { getN, navigationData } from "./navigationData/NavigationData";
+
 let asideMenu = [];
+
 function Aside({ showAsideBar }) {
-  const [parentId, setParentId] = useState(null);
-  const [childId, setChildId] = useState(null);
+  const [selectedMenu, setSelectedMenu] = useState({ parentId: null, childId: null, subSubId: null });
   const [countLaenData, setCountLenData] = useState(null);
   const [mainMenus, setMainMenus] = useState();
-  const [tokenUpdated, setTokenUpdated] = useState();
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
-  console.log(location, "location");
-
   const menuClicked = (parentId) => {
-    setParentId((prev) => (prev === parentId ? null : parentId));
-    setChildId(null);
+    setSelectedMenu((prev) => ({
+      ...prev,
+      parentId: prev.parentId === parentId ? null : parentId,
+      childId: null,
+      subSubId: null,
+    }));
   };
+
   const subMenuClicked = (e, childId) => {
-    setChildId((prev) => (prev === childId ? null : childId));
     e.stopPropagation();
+    setSelectedMenu((prev) => ({
+      ...prev,
+      childId: prev.childId === childId ? null : childId,
+      subSubId: null,
+    }));
   };
 
   const handleLogOut = () => {
@@ -43,124 +49,125 @@ function Aside({ showAsideBar }) {
     asideMenu.forEach((item) => {
       item?.subMenus.map((submenu) => {
         if (submenu.path === modifiedPath) {
-          setChildId(submenu.uniqueId);
-          setParentId(item.uniqueId);
+          setSelectedMenu({
+            childId: submenu.uniqueId,
+            parentId: item.uniqueId,
+            subSubId: null,
+          });
         }
       });
     });
-  }, []);
+  }, [location]);
+
   const getCountData = async () => {
     try {
-      const response = await getLength()
-      setCountLenData(response?.data)
+      const response = await getLength();
+      setCountLenData(response?.data);
     } catch (error) {
-      alert(error.message)
+      alert(error.message);
     }
-  }
+  };
 
+  asideMenu = navigationData(countLaenData);
 
-  asideMenu = navigationData(countLaenData)
-
-  //  ------------------Navigation Data Apis------------
-
-  const getMensAllData = async () => {
+  const getMenusAllData = async () => {
     try {
-      const menusRes = await getMenusdata()
-      setMainMenus(menusRes?.data)
+      const menusRes = await getMenusdata();
+      setMainMenus(menusRes?.data);
     } catch (error) {
-      alert(error?.message)
+      alert(error?.message);
     }
-  }
-
+  };
 
   useEffect(() => {
-   
-    getCountData()
-    const modifiedPath = location.pathname.replace("/", "");
-
-    const foundSubMenu = asideMenu
-      .flatMap((item) => item?.subMenus || [])
-      .find((submenu) => submenu.path === modifiedPath);
-
-    if (foundSubMenu) {
-      setChildId(foundSubMenu.uniqueId);
-      const parentItem = asideMenu.find((item) =>
-        item.subMenus?.includes(foundSubMenu)
-      );
-      if (parentItem) {
-        setParentId(parentItem.uniqueId);
-      }
-    }
+    getCountData();
+    getMenusAllData();
   }, []);
-  useEffect(() => {
-    getMensAllData()
-    setTokenUpdated(location.state)
-  }, [])
+
   return (
     <>
-      <div
-        className={`deznav ${!showAsideBar ? "showMenu" : "hideMenu"}`}
-        id="abcd"
-      >
-        <div className="deznav-scroll mm-active d-flex flex-column justify-content-between ">
+      <div className={`deznav ${!showAsideBar ? "showMenu" : "hideMenu"}`} id="abcd">
+        <div className="deznav-scroll d-flex flex-column justify-content-between h-100">
+          {/* Main Menu Content */}
           <ul className="metismenu mm-show flex-1" id="menu">
-            <li className={`mm-active hideDarrow  ${!showAsideBar ? "hide" : ""}`}>
+            <li className={`mm-active hideDarrow ${!showAsideBar ? "hide" : ""}`}>
               <Link className="" to={mainMenus?.dashboard?.frontRoute} aria-expanded="false">
                 <span className="menu-icon">
                   <MdDashboard />
                 </span>
-                <span className={`nav-text`}> {t("Dashboard")} </span>
+                <span className="nav-text"> {t("Dashboard")} </span>
               </Link>
             </li>
-            {mainMenus ? (<>
-              {mainMenus?.role?.map((item, i) => {
-                return (
+
+            {/* Main menus rendering */}
+            {mainMenus ? (
+              <>
+                {mainMenus?.role?.map((item, i) => (
                   <li
-                    className={`mm-active ${!showAsideBar ? "hide" : ""} ${parentId === item.uniqueId ? "active" : ""
-                      }`}
+                    className={`mm-active ${!showAsideBar ? "hide" : ""} ${selectedMenu.parentId === item.uniqueId ? "active" : ""}`}
                     onClick={() => menuClicked(item.uniqueId)}
                     key={i}
                   >
                     <Link className="has-arrow" aria-expanded="false">
-                      <div className="">
-                        <div className="menu-icon">
-                          {/* <span>{item?.icon}</span> */}
-                          <span>{"⍟"}</span>
-                          {/* <span>
-                          <img src={asidemainmodicon} alt="" width={15}/>
-                        </span> */}
-                        </div>
-                        <span className={`nav-text`}>  {t(item?.title)}</span>
+                      <div className="menu-icon">
+                        <span>{"⍟"}</span>
                       </div>
+                      <span className="nav-text">{t(item?.title)}</span>
                     </Link>
 
-                    <ul
-                      aria-expanded="false"
-                      className={`mm-collapse left ${item.uniqueId === parentId ? "mm-show" : ""
-                        }`}
-                    >
-                      {item?.subMenus?.map((subItem, i) => {
-                        return (
-                          <li
-                            className={`mm-active sidebar-content ${childId === subItem.uniqueId ? "active" : ""
-                              }`}
-                            onClick={(e) => subMenuClicked(e, subItem.uniqueId)}
-                          >
-                            <Link to={subItem?.path} className="mm-active">
-                              {t(subItem?.title)}
-                            </Link>
-                          </li>
-                        );
-                      })}
+                    {/* Sub-menus */}
+                    <ul aria-expanded="false" className={`mm-collapse left ${selectedMenu.parentId === item.uniqueId ? "mm-show" : ""}`}>
+                      {item?.subMenus?.map((subItem, i) => (
+                        <li
+                          className={`mm-active sidebar-content  ${selectedMenu.childId === subItem.id ? "active" : ""}`}
+                          onClick={(e) => subMenuClicked(e, subItem.id)}
+                          key={i}
+                        >
+                          <Link to={subItem?.path} className={`mm-active ${subItem?.subSubModule?.length > 0 ? "has-arrow" : ""}`}>
+                            {t(subItem?.title)}
+                          </Link>
+
+                          {/* Sub-sub menus */}
+                          <ul aria-expanded="false" className={`mm-collapse left ${selectedMenu.childId === subItem.id ? "mm-show" : ""}`}>
+                            {subItem?.subSubModule?.map((subSubItem, i) => (
+                              <li
+                                className={`mm-active sidebar-content ${selectedMenu.subSubId === subSubItem.id ? "active" : ""}`}
+                                key={i}
+                              >
+                                <Link to={subSubItem?.path} className="mm-active pl-2">
+                                  {t(subSubItem?.title)}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </li>
+                      ))}
                     </ul>
                   </li>
-                );
-              })}
-            </>) : <span className={`nav-text`} style={{ padding: "0.825rem 1.875rem" }}><Spinner animation="grow" size="sm" className="me-2" /><small>Loading ...... </small></span>}
+                ))}
+              </>
+            ) : (
+              <span className="nav-text" style={{ padding: "0.825rem 1.875rem" }}>
+                <Spinner animation="grow" size="sm" className="me-2" />
+                <small>Loading ...... </small>
+              </span>
+            )}
           </ul>
+
+          
         </div>
+        <div className="footer-actions d-flex flex-column align-items-center">
+            <button
+              className="btn border border-2 w-100"
+              type="button"
+              onClick={handleLogOut}
+            >
+              <CgLogOut /> <span>Log out</span>
+            </button>
+          </div>
       </div>
     </>
   );
 }
+
 export default Aside;

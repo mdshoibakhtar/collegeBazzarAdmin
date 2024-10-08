@@ -72,6 +72,9 @@ function ListRole({ onChangeVal, dmtTtxn, loading, dmtExcelTtxn, getDmtTxnData, 
                                                     <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Employee Name: activate to sort column ascending" style={{ width: '203.45px' }}>
                                                         Name
                                                     </th>
+                                                    <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Employee Name: activate to sort column ascending" style={{ width: '203.45px' }}>
+                                                        Company Name
+                                                    </th>
                                                     <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Contact Number: activate to sort column ascending" style={{ width: '161.675px' }}>
                                                         Slug	</th>
                                                     <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Contact Number: activate to sort column ascending" style={{ width: '161.675px' }}>
@@ -106,6 +109,7 @@ function ListRole({ onChangeVal, dmtTtxn, loading, dmtExcelTtxn, getDmtTxnData, 
                                                             })()}
                                                         </td> */}
                                                         <td> {item?.name}</td>
+                                                        <td> {item?.company_name}</td>
                                                         <td> {item?.slug}</td>
                                                         <td>
                                                             {item?.mainModules?.map((module, index) => (
