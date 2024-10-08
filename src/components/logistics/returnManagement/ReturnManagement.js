@@ -1,16 +1,26 @@
-import { Pagination } from "antd";
-import { Link } from "react-router-dom";
+import { Pagination } from "antd"
+import { Link } from "react-router-dom"
 import Breadcrumbs from "../../../common/breadcrumb/Breadcrumbs";
+import { ReturnManagementModal } from "./returnManagementModal/ReturnManagementModal";
+import { useState } from "react";
 
 
-const CrmDistributionSales = () => {
+export const ReturnManagement = () => {
     const breadCrumbsTitle = {
         id: "1",
-        title_1: "Transaction",
-        title_2: 'CRM Distribution Sales Add',
+        title_1: "Logistics",
+        title_2: 'Return Management',
         path_2: ""
     };
+
+    const [modalShow, setModalShow] = useState(false);
+    const [title, setTitle] = useState('')
+    const openModatl = (titles) => {
+        setTitle(titles)
+        setModalShow(true)
+    }
     return (
+
         <>
             <Breadcrumbs
                 breadCrumbsTitle={breadCrumbsTitle} />
@@ -21,11 +31,11 @@ const CrmDistributionSales = () => {
                         <div className="table-responsive active-projects style-1">
                             <div className="tbl-caption">
                                 <h4 className="heading mb-0">
-                                    CRM Distribution Sales Add
+                                    Return Management
                                 </h4>
-                                <div>
-                                    <Link className="btn btn-primary btn-sm" to="/crm-distribution-sales-add" role="button" aria-controls="offcanvasExample">+ Add New</Link>
-                                </div>
+                                {/* <div>
+                                    <Link className="btn btn-primary btn-sm" to="/vehicle-loading-sheet-add" role="button" aria-controls="offcanvasExample">+ Add New</Link>
+                                </div> */}
                             </div>
                             <div id="empoloyees-tblwrapper_wrapper" className="dataTables_wrapper no-footer">
                                 <div className="dt-buttons">
@@ -37,24 +47,39 @@ const CrmDistributionSales = () => {
                                     <thead>
                                         <tr role="row">
                                             <th style={{ width: '150px' }}>Sr. No.</th>
-                                            <th style={{ width: '150px' }}>Entry Date</th>
-                                            <th style={{ width: '150px' }}>Dealer</th>
-                                            <th style={{ width: '150px' }}>City</th>
-                                            <th style={{ width: '150px' }}>Days</th>
-                                            <th style={{ width: '150px' }}>Update Follow up</th>
-                                            <th style={{ width: '150px' }}>Action</th>
+                                            <th style={{ width: '150px' }}>Inward No.</th>
+                                            <th style={{ width: '150px' }}>Customer Name</th>
+                                            <th style={{ width: '150px' }}>SKU</th>
+                                            <th style={{ width: '150px' }}>Barcode</th>
+                                            <th style={{ width: '150px' }}>	Serial No.</th>
+                                            <th style={{ width: '150px' }}>Category</th>
+                                            <th style={{ width: '150px' }}>Brand</th>
+                                            <th style={{ width: '150px' }}>Call. NO.</th>
+                                            <th style={{ width: '150px' }}>Service Status</th>
+                                            <th style={{ width: '150px' }}>Company Status</th>
+                                            <th style={{ width: '150px' }}>Party Status</th>
+                                            {/* <th style={{ width: '150px' }}>Action</th> */}
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr role="row" className="odd" >
-                                            <td colSpan={7}>No Data Found !</td>
-
-
-
+                                            <td >1</td>
+                                            <td >763</td>
+                                            <td >01-Aug-2024</td>
+                                            <td >BADAMIKAR AND SONS (OWN STOCK)</td>
+                                            <td >LIEBHERR REF DB 2224-20</td>
+                                            <td >4059303000299</td>
+                                            <td >190040157001090062951</td>
+                                            <td >REFRIGERATOR</td>
+                                            {/* <td >	Brand</td> */}
+                                            <td >VD0924-0102</td>
+                                            <td ><button type="button" className="btn btn-success" onClick={() => openModatl('Register complaint')}>Pending</button></td>
+                                            <td ><button type="button" className="btn btn-success" onClick={() => openModatl('Company Status')}>Pending</button></td>
+                                            <td ><button type="button" className="btn btn-success" onClick={() => openModatl('Account Status')}>Pending</button></td>
 
                                             {/* <td>
                                                 <div className="d-flex">
-                                                    <Link to={`#`} className="btn btn-primary shadow btn-xs sharp me-1">
+                                                    <Link to={`/vehicle-loading-sheet-deatils`} className="btn btn-primary shadow btn-xs sharp me-1">
                                                         <IoEyeSharp />
                                                     </Link>
 
@@ -93,8 +118,14 @@ const CrmDistributionSales = () => {
                     </div>
                 </div>
             </div>
+
+            <ReturnManagementModal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+                title={title}
+            />
+
         </>
+
     )
 }
-
-export default CrmDistributionSales
