@@ -549,6 +549,9 @@ import CrmDistributionCollectionPage from "./pages/transaction/crmDistributionCo
 import CrmDistributionCollectionAdd from "./components/transaction/crmDistributionCollection/crmDistributionCollectionAdd/CrmDistributionCollectionAdd";
 import { CrmDistributionSalesPage } from "./pages/transaction/crmDistributionSales";
 import CrmDistributionSalesAdd from "./components/transaction/crmDistributionSales/crmDistributionSalesAdd/CrmDistributionSalesAdd";
+import FilesPage from "./pages/CustomerView/files/FilesPage";
+import Vaultpage from "./pages/CustomerView/vault/Vaultpage";
+import ReminderPage from "./pages/CustomerView/reminder/ReminderPage";
 import StockJournalOutwardPage from "./pages/logistics/stockJournalOutward";
 import StockJournalOutwardAdd from "./components/logistics/stockJournalOutward/stockJournalOutwardAdd/StockJournalOutwardAdd";
 import VehicleLoadingSheetPage from "./pages/logistics/vehicleLoadingSheet";
@@ -562,6 +565,22 @@ import TalukaWiseDealerListPage from "./pages/electronicsReports/accountReport/t
 import GroupSummaryPage from "./pages/electronicsReports/accountReport/groupSummary";
 
 // -------------------------DAUD----IMPORT-End----------------
+
+import Budget from "./pages/budgetlist";
+import AddNewBudget from "./pages/addgudget";
+import Costing from "./pages/costinglist";
+import CostingForm from "./pages/costingform";
+import SimpleList from "./pages/sample";
+import AddNewSimple from "./pages/addnewsample";
+import ShipmentList from "./pages/shipmentlist";
+import AddNewShipment from "./pages/Addnewshipment";
+import ProductList from "./pages/productlist";
+import DailyProduction from "./pages/dailyproduction";
+import StartDays from "./components/start-day/StartDays";
+import VehicleType from "./components/topNavigationComp/masters/veicle/VehicleType";
+import VehicleTypeForm from "./components/topNavigationComp/masters/veicle/MasterForm/VehicleTypeForm";
+import TourType from "./components/topNavigationComp/masters/Toure/TourType";
+import ToureTypeForm from "./components/topNavigationComp/masters/Toure/MasterForm/ToureTypeForm";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -1930,6 +1949,21 @@ function App() {
               <Route path="addnewbooking" element={<AddNewBooking />} />
 
 
+
+              {/* atif routes */}
+              <Route path="budgetlist" element={<Budget />} />
+              <Route path="addnewbudget" element={<AddNewBudget />} />
+              <Route path="costinglist" element={<Costing />} />
+              <Route path="costingform" element={<CostingForm />} />
+              <Route path="samplelist" element={<SimpleList />} />
+              <Route path="addnewsample" element={<AddNewSimple />} />
+              <Route path="shipment" element={<ShipmentList />} />
+              <Route path="newshipment" element={<AddNewShipment />} />
+              <Route path="productlist" element={<ProductList />} />
+              <Route path="dailyproduction" element={<DailyProduction />} />
+
+
+
               <Route path="customer-view/:id" element={<MainCustomerrView />}>
                 <Route path="" element={<LeadDetail />} />
                 <Route path="contacts" element={<ContactTable title='Contacts' />} />
@@ -1944,9 +1978,22 @@ function App() {
                 <Route path="estimates-view-listview" element={<Estimate style={true} title='Estimates' />} />
                 <Route path="tickets-view" element={<TicketsPage style={true} title='Tickets' />} />
                 <Route path="service" element={<ServiceList style={true} title='Service request' />} />
+                <Route path="files-view" element={<FilesPage style={true} title='Files' />} />
+                <Route path="vault-view" element={<Vaultpage style={true} title='Vault' />} />
+                <Route path="reminders-view" element={<ReminderPage style={true} title='Reminders' />} />
               </Route>
               <Route path="estimates-add" element={<EstimateForm style={true} title='Estimates Add' />} />
               <Route path="ticket-add" element={<TicketForm />} />
+
+              <Route path="day-start" element={<StartDays />} />
+
+              <Route path="Vehicle-Type" element={<VehicleType />} />
+              <Route path="create-vehicle-type" element={<VehicleTypeForm />} />
+              <Route path="create-vehicle-type/:id" element={<VehicleTypeForm />} />
+
+              <Route path="tour-type" element={<TourType />} />
+              <Route path="create-tour-type" element={<ToureTypeForm />} />
+              <Route path="create-tour-type/:id" element={<ToureTypeForm />} />
 
               <Route path="*" element={<PageNotFound />} />
             </Route>

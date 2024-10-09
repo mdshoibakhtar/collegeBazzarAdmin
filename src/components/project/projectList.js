@@ -16,7 +16,7 @@ const tablehead = [
 const TableTitle = [
     {id: "0", subtitle : [
         {id:"0.0", color: "primary", title: "3"},
-        {id:"0.1", color: "primary", title: "Brochure Design"},
+        {id:"0.1", color: "primary", title: "lorem 1"},
         {id:"0.2", color: "primary", title: "Kuhic LLC"},
         {id:"0.3", color: "border", title: "SEO Optimization"},
         {id:"0.4", color: "", title: "2024-10-01"},
@@ -26,7 +26,7 @@ const TableTitle = [
     ]},
     {id: "1", subtitle : [
         {id:"1.0", color: "primary", title: "1"},
-        {id:"1.1", color: "primary", title: "Build Website"},
+        {id:"1.1", color: "primary", title: "lorem 2"},
         {id:"1.2", color: "primary", title: "Gaylord-Leannon"},
         {id:"1.3", color: "border", title: "wordpress"},
         {id:"1.4", title: "2024-10-01"},
@@ -36,7 +36,7 @@ const TableTitle = [
     ]},
     {id: "1", subtitle : [
         {id:"1.0", color: "primary", title: "1"},
-        {id:"1.1", color: "primary", title: "Build Website"},
+        {id:"1.1", color: "primary", title: "lorem 3"},
         {id:"1.2", color: "primary", title: "Gaylord-Leannon"},
         {id:"1.3", color: "border", title: "wordpress"},
         {id:"1.4", title: "2024-10-01"},
@@ -46,7 +46,7 @@ const TableTitle = [
     ]},
     {id: "1", subtitle : [
         {id:"1.0", color: "primary", title: "1"},
-        {id:"1.1", color: "primary", title: "Build Website"},
+        {id:"1.1", color: "primary", title: "lorem 4"},
         {id:"1.2", color: "primary", title: "Gaylord-Leannon"},
         {id:"1.3", color: "border", title: "wordpress"},
         {id:"1.4", title: "2024-10-01"},
@@ -56,7 +56,7 @@ const TableTitle = [
     ]},
     {id: "1", subtitle : [
         {id:"1.0", color: "primary", title: "1"},
-        {id:"1.1", color: "primary", title: "Build Website"},
+        {id:"1.1", color: "primary", title: "lorem 5"},
         {id:"1.2", color: "primary", title: "Gaylord-Leannon"},
         {id:"1.3", color: "border", title: "wordpress"},
         {id:"1.4", title: "2024-10-01"},
@@ -66,7 +66,7 @@ const TableTitle = [
     ]},
     {id: "1", subtitle : [
         {id:"1.0", color: "primary", title: "1"},
-        {id:"1.1", color: "primary", title: "Build Website"},
+        {id:"1.1", color: "primary", title: "lorem 6"},
         {id:"1.2", color: "primary", title: "Gaylord-Leannon"},
         {id:"1.3", color: "border", title: "wordpress"},
         {id:"1.4", title: "2024-10-01"},
@@ -84,7 +84,7 @@ export default function ProjectList(){
                     <th key={i} className="main-th">{Item.title}</th>
                     )}
                 </tr>
-                {TableTitle.map((item, i)=>
+                 {TableTitle.map((item, i)=>
                 <tr key={i}>
                     {item.subtitle.map((text, y)=>
                         <td key={y} className={`sec-td`}><Link to="/" className={`${text.color}`}>{text.title}</Link></td>

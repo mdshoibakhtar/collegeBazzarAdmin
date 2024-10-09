@@ -1,10 +1,10 @@
 import React from "react";
 
-export default function NewOrderTable(){
+export default function NewOrderTable({table}){
     return(
         <div className="mt-3">
             <div className="overflow-scroll p-2">
-            <table  >
+            {table && <table  >
                 <tr>
                     <th className="border text-nowrap text-bold p-2">STYLE</th>
                     <th className="border text-nowrap text-bold p-2">COLOR</th>
@@ -29,7 +29,7 @@ export default function NewOrderTable(){
                     <td className="border">0</td>
                     <td className="border">0</td>
                 </tr>
-            </table>
+            </table>}
         </div>
         <div className="mt-3">
             <ul className="d-flex gap-2 justify-content-center ">

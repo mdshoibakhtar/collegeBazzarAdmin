@@ -33,6 +33,7 @@
     "react-csv": "^2.2.2",
     "react-datepicker": "^7.3.0",
     "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.9",
     "react-fancybox": "^0.2.5",
     "react-i18next": "^14.0.5",
     "react-icons": "^5.0.1",

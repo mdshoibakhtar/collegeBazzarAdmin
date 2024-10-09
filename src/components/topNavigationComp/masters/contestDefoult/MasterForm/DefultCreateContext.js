@@ -25,6 +25,7 @@ function DefultCreateContext() {
         isFree: true,
         start_time: "",
         end_time: "",
+        banner_image: '',
         rankingRewards: [{ minRank: "", maxRank: "", reward: "" }],
     });
 
@@ -92,18 +93,7 @@ function DefultCreateContext() {
         }
     }
 
-    const handleChangeImage = async (e) => {
-        const image = new FormData()
-        image.append('image', e.target.files[0])
-        try {
-            const res = await clodinaryImage(image)
-            setTimeout(() => {
-                setImage(res.data?.data?.url)
-            }, 1000);
-        } catch (error) {
-
-        }
-    }
+ 
 
     useEffect(() => {
         const fetchContestData = async () => {
@@ -117,22 +107,40 @@ function DefultCreateContext() {
                     maxSpots: response?.data?.maxSpots || 0,
                     entryFee: response?.data?.entryFee || 0,
                     winnerPercentage: response?.data?.winnerPercentage || 0,
-                    isFree: response?.data?.isFree || true,
+                    isFree: response?.data?.isFree,
                     start_time: response?.data?.start_date 
-                        ? new Date(response?.data?.start_date).toISOString().slice(0, 16) 
+                        ? new Date(response?.data?.start_date).toISOString().slice(11, 16)  // Format as HH:MM
                         : "",
                     end_time: response?.data?.end_date 
-                        ? new Date(response?.data?.end_date).toISOString().slice(0, 16) 
+                        ? new Date(response?.data?.end_date).toISOString().slice(11, 16)  // Format as HH:MM
                         : "",
                     rankingRewards: response?.data?.rankingRewards || [{ minRank: "", maxRank: "", reward: "" }],
                 });
+                
+                setImage(response?.data?.banner_image);
             }
         };
-    
+        
+
         fetchContestData();
         getDatas();
     }, [params?.id]);
-    
+
+
+
+    const handleChangeImage = async (e) => {
+        const image = new FormData()
+        image.append('image', e.target.files[0])
+        try {
+            const res = await clodinaryImage(image)
+            setTimeout(() => {
+                setImage(res.data?.data?.url)
+            }, 1000);
+        } catch (error) {
+
+        }
+    }
+
 
     return (
         <>
@@ -280,6 +288,16 @@ function DefultCreateContext() {
                                                     onBlur={handleBlur}
                                                     name="end_time"
                                                 />
+                                            </div>
+                                            <div className="col-xl-4 mb-3">
+                                                <h6>Banner Image</h6>
+                                                <CustomInputField
+                                                    type="file"
+                                                    onChange={handleChangeImage}
+                                                    onBlur={handleBlur}
+                                                    name="end_date"
+                                                />
+                                                {image && <img src={`${baseUrlImage}${image}`} />}
                                             </div>
 
                                             <div className="col-xl-12 mb-3">
