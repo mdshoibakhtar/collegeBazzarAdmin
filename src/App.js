@@ -558,6 +558,12 @@ import VehicleLoadingSheetPage from "./pages/logistics/vehicleLoadingSheet";
 import VehicleLoadingSheetAdd from "./components/logistics/vehicleLoadingSheet/vehicleLoadingSheetAdd/VehicleLoadingSheetAdd";
 import VehicleLoadingSheetDeatils from "./components/logistics/vehicleLoadingSheet/vehicleLoadingSheetDetails/VehicleLoadingSheetDeatils";
 import { ReturnManagementPage } from "./pages/logistics/returnManagement";
+import WarehouseStocktransferPage from "./pages/logistics/warehouseStocktransfer";
+import WarehouseStocktransferAdd from "./components/logistics/warehouseStocktransfer/warehouseStocktransferAdd/WarehouseStocktransferAdd";
+import LedgerReportsPage from "./pages/electronicsReports/accountReport/ledgerReports";
+import TalukaWiseDealerListPage from "./pages/electronicsReports/accountReport/talukaWiseDealerList";
+import GroupSummaryPage from "./pages/electronicsReports/accountReport/groupSummary";
+
 // -------------------------DAUD----IMPORT-End----------------
 
 import Budget from "./pages/budgetlist";
@@ -1716,6 +1722,15 @@ function App() {
               <Route path="vehicle-loading-sheet-add" element={<VehicleLoadingSheetAdd />} />
               <Route path="vehicle-loading-sheet-deatils" element={<VehicleLoadingSheetDeatils />} />
               <Route path="return-management" element={<ReturnManagementPage />} />
+              <Route path="warehouse-stock-transfer" element={<WarehouseStocktransferPage />} />
+              <Route path="warehouse-stock-transfer-add" element={<WarehouseStocktransferAdd />} />
+              <Route path="ledger-report" element={<LedgerReportsPage heading={'Ledger Report'} />} />
+              <Route path="ledger-report-running-bal" element={<LedgerReportsPage heading={'Ledger Report Running Bal'} />} />
+              <Route path="cash-book" element={<LedgerReportsPage heading={'Cash Book'} />} />
+              <Route path="ledger-report-detailed" element={<LedgerReportsPage heading={'Ledger Report Detailed'} />} />
+              <Route path="taluka-wise-dealer-list" element={<TalukaWiseDealerListPage />} />
+              <Route path="group-summary" element={<GroupSummaryPage />} />
+
 
 
               {/* -----------------Goatx Routes-------- */}
