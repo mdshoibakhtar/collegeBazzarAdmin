@@ -549,6 +549,11 @@ import CrmDistributionCollectionPage from "./pages/transaction/crmDistributionCo
 import CrmDistributionCollectionAdd from "./components/transaction/crmDistributionCollection/crmDistributionCollectionAdd/CrmDistributionCollectionAdd";
 import { CrmDistributionSalesPage } from "./pages/transaction/crmDistributionSales";
 import CrmDistributionSalesAdd from "./components/transaction/crmDistributionSales/crmDistributionSalesAdd/CrmDistributionSalesAdd";
+import InwordOutwardRegister from "./components/logistics/reports/inwordOutwardRegister/InwordOutwardRegister";
+import BillButnotDispatch from "./components/logistics/reports/billButNotDispatch/BillButnotDispatch";
+import Materialinbutpurch from "./components/logistics/reports/materialinbutpurch/Materialinbutpurch";
+import PurchaseNotmatched from "./components/logistics/reports/purchaseNotmatched/PurchaseNotmatched";
+import PurchaseInward from "./components/logistics/reports/purchaseInward/PurchaseInward";
 // -------------------------DAUD----IMPORT-End----------------
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1901,6 +1906,11 @@ function App() {
               <Route path="addneworder" element={<AddNewOrder />} />
               <Route path="bookinglist" element={<BookingList />} />
               <Route path="addnewbooking" element={<AddNewBooking />} />
+              <Route path="inward/outtward-register" element={<InwordOutwardRegister />} />
+              <Route path="billed-but-not-dispatched" element={<BillButnotDispatch />} />
+              <Route path="material-in-but-purchase-not-made" element={<Materialinbutpurch />} />
+              <Route path="purchase-not-matched-with-Inward" element={<PurchaseNotmatched />} />
+              <Route path="purchase-&-Inward" element={<PurchaseInward />} />
 
               
               <Route path="customer-view/:id" element={<MainCustomerrView />}>
