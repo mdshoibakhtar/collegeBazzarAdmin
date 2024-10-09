@@ -1,12 +1,14 @@
-.wrap-filter{
+.wrap-filter {
     justify-content: space-between;
 }
-.wrap-summery{
+
+.wrap-summery {
     background: #fff;
     box-shadow: 0px 0px 3px 1px #6e6e6e;
     border-radius: 10px;
 }
-.wrap-summery .title{
+
+.wrap-summery .title {
     font-size: 20px !important;
     vertical-align: baseline;
     font-weight: 500;
@@ -14,49 +16,61 @@
     padding: 15px;
     padding-bottom: 0px;
 }
-.sepretor{
+
+.sepretor {
     margin-top: 20x;
     gap: 15px;
     padding: 15px;
     padding-top: 0px;
     border-bottom: 2px solid #e2e8f0;
 }
-.sepretor li{
-    border-right: 1px solid black; 
+
+.sepretor li {
+    border-right: 1px solid black;
     padding-right: 50px;
 }
-.sepretor li:last-child{
+
+.sepretor li:last-child {
     border: none;
 }
-.sepretor li a{
+
+.sepretor li a {
     font-size: 16px;
 }
-.sepretor li a span{
+
+.sepretor li a span {
     font-size: 18px;
     margin-right: 8px;
     color: black !important;
     font-weight: 500;
 }
-.primary{
+
+.primary {
     color: blue;
 }
-.danger{
+
+.danger {
     color: red;
 }
-.success{
+
+.success {
     color: green;
 }
-.info{
+
+.info {
     color: skyblue;
 }
-.main-tab{
+
+.main-tab {
     width: 100%;
 }
-.main-tr{
+
+.main-tr {
     padding: 20px;
     background-color: #F8FAFC;
 }
-.main-th{
+
+.main-th {
     padding: 10px;
     border-color: rgba(226, 232, 240, .7);
     border: 1px rgba(226, 232, 240, .7);
@@ -66,49 +80,60 @@
     font-weight: 500;
 
 }
-.sec-td{
+
+.sec-td {
     padding: 10px 0px 25px 0px;
     font-size: 14px;
     border-color: #EBEFF4;
-    border-bottom:  1px #EBEFF4;
+    border-bottom: 1px #EBEFF4;
     border-style: solid;
     padding: 10px;
 }
-.border-b{
-    border-bottom:  2px solid #EBEFF4; 
+
+.border-b {
+    border-bottom: 2px solid #EBEFF4;
 }
-.limit{
+
+.limit {
     width: 80px;
     border-color: #EBEFF4;
 }
-.limit:focus{
-    border-color:blue ;
+
+.limit:focus {
+    border-color: blue;
 }
-.exp-btn{
+
+.exp-btn {
     border: 1px solid #EBEFF4;
     border-radius: 8px;
     overflow: hidden;
 }
-.exp-btn button{
+
+.exp-btn button {
     border: none;
-    background: white; 
+    background: white;
     padding: 3px 0px;
 }
-.exp-btn button:first-child{
+
+.exp-btn button:first-child {
     border-right: 1px solid #EBEFF4;
 }
-.exp-btn button:hover{
+
+.exp-btn button:hover {
     background: rgb(241, 250, 253);
 }
-.search{
+
+.search {
     width: 100px;
     border: none;
     padding: 3px;
 }
-.p-6{
+
+.p-6 {
     padding: 30px;
 }
-.num{
+
+.num {
     width: 40px;
     text-align: center;
     display: flex;
@@ -118,16 +143,56 @@
     color: white;
     background: blue;
 }
-.border{
+
+.border {
     border: 1px solid #EBEFF4;
     padding: 3px;
     border-radius: 5px;
 }
-.wrap-newProject{
+
+.wrap-newProject {
     max-width: 700px;
     margin: 40px auto;
 }
-.active{
+
+.active {
     color: blue;
     border-bottom: 1px solid blue;
+}
+
+
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.8);
+    /* White overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    /* Ensure it's above other elements */
+}
+
+.spinner {
+    border: 16px solid #f3f3f3;
+    /* Light grey */
+    border-top: 16px solid #3498db;
+    /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
