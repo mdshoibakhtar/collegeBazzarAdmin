@@ -7,7 +7,7 @@ export default function FilterProject(){
     return(
         <div className="d-flex wrap-filter">
             <ul className="d-flex">
-                <li><Link to="/project/newproject" className="btn btn-primary mx-0"><IoMdAdd /> New project</Link></li>
+                <li><Link to="newproject" className="btn btn-primary mx-0"><IoMdAdd /> New project</Link></li>
                 <li><Link to="/" className="btn btn-outline-light bg-white"><CgMenuLeftAlt /></Link></li>
             </ul>
             <ul>

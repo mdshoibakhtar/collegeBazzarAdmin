@@ -33,8 +33,8 @@ function ConvertStatusMasterList({ data, totalCount, page, count, onChangeVal, c
                                                 <tr role="row">
                                                     <th style={{ width: '50px' }}>S.No</th>
                                                     <th style={{ width: '200px' }}>Contest Name</th>
-                                                    <th style={{ width: '150px' }}>Contest Type</th>
-                                                    <th style={{ width: '150px' }}>Market Type</th>
+                                                    {/* <th style={{ width: '150px' }}>Contest Type</th>
+                                                    <th style={{ width: '150px' }}>Market Type</th> */}
                                                     <th style={{ width: '150px' }}>Joining Amount</th>
                                                     <th style={{ width: '150px' }}>Reward</th>
                                                     <th style={{ width: '150px' }}>Max Spots</th>
@@ -51,8 +51,8 @@ function ConvertStatusMasterList({ data, totalCount, page, count, onChangeVal, c
                                                         <tr role="row" key={item?._id}>
                                                             <td>{(i + 1) + (page * count)}</td>
                                                             <td>{item?.name}</td>
-                                                            <td>{item?.contest_type?.title}</td>
-                                                            <td>{item?.market_type?.name}</td>
+                                                            {/* <td>{item?.contest_type?.title}</td>
+                                                            <td>{item?.market_type?.name}</td> */}  
                                                             <td>{item?.entryFee}</td>
                                                             <td>{item?.reward}</td>
                                                             <td>{item?.maxSpots}</td>
