@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import DearMearchantPopUp from "../../common/dearMearchantPopUp/DearMearchantPopUp"
-import Breadcrumbs from "../../common/breadcrumb/Breadcrumbs";
-import { DashboardGet, getLength, getMenusdata } from "../../api/login/Login";
+// import DearMearchantPopUp from "../../common/dearMearchantPopUp/DearMearchantPopUp"
+
+import { DashboardGet, getLength, getMenusdata } from "../../../api/login/Login";
 import { FaBookReader, FaGlobeEurope } from "react-icons/fa";
 import { PiStudentBold } from "react-icons/pi";
 import { MdOutlinePayment } from "react-icons/md";
 import { TopTenColleges } from "./TopTenColleges";
-import StaffKycModal from "../../common/staffKycmodal/StaffKycModal";
+// import StaffKycModal from "../../common/staffKycmodal/StaffKycModal";
 import { FaSchool } from "react-icons/fa";
 import TopTenCourse from "./TopTenCourse";
 import TopTenCountries from "./TopTenCountries";
+import Breadcrumbs from "../../../common/breadcrumb/Breadcrumbs";
 
 
 function DasBoardRight() {
@@ -56,7 +57,7 @@ function DasBoardRight() {
     return (
         <>
             <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
-           
+
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-xl-9 wid-100">
@@ -169,7 +170,7 @@ function DasBoardRight() {
                                     <div className="card-body  p-0" style={{ position: 'relative' }}>
                                         <TopTenColleges dasboradData={dasboradData} />
                                         <TopTenCourse />
-                                        <TopTenCountries/>
+                                        <TopTenCountries />
                                     </div>
                                 </div>
                             </div>

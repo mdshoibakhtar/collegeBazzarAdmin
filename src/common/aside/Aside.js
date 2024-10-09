@@ -21,6 +21,8 @@ function Aside({ showAsideBar }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
+  const [loader, setLoader] = useState(false)
+
   const menuClicked = (parentId) => {
     setSelectedMenu((prev) => ({
       ...prev,
@@ -71,11 +73,14 @@ function Aside({ showAsideBar }) {
   asideMenu = navigationData(countLaenData);
 
   const getMenusAllData = async () => {
+    setLoader(true)
     try {
       const menusRes = await getMenusdata();
       setMainMenus(menusRes?.data);
+      setLoader(false)
     } catch (error) {
       alert(error?.message);
+      setLoader(false)
     }
   };
 
@@ -154,17 +159,17 @@ function Aside({ showAsideBar }) {
             )}
           </ul>
 
-          
+
         </div>
         <div className="footer-actions d-flex flex-column align-items-center">
-            <button
-              className="btn border border-2 w-100"
-              type="button"
-              onClick={handleLogOut}
-            >
-              <CgLogOut /> <span>Log out</span>
-            </button>
-          </div>
+          <button
+            className="btn border border-2 w-100"
+            type="button"
+            onClick={handleLogOut}
+          >
+            <CgLogOut /> <span>Log out</span>
+          </button>
+        </div>
       </div>
     </>
   );
