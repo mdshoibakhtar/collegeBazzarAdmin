@@ -47,7 +47,7 @@ function StaffKycDetails({ imagePreviews, submitForm, setFieldValue, handleColod
                                                         <div className="card-body p-0 m-4">
                                                             <div className="table-responsive active-projects style-1 style-11">
                                                                 <div className="tbl-caption justify-content-center">
-                                                                    <h4 className="heading mb-0 border p-1 rounded udtfont"><b>{field.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</b></h4>
+                                                                    <h4 className="heading mb-0 border p-1 rounded udtfont"><b>{field.split('_').map(word => word.charAt(0)?.toUpperCase() + word.slice(1)).join(' ')}</b></h4>
                                                                 </div>
                                                                 <div className="card mt-3" style={{}} onClick={() => { CLickImgShow(initialValues?.[field]) }}>
                                                                     {initialValues?.[field] ? (
@@ -66,14 +66,14 @@ function StaffKycDetails({ imagePreviews, submitForm, setFieldValue, handleColod
                                                                     ) : (
                                                                         <div className="preferably-square">
                                                                             <div className='text-center text-uppercase'><small>Doc Not Uploaded</small></div>
-                                                                            <figcaption className='text-center p-2'><strong>{`${field.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')} Not Found`}</strong></figcaption>
+                                                                            <figcaption className='text-center p-2'><strong>{`${field.split('_').map(word => word.charAt(0)?.toUpperCase() + word.slice(1)).join(' ')} Not Found`}</strong></figcaption>
                                                                         </div>
                                                                     )}
                                                                     <div className="eyeV"><FaEye /></div>
                                                                 </div>
                                                             </div>
                                                             <div className={`upload-btn-wrapper ${aproval?.is_approved === "Approved" ? 'd-none' : 'd-block'}`}>
-                                                                <button id="uloadbtn" type='button'><small className='me-2'><LuUpload /></small>{`Upload ${field.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}`}</button>
+                                                                <button id="uloadbtn" type='button'><small className='me-2'><LuUpload /></small>{`Upload ${field.split('_').map(word => word.charAt(0)?.toUpperCase() + word.slice(1)).join(' ')}`}</button>
                                                                 <input type="file" className='w-100' name={field} onChange={(e) => handleColodinaryImage(e, field, setFieldValue)} accept={field === "kyc_video" ? "video/mp4,video/x-m4v,video/*" : "image/*"} />
                                                             </div>
                                                         </div>
@@ -120,7 +120,7 @@ function StaffKycDetails({ imagePreviews, submitForm, setFieldValue, handleColod
                                         <div className="dataTables_paginate paging_simple_numbers" id="empoloyees-tblwrapper_paginate">
                                         </div>
                                         {error ? (<div className='alert'>
-                                            <Alert message="Warning" type="warning" description={error?.message.toUpperCase()} />
+                                            <Alert message="Warning" type="warning" description={error?.message?.toUpperCase()} />
                                         </div>) : ""}
                                     </div>
                                 </div>

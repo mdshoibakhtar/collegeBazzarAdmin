@@ -549,6 +549,11 @@ import CrmDistributionCollectionPage from "./pages/transaction/crmDistributionCo
 import CrmDistributionCollectionAdd from "./components/transaction/crmDistributionCollection/crmDistributionCollectionAdd/CrmDistributionCollectionAdd";
 import { CrmDistributionSalesPage } from "./pages/transaction/crmDistributionSales";
 import CrmDistributionSalesAdd from "./components/transaction/crmDistributionSales/crmDistributionSalesAdd/CrmDistributionSalesAdd";
+import InwordOutwardRegister from "./components/logistics/reports/inwordOutwardRegister/InwordOutwardRegister";
+import BillButnotDispatch from "./components/logistics/reports/billButNotDispatch/BillButnotDispatch";
+import Materialinbutpurch from "./components/logistics/reports/materialinbutpurch/Materialinbutpurch";
+import PurchaseNotmatched from "./components/logistics/reports/purchaseNotmatched/PurchaseNotmatched";
+import PurchaseInward from "./components/logistics/reports/purchaseInward/PurchaseInward";
 import FilesPage from "./pages/CustomerView/files/FilesPage";
 import Vaultpage from "./pages/CustomerView/vault/Vaultpage";
 import ReminderPage from "./pages/CustomerView/reminder/ReminderPage";
@@ -1949,19 +1954,13 @@ function App() {
               <Route path="addnewbooking" element={<AddNewBooking />} />
 
 
+              
+              <Route path="purchase-&-Inward" element={<PurchaseInward />} />
+              <Route path="billed-but-not-dispatched" element={<BillButnotDispatch />} />
 
-              {/* atif routes */}
-              <Route path="budgetlist" element={<Budget />} />
-              <Route path="addnewbudget" element={<AddNewBudget />} />
-              <Route path="costinglist" element={<Costing />} />
-              <Route path="costingform" element={<CostingForm />} />
-              <Route path="samplelist" element={<SimpleList />} />
-              <Route path="addnewsample" element={<AddNewSimple />} />
-              <Route path="shipment" element={<ShipmentList />} />
-              <Route path="newshipment" element={<AddNewShipment />} />
-              <Route path="productlist" element={<ProductList />} />
-              <Route path="dailyproduction" element={<DailyProduction />} />
-
+              <Route path="inward/outtward-register" element={<InwordOutwardRegister />} />
+              <Route path="material-in-but-purchase-not-made" element={<Materialinbutpurch />} />
+              <Route path="purchase-not-matched-with-Inward" element={<PurchaseNotmatched />} />
 
 
               <Route path="customer-view/:id" element={<MainCustomerrView />}>

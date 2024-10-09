@@ -102,8 +102,8 @@ function StaffKycMasterByid() {
                 (position) => {
                     setInitialValues(prevState => ({
                         ...prevState,
-                        latitude: position.coords.latitude,
-                        longitude: position.coords.longitude,
+                        latitude: position?.coords?.latitude,
+                        longitude: position?.coords?.longitude,
                     }));
                 },
                 (error) => {
