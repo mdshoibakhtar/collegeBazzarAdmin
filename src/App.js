@@ -554,7 +554,38 @@ import BillButnotDispatch from "./components/logistics/reports/billButNotDispatc
 import Materialinbutpurch from "./components/logistics/reports/materialinbutpurch/Materialinbutpurch";
 import PurchaseNotmatched from "./components/logistics/reports/purchaseNotmatched/PurchaseNotmatched";
 import PurchaseInward from "./components/logistics/reports/purchaseInward/PurchaseInward";
+import FilesPage from "./pages/CustomerView/files/FilesPage";
+import Vaultpage from "./pages/CustomerView/vault/Vaultpage";
+import ReminderPage from "./pages/CustomerView/reminder/ReminderPage";
+import StockJournalOutwardPage from "./pages/logistics/stockJournalOutward";
+import StockJournalOutwardAdd from "./components/logistics/stockJournalOutward/stockJournalOutwardAdd/StockJournalOutwardAdd";
+import VehicleLoadingSheetPage from "./pages/logistics/vehicleLoadingSheet";
+import VehicleLoadingSheetAdd from "./components/logistics/vehicleLoadingSheet/vehicleLoadingSheetAdd/VehicleLoadingSheetAdd";
+import VehicleLoadingSheetDeatils from "./components/logistics/vehicleLoadingSheet/vehicleLoadingSheetDetails/VehicleLoadingSheetDeatils";
+import { ReturnManagementPage } from "./pages/logistics/returnManagement";
+import WarehouseStocktransferPage from "./pages/logistics/warehouseStocktransfer";
+import WarehouseStocktransferAdd from "./components/logistics/warehouseStocktransfer/warehouseStocktransferAdd/WarehouseStocktransferAdd";
+import LedgerReportsPage from "./pages/electronicsReports/accountReport/ledgerReports";
+import TalukaWiseDealerListPage from "./pages/electronicsReports/accountReport/talukaWiseDealerList";
+import GroupSummaryPage from "./pages/electronicsReports/accountReport/groupSummary";
+
 // -------------------------DAUD----IMPORT-End----------------
+
+import Budget from "./pages/budgetlist";
+import AddNewBudget from "./pages/addgudget";
+import Costing from "./pages/costinglist";
+import CostingForm from "./pages/costingform";
+import SimpleList from "./pages/sample";
+import AddNewSimple from "./pages/addnewsample";
+import ShipmentList from "./pages/shipmentlist";
+import AddNewShipment from "./pages/Addnewshipment";
+import ProductList from "./pages/productlist";
+import DailyProduction from "./pages/dailyproduction";
+import StartDays from "./components/start-day/StartDays";
+import VehicleType from "./components/topNavigationComp/masters/veicle/VehicleType";
+import VehicleTypeForm from "./components/topNavigationComp/masters/veicle/MasterForm/VehicleTypeForm";
+import TourType from "./components/topNavigationComp/masters/Toure/TourType";
+import ToureTypeForm from "./components/topNavigationComp/masters/Toure/MasterForm/ToureTypeForm";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -1690,6 +1721,21 @@ function App() {
               <Route path="crm-distribution-collection-add" element={<CrmDistributionCollectionAdd />} />
               <Route path="crm-distribution-sales" element={<CrmDistributionSalesPage />} />
               <Route path="crm-distribution-sales-add" element={<CrmDistributionSalesAdd />} />
+              <Route path="stock-journal-Outward" element={<StockJournalOutwardPage />} />
+              <Route path="stock-journal-Outward-add" element={<StockJournalOutwardAdd />} />
+              <Route path="vehicle-loading-sheet" element={<VehicleLoadingSheetPage />} />
+              <Route path="vehicle-loading-sheet-add" element={<VehicleLoadingSheetAdd />} />
+              <Route path="vehicle-loading-sheet-deatils" element={<VehicleLoadingSheetDeatils />} />
+              <Route path="return-management" element={<ReturnManagementPage />} />
+              <Route path="warehouse-stock-transfer" element={<WarehouseStocktransferPage />} />
+              <Route path="warehouse-stock-transfer-add" element={<WarehouseStocktransferAdd />} />
+              <Route path="ledger-report" element={<LedgerReportsPage heading={'Ledger Report'} />} />
+              <Route path="ledger-report-running-bal" element={<LedgerReportsPage heading={'Ledger Report Running Bal'} />} />
+              <Route path="cash-book" element={<LedgerReportsPage heading={'Cash Book'} />} />
+              <Route path="ledger-report-detailed" element={<LedgerReportsPage heading={'Ledger Report Detailed'} />} />
+              <Route path="taluka-wise-dealer-list" element={<TalukaWiseDealerListPage />} />
+              <Route path="group-summary" element={<GroupSummaryPage />} />
+
 
 
               {/* -----------------Goatx Routes-------- */}
@@ -1906,13 +1952,17 @@ function App() {
               <Route path="addneworder" element={<AddNewOrder />} />
               <Route path="bookinglist" element={<BookingList />} />
               <Route path="addnewbooking" element={<AddNewBooking />} />
-              <Route path="inward/outtward-register" element={<InwordOutwardRegister />} />
-              <Route path="billed-but-not-dispatched" element={<BillButnotDispatch />} />
-              <Route path="material-in-but-purchase-not-made" element={<Materialinbutpurch />} />
-              <Route path="purchase-not-matched-with-Inward" element={<PurchaseNotmatched />} />
-              <Route path="purchase-&-Inward" element={<PurchaseInward />} />
+
 
               
+              <Route path="purchase-&-Inward" element={<PurchaseInward />} />
+              <Route path="billed-but-not-dispatched" element={<BillButnotDispatch />} />
+
+              <Route path="inward/outtward-register" element={<InwordOutwardRegister />} />
+              <Route path="material-in-but-purchase-not-made" element={<Materialinbutpurch />} />
+              <Route path="purchase-not-matched-with-Inward" element={<PurchaseNotmatched />} />
+
+
               <Route path="customer-view/:id" element={<MainCustomerrView />}>
                 <Route path="" element={<LeadDetail />} />
                 <Route path="contacts" element={<ContactTable title='Contacts' />} />
@@ -1927,9 +1977,22 @@ function App() {
                 <Route path="estimates-view-listview" element={<Estimate style={true} title='Estimates' />} />
                 <Route path="tickets-view" element={<TicketsPage style={true} title='Tickets' />} />
                 <Route path="service" element={<ServiceList style={true} title='Service request' />} />
+                <Route path="files-view" element={<FilesPage style={true} title='Files' />} />
+                <Route path="vault-view" element={<Vaultpage style={true} title='Vault' />} />
+                <Route path="reminders-view" element={<ReminderPage style={true} title='Reminders' />} />
               </Route>
               <Route path="estimates-add" element={<EstimateForm style={true} title='Estimates Add' />} />
               <Route path="ticket-add" element={<TicketForm />} />
+
+              <Route path="day-start" element={<StartDays />} />
+
+              <Route path="Vehicle-Type" element={<VehicleType />} />
+              <Route path="create-vehicle-type" element={<VehicleTypeForm />} />
+              <Route path="create-vehicle-type/:id" element={<VehicleTypeForm />} />
+
+              <Route path="tour-type" element={<TourType />} />
+              <Route path="create-tour-type" element={<ToureTypeForm />} />
+              <Route path="create-tour-type/:id" element={<ToureTypeForm />} />
 
               <Route path="*" element={<PageNotFound />} />
             </Route>

@@ -21,6 +21,8 @@ function Aside({ showAsideBar }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
+  const [loader, setLoader] = useState(false)
+
   const menuClicked = (parentId) => {
     console.log(parentId);
     setSelectedMenu((prev) => ({
@@ -82,11 +84,14 @@ function Aside({ showAsideBar }) {
   asideMenu = navigationData(countLaenData);
 
   const getMenusAllData = async () => {
+    setLoader(true)
     try {
       const menusRes = await getMenusdata();
       setMainMenus(menusRes?.data);
+      setLoader(false)
     } catch (error) {
       alert(error?.message);
+      setLoader(false)
     }
   };
 

@@ -56873,3 +56873,83 @@ input[type="number"]::-webkit-inner-spin-button {
 .set-mat-details h3 {
   margin: 0px;
 }
+
+
+
+
+
+
+
+/* VaultEntry.css */
+
+.vault-entry-container {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #f9fafb;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.vault-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.vault-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #333;
+}
+
+.icons {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-icon, .delete-icon {
+  cursor: pointer;
+}
+
+.vault-details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.left-section, .right-section {
+  width: 45%;
+}
+
+.left-section p, .right-section p {
+  margin: 4px 0;
+  font-size: 0.95rem;
+}
+
+.vault-footer {
+  font-size: 0.85rem;
+  color: #777;
+  border-top: 1px solid #e0e0e0;
+  padding-top: 8px;
+}
+
+.lock-icon {
+  font-size: 1rem;
+  color: #007bff;
+  vertical-align: middle;
+}
+
+.vault-entry-container .vault-details p strong {
+  font-weight: 600;
+}
+
+
+.vehicleLoading {
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
