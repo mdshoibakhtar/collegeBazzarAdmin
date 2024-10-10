@@ -589,6 +589,12 @@ import ToureTypeForm from "./components/topNavigationComp/masters/Toure/MasterFo
 import ReturnManagementReconcile from "./components/logistics/reports/returnManagementReconcile/ReturnManagementReconcile";
 import Pendingdoc from "./components/logistics/reports/pendingdoc/Pendingdoc";
 import PendingInward from "./components/logistics/reports/pendingInward/PendingInward";
+import GroupPage from "./components/topNavigationComp/masters/group/GroupPage";
+import GroupForm from "./components/topNavigationComp/masters/group/MasterForm/GroupForm";
+import LeagerPage from "./pages/CustomerView/leager/LeagerPage";
+import AddLeager from "./pages/CustomerView/leager/AddLeager";
+import NewsPage from "./components/topNavigationComp/masters/news/NewsPage";
+import NewsForm from "./components/topNavigationComp/masters/news/MasterForm/NewsForm";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -1967,6 +1973,21 @@ function App() {
               <Route path="material-in-but-purchase-not-made" element={<Materialinbutpurch />} />
               <Route path="purchase-not-matched-with-Inward" element={<PurchaseNotmatched />} />
 
+              {/* atif routes */}
+              <Route path="budgetlist" element={<Budget />} />
+              <Route path="addnewbudget" element={<AddNewBudget />} />
+              <Route path="costinglist" element={<Costing />} />
+              <Route path="costingform" element={<CostingForm />} />
+              <Route path="samplelist" element={<SimpleList />} />
+              <Route path="addnewsample" element={<AddNewSimple />} />
+              <Route path="shipment" element={<ShipmentList />} />
+              <Route path="newshipment" element={<AddNewShipment />} />
+              <Route path="productlist" element={<ProductList />} />
+              <Route path="dailyproduction" element={<DailyProduction />} />
+
+
+
+
 
               <Route path="customer-view/:id" element={<MainCustomerrView />}>
                 <Route path="" element={<LeadDetail />} />
@@ -1985,6 +2006,8 @@ function App() {
                 <Route path="files-view" element={<FilesPage style={true} title='Files' />} />
                 <Route path="vault-view" element={<Vaultpage style={true} title='Vault' />} />
                 <Route path="reminders-view" element={<ReminderPage style={true} title='Reminders' />} />
+                <Route path="ledgers" element={<LeagerPage style={true} title='Ledgers' />} />
+                <Route path="add-leager" element={<AddLeager style={true} title='Ledgers' />} />
               </Route>
               <Route path="estimates-add" element={<EstimateForm style={true} title='Estimates Add' />} />
               <Route path="ticket-add" element={<TicketForm />} />
@@ -1998,6 +2021,14 @@ function App() {
               <Route path="tour-type" element={<TourType />} />
               <Route path="create-tour-type" element={<ToureTypeForm />} />
               <Route path="create-tour-type/:id" element={<ToureTypeForm />} />
+
+              <Route path="list-group" element={<GroupPage />} />
+              <Route path="add-group" element={<GroupForm />} />
+              <Route path="add-group/:id" element={<GroupForm />} />
+
+              <Route path="List-News" element={<NewsPage />} />
+              <Route path="Add-News" element={<NewsForm />} />
+              <Route path="Add-News/:id" element={<NewsForm />} />
 
               <Route path="*" element={<PageNotFound />} />
             </Route>

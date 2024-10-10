@@ -63,7 +63,7 @@ function CostSheetCompo() {
 
                         </div>
                         <div className="col-12" style={{ overflowX: "auto" }}>
-                            <CostSheetTable costList={costList}/>
+                            <CostSheetTable costList={costList?.length ? costList : []}/>
                         </div>
 
                     </div>

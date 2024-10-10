@@ -68,7 +68,7 @@ function FeedBack() {
 
                         </div>
                         <div className="col-12" style={{ overflowX: "auto" }}>
-                            <FeedBackTable feedbacklist={feedbacklist}/>
+                            <FeedBackTable feedbacklist={feedbacklist?.length ? feedbacklist : []}/>
                         </div>
 
                     </div>
