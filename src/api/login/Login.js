@@ -3096,3 +3096,47 @@ export const getParticipateId = (id) => {
 export const updateParticipate = (id, data) => {
   return axiosInstance.put(`/contestParticipate/update_participateContestant/${id}`, data);
 };
+
+
+
+
+
+
+
+export const DeleteNews = (id) => {
+  return axiosInstance.delete(`/news/delete_type/${id}`);
+};
+
+// GET default contests with pagination
+export const getNews = (page, count) => {
+  return axiosInstance.get(`/news/page?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET a default contest by ID
+export const getNewsById = (id) => {
+  return axiosInstance.get(`/news/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new default contest
+export const postNewss = (data) => {
+  return axiosInstance.post(`/news/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const updatenews= (id, data) => {
+  return axiosInstance.put(`/news/update_type/${id}`, data);
+};

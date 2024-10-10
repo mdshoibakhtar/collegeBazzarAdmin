@@ -13,6 +13,7 @@ function MainCustomerrView() {
 
                     <ul>
                         <li><Link to="/customer-view/66eaa9c8b71b77a5f5fba7a5"><FaUser className="icon-sideb" /> Profile</Link></li>
+                        <li><Link to="/customer-view/1/ledgers"><FaUser className="icon-sideb" /> Ledgers</Link></li>
                         <li><Link to="/customer-view/1/contacts"><FaAddressBook className="icon-sideb" /> Contacts</Link></li>
                         <li><Link to="/customer-view/1/service"><FaAddressBook className="icon-sideb" /> Service Request</Link></li>
                         <li><Link to="/customer-view/1/keep-in-touch"><FaHandshake className="icon-sideb" /> Keep In Touch</Link></li>
