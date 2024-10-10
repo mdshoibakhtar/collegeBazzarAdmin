@@ -4,7 +4,7 @@ import Loadar from "../../../../common/loader/Loader";
 import { listRoleDelete } from "../../../../api/login/Login";
 import { toast, ToastContainer } from "react-toastify";
 
-function ListRole({ onChangeVal, dmtTtxn, loading, dmtExcelTtxn, getDmtTxnData, total,page }) {
+function ListRole({ onChangeVal, dmtTtxn, loading, dmtExcelTtxn, getDmtTxnData, total, page }) {
     const curdmtTtxn = dmtTtxn
     const curdmtexcelTtxn = dmtExcelTtxn?.dmtTransaction
 
@@ -45,9 +45,9 @@ function ListRole({ onChangeVal, dmtTtxn, loading, dmtExcelTtxn, getDmtTxnData, 
                             <div className="card-body p-0">
                                 <div className="table-responsive active-projects style-1">
                                     <div className="tbl-caption">
-                                        <h4 className="heading mb-0"><b> List Main Module </b></h4>
+                                        <h4 className="heading mb-0"><b> List Role  Main Module  Company Name </b></h4>
                                         <div>
-                                            {/* <Link className="btn btn-primary btn-sm" to="/add-summary-report" role="button" aria-controls="offcanvasExample">+  ADD SUMMARY REPORTS </Link> */}
+                                            <Link className="btn btn-primary btn-sm" to="/add-role" role="button" aria-controls="offcanvasExample">+ ADD ROLE</Link>
                                             {/* <button type="button" className="btn btn-secondary btn-sm" >
                     + Invite Employee
                 </button> */}
@@ -88,7 +88,7 @@ function ListRole({ onChangeVal, dmtTtxn, loading, dmtExcelTtxn, getDmtTxnData, 
                                                 {curdmtTtxn?.map((item, i) => {
                                                     return <tr role="row" className="odd" key={i}>
                                                         <td> {item?.createdAt}</td>
-                                                       {/*  <td>
+                                                        {/*  <td>
                                                             {(() => {
                                                                 if (!item?.createdAt) return "";
 

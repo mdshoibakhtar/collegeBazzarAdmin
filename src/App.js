@@ -586,6 +586,9 @@ import VehicleType from "./components/topNavigationComp/masters/veicle/VehicleTy
 import VehicleTypeForm from "./components/topNavigationComp/masters/veicle/MasterForm/VehicleTypeForm";
 import TourType from "./components/topNavigationComp/masters/Toure/TourType";
 import ToureTypeForm from "./components/topNavigationComp/masters/Toure/MasterForm/ToureTypeForm";
+import ReturnManagementReconcile from "./components/logistics/reports/returnManagementReconcile/ReturnManagementReconcile";
+import Pendingdoc from "./components/logistics/reports/pendingdoc/Pendingdoc";
+import PendingInward from "./components/logistics/reports/pendingInward/PendingInward";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -1954,10 +1957,12 @@ function App() {
               <Route path="addnewbooking" element={<AddNewBooking />} />
 
 
-              
+
               <Route path="purchase-&-Inward" element={<PurchaseInward />} />
               <Route path="billed-but-not-dispatched" element={<BillButnotDispatch />} />
-
+              <Route path="return_management_reconcile" element={<ReturnManagementReconcile />} />
+              <Route path="pendingdc" element={<Pendingdoc />} />
+              <Route path="pending-inward" element={<PendingInward />} />
               <Route path="inward/outtward-register" element={<InwordOutwardRegister />} />
               <Route path="material-in-but-purchase-not-made" element={<Materialinbutpurch />} />
               <Route path="purchase-not-matched-with-Inward" element={<PurchaseNotmatched />} />
