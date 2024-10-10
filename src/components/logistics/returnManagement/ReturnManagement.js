@@ -1,17 +1,12 @@
 import { Pagination } from "antd"
 import { Link } from "react-router-dom"
-import Breadcrumbs from "../../../common/breadcrumb/Breadcrumbs";
 import { ReturnManagementModal } from "./returnManagementModal/ReturnManagementModal";
 import { useState } from "react";
+import { Estimate_request_Filter } from "../../estimate_request/Estimate_request_Filter";
 
 
 export const ReturnManagement = () => {
-    const breadCrumbsTitle = {
-        id: "1",
-        title_1: "Logistics",
-        title_2: 'Return Management',
-        path_2: ""
-    };
+    
 
     const [modalShow, setModalShow] = useState(false);
     const [title, setTitle] = useState('')
@@ -22,9 +17,7 @@ export const ReturnManagement = () => {
     return (
 
         <>
-            <Breadcrumbs
-                breadCrumbsTitle={breadCrumbsTitle} />
-            {/* <Estimate_request_Filter /> */}
+            
             <div style={{ margin: "14px" }}>
                 <div className="card">
                     <div className="card-body p-0">
