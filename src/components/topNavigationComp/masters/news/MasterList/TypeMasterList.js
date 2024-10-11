@@ -1,9 +1,44 @@
 import { Pagination, Popconfirm } from 'antd';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
+import { baseUrlImage } from '../../../../../baseUrl';
+import { updatenews } from '../../../../../api/login/Login';
 
-function TypeMasterList({ data, totalCount, page, count, onChangeVal, confirm, cancel }) {
+
+const toastSuccessMessage = (message) => {
+    toast.success(`Update ${message}`, {
+        position: "top-right",
+    });
+};
+const toastErrorMessage = (message) => {
+    toast.error(`${message}`, {
+        position: "top-right",
+    });
+};
+function TypeMasterList({ data, totalCount, page, count, onChangeVal, confirm, cancel , getFloorMasters }) {
+
+    const chengeActive = async (id, status) => {
+        const data = {
+            ...id,
+            isActive: status
+        };
+
+        try {
+            const res = await updatenews(data._id, data);
+            if (res.statusCode == 200) {
+                toastSuccessMessage('Status Successfully');
+                getFloorMasters(0)
+            }else{
+
+                toastErrorMessage('Status Not Update');
+            }
+        } catch (error) {
+
+        }
+
+
+    };
     return (
         <>
             <div>
@@ -45,21 +80,36 @@ function TypeMasterList({ data, totalCount, page, count, onChangeVal, confirm, c
                                                             <td>{item?.subject}</td>
                                                             <td>{item?.description}</td>
                                                             <td>
-                                                                {item?.image ? (
-                                                                    <img src={item?.image} alt="news" style={{ width: '50px', height: '50px' }} />
+                                                                {item?.banner_image ? (
+                                                                    <img src={`${baseUrlImage}${item.banner_image}`} alt="news" style={{ width: '50px', height: '50px' }} />
                                                                 ) : (
                                                                     'No Image'
                                                                 )}
                                                             </td>
                                                             <td>
-                                                                {item?.icon ? (
-                                                                    <img src={item?.icon} alt="icon" style={{ width: '20px', height: '20px' }} />
+                                                                {item?.icon_image ? (
+                                                                    <img src={`${baseUrlImage}${item.icon_image}`} alt="icon" style={{ width: '50px', height: '50px' }} />
                                                                 ) : (
                                                                     'No Icon'
                                                                 )}
                                                             </td>
                                                             <td>{item?.news_type}</td>
-                                                            <td>{item?.isActive ? 'Active' : 'Inactive'}</td>
+                                                            <td>
+                                                                <div className="form-check form-switch">
+                                                                    <input
+                                                                        className="form-check-input"
+                                                                        type="checkbox"
+                                                                        id="flexSwitchCheckChecked"
+                                                                        defaultChecked=""
+                                                                        checked={item?.isActive}
+                                                                        onChange={() => {
+                                                                            chengeActive(item, !item?.isActive)
+                                                                        }}
+                                                                    />
+
+                                                                </div>
+
+                                                            </td>
                                                             <td>
                                                                 <div className="d-flex">
                                                                     <Link to={`/Add-News/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
