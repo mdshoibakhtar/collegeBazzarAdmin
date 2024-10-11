@@ -595,6 +595,8 @@ import LeagerPage from "./pages/CustomerView/leager/LeagerPage";
 import AddLeager from "./pages/CustomerView/leager/AddLeager";
 import NewsPage from "./components/topNavigationComp/masters/news/NewsPage";
 import NewsForm from "./components/topNavigationComp/masters/news/MasterForm/NewsForm";
+import BankPaymentPage from "./pages/transaction/bankCash/bankPayment";
+import AddBankPayment from "./components/transaction/bankCash/bankPayment/addBankPayment/AddBankPayment";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -1744,6 +1746,15 @@ function App() {
               <Route path="ledger-report-detailed" element={<LedgerReportsPage heading={'Ledger Report Detailed'} />} />
               <Route path="taluka-wise-dealer-list" element={<TalukaWiseDealerListPage />} />
               <Route path="group-summary" element={<GroupSummaryPage />} />
+
+              <Route path="bankpayment/list" element={<BankPaymentPage heading={'Bank Payment'} />} />
+              <Route path="bankpayment/add" element={<AddBankPayment />} />
+              <Route path="bankreceipt/list" element={<BankPaymentPage heading={'Bank Receipt'} />} />
+
+              <Route path="cashreceipt/list" element={<BankPaymentPage heading={'Cash Payment'} />} />
+
+
+
 
 
 
