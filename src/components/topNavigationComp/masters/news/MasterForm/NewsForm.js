@@ -18,7 +18,7 @@ function NewsForm() {
         description: '',
         banner_image: '',
         icon_image: '',
-        news_type: [], // Multi-select for news type
+        news_type: '', // Single-select for news type
         isActive: false, // Boolean for active status
         user_id: [], // Multi-select for user IDs
         staff_id: [], // Multi-select for staff IDs
@@ -44,13 +44,13 @@ function NewsForm() {
                 ...item, value: item.name, label: item.name // Assuming item.id and item.name exist
             }));
             setUserOptions(users); // Set user options correctly
-            
+
             const res = await getAllAssign();
             const staff = res.data?.map((item) => ({
                 ...item, value: item.name, label: item.name // Assuming item.id and item.name exist
             }));
             setStaffOptions(staff); // Set staff options correctly
-            
+
         } catch (error) {
             console.error("Error fetching users and staff:", error);
         }
@@ -71,7 +71,7 @@ function NewsForm() {
         });
     };
 
-    const [loading , setLoading] = useState(false)
+    const [loading, setLoading] = useState(false)
     const submitForm = async (values) => {
         console.log("Submitting form with values:", values);
         setLoading(true)
@@ -81,7 +81,7 @@ function NewsForm() {
                 description: values.description,
                 banner_image: values.banner_image,
                 icon_image: values.icon_image,
-                news_type: values.news_type.map(option => option.value),
+                news_type: values.news_type.value, // Now a single value
                 isActive: values.isActive,
                 user_id: values.user_id.map(option => option._id),
                 staff_id: values.staff_id.map(option => option._id),
@@ -95,7 +95,7 @@ function NewsForm() {
                         navigate(`/List-News`);
                     }, 1000);
                 }
-                else{
+                else {
                     toastErrorMessage(res.message)
                 }
             } else {
@@ -106,7 +106,7 @@ function NewsForm() {
                         navigate(`/List-News`);
                     }, 1000);
                 }
-                else{
+                else {
                     toastErrorMessage(res.message)
                 }
             }
@@ -124,9 +124,9 @@ function NewsForm() {
                     setInitialValues(prevValues => ({
                         ...prevValues,
                         ...response.data,
-                        news_type: response.data.news_type.map(type => ({ value: type, label: type })), // Adjust if necessary
-                        user_id: response.data.user_id.map(id => ({ value: id, label: id })), // Adjust if necessary
-                        staff_id: response.data.staff_id.map(id => ({ value: id, label: id })) // Adjust if necessary
+                        news_type: { value: response.data.news_type, label: response.data.news_type }, // Adjust for single select
+                        user_id: response.data.user_id.map(id => ({ ...id, value: id.name, label: id.name })), // Adjust if necessary
+                        staff_id: response.data.staff_id.map(id => ({ ...id, value: id.name, label: id.name })) // Adjust if necessary
                     }));
                 }
             }
@@ -148,9 +148,9 @@ function NewsForm() {
         }
     };
 
-    // Separate handlers for multi-select fields
-    const handleNewsTypeChange = (selectedOptions) => {
-        setInitialValues(prevValues => ({ ...prevValues, news_type: selectedOptions }));
+    // Separate handler for single-select field
+    const handleNewsTypeChange = (selectedOption) => {
+        setInitialValues(prevValues => ({ ...prevValues, news_type: selectedOption }));
     };
 
     const handleUserChange = (selectedOptions) => {
@@ -163,7 +163,7 @@ function NewsForm() {
 
     return (
         <>
-        {loading && <Loadar/>}
+            {loading && <Loadar />}
             <ToastContainer />
             <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
             <div style={{ margin: "14px" }}>
@@ -204,10 +204,8 @@ function NewsForm() {
                                     <div className="col-xl-4 mb-3">
                                         <h6>News Type</h6>
                                         <Select
-                                            isMulti
                                             options={newsTypeOptions}
                                             value={initialValues.news_type}
-                                            closeMenuOnSelect={false}
                                             onChange={handleNewsTypeChange} // Use the custom handler
                                         />
                                     </div>
@@ -251,26 +249,28 @@ function NewsForm() {
                                             name="banner_image"
                                             className="form-control"
                                         />
-                                        {initialValues.banner_image && <img src={`${baseUrlImage}${initialValues.banner_image}`} alt="Banner" />}
+                                        {initialValues.banner_image && <img src={`${baseUrlImage}${initialValues.banner_image}`} alt="Banner Preview" />}
                                     </div>
 
                                     <div className="col-xl-4 mb-3">
                                         <h6>Icon Image</h6>
                                         <input
                                             type="file"
-                                            className="form-control"
-                                            name="icon_image"
                                             onChange={handleChangeImage}
+                                            name="icon_image"
+                                            className="form-control"
                                         />
-                                        {initialValues.icon_image && <img src={`${baseUrlImage}${initialValues.icon_image}`} alt="Icon" />}
+                                        {initialValues.icon_image && <img src={`${baseUrlImage}${initialValues.icon_image}`} alt="Icon Preview" />}
                                     </div>
+                                </div>
 
-                                    <div className="col-xl-12 mb-3">
-                                        <button type="submit" className="btn btn-primary">
-                                            {params?.id ? "Update" : "Add"} News
-                                        </button>
-                                        <Link to="/List-News" className="btn btn-secondary ml-2">Cancel</Link>
-                                    </div>
+                                <div className="mb-3">
+                                    <button className="btn btn-primary me-2">
+                                        {params?.id ? "Update" : "Submit"}
+                                    </button>
+                                    <Link to="/List-News" className="btn btn-outline-primary me-2">
+                                        Cancel
+                                    </Link>
                                 </div>
                             </form>
                         </div>
