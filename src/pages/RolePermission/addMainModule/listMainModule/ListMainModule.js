@@ -37,7 +37,7 @@ function ListMainModule({ onChangeVal,toatalCount, dmtTtxn, loading, dmtExcelTtx
                                     <div className="tbl-caption">
                                         <h4 className="heading mb-0"><b> List Main Module </b></h4>
                                         <div>
-                                            {/* <Link className="btn btn-primary btn-sm" to="/add-summary-report" role="button" aria-controls="offcanvasExample">+  ADD SUMMARY REPORTS </Link> */}
+                                            <Link className="btn btn-primary btn-sm" to="/add-main-module" role="button" aria-controls="offcanvasExample">+  ADD MANIN MODULE  </Link>
                                             {/* <button type="button" className="btn btn-secondary btn-sm" >
                     + Invite Employee
                 </button> */}

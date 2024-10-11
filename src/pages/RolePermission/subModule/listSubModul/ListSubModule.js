@@ -39,7 +39,7 @@ function ListSubModule({ onChangeVal, dmtTtxn, loading, dmtExcelTtxn, getDmtTxnD
                                     <div className="tbl-caption">
                                         <h4 className="heading mb-0"><b> List Sub Module </b></h4>
                                         <div>
-                                            {/* <Link className="btn btn-primary btn-sm" to="/add-summary-report" role="button" aria-controls="offcanvasExample">+  ADD SUMMARY REPORTS </Link> */}
+                                            <Link className="btn btn-primary btn-sm" to="/add-sub-module" role="button" aria-controls="offcanvasExample">+  ADD SUB MODULE </Link>
                                             {/* <button type="button" className="btn btn-secondary btn-sm" >
                     + Invite Employee
                 </button> */}
