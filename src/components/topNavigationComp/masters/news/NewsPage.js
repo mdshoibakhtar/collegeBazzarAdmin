@@ -1,6 +1,6 @@
 import Breadcrumbs from '../../../../common/breadcrumb/Breadcrumbs'
 import React, { useEffect, useState } from 'react'
-import {  deleteCallConvertStatusById, deleteMarketTypeById, getCallConvertStatusByUser, getMarketTypeByPage } from '../../../../api/login/Login'
+import {  deleteCallConvertStatusById, deleteMarketTypeById, DeleteNews, getCallConvertStatusByUser, getMarketTypeByPage, getNews } from '../../../../api/login/Login'
 import { message } from 'antd'
 import { useParams } from 'react-router-dom'
 import TypeMasterList from './MasterList/TypeMasterList'
@@ -22,7 +22,7 @@ function NewsPage() {
         
         setLoading(true)
         try {
-            const res = await getMarketTypeByPage( page , count)
+            const res = await getNews( page , count)
             setTotalCount(res?.totalCount)
             setData(res?.data)
             setPage(page)
@@ -40,7 +40,7 @@ function NewsPage() {
     const deleteBlockAdd = async (id) => {
         setLoading(true)
         try {
-            await deleteMarketTypeById(id)
+            await DeleteNews(id)
             let backList = totalCount % 11 === 0 ? page - 1 : page
             getFloorMasters(backList)
         } catch (error) {
@@ -60,12 +60,12 @@ function NewsPage() {
         message.error('Cancle Successfull!');
     };
     useEffect(() => {
-        // getFloorMasters(page)
+        getFloorMasters(page)
     }, [])
     return (
         <>
             <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
-            <TypeMasterList totalCount={totalCount} page={page} onChangeVal={onChangeVal} data={data}  count={count} confirm={confirm} cancel={cancel} loading={loading}/>
+            <TypeMasterList getFloorMasters={getFloorMasters} totalCount={totalCount} page={page} onChangeVal={onChangeVal} data={data}  count={count} confirm={confirm} cancel={cancel} loading={loading}/>
         </>
     )
 }
