@@ -614,6 +614,19 @@ import StockRegister from "./components/kingsonreports/stockSheet/stockRegister/
 import ProductLedger from "./components/kingsonreports/stockSheet/stockRegister/stockRegisterList/productledger/ProductLedger";
 import WallRep from "./pages/walletReport";
 import AddUpdateVirtualWall from "./components/virtualWallet/addUpdateVirtualWall/AddUpdateVirtualWall";
+import ContraPage from "./pages/transaction/bankCash/contra";
+import ContraAdd from "./components/transaction/bankCash/contra/contraAdd/ContraAdd";
+import { GSTExpenseEntryPage } from "./pages/transaction/gst/GSTExpenseEntry";
+import GSTExpenseEntryAdd from "./components/transaction/gst/GSTExpenseEntry/GSTExpenseEntryAdd/GSTExpenseEntryAdd";
+import RcmEntryPage from "./pages/transaction/gst/RcmEntry";
+import RcmEntryAdd from "./components/transaction/gst/RcmEntry/RcmEntryAdd/RcmEntryAdd";
+import GSTIncomePage from "./pages/transaction/gst/GSTIncome";
+import GSTIncomeAdd from "./components/transaction/gst/GSTIncome/GSTIncomeAdd/GSTIncomeAdd";
+import SalesBill from "./components/topNavigationComp/masters/news/NewsPage";
+import SalesBills from "./components/topNavigationComp/masters/salesbill/SalesBill";
+import SalesAdd from "./components/topNavigationComp/masters/salesbill/MasterForm/SalesAdd";
+import SalesReturn from "./components/topNavigationComp/masters/salesreturn/SalesReturn";
+import SalesAddRetuen from "./components/topNavigationComp/masters/salesreturn/MasterForm/SalesAdd";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -1782,6 +1795,16 @@ function App() {
 
               <Route path="cashreceipt/list" element={<BankPaymentPage heading={'Cash Payment'} />} />
 
+              <Route path="cashpayment/list" element={<BankPaymentPage heading={'List Of Cash Payment'} />} />
+              <Route path="contra/list" element={<ContraPage />} />
+              <Route path="contra/Add" element={<ContraAdd />} />
+              <Route path="gstexpenseentry/list" element={<GSTExpenseEntryPage />} />
+              <Route path="gstexpenseentry/add" element={<GSTExpenseEntryAdd />} />
+              <Route path="gstrcmentry/list" element={<RcmEntryPage />} />
+              <Route path="gstrcmentry/add" element={<RcmEntryAdd />} />
+              <Route path="gstincome/list" element={<GSTIncomePage />} />
+              <Route path="gstincome/add" element={<GSTIncomeAdd />} />
+
 
 
 
@@ -2074,23 +2097,18 @@ function App() {
               <Route path="add-group" element={<GroupForm />} />
               <Route path="add-group/:id" element={<GroupForm />} />
 
-              <Route path="list-news" element={<NewsPage />} />
-              <Route path="add-news" element={<NewsForm />} />
-              <Route path="update-news/:id" element={<NewsForm />} />
+              <Route path="List-News" element={<NewsPage />} />
+              <Route path="Add-News" element={<NewsForm />} />
+              <Route path="Add-News/:id" element={<NewsForm />} />
 
 
-              {/* -----daud--new ---report---list---Account-book */}
-              <Route path="kng-accountledger" element={<AccountLedgerPage />} />
-              <Route
-                path="kng-active-accountledger"
-                element={<ActiveAccountLedgerPage />}
-              />
+              <Route path="list-sales-bill" element={<SalesBills />} />
+              <Route path="add-sales-bill" element={<SalesAdd />} />
+              <Route path="add-sales-bill/:id" element={<SalesAdd />} />
 
-              <Route path="kng-voucherlist" element={<VoucherlistPage />} />
-              <Route path="kng-daybook" element={<DayBookPage />} />
-              <Route path="kng-bankbook" element={<BankBookPage />} />
-              <Route path="kng-cashbook" element={<CashBookPage />} />
-              <Route path="kng-receiptregister" element={<ReceiptRegisterPage />} />
+              <Route path="list-sales-return" element={<SalesReturn />} />
+              <Route path="add-sales-return" element={<SalesAddRetuen />} />
+              <Route path="add-sales-return/:id" element={<SalesAddRetuen />} />
 
               <Route path="*" element={<PageNotFound />} />
             </Route>
