@@ -605,6 +605,11 @@ import RcmEntryPage from "./pages/transaction/gst/RcmEntry";
 import RcmEntryAdd from "./components/transaction/gst/RcmEntry/RcmEntryAdd/RcmEntryAdd";
 import GSTIncomePage from "./pages/transaction/gst/GSTIncome";
 import GSTIncomeAdd from "./components/transaction/gst/GSTIncome/GSTIncomeAdd/GSTIncomeAdd";
+import SalesBill from "./components/topNavigationComp/masters/news/NewsPage";
+import SalesBills from "./components/topNavigationComp/masters/salesbill/SalesBill";
+import SalesAdd from "./components/topNavigationComp/masters/salesbill/MasterForm/SalesAdd";
+import SalesReturn from "./components/topNavigationComp/masters/salesreturn/SalesReturn";
+import SalesAddRetuen from "./components/topNavigationComp/masters/salesreturn/MasterForm/SalesAdd";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -2058,6 +2063,15 @@ function App() {
               <Route path="List-News" element={<NewsPage />} />
               <Route path="Add-News" element={<NewsForm />} />
               <Route path="Add-News/:id" element={<NewsForm />} />
+
+
+              <Route path="list-sales-bill" element={<SalesBills />} />
+              <Route path="add-sales-bill" element={<SalesAdd />} />
+              <Route path="add-sales-bill/:id" element={<SalesAdd />} />
+
+              <Route path="list-sales-return" element={<SalesReturn />} />
+              <Route path="add-sales-return" element={<SalesAddRetuen />} />
+              <Route path="add-sales-return/:id" element={<SalesAddRetuen />} />
 
               <Route path="*" element={<PageNotFound />} />
             </Route>
