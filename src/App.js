@@ -607,6 +607,13 @@ import ReceiptRegisterPage from "./pages/report/accountBook/receiptRegister";
 import CashBookPage from "./pages/report/accountBook/cashBook";
 import BankPaymentPage from "./pages/transaction/bankCash/bankPayment";
 import AddBankPayment from "./components/transaction/bankCash/bankPayment/addBankPayment/AddBankPayment";
+import PaymentRequestViewPage from "./pages/paymentRequestView";
+import PurchaseRegister from "./components/kingsonreports/purchaseregister/PurchaseRegister";
+import Purchaseregisterform from "./components/kingsonreports/purchaseregister/purchaseregisterform/Purchaseregisterform";
+import StockRegister from "./components/kingsonreports/stockSheet/stockRegister/StockRegister";
+import ProductLedger from "./components/kingsonreports/stockSheet/stockRegister/stockRegisterList/productledger/ProductLedger";
+import WallRep from "./pages/walletReport";
+import AddUpdateVirtualWall from "./components/virtualWallet/addUpdateVirtualWall/AddUpdateVirtualWall";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -1492,6 +1499,18 @@ function App() {
                 path="messages/manage-reports"
                 element={<ManageReports />}
               />
+              <Route
+                path="payment-request-view"
+                element={<PaymentRequestViewPage />}
+              />
+              <Route
+                path="/admin/wallet/virtual-wallet"
+                element={<WallRep />}
+              />
+              <Route
+                path="/admin/wallet/add/virtual-wallet"
+                element={<AddUpdateVirtualWall />}
+              />
               {/* mustafa Routes -------------------- */}
               <Route path="number-list" element={<ListnumberWhatsaap />} />
               <Route path='add-numbers' element={<AddNumber />} />
@@ -1997,6 +2016,10 @@ function App() {
               <Route path="kng-update-sale-register-" element={<UpdateSalesRegisterDetail />} />
               <Route path="kng-sale-register-with-exp" element={<SalesRegisterWithExpDetails />} />
               <Route path="kng-cn-entry-wn-stock-list" element={<CnEntryWnStocklist />} />
+              <Route path="kng-purchase-register" element={<PurchaseRegister />} />
+              <Route path="kng-update-purchase-register" element={<Purchaseregisterform />} />
+              <Route path="kng-stocksheet" element={<StockRegister />} />
+              <Route path="kng-stocksheet/ledgerview" element={<ProductLedger />} />
 
               {/* atif routes */}
               <Route path="budgetlist" element={<Budget />} />

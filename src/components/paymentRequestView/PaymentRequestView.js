@@ -54,14 +54,13 @@ function PaymentRequestView() {
     };
     useEffect(() => {
         getPaymentRequest(0)
-
         fetchUserType();
     }, [])
     return (
         <>
             <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
             <PaymentRequestViewForm submitForm={submitForm} loading={loading} page={page} count={count} token={token} userData={userData} />
-            <PaymentRequestViewList fetchUserType={getPaymentRequest} onChangeVal={onChangeVal} state={state} loading={loading} />
+            <PaymentRequestViewList fetchUserType={getPaymentRequest} onChangeVal={onChangeVal} state={state} loading={loading} getPaymentRequest={getPaymentRequest} />
         </>
     )
 }
