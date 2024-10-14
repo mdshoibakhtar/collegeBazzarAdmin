@@ -597,6 +597,14 @@ import NewsPage from "./components/topNavigationComp/masters/news/NewsPage";
 import NewsForm from "./components/topNavigationComp/masters/news/MasterForm/NewsForm";
 import BankPaymentPage from "./pages/transaction/bankCash/bankPayment";
 import AddBankPayment from "./components/transaction/bankCash/bankPayment/addBankPayment/AddBankPayment";
+import ContraPage from "./pages/transaction/bankCash/contra";
+import ContraAdd from "./components/transaction/bankCash/contra/contraAdd/ContraAdd";
+import { GSTExpenseEntryPage } from "./pages/transaction/gst/GSTExpenseEntry";
+import GSTExpenseEntryAdd from "./components/transaction/gst/GSTExpenseEntry/GSTExpenseEntryAdd/GSTExpenseEntryAdd";
+import RcmEntryPage from "./pages/transaction/gst/RcmEntry";
+import RcmEntryAdd from "./components/transaction/gst/RcmEntry/RcmEntryAdd/RcmEntryAdd";
+import GSTIncomePage from "./pages/transaction/gst/GSTIncome";
+import GSTIncomeAdd from "./components/transaction/gst/GSTIncome/GSTIncomeAdd/GSTIncomeAdd";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -1752,6 +1760,16 @@ function App() {
               <Route path="bankreceipt/list" element={<BankPaymentPage heading={'Bank Receipt'} />} />
 
               <Route path="cashreceipt/list" element={<BankPaymentPage heading={'Cash Payment'} />} />
+
+              <Route path="cashpayment/list" element={<BankPaymentPage heading={'List Of Cash Payment'} />} />
+              <Route path="contra/list" element={<ContraPage />} />
+              <Route path="contra/Add" element={<ContraAdd />} />
+              <Route path="gstexpenseentry/list" element={<GSTExpenseEntryPage />} />
+              <Route path="gstexpenseentry/add" element={<GSTExpenseEntryAdd />} />
+              <Route path="gstrcmentry/list" element={<RcmEntryPage />} />
+              <Route path="gstrcmentry/add" element={<RcmEntryAdd />} />
+              <Route path="gstincome/list" element={<GSTIncomePage />} />
+              <Route path="gstincome/add" element={<GSTIncomeAdd />} />
 
 
 
