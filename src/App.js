@@ -2019,7 +2019,7 @@ function App() {
               <Route path="kng-purchase-register" element={<PurchaseRegister />} />
               <Route path="kng-update-purchase-register" element={<Purchaseregisterform />} />
               <Route path="kng-stocksheet" element={<StockRegister />} />
-              <Route path="kng-stocksheet/ledgerview" element={<ProductLedger />} />
+              {/* <Route path="kng-stocksheet/ledgerview" element={<ProductLedger />} /> */}
 
               {/* atif routes */}
               <Route path="budgetlist" element={<Budget />} />

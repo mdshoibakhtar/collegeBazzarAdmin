@@ -46,7 +46,7 @@ function ProductLedgerList() {
                     <h4 className="heading mb-0">Product Ledger</h4>
                     <Link
                       className="btn btn-primary btn-sm"
-                      to=""
+                      to="/kng-stocksheet"
                       role="button"
                       aria-controls="offcanvasExample"
                     >
@@ -121,7 +121,6 @@ function ProductLedgerList() {
                     >
                       Showing 1 to 10 of 12 entries
                     </div>
-
                   </div>
                 </div>
               </div>

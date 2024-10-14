@@ -6,8 +6,8 @@ function ProductLedger() {
     const breadCrumbsTitle = {
         id: "2324",
         title_1: "Stock Sheet",
-        title_1: "Stock Register",
-        title_1: "Product Ledger",
+        title_2: "Stock Register",
+        title_3: "Product Ledger",
     }
     return (
         <>

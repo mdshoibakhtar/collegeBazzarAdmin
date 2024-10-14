@@ -12,7 +12,7 @@ function StockRegisterLis() {
                                     <h4 className="heading mb-0">Stock Register</h4>
                                     <Link
                                         className="btn btn-primary btn-sm"
-                                        to="/add-kng-purchase-register"
+                                        to="/kng-stocksheet/ledgerview"
                                         role="button"
                                         aria-controls="offcanvasExample"
                                     >
