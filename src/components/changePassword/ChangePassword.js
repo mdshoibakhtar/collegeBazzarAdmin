@@ -25,7 +25,7 @@ function ChangePassword() {
             errors.oldPassword = "Old Password is required";
         }
 
-        if (!values?.newPassword) {
+        /* if (!values?.newPassword) {
             errors.newPassword = "New Password  Is Required";
         } else if (!regexPassword.test(values?.newPassword)) {
             errors.newPassword = "Password must  8 digits and more than 8 digits  with one special character & Capital Letter & Small Letter.";
@@ -34,7 +34,7 @@ function ChangePassword() {
             errors.confirmPassword = "Confirm Password  Is Required";
         } else if (!regexPassword.test(values?.confirmPassword)) {
             errors.confirmPassword = "confirm password is must match New Password";
-        }
+        } */
 
         return errors;
     };

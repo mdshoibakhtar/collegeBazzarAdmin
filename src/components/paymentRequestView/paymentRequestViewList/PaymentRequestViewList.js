@@ -5,7 +5,7 @@ import Loadar from "../../../common/loader/Loader";
 import PaymentUpdate from "./paymentUpdate/PaymentUpdate";
 import { useState } from "react";
 
-function PaymentRequestViewList({ state, onChangeVal, loading, fetchUserType }) {
+function PaymentRequestViewList({ state, onChangeVal, loading, fetchUserType, getPaymentRequest }) {
     const data = state?.requestList
     const [show, setShow] = useState(false);
     const [showLog, setshowLog] = useState(false)
@@ -18,6 +18,27 @@ function PaymentRequestViewList({ state, onChangeVal, loading, fetchUserType }) 
         }, 1000);
     };
     const handleClose = () => setShow(false);
+    const getStatusStyle = (status) => {
+        const baseStyle = {
+            padding: '5px 10px',
+            borderRadius: '4px',
+            fontWeight: 'bold',
+            textTransform: 'capitalize'
+        };
+
+        switch (status.toLowerCase()) {
+            case 'approved':
+                return { ...baseStyle, backgroundColor: '#28a745', color: 'white' };
+            case 'pending':
+                return { ...baseStyle, backgroundColor: '#ffc107', color: 'black' };
+            case 'in progress':
+                return { ...baseStyle, backgroundColor: '#17a2b8', color: 'white' };
+            case 'reject':
+                return { ...baseStyle, backgroundColor: '#dc3545', color: 'white' };
+            default:
+                return { ...baseStyle, backgroundColor: '#6c757d', color: 'white' };
+        }
+    };
     return (
         <>
 
@@ -109,7 +130,10 @@ function PaymentRequestViewList({ state, onChangeVal, loading, fetchUserType }) 
 
 
                                                 <td className="" style={{ cursor: "pointer" }}>
-                                                    <span className="badge badge-success light border-0" onClick={() => { handleShow(item) }}>{item?.status}</span>
+                                                    <span className="badge badge-success light border-0"
+                                                        style={getStatusStyle(item?.status)}
+                                                        onClick={() => { handleShow(item) }}>{item?.status}
+                                                    </span>
                                                     {/* <span className="badge badge-success text-light border-0" style={{ backgroundColor: `${item?.status === true ? 'blue' : '#bc3922ab'}`, fontSize: `${item?.status === false ? '0.8rem' : ''}` }}>{item?.isActive == true ? 'active' : 'Inactive'}</span> */}
                                                 </td>
                                                 {/* <td>
@@ -142,7 +166,7 @@ function PaymentRequestViewList({ state, onChangeVal, loading, fetchUserType }) 
                     </div>
                 </div>
             </div >
-            <PaymentUpdate show={show} handleClose={handleClose} values={values} setshowLog={setshowLog} showLog={showLog} fetchUserType={fetchUserType} />
+            <PaymentUpdate show={show} handleClose={handleClose} values={values} setshowLog={setshowLog} showLog={showLog} fetchUserType={fetchUserType} getPaymentRequest={getPaymentRequest} />
         </>
     )
 }

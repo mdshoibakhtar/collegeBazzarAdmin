@@ -10,7 +10,7 @@ import { ModalImgShow } from '../../../distributer/createUserDistributer/kycDeta
 import { ToastContainer, toast } from 'react-toastify';
 import { baseUrlImage } from '../../../../baseUrl';
 
-function PaymentUpdate({ show, handleClose, values, showLog, setshowLog, fetchUserType }) {
+function PaymentUpdate({ show, handleClose, values, showLog, setshowLog, fetchUserType, getPaymentRequest}) {
     const [initialValues, setInitialValues] = useState({
         user_name: "",
         amount: '',
@@ -65,6 +65,7 @@ function PaymentUpdate({ show, handleClose, values, showLog, setshowLog, fetchUs
         }
         if (showLog === false) {
             const dates = formatDate(values?.paymentDate);
+
             const clonne = {
                 user_name: values?.username,
                 amount: values?.amount,
@@ -180,6 +181,7 @@ function PaymentUpdate({ show, handleClose, values, showLog, setshowLog, fetchUs
             if (response?.statusCode === 200) {
                 toastSuccessMessage(response?.message);
                 fetchUserType();
+                getPaymentRequest(0)
                 handleClose();
             } else {
                 toastErrorMessage(response.message);
@@ -362,7 +364,7 @@ function PaymentUpdate({ show, handleClose, values, showLog, setshowLog, fetchUs
                                             </div>
                                             <div className="col-xl-6 mb-3">
                                                 <CustomInputField
-                                                    type="number"
+                                                    type="text"
                                                     value={values?.bank_ref}
                                                     hasError={errors.bank_ref && touched.bank_ref}
                                                     onChange={handleChange1}
