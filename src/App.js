@@ -627,6 +627,32 @@ import SalesBills from "./components/topNavigationComp/masters/salesbill/SalesBi
 import SalesAdd from "./components/topNavigationComp/masters/salesbill/MasterForm/SalesAdd";
 import SalesReturn from "./components/topNavigationComp/masters/salesreturn/SalesReturn";
 import SalesAddRetuen from "./components/topNavigationComp/masters/salesreturn/MasterForm/SalesAdd";
+import ProductionReportPage from "./pages/report/productionReport";
+
+
+/* -----------------Moin Import File Start------------------------ */
+import SalesIvoiceListPage from "./pages/salesInvoiceListPage";
+import AddNewSaleInvoicePage from "./pages/addNewSaleInvoicePage";
+import InterBankStockTransferPage from "./pages/interBankStockTransferPage";
+import AddInterBankStockTransferPage from "./pages/addInterBankStockTransferPage";
+import SalesReturnPage from "./pages/salesReturnPage";
+import AddSaleRetunPage from "./pages/addSaleRetunPage";
+import SalesRetunWithoutGstPage from "./pages/salesRetunWithoutGstPage";
+import AddSalesReturnWithoutGstPage from "./pages/addSalesRetunWithoutGstPage";
+import BtrPage from "./pages/btrPage";
+import AddBtrPage from "./pages/addBtrPage";
+import NegativeSock from "./components/kingsonreports/stockSheet/negativeStock/NegativeSock";
+import ViewProductionForm from "./components/kingsonreports/stockSheet/stockRegister/stockRegisterList/productledger/viewProductionform/ViewProductionForm";
+import RecordLevel from "./components/kingsonreports/stockSheet/recordlevel/RecordLevel";
+import StockStatement from "./components/kingsonreports/stockSheet/stockStatement/StockStatement";
+import BatchStock from "./components/kingsonreports/stockSheet/batchStock/BatchStock";
+import BatchWithLocation from "./components/kingsonreports/stockSheet/batchWithLocation/BatchWithLocation";
+import ViewProductionEntry from "./components/kingsonreports/productionReport/viewProductionEntry/ViewProductionEntry";
+
+
+/* -----------------Moin Import File END------------------------ */
+
+
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -2042,7 +2068,13 @@ function App() {
               <Route path="kng-purchase-register" element={<PurchaseRegister />} />
               <Route path="kng-update-purchase-register" element={<Purchaseregisterform />} />
               <Route path="kng-stocksheet" element={<StockRegister />} />
-              {/* <Route path="kng-stocksheet/ledgerview" element={<ProductLedger />} /> */}
+              <Route path="kng-stocksheet/ledgerview" element={<ProductLedger />} />
+              <Route path="kng-negative/stock" element={<NegativeSock />} />
+              <Route path="kng-nstock/ledgerview" element={<ViewProductionForm />} />
+              <Route path="kng-record/level" element={<RecordLevel />} />
+              <Route path="kng-stock-statement-list" element={<StockStatement />} />
+              <Route path="kng-batch-stock-list" element={<BatchStock />} />
+              <Route path="kng-batch-stock-location-list" element={<BatchWithLocation />} />
 
               {/* atif routes */}
               <Route path="budgetlist" element={<Budget />} />
@@ -2101,6 +2133,18 @@ function App() {
               <Route path="Add-News" element={<NewsForm />} />
               <Route path="Add-News/:id" element={<NewsForm />} />
 
+              {/* -----daud--new ---report---list---Account-book */}
+              <Route path="kng-accountledger" element={<AccountLedgerPage />} />
+              <Route
+                path="kng-active-accountledger"
+                element={<ActiveAccountLedgerPage />}
+              />
+
+              <Route path="kng-voucherlist" element={<VoucherlistPage />} />
+              <Route path="kng-daybook" element={<DayBookPage />} />
+              <Route path="kng-bankbook" element={<BankBookPage />} />
+              <Route path="kng-cashbook" element={<CashBookPage />} />
+              <Route path="kng-receiptregister" element={<ReceiptRegisterPage />} />
 
               <Route path="list-sales-bill" element={<SalesBills />} />
               <Route path="add-sales-bill" element={<SalesAdd />} />
@@ -2109,6 +2153,28 @@ function App() {
               <Route path="list-sales-return" element={<SalesReturn />} />
               <Route path="add-sales-return" element={<SalesAddRetuen />} />
               <Route path="add-sales-return/:id" element={<SalesAddRetuen />} />
+              <Route
+                path="kng-productionReport"
+                element={<ProductionReportPage />}
+              />
+
+              <Route
+                path="kgn-productionReport/productionEntry"
+                element={<ViewProductionEntry />}
+              />
+
+              {/* ----------------Moin's Route start-------------------------------*/}
+              <Route path="ele-sales-invoice" element={<SalesIvoiceListPage />} />
+              <Route path="ele-sales-invoice/create" element={<AddNewSaleInvoicePage />} />
+              <Route path="ele-inter-bank-stock-transfer" element={<InterBankStockTransferPage />} />
+              <Route path="ele-inter-bank-stock-transfer/create" element={<AddInterBankStockTransferPage />} />
+              <Route path="ele-sales-return" element={<SalesReturnPage />} />
+              <Route path="ele-sales-return/create" element={<AddSaleRetunPage />} />
+              <Route path="ele-sales-return/without-gst" element={<SalesRetunWithoutGstPage />} />
+              <Route path="ele-sales-return/without-gst/create" element={<AddSalesReturnWithoutGstPage />} />
+              <Route path="ele-BTR" element={<BtrPage />} />
+              <Route path="ele-BTR/create" element={<AddBtrPage />} />
+              {/* ----------------Moin's Route End-------------------------------*/}
 
               <Route path="*" element={<PageNotFound />} />
             </Route>

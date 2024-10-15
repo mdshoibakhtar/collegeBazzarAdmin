@@ -1,7 +1,69 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function ProductLedgerList() {
+  // Sample data array
+  const ledgerData = [
+    {
+      date: '25/04/2024',
+      type: 'Production',
+      no: '1',
+      salesQty: '10.00',
+      purchaseQty: '0.00',
+      rate: '100.00'
+    },
+    {
+      date: '25/04/2024',
+      type: 'Production',
+      no: '1',
+      salesQty: '10.00',
+      purchaseQty: '0.00',
+      rate: '100.00'
+    },
+    {
+      date: '25/04/2024',
+      type: 'Production',
+      no: '1',
+      salesQty: '10.00',
+      purchaseQty: '0.00',
+      rate: '100.00'
+    },
+    {
+      date: '25/04/2024',
+      type: 'Production',
+      no: '1',
+      salesQty: '10.00',
+      purchaseQty: '0.00',
+      rate: '100.00'
+    },
+  ];
+
+  // State to manage selected rows
+  const [selectedRows, setSelectedRows] = useState([]);
+  const [selectAll, setSelectAll] = useState(false);
+
+  // Handle individual checkbox change
+  const handleCheckboxChange = (index) => {
+    const updatedSelectedRows = [...selectedRows];
+    if (updatedSelectedRows.includes(index)) {
+      updatedSelectedRows.splice(updatedSelectedRows.indexOf(index), 1);
+    } else {
+      updatedSelectedRows.push(index);
+    }
+    setSelectedRows(updatedSelectedRows);
+    setSelectAll(updatedSelectedRows.length === ledgerData.length);
+  };
+
+  // Handle "Select All" checkbox change
+  const handleSelectAllChange = () => {
+    if (selectAll) {
+      setSelectedRows([]);
+    } else {
+      setSelectedRows(ledgerData.map((_, index) => index));
+    }
+    setSelectAll(!selectAll);
+  };
+
   return (
     <>
       <section className=''>
@@ -33,8 +95,8 @@ function ProductLedgerList() {
                 </div>
               </div>
             </div>
-            </div>
           </div>
+        </div>
       </section>
       <section>
         <div className="row m-4">
@@ -50,15 +112,7 @@ function ProductLedgerList() {
                       role="button"
                       aria-controls="offcanvasExample"
                     >
-                      <i class="fa-solid fa-square-caret-left"></i>
-                    </Link>
-                    <Link
-                      className="btn btn-primary btn-sm"
-                      to="/add-kng-purchase-register"
-                      role="button"
-                      aria-controls="offcanvasExample"
-                    >
-                      + ADD Product Ledger
+                      <i className="fa-solid fa-square-caret-left"></i>
                     </Link>
                   </div>
                   <div
@@ -73,44 +127,62 @@ function ProductLedgerList() {
                     >
                       <thead>
                         <tr role="row">
-                          <th style={{ width: '122px' }}>Date</th>
-                          <th style={{ width: '122px' }}>Type </th>
-                          <th style={{ width: '203px' }}>No </th>
-                          <th style={{ width: '156px' }}>Sales Qty</th>
-                          <th style={{ width: '141px' }}>Purchase Qty</th>
-                          <th style={{ width: '161px' }}>Rate</th>
-                          <th style={{ width: '161px' }}>Action</th>
+                          <th>
+                            <input
+                              type="checkbox"
+                              checked={selectAll}
+                              onChange={handleSelectAllChange}
+                            />
+                          </th>
+                          <th>Date</th>
+                          <th>Type</th>
+                          <th>No</th>
+                          <th>Sales Qty</th>
+                          <th>Purchase Qty</th>
+                          <th>Rate</th>
+                          <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr role="row">
-                          <td colSpan={6} className="text-center">
-                            {/* Replace with actual data */}
-                            No records found.
-                          </td>
-                          <td className="text-center">
-                            <Link
-                              to="/kng-update-purchase-register"
-                              className="btn btn-sm btn-light mx-1"
-                              title="View Details"
-                            >
-                              <i className="fa-regular fa-eye text-primary"></i>
-                            </Link>
-                            <Link
-                              to="/kng-update-purchase-register"
-                              className="btn btn-sm btn-light mx-1"
-                              title="Edit"
-                            >
-                              <i className="fa-solid fa-pen-to-square text-primary"></i>
-                            </Link>
-                            <button
-                              className="btn btn-sm btn-light mx-1"
-                              title="Delete"
-                            >
-                              <i className="fa-solid fa-trash text-danger"></i>
-                            </button>
-                          </td>
-                        </tr>
+                        {ledgerData.map((item, index) => (
+                          <tr key={index} role="row">
+                            <td>
+                              <input
+                                type="checkbox"
+                                checked={selectedRows.includes(index)}
+                                onChange={() => handleCheckboxChange(index)}
+                              />
+                            </td>
+                            <td>{item.date}</td>
+                            <td>{item.type}</td>
+                            <td>{item.no}</td>
+                            <td>{item.salesQty}</td>
+                            <td>{item.purchaseQty}</td>
+                            <td>{item.rate}</td>
+                            <td className="text-center">
+                              <Link
+                                to=""
+                                className="btn btn-sm btn-light mx-1"
+                                title="View Details"
+                              >
+                                <i className="fa-regular fa-eye text-primary"></i>
+                              </Link>
+                              <Link
+                                to=""
+                                className="btn btn-sm btn-light mx-1"
+                                title="Edit"
+                              >
+                                <i className="fa-solid fa-pen-to-square text-primary"></i>
+                              </Link>
+                              <button
+                                className="btn btn-sm btn-light mx-1"
+                                title="Delete"
+                              >
+                                <i className="fa-solid fa-trash text-danger"></i>
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
                     <div
@@ -119,7 +191,7 @@ function ProductLedgerList() {
                       role="status"
                       aria-live="polite"
                     >
-                      Showing 1 to 10 of 12 entries
+                      Showing 1 to {ledgerData.length} of {ledgerData.length} entries
                     </div>
                   </div>
                 </div>
@@ -129,7 +201,7 @@ function ProductLedgerList() {
         </div>
       </section>
     </>
-  )
+  );
 }
 
-export default ProductLedgerList
+export default ProductLedgerList;
