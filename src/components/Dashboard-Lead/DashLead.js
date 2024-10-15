@@ -19,9 +19,8 @@ const DashLead = () => {
     return (
         <div className="dashboard row">
             {cards.map((card, index) => (
-                <div className='col-4' key={index}>
+                <div className='col-xl-4' key={index}>
                     <div className="cards">
-
                         <div className="card-title">{card.title}</div>
                         <div className='icon-contain'>
                             <div className="card-count">{card.count}</div>

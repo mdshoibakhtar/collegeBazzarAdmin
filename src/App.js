@@ -510,7 +510,6 @@ import CreateNewInvoice from "./components/sales/invoices/createNewInvoice/Creat
 import ExpenseSubCategoryPage from "./pages/expenses/expenseSubCategory";
 // import ExpenseListPage from "./pages/expenses/expenseList";
 import AddExpense from "./components/expenses/expenseList/addExpense/AddExpense";
-import NotFoundWithDelay from "./common/pageNotFound/pageNotFoundDelayL";
 import FormSubSubModule from "./pages/RolePermission/subSubModule/formSubSubModule/FormSubSubModule";
 import MainSubSubModule from "./pages/RolePermission/subSubModule/mainSubSubModule/MainSubSubModule";
 import Inward from "./components/logistics/inward/Inward";
@@ -595,8 +594,26 @@ import LeagerPage from "./pages/CustomerView/leager/LeagerPage";
 import AddLeager from "./pages/CustomerView/leager/AddLeager";
 import NewsPage from "./components/topNavigationComp/masters/news/NewsPage";
 import NewsForm from "./components/topNavigationComp/masters/news/MasterForm/NewsForm";
+import SalesRegisters from "./components/kingsonreports/sales/SalesRegisters";
+import UpdateSalesRegisterDetail from "./components/kingsonreports/sales/updateSalesRegisterDetails/UpdateSalesRegisterDetail";
+import SalesRegisterWithExpDetails from "./components/kingsonreports/salesRegisterWithExp/salesRegisterWithExpDetails/SalesRegisterWithExpDetails";
+import CnEntryWnStocklist from "./components/kingsonreports/cNEntryWNStock/CnEntryWnStocklist";
+import AccountLedgerPage from "./pages/report/accountBook/accountLedger";
+import ActiveAccountLedgerPage from "./pages/report/accountBook/activeAccountLedger";
+import VoucherlistPage from "./pages/report/accountBook/voucherList";
+import DayBookPage from "./pages/report/accountBook/dayBook";
+import BankBookPage from "./pages/report/accountBook/bankBook";
+import ReceiptRegisterPage from "./pages/report/accountBook/receiptRegister";
+import CashBookPage from "./pages/report/accountBook/cashBook";
 import BankPaymentPage from "./pages/transaction/bankCash/bankPayment";
 import AddBankPayment from "./components/transaction/bankCash/bankPayment/addBankPayment/AddBankPayment";
+import PaymentRequestViewPage from "./pages/paymentRequestView";
+import PurchaseRegister from "./components/kingsonreports/purchaseregister/PurchaseRegister";
+import Purchaseregisterform from "./components/kingsonreports/purchaseregister/purchaseregisterform/Purchaseregisterform";
+import StockRegister from "./components/kingsonreports/stockSheet/stockRegister/StockRegister";
+import ProductLedger from "./components/kingsonreports/stockSheet/stockRegister/stockRegisterList/productledger/ProductLedger";
+import WallRep from "./pages/walletReport";
+import AddUpdateVirtualWall from "./components/virtualWallet/addUpdateVirtualWall/AddUpdateVirtualWall";
 import ContraPage from "./pages/transaction/bankCash/contra";
 import ContraAdd from "./components/transaction/bankCash/contra/contraAdd/ContraAdd";
 import { GSTExpenseEntryPage } from "./pages/transaction/gst/GSTExpenseEntry";
@@ -1505,6 +1522,18 @@ function App() {
                 path="messages/manage-reports"
                 element={<ManageReports />}
               />
+              <Route
+                path="payment-request-view"
+                element={<PaymentRequestViewPage />}
+              />
+              <Route
+                path="/admin/wallet/virtual-wallet"
+                element={<WallRep />}
+              />
+              <Route
+                path="/admin/wallet/add/virtual-wallet"
+                element={<AddUpdateVirtualWall />}
+              />
               {/* mustafa Routes -------------------- */}
               <Route path="number-list" element={<ListnumberWhatsaap />} />
               <Route path='add-numbers' element={<AddNumber />} />
@@ -2026,6 +2055,14 @@ function App() {
               <Route path="inward/outtward-register" element={<InwordOutwardRegister />} />
               <Route path="material-in-but-purchase-not-made" element={<Materialinbutpurch />} />
               <Route path="purchase-not-matched-with-Inward" element={<PurchaseNotmatched />} />
+              <Route path="kng-sale-register-" element={<SalesRegisters />} />
+              <Route path="kng-update-sale-register-" element={<UpdateSalesRegisterDetail />} />
+              <Route path="kng-sale-register-with-exp" element={<SalesRegisterWithExpDetails />} />
+              <Route path="kng-cn-entry-wn-stock-list" element={<CnEntryWnStocklist />} />
+              <Route path="kng-purchase-register" element={<PurchaseRegister />} />
+              <Route path="kng-update-purchase-register" element={<Purchaseregisterform />} />
+              <Route path="kng-stocksheet" element={<StockRegister />} />
+              {/* <Route path="kng-stocksheet/ledgerview" element={<ProductLedger />} /> */}
 
               {/* atif routes */}
               <Route path="budgetlist" element={<Budget />} />
@@ -2097,7 +2134,6 @@ function App() {
             </Route>
           </>
         )}
-        {/* <Route path="*" element={<NotFoundWithDelay />} /> */}
       </Routes>
     </>
   );

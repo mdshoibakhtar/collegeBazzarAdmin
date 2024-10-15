@@ -9,13 +9,10 @@ function DashboardLeadPage() {
     }
     return <>
         <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
-        <div className=" container" >
-            <div className="row"><div className="col-lg-4">
-                <h1 className="bg-warning text-white text-decoration-none rounded" >
-                    LEAD DASHBOARD
-                </h1>
-            </div></div>
-
+        <div className="container" >
+            <h3 className="bg-dark px-4 py-3 text-white text-decoration-none rounded" >
+                LEAD DASHBOARD
+            </h3>
             <DashLead />
         </div>
     </>
