@@ -649,7 +649,19 @@ import BatchStock from "./components/kingsonreports/stockSheet/batchStock/BatchS
 import BatchWithLocation from "./components/kingsonreports/stockSheet/batchWithLocation/BatchWithLocation";
 import ViewProductionEntry from "./components/kingsonreports/productionReport/viewProductionEntry/ViewProductionEntry";
 
+import EditBankReceipt from "./components/kingsonreports/AccountBook/receiptRegister/editBankReceipt/EditBankReceipt";
+import BillToBill from "./components/kingsonreports/AccountBook/receiptRegister/editBankReceipt/billToBill/BillToBill";
+import UserLog from "./components/kingsonreports/AccountBook/receiptRegister/editBankReceipt/userLog/UserLog";
 
+
+import PurchaseOrderListPage from "./pages/purchaseOrderListpage";
+import AddPurchaseOrderPage from "./pages/addpurchaseOrderPage";
+import PurchaseInvoiceListPage from "./pages/purchaseInvoiceListPage";
+import AddPurchaseInvoicePage from "./pages/addPurchaseInvoicePage";
+import PurchaseReturnPage from "./pages/purchaseReturnPage";
+import AddPurchaseReturnPage from "./pages/addPurchaseReturnPage";
+import PurchaseReturnWithoutGstPage from "./pages/purchaseReturnWithoutGstPage";
+import AddPurchaseReturnWithoutGstPage from "./pages/addPurchaseReturnWithoutGstPage";
 /* -----------------Moin Import File END------------------------ */
 
 
@@ -2145,6 +2157,19 @@ function App() {
               <Route path="kng-bankbook" element={<BankBookPage />} />
               <Route path="kng-cashbook" element={<CashBookPage />} />
               <Route path="kng-receiptregister" element={<ReceiptRegisterPage />} />
+              <Route
+                path="kng-receiptregister/editBank-receipt"
+                element={<EditBankReceipt />}
+              />
+              <Route
+                path="receiptregister/editBank-receipt/kng-bill-to-bill"
+                element={<BillToBill />}
+              />
+
+              <Route
+                path="receiptregister/editBank-receipt/kng-userLog"
+                element={<UserLog />}
+              />
 
               <Route path="list-sales-bill" element={<SalesBills />} />
               <Route path="add-sales-bill" element={<SalesAdd />} />
@@ -2174,6 +2199,14 @@ function App() {
               <Route path="ele-sales-return/without-gst/create" element={<AddSalesReturnWithoutGstPage />} />
               <Route path="ele-BTR" element={<BtrPage />} />
               <Route path="ele-BTR/create" element={<AddBtrPage />} />
+              <Route path="ele-purchase-order" element={<PurchaseOrderListPage />} />
+              <Route path="ele-purchase-order/create" element={<AddPurchaseOrderPage />} />X
+              <Route path="ele-purchase-invoice" element={<PurchaseInvoiceListPage />} />
+              <Route path="ele-purchase-invoice/create" element={<AddPurchaseInvoicePage />} />
+              <Route path="ele-purchase-return" element={<PurchaseReturnPage />} />
+              <Route path="ele-purchase-return/create" element={<AddPurchaseReturnPage />} />
+              <Route path="ele-purchase-return/without-gst" element={<PurchaseReturnWithoutGstPage />} />
+              <Route path="ele-purchase-return/without-gst/create" element={<AddPurchaseReturnWithoutGstPage />} />
               {/* ----------------Moin's Route End-------------------------------*/}
 
               <Route path="*" element={<PageNotFound />} />

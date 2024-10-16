@@ -103,7 +103,7 @@ function ReceiptRegister() {
                           <td>
                             <div className="d-flex">
                               <Link
-                                to=""
+                                to="/kng-receiptregister/editBank-receipt"
                                 className="btn btn-primary shadow btn-xs sharp me-1"
                               >
                                 <i className="fa fa-pencil" />
@@ -146,7 +146,7 @@ function ReceiptRegister() {
                           <td>
                             <div className="d-flex">
                               <Link
-                                to=""
+                                to="/kng-receiptregister/editBank-receipt"
                                 className="btn btn-primary shadow btn-xs sharp me-1"
                               >
                                 <i className="fa fa-pencil" />
