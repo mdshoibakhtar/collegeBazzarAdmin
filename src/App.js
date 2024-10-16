@@ -686,6 +686,18 @@ import PodUpdation from "./components/podUpdation/PodUpdation";
 import { GenerateBill } from "./components/generateBill/GenerateBill";
 import DcProduct from "./components/dcProduct/DcProduct";
 import InwardProduct from "./components/inwardProduct/InwardProduct";
+import CNEntrywithStockPage from "./pages/transaction/gst/CNEntrywithStock";
+import CNEntrywithStockAdd from "./components/transaction/gst/CNEntrywithStock/CNEntrywithStockAdd/CNEntrywithStockAdd";
+import DNEntrywithStockPage from "./pages/transaction/gst/DNEntrywithStock";
+import DNEntrywithStockAdd from "./components/transaction/gst/DNEntrywithStock/DNEntrywithStockAdd/DNEntrywithStockAdd";
+import QuatationPage from "./pages/transaction/gst/Quatations/Quatation";
+import QuatationAdd from "./components/transaction/Quatations/Quatation/QuatationAdd/QuatationAdd";
+import PurchaseQuatationPage from "./pages/transaction/gst/Quatations/purchaseQuatation";
+import PurchaseQuatationAdd from "./components/transaction/Quatations/purchaseQuatation/purchaseQuatationAdd/PurchaseQuatationAdd";
+import SalesOrderPage from "./pages/transaction/order/saleOrder";
+import SalseOrderAdd from "./components/transaction/order/salseOrder/salseOrderAdd/SalseOrderAdd";
+import PurchageOrderPage from "./pages/transaction/order/purchageOrder";
+import PurchageOrderAdd from "./components/transaction/order/purchageOrder/purchageOrderAdd/PurchageOrderAdd";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -1873,6 +1885,18 @@ function App() {
               <Route path="cnentrywostock/add" element={<EntryCnStocksAdd />} />
               <Route path="dnentrywostock/list" element={<EntryDnStocksPage />} />
               <Route path="dnentrywostock/add" element={<EntryDnStocksAdd />} />
+              <Route path="cnentrywithstock/list" element={<CNEntrywithStockPage />} />
+              <Route path="cnentrywithstock/add" element={<CNEntrywithStockAdd />} />
+              <Route path="dnentrywithstock/list" element={<DNEntrywithStockPage />} />
+              <Route path="dnentrywithstock/add" element={<DNEntrywithStockAdd />} />
+              <Route path="quotation/list" element={<QuatationPage />} />
+              <Route path="quotation/add" element={<QuatationAdd />} />
+              <Route path="purchasequotation/list" element={<PurchaseQuatationPage />} />
+              <Route path="purchasequotation/add" element={<PurchaseQuatationAdd />} />
+              <Route path="salesorder/list" element={<SalesOrderPage />} />
+              <Route path="salesorder/add" element={<SalseOrderAdd />} />
+              {/* <Route path="purchaseorder/list" element={<PurchageOrderPage />} />
+              <Route path="purchaseorder/Add" element={<PurchageOrderAdd />} /> */}
 
 
 
