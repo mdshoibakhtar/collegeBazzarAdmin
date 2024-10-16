@@ -627,6 +627,16 @@ import SalesBills from "./components/topNavigationComp/masters/salesbill/SalesBi
 import SalesAdd from "./components/topNavigationComp/masters/salesbill/MasterForm/SalesAdd";
 import SalesReturn from "./components/topNavigationComp/masters/salesreturn/SalesReturn";
 import SalesAddRetuen from "./components/topNavigationComp/masters/salesreturn/MasterForm/SalesAdd";
+import GSTUtilizationPage from "./pages/transaction/gst/GSTUtilization";
+import { GSTUtilizationAdd } from "./components/transaction/gst/GSTUtilization/GSTUtilizationAdd/GSTUtilizationAdd";
+import GstPaymentPage from "./pages/transaction/gst/GSTPayment";
+import GSTPaymentAdd from "./components/transaction/gst/GSTPayment/GSTPaymentAdd/GSTPaymentAdd";
+import GSTJournalPage from "./pages/transaction/gst/GSTJournal";
+import GSTJournalAdd from "./components/transaction/gst/GSTJournal/GSTJournalAdd/GSTJournalAdd";
+import EntryCnStocksPage from "./pages/transaction/gst/entryCnStocks";
+import EntryCnStocksAdd from "./components/transaction/gst/entryCnStocks/entryCnStocksAdd/EntryCnStocksAdd";
+import EntryDnStocksPage from "./pages/transaction/gst/entryDnStocks";
+import EntryDnStocksAdd from "./components/transaction/gst/entryDnStocks/entryDnStocksAdd/EntryDnStocksAdd";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -1804,6 +1814,16 @@ function App() {
               <Route path="gstrcmentry/add" element={<RcmEntryAdd />} />
               <Route path="gstincome/list" element={<GSTIncomePage />} />
               <Route path="gstincome/add" element={<GSTIncomeAdd />} />
+              <Route path="gstutilization/list" element={<GSTUtilizationPage />} />
+              <Route path="gstutilization/add" element={<GSTUtilizationAdd />} />
+              <Route path="gstpayment/list" element={<GstPaymentPage />} />
+              <Route path="gstpayment/add" element={<GSTPaymentAdd />} />
+              <Route path="gstjournal/list" element={<GSTJournalPage />} />
+              <Route path="gstjournal/add" element={<GSTJournalAdd />} />
+              <Route path="cnentrywostock/list" element={<EntryCnStocksPage />} />
+              <Route path="cnentrywostock/add" element={<EntryCnStocksAdd />} />
+              <Route path="dnentrywostock/list" element={<EntryDnStocksPage />} />
+              <Route path="dnentrywostock/add" element={<EntryDnStocksAdd />} />
 
 
 
