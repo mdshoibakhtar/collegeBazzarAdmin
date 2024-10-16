@@ -56953,3 +56953,19 @@ input[type="number"]::-webkit-inner-spin-button {
   align-items: center;
   justify-content: space-between;
 }
+/* ----daud some changes in style css */
+label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #000;
+}
+.form-control {
+  background: #fff;
+  color: #6e6e6e;
+  line-height: 1.5;
+  font-size: 13px;
+  height: 3rem;
+  /* border-radius: 2.2rem; */
+  border-color: #CCCCCC;
+  /* box-shadow: 0 7px 15px 0 rgba(0, 0, 0, .13), 0 1px 4px 0 rgba(0, 0, 0, .11); */
+}
