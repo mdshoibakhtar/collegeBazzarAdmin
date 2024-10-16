@@ -6,12 +6,14 @@ function BatchWithLocation() {
     const breadCrumbsTitle = {
         id: "1212",
         title_1: "Stock Sheet",
-        title_2: "Batch With Location"
+        title_2: "Batch With Location",
+        headingTitle: "Batch With Location"
     }
+
     return (
         <>
             <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
-            <BatchwithlocationList />
+            <BatchwithlocationList titleName={breadCrumbsTitle} />
         </>
     )
 }

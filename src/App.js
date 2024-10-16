@@ -567,7 +567,11 @@ import WarehouseStocktransferAdd from "./components/logistics/warehouseStocktran
 import LedgerReportsPage from "./pages/electronicsReports/accountReport/ledgerReports";
 import TalukaWiseDealerListPage from "./pages/electronicsReports/accountReport/talukaWiseDealerList";
 import GroupSummaryPage from "./pages/electronicsReports/accountReport/groupSummary";
-
+import QuotationReportPage from "./pages/report/quotationReport";
+import JobworkOutstockStatementPage from "./pages/report/jobworkReport/jobworkOutstockStatement";
+import JobworkoutOrderPage from "./pages/report/jobworkReport/jobworkOutOrder";
+import SalesOrderBookPage from "./pages/report/orderBook/salesOrderBook";
+import PurchaseOrderBookPage from "./pages/report/orderBook/purchaseOrderBook";
 // -------------------------DAUD----IMPORT-End----------------
 
 import Budget from "./pages/budgetlist";
@@ -665,6 +669,23 @@ import AddPurchaseReturnWithoutGstPage from "./pages/addPurchaseReturnWithoutGst
 /* -----------------Moin Import File END------------------------ */
 
 
+import GSTUtilizationPage from "./pages/transaction/gst/GSTUtilization";
+import { GSTUtilizationAdd } from "./components/transaction/gst/GSTUtilization/GSTUtilizationAdd/GSTUtilizationAdd";
+import GstPaymentPage from "./pages/transaction/gst/GSTPayment";
+import GSTPaymentAdd from "./components/transaction/gst/GSTPayment/GSTPaymentAdd/GSTPaymentAdd";
+import GSTJournalPage from "./pages/transaction/gst/GSTJournal";
+import GSTJournalAdd from "./components/transaction/gst/GSTJournal/GSTJournalAdd/GSTJournalAdd";
+import EntryCnStocksPage from "./pages/transaction/gst/entryCnStocks";
+import EntryCnStocksAdd from "./components/transaction/gst/entryCnStocks/entryCnStocksAdd/EntryCnStocksAdd";
+import EntryDnStocksPage from "./pages/transaction/gst/entryDnStocks";
+import EntryDnStocksAdd from "./components/transaction/gst/entryDnStocks/entryDnStocksAdd/EntryDnStocksAdd";
+import Batchexpiring from "./components/kingsonreports/stockSheet/batchexpiring/Batchexpiring";
+import LocationWiseStock from "./components/kingsonreports/stockSheet/locationWiseStock/LocationWiseStock";
+import Unusedserialnostock from "./components/kingsonreports/stockSheet/unUsedsriealNoStock/Unusedserialnostock";
+import PodUpdation from "./components/podUpdation/PodUpdation";
+import { GenerateBill } from "./components/generateBill/GenerateBill";
+import DcProduct from "./components/dcProduct/DcProduct";
+import InwardProduct from "./components/inwardProduct/InwardProduct";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -1842,6 +1863,16 @@ function App() {
               <Route path="gstrcmentry/add" element={<RcmEntryAdd />} />
               <Route path="gstincome/list" element={<GSTIncomePage />} />
               <Route path="gstincome/add" element={<GSTIncomeAdd />} />
+              <Route path="gstutilization/list" element={<GSTUtilizationPage />} />
+              <Route path="gstutilization/add" element={<GSTUtilizationAdd />} />
+              <Route path="gstpayment/list" element={<GstPaymentPage />} />
+              <Route path="gstpayment/add" element={<GSTPaymentAdd />} />
+              <Route path="gstjournal/list" element={<GSTJournalPage />} />
+              <Route path="gstjournal/add" element={<GSTJournalAdd />} />
+              <Route path="cnentrywostock/list" element={<EntryCnStocksPage />} />
+              <Route path="cnentrywostock/add" element={<EntryCnStocksAdd />} />
+              <Route path="dnentrywostock/list" element={<EntryDnStocksPage />} />
+              <Route path="dnentrywostock/add" element={<EntryDnStocksAdd />} />
 
 
 
@@ -2079,6 +2110,7 @@ function App() {
               <Route path="kng-cn-entry-wn-stock-list" element={<CnEntryWnStocklist />} />
               <Route path="kng-purchase-register" element={<PurchaseRegister />} />
               <Route path="kng-update-purchase-register" element={<Purchaseregisterform />} />
+              <Route path="kng-add-purchase-register" element={<Purchaseregisterform />} />
               <Route path="kng-stocksheet" element={<StockRegister />} />
               <Route path="kng-stocksheet/ledgerview" element={<ProductLedger />} />
               <Route path="kng-negative/stock" element={<NegativeSock />} />
@@ -2087,6 +2119,9 @@ function App() {
               <Route path="kng-stock-statement-list" element={<StockStatement />} />
               <Route path="kng-batch-stock-list" element={<BatchStock />} />
               <Route path="kng-batch-stock-location-list" element={<BatchWithLocation />} />
+              <Route path="kng-batch-expring-list" element={<Batchexpiring />} />
+              <Route path="kng-location-wise-list" element={<LocationWiseStock />} />
+              <Route path="kng-unused-serial-number-stock-list" element={<Unusedserialnostock />} />
 
               {/* atif routes */}
               <Route path="budgetlist" element={<Budget />} />
@@ -2187,6 +2222,17 @@ function App() {
                 path="kgn-productionReport/productionEntry"
                 element={<ViewProductionEntry />}
               />
+              <Route path="kng-quotationReport" element={<QuotationReportPage />} />
+              <Route
+                path="kng-jobwork-OutstockStatement"
+                element={<JobworkOutstockStatementPage />}
+              />
+              <Route
+                path="kng-jobworkoutOrder-Report"
+                element={<JobworkoutOrderPage />}
+              />
+              <Route path="kng-saleorder" element={<SalesOrderBookPage />} />
+              <Route path="kng-purorder" element={<PurchaseOrderBookPage />} />
 
               {/* ----------------Moin's Route start-------------------------------*/}
               <Route path="ele-sales-invoice" element={<SalesIvoiceListPage />} />
@@ -2209,6 +2255,13 @@ function App() {
               <Route path="ele-purchase-return/without-gst/create" element={<AddPurchaseReturnWithoutGstPage />} />
               {/* ----------------Moin's Route End-------------------------------*/}
 
+
+              {/*-------------------------meraj Routes start ----------------------- */}
+              <Route path="ele-pod-updation" element={<PodUpdation />} />
+              <Route path="ele-generate-bill" element={<GenerateBill />} />
+              <Route path="ele-close-dc-product" element={<DcProduct />} />
+              <Route path="ele-close-inward-product" element={<InwardProduct />} />
+              meraj{/*-------------------------meraj Routes End ----------------------- */}
               <Route path="*" element={<PageNotFound />} />
             </Route>
           </>

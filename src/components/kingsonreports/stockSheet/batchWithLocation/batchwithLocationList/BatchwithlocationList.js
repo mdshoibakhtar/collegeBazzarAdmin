@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 
-function BatchwithlocationList() {
+function BatchwithlocationList({titleName}) {
     const data = [
         {
             batchNo: 1,
@@ -61,7 +61,7 @@ function BatchwithlocationList() {
                             <div className="card-body p-0">
                                 <div className="table-responsive active-projects style-1">
                                     <div className="tbl-caption">
-                                        <h4 className="heading mb-0"><b>Batch With Location</b></h4>
+                                        <h4 className="heading mb-0"><b>{titleName.headingTitle}</b></h4>
                                         <div>
                                             <Link
                                                 className="btn btn-primary btn-sm"
