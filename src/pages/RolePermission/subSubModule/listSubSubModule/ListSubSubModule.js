@@ -102,17 +102,17 @@ function ListSubSubModule({ onChangeVal, dmtTtxn, loading, dmtExcelTtxn, getDmtT
                                             </tbody>
                                         </table>
                                         <div className="dataTables_info" id="empoloyees-tblwrapper_info" role="status" aria-live="polite">
-                                            {/* Total {total} entries */}
+                                            Total {total} entries
                                         </div>
                                         <div className="dataTables_paginate paging_simple_numbers" id="empoloyees-tblwrapper_paginate">
-                                           {/*  <Pagination
+                                            <Pagination
                                                 // showSizeChanger
                                                 // onShowSizeChange={''}
 
                                                 defaultCurrent={1}
                                                 onChange={onChangeVal}
                                                 total={total}
-                                            /> */}
+                                            />
                                         </div>
                                     </div>
                                 </div>
