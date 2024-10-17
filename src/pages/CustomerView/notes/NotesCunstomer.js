@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AddContact from "./AddContact";
 import { Link, useParams } from "react-router-dom";
-import { Popconfirm } from "antd";
+import { message, Popconfirm } from "antd";
+import { deleteLeadNoteById, getLeadNoteById, getLeadNotes } from "../../../api/login/Login";
 const dummyData = [
     {
         id: 1,
@@ -14,11 +15,70 @@ const dummyData = [
     }
     // Add more dummy data here if needed
 ];
-
+const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+    });
+};
 const NotesCunstomer = ({ title }) => {
     const [modalShow, setModalShow] = useState(false);
 
+    const [data, setData] = useState()
+    const parems = useParams()
+    const getFloorMasters = async (page) => {
 
+        try {
+            const res = await getLeadNotes(page, 100, parems.id)
+            setData(res?.data)
+        } catch (error) {
+
+        }
+    }
+    const deleteBlockAdd = async (id) => {
+        try {
+            await deleteLeadNoteById(id)
+            getFloorMasters(0)
+        } catch (error) {
+            // toastSuccessMessage(error.message)
+        }
+    }
+
+    const confirm = (id) => {
+        deleteBlockAdd(id)
+        message.success('Delete Successfull!');
+
+    };
+    const cancel = (e) => {
+        // console.log(e);
+        message.error('Cancle Successfull!');
+    };
+    useEffect(() => {
+        getFloorMasters(0)
+    }, [])
+
+    const [value, setValue] = useState()
+    useEffect(() => {
+        if (value) {
+            setTimeout(() => {
+                setModalShow(true)
+            }, 1000);
+        }
+    }, [value])
+    const [id, setId] = useState()
+    const setIdModel = async (id) => {
+        setId(id)
+        try {
+            const res = await getLeadNoteById(id)
+            setValue(res?.data)
+        } catch (error) {
+
+        }
+    }
     return (
         <>
             <h4>{title}</h4>
@@ -35,7 +95,10 @@ const NotesCunstomer = ({ title }) => {
                     </div>
                 </div>
                 <AddContact
+                    id={id}
+                    getFloorMasters={getFloorMasters}
                     show={modalShow}
+                    value={value}
                     onHide={() => setModalShow(false)}
                 />
                 <div className="">
@@ -44,28 +107,26 @@ const NotesCunstomer = ({ title }) => {
                             <tr>
                                 <th scope="col">S.no</th>
                                 <th scope="col">Description</th>
-                                <th scope="col text-center">Added From</th>
                                 <th scope="col text-center">Date Added</th>
                                 <th scope="col text-center">Option</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {dummyData.map((contact, i) => (
+                            {data?.map((contact, i) => (
                                 <tr key={contact.id}>
                                     <td>{i + 1}</td>
                                     <td>{contact.description}</td>
-                                    <td>{contact.date}</td>
-                                    <td>{contact.date}</td>
+                                    <td>{formatDate(contact.added_date)}</td>
                                     <td>
                                         <div className="d-flex">
-                                            <Link to={`#`} className="btn btn-primary shadow btn-xs sharp me-1">
+                                            <Link to={`#`} onClick={() => { setIdModel(contact?._id) }} className="btn btn-primary shadow btn-xs sharp me-1">
                                                 <i className="fa fa-pencil" />
                                             </Link>
                                             <Popconfirm
                                                 title="Delete Note!"
                                                 description="Are you sure to delete?"
-                                                // onConfirm={() => confirm(item?._id)}
-                                                // onCancel={cancel}
+                                                onConfirm={() => confirm(contact?._id)}
+                                                onCancel={cancel}
                                                 okText="Yes"
                                                 cancelText="No"
                                             >

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { clodinaryImage, getTaskPriorities, postLeadServiceReq } from "../../../api/login/Login";
+import { clodinaryImage, getLeadServiceReqById, getTaskPriorities, postLeadServiceReq, updateLeadServiceReqById } from "../../../api/login/Login";
 import { baseUrlImage } from "../../../baseUrl";
-import { toast ,ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
-const AddContact = ({ show, onHide ,getFloorMasters}) => {
+const EditContact = ({ show, onHide, getFloorMasters, id, data }) => {
+    console.log('data', data);
     const parem = useParams()
     const [formData, setFormData] = useState({
         customer_name: "",
@@ -36,13 +37,21 @@ const AddContact = ({ show, onHide ,getFloorMasters}) => {
         getData()
     }, [])
 
+    const [image, setImage] = useState(null);
+    useEffect(() => {
+        if (data) {
+           
+            setFormData(data)
+            setImage(data?.attach_photo)
+        }
+    }, [data])
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
-    const [image, setImage] = useState(null);
-    const handleFileChange =async (e) => {
+    const handleFileChange = async (e) => {
         const image = new FormData()
         image.append('image', e.target.files[0])
         try {
@@ -66,18 +75,33 @@ const AddContact = ({ show, onHide ,getFloorMasters}) => {
         });
     };
 
-  
-    const handleSubmit =async (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         // Your submit logic here
         console.log("Form Data Submitted", formData);
-       
+
         try {
-            const res = await postLeadServiceReq({...formData , attach_photo:image});
+            const res = await updateLeadServiceReqById(id ,{ ...formData, attach_photo: image });
             if (res?.statusCode == "200") {
-                toastSuccessMessage("Service request added successfully");
+                toastSuccessMessage("Service request Update successfully");
                 setTimeout(() => {
                     getFloorMasters()
+                    setFormData({
+                        customer_name: "",
+                        customer_number: "",
+                        task_detail: "", // This should be task._id from your database
+                        preferred_date: "",
+                        address: "",
+                        landmark_product_detail: "",
+                        product_detail: "",
+                        product_no: "",
+                        service_description: "",
+                        message: "",
+                        attach_photo: null, // Will store file or base64 string
+                        model_no: "",
+                        user_id: parem.id, // This should be user._id from your database
+                    })
                     onHide();
                 }, 1000);
             }
@@ -87,14 +111,15 @@ const AddContact = ({ show, onHide ,getFloorMasters}) => {
         } catch (error) {
             console.error("Error:", error);
         }
-         // Close the modal
+        // Close the modal
     };
+    console.log(formData);
 
     return (
         <Modal show={show} onHide={onHide} dialogClassName="custom-modal-width">
             <Modal.Header closeButton>
-                <Modal.Title> Add Service request</Modal.Title>
-                <ToastContainer/>
+                <Modal.Title>Update Service request</Modal.Title>
+                <ToastContainer />
             </Modal.Header>
             <Modal.Body>
                 <form onSubmit={handleSubmit}>
@@ -107,7 +132,7 @@ const AddContact = ({ show, onHide ,getFloorMasters}) => {
                                     type="text"
                                     className="form-control"
                                     name="customer_name"
-                                    value={formData.customer_name}
+                                    value={formData?.customer_name}
                                     onChange={handleInputChange}
                                 />
                             </div>
@@ -119,7 +144,7 @@ const AddContact = ({ show, onHide ,getFloorMasters}) => {
                                     type="number"
                                     className="form-control"
                                     name="customer_number"
-                                    value={formData.customer_number}
+                                    value={formData?.customer_number}
                                     onChange={handleInputChange}
                                 />
                             </div>
@@ -131,7 +156,7 @@ const AddContact = ({ show, onHide ,getFloorMasters}) => {
                                     type="number"
                                     className="form-control"
                                     name="model_no"
-                                    value={formData.model_no}
+                                    value={formData?.model_no}
                                     onChange={handleInputChange}
                                 />
                             </div>
@@ -146,7 +171,7 @@ const AddContact = ({ show, onHide ,getFloorMasters}) => {
                                 <select
                                     className="form-control"
                                     name="task_detail"
-                                    value={formData.task_detail}
+                                    value={formData?.task_detail}
                                     onChange={handleInputChange}
                                 >
                                     <option value="">Select Task</option>
@@ -169,7 +194,7 @@ const AddContact = ({ show, onHide ,getFloorMasters}) => {
                                     type="date"
                                     className="form-control"
                                     name="preferred_date"
-                                    value={formData.preferred_date}
+                                    value={formData?.preferred_date}
                                     onChange={handleInputChange}
                                 />
                             </div>
@@ -185,7 +210,7 @@ const AddContact = ({ show, onHide ,getFloorMasters}) => {
                                     type="text"
                                     className="form-control"
                                     name="address"
-                                    value={formData.address}
+                                    value={formData?.address}
                                     onChange={handleInputChange}
                                 />
                             </div>
@@ -197,7 +222,7 @@ const AddContact = ({ show, onHide ,getFloorMasters}) => {
                                     type="text"
                                     className="form-control"
                                     name="landmark_product_detail"
-                                    value={formData.landmark_product_detail}
+                                    value={formData?.landmark_product_detail}
                                     onChange={handleInputChange}
                                 />
                             </div>
@@ -213,7 +238,7 @@ const AddContact = ({ show, onHide ,getFloorMasters}) => {
                                     type="text"
                                     className="form-control"
                                     name="product_detail"
-                                    value={formData.product_detail}
+                                    value={formData?.product_detail}
                                     onChange={handleInputChange}
                                 />
                             </div>
@@ -225,7 +250,7 @@ const AddContact = ({ show, onHide ,getFloorMasters}) => {
                                     type="text"
                                     className="form-control"
                                     name="product_no"
-                                    value={formData.product_no}
+                                    value={formData?.product_no}
                                     onChange={handleInputChange}
                                 />
                             </div>
@@ -240,7 +265,7 @@ const AddContact = ({ show, onHide ,getFloorMasters}) => {
                                 <textarea
                                     className="form-control"
                                     name="service_description"
-                                    value={formData.service_description}
+                                    value={formData?.service_description}
                                     onChange={handleInputChange}
                                 />
                             </div>
@@ -251,7 +276,7 @@ const AddContact = ({ show, onHide ,getFloorMasters}) => {
                                 <textarea
                                     className="form-control"
                                     name="message"
-                                    value={formData.message}
+                                    value={formData?.message}
                                     onChange={handleInputChange}
                                 />
                             </div>
@@ -270,7 +295,7 @@ const AddContact = ({ show, onHide ,getFloorMasters}) => {
                                     onChange={handleFileChange}
                                 />
                             </div>
-                            {image && <img style={{width:"100px" , height:"100px"}} src={`${baseUrlImage}${image}`} />}
+                            {image && <img style={{ width: "100px", height: "100px" }} src={`${baseUrlImage}${image}`} />}
                         </div>
                     </div>
 
@@ -283,7 +308,7 @@ const AddContact = ({ show, onHide ,getFloorMasters}) => {
                                     type="text"
                                     className="form-control"
                                     name="user_id"
-                                    value={formData.user_id}
+                                    value={formData?.user_id}
                                     onChange={handleInputChange}
                                 />
                             </div>
@@ -299,4 +324,4 @@ const AddContact = ({ show, onHide ,getFloorMasters}) => {
     );
 };
 
-export default AddContact;
+export default EditContact;

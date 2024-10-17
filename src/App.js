@@ -631,6 +631,15 @@ import SalesBills from "./components/topNavigationComp/masters/salesbill/SalesBi
 import SalesAdd from "./components/topNavigationComp/masters/salesbill/MasterForm/SalesAdd";
 import SalesReturn from "./components/topNavigationComp/masters/salesreturn/SalesReturn";
 import SalesAddRetuen from "./components/topNavigationComp/masters/salesreturn/MasterForm/SalesAdd";
+import PrirotyMaster from "./components/topNavigationComp/masters/priorityTask/PrirotyMaster";
+import PrirotyAdd from "./components/topNavigationComp/masters/priorityTask/masterform/PrirotyAdd";
+import RelatedMaster from "./components/topNavigationComp/masters/relatedto/RelatedMaster";
+import RelatedAdd from "./components/topNavigationComp/masters/relatedto/masterform/RelatedAdd";
+import PrirotyMas from "./components/topNavigationComp/masters/priority/PrirotyMas";
+import TaskAdd from "./components/topNavigationComp/masters/priority/masterform/TaskAdd";
+import NatureMaster from "./components/topNavigationComp/masters/nature/NatureMaster";
+import NatureAdd from "./components/topNavigationComp/masters/nature/masterform/NatureAdd";
+import ProjectFrom from "./components/project/projectform";
 import ProductionReportPage from "./pages/report/productionReport";
 
 
@@ -1808,7 +1817,7 @@ function App() {
               <Route path="sale-invoice-cow" element={<SaleInvoice />} />
               <Route path="sale-due-collection" element={<SaleDueCollectionnPage />} />
               <Route path="expense-list" element={<ExpenseListPage />} />
-              <Route path="expense-add" element={<ExpenseListAdd />} />
+             
               <Route path="expense-purpose" element={<ExpensePurposePage />} />
               <Route path="add-new-expense-purpose" element={<AddNewPurpose />} />
               <Route path="supplier" element={<SuppliersPage />} />
@@ -2064,7 +2073,7 @@ function App() {
               <Route path="add-vehicle" element={<AddVehicle />} />
 
               <Route path="tasks" element={<TasksListPage />} />
-              <Route path="task/create" element={<AddNewTaskPage />} />
+              <Route path="task/create/:id" element={<AddNewTaskPage />} />
               <Route path="task/overview" element={<TasksOverviewPage />} />
               <Route path="task_templates" element={<TaskTemplateListPage />} />
               <Route path="task_templates/create" element={<AddNewTaskTemplatePage />} />
@@ -2188,9 +2197,14 @@ function App() {
                 <Route path="notes" element={<NotesCunstomer title='Notes' />} />
                 <Route path="proposals-view" element={<ProposalList style={true} />} />
                 <Route path="expenses-view" element={<ExpenseListPage style={true} />} />
+                <Route path="expense-add" element={<ExpenseListAdd />} />
                 <Route path="projects-view" element={<Project style={true} />} />
+                <Route path="project-add" element={<ProjectFrom style={true} />} />
                 <Route path="tasks-view" element={<TasksListPage style={true} />} />
+                <Route path="task/create" element={<AddNewTaskPage />} />
+                <Route path="task/update/:update" element={<AddNewTaskPage />} />
                 <Route path="estimates-view" element={<EstimateList style={true} title='Estimates' />} />
+                <Route path="estimates-add" element={<EstimateForm style={true} title='Estimates Add' />} />
                 <Route path="estimates-view-listview" element={<Estimate style={true} title='Estimates' />} />
                 <Route path="tickets-view" element={<TicketsPage style={true} title='Tickets' />} />
                 <Route path="service" element={<ServiceList style={true} title='Service request' />} />
@@ -2200,7 +2214,6 @@ function App() {
                 <Route path="ledgers" element={<LeagerPage style={true} title='Ledgers' />} />
                 <Route path="add-leager" element={<AddLeager style={true} title='Ledgers' />} />
               </Route>
-              <Route path="estimates-add" element={<EstimateForm style={true} title='Estimates Add' />} />
               <Route path="ticket-add" element={<TicketForm />} />
 
               <Route path="day-start" element={<StartDays />} />
@@ -2254,6 +2267,25 @@ function App() {
               <Route path="list-sales-return" element={<SalesReturn />} />
               <Route path="add-sales-return" element={<SalesAddRetuen />} />
               <Route path="add-sales-return/:id" element={<SalesAddRetuen />} />
+
+              <Route path="priority_task" element={<PrirotyMaster />} />
+              <Route path="add-priority_task" element={<PrirotyAdd />} />
+              <Route path="add-priority_task/:id" element={<PrirotyAdd />} />
+
+              <Route path="related_master" element={<RelatedMaster />} />
+              <Route path="add-related_master" element={<RelatedAdd />} />
+              <Route path="add-related_master/:id" element={<RelatedAdd />} />
+
+              <Route path="task_master" element={<PrirotyMas />} />
+              <Route path="add-task_master" element={<TaskAdd />} />
+              <Route path="add-task_master/:id" element={<TaskAdd />} />
+
+
+
+
+              <Route path="nature_master" element={<NatureMaster />} />
+              <Route path="add-nature_master" element={<NatureAdd />} />
+              <Route path="add-nature_master/:id" element={<NatureAdd />} />
               <Route
                 path="kng-productionReport"
                 element={<ProductionReportPage />}
