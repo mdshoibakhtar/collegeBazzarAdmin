@@ -1,10 +1,13 @@
 import Modal from 'react-bootstrap/Modal';
 import React, { useState, useEffect } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
+import { toast, ToastContainer } from 'react-toastify';
+import { postLeadNote, updateLeadNoteById } from '../../../api/login/Login';
+import { useParams } from 'react-router-dom';
 
 function AddContact(props) {
   const [formData, setFormData] = useState({
-    startDateTime: '',
+    added_date: '',
     description: '',
   });
 
@@ -20,7 +23,7 @@ function AddContact(props) {
   useEffect(() => {
     setFormData((prevData) => ({
       ...prevData,
-      startDateTime: getCurrentDateTime(),
+      added_date: getCurrentDateTime(),
     }));
   }, []);
 
@@ -34,10 +37,55 @@ function AddContact(props) {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const toastSuccessMessage = (message) => {
+    toast.success(`${props?.id ? "Update" : "Add"} ${message}`, {
+      position: "top-right",
+    });
+  };
+  const params = useParams()
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Form Data Submitted: ", formData);
+
+    try {
+
+      if (!props.value) {
+        const res = await postLeadNote({ ...formData, user_id: params.id });
+        if (res?.statusCode == "200") {
+          toastSuccessMessage("Note Successfully Added");
+          setTimeout(() => {
+            setFormData({
+              added_date: getCurrentDateTime(),
+              description: '',
+            });
+            props.getFloorMasters(0)
+            props.onHide();
+          }, 1000);
+        }
+      } else {
+        const res = await updateLeadNoteById(props.id, { ...formData, user_id: params.id });
+        if (res?.statusCode == "200") {
+          toastSuccessMessage("Note Successfully Updated");
+          setTimeout(() => {
+            props.getFloorMasters(0)
+            props.onHide();
+          }, 1000);
+        }
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+
+    }
   };
+
+  useEffect(()=>{
+    if(props.value){
+      setFormData({
+        added_date: props.value.added_date,
+        description: props.value.description
+      })
+    }
+  },[props.value])
 
   return (
     <Modal
@@ -46,6 +94,7 @@ function AddContact(props) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
+      <ToastContainer />
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
           Add Notes
@@ -53,7 +102,7 @@ function AddContact(props) {
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
-        <Row className="mb-3">
+          <Row className="mb-3">
             <Col xs={12}>
               <Form.Group controlId="formDescription">
                 <Form.Label>Description</Form.Label>
@@ -67,22 +116,22 @@ function AddContact(props) {
               </Form.Group>
             </Col>
           </Row>
-         
-        <Row className="mb-3">
+
+          <Row className="mb-3">
             <Col xs={12} md={6}>
-              <Form.Group controlId="formStartDateTime">
+              <Form.Group controlId="formadded_date">
                 <Form.Label>Added Date</Form.Label>
                 <Form.Control
                   type="datetime-local"
-                  name="startDateTime"
-                  value={formData.startDateTime}
+                  name="added_date"
+                  value={formData.added_date}
                   onChange={handleInputChange}
                 />
               </Form.Group>
             </Col>
           </Row>
 
-        
+
 
           <Button variant="primary" type="submit">
             Submit
