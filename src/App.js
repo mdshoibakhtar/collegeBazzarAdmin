@@ -567,7 +567,11 @@ import WarehouseStocktransferAdd from "./components/logistics/warehouseStocktran
 import LedgerReportsPage from "./pages/electronicsReports/accountReport/ledgerReports";
 import TalukaWiseDealerListPage from "./pages/electronicsReports/accountReport/talukaWiseDealerList";
 import GroupSummaryPage from "./pages/electronicsReports/accountReport/groupSummary";
-
+import QuotationReportPage from "./pages/report/quotationReport";
+import JobworkOutstockStatementPage from "./pages/report/jobworkReport/jobworkOutstockStatement";
+import JobworkoutOrderPage from "./pages/report/jobworkReport/jobworkOutOrder";
+import SalesOrderBookPage from "./pages/report/orderBook/salesOrderBook";
+import PurchaseOrderBookPage from "./pages/report/orderBook/purchaseOrderBook";
 // -------------------------DAUD----IMPORT-End----------------
 
 import Budget from "./pages/budgetlist";
@@ -627,6 +631,44 @@ import SalesBills from "./components/topNavigationComp/masters/salesbill/SalesBi
 import SalesAdd from "./components/topNavigationComp/masters/salesbill/MasterForm/SalesAdd";
 import SalesReturn from "./components/topNavigationComp/masters/salesreturn/SalesReturn";
 import SalesAddRetuen from "./components/topNavigationComp/masters/salesreturn/MasterForm/SalesAdd";
+import ProductionReportPage from "./pages/report/productionReport";
+
+
+/* -----------------Moin Import File Start------------------------ */
+import SalesIvoiceListPage from "./pages/salesInvoiceListPage";
+import AddNewSaleInvoicePage from "./pages/addNewSaleInvoicePage";
+import InterBankStockTransferPage from "./pages/interBankStockTransferPage";
+import AddInterBankStockTransferPage from "./pages/addInterBankStockTransferPage";
+import SalesReturnPage from "./pages/salesReturnPage";
+import AddSaleRetunPage from "./pages/addSaleRetunPage";
+import SalesRetunWithoutGstPage from "./pages/salesRetunWithoutGstPage";
+import AddSalesReturnWithoutGstPage from "./pages/addSalesRetunWithoutGstPage";
+import BtrPage from "./pages/btrPage";
+import AddBtrPage from "./pages/addBtrPage";
+import NegativeSock from "./components/kingsonreports/stockSheet/negativeStock/NegativeSock";
+import ViewProductionForm from "./components/kingsonreports/stockSheet/stockRegister/stockRegisterList/productledger/viewProductionform/ViewProductionForm";
+import RecordLevel from "./components/kingsonreports/stockSheet/recordlevel/RecordLevel";
+import StockStatement from "./components/kingsonreports/stockSheet/stockStatement/StockStatement";
+import BatchStock from "./components/kingsonreports/stockSheet/batchStock/BatchStock";
+import BatchWithLocation from "./components/kingsonreports/stockSheet/batchWithLocation/BatchWithLocation";
+import ViewProductionEntry from "./components/kingsonreports/productionReport/viewProductionEntry/ViewProductionEntry";
+
+import EditBankReceipt from "./components/kingsonreports/AccountBook/receiptRegister/editBankReceipt/EditBankReceipt";
+import BillToBill from "./components/kingsonreports/AccountBook/receiptRegister/editBankReceipt/billToBill/BillToBill";
+import UserLog from "./components/kingsonreports/AccountBook/receiptRegister/editBankReceipt/userLog/UserLog";
+
+
+import PurchaseOrderListPage from "./pages/purchaseOrderListpage";
+import AddPurchaseOrderPage from "./pages/addpurchaseOrderPage";
+import PurchaseInvoiceListPage from "./pages/purchaseInvoiceListPage";
+import AddPurchaseInvoicePage from "./pages/addPurchaseInvoicePage";
+import PurchaseReturnPage from "./pages/purchaseReturnPage";
+import AddPurchaseReturnPage from "./pages/addPurchaseReturnPage";
+import PurchaseReturnWithoutGstPage from "./pages/purchaseReturnWithoutGstPage";
+import AddPurchaseReturnWithoutGstPage from "./pages/addPurchaseReturnWithoutGstPage";
+/* -----------------Moin Import File END------------------------ */
+
+
 import GSTUtilizationPage from "./pages/transaction/gst/GSTUtilization";
 import { GSTUtilizationAdd } from "./components/transaction/gst/GSTUtilization/GSTUtilizationAdd/GSTUtilizationAdd";
 import GstPaymentPage from "./pages/transaction/gst/GSTPayment";
@@ -637,6 +679,13 @@ import EntryCnStocksPage from "./pages/transaction/gst/entryCnStocks";
 import EntryCnStocksAdd from "./components/transaction/gst/entryCnStocks/entryCnStocksAdd/EntryCnStocksAdd";
 import EntryDnStocksPage from "./pages/transaction/gst/entryDnStocks";
 import EntryDnStocksAdd from "./components/transaction/gst/entryDnStocks/entryDnStocksAdd/EntryDnStocksAdd";
+import Batchexpiring from "./components/kingsonreports/stockSheet/batchexpiring/Batchexpiring";
+import LocationWiseStock from "./components/kingsonreports/stockSheet/locationWiseStock/LocationWiseStock";
+import Unusedserialnostock from "./components/kingsonreports/stockSheet/unUsedsriealNoStock/Unusedserialnostock";
+import PodUpdation from "./components/podUpdation/PodUpdation";
+import { GenerateBill } from "./components/generateBill/GenerateBill";
+import DcProduct from "./components/dcProduct/DcProduct";
+import InwardProduct from "./components/inwardProduct/InwardProduct";
 import CNEntrywithStockPage from "./pages/transaction/gst/CNEntrywithStock";
 import CNEntrywithStockAdd from "./components/transaction/gst/CNEntrywithStock/CNEntrywithStockAdd/CNEntrywithStockAdd";
 import DNEntrywithStockPage from "./pages/transaction/gst/DNEntrywithStock";
@@ -2102,8 +2151,18 @@ function App() {
               <Route path="kng-cn-entry-wn-stock-list" element={<CnEntryWnStocklist />} />
               <Route path="kng-purchase-register" element={<PurchaseRegister />} />
               <Route path="kng-update-purchase-register" element={<Purchaseregisterform />} />
+              <Route path="kng-add-purchase-register" element={<Purchaseregisterform />} />
               <Route path="kng-stocksheet" element={<StockRegister />} />
-              {/* <Route path="kng-stocksheet/ledgerview" element={<ProductLedger />} /> */}
+              <Route path="kng-stocksheet/ledgerview" element={<ProductLedger />} />
+              <Route path="kng-negative/stock" element={<NegativeSock />} />
+              <Route path="kng-nstock/ledgerview" element={<ViewProductionForm />} />
+              <Route path="kng-record/level" element={<RecordLevel />} />
+              <Route path="kng-stock-statement-list" element={<StockStatement />} />
+              <Route path="kng-batch-stock-list" element={<BatchStock />} />
+              <Route path="kng-batch-stock-location-list" element={<BatchWithLocation />} />
+              <Route path="kng-batch-expring-list" element={<Batchexpiring />} />
+              <Route path="kng-location-wise-list" element={<LocationWiseStock />} />
+              <Route path="kng-unused-serial-number-stock-list" element={<Unusedserialnostock />} />
 
               {/* atif routes */}
               <Route path="budgetlist" element={<Budget />} />
@@ -2162,6 +2221,31 @@ function App() {
               <Route path="Add-News" element={<NewsForm />} />
               <Route path="Add-News/:id" element={<NewsForm />} />
 
+              {/* -----daud--new ---report---list---Account-book */}
+              <Route path="kng-accountledger" element={<AccountLedgerPage />} />
+              <Route
+                path="kng-active-accountledger"
+                element={<ActiveAccountLedgerPage />}
+              />
+
+              <Route path="kng-voucherlist" element={<VoucherlistPage />} />
+              <Route path="kng-daybook" element={<DayBookPage />} />
+              <Route path="kng-bankbook" element={<BankBookPage />} />
+              <Route path="kng-cashbook" element={<CashBookPage />} />
+              <Route path="kng-receiptregister" element={<ReceiptRegisterPage />} />
+              <Route
+                path="kng-receiptregister/editBank-receipt"
+                element={<EditBankReceipt />}
+              />
+              <Route
+                path="receiptregister/editBank-receipt/kng-bill-to-bill"
+                element={<BillToBill />}
+              />
+
+              <Route
+                path="receiptregister/editBank-receipt/kng-userLog"
+                element={<UserLog />}
+              />
 
               <Route path="list-sales-bill" element={<SalesBills />} />
               <Route path="add-sales-bill" element={<SalesAdd />} />
@@ -2170,7 +2254,55 @@ function App() {
               <Route path="list-sales-return" element={<SalesReturn />} />
               <Route path="add-sales-return" element={<SalesAddRetuen />} />
               <Route path="add-sales-return/:id" element={<SalesAddRetuen />} />
+              <Route
+                path="kng-productionReport"
+                element={<ProductionReportPage />}
+              />
 
+              <Route
+                path="kgn-productionReport/productionEntry"
+                element={<ViewProductionEntry />}
+              />
+              <Route path="kng-quotationReport" element={<QuotationReportPage />} />
+              <Route
+                path="kng-jobwork-OutstockStatement"
+                element={<JobworkOutstockStatementPage />}
+              />
+              <Route
+                path="kng-jobworkoutOrder-Report"
+                element={<JobworkoutOrderPage />}
+              />
+              <Route path="kng-saleorder" element={<SalesOrderBookPage />} />
+              <Route path="kng-purorder" element={<PurchaseOrderBookPage />} />
+
+              {/* ----------------Moin's Route start-------------------------------*/}
+              <Route path="ele-sales-invoice" element={<SalesIvoiceListPage />} />
+              <Route path="ele-sales-invoice/create" element={<AddNewSaleInvoicePage />} />
+              <Route path="ele-inter-bank-stock-transfer" element={<InterBankStockTransferPage />} />
+              <Route path="ele-inter-bank-stock-transfer/create" element={<AddInterBankStockTransferPage />} />
+              <Route path="ele-sales-return" element={<SalesReturnPage />} />
+              <Route path="ele-sales-return/create" element={<AddSaleRetunPage />} />
+              <Route path="ele-sales-return/without-gst" element={<SalesRetunWithoutGstPage />} />
+              <Route path="ele-sales-return/without-gst/create" element={<AddSalesReturnWithoutGstPage />} />
+              <Route path="ele-BTR" element={<BtrPage />} />
+              <Route path="ele-BTR/create" element={<AddBtrPage />} />
+              <Route path="ele-purchase-order" element={<PurchaseOrderListPage />} />
+              <Route path="ele-purchase-order/create" element={<AddPurchaseOrderPage />} />X
+              <Route path="ele-purchase-invoice" element={<PurchaseInvoiceListPage />} />
+              <Route path="ele-purchase-invoice/create" element={<AddPurchaseInvoicePage />} />
+              <Route path="ele-purchase-return" element={<PurchaseReturnPage />} />
+              <Route path="ele-purchase-return/create" element={<AddPurchaseReturnPage />} />
+              <Route path="ele-purchase-return/without-gst" element={<PurchaseReturnWithoutGstPage />} />
+              <Route path="ele-purchase-return/without-gst/create" element={<AddPurchaseReturnWithoutGstPage />} />
+              {/* ----------------Moin's Route End-------------------------------*/}
+
+
+              {/*-------------------------meraj Routes start ----------------------- */}
+              <Route path="ele-pod-updation" element={<PodUpdation />} />
+              <Route path="ele-generate-bill" element={<GenerateBill />} />
+              <Route path="ele-close-dc-product" element={<DcProduct />} />
+              <Route path="ele-close-inward-product" element={<InwardProduct />} />
+              meraj{/*-------------------------meraj Routes End ----------------------- */}
               <Route path="*" element={<PageNotFound />} />
             </Route>
           </>
