@@ -698,6 +698,14 @@ import SalesOrderPage from "./pages/transaction/order/saleOrder";
 import SalseOrderAdd from "./components/transaction/order/salseOrder/salseOrderAdd/SalseOrderAdd";
 import PurchageOrderPage from "./pages/transaction/order/purchageOrder";
 import PurchageOrderAdd from "./components/transaction/order/purchageOrder/purchageOrderAdd/PurchageOrderAdd";
+import OrderFromQuationPage from "./pages/transaction/order/orderFromQuation";
+import OrderFromQuationAdd from "./components/transaction/order/orderFromQuation/orderFromQuationAdd/OrderFromQuationAdd";
+import PurchaseOrderFromQuotationPage from "./pages/transaction/order/purchaseOrderFromQuotation";
+import PurchaseOrderFromQuotationAdd from "./components/transaction/order/purchaseOrderFromQuotation/purchaseOrderFromQuotationAdd/PurchaseOrderFromQuotationAdd";
+import SalesChallanPage from "./pages/transaction/challan/salesChallan";
+import SalesChallanAdd from "./components/transaction/challan/salesChallan/salesChallanAdd/SalesChallanAdd";
+import PurchaseChallanPage from "./pages/transaction/challan/purchaseChallan";
+import PurchaseChallanAdd from "./components/transaction/challan/purchaseChallan/purchaseChallanAdd/PurchaseChallanAdd";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -1895,8 +1903,17 @@ function App() {
               <Route path="purchasequotation/add" element={<PurchaseQuatationAdd />} />
               <Route path="salesorder/list" element={<SalesOrderPage />} />
               <Route path="salesorder/add" element={<SalseOrderAdd />} />
-              {/* <Route path="purchaseorder/list" element={<PurchageOrderPage />} />
-              <Route path="purchaseorder/Add" element={<PurchageOrderAdd />} /> */}
+              <Route path="purchaseorder/list" element={<PurchageOrderPage />} />
+              <Route path="purchaseorder/Add" element={<PurchageOrderAdd />} />
+              <Route path="salesorderfrm/list" element={<OrderFromQuationPage />} />
+              <Route path="salesorderfrm/Add" element={<OrderFromQuationAdd />} />
+              <Route path="purchaseorderfrm/list" element={<PurchaseOrderFromQuotationPage />} />
+              <Route path="purchaseorderfrm/add" element={<PurchaseOrderFromQuotationAdd />} />
+              <Route path="saleschallan/list" element={<SalesChallanPage />} />
+              <Route path="saleschallan/add" element={<SalesChallanAdd />} />
+              {/* <Route path="purchasechallan/list" element={<PurchaseChallanPage />} />
+              <Route path="purchasechallan/add" element={<PurchaseChallanAdd />} /> */}
+
 
 
 
