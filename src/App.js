@@ -715,6 +715,16 @@ import SalesChallanPage from "./pages/transaction/challan/salesChallan";
 import SalesChallanAdd from "./components/transaction/challan/salesChallan/salesChallanAdd/SalesChallanAdd";
 import PurchaseChallanPage from "./pages/transaction/challan/purchaseChallan";
 import PurchaseChallanAdd from "./components/transaction/challan/purchaseChallan/purchaseChallanAdd/PurchaseChallanAdd";
+import SalesFromOrderPage from "./pages/transaction/challan/salesFromOrder";
+import SalesFromOrderAdd from "./components/transaction/challan/salesFromOrder/salesFromOrderAdd/SalesFromOrderAdd";
+import PurchangefromChalanPage from "./pages/transaction/challan/purchagefromChallan";
+import PurchangefromChalanAdd from "./components/transaction/challan/purchangefromChalan/PurchangefromChalanAdd";
+import ChallanReturnPage from "./pages/transaction/challan/challanReturn";
+import ChallanReturnAdd from "./components/transaction/challan/challanReturn/challanReturnAdd/ChallanReturnAdd";
+import StocksTrasferPage from "./pages/transaction/stockTransfer";
+import StockTransferAdd from "./components/transaction/stockTransfer/stockTransferAdd/StockTransferAdd";
+import ProductionEntryPage from "./pages/transaction/productionEntry";
+import ProductionEntryAdd from "./components/transaction/productionEntry/productionEntryAdd/ProductionEntryAdd";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -1920,8 +1930,18 @@ function App() {
               <Route path="purchaseorderfrm/add" element={<PurchaseOrderFromQuotationAdd />} />
               <Route path="saleschallan/list" element={<SalesChallanPage />} />
               <Route path="saleschallan/add" element={<SalesChallanAdd />} />
-              {/* <Route path="purchasechallan/list" element={<PurchaseChallanPage />} />
-              <Route path="purchasechallan/add" element={<PurchaseChallanAdd />} /> */}
+              <Route path="purchasechallan/list" element={<PurchaseChallanPage />} />
+              <Route path="purchasechallan/add" element={<PurchaseChallanAdd />} />
+              <Route path="saleschallanfrm/list" element={<SalesFromOrderPage />} />
+              <Route path="saleschallanfrm/add" element={<SalesFromOrderAdd />} />
+              <Route path="purchasechallanfrm/list" element={<PurchangefromChalanPage />} />
+              <Route path="purchasechallanfrm/add" element={<PurchangefromChalanAdd />} />
+              <Route path="challanreturn/list" element={<ChallanReturnPage />} />
+              <Route path="challanreturn/add" element={<ChallanReturnAdd />} />
+              <Route path="stocktransfer/list" element={<StocksTrasferPage />} />
+              <Route path="stocktransfer/add" element={<StockTransferAdd />} />
+              {/* <Route path="production/list" element={<ProductionEntryPage />} />
+              <Route path="production/add" element={<ProductionEntryAdd />} /> */}
 
 
 
