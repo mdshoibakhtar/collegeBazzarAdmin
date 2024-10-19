@@ -3454,3 +3454,44 @@ export const updateLeadNoteById = (id, data) => {
     },
   });
 };
+
+
+
+
+// GET lead notes with pagination
+export const getCrePhonePay = (page = 0, count = 10 ,id) => {
+  return axiosInstance.get(`/paymentGatewayCredentials?slug=phonepe`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+export const updatePhonePay = (data) => {
+  return axiosInstance.put(`/paymentGatewayCredentials?slug=phonepe`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+
+
+export const getCreRozerPay = (page = 0, count = 10 ,id) => {
+  return axiosInstance.get(`/paymentGatewayCredentials?slug=razorpay`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+export const updateCreRozerPay = (data) => {
+  return axiosInstance.put(`/paymentGatewayCredentials?slug=razorpay`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
