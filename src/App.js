@@ -791,6 +791,17 @@ import Walletreport from "./components/topNavigationComp/masters/walletReport/Wa
 import JobworkOutRecipetPage from "./pages/transaction/jobworkOut/jobworkOutRecipet";
 import JobworkOutRecipetAdd from "./components/transaction/jobworkOut/jobworkOutRecipet/jobworkOutRecipetAdd/JobworkOutRecipetAdd";
 import BankPaymenttPage from "./pages/transaction/quickEntry/bankPayment";
+
+import PropertyCharges from "./pages/propertycharges";
+import CreatePropertyCharges from "./pages/CreatePropertycharges";
+import PropertyShowing from "./pages/PropertyShowing";
+import PropertyUnit from "./pages/PropertyUnit/Index";
+import CreatePropertyShowing from "./pages/CreatePropertyShowing";
+import CreatePropertyunit from "./pages/Createpropertyunit";
+import PropertyStages from "./pages/PropertyStages";
+import CreatePropertyStages from "./pages/CreateStages";
+import PropertyStagePlane from "./pages/PropartyStageplan";
+// import CreateStageplan from "./pages/NewStagesplan";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -2418,6 +2429,16 @@ function App() {
               <Route path="newfloor" element={<NewFloor />} />
               <Route path="block" element={<Block />} />
               <Route path="newblock" element={<NewBlock />} />
+              <Route path="propertycharges" element={<PropertyCharges />} />
+              <Route path="newpropertycharges" element={<CreatePropertyCharges />} />
+              <Route path="propertyshowing" element={<PropertyShowing />} />
+              <Route path="newpropertyshowing" element={<CreatePropertyShowing />} />
+              <Route path="propertyunit" element={<PropertyUnit />} />
+              <Route path="newpropertyunit" element={<CreatePropertyunit />} />
+              <Route path="propertystages" element={<PropertyStages />} />
+              <Route path="newpropertystages" element={<CreatePropertyStages />} />
+              <Route path="newpropertystages" element={<CreatePropertyStages />} />
+              <Route path="propertystagesplane" element={<PropertyStagePlane />} />
 
               <Route path="Tax-Master" element={<TaxMaster />} />
               <Route path="add-tax_master" element={<TaxAdd />} />
