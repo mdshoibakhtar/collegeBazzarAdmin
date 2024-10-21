@@ -803,6 +803,13 @@ import CreatePropertyunit from "./pages/Createpropertyunit";
 import PropertyStages from "./pages/PropertyStages";
 import CreatePropertyStages from "./pages/CreateStages";
 import PropertyStagePlane from "./pages/PropartyStageplan";
+
+import { PurchaseInvoiceType } from "./components/purchaseInvoiceType/PurchaseInvoiceType";
+import { AddPurchaseInvoiceType } from "./components/purchaseInvoiceType/addPurchaseInvoiceType/AddPurchaseInvoiceType";
+import { PurchaseExpenseFormula } from "./components/purchaseExpenseFormula/PurchaseExpenseFormula";
+import { AddPurchaseExpenseFormula } from "./components/purchaseExpenseFormula/addPurchaseExpenseFormula/AddPurchaseExpenseFormula";
+import LinkPurchaseExpense from "./components/linkPurchaseExpense/LinkPurchaseExpense";
+import { LinkExpenseWithInvoiceType } from "./components/linkPurchaseExpense/linkExpenseWithInvoiceType/LinkExpenseWithInvoiceType";
 // import CreateStageplan from "./pages/NewStagesplan";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -2531,6 +2538,14 @@ function App() {
               <Route path="ele-generate-bill" element={<GenerateBill />} />
               <Route path="ele-close-dc-product" element={<DcProduct />} />
               <Route path="ele-close-inward-product" element={<InwardProduct />} />
+              <Route path="purchase-invoice-type" element={<PurchaseInvoiceType />} />
+              {/* 21:10:21-10-24 */}
+              
+              <Route path="add-purchase-invoice-type" element={<AddPurchaseInvoiceType />} />
+              <Route path="purchase-expense-formula" element={<PurchaseExpenseFormula />} />
+              <Route path="add-purchase-expense-formula" element={<AddPurchaseExpenseFormula />} />
+              <Route path="link-purchase-expense" element={<LinkPurchaseExpense />} />
+              <Route path="link-expense-with-invoice-type" element={<LinkExpenseWithInvoiceType />} />
               {/*-------------------------meraj Routes End ----------------------- */}
               <Route path="*" element={<PageNotFound />} />
             </Route>
