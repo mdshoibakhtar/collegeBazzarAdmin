@@ -698,6 +698,11 @@ import SalesOrderPage from "./pages/transaction/order/saleOrder";
 import SalseOrderAdd from "./components/transaction/order/salseOrder/salseOrderAdd/SalseOrderAdd";
 import PurchageOrderPage from "./pages/transaction/order/purchageOrder";
 import PurchageOrderAdd from "./components/transaction/order/purchageOrder/purchageOrderAdd/PurchageOrderAdd";
+import ProfitRegister from "./components/kingsonreports/stockSheet/analysisReports/profitRegister/ProfitRegister";
+import Partywisesalepurchase from "./components/kingsonreports/stockSheet/analysisReports/partywisesalepurchase/Partywisesalepurchase";
+import Productwisepartyreport from "./components/kingsonreports/stockSheet/analysisReports/productwisepartyreport/Productwisepartyreport";
+import Partycrossreports from "./components/kingsonreports/stockSheet/analysisReports/partycrossreport/Partycrossreports";
+import Saleswisereports from "./components/kingsonreports/stockSheet/analysisReports/saleswisereport/Saleswisereports";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -2146,6 +2151,11 @@ function App() {
               <Route path="kng-batch-expring-list" element={<Batchexpiring />} />
               <Route path="kng-location-wise-list" element={<LocationWiseStock />} />
               <Route path="kng-unused-serial-number-stock-list" element={<Unusedserialnostock />} />
+              <Route path="kng-profit-register-list" element={<ProfitRegister />} />
+              <Route path="kng-partywise-sale-purchase-list" element={<Partywisesalepurchase />} />
+              <Route path="kng-product-wise-party-report-list" element={<Productwisepartyreport />} />
+              <Route path="kng-party-cross-report-list" element={<Partycrossreports />} />
+              <Route path="kng-sales-wise-report-list" element={<Saleswisereports />} />
 
               {/* atif routes */}
               <Route path="budgetlist" element={<Budget />} />
