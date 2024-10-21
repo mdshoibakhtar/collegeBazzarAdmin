@@ -779,6 +779,7 @@ import StocksTrasferPage from "./pages/transaction/stockTransfer";
 import StockTransferAdd from "./components/transaction/stockTransfer/stockTransferAdd/StockTransferAdd";
 import ProductionEntryPage from "./pages/transaction/productionEntry";
 import ProductionEntryAdd from "./components/transaction/productionEntry/productionEntryAdd/ProductionEntryAdd";
+import Walletreport from "./components/topNavigationComp/masters/walletReport/Walletreport";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -2401,6 +2402,8 @@ function App() {
               <Route path="TCS-Master" element={<TcsMaster />} />
               <Route path="add-TCS-Master" element={<TcsAdd />} />
               <Route path="add-TCS-Master/:id" element={<TcsAdd />} />
+
+              <Route path="wallet_report" element={<Walletreport />} />
 
 
               {/* junaid ends */}
