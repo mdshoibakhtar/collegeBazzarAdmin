@@ -3,7 +3,7 @@ import Breadcrumbs from "../../../../../common/breadcrumb/Breadcrumbs";
 
 
 
-const JobworkOutIssueAdd = () => {
+const JobworkOutRecipetAdd = () => {
     const breadCrumbsTitle = {
         id: "1",
         title_1: "Transaction",
@@ -29,10 +29,58 @@ const JobworkOutIssueAdd = () => {
 
 
     const [rows, setRows] = useState([
-        { id: 1, item: '', Location: '', Quantity2: '', Quantity: 0, JobworRate: '', JobworkAmount: '', },
-        { id: 2, item: '', Location: '', Quantity2: '', Quantity: 0, JobworRate: '', JobworkAmount: '', },
-        { id: 3, item: '', Location: '', Quantity2: '', Quantity: 0, JobworRate: '', JobworkAmount: '', },
-        { id: 4, item: '', Location: '', Quantity2: '', Quantity: 0, JobworRate: '', JobworkAmount: '', },
+        {
+            id: 1,
+            type: '',
+            stock: '',
+            item: '',
+            location: '',
+            quantity2: '',
+            quantity: 0,
+            rate: '',
+            amount: '',
+            jobworkRate: '',
+            jobworkAmount: ''
+        },
+        {
+            id: 2,
+            type: '',
+            stock: '',
+            item: '',
+            location: '',
+            quantity2: '',
+            quantity: 0,
+            rate: '',
+            amount: '',
+            jobworkRate: '',
+            jobworkAmount: ''
+        },
+        {
+            id: 3,
+            type: '',
+            stock: '',
+            item: '',
+            location: '',
+            quantity2: '',
+            quantity: 0,
+            rate: '',
+            amount: '',
+            jobworkRate: '',
+            jobworkAmount: ''
+        },
+        {
+            id: 4,
+            type: '',
+            stock: '',
+            item: '',
+            location: '',
+            quantity2: '',
+            quantity: 0,
+            rate: '',
+            amount: '',
+            jobworkRate: '',
+            jobworkAmount: ''
+        }
     ]);
 
 
@@ -47,6 +95,23 @@ const JobworkOutIssueAdd = () => {
     const renderRow = (row, index) => (
         <tr key={row.id}>
             {/* Cr/Db Select */}
+            <td>
+                <select
+                    value={row.type}
+                    onChange={(e) => handleChange(index, 'type', e.target.value)}
+                >
+                    <option value="">Select</option>
+                    <option value="Cr">Cr</option>
+                    <option value="Db">Db</option>
+                </select>
+            </td>
+            <td>
+                <input
+                    type="number"
+                    value={row.stock}
+                    onChange={(e) => handleChange(index, 'stock', e.target.value)}
+                />
+            </td>
             <td>
                 <select
                     value={row.item}
@@ -89,7 +154,6 @@ const JobworkOutIssueAdd = () => {
                     onChange={(e) => handleChange(index, 'Quantity', e.target.value)}
                 />
             </td>
-
             <td>
                 <input
                     type="number"
@@ -112,10 +176,7 @@ const JobworkOutIssueAdd = () => {
                     onChange={(e) => handleChange(index, 'DiscType', e.target.value)}
                 />
             </td>
-
-
             {/* Amount Input */}
-
             <td>
                 <input
                     type="number"
@@ -181,7 +242,7 @@ const JobworkOutIssueAdd = () => {
                                             name="taxType"
 
                                         >
-                                            <option value="">Select Tax Type</option>
+                                            <option value="">Select Account</option>
                                             <option value="GST 5%">GST 5%</option>
                                             <option value="GST 12%">GST 12%</option>
                                             <option value="GST MULTIPLE">GST MULTIPLE</option>
@@ -197,8 +258,24 @@ const JobworkOutIssueAdd = () => {
                                             name="voucher"
                                             value={formData.voucher}
                                             onChange={handleInputChange}
-                                            placeholder="Enter Order No"
+                                            placeholder="Enter Vou No."
                                         />
+                                    </div>
+                                    <div className="col-md-3 mb-3">
+                                        <label htmlFor="taxType">Jobwork :</label>
+                                        <select
+                                            className="form-control"
+                                            name="taxType"
+
+                                        >
+                                            <option value="">Select Jobwork</option>
+                                            <option value="GST 5%">GST 5%</option>
+                                            <option value="GST 12%">GST 12%</option>
+                                            <option value="GST MULTIPLE">GST MULTIPLE</option>
+                                        </select>
+                                    </div>
+                                    <div className="col-md-3 mb-3">
+                                        <button type="button" className="btn btn-primary">Go</button>
                                     </div>
 
 
@@ -208,11 +285,15 @@ const JobworkOutIssueAdd = () => {
                                     <table border="1" cellPadding="10">
                                         <thead>
                                             <tr>
+                                                <th>	Type</th>
+                                                <th>	Stock</th>
                                                 <th>	Item</th>
                                                 {/* <th>Tax %</th> */}
                                                 <th>Location</th>
                                                 <th>Quantity2</th>
                                                 <th>Quantity</th>
+                                                <th>Rate</th>
+                                                <th>Amount</th>
                                                 <th>Jobwork Rate</th>
                                                 <th>Jobwork Amount	</th>
 
@@ -243,4 +324,4 @@ const JobworkOutIssueAdd = () => {
     )
 }
 
-export default JobworkOutIssueAdd
+export default JobworkOutRecipetAdd
