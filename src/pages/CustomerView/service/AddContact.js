@@ -1,41 +1,100 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import { clodinaryImage, getTaskPriorities, postLeadServiceReq } from "../../../api/login/Login";
+import { baseUrlImage } from "../../../baseUrl";
+import { toast ,ToastContainer } from "react-toastify";
 
-const AddContact = ({ show, onHide }) => {
+const AddContact = ({ show, onHide ,getFloorMasters}) => {
+    const parem = useParams()
     const [formData, setFormData] = useState({
-        customerName: "",
-        customerNumber: "",
-        taskDetail: "",
-        prefDate: "",
-        prefTime: "",
+        customer_name: "",
+        customer_number: "",
+        task_detail: "", // This should be task._id from your database
+        preferred_date: "",
         address: "",
-        landmark: "",
-        productDetail: "",
-        modelNo: "",
-        serviceDescription: "",
+        landmark_product_detail: "",
+        product_detail: "",
+        product_no: "",
+        service_description: "",
         message: "",
-        attachedPhoto: null,
+        attach_photo: null, // Will store file or base64 string
+        model_no: "",
+        user_id: parem.id, // This should be user._id from your database
     });
+
+    const [task, setTask] = useState([])
+    const getData = async () => {
+        try {
+            const res = await getTaskPriorities(0, 100)
+            setTask(res.data)
+        } catch (error) {
+
+        }
+    }
+    useEffect(() => {
+        getData()
+    }, [])
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleFileChange = (e) => {
-        setFormData({ ...formData, attachedPhoto: e.target.files[0] });
+    const [image, setImage] = useState(null);
+    const handleFileChange =async (e) => {
+        const image = new FormData()
+        image.append('image', e.target.files[0])
+        try {
+            const res = await clodinaryImage(image)
+            setTimeout(() => {
+                setImage(res.data?.data?.url)
+            }, 1000);
+        } catch (error) {
+
+        }
     };
 
-    const handleSubmit = (e) => {
+    const toastSuccessMessage = (message) => {
+        toast.success(`${message}`, {
+            position: "top-right",
+        });
+    };
+    const toastErrorMessage = (message) => {
+        toast.error(`${message}`, {
+            position: "top-right",
+        });
+    };
+
+  
+    const handleSubmit =async (e) => {
         e.preventDefault();
+        // Your submit logic here
         console.log("Form Data Submitted", formData);
-        onHide(); // Close the modal
+       
+        try {
+            const res = await postLeadServiceReq({...formData , attach_photo:image});
+            if (res?.statusCode == "200") {
+                toastSuccessMessage("Service request added successfully");
+                setTimeout(() => {
+                    getFloorMasters()
+                    onHide();
+                }, 1000);
+            }
+            else {
+                toastErrorMessage("Something went wrong Service request Not Add");
+            }
+        } catch (error) {
+            console.error("Error:", error);
+        }
+         // Close the modal
     };
 
     return (
         <Modal show={show} onHide={onHide} dialogClassName="custom-modal-width">
             <Modal.Header closeButton>
-                <Modal.Title>Add Contact</Modal.Title>
+                <Modal.Title> Add Service request</Modal.Title>
+                <ToastContainer/>
             </Modal.Header>
             <Modal.Body>
                 <form onSubmit={handleSubmit}>
@@ -47,8 +106,8 @@ const AddContact = ({ show, onHide }) => {
                                 <input
                                     type="text"
                                     className="form-control"
-                                    name="customerName"
-                                    value={formData.customerName}
+                                    name="customer_name"
+                                    value={formData.customer_name}
                                     onChange={handleInputChange}
                                 />
                             </div>
@@ -57,61 +116,67 @@ const AddContact = ({ show, onHide }) => {
                             <div className="form-group">
                                 <label>Customer Number</label>
                                 <input
-                                    type="text"
+                                    type="number"
                                     className="form-control"
-                                    name="customerNumber"
-                                    value={formData.customerNumber}
+                                    name="customer_number"
+                                    value={formData.customer_number}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="form-group">
+                                <label>Model No</label>
+                                <input
+                                    type="number"
+                                    className="form-control"
+                                    name="model_no"
+                                    value={formData.model_no}
                                     onChange={handleInputChange}
                                 />
                             </div>
                         </div>
                     </div>
 
-                    {/* Row 2: Task Detail, Preferred Date, and Preferred Time */}
+                    {/* Row 2: Task Detail, Preferred Date */}
                     <div className="row">
-                        <div className="col-md-4">
+                        <div className="col-md-6">
                             <div className="form-group">
                                 <label>Task Detail</label>
                                 <select
                                     className="form-control"
-                                    name="taskDetail"
-                                    value={formData.taskDetail}
+                                    name="task_detail"
+                                    value={formData.task_detail}
                                     onChange={handleInputChange}
                                 >
                                     <option value="">Select Task</option>
-                                    <option value="installation">Installation</option>
-                                    <option value="maintenance">Maintenance</option>
-                                    <option value="repair">Repair</option>
+                                    {task?.map((item, index) => (
+                                        <option key={index} value={item._id}>
+                                            {item.name}
+                                        </option>
+                                    ))}
+                                    {/* Task IDs should be fetched from your DB */}
+                                    {/* <option value="task_id_1">Installation</option>
+                                    <option value="task_id_2">Maintenance</option>
+                                    <option value="task_id_3">Repair</option> */}
                                 </select>
                             </div>
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-md-6">
                             <div className="form-group">
                                 <label>Preferred Date</label>
                                 <input
                                     type="date"
                                     className="form-control"
-                                    name="prefDate"
-                                    value={formData.prefDate}
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div className="form-group">
-                                <label>Preferred Time</label>
-                                <input
-                                    type="time"
-                                    className="form-control"
-                                    name="prefTime"
-                                    value={formData.prefTime}
+                                    name="preferred_date"
+                                    value={formData.preferred_date}
                                     onChange={handleInputChange}
                                 />
                             </div>
                         </div>
                     </div>
 
-                    {/* Row 3: Address and Landmark */}
+                    {/* Row 3: Address and Landmark Product Detail */}
                     <div className="row">
                         <div className="col-md-6">
                             <div className="form-group">
@@ -127,19 +192,19 @@ const AddContact = ({ show, onHide }) => {
                         </div>
                         <div className="col-md-6">
                             <div className="form-group">
-                                <label>Landmark</label>
+                                <label>Landmark Product Detail</label>
                                 <input
                                     type="text"
                                     className="form-control"
-                                    name="landmark"
-                                    value={formData.landmark}
+                                    name="landmark_product_detail"
+                                    value={formData.landmark_product_detail}
                                     onChange={handleInputChange}
                                 />
                             </div>
                         </div>
                     </div>
 
-                    {/* Row 4: Product Detail and Model No */}
+                    {/* Row 4: Product Detail and Product No */}
                     <div className="row">
                         <div className="col-md-6">
                             <div className="form-group">
@@ -147,20 +212,20 @@ const AddContact = ({ show, onHide }) => {
                                 <input
                                     type="text"
                                     className="form-control"
-                                    name="productDetail"
-                                    value={formData.productDetail}
+                                    name="product_detail"
+                                    value={formData.product_detail}
                                     onChange={handleInputChange}
                                 />
                             </div>
                         </div>
                         <div className="col-md-6">
                             <div className="form-group">
-                                <label>Model No</label>
+                                <label>Product No</label>
                                 <input
                                     type="text"
                                     className="form-control"
-                                    name="modelNo"
-                                    value={formData.modelNo}
+                                    name="product_no"
+                                    value={formData.product_no}
                                     onChange={handleInputChange}
                                 />
                             </div>
@@ -174,8 +239,8 @@ const AddContact = ({ show, onHide }) => {
                                 <label>Service Description</label>
                                 <textarea
                                     className="form-control"
-                                    name="serviceDescription"
-                                    value={formData.serviceDescription}
+                                    name="service_description"
+                                    value={formData.service_description}
                                     onChange={handleInputChange}
                                 />
                             </div>
@@ -201,12 +266,29 @@ const AddContact = ({ show, onHide }) => {
                                 <input
                                     type="file"
                                     className="form-control"
-                                    name="attachedPhoto"
+                                    name="attach_photo"
                                     onChange={handleFileChange}
                                 />
                             </div>
+                            {image && <img style={{width:"100px" , height:"100px"}} src={`${baseUrlImage}${image}`} />}
                         </div>
                     </div>
+
+                    {/* User ID (optional field, adjust as needed) */}
+                    {/* <div className="row">
+                        <div className="col-md-12">
+                            <div className="form-group">
+                                <label>User ID</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    name="user_id"
+                                    value={formData.user_id}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                        </div>
+                    </div> */}
 
                     <Button type="submit" className="btn btn-primary mt-3">
                         Submit

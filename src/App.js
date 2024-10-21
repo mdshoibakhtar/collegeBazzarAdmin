@@ -631,6 +631,15 @@ import SalesBills from "./components/topNavigationComp/masters/salesbill/SalesBi
 import SalesAdd from "./components/topNavigationComp/masters/salesbill/MasterForm/SalesAdd";
 import SalesReturn from "./components/topNavigationComp/masters/salesreturn/SalesReturn";
 import SalesAddRetuen from "./components/topNavigationComp/masters/salesreturn/MasterForm/SalesAdd";
+import PrirotyMaster from "./components/topNavigationComp/masters/priorityTask/PrirotyMaster";
+import PrirotyAdd from "./components/topNavigationComp/masters/priorityTask/masterform/PrirotyAdd";
+import RelatedMaster from "./components/topNavigationComp/masters/relatedto/RelatedMaster";
+import RelatedAdd from "./components/topNavigationComp/masters/relatedto/masterform/RelatedAdd";
+import PrirotyMas from "./components/topNavigationComp/masters/priority/PrirotyMas";
+import TaskAdd from "./components/topNavigationComp/masters/priority/masterform/TaskAdd";
+import NatureMaster from "./components/topNavigationComp/masters/nature/NatureMaster";
+import NatureAdd from "./components/topNavigationComp/masters/nature/masterform/NatureAdd";
+import ProjectFrom from "./components/project/projectform";
 import ProductionReportPage from "./pages/report/productionReport";
 
 
@@ -703,6 +712,79 @@ import Partywisesalepurchase from "./components/kingsonreports/stockSheet/analys
 import Productwisepartyreport from "./components/kingsonreports/stockSheet/analysisReports/productwisepartyreport/Productwisepartyreport";
 import Partycrossreports from "./components/kingsonreports/stockSheet/analysisReports/partycrossreport/Partycrossreports";
 import Saleswisereports from "./components/kingsonreports/stockSheet/analysisReports/saleswisereport/Saleswisereports";
+import OrderFromQuationPage from "./pages/transaction/order/orderFromQuation";
+import OrderFromQuationAdd from "./components/transaction/order/orderFromQuation/orderFromQuationAdd/OrderFromQuationAdd";
+import PurchaseOrderFromQuotationPage from "./pages/transaction/order/purchaseOrderFromQuotation";
+import PurchaseOrderFromQuotationAdd from "./components/transaction/order/purchaseOrderFromQuotation/purchaseOrderFromQuotationAdd/PurchaseOrderFromQuotationAdd";
+import SalesChallanPage from "./pages/transaction/challan/salesChallan";
+import SalesChallanAdd from "./components/transaction/challan/salesChallan/salesChallanAdd/SalesChallanAdd";
+import PurchaseChallanPage from "./pages/transaction/challan/purchaseChallan";
+import PurchaseChallanAdd from "./components/transaction/challan/purchaseChallan/purchaseChallanAdd/PurchaseChallanAdd";
+import SalesInvoiceMaster from "./components/topNavigationComp/masters/salesInvoice/SalesInvoiceMaster";
+import SalesInvoiceForm from "./components/topNavigationComp/masters/salesInvoice/masterform/SalesInvoiceForm";
+import SaleExpenseFormula from "./components/topNavigationComp/masters/Sale-Expense-Formula/SaleExpenseFormula";
+import SalesExpenseForm from "./components/topNavigationComp/masters/Sale-Expense-Formula/masterform/SalesExpenseForm";
+import SalesLinksForm from "./components/topNavigationComp/masters/Sale-links/masterform/SalesLinksForm";
+import PhonePayForm from "./components/topNavigationComp/masters/phonepay/masterform/PhonePayForm";
+import RzerPayPayForm from "./components/topNavigationComp/masters/rozerpay/masterform/RzerPayPayForm";
+import REMSstatus from "./pages/rems-status";
+import EditPMSenquary from "./pages/Editpmsenquary";
+import Editbooking from "./pages/Editbooking/Index";
+// import Report from "./pages/Reports";
+import BookingStatus from "./pages/bookingStatus";
+import PropertyHome from "./pages/Property";
+import Compaigs from "./pages/Compaigs";
+import NEwCampaigs from "./pages/NewCampaigs/Index";
+import BookingSnap from "./pages/bookingSnap";
+import Ventures from "./pages/ventures";
+import Newventures from "./pages/Newventures";
+import Floor from "./pages/Floor";
+import NewFloor from "./pages/newFloor";
+import Block from "./pages/Block";
+import NewBlock from "./pages/newblock";
+import TaxMaster from "./components/topNavigationComp/masters/Tax-master/TaxMaster";
+import TaxAdd from "./components/topNavigationComp/masters/Tax-master/masterform/TaxAdd";
+import TaxGroup from "./components/topNavigationComp/masters/Tax-group/TaxGroup";
+import TaxGroupAdd from "./components/topNavigationComp/masters/Tax-group/masterform/TaxGroupAdd";
+import TcsMaster from "./components/topNavigationComp/masters/TcsMaster/TcsMaster";
+import TcsAdd from "./components/topNavigationComp/masters/TcsMaster/masterform/TcsAdd";
+
+
+
+
+// daud work
+// 17:10:24:   work here----
+import TdsReportPage from "./pages/report/tdsReport";
+import SalesChallanBookPage from "./pages/report/challanBook/salesChallanBook";
+import PurchaseChallanBookPage from "./pages/report/challanBook/purchaseChallanBook";
+import Gstr3bPage from "./pages/report/gstReports/gstr3b";
+import GstrIntegrity from "./components/kingsonreports/gstReports/gstr3b/GstrIntegrity";
+import GstrReport1Page from "./pages/report/gstReports/gstr1";
+import Gstr2Page from "./pages/report/gstReports/gstr2";
+import GstReport9Page from "./pages/report/gstReports/gstr9";
+import GstrSummaryPage from "./pages/report/gstReports/gstrSummary";
+
+// ----18:10:23---import----//
+
+
+// ---19:10:24--
+
+import OpeningBalancePage from "./pages/report/finalReports/openingBalance";
+import TrialBalancePage from "./pages/report/finalReports/TrialBalance";
+import TradingAccountPage from "./pages/report/finalReports/tradingAccount";
+import ProfitLossPage from "./pages/report/finalReports/profitLoss";
+import BalanceSheetPage from "./pages/report/finalReports/balanceSheet";
+import SalesFromOrderPage from "./pages/transaction/challan/salesFromOrder";
+import SalesFromOrderAdd from "./components/transaction/challan/salesFromOrder/salesFromOrderAdd/SalesFromOrderAdd";
+import PurchangefromChalanPage from "./pages/transaction/challan/purchagefromChallan";
+import PurchangefromChalanAdd from "./components/transaction/challan/purchangefromChalan/PurchangefromChalanAdd";
+import ChallanReturnPage from "./pages/transaction/challan/challanReturn";
+import ChallanReturnAdd from "./components/transaction/challan/challanReturn/challanReturnAdd/ChallanReturnAdd";
+import StocksTrasferPage from "./pages/transaction/stockTransfer";
+import StockTransferAdd from "./components/transaction/stockTransfer/stockTransferAdd/StockTransferAdd";
+import ProductionEntryPage from "./pages/transaction/productionEntry";
+import ProductionEntryAdd from "./components/transaction/productionEntry/productionEntryAdd/ProductionEntryAdd";
+import Walletreport from "./components/topNavigationComp/masters/walletReport/Walletreport";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -1805,7 +1887,7 @@ function App() {
               <Route path="sale-invoice-cow" element={<SaleInvoice />} />
               <Route path="sale-due-collection" element={<SaleDueCollectionnPage />} />
               <Route path="expense-list" element={<ExpenseListPage />} />
-              <Route path="expense-add" element={<ExpenseListAdd />} />
+
               <Route path="expense-purpose" element={<ExpensePurposePage />} />
               <Route path="add-new-expense-purpose" element={<AddNewPurpose />} />
               <Route path="supplier" element={<SuppliersPage />} />
@@ -1900,8 +1982,27 @@ function App() {
               <Route path="purchasequotation/add" element={<PurchaseQuatationAdd />} />
               <Route path="salesorder/list" element={<SalesOrderPage />} />
               <Route path="salesorder/add" element={<SalseOrderAdd />} />
-              {/* <Route path="purchaseorder/list" element={<PurchageOrderPage />} />
-              <Route path="purchaseorder/Add" element={<PurchageOrderAdd />} /> */}
+              <Route path="purchaseorder/list" element={<PurchageOrderPage />} />
+              <Route path="purchaseorder/Add" element={<PurchageOrderAdd />} />
+              <Route path="salesorderfrm/list" element={<OrderFromQuationPage />} />
+              <Route path="salesorderfrm/Add" element={<OrderFromQuationAdd />} />
+              <Route path="purchaseorderfrm/list" element={<PurchaseOrderFromQuotationPage />} />
+              <Route path="purchaseorderfrm/add" element={<PurchaseOrderFromQuotationAdd />} />
+              <Route path="saleschallan/list" element={<SalesChallanPage />} />
+              <Route path="saleschallan/add" element={<SalesChallanAdd />} />
+              <Route path="purchasechallan/list" element={<PurchaseChallanPage />} />
+              <Route path="purchasechallan/add" element={<PurchaseChallanAdd />} />
+              <Route path="saleschallanfrm/list" element={<SalesFromOrderPage />} />
+              <Route path="saleschallanfrm/add" element={<SalesFromOrderAdd />} />
+              <Route path="purchasechallanfrm/list" element={<PurchangefromChalanPage />} />
+              <Route path="purchasechallanfrm/add" element={<PurchangefromChalanAdd />} />
+              <Route path="challanreturn/list" element={<ChallanReturnPage />} />
+              <Route path="challanreturn/add" element={<ChallanReturnAdd />} />
+              <Route path="stocktransfer/list" element={<StocksTrasferPage />} />
+              <Route path="stocktransfer/add" element={<StockTransferAdd />} />
+              {/* <Route path="production/list" element={<ProductionEntryPage />} />
+              <Route path="production/add" element={<ProductionEntryAdd />} /> */}
+
 
 
 
@@ -2052,7 +2153,7 @@ function App() {
               <Route path="add-vehicle" element={<AddVehicle />} />
 
               <Route path="tasks" element={<TasksListPage />} />
-              <Route path="task/create" element={<AddNewTaskPage />} />
+              <Route path="task/create/:id" element={<AddNewTaskPage />} />
               <Route path="task/overview" element={<TasksOverviewPage />} />
               <Route path="task_templates" element={<TaskTemplateListPage />} />
               <Route path="task_templates/create" element={<AddNewTaskTemplatePage />} />
@@ -2181,9 +2282,14 @@ function App() {
                 <Route path="notes" element={<NotesCunstomer title='Notes' />} />
                 <Route path="proposals-view" element={<ProposalList style={true} />} />
                 <Route path="expenses-view" element={<ExpenseListPage style={true} />} />
+                <Route path="expense-add" element={<ExpenseListAdd />} />
                 <Route path="projects-view" element={<Project style={true} />} />
+                <Route path="project-add" element={<ProjectFrom style={true} />} />
                 <Route path="tasks-view" element={<TasksListPage style={true} />} />
+                <Route path="task/create" element={<AddNewTaskPage />} />
+                <Route path="task/update/:update" element={<AddNewTaskPage />} />
                 <Route path="estimates-view" element={<EstimateList style={true} title='Estimates' />} />
+                <Route path="estimates-add" element={<EstimateForm style={true} title='Estimates Add' />} />
                 <Route path="estimates-view-listview" element={<Estimate style={true} title='Estimates' />} />
                 <Route path="tickets-view" element={<TicketsPage style={true} title='Tickets' />} />
                 <Route path="service" element={<ServiceList style={true} title='Service request' />} />
@@ -2193,7 +2299,6 @@ function App() {
                 <Route path="ledgers" element={<LeagerPage style={true} title='Ledgers' />} />
                 <Route path="add-leager" element={<AddLeager style={true} title='Ledgers' />} />
               </Route>
-              <Route path="estimates-add" element={<EstimateForm style={true} title='Estimates Add' />} />
               <Route path="ticket-add" element={<TicketForm />} />
 
               <Route path="day-start" element={<StartDays />} />
@@ -2247,6 +2352,96 @@ function App() {
               <Route path="list-sales-return" element={<SalesReturn />} />
               <Route path="add-sales-return" element={<SalesAddRetuen />} />
               <Route path="add-sales-return/:id" element={<SalesAddRetuen />} />
+
+              <Route path="priority_task" element={<PrirotyMaster />} />
+              <Route path="add-priority_task" element={<PrirotyAdd />} />
+              <Route path="add-priority_task/:id" element={<PrirotyAdd />} />
+
+              <Route path="related_master" element={<RelatedMaster />} />
+              <Route path="add-related_master" element={<RelatedAdd />} />
+              <Route path="add-related_master/:id" element={<RelatedAdd />} />
+
+              <Route path="task_master" element={<PrirotyMas />} />
+              <Route path="add-task_master" element={<TaskAdd />} />
+              <Route path="add-task_master/:id" element={<TaskAdd />} />
+
+              {/* junaid start */}
+
+
+              <Route path="nature_master" element={<NatureMaster />} />
+              <Route path="add-nature_master" element={<NatureAdd />} />
+              <Route path="add-nature_master/:id" element={<NatureAdd />} />
+
+
+              <Route path="Sales-Invoice-Type" element={<SalesInvoiceMaster />} />
+              <Route path="add-Sales-Invoice-Type" element={<SalesInvoiceForm />} />
+              <Route path="add-Sales-Invoice-Type/:id" element={<SalesInvoiceForm />} />
+
+              <Route path="Sale-Expense-Formula" element={<SaleExpenseFormula />} />
+              <Route path="add-Sale-Expense-Formula" element={<SalesExpenseForm />} />
+              <Route path="add-Sale-Expense-Formula/:id" element={<SalesExpenseForm />} />
+
+              <Route path="Link-Sale-Expense" element={<SalesLinksForm />} />
+              <Route path="payment/phonepe" element={<PhonePayForm />} />
+              <Route path="payment/razorpay" element={<RzerPayPayForm />} />
+
+              <Route path="rems-status" element={<REMSstatus />} />
+              <Route path="editpms" element={<EditPMSenquary />} />
+              <Route path="editbooking" element={<Editbooking />} />
+              {/* <Route path="report" element={<Report />} /> */}
+              <Route path="bookingstatus" element={<BookingStatus />} />
+              <Route path="property" element={<PropertyHome />} />
+              <Route path="compaigs" element={<Compaigs />} />
+              <Route path="newcompaigs" element={<NEwCampaigs />} />
+              <Route path="bookingsnap" element={<BookingSnap />} />
+              <Route path="ventures" element={<Ventures />} />
+              <Route path="newventures" element={<Newventures />} />
+              <Route path="floor" element={<Floor />} />
+              <Route path="newfloor" element={<NewFloor />} />
+              <Route path="block" element={<Block />} />
+              <Route path="newblock" element={<NewBlock />} />
+
+              <Route path="Tax-Master" element={<TaxMaster />} />
+              <Route path="add-tax_master" element={<TaxAdd />} />
+              <Route path="add-tax_master/:id" element={<TaxAdd />} />
+
+              <Route path="Tax-Group" element={<TaxGroup />} />
+              <Route path="add-tax_Group" element={<TaxGroupAdd />} />
+              <Route path="add-tax_Group/:id" element={<TaxGroupAdd />} />
+
+              <Route path="TCS-Master" element={<TcsMaster />} />
+              <Route path="add-TCS-Master" element={<TcsAdd />} />
+              <Route path="add-TCS-Master/:id" element={<TcsAdd />} />
+
+              <Route path="wallet_report" element={<Walletreport />} />
+
+
+              {/* junaid ends */}
+
+              {/* ---17:10:24---work */}
+
+              <Route path="tdsreport" element={<TdsReportPage />} />
+              <Route
+                path="saleschallanreport"
+                element={<SalesChallanBookPage />}
+              />
+              <Route path="purchallan" element={<PurchaseChallanBookPage />} />
+              <Route path="gstr3b" element={<Gstr3bPage />} />
+              <Route path="gstr3b/gstrIntegrity" element={<GstrIntegrity />} />
+              <Route path="gstr1" element={<GstrReport1Page />} />
+              <Route path="gstr2" element={<Gstr2Page />} />
+              <Route path="gstr9" element={<GstReport9Page />} />
+              <Route path="gstsummary" element={<GstrSummaryPage />} />
+
+              {/* ----18:10:24--reoute */}
+
+              <Route path="openingbalance" element={<OpeningBalancePage />} />
+              <Route path="trialbalance" element={<TrialBalancePage />} />
+              <Route path="trade" element={<TradingAccountPage />} />
+              <Route path="pl" element={<ProfitLossPage />} />
+              <Route path="pl" element={<BalanceSheetPage />} />
+
+
               <Route
                 path="kng-productionReport"
                 element={<ProductionReportPage />}
@@ -2295,7 +2490,7 @@ function App() {
               <Route path="ele-generate-bill" element={<GenerateBill />} />
               <Route path="ele-close-dc-product" element={<DcProduct />} />
               <Route path="ele-close-inward-product" element={<InwardProduct />} />
-              meraj{/*-------------------------meraj Routes End ----------------------- */}
+              {/*-------------------------meraj Routes End ----------------------- */}
               <Route path="*" element={<PageNotFound />} />
             </Route>
           </>

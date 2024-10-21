@@ -1,6 +1,6 @@
 import { Pagination } from "antd"
 import Breadcrumbs from "../../../common/breadcrumb/Breadcrumbs"
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 
 
 function ExpenseList({style}) {
@@ -10,6 +10,7 @@ function ExpenseList({style}) {
         title_2: 'Expense List',
         path_2: ""
     };
+    const params = useParams()
     return (
         <>
           {style && <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />}  
@@ -22,7 +23,7 @@ function ExpenseList({style}) {
                                     Expense List
                                 </h4>
                                 <div>
-                                    <Link className="btn btn-primary btn-sm" to="/expense-add" role="button" aria-controls="offcanvasExample">+ Add New</Link>
+                                    <Link className="btn btn-primary btn-sm" to={`/customer-view/${params.id}/expense-add`} role="button" aria-controls="offcanvasExample">+ Add New</Link>
                                 </div>
                             </div>
                             <div id="empoloyees-tblwrapper_wrapper" className="dataTables_wrapper no-footer">
@@ -34,7 +35,7 @@ function ExpenseList({style}) {
                                 <table id="empoloyees-tblwrapper" className="table dataTable no-footer" role="grid" aria-describedby="empoloyees-tblwrapper_info">
                                     <thead>
                                         <tr role="row">
-                                            <th style={{ width: '150px' }}>#	</th>
+                                            <th style={{ width: '150px' }}>#</th>
                                             <th style={{ width: '150px' }}>Date</th>
                                             <th style={{ width: '150px' }}>Purpose Name</th>
                                             <th style={{ width: '150px' }}>Details</th>

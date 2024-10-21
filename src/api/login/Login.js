@@ -3137,6 +3137,371 @@ export const postNewss = (data) => {
   });
 };
 
-export const updatenews= (id, data) => {
+export const updatenews = (id, data) => {
   return axiosInstance.put(`/news/update_type/${id}`, data);
+};
+
+
+
+
+// DELETE a task priority by ID
+export const deleteTaskPriorityById = (id) => {
+  return axiosInstance.delete(`/task_priority/delete_type/${id}`);
+};
+
+// GET task priorities with pagination
+export const getTaskPriorities = (page = 0, count = 10) => {
+  return axiosInstance.get(`/task_priority/user?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET a task priority by ID
+export const getTaskPriorityById = (id) => {
+  return axiosInstance.get(`/task_priority/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new task priority
+export const postTaskPriority = (data) => {
+  return axiosInstance.post(`/task_priority/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing task priority by ID
+export const updateTaskPriorityById = (id, data) => {
+  return axiosInstance.put(`/task_priority/update_type/${id}`, data);
+};
+
+
+
+
+// DELETE a task relatedTo by ID
+export const deleteTaskRelatedToById = (id) => {
+  return axiosInstance.delete(`/task_relatedTo/delete_type/${id}`);
+};
+
+// GET task relatedTo with pagination
+export const getTaskRelatedTo = (page = 0, count = 10) => {
+  return axiosInstance.get(`/task_relatedTo/user?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET a task relatedTo by ID
+export const getTaskRelatedToById = (id) => {
+  return axiosInstance.get(`/task_relatedTo/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new task relatedTo
+export const postTaskRelatedTo = (data) => {
+  return axiosInstance.post(`/task_relatedTo/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing task relatedTo by ID
+export const updateTaskRelatedToById = (id, data) => {
+  return axiosInstance.put(`/task_relatedTo/update_type/${id}`, data);
+};
+
+
+
+
+
+// DELETE a lead service request by ID
+export const deleteLeadServiceReqById = (id) => {
+  return axiosInstance.delete(`/lead_service_req/delete_type/${id}`);
+};
+
+// GET lead service requests with pagination
+export const getLeadServiceReq = (page = 0, count = 10, id) => {
+  return axiosInstance.get(`/lead_service_req/user?page=${page}&count=${count}&id=${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET a lead service request by ID
+export const getLeadServiceReqById = (id) => {
+  return axiosInstance.get(`/lead_service_req/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new lead service request
+export const postLeadServiceReq = (data) => {
+  return axiosInstance.post(`/lead_service_req/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing lead service request by ID
+export const updateLeadServiceReqById = (id, data) => {
+  return axiosInstance.put(`/lead_service_req/update_type/${id}`, data);
+};
+
+
+
+
+// DELETE a task priority by ID
+export const deleteTaskById = (id) => {
+  return axiosInstance.delete(`/task/delete_type/${id}`);
+};
+
+// GET task priorities with pagination
+export const getTaskList = (page = 0, count = 10, id) => {
+  return axiosInstance.get(`/task/user?page=${page}&count=${count}&id=${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET a task  by ID
+export const getTaskById = (id) => {
+  return axiosInstance.get(`/task/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new task 
+export const postTask = (data) => {
+  return axiosInstance.post(`/task/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing task  by ID
+export const updateTaskById = (id, data) => {
+  return axiosInstance.put(`/task/update_type/${id}`, data);
+};
+
+
+
+
+
+// DELETE a nature item by ID
+export const deleteNatureById = (id) => {
+  return axiosInstance.delete(`/nature/delete_type/${id}`);
+};
+
+// GET nature items with pagination
+export const getNature = (page = 0, count = 10) => {
+  return axiosInstance.get(`/nature/page?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET a nature item by ID
+export const getNatureById = (id) => {
+  return axiosInstance.get(`/nature/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new nature item
+export const postNature = (data) => {
+  return axiosInstance.post(`/nature/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing nature item by ID
+export const updateNatureById = (id, data) => {
+  return axiosInstance.put(`/nature/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+// DELETE a lead expense by ID
+export const deleteLeadExpenseById = (id) => {
+  return axiosInstance.delete(`/lead_expenses/delete_type/${id}`);
+};
+
+// GET lead expenses with pagination
+export const getLeadExpenses = (page = 0, count = 10) => {
+  return axiosInstance.get(`/lead_expenses/user?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET a lead expense by ID
+export const getLeadExpenseById = (id) => {
+  return axiosInstance.get(`/lead_expenses/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new lead expense
+export const postLeadExpense = (data) => {
+  return axiosInstance.post(`/lead_expenses/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing lead expense by ID
+export const updateLeadExpenseById = (id, data) => {
+  return axiosInstance.put(`/lead_expenses/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+// DELETE a lead note by ID
+export const deleteLeadNoteById = (id) => {
+  return axiosInstance.delete(`/lead_notes/delete_type/${id}`);
+};
+
+// GET lead notes with pagination
+export const getLeadNotes = (page = 0, count = 10, id) => {
+  return axiosInstance.get(`/lead_notes/user?page=${page}&count=${count}&id=${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET a lead note by ID
+export const getLeadNoteById = (id) => {
+  return axiosInstance.get(`/lead_notes/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new lead note
+export const postLeadNote = (data) => {
+  return axiosInstance.post(`/lead_notes/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing lead note by ID
+export const updateLeadNoteById = (id, data) => {
+  return axiosInstance.put(`/lead_notes/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+
+
+// GET lead notes with pagination
+export const getCrePhonePay = (page = 0, count = 10, id) => {
+  return axiosInstance.get(`/paymentGatewayCredentials?slug=phonepe`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+export const updatePhonePay = (data) => {
+  return axiosInstance.put(`/paymentGatewayCredentials?slug=phonepe`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+
+
+export const getCreRozerPay = (page = 0, count = 10, id) => {
+  return axiosInstance.get(`/paymentGatewayCredentials?slug=razorpay`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+export const updateCreRozerPay = (data) => {
+  return axiosInstance.put(`/paymentGatewayCredentials?slug=razorpay`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+export const getreportPayment = (page, count, start_date, end_date) => {
+  return axiosInstance.post(`/transaction/admin`, { start_date, end_date, page, count }, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
 };
