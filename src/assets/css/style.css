@@ -56776,19 +56776,22 @@ input[type="number"]::-webkit-inner-spin-button {
   font-weight: bold;
   text-align: center;
 }
-.upload input{
-    width: 100px;
-    height: 80px;
-    top: 50%;
-    transform: translateY(-50%);
-    opacity: 0;
-    cursor: pointer;
+
+.upload input {
+  width: 100px;
+  height: 80px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  cursor: pointer;
 }
-.upload label svg{
-    font-size: 100px !important;
+
+.upload label svg {
+  font-size: 100px !important;
 }
-.upload{
-    line-height: 191px;
+
+.upload {
+  line-height: 191px;
 }
 
 /* mustafa */
@@ -56909,7 +56912,8 @@ input[type="number"]::-webkit-inner-spin-button {
   gap: 10px;
 }
 
-.edit-icon, .delete-icon {
+.edit-icon,
+.delete-icon {
   cursor: pointer;
 }
 
@@ -56919,11 +56923,13 @@ input[type="number"]::-webkit-inner-spin-button {
   margin-bottom: 16px;
 }
 
-.left-section, .right-section {
+.left-section,
+.right-section {
   width: 45%;
 }
 
-.left-section p, .right-section p {
+.left-section p,
+.right-section p {
   margin: 4px 0;
   font-size: 0.95rem;
 }
@@ -56953,12 +56959,14 @@ input[type="number"]::-webkit-inner-spin-button {
   align-items: center;
   justify-content: space-between;
 }
+
 /* ----daud some changes in style css */
 label {
   font-size: 14px;
   font-weight: 500;
   color: #000;
 }
+
 .form-control {
   background: #fff;
   color: #6e6e6e;
@@ -56968,4 +56976,37 @@ label {
   /* border-radius: 2.2rem; */
   border-color: #CCCCCC;
   /* box-shadow: 0 7px 15px 0 rgba(0, 0, 0, .13), 0 1px 4px 0 rgba(0, 0, 0, .11); */
+}
+
+/* .status-table th,
+ .status-table td {
+   padding: 20px;
+   vertical-align: middle;
+ }
+
+ .bg-light-pink {
+   background-color: #f8d7da;
+ }
+
+ .bg-light-yellow {
+   background-color: #fff3cd;
+ }
+
+ .bg-light-green {
+   background-color: #d4edda;
+ } */
+
+.detaisIssue {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  margin: 10px 0px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+}
+
+.detaisIssue h2,
+h3 {
+  margin: 0px !important;
 }
