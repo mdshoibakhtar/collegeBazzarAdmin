@@ -3137,7 +3137,7 @@ export const postNewss = (data) => {
   });
 };
 
-export const updatenews= (id, data) => {
+export const updatenews = (id, data) => {
   return axiosInstance.put(`/news/update_type/${id}`, data);
 };
 
@@ -3237,7 +3237,7 @@ export const deleteLeadServiceReqById = (id) => {
 };
 
 // GET lead service requests with pagination
-export const getLeadServiceReq = (page = 0, count = 10 ,id) => {
+export const getLeadServiceReq = (page = 0, count = 10, id) => {
   return axiosInstance.get(`/lead_service_req/user?page=${page}&count=${count}&id=${id}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
@@ -3280,7 +3280,7 @@ export const deleteTaskById = (id) => {
 };
 
 // GET task priorities with pagination
-export const getTaskList = (page = 0, count = 10 ,id) => {
+export const getTaskList = (page = 0, count = 10, id) => {
   return axiosInstance.get(`/task/user?page=${page}&count=${count}&id=${id}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
@@ -3416,7 +3416,7 @@ export const deleteLeadNoteById = (id) => {
 };
 
 // GET lead notes with pagination
-export const getLeadNotes = (page = 0, count = 10 ,id) => {
+export const getLeadNotes = (page = 0, count = 10, id) => {
   return axiosInstance.get(`/lead_notes/user?page=${page}&count=${count}&id=${id}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
@@ -3448,6 +3448,57 @@ export const postLeadNote = (data) => {
 // PUT (update) an existing lead note by ID
 export const updateLeadNoteById = (id, data) => {
   return axiosInstance.put(`/lead_notes/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+
+
+// GET lead notes with pagination
+export const getCrePhonePay = (page = 0, count = 10, id) => {
+  return axiosInstance.get(`/paymentGatewayCredentials?slug=phonepe`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+export const updatePhonePay = (data) => {
+  return axiosInstance.put(`/paymentGatewayCredentials?slug=phonepe`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+
+
+export const getCreRozerPay = (page = 0, count = 10, id) => {
+  return axiosInstance.get(`/paymentGatewayCredentials?slug=razorpay`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+export const updateCreRozerPay = (data) => {
+  return axiosInstance.put(`/paymentGatewayCredentials?slug=razorpay`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+export const getreportPayment = (page, count, start_date, end_date) => {
+  return axiosInstance.post(`/transaction/admin`, { start_date, end_date, page, count }, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
       Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
