@@ -779,6 +779,14 @@ import StocksTrasferPage from "./pages/transaction/stockTransfer";
 import StockTransferAdd from "./components/transaction/stockTransfer/stockTransferAdd/StockTransferAdd";
 import ProductionEntryPage from "./pages/transaction/productionEntry";
 import ProductionEntryAdd from "./components/transaction/productionEntry/productionEntryAdd/ProductionEntryAdd";
+import ProductionPlaningPage from "./pages/transaction/productionsPlanning/productionPlanning";
+import ProductionPlanningAdd from "./components/transaction/productionsPlanning/productionPlanning/productionPlanningAdd/ProductionPlanningAdd";
+import ProductionIssuePage from "./pages/transaction/productionsPlanning/productionIssue";
+import ProductionIssueDetails from "./components/transaction/productionsPlanning/productionIssue/productionIssueDetails/ProductionIssueDetails";
+import JobworkOutOrderPage from "./pages/transaction/jobworkOut/jobworkOutOrder";
+import JobworkOutOrderAdd from "./components/transaction/jobworkOut/jobworkOutOrder/jobworkOutOrderAdd/JobworkOutOrderAdd";
+import JobworkOutIssuePage from "./pages/transaction/jobworkOut/jobworkOutIssue";
+import JobworkOutIssueAdd from "./components/transaction/jobworkOut/jobworkOutIssue/jobworkOutIssueAdd/JobworkOutIssueAdd";
 import Walletreport from "./components/topNavigationComp/masters/walletReport/Walletreport";
 
 import PropertyCharges from "./pages/propertycharges";
@@ -2006,8 +2014,20 @@ function App() {
               <Route path="challanreturn/add" element={<ChallanReturnAdd />} />
               <Route path="stocktransfer/list" element={<StocksTrasferPage />} />
               <Route path="stocktransfer/add" element={<StockTransferAdd />} />
-              {/* <Route path="production/list" element={<ProductionEntryPage />} />
-              <Route path="production/add" element={<ProductionEntryAdd />} /> */}
+
+              <Route path="production/list" element={<ProductionEntryPage />} />
+              <Route path="production/add" element={<ProductionEntryAdd />} />
+              <Route path="productionplanning" element={<ProductionPlaningPage />} />
+              <Route path="productionplanning/add" element={<ProductionPlanningAdd />} />
+              <Route path="productionissue/list" element={<ProductionIssuePage Heading={'List Of Production Issue'} />} />
+              <Route path="productionissue/details" element={<ProductionIssueDetails Heading={'Production Issue Details'} />} />
+              <Route path="productionreceipt/list" element={<ProductionIssuePage Heading={'List Of Production Receipt'} />} />
+              {/* <Route path="jobworkorder/list" element={<JobworkOutOrderPage />} />
+              <Route path="jobworkorder/add" element={<JobworkOutOrderAdd />} />
+              <Route path="jobworkissue/list" element={<JobworkOutIssuePage />} />
+              <Route path="jobworkissue/add" element={<JobworkOutIssueAdd />} /> */}
+
+
 
 
 
