@@ -788,6 +788,9 @@ import JobworkOutOrderAdd from "./components/transaction/jobworkOut/jobworkOutOr
 import JobworkOutIssuePage from "./pages/transaction/jobworkOut/jobworkOutIssue";
 import JobworkOutIssueAdd from "./components/transaction/jobworkOut/jobworkOutIssue/jobworkOutIssueAdd/JobworkOutIssueAdd";
 import Walletreport from "./components/topNavigationComp/masters/walletReport/Walletreport";
+import JobworkOutRecipetPage from "./pages/transaction/jobworkOut/jobworkOutRecipet";
+import JobworkOutRecipetAdd from "./components/transaction/jobworkOut/jobworkOutRecipet/jobworkOutRecipetAdd/JobworkOutRecipetAdd";
+import BankPaymenttPage from "./pages/transaction/quickEntry/bankPayment";
 
 import PropertyCharges from "./pages/propertycharges";
 import CreatePropertyCharges from "./pages/CreatePropertycharges";
@@ -2022,10 +2025,15 @@ function App() {
               <Route path="productionissue/list" element={<ProductionIssuePage Heading={'List Of Production Issue'} />} />
               <Route path="productionissue/details" element={<ProductionIssueDetails Heading={'Production Issue Details'} />} />
               <Route path="productionreceipt/list" element={<ProductionIssuePage Heading={'List Of Production Receipt'} />} />
-              {/* <Route path="jobworkorder/list" element={<JobworkOutOrderPage />} />
+
+              <Route path="jobworkorder/list" element={<JobworkOutOrderPage />} />
               <Route path="jobworkorder/add" element={<JobworkOutOrderAdd />} />
               <Route path="jobworkissue/list" element={<JobworkOutIssuePage />} />
-              <Route path="jobworkissue/add" element={<JobworkOutIssueAdd />} /> */}
+              <Route path="jobworkissue/add" element={<JobworkOutIssueAdd />} />
+              <Route path="jobworkreceipt/list" element={<JobworkOutRecipetPage />} />
+              <Route path="jobworkreceipt/add" element={<JobworkOutRecipetAdd />} />
+              <Route path="bank-Payment-Quick" element={<BankPaymenttPage heading={'Bank Payment (Quick)'} />} />
+              <Route path="bank-Receipt-Quick" element={<BankPaymenttPage heading={'Bank Receipt (Quick)'} />} />
 
 
 
