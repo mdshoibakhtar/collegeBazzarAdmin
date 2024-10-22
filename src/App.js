@@ -788,6 +788,9 @@ import JobworkOutOrderAdd from "./components/transaction/jobworkOut/jobworkOutOr
 import JobworkOutIssuePage from "./pages/transaction/jobworkOut/jobworkOutIssue";
 import JobworkOutIssueAdd from "./components/transaction/jobworkOut/jobworkOutIssue/jobworkOutIssueAdd/JobworkOutIssueAdd";
 import Walletreport from "./components/topNavigationComp/masters/walletReport/Walletreport";
+import JobworkOutRecipetPage from "./pages/transaction/jobworkOut/jobworkOutRecipet";
+import JobworkOutRecipetAdd from "./components/transaction/jobworkOut/jobworkOutRecipet/jobworkOutRecipetAdd/JobworkOutRecipetAdd";
+import BankPaymenttPage from "./pages/transaction/quickEntry/bankPayment";
 
 import PropertyCharges from "./pages/propertycharges";
 import CreatePropertyCharges from "./pages/CreatePropertycharges";
@@ -799,6 +802,8 @@ import PropertyStages from "./pages/PropertyStages";
 import CreatePropertyStages from "./pages/CreateStages";
 import PropertyStagePlane from "./pages/PropartyStageplan";
 import ListCustomer from "./pages/listCustomer/ListCustomer";
+import StockJurnerlPage from "./pages/transaction/stockJurnal";
+import StockJurnalAdd from "./components/transaction/stockJurnal/stockJurnalAdd/StockJurnalAdd";
 // import CreateStageplan from "./pages/NewStagesplan";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -2027,10 +2032,19 @@ function App() {
               <Route path="productionissue/list" element={<ProductionIssuePage Heading={'List Of Production Issue'} />} />
               <Route path="productionissue/details" element={<ProductionIssueDetails Heading={'Production Issue Details'} />} />
               <Route path="productionreceipt/list" element={<ProductionIssuePage Heading={'List Of Production Receipt'} />} />
-              {/* <Route path="jobworkorder/list" element={<JobworkOutOrderPage />} />
+
+              <Route path="jobworkorder/list" element={<JobworkOutOrderPage />} />
               <Route path="jobworkorder/add" element={<JobworkOutOrderAdd />} />
               <Route path="jobworkissue/list" element={<JobworkOutIssuePage />} />
-              <Route path="jobworkissue/add" element={<JobworkOutIssueAdd />} /> */}
+              <Route path="jobworkissue/add" element={<JobworkOutIssueAdd />} />
+              <Route path="jobworkreceipt/list" element={<JobworkOutRecipetPage />} />
+              <Route path="jobworkreceipt/add" element={<JobworkOutRecipetAdd />} />
+              <Route path="bank-Payment-Quick" element={<BankPaymenttPage heading={'Bank Payment (Quick)'} />} />
+              <Route path="bank-Receipt-Quick" element={<BankPaymenttPage heading={'Bank Receipt (Quick)'} />} />
+              <Route path="cash-Payment-Quick" element={<BankPaymenttPage heading={'Cash Payment (Quick)'} />} />
+              <Route path="cash-Receipt-Quick" element={<BankPaymenttPage heading={'Cash Receipt (Quick)'} />} />
+              <Route path="stockjournal/list" element={<StockJurnerlPage />} />
+              <Route path="stockjournal/add" element={<StockJurnalAdd />} />
 
 
 

@@ -1,14 +1,14 @@
 import { useState } from "react";
-import Breadcrumbs from "../../../../../common/breadcrumb/Breadcrumbs";
+import Breadcrumbs from "../../../../common/breadcrumb/Breadcrumbs";
 
 
 
-const JobworkOutIssueAdd = () => {
+const StockJurnalAdd = () => {
     const breadCrumbsTitle = {
         id: "1",
         title_1: "Transaction",
-        title_2: 'Jobwork Out',
-        title_3: `Add Jobwork Out Issue`,
+        title_2: 'Stock Journal',
+        title_3: `Add Stock Journal`,
         path_2: ``
     };
 
@@ -29,10 +29,10 @@ const JobworkOutIssueAdd = () => {
 
 
     const [rows, setRows] = useState([
-        { id: 1, item: '', Location: '', Quantity2: '', Quantity: 0, JobworRate: '', JobworkAmount: '', },
-        { id: 2, item: '', Location: '', Quantity2: '', Quantity: 0, JobworRate: '', JobworkAmount: '', },
-        { id: 3, item: '', Location: '', Quantity2: '', Quantity: 0, JobworRate: '', JobworkAmount: '', },
-        { id: 4, item: '', Location: '', Quantity2: '', Quantity: 0, JobworRate: '', JobworkAmount: '', },
+        { id: 1, Type: '', item: '', BatchNo: '', Location: '', Quantity2: '', Quantity: 0, CurrentStock: '', Rate: '', amount: '' },
+        { id: 2, Type: '', item: '', BatchNo: '', Location: '', Quantity2: '', Quantity: 0, CurrentStock: '', Rate: '', amount: '' },
+        { id: 3, Type: '', item: '', BatchNo: '', Location: '', Quantity2: '', Quantity: 0, CurrentStock: '', Rate: '', amount: '' },
+        { id: 4, Type: '', item: '', BatchNo: '', Location: '', Quantity2: '', Quantity: 0, CurrentStock: '', Rate: '', amount: '' },
     ]);
 
 
@@ -49,6 +49,26 @@ const JobworkOutIssueAdd = () => {
             {/* Cr/Db Select */}
             <td>
                 <select
+                    value={row.Type}
+                    onChange={(e) => handleChange(index, 'Type', e.target.value)}
+                >
+                    <option value="">Select</option>
+                    <option value="Cr">Cr</option>
+                    <option value="Db">Db</option>
+                </select>
+            </td>
+            <td>
+                <select
+                    value={row.Type}
+                    onChange={(e) => handleChange(index, 'Type', e.target.value)}
+                >
+                    <option value="">Select</option>
+                    <option value="Cr">Cr</option>
+                    <option value="Db">Db</option>
+                </select>
+            </td>
+            <td>
+                <select
                     value={row.item}
                     onChange={(e) => handleChange(index, 'item', e.target.value)}
                 >
@@ -59,19 +79,22 @@ const JobworkOutIssueAdd = () => {
             </td>
 
             {/* Account Name Select */}
-            {/* <td>
-                <input
-                    type="number"
-                    value={row.Tax}
-                    onChange={(e) => handleChange(index, 'Tax', e.target.value)}
-                />
-            </td> */}
             <td>
                 <input
                     type="number"
+                    value={row.BatchNo}
+                    onChange={(e) => handleChange(index, 'BatchNo', e.target.value)}
+                />
+            </td>
+            <td>
+                <select
                     value={row.Location}
                     onChange={(e) => handleChange(index, 'Location', e.target.value)}
-                />
+                >
+                    <option value="">Select</option>
+                    <option value="Cr">Cr</option>
+                    <option value="Db">Db</option>
+                </select>
             </td>
             <td>
                 <input
@@ -93,25 +116,19 @@ const JobworkOutIssueAdd = () => {
             <td>
                 <input
                     type="number"
-                    value={row.Rate}
-                    onChange={(e) => handleChange(index, 'Rate', e.target.value)}
+                    value={row.CurrentStock}
+                    onChange={(e) => handleChange(index, 'CurrentStock', e.target.value)}
                 />
             </td>
 
             <td>
                 <input
                     type="number"
-                    value={row.DiscRs}
-                    onChange={(e) => handleChange(index, 'DiscRs', e.target.value)}
+                    value={row.Rate}
+                    onChange={(e) => handleChange(index, 'Rate', e.target.value)}
                 />
             </td>
-            <td>
-                <input
-                    type="number"
-                    value={row.DiscType}
-                    onChange={(e) => handleChange(index, 'DiscType', e.target.value)}
-                />
-            </td>
+
 
 
             {/* Amount Input */}
@@ -157,7 +174,7 @@ const JobworkOutIssueAdd = () => {
                         <div className="card-body p-0">
                             <div className="table-responsive active-projects style-1">
                                 <div className="tbl-caption tbl-caption-2">
-                                    <h4 className="heading mb-0">Add Jobwork Out Order</h4>
+                                    <h4 className="heading mb-0">Add Stock Journal</h4>
                                 </div>
                                 <div className="row">
                                     <div className="col-md-3 mb-3">
@@ -174,22 +191,10 @@ const JobworkOutIssueAdd = () => {
 
 
 
-                                    <div className="col-md-3 mb-3">
-                                        <label htmlFor="taxType">Account</label>
-                                        <select
-                                            className="form-control"
-                                            name="taxType"
 
-                                        >
-                                            <option value="">Select Tax Type</option>
-                                            <option value="GST 5%">GST 5%</option>
-                                            <option value="GST 12%">GST 12%</option>
-                                            <option value="GST MULTIPLE">GST MULTIPLE</option>
-                                        </select>
-                                    </div>
 
                                     <div className="col-md-3 mb-3">
-                                        <label htmlFor="taxType">Vou No. :
+                                        <label htmlFor="taxType">Voucher No. :
                                         </label>
                                         <input
                                             type="number"
@@ -208,14 +213,16 @@ const JobworkOutIssueAdd = () => {
                                     <table border="1" cellPadding="10">
                                         <thead>
                                             <tr>
-                                                <th>	Item</th>
-                                                {/* <th>Tax %</th> */}
-                                                <th>Location</th>
+                                                <th>Type</th>
+                                                <th>Stock</th>
+                                                <th>Item</th>
+                                                <th>Batch No</th>
+                                                <th>Location LiveStock	</th>
                                                 <th>Quantity2</th>
                                                 <th>Quantity</th>
-                                                <th>Jobwork Rate</th>
-                                                <th>Jobwork Amount	</th>
-
+                                                <th>CurrentStock</th>
+                                                <th>Rate</th>
+                                                <th>Amount</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -243,4 +250,4 @@ const JobworkOutIssueAdd = () => {
     )
 }
 
-export default JobworkOutIssueAdd
+export default StockJurnalAdd
