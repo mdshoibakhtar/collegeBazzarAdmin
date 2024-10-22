@@ -758,6 +758,28 @@ export const reailerDistIdAgainst = (page, count, id) => {
 export const reailerDistIdAgainstFillers = (data) => {
   return axiosInstance.get(`${baseUrl}user/member/filter/search?mobile=${data.mobile}&page=${data.page}&count=${data.count}&id=${data.id}&email=${data.email}&is_approved=${data.kycStatus ? data.kycStatus : ''}&name=${data.name}&refer_id=${data.refer_id}`)
 }
+
+// export const reailerDistIdAgainstFillersPlay = (data) => {
+//   const filterTypes = data.filter_type.length ? data.filter_type.join(',') : ''; // join filter_type array to a comma-separated string
+//   return axiosInstance.get(`${baseUrl}user/member/filter/search`, {
+//     params: {
+//       start_date: data.start_date,
+//       end_date: data.end_date,
+//       filter_type: filterTypes,
+//       page: data.page,
+//       count: data.count,
+//       contest_type: data.contest_type,
+//       contest_name: data.contest_name,
+//       amount: data.amount
+//     }
+//   });
+// };
+export const reailerDistIdAgainstFillersPlay = (data) => {
+  return axiosInstance.get(`${baseUrl}user/member/filter/search?mobile=${data.mobile ? data.mobile : ''}&page=${data.page}&count=${data.count}&id=${data.id ?data.id :''}&email=${data.email ? data.email :''}&is_approved=${data.kycStatus ? data.kycStatus : ''}&contest_name=${data.contest_name ?data.contest_name:''}&refer_id=${data.refer_id ?data.refer_id :''}&start_date=${data.start_date}&end_date=${data.end_date}&filter_type=${data.filter_type.length ? data.filter_type.join(',') : ''}&contest_type=${data.contest_type ?data.contest_type:[]}&amount=${data.amount?data.amount:''}`);
+};
+
+
+
 export const updateDistributerApproval = (val, id) => {
   return axiosInstance.put(`${baseUrl}user/updateuserStatus/${id}`, val)
 }

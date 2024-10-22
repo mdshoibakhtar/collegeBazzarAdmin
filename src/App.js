@@ -798,6 +798,7 @@ import CreatePropertyunit from "./pages/Createpropertyunit";
 import PropertyStages from "./pages/PropertyStages";
 import CreatePropertyStages from "./pages/CreateStages";
 import PropertyStagePlane from "./pages/PropartyStageplan";
+import ListCustomer from "./pages/listCustomer/ListCustomer";
 // import CreateStageplan from "./pages/NewStagesplan";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -1111,6 +1112,10 @@ function App() {
               <Route
                 path="member-list/:id/:name"
                 element={<DistributerPage />}
+              />
+              <Route
+                path="member-list-playnif/:id/:name"
+                element={<ListCustomer />}
               />
 
 
@@ -2154,7 +2159,7 @@ function App() {
               <Route path="Budget-add/:id" element={<BugetForm />} />
 
 
-              {/* <Route path="Dummy-users-List" element={<DummyUsers />} /> */}
+              <Route path="Dummy-users-List" element={<DummyUsers />} />
               <Route path="Dummy-users-add" element={<DummyForm />} />
               <Route path="Dummy-users-add/:id" element={<DummyForm />} />
 
