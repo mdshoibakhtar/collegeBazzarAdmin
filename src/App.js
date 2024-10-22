@@ -801,6 +801,8 @@ import CreatePropertyunit from "./pages/Createpropertyunit";
 import PropertyStages from "./pages/PropertyStages";
 import CreatePropertyStages from "./pages/CreateStages";
 import PropertyStagePlane from "./pages/PropartyStageplan";
+import StockJurnerlPage from "./pages/transaction/stockJurnal";
+import StockJurnalAdd from "./components/transaction/stockJurnal/stockJurnalAdd/StockJurnalAdd";
 // import CreateStageplan from "./pages/NewStagesplan";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -2034,6 +2036,10 @@ function App() {
               <Route path="jobworkreceipt/add" element={<JobworkOutRecipetAdd />} />
               <Route path="bank-Payment-Quick" element={<BankPaymenttPage heading={'Bank Payment (Quick)'} />} />
               <Route path="bank-Receipt-Quick" element={<BankPaymenttPage heading={'Bank Receipt (Quick)'} />} />
+              <Route path="cash-Payment-Quick" element={<BankPaymenttPage heading={'Cash Payment (Quick)'} />} />
+              <Route path="cash-Receipt-Quick" element={<BankPaymenttPage heading={'Cash Receipt (Quick)'} />} />
+              <Route path="stockjournal/list" element={<StockJurnerlPage />} />
+              <Route path="stockjournal/add" element={<StockJurnalAdd />} />
 
 
 
