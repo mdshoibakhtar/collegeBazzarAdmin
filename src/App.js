@@ -804,6 +804,10 @@ import PropertyStagePlane from "./pages/PropartyStageplan";
 import ListCustomer from "./pages/listCustomer/ListCustomer";
 import StockJurnerlPage from "./pages/transaction/stockJurnal";
 import StockJurnalAdd from "./components/transaction/stockJurnal/stockJurnalAdd/StockJurnalAdd";
+import BuildingsMaster from "./components/topNavigationComp/masters/building/BuildingsMaster";
+import BuildAdd from "./components/topNavigationComp/masters/building/masterform/BuildAdd";
+import FloorMaster from "./components/topNavigationComp/masters/Floor/FloorMaster";
+import FloorAdd from "./components/topNavigationComp/masters/Floor/masterform/FloorAdd";
 // import CreateStageplan from "./pages/NewStagesplan";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -2464,6 +2468,14 @@ function App() {
               <Route path="add-TCS-Master/:id" element={<TcsAdd />} />
 
               <Route path="wallet_report" element={<Walletreport />} />
+
+              <Route path="building-list" element={<BuildingsMaster />} />
+              <Route path="building-add" element={<BuildAdd />} />
+              <Route path="building-add/:id" element={<BuildAdd />} />
+
+              <Route path="Floor-List" element={<FloorMaster />} />
+              <Route path="Floor-Add" element={<FloorAdd />} />
+              <Route path="Floor-Add/:id" element={<FloorAdd />} />
 
 
               {/* junaid ends */}

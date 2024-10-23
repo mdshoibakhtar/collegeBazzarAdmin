@@ -3527,3 +3527,37 @@ export const getreportPayment = (page, count, start_date, end_date) => {
     },
   });
 };
+
+
+export const getCreVenture = (page, count ) => {
+  return axiosInstance.get(`/prop_venture/page?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+export const getProperty = (page, count ) => {
+  return axiosInstance.get(`/prop_property/page?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+export const getBlock = (page, count ) => {
+  return axiosInstance.get(`/prop_block/page?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+export const getBooking = (page, count ) => {
+  return axiosInstance.get(`/prop_block/page?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};

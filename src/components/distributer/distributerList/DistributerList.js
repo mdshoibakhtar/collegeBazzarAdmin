@@ -170,7 +170,7 @@ function DistributerList({dynemicFields, loading, params, state, handleChange, o
 
                                                         <td style={{ position: 'relative' }} className="d-flex align-item-center" >
 
-                                                            {/* <Dropdown>
+                                                            <Dropdown>
                                                                 <Dropdown.Toggle variant="success" id="dropdown-basic">
                                                                     Action
                                                                 </Dropdown.Toggle>
@@ -186,7 +186,7 @@ function DistributerList({dynemicFields, loading, params, state, handleChange, o
                                                                     <Dropdown.Item href="#" onClick={() => { handleShow5(item) }}>Locked Amount</Dropdown.Item>
                                                                     <Dropdown.Item href="/admin/member/profile/view/3">View Profile</Dropdown.Item>
                                                                 </Dropdown.Menu>
-                                                            </Dropdown> */}
+                                                            </Dropdown>
 
                                                             {/*  <Dropdown>
                                                                 <Dropdown.Toggle variant="success" id="dropdown-basic">
