@@ -33,11 +33,13 @@ function MasterList({data,totalCount,page,count,onChangeVal,confirm,cancel}) {
                                                 </th>
                                                
                                                 <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Department: activate to sort column ascending" style={{ width: '156.475px' ,textAlign: 'center'}}>
-                                                    Type</th>
+                                                Venture </th>
                                                 <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Department: activate to sort column ascending" style={{ width: '156.475px' ,textAlign: 'center'}}>
-                                                    Tax Per</th>
+                                                Property </th>
                                                 <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Department: activate to sort column ascending" style={{ width: '156.475px' ,textAlign: 'center'}}>
-                                                    Add Tax Per</th>
+                                                Block </th>
+                                                <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Department: activate to sort column ascending" style={{ width: '156.475px' ,textAlign: 'center'}}>
+                                                Booking  </th>
 
                                                 <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Status: activate to sort column ascending" style={{ width: '96.125px' ,textAlign: 'center'}}>
                                                     Actions </th>
