@@ -14,7 +14,7 @@ import { Pagination } from "antd";
 import ModelLeadFollowUp from "./ModelLeadFollowUp";
 
 
-function DistributerList({dynemicFields, loading, params, state, handleChange, onChangeVal, approval,selectedUsers ,setSelectedUsers}) {
+function DistributerList({dynemicFields, loading, params, state, handleChange, onChangeVal, totalCount,selectedUsers ,setSelectedUsers}) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -170,7 +170,7 @@ function DistributerList({dynemicFields, loading, params, state, handleChange, o
 
                                                         <td style={{ position: 'relative' }} className="d-flex align-item-center" >
 
-                                                            {/* <Dropdown>
+                                                            <Dropdown>
                                                                 <Dropdown.Toggle variant="success" id="dropdown-basic">
                                                                     Action
                                                                 </Dropdown.Toggle>
@@ -186,7 +186,7 @@ function DistributerList({dynemicFields, loading, params, state, handleChange, o
                                                                     <Dropdown.Item href="#" onClick={() => { handleShow5(item) }}>Locked Amount</Dropdown.Item>
                                                                     <Dropdown.Item href="/admin/member/profile/view/3">View Profile</Dropdown.Item>
                                                                 </Dropdown.Menu>
-                                                            </Dropdown> */}
+                                                            </Dropdown>
 
                                                             {/*  <Dropdown>
                                                                 <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -225,7 +225,11 @@ function DistributerList({dynemicFields, loading, params, state, handleChange, o
                                             </tbody>
                                         </table>
                                         <ModelLeadFollowUp show={modalShow2} onHide={() => setModalShow2(false)} />
-                                        <Pagination className="pagination_gutter pagination_primary pagination_sm" />
+                                        <Pagination
+                                            defaultCurrent={1}
+                                            onChange={onChangeVal}
+                                            total={totalCount}
+                                        />
                                     </div>
                                 </div>
                             </div>
