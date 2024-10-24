@@ -813,6 +813,12 @@ import { PurchaseExpenseFormula } from "./components/purchaseExpenseFormula/Purc
 import { AddPurchaseExpenseFormula } from "./components/purchaseExpenseFormula/addPurchaseExpenseFormula/AddPurchaseExpenseFormula";
 import LinkPurchaseExpense from "./components/linkPurchaseExpense/LinkPurchaseExpense";
 import { LinkExpenseWithInvoiceType } from "./components/linkPurchaseExpense/linkExpenseWithInvoiceType/LinkExpenseWithInvoiceType";
+import Capital from "./components/hawala/capital/Capital";
+import Depricition from "./components/hawala/depriciation/Depricition";
+import Intrest from "./components/hawala/intrest/Intrest";
+import DiscountKasarEntry from "./components/hawala/discountKasarEntry/DiscountKasarEntry";
+import TdsCalculations from "./components/hawala/tdsCalculation/TdsCalculations";
+import CommisionEntry from "./components/hawala/commisionEntry/CommisionEntry";
 // import CreateStageplan from "./pages/NewStagesplan";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -2555,6 +2561,17 @@ function App() {
               <Route path="link-purchase-expense" element={<LinkPurchaseExpense />} />
               <Route path="link-expense-with-invoice-type" element={<LinkExpenseWithInvoiceType />} />
               {/*-------------------------meraj Routes End ----------------------- */}
+
+              {/* HAWALA ROUTES ---------------------- */}
+              {/* 24:10:24 */}
+              <Route path="kng-capital" element={<Capital />} />
+              <Route path="depricitions" element={<Depricition />} />
+              <Route path="interest" element={<Intrest />} />
+              <Route path="discount/kasar/entry" element={<DiscountKasarEntry />} />
+              <Route path="tdscalculations" element={<TdsCalculations />} />
+              <Route path="commision-entry/report" element={<CommisionEntry />} />
+
+
               <Route path="*" element={<PageNotFound />} />
             </Route>
           </>
