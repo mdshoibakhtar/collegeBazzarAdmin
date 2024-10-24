@@ -2,13 +2,13 @@
 import { useParams } from 'react-router-dom'
 import Breadcrumbs from '../../common/breadcrumb/Breadcrumbs'
 import '../../components/distributer/distributer.css'
-import DistributerKycStatus from './distributerKycStatus/DistributerKycStatus'
 import DistributerList from './distributerList/DistributerList'
 import { useEffect, useState } from 'react'
-import { getCompanyInfo, getLength, reailerDistIdAgainst, reailerDistIdAgainstFillers, updateDistributerApproval } from '../../api/login/Login'
+import { getCompanyInfo, getLength, reailerDistIdAgainst, reailerDistIdAgainstFillers, reailerDistIdAgainstFillersPlay, updateDistributerApproval, userDelete } from '../../api/login/Login'
 import { toast } from 'react-toastify'
 import DisterbuterFIlter from './distributerKycStatus/DisterbuterFIlter'
-function Distributer() {
+import { message } from 'antd'
+function ListCustomercom() {
     const params = useParams()
     const [state, setState] = useState([])
     const [loading, setLoading] = useState(false);
@@ -25,13 +25,16 @@ function Distributer() {
 
     const submitForm = async (values) => {
         setLoading(true)
+        console.log(values);
+        
         try {
-            const res = await reailerDistIdAgainstFillers({ ...values, mobile: values.mobile.slice(1), page: 0, count: count, id: params?.id });
+            const res = await reailerDistIdAgainstFillersPlay({ ...values, mobile: values.mobile, page: values.page, count: values.count, id: params?.id });
             setState(res?.data);
             setLoading(false)
         } catch (error) {
 
         }
+        setLoading(false)
     }
     const getReailerDistIdAgainst = async (page) => {
         setLoading(true)
@@ -155,13 +158,27 @@ function Distributer() {
         title_2: params?.name,
     }
     const [selectedUsers, setSelectedUsers] = useState([]);
+    const deleteBlogCategoryItem = async (id) => {
+        setLoading(true);
+        try {
+            await userDelete(id);
+            getReailerDistIdAgainst(0);
+        } catch (error) {
+            alert(error.message);
+        }
+        setLoading(false);
+    };
+    const confirm = (id) => {
+        deleteBlogCategoryItem(id);
+        message.success('Delete Successful!');
+    };
     return (
         <>
             <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
             {/* <DistributerKycStatus submitForm={submitForm} params={params} initialValues={initialValues} /> */}
             <DisterbuterFIlter dynemicFields={dynemicFields} params={params} selectedUsers={selectedUsers} submitForm={submitForm} getReailerDistIdAgainst={getReailerDistIdAgainst} />
-            <DistributerList totalCount={totalCount} dynemicFields={dynemicFields} selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers} loading={loading} params={params} state={state} handleChange={handleChange} onChangeVal={onChangeVal} approval={approval} />
+            <DistributerList totalCount={totalCount} dynemicFields={dynemicFields} selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers} loading={loading} params={params} confirm={confirm} state={state} handleChange={handleChange} onChangeVal={onChangeVal} approval={approval} />
         </>
     )
 }
-export default Distributer
+export default ListCustomercom

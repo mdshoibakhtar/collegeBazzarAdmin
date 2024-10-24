@@ -117,9 +117,9 @@ function BlogList() {
                                                                 <i className="fa fa-pencil" />
                                                             </Link>
                                                             <Popconfirm
-                                                                title="Delete Blog Category"
+                                                                title="Delete Blog"
                                                                 description="Are you sure to delete?"
-                                                                onConfirm={() => confirm(item?.blog_id)}
+                                                                onConfirm={() => confirm(item?._id)}
                                                                 onCancel={cancel}
                                                                 okText="Yes"
                                                                 cancelText="No"

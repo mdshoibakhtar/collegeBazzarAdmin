@@ -748,8 +748,12 @@ import TaxGroup from "./components/topNavigationComp/masters/Tax-group/TaxGroup"
 import TaxGroupAdd from "./components/topNavigationComp/masters/Tax-group/masterform/TaxGroupAdd";
 import TcsMaster from "./components/topNavigationComp/masters/TcsMaster/TcsMaster";
 import TcsAdd from "./components/topNavigationComp/masters/TcsMaster/masterform/TcsAdd";
-
-
+import Walletreport from "./components/topNavigationComp/masters/walletReport/Walletreport";
+import BuildingsMaster from "./components/topNavigationComp/masters/building/BuildingsMaster";
+import BuildAdd from "./components/topNavigationComp/masters/building/masterform/BuildAdd";
+import FloorMaster from "./components/topNavigationComp/masters/Floor/FloorMaster";
+import FloorAdd from "./components/topNavigationComp/masters/Floor/masterform/FloorAdd";
+import Withdrawals from "./components/topNavigationComp/masters/withdrawls/Withdrawals";
 
 
 // daud work
@@ -792,7 +796,6 @@ import JobworkOutOrderPage from "./pages/transaction/jobworkOut/jobworkOutOrder"
 import JobworkOutOrderAdd from "./components/transaction/jobworkOut/jobworkOutOrder/jobworkOutOrderAdd/JobworkOutOrderAdd";
 import JobworkOutIssuePage from "./pages/transaction/jobworkOut/jobworkOutIssue";
 import JobworkOutIssueAdd from "./components/transaction/jobworkOut/jobworkOutIssue/jobworkOutIssueAdd/JobworkOutIssueAdd";
-import Walletreport from "./components/topNavigationComp/masters/walletReport/Walletreport";
 import JobworkOutRecipetPage from "./pages/transaction/jobworkOut/jobworkOutRecipet";
 import JobworkOutRecipetAdd from "./components/transaction/jobworkOut/jobworkOutRecipet/jobworkOutRecipetAdd/JobworkOutRecipetAdd";
 import BankPaymenttPage from "./pages/transaction/quickEntry/bankPayment";
@@ -1765,8 +1768,19 @@ function App() {
                 <Route path="optin-management" element={<OptinManageMent />} />
                 <Route path="whatsapp-blocklist" element={<WaBlockNumber />} />
               </Route>
+              <Route path="All-Withdrawals" element={<Withdrawals title={'All-Withdrawals'} api='' />} />
+              <Route path="Pending-Withdrawals/Pending-Withdrawals" element={<Withdrawals title={'Pending Withdrawals'} api='Pending' />} />
+              <Route path="Rejected-Withdrawals/Rejected-Withdrawals" element={<Withdrawals title={'Rejected-Withdrawals'} api='Rejected' />} />
+              <Route path="Approved-Withdrawals/Approved-Withdrawals" element={<Withdrawals title={'Approved-Withdrawals'} api='Approved' />} />
+              <Route path="wallet_report" element={<Walletreport />} />
 
+              <Route path="building-list" element={<BuildingsMaster />} />
+              <Route path="building-add" element={<BuildAdd />} />
+              <Route path="building-add/:id" element={<BuildAdd />} />
 
+              <Route path="Floor-List" element={<FloorMaster />} />
+              <Route path="Floor-Add" element={<FloorAdd />} />
+              <Route path="Floor-Add/:id" element={<FloorAdd />} />
               <Route path="wa-report-download" element={<WhatsAppReports />} />
               <Route path="add-template-type" element={<TemplateTypeAdd />} />
               <Route path="edit-template-type/:id" element={<TemplateTypeAdd />} />
@@ -2554,7 +2568,7 @@ function App() {
               <Route path="ele-close-inward-product" element={<InwardProduct />} />
               <Route path="purchase-invoice-type" element={<PurchaseInvoiceType />} />
               {/* 21:10:21-10-24 */}
-              
+
               <Route path="add-purchase-invoice-type" element={<AddPurchaseInvoiceType />} />
               <Route path="purchase-expense-formula" element={<PurchaseExpenseFormula />} />
               <Route path="add-purchase-expense-formula" element={<AddPurchaseExpenseFormula />} />

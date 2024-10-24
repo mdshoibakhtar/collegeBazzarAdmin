@@ -10,11 +10,11 @@ import LockAmount from "../createUserDistributer/lockAmount/LockAmount";
 import ExportPdf from "../../../common/exportPdf/ExportPdf";
 import "../distributer.css"
 import { ToastContainer, toast } from "react-toastify";
-import { Pagination } from "antd";
+import { message, Pagination, Popconfirm } from "antd";
 import ModelLeadFollowUp from "./ModelLeadFollowUp";
 
 
-function DistributerList({ dynemicFields, loading, params, state, handleChange, onChangeVal, totalCount, selectedUsers, setSelectedUsers }) {
+function DistributerList({dynemicFields, loading, params, state, handleChange, onChangeVal, totalCount,selectedUsers ,setSelectedUsers,confirm}) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -36,8 +36,10 @@ function DistributerList({ dynemicFields, loading, params, state, handleChange, 
             setShow5(true)
         }, 1000);
     }
-
-
+    const cancel = (e) => {
+        message.error('Cancel Successful!');
+    };
+    
     const [selectAll, setSelectAll] = useState(false);
 
     const handleCheckboxChange = (event, user) => {
@@ -63,15 +65,9 @@ function DistributerList({ dynemicFields, loading, params, state, handleChange, 
         }
     };
 
-
+    
     const [modalShow2, setModalShow2] = useState(false);
-    const [datas , setDats] = useState()
-    const sendatas = (item) => {
-        setDats(item)
-        setTimeout(() => {
-            handleShow()
-        }, 1000);
-    }
+
     return (
         <>
             {loading && <Loadar />}
@@ -83,7 +79,7 @@ function DistributerList({ dynemicFields, loading, params, state, handleChange, 
                 <div className="row">
                     <div className="col-xl-12" >
                         <div className="card" >
-
+                            
 
                             <div className="card-body p-0">
                                 <div className="table-responsive active-projects style-1">
@@ -142,9 +138,9 @@ function DistributerList({ dynemicFields, loading, params, state, handleChange, 
                                                                 />
                                                             </div>
                                                         </td>
-                                                        <td className="sorting_1"><Link to={`/customer-view/${item._id}`}>Customer View</Link></td>
+                                                         <td className="sorting_1"><Link to={`/customer-view/${item._id}`}>Customer View</Link></td> 
                                                         <td className="sorting_1">{item?.createdAt}</td>
-
+                                                       
                                                         <td className="sorting_1">{item?.refer_id}</td>
                                                         <td className="sorting_1">{item?.member_type}</td>
                                                         <td>{item?.name}</td>
@@ -176,23 +172,23 @@ function DistributerList({ dynemicFields, loading, params, state, handleChange, 
 
                                                         <td style={{ position: 'relative' }} className="d-flex align-item-center" >
 
-                                                            <Dropdown>
+                                                            {/* <Dropdown>
                                                                 <Dropdown.Toggle variant="success" id="dropdown-basic">
                                                                     Action
                                                                 </Dropdown.Toggle>
 
                                                                 <Dropdown.Menu>
-                                                                    <Dropdown.Item Link="#" onClick={()=>{sendatas(item)}}>Fund Transfer / Return</Dropdown.Item>
                                                                     <Dropdown.Item href="/admin/certificate" >BC Authorization Letter</Dropdown.Item>
                                                                     <Dropdown.Item Link="#" >ID Card</Dropdown.Item>
                                                                     <Dropdown.Item href="#" >Certificate</Dropdown.Item>
+                                                                    <Dropdown.Item Link="#" onClick={handleShow}>Fund Transfer / Return</Dropdown.Item>
                                                                     <Dropdown.Item href="#" onClick={handleShow2}>Scheme</Dropdown.Item>
                                                                     <Dropdown.Item href="#" onClick={handleShow3}>Add Id Stock</Dropdown.Item>
                                                                     <Dropdown.Item href="#" onClick={handleShow4}>Permission</Dropdown.Item>
                                                                     <Dropdown.Item href="#" onClick={() => { handleShow5(item) }}>Locked Amount</Dropdown.Item>
                                                                     <Dropdown.Item href="/admin/member/profile/view/3">View Profile</Dropdown.Item>
                                                                 </Dropdown.Menu>
-                                                            </Dropdown>
+                                                            </Dropdown> */}
 
                                                             {/*  <Dropdown>
                                                                 <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -213,17 +209,17 @@ function DistributerList({ dynemicFields, loading, params, state, handleChange, 
 
                                                             <Link to={`/admin/detail-lead/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-refresh" /></Link>
                                                             <Link to={`/admin/create-user/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
-                                                            <Link to="#" onClick={() => setModalShow2(true)} className="btn btn-danger shadow btn-xs sharp"><i className="fa fa-home" /></Link>
-                                                            {/* <Popconfirm
-                                                            title="Delete Currency !"
+                                                            {/* <Link to="#" onClick={() => setModalShow2(true)}  className="btn btn-danger shadow btn-xs sharp"><i className="fa fa-home" /></Link> */}
+                                                            <Popconfirm
+                                                            title="Delete !"
                                                             description="Are you sure to delete ?"
-                                                            onConfirm={() => confirm(item?.id)}
+                                                            onConfirm={() => confirm(item?._id)}
                                                             onCancel={cancel}
                                                             okText="Yes"
                                                             cancelText="No"
                                                         >
                                                             <Link to="#" disable className="btn btn-danger shadow btn-xs sharp"><i className="fa fa-trash" /></Link>
-                                                        </Popconfirm> */}
+                                                        </Popconfirm>
                                                         </td>
 
                                                     </tr>
@@ -242,12 +238,12 @@ function DistributerList({ dynemicFields, loading, params, state, handleChange, 
                         </div>
                     </div>
                 </div>
-                <FundTransfer show={show} handleClose={handleClose} datas={datas}/>
+                <FundTransfer show={show} handleClose={handleClose} />
                 <SchemeManager show={show2} handleClose={handleClose2} />
                 <IdStocks show={show3} handleClose={handleClose3} />
                 <MemberPermission show={show4} handleClose={handleClose4} />
                 <LockAmount show={show5} handleClose={handleClose5} getItem={getItem} />
-
+                
             </section>
         </>
     );
