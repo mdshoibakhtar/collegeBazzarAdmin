@@ -3561,3 +3561,32 @@ export const getBooking = (page, count ) => {
     },
   });
 };
+
+
+
+export const postfund = (data) => {
+  return axiosInstance.post(`/paymentRequest/fund-transfer`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+export const getListWidraw = (data) => {
+  return axiosInstance.post(`/withdraw`, data,{
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+export const PostWidraw = (data ,id) => {
+  return axiosInstance.put(`/withdraw/update_Type/${id}`, data,{
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};

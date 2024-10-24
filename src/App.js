@@ -808,6 +808,7 @@ import BuildingsMaster from "./components/topNavigationComp/masters/building/Bui
 import BuildAdd from "./components/topNavigationComp/masters/building/masterform/BuildAdd";
 import FloorMaster from "./components/topNavigationComp/masters/Floor/FloorMaster";
 import FloorAdd from "./components/topNavigationComp/masters/Floor/masterform/FloorAdd";
+import Withdrawals from "./components/topNavigationComp/masters/withdrawls/Withdrawals";
 // import CreateStageplan from "./pages/NewStagesplan";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -2409,6 +2410,10 @@ function App() {
               <Route path="add-task_master" element={<TaskAdd />} />
               <Route path="add-task_master/:id" element={<TaskAdd />} />
 
+              <Route path="All-Withdrawals" element={<Withdrawals title={'All-Withdrawals'} api=''/>} />
+              <Route path="Pending-Withdrawals/Pending-Withdrawals" element={<Withdrawals title={'Pending Withdrawals'} api='Pending'/>} />
+              <Route path="Rejected-Withdrawals/Rejected-Withdrawals" element={<Withdrawals title={'Rejected-Withdrawals'} api='Rejected'/>} />
+              <Route path="Approved-Withdrawals/Approved-Withdrawals" element={<Withdrawals title={'Approved-Withdrawals'}  api='Approved' />} />
               {/* junaid start */}
 
 
