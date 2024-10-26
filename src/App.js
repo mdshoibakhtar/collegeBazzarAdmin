@@ -828,6 +828,8 @@ import StateMerge from "./components/advanceUtility/statemerge/StateMerge";
 import SpecificationMerge from "./components/advanceUtility/specificationmerge/SpecificationMerge";
 import VoucherPrint from "./components/advanceUtility/vocherPrint/VoucherPrint";
 import Barcodetility from "./components/advanceUtility/barcodeutility/Barcodetility";
+import AddVoucher from "./components/kingsonreports/AccountBook/accountMaster/voucherMaster/addVoucher/AddVoucher";
+import VoucherMasterList from "./components/kingsonreports/AccountBook/accountMaster/voucherMaster/voucherMasterList/VoucherMasterList";
 // import CreateStageplan from "./pages/NewStagesplan";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -893,8 +895,8 @@ function App() {
   }
   console.log(window.localStorage.getItem('dashRout') == null);
 
-  
-  
+
+
   return (
     <>
       <Routes>
@@ -2600,6 +2602,12 @@ function App() {
               <Route path="specification/merge" element={<SpecificationMerge />} />
               <Route path="voucher/print" element={<VoucherPrint />} />
               <Route path="barcode/utility" element={<Barcodetility />} />
+
+
+              {/*-------------------------26:10:24------------------------ */}
+              <Route path="voucher-type-list" element={<VoucherMasterList />} />
+              <Route path="add-voucher-type" element={<AddVoucher />} />
+              <Route path="update-voucher-type/:id" element={<AddVoucher />} />
 
               <Route path="*" element={<PageNotFound />} />
             </Route>

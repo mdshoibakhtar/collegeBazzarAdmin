@@ -1,26 +1,34 @@
-// import React from 'react'
-
-// function BankBook() {
-//   return (
-//     <div>
-//       gfhdf
-//     </div>
-//   )
-// }
-
-// export default BankBook
-
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import { ToastContainer } from "react-toastify";
+import { Pagination } from "antd";
 
-import { Pagination, Popconfirm } from "antd";
-// import Modal from "react-bootstrap/Modal";
-import { useState } from "react";
-import { Button } from "react-bootstrap";
-import { MdUpload } from "react-icons/md";
+function BankBook({ tittle, data, page, count, handlePageChange }) {
+  const [selectedItems, setSelectedItems] = useState([]);
+  const [selectAll, setSelectAll] = useState(false);
 
-function BankBook() {
-  const [show, setShow] = useState(false);
+
+
+
+
+  // Handle the select all checkbox
+  const handleSelectAll = () => {
+    if (selectAll) {
+      setSelectedItems([]); // Uncheck all
+    } else {
+      setSelectedItems(data?.voucher.map((item) => item.AccLedgerName)); // Check all
+    }
+    setSelectAll(!selectAll); // Toggle select all state
+  };
+
+  // Handle individual checkbox selection
+  const handleCheckboxChange = (item) => {
+    if (selectedItems.includes(item.AccLedgerName)) {
+      setSelectedItems(selectedItems.filter((name) => name !== item.AccLedgerName));
+    } else {
+      setSelectedItems([...selectedItems, item.AccLedgerName]);
+    }
+  };
+
   return (
     <>
       <div>
@@ -30,224 +38,63 @@ function BankBook() {
               <div className="card-body p-0">
                 <div className="table-responsive active-projects style-1">
                   <div className="tbl-caption">
-                    <h4 className="heading mb-0">Bank Book</h4>
-                    {/* <div>
-                      <Link
-                        className="btn btn-primary btn-sm"
-                        to="add-expense"
-                        role="button"
-                        aria-controls="offcanvasExample"
-                      >
-                        + Add Expense
-                      </Link>
-
-                      <Link
-                        className="btn btn-primary btn-sm"
-                        to="import-expenses"
-                        role="button"
-                        aria-controls="offcanvasExample"
-                      >
-                        <MdUpload className="fs-4" /> Import Expenses
-                      </Link>
-
-                      <Button
-                        className="btn btn-primary btn-sm bg-primary"
-                        type="button"
-                        role="button"
-                        aria-controls="offcanvasExample"
-                        onClick={() => setShow(true)}
-                      >
-                        <FaFileAlt className="mb-1 me-1" />
-                        Batch Payments
-                      </Button>
-                    </div> */}
+                    <h4 className="heading mb-0">{tittle} Book</h4>
                   </div>
-                  <div
-                    id="banner-tblwrapper_wrapper"
-                    className="dataTables_wrapper no-footer"
-                  >
+                  <div id="banner-tblwrapper_wrapper" className="dataTables_wrapper no-footer">
                     <div className="dt-buttons">
-                      <button
-                        className="dt-button buttons-excel buttons-html5 btn btn-sm border-0"
-                        tabIndex={0}
-                        aria-controls="banner-tblwrapper"
-                        type="button"
-                      >
+                      <button className="dt-button buttons-excel buttons-html5 btn btn-sm border-0" type="button">
                         <span>
                           <i className="fa-solid fa-file-excel" /> Export Report
                         </span>
                       </button>
                     </div>
-                    <table
-                      id="banner-tblwrapper"
-                      className="table dataTable no-footer"
-                      role="grid"
-                      aria-describedby="banner-tblwrapper_info"
-                    >
+                    <table id="banner-tblwrapper" className="table dataTable no-footer" role="grid">
                       <thead>
                         <tr role="row">
                           <th style={{ width: "50px" }}>
-                            <input type="checkbox" className="" />
+                            <input
+                              type="checkbox"
+                              checked={selectAll}
+                              onChange={handleSelectAll}
+                            />
                           </th>
-                          <th style={{ width: "150px" }}> A</th>
-
+                          <th style={{ width: "150px" }}>Date</th>
                           <th style={{ width: "150px" }}>Account Name</th>
                           <th style={{ width: "150px" }}>Closing Balance</th>
-                          <th style={{ width: "150px" }}>Cr/Db</th>
-
-                          {/* <th style={{ width: "100px" }}>Actions</th> */}
+                          <th style={{ width: "150px" }}>Cr</th>
+                          <th style={{ width: "150px" }}>Dr</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr role="row">
-                          <td>
-                            <input type="checkbox" />
-                          </td>
-                          <td></td>
-                          <td>Hsfc Bank</td>
-                          <td>2,75,537.00</td>
-                          <td>Cr</td>
+                        {data?.voucher?.map((item, i) => (
+                          <tr role="row" key={i}>
+                            <td>
+                              <input
+                                type="checkbox"
+                                checked={selectedItems.includes(item.AccLedgerName)}
+                                onChange={() => handleCheckboxChange(item)}
+                              />
+                            </td>
+                            <td>{new Date(item?.AccLedgerEntryDateTime).toLocaleDateString("en-GB")}</td>
 
-                          {/* <td>
-                            <div className="d-flex">
-                              <Link
-                                to=""
-                                className="btn btn-primary shadow btn-xs sharp me-1"
-                              >
-                                <i className="fa fa-pencil" />
-                              </Link>
-                              <Popconfirm
-                                title="Delete banner!"
-                                description="Are you sure to delete?"
-                                okText="Yes"
-                                cancelText="No"
-                              >
-                                <Link
-                                  to="#"
-                                  className="btn btn-danger shadow btn-xs sharp"
-                                >
-                                  <i className="fa fa-trash" />
-                                </Link>
-                              </Popconfirm>
-                            </div>
-                          </td> */}
-                        </tr>
-
-                        <tr role="row">
-                          <td>
-                            <input type="checkbox" />
-                          </td>
-                          <td></td>
-                          <td>Hsfc Bank</td>
-                          <td>2,75,537.00</td>
-                          <td>Cr</td>
-
-                          {/* <td>
-                            <div className="d-flex">
-                              <Link
-                                to=""
-                                className="btn btn-primary shadow btn-xs sharp me-1"
-                              >
-                                <i className="fa fa-pencil" />
-                              </Link>
-                              <Popconfirm
-                                title="Delete banner!"
-                                description="Are you sure to delete?"
-                                okText="Yes"
-                                cancelText="No"
-                              >
-                                <Link
-                                  to="#"
-                                  className="btn btn-danger shadow btn-xs sharp"
-                                >
-                                  <i className="fa fa-trash" />
-                                </Link>
-                              </Popconfirm>
-                            </div>
-                          </td> */}
-                        </tr>
-
-                        <tr role="row">
-                          <td>
-                            <input type="checkbox" />
-                          </td>
-                          <td></td>
-                          <td>Hsfc Bank</td>
-                          <td>2,75,537.00</td>
-                          <td>Cr</td>
-
-                          {/* <td>
-                            <div className="d-flex">
-                              <Link
-                                to=""
-                                className="btn btn-primary shadow btn-xs sharp me-1"
-                              >
-                                <i className="fa fa-pencil" />
-                              </Link>
-                              <Popconfirm
-                                title="Delete banner!"
-                                description="Are you sure to delete?"
-                                okText="Yes"
-                                cancelText="No"
-                              >
-                                <Link
-                                  to="#"
-                                  className="btn btn-danger shadow btn-xs sharp"
-                                >
-                                  <i className="fa fa-trash" />
-                                </Link>
-                              </Popconfirm>
-                            </div>
-                          </td> */}
-                        </tr>
-
-                        <tr role="row">
-                          <td>
-                            <input type="checkbox" />
-                          </td>
-                          <td></td>
-                          <td>Hsfc Bank</td>
-                          <td>2,75,537.00</td>
-                          <td>Cr</td>
-
-                          {/* <td>
-                            <div className="d-flex">
-                              <Link
-                                to=""
-                                className="btn btn-primary shadow btn-xs sharp me-1"
-                              >
-                                <i className="fa fa-pencil" />
-                              </Link>
-                              <Popconfirm
-                                title="Delete banner!"
-                                description="Are you sure to delete?"
-                                okText="Yes"
-                                cancelText="No"
-                              >
-                                <Link
-                                  to="#"
-                                  className="btn btn-danger shadow btn-xs sharp"
-                                >
-                                  <i className="fa fa-trash" />
-                                </Link>
-                              </Popconfirm>
-                            </div>
-                          </td> */}
-                        </tr>
-
-
-                        
+                            <td>{item?.AccLedgerName}</td>
+                            <td>{item?.closing_amount}</td>
+                            <td>{item?.crAmt}</td>
+                            <td>{item?.drAmt}</td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
-                    <div
-                      className="dataTables_info"
-                      role="status"
-                      aria-live="polite"
-                    >
-                      Total {"0"} entries
+                    <div className="dataTables_info" role="status" aria-live="polite">
+                      Total {data?.totalCount} entries
                     </div>
                     <div className="dataTables_paginate paging_simple_numbers">
-                      <Pagination defaultCurrent={1} />
+                      <Pagination
+                        current={page}
+                        pageSize={count}
+                        total={data?.totalCount}
+                        onChange={handlePageChange}
+                      />
                     </div>
                   </div>
                 </div>

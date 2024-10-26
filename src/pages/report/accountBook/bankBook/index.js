@@ -17,18 +17,22 @@ function BankBookPage() {
 
 
   const getVocherListDatas = async (name) => {
-    const res = await getVoucherTypeData(name,count,page)
-    console.log(res);
-
+    const res = await getVoucherTypeData(name, count, page)
+    setData(res?.data)
   }
-  useEffect(()=>{
+  useEffect(() => {
     getVocherListDatas(params?.name)
-  },[])
-
+  }, [])
+  useEffect(() => {
+    getVocherListDatas(params?.name);
+  }, [params.name]);
+  const handlePageChange = (page) => {
+    setPage(page);
+  };
   return (
     <>
       <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
-      <BankBook />
+      <BankBook tittle={params?.name} data={data} count={count} page={page} handlePageChange={handlePageChange} />
     </>
   );
 }
