@@ -1,5 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link ,useParams } from "react-router-dom";
+import { deleteAccLedgerById, getAccLedgerByPage } from "../../../api/login/Login";
 
 const dummyData = [
     {
@@ -28,12 +29,50 @@ const dummyData = [
 ];
 
 const LeagerPage = ({ title }) => {
+    const paremss = useParams()
+    const [data, setData] = useState()
+    const [loading, setLoading] = useState(false);
+    const [count, setCount] = useState(10)
+    const [page, setPage] = useState(0)
+    const [totalCount, setTotalCount] = useState()
+    
+
+    // ----------list Api----------
+    const param = useParams()
+    const getFloorMasters = async (page) => {
+        
+        setLoading(true)
+        try {
+            const res = await getAccLedgerByPage( page , count)
+            setTotalCount(res?.totalCount)
+            setData(res?.data)
+            setPage(page)
+        } catch (error) {
+
+        }
+        setLoading(false)
+    }
+    const deleteBlockAdd = async (id) => {
+        setLoading(true)
+        try {
+            await deleteAccLedgerById(id)
+            let backList = totalCount % 11 === 0 ? page - 1 : page
+            getFloorMasters(backList)
+        } catch (error) {
+            // toastSuccessMessage(error.message)
+        }
+        setLoading(false)
+    }
+
+    useEffect(() => {
+        getFloorMasters(page)
+    }, [])
     return (
         <div style={{width:"1000px"}}>
             <h4>{title}</h4>
             <div className="container mt-4 card">
                 <div className="d-flex justify-content-between align-items-center mb-3">
-                    <Link className="btn btn-primary" to='/customer-view/1/add-leager' >
+                    <Link className="btn btn-primary" to={`/customer-view/${paremss.id}/add-leager`} >
                         + New {title}
                     </Link>
                     <div className="form-group">
@@ -62,7 +101,7 @@ const LeagerPage = ({ title }) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {dummyData.map((ledger, i) => (
+                            {data?.map((ledger, i) => (
                                 <tr key={ledger.id}>
                                     <td>{i + 1}</td>
                                     <td>{ledger.ledgerName}</td>

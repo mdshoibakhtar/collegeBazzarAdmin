@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import Breadcrumbs from '../../../../../common/breadcrumb/Breadcrumbs';
-import { updateMarketTypeById, postMarketType, getMarketTypeById } from '../../../../../api/login/Login';
+import { updateAccGroupById, postAccGroup, getMarketTypeById, getAccGroupByPage, getAccGroupById } from '../../../../../api/login/Login';
 
 function GroupForm() {
     const breadCrumbsTitle = {
@@ -16,39 +16,15 @@ function GroupForm() {
         alias: '',
         under: '', // Select field for "Under"
         nature: '', // Select field for "Nature"
-        subLedger: '', // Option for "Group Behave like a sub-ledger"
-        debitCreditBalance: '', // Option for "Net Debit/Credit Balance for Reporting"
-        usedForCalculation: '', // Option for "Used For Calculation"
+        group_behave: false, // Checkbox for "Group Behave like a sub-ledger"
+        balance_for_reporting: false, // Checkbox for "Net Debit/Credit Balance for Reporting"
+        used_for_calculation: false, // Checkbox for "Used For Calculation"
+        parent_id: null, // To store selected parent ID
+        is_editable: true
     });
 
     const params = useParams();
     const navigate = useNavigate();
-
-    const validate = (values) => {
-        let errors = {};
-        if (!values.name) {
-            errors.name = "Group Name is required";
-        }
-        if (!values.alias) {
-            errors.alias = "Alias is required";
-        }
-        if (!values.under) {
-            errors.under = "Under option is required";
-        }
-        if (!values.nature) {
-            errors.nature = "Nature option is required";
-        }
-        if (!values.subLedger) {
-            errors.subLedger = "Please select whether the group behaves like a sub-ledger";
-        }
-        if (!values.debitCreditBalance) {
-            errors.debitCreditBalance = "Please select whether Net Debit/Credit Balance is for reporting";
-        }
-        if (!values.usedForCalculation) {
-            errors.usedForCalculation = "Please select whether it's used for calculation";
-        }
-        return errors;
-    };
 
     const toastSuccessMessage = (message) => {
         toast.success(`${params?.id ? "Update" : "Add"} ${message}`, {
@@ -56,25 +32,23 @@ function GroupForm() {
         });
     };
 
-    const submitForm = async (values) => {
-        console.log("Submitting form with values:", values);
-        return
-
+    const submitForm = async (event) => {
+        event.preventDefault();
         try {
             if (!params?.id) {
-                const res = await postMarketType(values);
-                if (res?.statusCode == "200") {
+                const res = await postAccGroup(initialValues);
+                if (res?.statusCode === "200") {
                     toastSuccessMessage("Group added successfully");
                     setTimeout(() => {
-                        navigate(`/market-type`);
+                        navigate(`/list-group`);
                     }, 1000);
                 }
             } else {
-                const res = await updateMarketTypeById(params.id, values);
-                if (res?.statusCode == "200") {
+                const res = await updateAccGroupById(params.id, initialValues);
+                if (res?.statusCode === "200") {
                     toastSuccessMessage("Group updated successfully");
                     setTimeout(() => {
-                        navigate(`/market-type`);
+                        navigate(`/list-group`);
                     }, 1000);
                 }
             }
@@ -82,11 +56,20 @@ function GroupForm() {
             console.error("Error:", error);
         }
     };
+    const [datas, setDatas] = useState(null)
+    const fetchMarketTypeData = async () => {
 
+        const response = await getAccGroupByPage(0, 100);
+        setDatas(response?.data);
+
+    };
+    useEffect(() => {
+        fetchMarketTypeData();
+    }, []);
     useEffect(() => {
         const fetchMarketTypeData = async () => {
             if (params?.id) {
-                const response = await getMarketTypeById(params.id);
+                const response = await getAccGroupById(params.id);
                 if (response?.data) {
                     setInitialValues(response.data);
                 }
@@ -95,7 +78,6 @@ function GroupForm() {
 
         fetchMarketTypeData();
     }, [params?.id]);
-
     return (
         <>
             <ToastContainer />
@@ -134,6 +116,25 @@ function GroupForm() {
                                     </div>
 
                                     <div className="col-xl-4 mb-3">
+                                        <h6>Parent Group</h6>
+                                        <select
+                                            className="form-select"
+                                            name="under"
+                                            value={initialValues.parent_id}
+                                            onChange={(e) => setInitialValues({ ...initialValues, parent_id: e.target.value })}
+                                        >
+                                            <option value="">Select Parent</option>
+                                            {datas && datas?.map((item)=>{
+                                                return(
+                                                    <option value={item?._id}>{item?.name}</option>
+                                                )
+                                            })}
+                                           
+                                        </select>
+                                    </div>
+
+
+                                    <div className="col-xl-4 mb-3">
                                         <h6>Under</h6>
                                         <select
                                             className="form-select"
@@ -157,10 +158,10 @@ function GroupForm() {
                                             onChange={(e) => setInitialValues({ ...initialValues, nature: e.target.value })}
                                         >
                                             <option value="">Select Nature</option>
-                                            <option value="asset">Asset</option>
-                                            <option value="liability">Liability</option>
-                                            <option value="income">Income</option>
-                                            <option value="expense">Expense</option>
+                                            <option value="Assets">Assets</option>
+                                            <option value="Liabilities">Liabilities</option>
+                                            <option value="Income">Income</option>
+                                            <option value="Expenses">Expenses</option>
                                         </select>
                                     </div>
 
@@ -168,13 +169,12 @@ function GroupForm() {
                                         <h6>Group Behave like a sub-ledger</h6>
                                         <select
                                             className="form-select"
-                                            name="subLedger"
-                                            value={initialValues.subLedger}
-                                            onChange={(e) => setInitialValues({ ...initialValues, subLedger: e.target.value })}
+                                            name="group_behave"
+                                            value={initialValues.group_behave ? "Yes" : "No"}
+                                            onChange={(e) => setInitialValues({ ...initialValues, group_behave: e.target.value === "Yes" })}
                                         >
-                                            <option value="">Select Option</option>
-                                            <option value="yes">Yes</option>
-                                            <option value="no">No</option>
+                                            <option value="No">No</option>
+                                            <option value="Yes">Yes</option>
                                         </select>
                                     </div>
 
@@ -182,13 +182,12 @@ function GroupForm() {
                                         <h6>Net Debit/Credit Balance for Reporting</h6>
                                         <select
                                             className="form-select"
-                                            name="debitCreditBalance"
-                                            value={initialValues.debitCreditBalance}
-                                            onChange={(e) => setInitialValues({ ...initialValues, debitCreditBalance: e.target.value })}
+                                            name="balance_for_reporting"
+                                            value={initialValues.balance_for_reporting ? "Yes" : "No"}
+                                            onChange={(e) => setInitialValues({ ...initialValues, balance_for_reporting: e.target.value === "Yes" })}
                                         >
-                                            <option value="">Select Option</option>
-                                            <option value="yes">Yes</option>
-                                            <option value="no">No</option>
+                                            <option value="No">No</option>
+                                            <option value="Yes">Yes</option>
                                         </select>
                                     </div>
 
@@ -196,15 +195,15 @@ function GroupForm() {
                                         <h6>Used For Calculation</h6>
                                         <select
                                             className="form-select"
-                                            name="usedForCalculation"
-                                            value={initialValues.usedForCalculation}
-                                            onChange={(e) => setInitialValues({ ...initialValues, usedForCalculation: e.target.value })}
+                                            name="used_for_calculation"
+                                            value={initialValues.used_for_calculation ? "Yes" : "No"}
+                                            onChange={(e) => setInitialValues({ ...initialValues, used_for_calculation: e.target.value === "Yes" })}
                                         >
-                                            <option value="">Select Option</option>
-                                            <option value="yes">Yes</option>
-                                            <option value="no">No</option>
+                                            <option value="No">No</option>
+                                            <option value="Yes">Yes</option>
                                         </select>
                                     </div>
+
 
                                     <div className="col-xl-12 mb-3">
                                         <Link to="#" className="btn btn-danger light ms-1">

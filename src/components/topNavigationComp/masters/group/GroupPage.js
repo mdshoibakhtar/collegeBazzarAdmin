@@ -1,6 +1,6 @@
 import Breadcrumbs from '../../../../common/breadcrumb/Breadcrumbs'
 import React, { useEffect, useState } from 'react'
-import {  deleteCallConvertStatusById, deleteMarketTypeById, getCallConvertStatusByUser, getMarketTypeByPage } from '../../../../api/login/Login'
+import {  deleteAccGroupById, deleteCallConvertStatusById, deleteMarketTypeById, getAccGroupByPage, getCallConvertStatusByUser, getMarketTypeByPage } from '../../../../api/login/Login'
 import { message } from 'antd'
 import { useParams } from 'react-router-dom'
 import TypeMasterList from './MasterList/TypeMasterList'
@@ -22,7 +22,7 @@ function GroupPage() {
         
         setLoading(true)
         try {
-            const res = await getMarketTypeByPage( page , count)
+            const res = await getAccGroupByPage( page , count)
             setTotalCount(res?.totalCount)
             setData(res?.data)
             setPage(page)
@@ -40,7 +40,7 @@ function GroupPage() {
     const deleteBlockAdd = async (id) => {
         setLoading(true)
         try {
-            await deleteMarketTypeById(id)
+            await deleteAccGroupById(id)
             let backList = totalCount % 11 === 0 ? page - 1 : page
             getFloorMasters(backList)
         } catch (error) {
@@ -60,7 +60,7 @@ function GroupPage() {
         message.error('Cancle Successfull!');
     };
     useEffect(() => {
-        // getFloorMasters(page)
+        getFloorMasters(page)
     }, [])
     return (
         <>

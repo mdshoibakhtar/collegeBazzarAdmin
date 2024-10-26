@@ -29,7 +29,6 @@ function TypeMasterList({ data, totalCount, page, count, onChangeVal, confirm, c
                                                 <tr role="row">
                                                     <th style={{ width: '50px' }}>S.No</th>
                                                     <th style={{ width: '200px' }}>Name</th>
-                                                    <th style={{ width: '200px' }}>Under</th>
                                                     <th style={{ width: '200px' }}>Alias</th>
                                                     <th style={{ width: '200px' }}>Group Behave</th>
                                                     <th style={{ width: '200px' }}>Balance for reporting</th>
@@ -43,9 +42,12 @@ function TypeMasterList({ data, totalCount, page, count, onChangeVal, confirm, c
                                                         <tr role="row" key={item?._id}>
                                                             <td>{(i + 1) + (page * count)}</td>
                                                             <td>{item?.name}</td>
-                                                            <td>{item?.isActive ? 'Active' : 'In Active'}</td>
-                                                        
-                                                            <td>
+                                                            <td>{item?.alias}</td>
+                                                            <td>{item?.group_behave ? 'Yes' : 'No'}</td>
+                                                            <td>{item?.balance_for_reporting ? 'Yes' : 'No'}</td>
+                                                            <td>{item?.used_for_calculation ? 'Yes' : 'No'}</td>
+
+                                                            {item?.is_editable ? <td>
                                                                 <div className="d-flex">
                                                                     <Link to={`/add-group/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
                                                                         <i className="fa fa-pencil" />
@@ -63,7 +65,7 @@ function TypeMasterList({ data, totalCount, page, count, onChangeVal, confirm, c
                                                                         </Link>
                                                                     </Popconfirm>
                                                                 </div>
-                                                            </td>
+                                                            </td>: <td>----</td>}
                                                         </tr>
                                                     );
                                                 })}

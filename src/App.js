@@ -616,7 +616,7 @@ import PurchaseRegister from "./components/kingsonreports/purchaseregister/Purch
 import Purchaseregisterform from "./components/kingsonreports/purchaseregister/purchaseregisterform/Purchaseregisterform";
 import StockRegister from "./components/kingsonreports/stockSheet/stockRegister/StockRegister";
 import ProductLedger from "./components/kingsonreports/stockSheet/stockRegister/stockRegisterList/productledger/ProductLedger";
-import WallRep from "./pages/walletReport";
+// import WallRep from "./pages/Walletreport";
 import AddUpdateVirtualWall from "./components/virtualWallet/addUpdateVirtualWall/AddUpdateVirtualWall";
 import ContraPage from "./pages/transaction/bankCash/contra";
 import ContraAdd from "./components/transaction/bankCash/contra/contraAdd/ContraAdd";
@@ -1703,10 +1703,10 @@ function App() {
                 path="payment-request-view"
                 element={<PaymentRequestViewPage />}
               />
-              <Route
+              {/* <Route
                 path="/admin/wallet/virtual-wallet"
                 element={<WallRep />}
-              />
+              /> */}
               <Route
                 path="/admin/wallet/add/virtual-wallet"
                 element={<AddUpdateVirtualWall />}
