@@ -1,6 +1,8 @@
 import { Pagination } from "antd"
 import Breadcrumbs from "../../../../common/breadcrumb/Breadcrumbs";
 import { Link } from "react-router-dom";
+import BankPaymentFilter from "./bankPaymentFilter/BankPaymentFilter";
+
 
 
 const BankPayment = ({ heading }) => {
@@ -18,6 +20,7 @@ const BankPayment = ({ heading }) => {
             <Breadcrumbs
                 breadCrumbsTitle={breadCrumbsTitle} />
             {/* <GroupSummaryFilter /> */}
+            <BankPaymentFilter />
             <div style={{ margin: "14px" }}>
                 <div className="card">
                     <div className="card-body p-0">

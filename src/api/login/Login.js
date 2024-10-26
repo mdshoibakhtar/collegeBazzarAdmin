@@ -3528,6 +3528,15 @@ export const getreportPayment = (page, count, start_date, end_date) => {
   });
 };
 
+export const masterget = (name) => {
+  return axiosInstance.get(`ledger/admin?AccLedgerGroupId=${name}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
 
 export const getCreVenture = (page, count) => {
   return axiosInstance.get(`/prop_venture/page?page=${page}&count=${count}`, {
