@@ -23,9 +23,9 @@ function Withdrawals({ title, api }) {
     }, []);
 
     // ----------list Api----------
-    const getFloorMasters = async (page) => {
+    const getFloorMasters = async (page, datestart, dateend) => {
         setLoading(true)
-        const clone = { start_date, end_date , status: api }
+        const clone = { start_date: datestart ? datestart : start_date, end_date: dateend ? dateend : end_date, status: api }
         try {
             const res = await getListWidraw(clone)
             setTotalCount(res?.totalCount)
@@ -79,7 +79,7 @@ function Withdrawals({ title, api }) {
     return (
         <>
             <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
-            <MasterList getFloorMasters={getFloorMasters} title={title} totalCount={totalCount} page={page} onChangeVal={onChangeVal} data={data} count={count} confirm={confirm} cancel={cancel} loading={loading} />
+            <MasterList getFloorMasters={getFloorMasters} title={title} totalCount={totalCount} page={page} onChangeVal={onChangeVal} data={data} count={count} confirm={confirm} cancel={cancel} loading={loading}  />
         </>
     )
 }
