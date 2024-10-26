@@ -3709,3 +3709,24 @@ export const updateAccLedgerById = (id, data) => {
 export const getVoucherTypeData = (name, page, count) => {
   return axiosInstance.get(`${baseUrl}AccVoucher/page?page=${page}&count=${count}&start_date=&end_date=&voucherType=${name}&accLedgerId=`);
 };
+
+
+
+export const voucherMasterAdd = (data) => {
+  return axiosInstance.post(`${baseUrl}accVoucherType/addType`, data);
+};
+export const getvoucherMaster = (page, count) => {
+  return axiosInstance.get(`${baseUrl}accVoucherType/page?page=${page}&count=${count}`);
+};
+
+export const voucherMasterDelete = (id) => {
+  return axiosInstance.delete(`${baseUrl}accVoucherType/delete_type/${id}`);
+};
+
+export const getvoucherMasterId = (id) => {
+  return axiosInstance.get(`${baseUrl}accVoucherType/${id}`);
+};
+
+export const voucherMasterUpdate = (id, value) => {
+  return axiosInstance.put(`${baseUrl}bank/updatebank/${id}`, value);
+};
