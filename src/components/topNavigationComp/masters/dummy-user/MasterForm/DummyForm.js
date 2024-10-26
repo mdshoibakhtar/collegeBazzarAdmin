@@ -36,10 +36,10 @@ function DummyForm({ selectedItems ,close}) {
 
         const payload = {
             contestids: selectedItems,
-            start_prediction: formData.start_prediction,
-            end_prediction: formData.end_prediction,
-            no_of_dummy_user: formData.no_of_dummy_user,
-            no_of_participate_each: formData.no_of_participate_each,
+            start_prediction: +formData.start_prediction,
+            end_prediction: +formData.end_prediction,
+            no_of_dummy_user: +formData.no_of_dummy_user,
+            no_of_participate_each: +formData.no_of_participate_each,
         };
         console.log(payload);
 
