@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useParams } from "react-router-dom";
 
 import "./assets/css/style.css";
 import "./components/upgrade-member/member.css"
@@ -822,6 +822,12 @@ import Intrest from "./components/hawala/intrest/Intrest";
 import DiscountKasarEntry from "./components/hawala/discountKasarEntry/DiscountKasarEntry";
 import TdsCalculations from "./components/hawala/tdsCalculation/TdsCalculations";
 import CommisionEntry from "./components/hawala/commisionEntry/CommisionEntry";
+import ProductMerge from "./components/advanceUtility/productMerge/ProductMerge";
+import CityMerge from "./components/advanceUtility/cityMerge/CityMerge";
+import StateMerge from "./components/advanceUtility/statemerge/StateMerge";
+import SpecificationMerge from "./components/advanceUtility/specificationmerge/SpecificationMerge";
+import VoucherPrint from "./components/advanceUtility/vocherPrint/VoucherPrint";
+import Barcodetility from "./components/advanceUtility/barcodeutility/Barcodetility";
 // import CreateStageplan from "./pages/NewStagesplan";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -887,6 +893,8 @@ function App() {
   }
   console.log(window.localStorage.getItem('dashRout') == null);
 
+  
+  
   return (
     <>
       <Routes>
@@ -2393,9 +2401,9 @@ function App() {
               />
 
               <Route path="kng-voucherlist" element={<VoucherlistPage />} />
-              <Route path="kng-daybook" element={<DayBookPage />} />
-              <Route path="kng-bankbook" element={<BankBookPage />} />
-              <Route path="kng-cashbook" element={<CashBookPage />} />
+              <Route path="kng-voucher/:name" element={<BankBookPage />} />
+              {/* <Route path="kng-bankbook/:id" element={<BankBookPage />} />
+              <Route path="kng-cashbook/:id" element={<BankBookPage />} /> */}
               <Route path="kng-receiptregister" element={<ReceiptRegisterPage />} />
               <Route
                 path="kng-receiptregister/editBank-receipt"
@@ -2584,7 +2592,14 @@ function App() {
               <Route path="discount/kasar/entry" element={<DiscountKasarEntry />} />
               <Route path="tdscalculations" element={<TdsCalculations />} />
               <Route path="commision-entry/report" element={<CommisionEntry />} />
-
+              {/* ADVANCE UTILITY ---------------------- */}
+              {/* 25:10:24 */}
+              <Route path="product/merge" element={<ProductMerge />} />
+              <Route path="city/merge" element={<CityMerge />} />
+              <Route path="state/merge" element={<StateMerge />} />
+              <Route path="specification/merge" element={<SpecificationMerge />} />
+              <Route path="voucher/print" element={<VoucherPrint />} />
+              <Route path="barcode/utility" element={<Barcodetility />} />
 
               <Route path="*" element={<PageNotFound />} />
             </Route>
