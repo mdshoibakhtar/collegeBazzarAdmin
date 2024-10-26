@@ -37,7 +37,9 @@ function Distributer() {
         setLoading(true)
         try {
             const res = await reailerDistIdAgainst(page, count, userId)
-            setTotalCount(res?.data?.count)
+            setTotalCount(res?.data?.totalCount)
+            console.log(res?.data);
+            
             setState(res?.data)
         } catch (error) {
 
@@ -158,7 +160,7 @@ function Distributer() {
             <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
             {/* <DistributerKycStatus submitForm={submitForm} params={params} initialValues={initialValues} /> */}
             <DisterbuterFIlter dynemicFields={dynemicFields} params={params} selectedUsers={selectedUsers} submitForm={submitForm} getReailerDistIdAgainst={getReailerDistIdAgainst} />
-            <DistributerList dynemicFields={dynemicFields} selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers} loading={loading} params={params} state={state} handleChange={handleChange} onChangeVal={onChangeVal} approval={approval} />
+            <DistributerList totalCount={totalCount} dynemicFields={dynemicFields} selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers} loading={loading} params={params} state={state} handleChange={handleChange} onChangeVal={onChangeVal} approval={approval} />
         </>
     )
 }

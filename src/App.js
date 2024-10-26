@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useParams } from "react-router-dom";
 
 import "./assets/css/style.css";
 import "./components/upgrade-member/member.css"
@@ -707,6 +707,11 @@ import SalesOrderPage from "./pages/transaction/order/saleOrder";
 import SalseOrderAdd from "./components/transaction/order/salseOrder/salseOrderAdd/SalseOrderAdd";
 import PurchageOrderPage from "./pages/transaction/order/purchageOrder";
 import PurchageOrderAdd from "./components/transaction/order/purchageOrder/purchageOrderAdd/PurchageOrderAdd";
+import ProfitRegister from "./components/kingsonreports/stockSheet/analysisReports/profitRegister/ProfitRegister";
+import Partywisesalepurchase from "./components/kingsonreports/stockSheet/analysisReports/partywisesalepurchase/Partywisesalepurchase";
+import Productwisepartyreport from "./components/kingsonreports/stockSheet/analysisReports/productwisepartyreport/Productwisepartyreport";
+import Partycrossreports from "./components/kingsonreports/stockSheet/analysisReports/partycrossreport/Partycrossreports";
+import Saleswisereports from "./components/kingsonreports/stockSheet/analysisReports/saleswisereport/Saleswisereports";
 import OrderFromQuationPage from "./pages/transaction/order/orderFromQuation";
 import OrderFromQuationAdd from "./components/transaction/order/orderFromQuation/orderFromQuationAdd/OrderFromQuationAdd";
 import PurchaseOrderFromQuotationPage from "./pages/transaction/order/purchaseOrderFromQuotation";
@@ -743,8 +748,12 @@ import TaxGroup from "./components/topNavigationComp/masters/Tax-group/TaxGroup"
 import TaxGroupAdd from "./components/topNavigationComp/masters/Tax-group/masterform/TaxGroupAdd";
 import TcsMaster from "./components/topNavigationComp/masters/TcsMaster/TcsMaster";
 import TcsAdd from "./components/topNavigationComp/masters/TcsMaster/masterform/TcsAdd";
-
-
+import Walletreport from "./components/topNavigationComp/masters/walletReport/Walletreport";
+import BuildingsMaster from "./components/topNavigationComp/masters/building/BuildingsMaster";
+import BuildAdd from "./components/topNavigationComp/masters/building/masterform/BuildAdd";
+import FloorMaster from "./components/topNavigationComp/masters/Floor/FloorMaster";
+import FloorAdd from "./components/topNavigationComp/masters/Floor/masterform/FloorAdd";
+import Withdrawals from "./components/topNavigationComp/masters/withdrawls/Withdrawals";
 
 
 // daud work
@@ -787,7 +796,6 @@ import JobworkOutOrderPage from "./pages/transaction/jobworkOut/jobworkOutOrder"
 import JobworkOutOrderAdd from "./components/transaction/jobworkOut/jobworkOutOrder/jobworkOutOrderAdd/JobworkOutOrderAdd";
 import JobworkOutIssuePage from "./pages/transaction/jobworkOut/jobworkOutIssue";
 import JobworkOutIssueAdd from "./components/transaction/jobworkOut/jobworkOutIssue/jobworkOutIssueAdd/JobworkOutIssueAdd";
-import Walletreport from "./components/topNavigationComp/masters/walletReport/Walletreport";
 import JobworkOutRecipetPage from "./pages/transaction/jobworkOut/jobworkOutRecipet";
 import JobworkOutRecipetAdd from "./components/transaction/jobworkOut/jobworkOutRecipet/jobworkOutRecipetAdd/JobworkOutRecipetAdd";
 import BankPaymenttPage from "./pages/transaction/quickEntry/bankPayment";
@@ -801,8 +809,25 @@ import CreatePropertyunit from "./pages/Createpropertyunit";
 import PropertyStages from "./pages/PropertyStages";
 import CreatePropertyStages from "./pages/CreateStages";
 import PropertyStagePlane from "./pages/PropartyStageplan";
-import StockJurnerlPage from "./pages/transaction/stockJurnal";
-import StockJurnalAdd from "./components/transaction/stockJurnal/stockJurnalAdd/StockJurnalAdd";
+
+import { PurchaseInvoiceType } from "./components/purchaseInvoiceType/PurchaseInvoiceType";
+import { AddPurchaseInvoiceType } from "./components/purchaseInvoiceType/addPurchaseInvoiceType/AddPurchaseInvoiceType";
+import { PurchaseExpenseFormula } from "./components/purchaseExpenseFormula/PurchaseExpenseFormula";
+import { AddPurchaseExpenseFormula } from "./components/purchaseExpenseFormula/addPurchaseExpenseFormula/AddPurchaseExpenseFormula";
+import LinkPurchaseExpense from "./components/linkPurchaseExpense/LinkPurchaseExpense";
+import { LinkExpenseWithInvoiceType } from "./components/linkPurchaseExpense/linkExpenseWithInvoiceType/LinkExpenseWithInvoiceType";
+import Capital from "./components/hawala/capital/Capital";
+import Depricition from "./components/hawala/depriciation/Depricition";
+import Intrest from "./components/hawala/intrest/Intrest";
+import DiscountKasarEntry from "./components/hawala/discountKasarEntry/DiscountKasarEntry";
+import TdsCalculations from "./components/hawala/tdsCalculation/TdsCalculations";
+import CommisionEntry from "./components/hawala/commisionEntry/CommisionEntry";
+import ProductMerge from "./components/advanceUtility/productMerge/ProductMerge";
+import CityMerge from "./components/advanceUtility/cityMerge/CityMerge";
+import StateMerge from "./components/advanceUtility/statemerge/StateMerge";
+import SpecificationMerge from "./components/advanceUtility/specificationmerge/SpecificationMerge";
+import VoucherPrint from "./components/advanceUtility/vocherPrint/VoucherPrint";
+import Barcodetility from "./components/advanceUtility/barcodeutility/Barcodetility";
 // import CreateStageplan from "./pages/NewStagesplan";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -868,6 +893,8 @@ function App() {
   }
   console.log(window.localStorage.getItem('dashRout') == null);
 
+  
+  
   return (
     <>
       <Routes>
@@ -1749,8 +1776,19 @@ function App() {
                 <Route path="optin-management" element={<OptinManageMent />} />
                 <Route path="whatsapp-blocklist" element={<WaBlockNumber />} />
               </Route>
+              <Route path="All-Withdrawals" element={<Withdrawals title={'All-Withdrawals'} api='' />} />
+              <Route path="Pending-Withdrawals/Pending-Withdrawals" element={<Withdrawals title={'Pending Withdrawals'} api='Pending' />} />
+              <Route path="Rejected-Withdrawals/Rejected-Withdrawals" element={<Withdrawals title={'Rejected-Withdrawals'} api='Rejected' />} />
+              <Route path="Approved-Withdrawals/Approved-Withdrawals" element={<Withdrawals title={'Approved-Withdrawals'} api='Approved' />} />
+              <Route path="wallet_report" element={<Walletreport />} />
 
+              <Route path="building-list" element={<BuildingsMaster />} />
+              <Route path="building-add" element={<BuildAdd />} />
+              <Route path="building-add/:id" element={<BuildAdd />} />
 
+              <Route path="Floor-List" element={<FloorMaster />} />
+              <Route path="Floor-Add" element={<FloorAdd />} />
+              <Route path="Floor-Add/:id" element={<FloorAdd />} />
               <Route path="wa-report-download" element={<WhatsAppReports />} />
               <Route path="add-template-type" element={<TemplateTypeAdd />} />
               <Route path="edit-template-type/:id" element={<TemplateTypeAdd />} />
@@ -2036,10 +2074,6 @@ function App() {
               <Route path="jobworkreceipt/add" element={<JobworkOutRecipetAdd />} />
               <Route path="bank-Payment-Quick" element={<BankPaymenttPage heading={'Bank Payment (Quick)'} />} />
               <Route path="bank-Receipt-Quick" element={<BankPaymenttPage heading={'Bank Receipt (Quick)'} />} />
-              <Route path="cash-Payment-Quick" element={<BankPaymenttPage heading={'Cash Payment (Quick)'} />} />
-              <Route path="cash-Receipt-Quick" element={<BankPaymenttPage heading={'Cash Receipt (Quick)'} />} />
-              <Route path="stockjournal/list" element={<StockJurnerlPage />} />
-              <Route path="stockjournal/add" element={<StockJurnalAdd />} />
 
 
 
@@ -2292,6 +2326,11 @@ function App() {
               <Route path="kng-batch-expring-list" element={<Batchexpiring />} />
               <Route path="kng-location-wise-list" element={<LocationWiseStock />} />
               <Route path="kng-unused-serial-number-stock-list" element={<Unusedserialnostock />} />
+              <Route path="kng-profit-register-list" element={<ProfitRegister />} />
+              <Route path="kng-partywise-sale-purchase-list" element={<Partywisesalepurchase />} />
+              <Route path="kng-product-wise-party-report-list" element={<Productwisepartyreport />} />
+              <Route path="kng-party-cross-report-list" element={<Partycrossreports />} />
+              <Route path="kng-sales-wise-report-list" element={<Saleswisereports />} />
 
               {/* atif routes */}
               <Route path="budgetlist" element={<Budget />} />
@@ -2362,9 +2401,9 @@ function App() {
               />
 
               <Route path="kng-voucherlist" element={<VoucherlistPage />} />
-              <Route path="kng-daybook" element={<DayBookPage />} />
-              <Route path="kng-bankbook" element={<BankBookPage />} />
-              <Route path="kng-cashbook" element={<CashBookPage />} />
+              <Route path="kng-voucher/:name" element={<BankBookPage />} />
+              {/* <Route path="kng-bankbook/:id" element={<BankBookPage />} />
+              <Route path="kng-cashbook/:id" element={<BankBookPage />} /> */}
               <Route path="kng-receiptregister" element={<ReceiptRegisterPage />} />
               <Route
                 path="kng-receiptregister/editBank-receipt"
@@ -2535,7 +2574,33 @@ function App() {
               <Route path="ele-generate-bill" element={<GenerateBill />} />
               <Route path="ele-close-dc-product" element={<DcProduct />} />
               <Route path="ele-close-inward-product" element={<InwardProduct />} />
+              <Route path="purchase-invoice-type" element={<PurchaseInvoiceType />} />
+              {/* 21:10:21-10-24 */}
+
+              <Route path="add-purchase-invoice-type" element={<AddPurchaseInvoiceType />} />
+              <Route path="purchase-expense-formula" element={<PurchaseExpenseFormula />} />
+              <Route path="add-purchase-expense-formula" element={<AddPurchaseExpenseFormula />} />
+              <Route path="link-purchase-expense" element={<LinkPurchaseExpense />} />
+              <Route path="link-expense-with-invoice-type" element={<LinkExpenseWithInvoiceType />} />
               {/*-------------------------meraj Routes End ----------------------- */}
+
+              {/* HAWALA ROUTES ---------------------- */}
+              {/* 24:10:24 */}
+              <Route path="kng-capital" element={<Capital />} />
+              <Route path="depricitions" element={<Depricition />} />
+              <Route path="interest" element={<Intrest />} />
+              <Route path="discount/kasar/entry" element={<DiscountKasarEntry />} />
+              <Route path="tdscalculations" element={<TdsCalculations />} />
+              <Route path="commision-entry/report" element={<CommisionEntry />} />
+              {/* ADVANCE UTILITY ---------------------- */}
+              {/* 25:10:24 */}
+              <Route path="product/merge" element={<ProductMerge />} />
+              <Route path="city/merge" element={<CityMerge />} />
+              <Route path="state/merge" element={<StateMerge />} />
+              <Route path="specification/merge" element={<SpecificationMerge />} />
+              <Route path="voucher/print" element={<VoucherPrint />} />
+              <Route path="barcode/utility" element={<Barcodetility />} />
+
               <Route path="*" element={<PageNotFound />} />
             </Route>
           </>

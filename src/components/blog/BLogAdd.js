@@ -23,7 +23,8 @@ const BLogAdd = () => {
         meta_description: '',    // Meta description field
         meta_keyword: '',        // Meta keyword field
         meta_image: '',          // Meta image URL field
-        blog_id: '',             // Blog category ID field
+        blog_id: '',
+        icon_image: '',        // Blog category ID field
     });
     const [errors, setErrors] = useState({});
     const [loader, setLoader] = useState(false);
@@ -266,6 +267,22 @@ const BLogAdd = () => {
 
                                                 </select>
 
+                                            </div>
+                                        </div>
+                                        <div className="col-xl-4 mb-3">
+                                            <div className={`form-group ${errors.icon_image ? 'has-error' : ''}`}>
+                                                <label htmlFor="icon_image">Icon Image</label>
+                                                <input
+                                                    type="file"
+                                                    id="icon_image"
+                                                    name="icon_image"
+                                                    onChange={handleChangeImage}   // Use the existing handleChangeImage for uploading
+                                                    className="form-control"
+                                                    placeholder="Upload Icon Image"
+                                                />
+                                                {formValues?.icon_image && (
+                                                    <img src={`${baseUrlImage}${formValues?.icon_image}`} alt="icon" style={{ width: '150px', height: '150px' }} />
+                                                )}
                                             </div>
                                         </div>
                                         <div className="col-xl-4 mb-3">

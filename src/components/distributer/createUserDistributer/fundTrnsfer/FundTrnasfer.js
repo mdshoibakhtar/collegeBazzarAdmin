@@ -1,217 +1,228 @@
-
-import { Formik } from 'formik';
 import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import CustomInputField from '../../../../common/CustomInputField';
 import CustomTextArea from '../../../../common/CustomTextArea';
-function FundTransfer({ show, handleClose }) {
+import { baseUrlImage } from '../../../../baseUrl';
+import { clodinaryImage, postfund } from '../../../../api/login/Login';
+import { toast, ToastContainer } from 'react-toastify';
+function FundTransfer({ show, handleClose ,datas}) {
+    console.log(datas);
+    
     const initialValues = {
-        user_name:"",
+        paymentDate: new Date().toISOString().slice(0, 10),  // Autofill date
+        status: 'Approved',
+        bankRef: '',
         amount: '',
-        payment_date: '',
+        bank: '',
+        method: 'UPI',
+        account_number: '',
+        receipt_img: '',
         remark: '',
-        bank_name: '',
-        bank_ref: '',
-        password:"",
-    }
+        user_id: datas?._id,  // Should be dynamically set if needed
+    };
 
-    const validate = (values) => {
-        let errors = {};
-        
-        if (!values.payment_date) {
-            errors.payment_date = "Payment Date is required";
-        }
-        if (!values.user_name) {
-            errors.user_name = "User Name is required";
-        }
+    const [values, setValues] = useState(initialValues);
+    const [errors, setErrors] = useState({});
 
-        if (!values.bank_name) {
-            errors.bank_name = "Bank Name  is required";
+    const validate = () => {
+        let newErrors = {};
+
+        if (!values.paymentDate) {
+            newErrors.paymentDate = "Payment Date is required";
+        }
+        if (!values.bank) {
+            newErrors.bank = "Bank is required";
         }
         if (!values.amount) {
-            errors.amount = "Amount  is required";
+            newErrors.amount = "Amount is required";
         }
-        if (!values.bank_ref) {
-            errors.bank_ref = "Bank Ref  is required";
+        if (!values.bankRef) {
+            newErrors.bankRef = "Bank Reference is required";
         }
-        if (!values.login_pasword) {
-            errors.login_pasword = "Password  is required";
+        if (!values.status) {
+            newErrors.status = "Status is required";
+        }
+        if (!values.method) {
+            newErrors.method = "Payment method is required";
+        }
+        if (!values.account_number) {
+            newErrors.account_number = "Account number is required";
         }
         if (!values.remark) {
-            errors.remark = "Remark  is required";
+            newErrors.remark = "Remark is required";
         }
-       
-        return errors;
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
     };
 
-    const submitForm = (values) => {
-        console.log(values);
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setValues((prevValues) => ({
+            ...prevValues,
+            [name]: value,
+        }));
+    };
+    const toastSuccessMessage = (message) => {
+        toast.success( {message}, {
+            position: "top-right",
+        });
+    };
+    const handleSubmit =async (e) => {
+        e.preventDefault();
+        if (validate()) {
+            const clone = { ...values , receipt_img: image , user_id: datas?._id};
+            const res = await postfund(clone);
+            if (res?.statusCode == "200") {
+                toastSuccessMessage("Fund Transfer Successfully");
+                setValues(initialValues);
+              setTimeout(() => {
+                handleClose()
+              }, 1000);
+            }
+            // Submit form data logic here
+        }
     };
 
-    const changeHandle = (selectedData) => {
-        // TODO
-    };
+    const [image, setImage] = useState(null);
+    const handleFileChange = async (e) => {
+        const image = new FormData()
+        image.append('image', e.target.files[0])
+        try {
+            const res = await clodinaryImage(image)
+            setTimeout(() => {
+                setImage(res.data?.data?.url)
+            }, 1000);
+        } catch (error) {
 
+        }
+    };
 
     return (
         <>
-            <Modal show={show} onHide={handleClose} className='dilog-box' id="dilog-box">
+            <Modal show={show} onHide={handleClose} className='dialog-box' id="dialog-box">
                 <Modal.Header closeButton>
-                    <Modal.Title>Update Payment</Modal.Title>
+                    <ToastContainer/>
+                    <Modal.Title>Fund Transfer To ({datas?.name})</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Formik
-                        initialValues={initialValues}
-                        validate={validate}
-                        onSubmit={submitForm}
-                    >
-                        {(formik) => {
-                            const {
-                                values,
-                                handleChange,
-                                handleSubmit,
-                                errors,
-                                touched,
-                                handleBlur,
-                                isValid,
-                                dirty,
-                            } = formik;
-                            return (
-                                <form className="tbl-captionn">
-                                    <div className="row">
-                                    <div className="col-xl-6 mb-3">
-                                            <CustomInputField
-                                                type="text"
-                                                value={values.user_name}
-                                                hasError={errors.user_name && touched.user_name}
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                errorMsg={errors.user_name}
-                                                autoFocus={true}
-                                                id="user_name"
-                                                placeholder="User Name"
-                                            />
-                                        </div>
-                                        <div className="col-xl-6 mb-3">
-                                            <CustomInputField
-                                                type="date"
-                                                value={values.payment_date}
-                                                hasError={errors.payment_date && touched.payment_date}
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                errorMsg={errors.payment_date}
-                                                autoFocus={true}
-                                                id="payment_date"
-                                                placeholder="Payment Date"
-                                            />
-                                        </div>
-                                         <div className="col-xl-6 mb-3">
-                                            <select className="form-select" aria-label="Default select example">
-                                                <option selected disabled>Select Method</option>
-                                                <option value={1}>NEFT</option>
-                                                <option value={2}>RTGS</option>
-                                            </select>
-                                        </div>
-
-                                        <div className="col-xl-6 mb-3">
-                                            <CustomInputField
-                                                type="text"
-                                                value={values.bank_name}
-                                                hasError={errors.bank_name && touched.bank_name}
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                errorMsg={errors.bank_name}
-                                                autoFocus={true}
-                                                id="bank_name"
-                                                placeholder="Bank name"
-                                                name="bank_name"
-                                            />
-                                        </div>
-                                        <div className="col-xl-6 mb-3">
-                                            <CustomInputField
-                                                type="number"
-                                                value={values.amount}
-                                                hasError={errors.amount && touched.amount}
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                errorMsg={errors.amount}
-                                                autoFocus={true}
-                                                id="amount"
-                                                placeholder="Amount"
-                                                name="amount"
-                                            />
-                                        </div>
-                                        <div className="col-xl-6 mb-3">
-                                            <CustomInputField
-                                                type="number"
-                                                value={values.bank_ref}
-                                                hasError={errors.bank_ref && touched.bank_ref}
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                errorMsg={errors.bank_ref}
-                                                autoFocus={true}
-                                                id="bank_ref"
-                                                placeholder="Bank  Ref"
-                                                name="bank_ref"
-                                            />
-                                        </div>
-                                        <div className="col-xl-6 mb-3">
-                                            <CustomInputField
-                                                type="password"
-                                                value={values.login_pasword}
-                                                hasError={errors.login_pasword && touched.login_pasword}
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                errorMsg={errors.login_pasword}
-                                                autoFocus={true}
-                                                id="login_pasword"
-                                                placeholder="Login Password"
-                                                name="login_pasword"
-                                            />
-                                        </div>
-                                        <div className="col-xl-6 mb-3">
-                                            <select className="form-select" aria-label="Default select example">
-                                                <option selected disabled>Select Status</option>
-                                                <option value={1}>Pending</option>
-                                                <option value={2}>Appoved</option>
-                                                <option value={2}>Reject</option>
-                                            </select>
-                                        </div>
-                                        <div className="col-xl-12 mb-3">
-                                            <CustomTextArea
-                                                type="text"
-                                                value={values.remark}
-                                                hasError={errors.remark && touched.remark}
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                errorMsg={errors.remark}
-                                                autoFocus={true}
-                                                id="remark"
-                                                placeholder="Remark"
-                                                name="remark"
-                                            />
-                                        </div>
-                                        <div className='border-top'>
-                                            <button className="btn btn-primary pd-x-20  rounded-2 " type="submit" style={{ marginTop: "15px" }}> Update </button>
-                                        </div>
-
-                                    </div>
-                                </form>
-                            );
-                        }}
-                    </Formik>
+                    <form onSubmit={handleSubmit} className="tbl-captionn">
+                        <div className="row">
+                            <div className="col-xl-6 mb-3">
+                                <CustomInputField
+                                    type="date"
+                                    value={values.paymentDate}
+                                    hasError={errors.paymentDate}
+                                    onChange={handleChange}
+                                    id="paymentDate"
+                                    name="paymentDate"
+                                    placeholder="Payment Date"
+                                    disabled
+                                />
+                            </div>
+                            <div className="col-xl-6 mb-3">
+                                <CustomInputField
+                                    type="text"
+                                    value={values.bank}
+                                    hasError={errors.bank}
+                                    onChange={handleChange}
+                                    id="bank"
+                                    name="bank"
+                                    placeholder="Bank Name"
+                                />
+                            </div>
+                            <div className="col-xl-6 mb-3">
+                                <CustomInputField
+                                    type="number"
+                                    value={values.amount}
+                                    hasError={errors.amount}
+                                    onChange={handleChange}
+                                    id="amount"
+                                    name="amount"
+                                    placeholder="Amount"
+                                />
+                            </div>
+                            <div className="col-xl-6 mb-3">
+                                <CustomInputField
+                                    type="text"
+                                    value={values.bankRef}
+                                    hasError={errors.bankRef}
+                                    onChange={handleChange}
+                                    id="bankRef"
+                                    name="bankRef"
+                                    placeholder="Bank Reference"
+                                />
+                            </div>
+                            <div className="col-xl-6 mb-3">
+                                <select
+                                    className="form-select"
+                                    value={values.method}
+                                    name="method"
+                                    onChange={handleChange}
+                                    aria-label="Select Method"
+                                >
+                                    <option disabled value="">Select Method</option>
+                                    <option value="NEFT">NEFT</option>
+                                    <option value="RTGS">RTGS</option>
+                                    <option value="UPI">UPI</option>
+                                </select>
+                                {errors.method && <div className="error">{errors.method}</div>}
+                            </div>
+                            <div className="col-xl-6 mb-3">
+                                <select
+                                    className="form-select"
+                                    value={values.status}
+                                    name="status"
+                                    onChange={handleChange}
+                                    aria-label="Select Status"
+                                >
+                                    <option disabled value="">Select Status</option>
+                                    <option value="Pending">Pending</option>
+                                    <option value="Approved">Approved</option>
+                                    <option value="Rejected">Rejected</option>
+                                </select>
+                                {errors.status && <div className="error">{errors.status}</div>}
+                            </div>
+                            <div className="col-xl-6 mb-3">
+                                <CustomInputField
+                                    type="text"
+                                    value={values.account_number}
+                                    hasError={errors.account_number}
+                                    onChange={handleChange}
+                                    id="account_number"
+                                    name="account_number"
+                                    placeholder="Account Number"
+                                />
+                            </div>
+                            <div className="col-xl-6 mb-3">
+                                <input
+                                    type="file"
+                                    onChange={handleFileChange}
+                                    id="receipt_img"
+                                    name="receipt_img"
+                                    className="form-control"
+                                />
+                                  {image && <img style={{ width: "100px", height: "100px" }} src={`${baseUrlImage}${image}`} />}
+                            </div>
+                            <div className="col-xl-12 mb-3">
+                                <CustomTextArea
+                                    value={values.remark}
+                                    hasError={errors.remark}
+                                    onChange={handleChange}
+                                    id="remark"
+                                    name="remark"
+                                    placeholder="Remark"
+                                />
+                            </div>
+                            <div className='border-top'>
+                                <button className="btn btn-primary pd-x-20 rounded-2" type="submit" style={{ marginTop: "15px" }}> Update </button>
+                            </div>
+                        </div>
+                    </form>
                 </Modal.Body>
-                {/* <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        Save Changes
-                    </Button>
-                </Modal.Footer> */}
             </Modal>
         </>
-    )
+    );
 }
-export default FundTransfer
+
+export default FundTransfer;

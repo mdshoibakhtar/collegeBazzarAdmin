@@ -57010,3 +57010,8 @@ label {
 h3 {
   margin: 0px !important;
 }
+
+.sus-sub-tab .nav-tabs {
+  padding: 0;
+  border: 0;
+}
