@@ -180,7 +180,7 @@ function AddVoucher() {
                                         >
                                             <option value="">Select Status</option>
                                             <option value={true}>Active</option>
-                                            <option value={false}>De Active</option>
+                                            <option value={false}>In Active</option>
                                         </select>
                                     </div>
 

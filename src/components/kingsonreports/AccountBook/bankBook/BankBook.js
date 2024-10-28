@@ -5,22 +5,15 @@ import { Pagination } from "antd";
 function BankBook({ tittle, data, page, count, handlePageChange }) {
   const [selectedItems, setSelectedItems] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
-
-
-
-
-
-  // Handle the select all checkbox
   const handleSelectAll = () => {
     if (selectAll) {
-      setSelectedItems([]); // Uncheck all
+      setSelectedItems([]); 
     } else {
-      setSelectedItems(data?.voucher.map((item) => item.AccLedgerName)); // Check all
+      setSelectedItems(data?.voucher.map((item) => item.AccLedgerName)); 
     }
-    setSelectAll(!selectAll); // Toggle select all state
+    setSelectAll(!selectAll); 
   };
 
-  // Handle individual checkbox selection
   const handleCheckboxChange = (item) => {
     if (selectedItems.includes(item.AccLedgerName)) {
       setSelectedItems(selectedItems.filter((name) => name !== item.AccLedgerName));
@@ -58,8 +51,8 @@ function BankBook({ tittle, data, page, count, handlePageChange }) {
                               onChange={handleSelectAll}
                             />
                           </th>
-                          <th style={{ width: "150px" }}>Date</th>
-                          <th style={{ width: "150px" }}>Account Name</th>
+                          <th style={{ width: "150px" }}>Entry Date</th>
+                          <th style={{ width: "150px" }}>Accountant Name</th>
                           <th style={{ width: "150px" }}>Closing Balance</th>
                           <th style={{ width: "150px" }}>Cr</th>
                           <th style={{ width: "150px" }}>Dr</th>
