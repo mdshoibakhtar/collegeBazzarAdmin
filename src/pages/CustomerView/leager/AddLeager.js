@@ -207,22 +207,12 @@ function AddLedger() {
               <label htmlFor="accLedgerEntryDateTime" className="form-label">Ledger Entry Date & Time</label>
               <input type="datetime-local" className="form-control" id="accLedgerEntryDateTime" name="accLedgerEntryDateTime" value={formData.accLedgerEntryDateTime} onChange={handleInputChange} />
             </div>
-            <div className="mb-3 col-4">
-              <label htmlFor="accBalanceType" className="form-label">Balance Type</label>
-              <select className="form-select" id="accBalanceType" name="accBalanceType" value={formData.accBalanceType} onChange={handleInputChange}>
-                <option value="">Select</option>
-                <option value="Cr">Credit</option>
-                <option value="Dr">Debit</option>
-              </select>
-            </div>
+           
             <div className="mb-3 col-4">
               <label htmlFor="accountHoldersName" className="form-label">Account Holder's Name</label>
               <input type="text" className="form-control" id="accountHoldersName" name="accountHoldersName" value={formData.accountHoldersName} onChange={handleInputChange} />
             </div>
-            <div className="mb-3 col-4">
-              <label htmlFor="accountNumber" className="form-label">Account Number</label>
-              <input type="text" className="form-control" id="accountNumber" name="accountNumber" value={formData.accountNumber} onChange={handleInputChange} />
-            </div>
+       
             <div className="mb-3 col-4">
               <label htmlFor="bankConfiguration" className="form-label">Bank Configuration</label>
               <input type="text" className="form-control" id="bankConfiguration" name="bankConfiguration" value={formData.bankConfiguration} onChange={handleInputChange} />
