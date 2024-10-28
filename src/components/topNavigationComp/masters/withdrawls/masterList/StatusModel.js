@@ -39,9 +39,9 @@ function StatusModel(props) {
                         <div>
                             <label>Date : {props?.datas.createdAt}</label>
                         </div>
-                        <div>
+                        {/* <div>
                             <label>Trx Number : {props?.datas.createdAt}</label>
-                        </div>
+                        </div> */}
                         <div>
                             <label>User Name : {props?.datas.user_id?.name}</label>
                         </div>

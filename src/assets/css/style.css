@@ -45858,7 +45858,7 @@ table.dataTable thead .sorting_asc {
 .active-projects .tbl-caption {
   padding-top: 0.4rem;
   padding-bottom: 0.4rem;
-  padding-left: 20px;
+  padding:0 20px;
 }
 
 .active-projects .tbl-caption button {

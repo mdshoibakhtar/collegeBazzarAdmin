@@ -3563,7 +3563,7 @@ export const getBlock = (page, count) => {
   });
 };
 export const getBooking = (page, count) => {
-  return axiosInstance.get(`/prop_block/page?page=${page}&count=${count}`, {
+  return axiosInstance.get(`/prop_booking/page?page=${page}&count=${count}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
       Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
@@ -3623,9 +3623,154 @@ export const vocherAddBankList = (value) => {
 
 
 
+// DELETE an account group by ID
+export const deleteAccGroupById = (id) => {
+  return axiosInstance.delete(`/accGroupMaster/delete_type/${id}`);
+};
+
+// GET account groups with pagination
+export const getAccGroupByPage = (page, count) => {
+  return axiosInstance.get(`/accGroupMaster/page?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET an account group by ID
+export const getAccGroupById = (id) => {
+  return axiosInstance.get(`/accGroupMaster/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new account group
+export const postAccGroup = (data) => {
+  return axiosInstance.post(`/accGroupMaster/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing account group by ID
+export const updateAccGroupById = (id, data) => {
+  return axiosInstance.put(`/accGroupMaster/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+
+
+// DELETE an account ledger by ID
+export const deleteAccLedgerById = (id) => {
+  return axiosInstance.delete(`/accLedger/delete_type/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET account ledgers with pagination
+export const getAccLedgerByPage = (page, count) => {
+  return axiosInstance.get(`/accLedger/page?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET an account ledger by ID
+export const getAccLedgerById = (id) => {
+  return axiosInstance.get(`/accLedger/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new account ledger
+export const postAccLedger = (data) => {
+  return axiosInstance.post(`/accLedger/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing account ledger by ID
+export const updateAccLedgerById = (id, data) => {
+  return axiosInstance.put(`/accLedger/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+
+
 // king son agro ------------ apis
 //25:10:24
 
-export const getVoucherTypeData = (name, page, count) => {
-  return axiosInstance.get(`${baseUrl}AccVoucher/page?page=${page}&count=${count}&start_date=&end_date=&voucherType=${name}&accLedgerId=`);
+export const getVoucherTypeData = (name, page, count, start_date, end_date) => {
+  return axiosInstance.get(`${baseUrl}AccVoucher/page?page=${page}&count=${count}&start_date=${start_date}&end_date=${end_date}&voucherType=${name}&accLedgerId=`);
+};
+
+
+
+export const voucherMasterAdd = (data) => {
+  return axiosInstance.post(`${baseUrl}accVoucherType/addType`, data);
+};
+export const getvoucherMaster = (page, count) => {
+  return axiosInstance.get(`${baseUrl}accVoucherType/page?page=${page}&count=${count}`);
+};
+
+export const voucherMasterDelete = (id) => {
+  return axiosInstance.delete(`${baseUrl}accVoucherType/delete_type/${id}`);
+};
+
+export const getvoucherMasterId = (id) => {
+  return axiosInstance.get(`${baseUrl}accVoucherType/${id}`);
+};
+
+export const voucherMasterUpdate = (id, value) => {
+  return axiosInstance.put(`${baseUrl}accVoucherType/update_type/${id}`, value);
+};
+
+export const voucherSetupAside = () => {
+  return axiosInstance.get(`${baseUrl}accVoucherType/page`);
+};
+
+
+
+export const updatePassword = (id,data) => {
+  return axiosInstance.put(`/user/updateuser/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+export const updatePin = (id,data) => {
+  return axiosInstance.put(`/user/updateuser/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
 };

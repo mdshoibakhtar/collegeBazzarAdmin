@@ -15,6 +15,8 @@ import DocumentDetails from "./documentsDetails/DocumentDetails";
 import KycDetails from "./kycDetails/KycDetails";
 import BankDetail from "./bankdetail/BankDetail";
 import Package from "./Package";
+import ChengePass from "./ChengePass";
+import ChengePin from "./ChengePin";
 
 const TAB = ["Basic Details", "Permanent Details", "Service"];
 
@@ -403,6 +405,28 @@ function CreateUserDistributer() {
 
                     <Tab eventKey="packagess" title="Package">
                       <Package
+                        initialValues={service}
+                        validate={validate}
+                        value={state}
+                        data={data}
+                        submitForm={submitForm}
+                        handlePermission={handlePermission}
+                        retailerInfo={retailerInfo}
+                      />
+                    </Tab>
+                    <Tab eventKey="Chenge Password" title="Chenge Password">
+                      <ChengePass
+                        initialValues={service}
+                        validate={validate}
+                        value={state}
+                        data={data}
+                        submitForm={submitForm}
+                        handlePermission={handlePermission}
+                        retailerInfo={retailerInfo}
+                      />
+                    </Tab>
+                    <Tab eventKey="Chenge Pin" title="Chenge Pin">
+                      <ChengePin
                         initialValues={service}
                         validate={validate}
                         value={state}

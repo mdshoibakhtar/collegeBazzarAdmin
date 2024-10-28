@@ -616,7 +616,7 @@ import PurchaseRegister from "./components/kingsonreports/purchaseregister/Purch
 import Purchaseregisterform from "./components/kingsonreports/purchaseregister/purchaseregisterform/Purchaseregisterform";
 import StockRegister from "./components/kingsonreports/stockSheet/stockRegister/StockRegister";
 import ProductLedger from "./components/kingsonreports/stockSheet/stockRegister/stockRegisterList/productledger/ProductLedger";
-import WallRep from "./pages/walletReport";
+// import WallRep from "./pages/Walletreport";
 import AddUpdateVirtualWall from "./components/virtualWallet/addUpdateVirtualWall/AddUpdateVirtualWall";
 import ContraPage from "./pages/transaction/bankCash/contra";
 import ContraAdd from "./components/transaction/bankCash/contra/contraAdd/ContraAdd";
@@ -828,6 +828,11 @@ import StateMerge from "./components/advanceUtility/statemerge/StateMerge";
 import SpecificationMerge from "./components/advanceUtility/specificationmerge/SpecificationMerge";
 import VoucherPrint from "./components/advanceUtility/vocherPrint/VoucherPrint";
 import Barcodetility from "./components/advanceUtility/barcodeutility/Barcodetility";
+import AddVoucher from "./components/kingsonreports/AccountBook/accountMaster/voucherMaster/addVoucher/AddVoucher";
+import VoucherMasterList from "./components/kingsonreports/AccountBook/accountMaster/voucherMaster/voucherMasterList/VoucherMasterList";
+import BusBookingMain from "./components/bus-booking-report/BusBookingMain";
+import AccountLedgerPageView from "./pages/report/accountBook/accountLedgerView";
+import SetupVoucher from "./components/setup/setupVoucher/SetupVoucher";
 // import CreateStageplan from "./pages/NewStagesplan";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -893,8 +898,8 @@ function App() {
   }
   console.log(window.localStorage.getItem('dashRout') == null);
 
-  
-  
+
+
   return (
     <>
       <Routes>
@@ -1720,10 +1725,10 @@ function App() {
                 path="payment-request-view"
                 element={<PaymentRequestViewPage />}
               />
-              <Route
+              {/* <Route
                 path="/admin/wallet/virtual-wallet"
                 element={<WallRep />}
-              />
+              /> */}
               <Route
                 path="/admin/wallet/add/virtual-wallet"
                 element={<AddUpdateVirtualWall />}
@@ -2372,6 +2377,7 @@ function App() {
                 <Route path="reminders-view" element={<ReminderPage style={true} title='Reminders' />} />
                 <Route path="ledgers" element={<LeagerPage style={true} title='Ledgers' />} />
                 <Route path="add-leager" element={<AddLeager style={true} title='Ledgers' />} />
+                <Route path="add-leager/:update" element={<AddLeager style={true} title='Ledgers' />} />
               </Route>
               <Route path="ticket-add" element={<TicketForm />} />
 
@@ -2395,6 +2401,7 @@ function App() {
 
               {/* -----daud--new ---report---list---Account-book */}
               <Route path="kng-accountledger" element={<AccountLedgerPage />} />
+              <Route path="viewAccDetail/:id" element={<AccountLedgerPageView />} />
               <Route
                 path="kng-active-accountledger"
                 element={<ActiveAccountLedgerPage />}
@@ -2601,7 +2608,18 @@ function App() {
               <Route path="voucher/print" element={<VoucherPrint />} />
               <Route path="barcode/utility" element={<Barcodetility />} />
 
+
+              {/*-------------------------26:10:24------------------------ */}
+              <Route path="voucher-type-list" element={<VoucherMasterList />} />
+              <Route path="add-voucher-type" element={<AddVoucher />} />
+              <Route path="update-voucher-type/:id" element={<AddVoucher />} />
+              <Route path="setupvoucher" element={<SetupVoucher />} />
+              
+
               <Route path="*" element={<PageNotFound />} />
+              {/* <Route path="/busbookig" element={<BusBookingMain />} /> */}
+
+
             </Route>
           </>
         )}

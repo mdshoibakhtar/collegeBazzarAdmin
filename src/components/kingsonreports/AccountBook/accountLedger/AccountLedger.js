@@ -1,306 +1,143 @@
-// import { Link } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { Pagination } from "antd";
+import { deleteAccLedgerById, getAccLedgerByPage } from "../../../../api/login/Login";
+import Loadar from "../../../../common/loader/Loader";
 
-import { Pagination, Popconfirm } from "antd";
-// import Modal from "react-bootstrap/Modal";
-import { useState } from "react";
-// import { Button } from "react-bootstrap";
-// import { MdUpload } from "react-icons/md";
+const AccountLedger = ({ title }) => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [count, setCount] = useState(10);
+  const [page, setPage] = useState(0);
+  const [totalCount, setTotalCount] = useState();
+  const [fromDate, setFromDate] = useState(new Date().toISOString().split("T")[0]);
+  const [toDate, setToDate] = useState(new Date().toISOString().split("T")[0]); // Autofill current date
 
+  // ----------list Api----------
+  const param = useParams();
 
-function AccountLedger() {
-  const [show, setShow] = useState(false);
+  const getFloorMasters = async (page) => {
+    setLoading(true);
+    try {
+      const res = await getAccLedgerByPage(page, count, fromDate, toDate);
+      setTotalCount(res?.totalCount);
+      setData(res?.data);
+      setPage(page);
+    } catch (error) {
+      console.error("Failed to fetch data:", error);
+    }
+    setLoading(false);
+  };
+
+  const deleteBlockAdd = async (id) => {
+    setLoading(true);
+    try {
+      await deleteAccLedgerById(id);
+      let backList = totalCount % 11 === 0 ? page - 1 : page;
+      getFloorMasters(backList);
+    } catch (error) {
+      console.error("Failed to delete data:", error);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getFloorMasters(page);
+  }, [page, fromDate, toDate]);
+
+  const onChangeVal = (e) => {
+    getFloorMasters(e - 1);
+  };
+
+  const handleDateFilterChange = () => {
+    // Fetch data with updated date filters
+    getFloorMasters(0);
+  };
+
   return (
-    <>
-      <div>
-        <div className="row m-2">
-          <div className="col-xl-12">
-            <div className="card">
-              <div className="card-body p-0">
-                <div className="table-responsive active-projects style-1">
-                  <div className="tbl-caption">
-                    <h4 className="heading mb-0">Account Ledger</h4>
-                    {/* <div>
-                      <Link
-                        className="btn btn-primary btn-sm"
-                        to="add-expense"
-                        role="button"
-                        aria-controls="offcanvasExample"
-                      >
-                        + Add Expense
-                      </Link>
-
-                      <Link
-                        className="btn btn-primary btn-sm"
-                        to="import-expenses"
-                        role="button"
-                        aria-controls="offcanvasExample"
-                      >
-                        <MdUpload className="fs-4" /> Import Expenses
-                      </Link>
-
-                      <Button
-                        className="btn btn-primary btn-sm bg-primary"
-                        type="button"
-                        role="button"
-                        aria-controls="offcanvasExample"
-                        onClick={() => setShow(true)}
-                      >
-                        <FaFileAlt className="mb-1 me-1" />
-                        Batch Payments
-                      </Button>
-                    </div> */}
-                  </div>
-                  <div
-                    id="banner-tblwrapper_wrapper"
-                    className="dataTables_wrapper no-footer"
-                  >
-                    <div className="dt-buttons">
-                      <button
-                        className="dt-button buttons-excel buttons-html5 btn btn-sm border-0"
-                        tabIndex={0}
-                        aria-controls="banner-tblwrapper"
-                        type="button"
-                      >
-                        <span>
-                          <i className="fa-solid fa-file-excel" /> Export Report
-                        </span>
-                      </button>
-                    </div>
-                    <table
-                      id="banner-tblwrapper"
-                      className="table dataTable no-footer"
-                      role="grid"
-                      aria-describedby="banner-tblwrapper_info"
-                    >
-                      <thead>
-                        <tr role="row">
-                          <th style={{ width: "50px" }}>
-                            <input type="checkbox" className="" />
-                          </th>
-                          <th style={{ width: "150px" }}>A</th>
-                          <th style={{ width: "150px" }}>Name</th>
-                          <th style={{ width: "150px" }}>City</th>
-                          <th style={{ width: "150px" }}>Opening</th>
-                          <th style={{ width: "150px" }}>Op. D/C</th>
-                          <th style={{ width: "150px" }}>Closing Balance</th>
-                          <th style={{ width: "150px" }}>Cl.Cr/Db</th>
-
-                          {/* <th style={{ width: "100px" }}>Actions</th> */}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr role="row">
-                          <td>
-                            <input type="checkbox" />
-                          </td>
-                          <td></td>
-
-                          <td>A K Agro Center</td>
-                          <td></td>
-                          <td>43,952.10</td>
-                          <td>Db</td>
-                          <td style={{ width: "150px" }}>43,952.10</td>
-                          <td>Db</td>
-
-                          {/* <td>
-                            <div className="d-flex">
-                              <Link
-                                to=""
-                                className="btn btn-primary shadow btn-xs sharp me-1"
-                              >
-                                <i className="fa fa-pencil" />
-                              </Link>
-                              <Popconfirm
-                                title="Delete banner!"
-                                description="Are you sure to delete?"
-                                okText="Yes"
-                                cancelText="No"
-                              >
-                                <Link
-                                  to="#"
-                                  className="btn btn-danger shadow btn-xs sharp"
-                                >
-                                  <i className="fa fa-trash" />
-                                </Link>
-                              </Popconfirm>
-                            </div>
-                          </td> */}
-                        </tr>
-
-                        <tr role="row">
-                          <td>
-                            <input type="checkbox" />
-                          </td>
-                          <td></td>
-
-                          <td>A K Agro Center</td>
-                          <td></td>
-                          <td>10,23,886.00</td>
-                          <td>Cr</td>
-                          <td style={{ width: "150px" }}>10,23,886.00</td>
-                          <td>Cr</td>
-
-                          {/* <td>
-                            <div className="d-flex">
-                              <Link
-                                to=""
-                                className="btn btn-primary shadow btn-xs sharp me-1"
-                              >
-                                <i className="fa fa-pencil" />
-                              </Link>
-                              <Popconfirm
-                                title="Delete banner!"
-                                description="Are you sure to delete?"
-                                okText="Yes"
-                                cancelText="No"
-                              >
-                                <Link
-                                  to="#"
-                                  className="btn btn-danger shadow btn-xs sharp"
-                                >
-                                  <i className="fa fa-trash" />
-                                </Link>
-                              </Popconfirm>
-                            </div>
-                          </td> */}
-                        </tr>
-
-                        <tr role="row">
-                          <td>
-                            <input type="checkbox" />
-                          </td>
-                          <td></td>
-
-                          <td>ABC PARTY</td>
-                          <td>TELG</td>
-                          <td>0.00</td>
-                          <td>Db</td>
-                          <td style={{ width: "150px" }}>0.00</td>
-                          <td>Db</td>
-
-                          {/* <td>
-                            <div className="d-flex">
-                              <Link
-                                to=""
-                                className="btn btn-primary shadow btn-xs sharp me-1"
-                              >
-                                <i className="fa fa-pencil" />
-                              </Link>
-                              <Popconfirm
-                                title="Delete banner!"
-                                description="Are you sure to delete?"
-                                okText="Yes"
-                                cancelText="No"
-                              >
-                                <Link
-                                  to="#"
-                                  className="btn btn-danger shadow btn-xs sharp"
-                                >
-                                  <i className="fa fa-trash" />
-                                </Link>
-                              </Popconfirm>
-                            </div>
-                          </td> */}
-                        </tr>
-
-                        <tr role="row">
-                          <td>
-                            <input type="checkbox" />
-                          </td>
-                          <td></td>
-
-                          <td>AGRI COMPANY PVT. LTD.</td>
-                          <td>AHMEDABAD</td>
-                          <td>1,76,323.36</td>
-                          <td>Cr</td>
-                          <td style={{ width: "150px" }}>1,76,323.36</td>
-                          <td>Cr</td>
-
-                          {/* <td>
-                            <div className="d-flex">
-                              <Link
-                                to=""
-                                className="btn btn-primary shadow btn-xs sharp me-1"
-                              >
-                                <i className="fa fa-pencil" />
-                              </Link>
-                              <Popconfirm
-                                title="Delete banner!"
-                                description="Are you sure to delete?"
-                                okText="Yes"
-                                cancelText="No"
-                              >
-                                <Link
-                                  to="#"
-                                  className="btn btn-danger shadow btn-xs sharp"
-                                >
-                                  <i className="fa fa-trash" />
-                                </Link>
-                              </Popconfirm>
-                            </div>
-                          </td> */}
-                        </tr>
-
-                        <tr role="row">
-                          <td>
-                            <input type="checkbox" />
-                          </td>
-                          <td></td>
-
-                          <td>A K Agro Center</td>
-                          <td></td>
-                          <td>43,952.10</td>
-                          <td>Db</td>
-                          <td style={{ width: "150px" }}>43,952.10</td>
-                          <td>Db</td>
-
-                          {/* <td>
-                            <div className="d-flex">
-                              <Link
-                                to=""
-                                className="btn btn-primary shadow btn-xs sharp me-1"
-                              >
-                                <i className="fa fa-pencil" />
-                              </Link>
-                              <Popconfirm
-                                title="Delete banner!"
-                                description="Are you sure to delete?"
-                                okText="Yes"
-                                cancelText="No"
-                              >
-                                <Link
-                                  to="#"
-                                  className="btn btn-danger shadow btn-xs sharp"
-                                >
-                                  <i className="fa fa-trash" />
-                                </Link>
-                              </Popconfirm>
-                            </div>
-                          </td> */}
-                        </tr>
-                      </tbody>
-                    </table>
-                    <div
-                      className="dataTables_info"
-                      role="status"
-                      aria-live="polite"
-                    >
-                      Total {"0"} entries
-                    </div>
-                    <div className="dataTables_paginate paging_simple_numbers">
-                      <Pagination defaultCurrent={1} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+    <div>
+      {loading && <Loadar />}
+      <div className="d-flex">
+        <h4>Account Ledger List</h4>
+        <div className="d-flex" style={{ marginLeft: "20px" }}>
+          <div className="me-3">
+            <label>From Date:</label>
+            <input
+              type="date"
+              className="form-control"
+              value={fromDate}
+              onChange={(e) => setFromDate(e.target.value)}
+            />
+          </div>
+          <div className="me-3">
+            <label>To Date:</label>
+            <input
+              type="date"
+              className="form-control"
+              value={toDate}
+              onChange={(e) => setToDate(e.target.value)}
+            />
+          </div>
+          <div style={{ display: "flex", alignItems: "end" }}>
+            <button className="btn btn-primary" onClick={handleDateFilterChange}>
+              Apply Filters
+            </button>
           </div>
         </div>
       </div>
-      <ToastContainer className="text-center" />
-    </>
+      <div className="container mt-4 card">
+
+
+        <div className="" style={{ overflow: "auto" }}>
+          <table className="table">
+            <thead>
+              <tr>
+                <th scope="col">S.no</th>
+                <th style={{ width: "150px" }}>#</th>
+                <th style={{ width: "150px" }}>Acc Ledger Name</th>
+                <th style={{ width: "150px" }}>City</th>
+                <th style={{ width: "150px" }}>Under Group</th>
+                <th style={{ width: "150px" }}>Opening Balance</th>
+                <th style={{ width: "150px" }}>Op. D/C</th>
+                <th style={{ width: "150px" }}>Closing Balance</th>
+                <th style={{ width: "150px" }}>Cl.Cr/Db</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data?.map((ledger, i) => (
+                <tr key={ledger.id}>
+                  <td>{i + 1}</td>
+                  <td><Link to={`/viewAccDetail/${ledger._id}`}>View Acc</Link></td>
+                  <td>{ledger.name}</td>
+                  <td>{ledger.state}</td>
+                  <td>{ledger.alias}</td>
+                  <td>{ledger.opening_balance}</td>
+                  <td>{ledger.opening_balance_type}</td>
+                  <td>{ledger.mobile}</td>
+                  <td>{ledger?.bank_id?.name}</td>
+                  <td>
+                    <button className="btn btn-sm btn-primary ms-2">Ledger Report</button>
+                    <button
+                      className="btn btn-sm btn-danger ms-2"
+                      onClick={() => deleteBlockAdd(ledger._id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <Pagination
+            defaultCurrent={1}
+            onChange={onChangeVal}
+            total={totalCount}
+          />
+        </div>
+      </div>
+    </div>
   );
-}
+};
 
 export default AccountLedger;
