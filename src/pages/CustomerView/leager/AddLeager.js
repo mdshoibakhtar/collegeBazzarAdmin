@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Button, Col, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
-import { postAccLedger, updateAccLedgerById } from "../../../api/login/Login";
+import { getAccGroupByPage, getAccLedgerById, getBankMaster, postAccLedger, updateAccLedgerById } from "../../../api/login/Login";
 import { toast, ToastContainer } from 'react-toastify';
 
 function AddLedger() {
@@ -59,28 +59,21 @@ function AddLedger() {
     e.preventDefault();
     console.log("Form Data Submitted: ", formData);
     try {
-      const res = await postAccLedger({...formData, user_id: params?.id});
-      if (res?.statusCode == "200") {
-        toastSuccessMessage("Ledger added successfully");
-        setTimeout(() => {
-          navigate(`/customer-view/${params.id}/ledgers`);
-        }, 1000);
-      }
-      return
-      if (!params?.id) {
+     
+      if (!params?.update) {
         const res = await postAccLedger(formData);
         if (res?.statusCode == "200") {
           toastSuccessMessage("Ledger added successfully");
           setTimeout(() => {
-            // navigate(`/list-group`);
+            navigate(`/customer-view/${params.id}/ledgers`);
           }, 1000);
         }
       } else {
-        const res = await updateAccLedgerById(params.id, formData);
+        const res = await updateAccLedgerById(params.update, formData);
         if (res?.statusCode == "200") {
           toastSuccessMessage("Ledger updated successfully");
           setTimeout(() => {
-            // navigate(`/list-group`);
+            navigate(`/customer-view/${params.id}/ledgers`);
           }, 1000);
         }
       }
@@ -92,6 +85,30 @@ function AddLedger() {
   // const addBankFromSelect = async()=>{
   //   await 
   // }
+  const [groups, setGroup] = useState([])
+  const [banks, setBank] = useState([])
+  const getGroups = async () => {
+    const res = await getAccGroupByPage(0, 100)
+    const res2 = await getBankMaster(0, 100)
+    setGroup(res?.data)
+    setBank(res2?.data)
+  }
+  useEffect(() => {
+    getGroups()
+  }, [])
+
+  useEffect(() => {
+    const fetchMarketTypeData = async () => {
+        if (params?.update) {
+            const response = await getAccLedgerById(params.update);
+            if (response?.data) {
+              setFormData(response.data);
+            }
+        }
+    };
+
+    fetchMarketTypeData();
+}, [params?.update]);
 
   return (
     <div style={{ width: "1000px" }}>
@@ -207,12 +224,12 @@ function AddLedger() {
               <label htmlFor="accLedgerEntryDateTime" className="form-label">Ledger Entry Date & Time</label>
               <input type="datetime-local" className="form-control" id="accLedgerEntryDateTime" name="accLedgerEntryDateTime" value={formData.accLedgerEntryDateTime} onChange={handleInputChange} />
             </div>
-           
+
             <div className="mb-3 col-4">
               <label htmlFor="accountHoldersName" className="form-label">Account Holder's Name</label>
               <input type="text" className="form-control" id="accountHoldersName" name="accountHoldersName" value={formData.accountHoldersName} onChange={handleInputChange} />
             </div>
-       
+
             <div className="mb-3 col-4">
               <label htmlFor="bankConfiguration" className="form-label">Bank Configuration</label>
               <input type="text" className="form-control" id="bankConfiguration" name="bankConfiguration" value={formData.bankConfiguration} onChange={handleInputChange} />
@@ -239,7 +256,12 @@ function AddLedger() {
             </div>
             <div className="mb-3 col-4">
               <label htmlFor="selectBank" className="form-label">Select Bank</label>
-              <input type="text" className="form-control" id="selectBank" name="selectBank" value={formData.selectBank} onChange={handleInputChange} />
+              <select className="form-select" id="selectBank" name="selectBank" value={formData.selectBank} onChange={handleInputChange}>
+                <option value="">Select</option>
+                {banks && banks?.map((group)=>{
+                  return <option value={group._id}>{group.bank_name}</option>
+                })}
+              </select>
             </div>
             <div className="mb-3 col-4">
               <label htmlFor="selectCompany" className="form-label">Select Company</label>
@@ -251,7 +273,12 @@ function AddLedger() {
             </div>
             <div className="mb-3 col-4">
               <label htmlFor="underGroup" className="form-label">Under Group</label>
-              <input type="text" className="form-control" id="underGroup" name="underGroup" value={formData.underGroup} onChange={handleInputChange} />
+              <select className="form-select" id="underGroup" name="underGroup" value={formData.underGroup} onChange={handleInputChange}>
+                <option value="">Select</option>
+                {groups && groups?.map((group)=>{
+                  return <option value={group._id}>{group.name}</option>
+                })}
+              </select>
             </div>
             <div className="mb-3 col-4">
               <label htmlFor="voucherDate" className="form-label">Voucher Date</label>

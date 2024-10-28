@@ -831,6 +831,7 @@ import Barcodetility from "./components/advanceUtility/barcodeutility/Barcodetil
 import AddVoucher from "./components/kingsonreports/AccountBook/accountMaster/voucherMaster/addVoucher/AddVoucher";
 import VoucherMasterList from "./components/kingsonreports/AccountBook/accountMaster/voucherMaster/voucherMasterList/VoucherMasterList";
 import BusBookingMain from "./components/bus-booking-report/BusBookingMain";
+import AccountLedgerPageView from "./pages/report/accountBook/accountLedgerView";
 import SetupVoucher from "./components/setup/setupVoucher/SetupVoucher";
 // import CreateStageplan from "./pages/NewStagesplan";
 function App() {
@@ -2376,6 +2377,7 @@ function App() {
                 <Route path="reminders-view" element={<ReminderPage style={true} title='Reminders' />} />
                 <Route path="ledgers" element={<LeagerPage style={true} title='Ledgers' />} />
                 <Route path="add-leager" element={<AddLeager style={true} title='Ledgers' />} />
+                <Route path="add-leager/:update" element={<AddLeager style={true} title='Ledgers' />} />
               </Route>
               <Route path="ticket-add" element={<TicketForm />} />
 
@@ -2399,6 +2401,7 @@ function App() {
 
               {/* -----daud--new ---report---list---Account-book */}
               <Route path="kng-accountledger" element={<AccountLedgerPage />} />
+              <Route path="viewAccDetail/:id" element={<AccountLedgerPageView />} />
               <Route
                 path="kng-active-accountledger"
                 element={<ActiveAccountLedgerPage />}

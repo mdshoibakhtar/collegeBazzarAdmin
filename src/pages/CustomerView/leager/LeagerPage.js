@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Link ,useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { deleteAccLedgerById, getAccLedgerByPage } from "../../../api/login/Login";
+import { Pagination } from "antd";
+import Loadar from "../../../common/loader/Loader";
 
 const dummyData = [
     {
@@ -35,15 +37,15 @@ const LeagerPage = ({ title }) => {
     const [count, setCount] = useState(10)
     const [page, setPage] = useState(0)
     const [totalCount, setTotalCount] = useState()
-    
+
 
     // ----------list Api----------
     const param = useParams()
     const getFloorMasters = async (page) => {
-        
+
         setLoading(true)
         try {
-            const res = await getAccLedgerByPage( page , count)
+            const res = await getAccLedgerByPage(page, count)
             setTotalCount(res?.totalCount)
             setData(res?.data)
             setPage(page)
@@ -67,8 +69,15 @@ const LeagerPage = ({ title }) => {
     useEffect(() => {
         getFloorMasters(page)
     }, [])
+    const onChangeVal = (e) => {
+        // console.log(e);
+        getFloorMasters(e - 1)
+
+    };
+  
     return (
-        <div style={{width:"1000px"}}>
+        <div style={{ width: "1000px" }}>
+            {loading && <Loadar/>}
             <h4>{title}</h4>
             <div className="container mt-4 card">
                 <div className="d-flex justify-content-between align-items-center mb-3">
@@ -84,7 +93,7 @@ const LeagerPage = ({ title }) => {
                         />
                     </div>
                 </div>
-                <div className="" style={{overflow:"auto"}}>
+                <div className="" style={{ overflow: "auto" }}>
                     <table className="table">
                         <thead>
                             <tr>
@@ -104,22 +113,27 @@ const LeagerPage = ({ title }) => {
                             {data?.map((ledger, i) => (
                                 <tr key={ledger.id}>
                                     <td>{i + 1}</td>
-                                    <td>{ledger.ledgerName}</td>
-                                    <td>{ledger.ledgerAlias}</td>
-                                    <td>{ledger.acName}</td>
-                                    <td>{ledger.acNo}</td>
+                                    <td>{ledger.name}</td>
+                                    <td>{ledger.alias}</td>
+                                    <td>{ledger.AC_name}</td>
+                                    <td>{ledger.AC_no}</td>
                                     <td>{ledger.mobile}</td>
-                                    <td>{ledger.email}</td>
-                                    <td>{ledger.address}</td>
-                                    <td>{ledger.bankDetail}</td>
+                                    <td>{ledger.Email}</td>
+                                    <td>{ledger.state}</td>
+                                    <td>{ledger?.bank_id?.name}</td>
                                     <td>
-                                        <button className="btn btn-sm btn-warning">Edit</button>
-                                        <button className="btn btn-sm btn-danger ms-2">Delete</button>
+                                        <Link className="btn btn-sm btn-warning" to={`/customer-view/${paremss.id}/add-leager/${ledger._id}`}>Edit</Link>
+                                        <button className="btn btn-sm btn-danger ms-2" onClick={()=>{deleteBlockAdd(ledger._id)}}>Delete</button>
                                     </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
+                    <Pagination
+                        defaultCurrent={1}
+                        onChange={onChangeVal}
+                        total={totalCount}
+                    />
                 </div>
             </div>
         </div>

@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Pagination } from "antd";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 import { deleteAccLedgerById, getAccLedgerByPage } from "../../../../api/login/Login";
 import Loadar from "../../../../common/loader/Loader";
+import AccountSummary from "./AccountSummary";
 
-const AccountLedger = ({ title }) => {
+const AccountLedgerView = ({ title }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [count, setCount] = useState(10);
   const [page, setPage] = useState(0);
   const [totalCount, setTotalCount] = useState();
   const [fromDate, setFromDate] = useState(new Date().toISOString().split("T")[0]);
-  const [toDate, setToDate] = useState(new Date().toISOString().split("T")[0]); // Autofill current date
+  const [toDate, setToDate] = useState(new Date().toISOString().split("T")[0]);
 
-  // ----------list Api----------
   const param = useParams();
 
   const getFloorMasters = async (page) => {
@@ -50,17 +52,28 @@ const AccountLedger = ({ title }) => {
   };
 
   const handleDateFilterChange = () => {
-    // Fetch data with updated date filters
     getFloorMasters(0);
+  };
+
+  const exportToPDF = () => {
+    const input = document.getElementById("tableToExport");
+    html2canvas(input).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+      const imgWidth = 190;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
+      pdf.save("account_ledger.pdf");
+    });
   };
 
   return (
     <div>
       {loading && <Loadar />}
       <div className="d-flex">
-        <h4>Account Ledger List</h4>
+        <h4>Account Ledger Detail</h4>
         <div className="d-flex" style={{ marginLeft: "20px" }}>
-          <div className="me-3">
+          <div className="me-3 d-block">
             <label>From Date:</label>
             <input
               type="date"
@@ -69,7 +82,7 @@ const AccountLedger = ({ title }) => {
               onChange={(e) => setFromDate(e.target.value)}
             />
           </div>
-          <div className="me-3">
+          <div className="me-3  d-block">
             <label>To Date:</label>
             <input
               type="date"
@@ -87,44 +100,48 @@ const AccountLedger = ({ title }) => {
       </div>
       <div className="container mt-4 card">
 
+        {/* Filter Section */}
+        <AccountSummary />
+        <div className="d-flex justify-content-between align-items-center mb-3">
 
-        <div className="" style={{ overflow: "auto" }}>
+          <button className="btn btn-success" onClick={exportToPDF}>
+            Download PDF
+          </button>
+        </div>
+
+        <div id="tableToExport" style={{ overflow: "auto" }}>
           <table className="table">
             <thead>
               <tr>
-                <th scope="col">S.no</th>
-                <th style={{ width: "150px" }}>#</th>
-                <th style={{ width: "150px" }}>Acc Ledger Name</th>
-                <th style={{ width: "150px" }}>City</th>
-                <th style={{ width: "150px" }}>Under Group</th>
-                <th style={{ width: "150px" }}>Opening Balance</th>
-                <th style={{ width: "150px" }}>Op. D/C</th>
-                <th style={{ width: "150px" }}>Closing Balance</th>
-                <th style={{ width: "150px" }}>Cl.Cr/Db</th>
-                <th scope="col">Action</th>
+                <th scope="col">Entry Date</th>
+                <th scope="col">Vch No</th>
+                <th scope="col">Vch Type</th>
+                <th scope="col">Account Ledger Name</th>
+                <th scope="col">Credit Amt</th>
+                <th scope="col">Debit Amt</th>
+                <th scope="col">Closing Amt</th>
+                <th scope="col">Cl Amt Type</th>
+                <th scope="col">Chq. No</th>
+                <th scope="col">Chq. Date</th>
+                <th scope="col">Narration</th>
+                <th scope="col">Branch</th>
               </tr>
             </thead>
             <tbody>
               {data?.map((ledger, i) => (
                 <tr key={ledger.id}>
-                  <td>{i + 1}</td>
-                  <td><Link to={`/viewAccDetail/${ledger._id}`}>View Acc</Link></td>
-                  <td>{ledger.name}</td>
-                  <td>{ledger.state}</td>
-                  <td>{ledger.alias}</td>
-                  <td>{ledger.opening_balance}</td>
-                  <td>{ledger.opening_balance_type}</td>
-                  <td>{ledger.mobile}</td>
-                  <td>{ledger?.bank_id?.name}</td>
-                  <td>
-                    <button className="btn btn-sm btn-primary ms-2">Ledger Report</button>
-                    <button
-                      className="btn btn-sm btn-danger ms-2"
-                      onClick={() => deleteBlockAdd(ledger._id)}
-                    >
-                      Delete
-                    </button>
-                  </td>
+                  <td>{ledger.date}</td>
+                  <td>{ledger.no}</td>
+                  <td>{ledger.type}</td>
+                  <td>{ledger.accountName}</td>
+                  <td>{ledger.credit}</td>
+                  <td>{ledger.debit}</td>
+                  <td>{ledger.closing}</td>
+                  <td>{ledger.cl}</td>
+                  <td>{ledger.chqNo}</td>
+                  <td>{ledger.chqDate}</td>
+                  <td>{ledger.narration}</td>
+                  <td>{ledger.branch}</td>
                 </tr>
               ))}
             </tbody>
@@ -140,4 +157,4 @@ const AccountLedger = ({ title }) => {
   );
 };
 
-export default AccountLedger;
+export default AccountLedgerView;

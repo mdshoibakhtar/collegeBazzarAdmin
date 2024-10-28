@@ -3734,3 +3734,22 @@ export const voucherMasterUpdate = (id, value) => {
 export const voucherSetupAside = () => {
   return axiosInstance.get(`${baseUrl}accVoucherType/page`);
 };
+
+
+
+export const updatePassword = (id,data) => {
+  return axiosInstance.put(`/user/updateuser/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+export const updatePin = (id,data) => {
+  return axiosInstance.put(`/user/updateuser/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
