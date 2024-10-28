@@ -1,88 +1,85 @@
-import React, { useState } from "react";
+import React from "react";
 import { ToastContainer } from "react-toastify";
-import { Pagination } from "antd";
+import { Empty, Pagination } from "antd";
+import ExportPdf from "../../../../common/exportPdf/ExportPdf";
+import { DownloadExcel } from "../../../../common/downloadExcel/DownLoadExcel";
+import { Button } from "react-bootstrap";
+import { downloadJSON } from "../../../../common/exportJson/exportJson";
 
-function BankBook({ tittle, data, page, count, handlePageChange }) {
-  const [selectedItems, setSelectedItems] = useState([]);
-  const [selectAll, setSelectAll] = useState(false);
-
-
-
-
-
-  // Handle the select all checkbox
-  const handleSelectAll = () => {
-    if (selectAll) {
-      setSelectedItems([]); // Uncheck all
-    } else {
-      setSelectedItems(data?.voucher.map((item) => item.AccLedgerName)); // Check all
-    }
-    setSelectAll(!selectAll); // Toggle select all state
-  };
-
-  // Handle individual checkbox selection
-  const handleCheckboxChange = (item) => {
-    if (selectedItems.includes(item.AccLedgerName)) {
-      setSelectedItems(selectedItems.filter((name) => name !== item.AccLedgerName));
-    } else {
-      setSelectedItems([...selectedItems, item.AccLedgerName]);
-    }
-  };
+function BankBook({ title, data, page, count, handleSelectAll, handlePageChange, handleCheckboxChange, selectedItems, selectAll }) {
 
   return (
     <>
       <div>
-        <div className="row m-2">
+        <div className="row m-4">
           <div className="col-xl-12">
             <div className="card">
               <div className="card-body p-0">
                 <div className="table-responsive active-projects style-1">
                   <div className="tbl-caption">
-                    <h4 className="heading mb-0">{tittle} Book</h4>
-                  </div>
-                  <div id="banner-tblwrapper_wrapper" className="dataTables_wrapper no-footer">
-                    <div className="dt-buttons">
-                      <button className="dt-button buttons-excel buttons-html5 btn btn-sm border-0" type="button">
-                        <span>
-                          <i className="fa-solid fa-file-excel" /> Export Report
-                        </span>
+                    <h4 className="heading mb-0"><b>{title} Book</b></h4>
+                    <div>
+                      <ExportPdf />
+                      <button className='btn-sm py-1 px-2 bg-primary' onClick={DownloadExcel}>
+                        <span><i className="fa-sharp fa-solid fa-file-excel"></i></span> &nbsp;Download Excel
+                      </button>
+                      <button className="btn-sm py-1 px-2 bg-secondary ms-2" onClick={() => downloadJSON(data, title)}>
+                        <span><i className="fa-solid fa-file-code"></i></span> &nbsp;Download JSON
                       </button>
                     </div>
-                    <table id="banner-tblwrapper" className="table dataTable no-footer" role="grid">
+                  </div>
+                  <div id="empoloyees-tblwrapper_wrapper" className="dataTables_wrapper no-footer">
+                    <table id="table-to-xls" className="table dataTable no-footer exppdf" role="grid" aria-describedby="empoloyees-tblwrapper_info">
                       <thead>
                         <tr role="row">
                           <th style={{ width: "50px" }}>
+                            <small>Select All</small>
+                            &nbsp;
                             <input
                               type="checkbox"
                               checked={selectAll}
                               onChange={handleSelectAll}
                             />
                           </th>
-                          <th style={{ width: "150px" }}>Date</th>
-                          <th style={{ width: "150px" }}>Account Name</th>
-                          <th style={{ width: "150px" }}>Closing Balance</th>
-                          <th style={{ width: "150px" }}>Cr</th>
-                          <th style={{ width: "150px" }}>Dr</th>
+                          <th style={{ width: "150px", textAlign: "center" }}>Vch Date</th>
+                          <th style={{ width: "150px", textAlign: "center" }}>Vch No</th>
+                          <th style={{ width: "150px", textAlign: "center" }}>Account Ledger Name</th>
+                          <th style={{ width: "150px", textAlign: "center" }}>Cr Amount</th>
+                          <th style={{ width: "150px", textAlign: "center" }}>Dr Amount</th>
+                          <th style={{ width: "150px", textAlign: "center" }}>Narration</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {data?.voucher?.map((item, i) => (
-                          <tr role="row" key={i}>
-                            <td>
-                              <input
-                                type="checkbox"
-                                checked={selectedItems.includes(item.AccLedgerName)}
-                                onChange={() => handleCheckboxChange(item)}
-                              />
+                        {data?.voucher?.length === 0 ? (
+                          <tr>
+                            <td colSpan={7} className="text-center">
+                              <Empty />
                             </td>
-                            <td>{new Date(item?.AccLedgerEntryDateTime).toLocaleDateString("en-GB")}</td>
-
-                            <td>{item?.AccLedgerName}</td>
-                            <td>{item?.closing_amount}</td>
-                            <td>{item?.crAmt}</td>
-                            <td>{item?.drAmt}</td>
                           </tr>
-                        ))}
+                        ) : (
+                          data?.voucher?.map((item, i) => (
+                            <tr role="row" key={i}>
+                              <td>
+                                <input
+                                  type="checkbox"
+                                  checked={selectedItems.includes(item?.AccLedgerName)}
+                                  onChange={() => handleCheckboxChange(item)}
+                                />
+                              </td>
+                              <td>{new Date(item?.createdAt).toLocaleDateString("en-GB")}</td>
+                              <td className="px-2">{item?.voucherNo}</td>
+                              <td className="px-2 text-start">{item?.accLedgerId?.name}</td>
+                              <td className="text-end p-0">
+                                {item?.crAmt ? `${item?.crAmt}/-` : "0 /-"}
+                              </td>
+                              <td className="text-end px-2">
+                                {item?.drAmt ? `${item?.drAmt}/-` : "0 /-"}
+                              </td>
+                              <td className="text-start px-2">{"Narration "}</td>
+                            </tr>
+                          ))
+                        )}
+
                       </tbody>
                     </table>
                     <div className="dataTables_info" role="status" aria-live="polite">
