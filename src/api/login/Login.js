@@ -3600,6 +3600,27 @@ export const PostWidraw = (data, id) => {
   });
 };
 
+export const vocherAddBank = (data) => {
+  return axiosInstance.post(`AccVoucher/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+export const vocherAddBankList = (value) => {
+  console.log('vocherAddBankList', value);
+
+  return axiosInstance.get(`AccVoucher/page?page=${value?.page}&count=${value?.count}&start_date=&end_date=&voucherType=&accLedgerId=`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
 
 
 // king son agro ------------ apis
