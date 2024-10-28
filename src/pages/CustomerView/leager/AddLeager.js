@@ -89,6 +89,9 @@ function AddLedger() {
       console.error("Error:", error);
     }
   };
+  // const addBankFromSelect = async()=>{
+  //   await 
+  // }
 
   return (
     <div style={{ width: "1000px" }}>
@@ -268,6 +271,7 @@ function AddLedger() {
         </div>
       </div>
     </div>
+
   );
 }
 
