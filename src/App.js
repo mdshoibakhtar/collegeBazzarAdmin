@@ -830,6 +830,8 @@ import VoucherPrint from "./components/advanceUtility/vocherPrint/VoucherPrint";
 import Barcodetility from "./components/advanceUtility/barcodeutility/Barcodetility";
 import AddVoucher from "./components/kingsonreports/AccountBook/accountMaster/voucherMaster/addVoucher/AddVoucher";
 import VoucherMasterList from "./components/kingsonreports/AccountBook/accountMaster/voucherMaster/voucherMasterList/VoucherMasterList";
+import BusBookingMain from "./components/bus-booking-report/BusBookingMain";
+import SetupVoucher from "./components/setup/setupVoucher/SetupVoucher";
 // import CreateStageplan from "./pages/NewStagesplan";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -2608,8 +2610,13 @@ function App() {
               <Route path="voucher-type-list" element={<VoucherMasterList />} />
               <Route path="add-voucher-type" element={<AddVoucher />} />
               <Route path="update-voucher-type/:id" element={<AddVoucher />} />
+              <Route path="setupvoucher" element={<SetupVoucher />} />
+              
 
               <Route path="*" element={<PageNotFound />} />
+              {/* <Route path="/busbookig" element={<BusBookingMain />} /> */}
+
+
             </Route>
           </>
         )}
