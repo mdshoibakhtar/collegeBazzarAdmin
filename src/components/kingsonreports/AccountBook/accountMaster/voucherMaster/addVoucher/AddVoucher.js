@@ -9,11 +9,11 @@ function AddVoucher() {
         alias: "",
         abbreviation: "",
         methodOfNumber: "",
-        advanceConfig: "",
-        useEffectiveDateForVoucher: "",
-        isOptional: "",
-        commonNaration: "",
-        narationForEntry: "",
+        advanceConfig: false,
+        useEffectiveDateForVoucher: false,
+        isOptional: false,
+        commonNaration: false,
+        narationForEntry: false,
         selected: false,
     });
     const params = useParams();
@@ -40,37 +40,51 @@ function AddVoucher() {
         });
     };
 
+
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
+        console.log(formData);
+        
         try {
             if (!params?.id) {
                 try {
-                    const response = params.id
-                        ? await voucherMasterAdd(formData, params.id) // Update if id exists
-                        : await voucherMasterAdd(formData); // Add new voucher
-                        toastSuccessMessage(response.data.message || "Voucher Type saved successfully!");
-                        if (response?.statusCode == "200") {
+                    const response = await voucherMasterAdd(formData);
+                    if (response?.statusCode === "200") {
+                        const successMessage = "Voucher Type saved successfully!";
+                        toastSuccessMessage(response?.data?.message || successMessage);
+
+                        setTimeout(() => {
                             navigate(`/voucher-type-list`);
-                            toastErrorMessage(response?.data?.message || `Failed to ${params.id ? "update" : "add"} Voucher Type`);
-                        }
+                        }, 1000);
+                    } else {
+                        const errorMessage = `Failed to  add Voucher Type`;
+                        toastErrorMessage(response?.data?.message || errorMessage);
+                    }
+
                 } catch (error) {
-                    toastErrorMessage(error.response?.data?.message || `Failed to ${params.id ? "update" : "add"} voucher`);
+                    alert(error.message)
                 }
+
             } else {
-                const res = await voucherMasterUpdate(params.id, formData);
-                console.log(res);
-                
-                if (res?.statusCode == "200") {
-                    toastSuccessMessage("Voucher updated successfully");
-                    setTimeout(() => {
-                        navigate(`/voucher-type-list`);
-                    }, 1000);
+                try {
+                    const response = await voucherMasterUpdate(params.id, formData);
+                    if (response?.statusCode == "200") {
+                        const successMessage = "Voucher Type saved successfully!";
+                        toastSuccessMessage(response?.data?.message || successMessage);
+                        navigate(`/voucher-type-list`)
+                    }
+
+                } catch (error) {
+                    alert(`Error`, error)
                 }
+
             }
+
         } catch (error) {
             console.error("Error:", error);
         }
     };
+
 
     useEffect(() => {
         if (params?.id) {
@@ -158,14 +172,16 @@ function AddVoucher() {
                                         <label className="form-label">
                                             Advance Config:
                                         </label>
-                                        <input
+
+                                        <select
                                             className="form-control"
                                             value={formData.advanceConfig}
-                                            type="text"
                                             name="advanceConfig"
-                                            autoComplete="off"
                                             onChange={handleInputChange}
-                                        />
+                                        >
+                                            <option value={true}>Active</option>
+                                            <option value={false}>In Active</option>
+                                        </select>
                                     </div>
 
                                     <div className="col-lg-4 col-md-8 form-group mg-b-0">
@@ -178,9 +194,8 @@ function AddVoucher() {
                                             name="useEffectiveDateForVoucher"
                                             onChange={handleInputChange}
                                         >
-                                            <option value="">Select Status</option>
                                             <option value={true}>Active</option>
-                                            <option value={false}>De Active</option>
+                                            <option value={false}>In Active</option>
                                         </select>
                                     </div>
 
@@ -194,9 +209,8 @@ function AddVoucher() {
                                             name="isOptional"
                                             onChange={handleInputChange}
                                         >
-                                            <option value="">Select Status</option>
                                             <option value={true}>Active</option>
-                                            <option value={false}>De Active</option>
+                                            <option value={false}>In Active</option>
                                         </select>
                                     </div>
 
@@ -204,33 +218,36 @@ function AddVoucher() {
                                         <label className="form-label">
                                             Common Narration:
                                         </label>
-                                        <input
+
+                                        <select
                                             className="form-control"
                                             value={formData.commonNaration}
-                                            type="text"
                                             name="commonNaration"
-                                            autoComplete="off"
                                             onChange={handleInputChange}
-                                        />
+                                        >
+                                            <option value={true}>Active</option>
+                                            <option value={false}>In Active</option>
+                                        </select>
                                     </div>
 
                                     <div className="col-lg-4 col-md-8 form-group mg-b-0">
                                         <label className="form-label">
                                             Narration for Entry:
                                         </label>
-                                        <input
+                                        <select
                                             className="form-control"
                                             value={formData.narationForEntry}
-                                            type="text"
                                             name="narationForEntry"
-                                            autoComplete="off"
                                             onChange={handleInputChange}
-                                        />
+                                        >
+                                            <option value={true}>Active</option>
+                                            <option value={false}>In Active</option>
+                                        </select>
                                     </div>
 
                                     <div className="col-lg-4 col-md-8 form-group mg-b-0">
                                         <label className="form-label">
-                                            Status:
+                                            selected:
                                         </label>
                                         <select
                                             className="form-control"
@@ -240,7 +257,7 @@ function AddVoucher() {
                                         >
                                             <option value="">Select Status</option>
                                             <option value={true}>Active</option>
-                                            <option value={false}>De Active</option>
+                                            <option value={false}>In Active</option>
                                         </select>
                                     </div>
                                     <div className="col-lg-12">

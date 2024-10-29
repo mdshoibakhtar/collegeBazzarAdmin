@@ -4,7 +4,6 @@ import GroupSummaryFilter from "./groupSummaryFilter/GroupSummaryFilter";
 
 
 const GroupSummary = () => {
-
     const breadCrumbsTitle = {
         id: "1",
         title_1: "Electronic Reports",

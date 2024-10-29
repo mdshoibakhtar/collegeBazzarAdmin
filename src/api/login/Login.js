@@ -3600,6 +3600,27 @@ export const PostWidraw = (data, id) => {
   });
 };
 
+export const vocherAddBank = (data) => {
+  return axiosInstance.post(`AccVoucher/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+export const vocherAddBankList = (value) => {
+  console.log('vocherAddBankList', value);
+
+  return axiosInstance.get(`AccVoucher/page?page=${value?.page}&count=${value?.count}&start_date=&end_date=&voucherType=&accLedgerId=`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
 
 
 // DELETE an account group by ID
@@ -3608,7 +3629,7 @@ export const deleteAccGroupById = (id) => {
 };
 
 // GET account groups with pagination
-export const getAccGroupByPage = (page , count ) => {
+export const getAccGroupByPage = (page, count) => {
   return axiosInstance.get(`/accGroupMaster/page?page=${page}&count=${count}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
@@ -3706,8 +3727,8 @@ export const updateAccLedgerById = (id, data) => {
 // king son agro ------------ apis
 //25:10:24
 
-export const getVoucherTypeData = (name, page, count) => {
-  return axiosInstance.get(`${baseUrl}AccVoucher/page?page=${page}&count=${count}&start_date=&end_date=&voucherType=${name}&accLedgerId=`);
+export const getVoucherTypeData = (name, page, count, start_date, end_date) => {
+  return axiosInstance.get(`${baseUrl}AccVoucher/page?page=${page}&count=${count}&start_date=${start_date}&end_date=${end_date}&voucherType=${name}&accLedgerId=`);
 };
 
 
@@ -3728,7 +3749,11 @@ export const getvoucherMasterId = (id) => {
 };
 
 export const voucherMasterUpdate = (id, value) => {
-  return axiosInstance.put(`${baseUrl}bank/updatebank/${id}`, value);
+  return axiosInstance.put(`${baseUrl}accVoucherType/update_type/${id}`, value);
+};
+
+export const voucherSetupAside = () => {
+  return axiosInstance.get(`${baseUrl}accVoucherType/page`);
 };
 
 

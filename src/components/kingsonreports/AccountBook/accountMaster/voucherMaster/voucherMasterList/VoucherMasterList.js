@@ -13,7 +13,7 @@ function VoucherMasterList() {
     const getVoucherTypeDataList = async (currentPage = page) => {
         setLoading(true);
         try {
-            const response = await getvoucherMaster(currentPage - 1, count); // Backend expects 0-based index
+            const response = await getvoucherMaster(currentPage - 1, count); 
             setData(response?.data || []);
             setTotalCount(response?.totalCount || 0);
         } catch (error) {
@@ -78,9 +78,9 @@ function VoucherMasterList() {
                                     >
                                         <thead>
                                             <tr role="row">
-                                                <th style={{ width: '122px' }}>Voucher Type Name</th>
-                                                <th style={{ width: '122px' }}>Status</th>
-                                                <th style={{ width: '122px' }}>Actions</th>
+                                                <th style={{ width: '122px', textAlign: "start" }}>Voucher Type Name</th>
+                                                <th style={{ width: '122px', textAlign: "start" }}>Status</th>
+                                                <th style={{ width: '122px', textAlign: "start" }}>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
