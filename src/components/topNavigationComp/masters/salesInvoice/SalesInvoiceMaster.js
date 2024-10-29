@@ -1,7 +1,7 @@
 
 import Breadcrumbs from '../../../../common/breadcrumb/Breadcrumbs'
 import React, { useEffect, useState } from 'react'
-import {  deleteNatureById, deleteTaskRelatedToById, getNature, getTaskRelatedTo } from '../../../../api/login/Login'
+import {  deleteAccSalesInvoiceTypeById, deleteNatureById, deleteTaskRelatedToById, getAccSalesInvoiceTypeByPage, getNature, getTaskRelatedTo } from '../../../../api/login/Login'
 import { message } from 'antd'
 import MasterList from './masterList/MasterList'
 function SalesInvoiceMaster() {
@@ -20,7 +20,7 @@ function SalesInvoiceMaster() {
     const getFloorMasters = async (page) => {
         setLoading(true)
         try {
-            const res = await getNature(page, count)
+            const res = await getAccSalesInvoiceTypeByPage(page, count)
             setTotalCount(res?.totalCount)
             setData(res?.data)
             setPage(page)
@@ -42,7 +42,7 @@ function SalesInvoiceMaster() {
     const deleteBlockAdd = async (id) => {
         setLoading(true)
         try {
-            await deleteNatureById(id)
+            await deleteAccSalesInvoiceTypeById(id)
             let backList = totalCount % 11 === 0 ? page - 1 : page
             getFloorMasters(backList)
         } catch (error) {
@@ -65,7 +65,7 @@ function SalesInvoiceMaster() {
 
 
     useEffect(() => {
-        // getFloorMasters(page)
+        getFloorMasters(page)
     }, [])
     return (
         <>

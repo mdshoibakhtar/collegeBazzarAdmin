@@ -1,7 +1,7 @@
 
 import Breadcrumbs from '../../../../common/breadcrumb/Breadcrumbs'
 import React, { useEffect, useState } from 'react'
-import {  deleteNatureById, deleteTaskRelatedToById, getNature, getTaskRelatedTo } from '../../../../api/login/Login'
+import {  deleteAccSalesExpenseFormulaById, getAccSalesExpenseFormulaByPage} from '../../../../api/login/Login'
 import { message } from 'antd'
 import MasterList from './masterList/MasterList'
 function SaleExpenseFormula() {
@@ -20,7 +20,7 @@ function SaleExpenseFormula() {
     const getFloorMasters = async (page) => {
         setLoading(true)
         try {
-            const res = await getNature(page, count)
+            const res = await getAccSalesExpenseFormulaByPage(page, count)
             setTotalCount(res?.totalCount)
             setData(res?.data)
             setPage(page)
@@ -42,7 +42,7 @@ function SaleExpenseFormula() {
     const deleteBlockAdd = async (id) => {
         setLoading(true)
         try {
-            await deleteNatureById(id)
+            await deleteAccSalesExpenseFormulaById(id)
             let backList = totalCount % 11 === 0 ? page - 1 : page
             getFloorMasters(backList)
         } catch (error) {
@@ -65,7 +65,7 @@ function SaleExpenseFormula() {
 
 
     useEffect(() => {
-        // getFloorMasters(page)
+        getFloorMasters(page)
     }, [])
     return (
         <>

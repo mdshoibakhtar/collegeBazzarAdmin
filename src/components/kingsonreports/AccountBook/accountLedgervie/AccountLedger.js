@@ -71,10 +71,10 @@ const AccountLedgerView = ({ title }) => {
     <div>
       {loading && <Loadar />}
       <div className="d-flex">
-        <h4>Account Ledger Detail</h4>
+        <h4>Account Ledger Report</h4>
         <div className="d-flex" style={{ marginLeft: "20px" }}>
           <div className="me-3 d-block">
-            <label>From Date:</label>
+            {/* <label>From Date:</label> */}
             <input
               type="date"
               className="form-control"
@@ -83,7 +83,7 @@ const AccountLedgerView = ({ title }) => {
             />
           </div>
           <div className="me-3  d-block">
-            <label>To Date:</label>
+            {/* <label>To Date:</label> */}
             <input
               type="date"
               className="form-control"
@@ -96,6 +96,9 @@ const AccountLedgerView = ({ title }) => {
               Apply Filters
             </button>
           </div>
+          <button className="btn btn-success" onClick={exportToPDF}>
+            Download PDF
+          </button>
         </div>
       </div>
       <div className="container mt-4 card">
@@ -104,9 +107,7 @@ const AccountLedgerView = ({ title }) => {
         <AccountSummary />
         <div className="d-flex justify-content-between align-items-center mb-3">
 
-          <button className="btn btn-success" onClick={exportToPDF}>
-            Download PDF
-          </button>
+         
         </div>
 
         <div id="tableToExport" style={{ overflow: "auto" }}>

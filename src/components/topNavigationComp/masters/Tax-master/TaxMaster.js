@@ -1,7 +1,7 @@
 
 import Breadcrumbs from '../../../../common/breadcrumb/Breadcrumbs'
 import React, { useEffect, useState } from 'react'
-import {  deleteNatureById, deleteTaskRelatedToById, getNature, getTaskRelatedTo } from '../../../../api/login/Login'
+import {  deleteAccTaxMasterById, deleteNatureById, deleteTaskRelatedToById, getAccTaxMasterByPage, getNature, getTaskRelatedTo } from '../../../../api/login/Login'
 import { message } from 'antd'
 import MasterList from './masterList/MasterList'
 function TaxMaster() {
@@ -20,7 +20,7 @@ function TaxMaster() {
     const getFloorMasters = async (page) => {
         setLoading(true)
         try {
-            const res = await getNature(page, count)
+            const res = await getAccTaxMasterByPage(page, count)
             setTotalCount(res?.totalCount)
             setData(res?.data)
             setPage(page)
@@ -42,7 +42,7 @@ function TaxMaster() {
     const deleteBlockAdd = async (id) => {
         setLoading(true)
         try {
-            await deleteNatureById(id)
+            await deleteAccTaxMasterById(id)
             let backList = totalCount % 11 === 0 ? page - 1 : page
             getFloorMasters(backList)
         } catch (error) {

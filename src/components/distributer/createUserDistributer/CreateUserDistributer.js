@@ -414,7 +414,7 @@ function CreateUserDistributer() {
                         retailerInfo={retailerInfo}
                       />
                     </Tab>
-                    <Tab eventKey="Chenge Password" title="Chenge Password">
+                    <Tab eventKey="Change Password" title="Change Password">
                       <ChengePass
                         initialValues={service}
                         validate={validate}
@@ -425,7 +425,7 @@ function CreateUserDistributer() {
                         retailerInfo={retailerInfo}
                       />
                     </Tab>
-                    <Tab eventKey="Chenge Pin" title="Chenge Pin">
+                    <Tab eventKey="Change Pin" title="Change Pin">
                       <ChengePin
                         initialValues={service}
                         validate={validate}

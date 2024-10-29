@@ -35,6 +35,9 @@ function MasterList({ data, totalCount, page, count, onChangeVal, confirm, cance
                                                 <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Department: activate to sort column ascending" style={{ width: '156.475px', textAlign: 'center' }}>
                                                     Sales A/C Name</th>
                                                 <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Employee Name: activate to sort column ascending" style={{ width: '203.45px', textAlign: 'center' }}>
+                                                    Tax
+                                                </th>
+                                                <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Employee Name: activate to sort column ascending" style={{ width: '203.45px', textAlign: 'center' }}>
                                                     Tax Type
                                                 </th>
                                                 <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Employee Name: activate to sort column ascending" style={{ width: '203.45px', textAlign: 'center' }}>
@@ -56,10 +59,20 @@ function MasterList({ data, totalCount, page, count, onChangeVal, confirm, cance
                                                     <td>
                                                         {item?.name}
                                                     </td>
-
                                                     <td>
-                                                        <span className="badge badge-success text-light border-0" style={{ backgroundColor: `${item?.isActive === true ? 'blue' : '#bc3922ab'}`, fontSize: `${item?.isActive === false ? '0.8rem' : ''}` }}>{item?.isActive == true ? 'Active' : 'In Active'}</span>
+                                                        {item?.sales_acc_id?.name}
                                                     </td>
+                                                    <td>
+                                                        {item?.tax_master?.name}
+                                                    </td>
+                                                    <td>
+                                                        {item?.tax_type}
+                                                    </td>
+                                                    <td>
+                                                        {item?.form_name}
+                                                    </td>
+
+                                                 
                                                     <td>
                                                         <div className="d-flex">
                                                             <Link to={`/add-Sales-Invoice-Type/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>

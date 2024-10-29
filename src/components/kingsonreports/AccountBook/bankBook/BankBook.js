@@ -21,10 +21,10 @@ function BankBook({ title, data, page, count, handleSelectAll, handlePageChange,
                     <div>
                       <ExportPdf />
                       <button className='btn-sm py-1 px-2 bg-primary' onClick={DownloadExcel}>
-                        <span><i className="fa-sharp fa-solid fa-file-excel"></i></span> &nbsp;Download Excel
+                        <span><i className="fa-sharp fa-solid fa-file-excel"></i></span> &nbsp;Export Excel
                       </button>
                       <button className="btn-sm py-1 px-2 bg-secondary ms-2" onClick={() => downloadJSON(data, title)}>
-                        <span><i className="fa-solid fa-file-code"></i></span> &nbsp;Download JSON
+                        <span><i className="fa-solid fa-file-code"></i></span> &nbsp;Export JSON
                       </button>
                     </div>
                   </div>
