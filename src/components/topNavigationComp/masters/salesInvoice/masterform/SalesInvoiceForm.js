@@ -3,8 +3,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Breadcrumbs from '../../../../../common/breadcrumb/Breadcrumbs';
 import { toast, ToastContainer } from 'react-toastify';
 import {
+    getAccSalesInvoiceTypeById,
+    getAccTaxMasterByPage,
+    getAllLegers,
     getNatureById,
+    postAccSalesInvoiceType,
     postNature,
+    updateAccSalesInvoiceTypeById,
     updateNatureById,
 } from '../../../../../api/login/Login';
 
@@ -16,17 +21,18 @@ function SalesInvoiceForm() {
 
     const [formData, setFormData] = useState({
         name: "",
-        salesAccount: "",
-        formName: "",
-        taxMaster: "",
+        sales_acc: "",
+        sales_acc_id: "",
+        form_name: "",
+        tax_master: "",
         isMultiTax: false,
-        fixedAccount: false,
-        taxType: "",
-        taxCalculation: "",
-        rcmOther: "",
-        reverseCharge: "",
-        exportType: "",
-        posType: ""
+        fixed_amount: false,
+        tax_type: "",
+        tax_calculation: "",
+        rcm: "",
+        reverse_charge: false,
+        export_type: "",
+        pos_type: ""
     });
 
     const params = useParams();
@@ -44,16 +50,16 @@ function SalesInvoiceForm() {
         e.preventDefault();
         try {
             if (!params?.id) {
-                const res = await postNature(formData);
+                const res = await postAccSalesInvoiceType({...formData,sales_acc_id:formData.sales_acc});
                 if (res?.statusCode === "200") {
                     toastSuccessMessage("Sales Invoice Type Successfully Added");
-                    setTimeout(() => navigate(`/nature_master`), 2000);
+                    setTimeout(() => navigate(`/Sales-Invoice-Type`), 2000);
                 }
             } else {
-                const res = await updateNatureById(params.id, formData);
+                const res = await updateAccSalesInvoiceTypeById(params.id, {...formData,sales_acc_id:formData.sales_acc});
                 if (res?.statusCode === "200") {
                     toastSuccessMessage("Sales Invoice Type Successfully Updated");
-                    setTimeout(() => navigate(`/nature_master`), 2000);
+                    setTimeout(() => navigate(`/Sales-Invoice-Type`), 2000);
                 }
             }
         } catch (error) {
@@ -68,12 +74,25 @@ function SalesInvoiceForm() {
     useEffect(() => {
         const fetchData = async () => {
             if (params?.id) {
-                const response = await getNatureById(params.id);
+                const response = await getAccSalesInvoiceTypeById(params.id);
                 setFormData(response?.data || {});
             }
         };
         fetchData();
     }, [params?.id]);
+
+    const [taxMasterData, setTaxMasterData] = useState([]);
+    const [leagersData, setLegersData] = useState([]);
+    const getDatas = async () => {
+        const response = await getAccTaxMasterByPage(0, 100);
+        const response1 = await getAllLegers(0, 100 ,'' ,'' ,'');
+        setLegersData(response1?.data.voucher);
+        setTaxMasterData(response?.data);
+    }
+
+    useEffect(() => {
+        getDatas();
+    }, []);
 
     return (
         <>
@@ -102,15 +121,20 @@ function SalesInvoiceForm() {
                                         />
                                     </div>
                                     <div className="col-xl-4 mb-3">
-                                        <label>Sales A/C</label>
+                                        <label>Sales Account</label>
                                         <select
                                             className="form-select"
-                                            name="salesAccount"
-                                            value={formData.salesAccount}
+                                            name="sales_acc"
+                                            value={formData.sales_acc}
                                             onChange={handleChange}
                                         >
-                                            <option value="">Select Sales A/C</option>
-                                            {/* Options for Sales A/C */}
+                                            <option value="">Select Sales Account</option>
+                                            {/* Map options here */}
+                                            {leagersData?.map((option) => (
+                                                <option key={option._id} value={option._id}>
+                                                    {option.name}
+                                                </option>
+                                            ))}
                                         </select>
                                     </div>
                                     <div className="col-xl-4 mb-3">
@@ -118,8 +142,8 @@ function SalesInvoiceForm() {
                                         <input
                                             type="text"
                                             className="form-control"
-                                            name="formName"
-                                            value={formData.formName}
+                                            name="form_name"
+                                            value={formData.form_name}
                                             onChange={handleChange}
                                             placeholder="Form Name"
                                         />
@@ -128,12 +152,16 @@ function SalesInvoiceForm() {
                                         <label>Tax Master</label>
                                         <select
                                             className="form-select"
-                                            name="taxMaster"
-                                            value={formData.taxMaster}
+                                            name="tax_master"
+                                            value={formData.tax_master}
                                             onChange={handleChange}
                                         >
                                             <option value="">Select Tax Master</option>
-                                            {/* Options for Tax Master */}
+                                            {taxMasterData?.map((tax) => (
+                                                <option key={tax._id} value={tax._id}>
+                                                    {tax.name}
+                                                </option>
+                                            ))}
                                         </select>
                                     </div>
                                     <div className="col-xl-4 mb-3">
@@ -149,11 +177,11 @@ function SalesInvoiceForm() {
                                         </select>
                                     </div>
                                     <div className="col-xl-4 mb-3">
-                                        <label>Fixed Account</label>
+                                        <label>Fixed Amount</label>
                                         <select
                                             className="form-select"
-                                            name="fixedAccount"
-                                            value={formData.fixedAccount ? "true" : "false"}
+                                            name="fixed_amount"
+                                            value={formData.fixed_amount ? "true" : "false"}
                                             onChange={handleChange}
                                         >
                                             <option value="false">False</option>
@@ -164,72 +192,84 @@ function SalesInvoiceForm() {
                                         <label>Tax Type</label>
                                         <select
                                             className="form-select"
-                                            name="taxType"
-                                            value={formData.taxType}
+                                            name="tax_type"
+                                            value={formData.tax_type}
                                             onChange={handleChange}
                                         >
                                             <option value="">Select Tax Type</option>
-                                            {/* Options for Tax Type */}
+
+                                            <option value="VAT">VAT</option>
+                                            <option value="GST">GST</option>
+                                            <option value="IGST">IGST</option>
+                                            <option value="FREE">FREE</option>
+                                            <option value="Non GST">Non GST</option>
                                         </select>
                                     </div>
                                     <div className="col-xl-4 mb-3">
                                         <label>Tax Calculation</label>
                                         <select
                                             className="form-select"
-                                            name="taxCalculation"
-                                            value={formData.taxCalculation}
+                                            name="tax_calculation"
+                                            value={formData.tax_calculation}
                                             onChange={handleChange}
                                         >
                                             <option value="">Select Tax Calculation</option>
-                                            {/* Options for Tax Calculation */}
+                                            <option value="itemwise">Itemwise</option>
+                                            <option value="fixed">Fixed</option>
                                         </select>
                                     </div>
                                     <div className="col-xl-4 mb-3">
-                                        <label>Rcm/Other</label>
+                                        <label>RCM</label>
                                         <select
                                             className="form-select"
-                                            name="rcmOther"
-                                            value={formData.rcmOther}
+                                            name="rcm"
+                                            value={formData.rcm}
                                             onChange={handleChange}
                                         >
-                                            <option value="">Select Rcm/Other</option>
-                                            {/* Options for Rcm/Other */}
+                                            <option value="">Select RCM</option>
+                                            <option value="RCM">RCM</option>
+                                            <option value="NONE">None</option>
                                         </select>
                                     </div>
                                     <div className="col-xl-4 mb-3">
                                         <label>Reverse Charge</label>
                                         <select
                                             className="form-select"
-                                            name="reverseCharge"
-                                            value={formData.reverseCharge}
+                                            name="reverse_charge"
+                                            value={formData.reverse_charge ? "true" : "false"}
                                             onChange={handleChange}
                                         >
-                                            <option value="">Select Reverse Charge</option>
-                                            {/* Options for Reverse Charge */}
+                                            <option value="false">False</option>
+                                            <option value="true">True</option>
                                         </select>
                                     </div>
                                     <div className="col-xl-4 mb-3">
                                         <label>Export Type</label>
                                         <select
                                             className="form-select"
-                                            name="exportType"
-                                            value={formData.exportType}
+                                            name="export_type"
+                                            value={formData.export_type}
                                             onChange={handleChange}
                                         >
                                             <option value="">Select Export Type</option>
-                                            {/* Options for Export Type */}
+                                            <option value="NONE">None</option>
+                                            <option value="WOPAY">WOPAY</option>
+                                            <option value="WPAY">WPAY</option>
+                                            <option value="SEZWOP">SEZWOP</option>
+                                            <option value="SEZ">SEZ</option>
                                         </select>
                                     </div>
                                     <div className="col-xl-4 mb-3">
                                         <label>POS Type</label>
                                         <select
                                             className="form-select"
-                                            name="posType"
-                                            value={formData.posType}
+                                            name="pos_type"
+                                            value={formData.pos_type}
                                             onChange={handleChange}
                                         >
                                             <option value="">Select POS Type</option>
-                                            {/* Options for POS Type */}
+                                            <option value="Regular">Regular</option>
+                                            <option value="POS">POS</option>
                                         </select>
                                     </div>
                                     <div className="col-xl-2 mb-3">

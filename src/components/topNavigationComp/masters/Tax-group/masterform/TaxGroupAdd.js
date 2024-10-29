@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Breadcrumbs from '../../../../../common/breadcrumb/Breadcrumbs';
-import { postNature, updateNatureById, getNatureById } from '../../../../../api/login/Login';
+import { postNature, updateNatureById, getNatureById, getAccTaxMasterByPage } from '../../../../../api/login/Login';
 import { toast, ToastContainer } from 'react-toastify';
 
 function TaxGroupAdd() {
@@ -65,7 +65,15 @@ function TaxGroupAdd() {
     const toastSuccessMessage = (message) => {
         toast.success(`${message}`, { position: "top-right" });
     };
+    const [taxMasterData, setTaxMasterData] = useState([]);
+    const getDatas = async () => {
+        const response = await getAccTaxMasterByPage(0, 100);
+        setTaxMasterData(response?.data);
+    }
 
+    useEffect(() => {
+        getDatas();
+    }, []);
     return (
         <>
             <ToastContainer />
@@ -112,8 +120,11 @@ function TaxGroupAdd() {
                                                             required
                                                         >
                                                             <option value="">Select Tax Master</option>
-                                                            <option value="VAT">VAT</option>
-                                                            <option value="GST">GST</option>
+                                                            {taxMasterData?.map((taxMaster) => (
+                                                                <option key={taxMaster._id} value={taxMaster._id}>
+                                                                    {taxMaster.name}
+                                                                </option>
+                                                            ))}
                                                         </select>
                                                     </td>
                                                     <td>

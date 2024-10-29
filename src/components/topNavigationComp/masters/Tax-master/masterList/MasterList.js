@@ -32,12 +32,7 @@ function MasterList({data,totalCount,page,count,onChangeVal,confirm,cancel}) {
                                                      Name
                                                 </th>
                                                
-                                                <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Department: activate to sort column ascending" style={{ width: '156.475px' ,textAlign: 'center'}}>
-                                                    Type</th>
-                                                <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Department: activate to sort column ascending" style={{ width: '156.475px' ,textAlign: 'center'}}>
-                                                    Tax Per</th>
-                                                <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Department: activate to sort column ascending" style={{ width: '156.475px' ,textAlign: 'center'}}>
-                                                    Add Tax Per</th>
+                                               
 
                                                 <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Status: activate to sort column ascending" style={{ width: '96.125px' ,textAlign: 'center'}}>
                                                     Actions </th>
@@ -55,9 +50,7 @@ function MasterList({data,totalCount,page,count,onChangeVal,confirm,cancel}) {
                                                         {item?.name}
                                                     </td>
                                                   
-                                                    <td>
-                                                        <span className="badge badge-success text-light border-0" style={{ backgroundColor: `${item?.isActive === true ? 'blue' : '#bc3922ab'}`, fontSize: `${item?.isActive === false ? '0.8rem' : ''}` }}>{item?.isActive == true ? 'Active' : 'In Active'}</span>
-                                                    </td>
+                                                    
                                                     <td>
                                                         <div className="d-flex">
                                                             <Link to={`/add-tax_master/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>

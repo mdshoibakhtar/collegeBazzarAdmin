@@ -48,9 +48,7 @@ function MasterList({data,totalCount,page,count,onChangeVal,confirm,cancel}) {
                                                         {item?.name}
                                                     </td>
                                                   
-                                                    <td>
-                                                        <span className="badge badge-success text-light border-0" style={{ backgroundColor: `${item?.isActive === true ? 'blue' : '#bc3922ab'}`, fontSize: `${item?.isActive === false ? '0.8rem' : ''}` }}>{item?.isActive == true ? 'Active' : 'In Active'}</span>
-                                                    </td>
+                                                 
                                                     <td>
                                                         <div className="d-flex">
                                                             <Link to={`/add-tax_Group/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
