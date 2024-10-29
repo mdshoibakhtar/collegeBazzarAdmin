@@ -1,6 +1,6 @@
 
 
-const BankPaymentFilter = () => {
+const BankPaymentFilter = ({ filterInitial, handleChange, getTransitionReport }) => {
     return (
         <div className="row m-4">
             <div className="col-xl-12">
@@ -14,14 +14,14 @@ const BankPaymentFilter = () => {
                                 <div className="row">
                                     <div className="col-md-6 mb-3">
                                         <label htmlFor="projectName">From Date </label>
-                                        <input type="date" className="form-control" id="projectName" placeholder="Enter Transfer to Warehouse " />
+                                        <input type="date" className="form-control" id="projectName" placeholder="Enter Transfer to Warehouse " name="start_date" value={filterInitial?.start_date} onChange={handleChange} />
                                     </div>
                                     <div className="col-md-6 mb-3">
                                         <label htmlFor="projectName">To Date </label>
-                                        <input type="date" className="form-control" id="projectName" placeholder="Enter Transfer to Warehouse " />
+                                        <input type="date" className="form-control" id="projectName" placeholder="Enter Transfer to Warehouse " name="end_date" value={filterInitial?.end_date} onChange={handleChange} />
                                     </div>
                                     <div className="col-md-12 mb-3">
-                                        <button type="button" className="btn btn-primary">Search</button>
+                                        <button type="button" className="btn btn-primary" onClick={() => getTransitionReport(0)}>Search</button>
                                     </div>
                                 </div>
                             </form>

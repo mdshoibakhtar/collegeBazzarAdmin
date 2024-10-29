@@ -2009,13 +2009,14 @@ function App() {
               <Route path="taluka-wise-dealer-list" element={<TalukaWiseDealerListPage />} />
               <Route path="group-summary" element={<GroupSummaryPage />} />
 
-              <Route path="bankpayment/list" element={<BankPaymentPage heading={'Bank Payment'} />} />
-              <Route path="bankpayment/add" element={<AddBankPayment />} />
-              <Route path="bankreceipt/list" element={<BankPaymentPage heading={'Bank Receipt'} />} />
+              <Route path="bankpayment/list" element={<BankPaymentPage heading={'Bank Payment'} apiPass={'bank payment'} />} />
+              <Route path="bankpayment/add/:name" element={<AddBankPayment />} />
+              <Route path="bankpayment/update/:name/:id" element={<AddBankPayment />} />
+              <Route path="bankreceipt/list" element={<BankPaymentPage heading={'Bank Receipt'} apiPass={'bank receipt'} />} />
 
-              <Route path="cashreceipt/list" element={<BankPaymentPage heading={'Cash Payment'} />} />
+              <Route path="cashreceipt/list" element={<BankPaymentPage heading={'Cash Receipt'} apiPass={'cash receipt'} />} />
 
-              <Route path="cashpayment/list" element={<BankPaymentPage heading={'List Of Cash Payment'} />} />
+              <Route path="cashpayment/list" element={<BankPaymentPage heading={'Cash Payment'} apiPass={'cash payment'} />} />
               <Route path="contra/list" element={<ContraPage />} />
               <Route path="contra/Add" element={<ContraAdd />} />
               <Route path="gstexpenseentry/list" element={<GSTExpenseEntryPage />} />
@@ -2614,7 +2615,7 @@ function App() {
               <Route path="add-voucher-type" element={<AddVoucher />} />
               <Route path="update-voucher-type/:id" element={<AddVoucher />} />
               <Route path="setupvoucher" element={<SetupVoucher />} />
-              
+
 
               <Route path="*" element={<PageNotFound />} />
               {/* <Route path="/busbookig" element={<BusBookingMain />} /> */}
