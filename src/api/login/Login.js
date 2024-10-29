@@ -3611,9 +3611,19 @@ export const vocherAddBank = (data) => {
 
 
 export const vocherAddBankList = (value) => {
-  console.log('vocherAddBankList', value);
+  // console.log('vocherAddBankList', value);
+  return axiosInstance.get(`AccVoucher/page?page=${value?.page}&count=${value?.count}&start_date=${value?.start_date}&end_date=${value?.end_date}&voucherType=${value?.vocherType}&accLedgerId=`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
 
-  return axiosInstance.get(`AccVoucher/page?page=${value?.page}&count=${value?.count}&start_date=&end_date=&voucherType=&accLedgerId=`, {
+export const vocherUpdateBankListById = (value) => {
+  // console.log('vocherAddBankList', value);
+
+  return axiosInstance.get(`AccVoucher/${value?.id}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
       Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
@@ -3758,7 +3768,7 @@ export const voucherSetupAside = () => {
 
 
 
-export const updatePassword = (id,data) => {
+export const updatePassword = (id, data) => {
   return axiosInstance.put(`/user/updateuser/${id}`, data, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
@@ -3766,7 +3776,7 @@ export const updatePassword = (id,data) => {
     },
   });
 };
-export const updatePin = (id,data) => {
+export const updatePin = (id, data) => {
   return axiosInstance.put(`/user/updateuser/${id}`, data, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
