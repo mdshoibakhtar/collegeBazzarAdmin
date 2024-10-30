@@ -3609,6 +3609,15 @@ export const vocherAddBank = (data) => {
   });
 };
 
+export const vocherUpdateBank = (id, data) => {
+  return axiosInstance.put(`AccVoucher/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
 
 export const vocherAddBankList = (value) => {
   // console.log('vocherAddBankList', value);
@@ -3839,7 +3848,7 @@ export const updateAccTaxMasterById = (id, data) => {
 
 
 
-export const getAllLegers = (page, count,start_date,end_date,AccLedgerGroupId) => {
+export const getAllLegers = (page, count, start_date, end_date, AccLedgerGroupId) => {
   return axiosInstance.get(`/Accledger/allList?start_date=${start_date}&end_date=${end_date}&AccLedgerGroupId=${AccLedgerGroupId}&page=${page}&count=${count}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
