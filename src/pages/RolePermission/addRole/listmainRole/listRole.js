@@ -124,7 +124,7 @@ function ListRole({ onChangeVal, dmtTtxn, loading, dmtExcelTtxn, getDmtTxnData, 
 
                                                                 <Link to={`/update-role/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                                 <Popconfirm
-                                                                    title="Delete  STATUS !"
+                                                                    title="Delete  List Role  Main Module  Company Name !"
                                                                     description="Are you sure to delete ?"
                                                                     onConfirm={() => confirm(item?._id)}
                                                                     onCancel={cancel}

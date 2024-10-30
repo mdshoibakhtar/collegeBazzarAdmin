@@ -832,6 +832,26 @@ import AddVoucher from "./components/kingsonreports/AccountBook/accountMaster/vo
 import VoucherMasterList from "./components/kingsonreports/AccountBook/accountMaster/voucherMaster/voucherMasterList/VoucherMasterList";
 import BusBookingMain from "./components/bus-booking-report/BusBookingMain";
 import AccountLedgerPageView from "./pages/report/accountBook/accountLedgerView";
+import TaxMasterPage from "./pages/setup/taxSetup/taxMaster";
+import AddTaxMaster from "./components/setup/taxSetup/taxMaster/addTaxMaster/AddTaxMaster";
+import TaxGroupPage from "./pages/setup/taxSetup/taxGroup";
+import AddTaxGroup from "./components/setup/taxSetup/taxGroup/addTaxGroup/AddTaxGroup";
+
+// ---26:10:24---import here---
+import TcsMasterPage from "./pages/setup/taxSetup/tcsMaster";
+import AddTcsMaster from "./components/setup/taxSetup/tcsMaster/addTcsMaster/AddTcsMaster";
+import TcsCertificatePage from "./pages/setup/taxSetup/tcsCertificate";
+import AddTcsCertificate from "./components/setup/taxSetup/tcsCertificate/addTcsCertificate/AddTcsCertificate";
+import EmailSetupPage from "./pages/setup/emailSetup";
+
+// ---28:10:24----import---here
+import NotificationSetupPage from "./pages/setup/notificationSetup";
+import SchedulerSetupPage from "./pages/setup/schedulerSetup";
+import SmsSetupPage from "./pages/setup/smsSetup";
+import ReminderSetupPage from "./pages/setup/reminderSetup";
+
+// ---29:10:24---
+import ReportSetupPage from "./pages/setup/reportSetup";
 import SetupVoucher from "./components/setup/setupVoucher/SetupVoucher";
 // import CreateStageplan from "./pages/NewStagesplan";
 function App() {
@@ -2608,14 +2628,33 @@ function App() {
               <Route path="voucher/print" element={<VoucherPrint />} />
               <Route path="barcode/utility" element={<Barcodetility />} />
 
-
               {/*-------------------------26:10:24------------------------ */}
+              <Route path="voucher-setup" element={<SetupVoucher />} />
               <Route path="voucher-type-list" element={<VoucherMasterList />} />
-              <Route path="add-voucher-type" element={<AddVoucher />} />
-              <Route path="update-voucher-type/:id" element={<AddVoucher />} />
-              <Route path="setupvoucher" element={<SetupVoucher />} />
-              
+              <Route path="voucher-setup" element={<VoucherMasterList />} />
+              <Route path="voucher-type/add" element={<AddVoucher />} />
+              <Route path="voucher-type/edit/:id" element={<AddVoucher />} />
 
+              {/* Tax Master */}
+              <Route path="taxmaster" element={<TaxMasterPage />} />
+              <Route path="taxmaster/add" element={<AddTaxMaster />} />
+              <Route path="taxgroup" element={<TaxGroupPage />} />
+              <Route path="taxgroup/add" element={<AddTaxGroup />} />
+
+              {/* TCS Master */}
+              <Route path="tcsmaster" element={<TcsMasterPage />} />
+              <Route path="tcsmaster/add" element={<AddTcsMaster />} />
+              <Route path="tcscertificate" element={<TcsCertificatePage />} />
+              <Route path="tcscertificate/add" element={<AddTcsCertificate />} />
+
+              {/* Email and Notification */}
+              <Route path="email-setup" element={<EmailSetupPage />} />
+              <Route path="notification-setup" element={<NotificationSetupPage />} />
+              <Route path="scheduler-setup" element={<SchedulerSetupPage />} />
+              <Route path="sms-setup" element={<SmsSetupPage />} />
+              {/* Report and Reminder */}
+              <Route path="report-setup" element={<ReportSetupPage />} />
+              <Route path="reminder-setup" element={<ReminderSetupPage/>} />
               <Route path="*" element={<PageNotFound />} />
               {/* <Route path="/busbookig" element={<BusBookingMain />} /> */}
 
