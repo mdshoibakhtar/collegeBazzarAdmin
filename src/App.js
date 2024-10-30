@@ -833,6 +833,10 @@ import VoucherMasterList from "./components/kingsonreports/AccountBook/accountMa
 import BusBookingMain from "./components/bus-booking-report/BusBookingMain";
 import AccountLedgerPageView from "./pages/report/accountBook/accountLedgerView";
 import SetupVoucher from "./components/setup/setupVoucher/SetupVoucher";
+import InvoiceMaster from "./components/topNavigationComp/masters/invoiceType/InvoiceMaster";
+import TypeInvoiceAdd from "./components/topNavigationComp/masters/invoiceType/masterform/TypeInvoiceAdd";
+import ExpenseMaster from "./components/topNavigationComp/masters/expensemaster/ExpenseMaster";
+import ExpenseAdd from "./components/topNavigationComp/masters/expensemaster/masterform/ExpenseAdd";
 // import CreateStageplan from "./pages/NewStagesplan";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -2463,6 +2467,26 @@ function App() {
               <Route path="add-Sale-Expense-Formula" element={<SalesExpenseForm />} />
               <Route path="add-Sale-Expense-Formula/:id" element={<SalesExpenseForm />} />
 
+
+              <Route path="purchase-invoice-type" element={<PurchaseInvoiceType />} />
+              <Route path="add-purchase-invoice-type" element={<AddPurchaseInvoiceType />} />
+              <Route path="add-purchase-invoice-type/:id" element={<AddPurchaseInvoiceType />} />
+
+              <Route path="purchase-expense-formula" element={<PurchaseExpenseFormula />} />
+              <Route path="add-purchase-expense-formula" element={<AddPurchaseExpenseFormula />} />
+              <Route path="add-purchase-expense-formula/:id" element={<AddPurchaseExpenseFormula />} />
+
+              <Route path="Invoice-Type" element={<InvoiceMaster />} />
+              <Route path="add-Invoice-Type" element={<TypeInvoiceAdd />} />
+              <Route path="add-Invoice-Type/:id" element={<TypeInvoiceAdd />} />
+
+              {/* <Route path="Expense-Master" element={<ExpenseMaster />} />
+              <Route path="add-Expense-Master" element={<ExpenseAdd />} />
+              <Route path="add-Expense-Master/:id" element={<ExpenseAdd />} /> */}
+
+              <Route path="link-purchase-expense" element={<LinkPurchaseExpense />} />
+              <Route path="link-expense-with-invoice-type" element={<LinkExpenseWithInvoiceType />} />
+
               <Route path="Link-Sale-Expense" element={<SalesLinksForm />} />
               <Route path="payment/phonepe" element={<PhonePayForm />} />
               <Route path="payment/razorpay" element={<RzerPayPayForm />} />
@@ -2582,14 +2606,9 @@ function App() {
               <Route path="ele-generate-bill" element={<GenerateBill />} />
               <Route path="ele-close-dc-product" element={<DcProduct />} />
               <Route path="ele-close-inward-product" element={<InwardProduct />} />
-              <Route path="purchase-invoice-type" element={<PurchaseInvoiceType />} />
               {/* 21:10:21-10-24 */}
 
-              <Route path="add-purchase-invoice-type" element={<AddPurchaseInvoiceType />} />
-              <Route path="purchase-expense-formula" element={<PurchaseExpenseFormula />} />
-              <Route path="add-purchase-expense-formula" element={<AddPurchaseExpenseFormula />} />
-              <Route path="link-purchase-expense" element={<LinkPurchaseExpense />} />
-              <Route path="link-expense-with-invoice-type" element={<LinkExpenseWithInvoiceType />} />
+             
               {/*-------------------------meraj Routes End ----------------------- */}
 
               {/* HAWALA ROUTES ---------------------- */}

@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { deleteAccPurchaseInvoiceTypeById, getAccPurchaseInvoiceTypeByPage } from "../../api/login/Login";
+import { message, Popconfirm } from "antd";
 
 export const PurchaseInvoiceType = () => {
   const sales = [
@@ -25,14 +27,70 @@ export const PurchaseInvoiceType = () => {
       formName: "",
     },
   ];
+  const [data, setData] = useState()
+  const [loading, setLoading] = useState(false);
+  const [count, setCount] = useState(10)
+  const [page, setPage] = useState(0)
+  const [totalCount, setTotalCount] = useState()
 
-  console.log(sales);
+
+  // ----------list Api----------
+  const getFloorMasters = async (page) => {
+    setLoading(true)
+    try {
+      const res = await getAccPurchaseInvoiceTypeByPage(page, count)
+      setTotalCount(res?.totalCount)
+      setData(res?.data)
+      setPage(page)
+    } catch (error) {
+
+    }
+    setLoading(false)
+  }
+  // add Area
+
+
+
+
+  const onChangeVal = (e) => {
+    // console.log(e);
+    getFloorMasters(e - 1)
+
+  };
+  const deleteBlockAdd = async (id) => {
+    setLoading(true)
+    try {
+      await deleteAccPurchaseInvoiceTypeById(id)
+      let backList = totalCount % 11 === 0 ? page - 1 : page
+      getFloorMasters(backList)
+    } catch (error) {
+      // toastSuccessMessage(error.message)
+    }
+    setLoading(false)
+  }
+
+  const confirm = (id) => {
+    console.log(id);
+    deleteBlockAdd(id)
+    message.success('Delete Successfull!');
+
+  };
+  const cancel = (e) => {
+    // console.log(e);
+    message.error('Cancle Successfull!');
+  };
+
+
+
+  useEffect(() => {
+    getFloorMasters(page)
+  }, [])
   return (
     <div className="row m-4">
       <div className="col-xl-12">
         <div className="card">
           <div className="d-flex flex-col flex-lg-row justify-content-between">
-            <h2>List Of Sales Invoice</h2>
+            <h2>List Of Purchase  Invoice</h2>
             <div className="mb-3 d-flex align-items-center gap-2">
               <label
                 for="exampleInputPassword1"
@@ -53,11 +111,11 @@ export const PurchaseInvoiceType = () => {
               <i className="fa-solid fa-plus"></i>
               <Link to="/add-purchase-invoice-type">ADD</Link >
             </button>
-            <button className="btn btn-link d-flex flex-col align-items-center">
+            {/* <button className="btn btn-link d-flex flex-col align-items-center">
               <i className="fa-solid fa-pen-to-square"></i>
               <span>EDIT</span>
-            </button>
-            <button className="btn btn-link d-flex flex-col align-items-center">
+            </button> */}
+            {/* <button className="btn btn-link d-flex flex-col align-items-center">
               <i className="fa-solid fa-eye"></i>
               <span>VIEW</span>
             </button>
@@ -68,7 +126,7 @@ export const PurchaseInvoiceType = () => {
             <button className="btn btn-link d-flex flex-col align-items-center">
               <i className="fa-solid fa-arrow-rotate-right"></i>
               <span>REFRESH</span>
-            </button>
+            </button> */}
           </div>
 
           <div className="d-flex gap-4 justify-content-between bg-light">
@@ -84,60 +142,70 @@ export const PurchaseInvoiceType = () => {
               <thead>
                 <tr className="align-items-center">
                   <th>
-                    <div className="form-check">
-                      <input
-                        type="checkbox"
-                        className="form-check-input"
-                        id="selectAll"
-                      />
-                    </div>
+                    #
                   </th>
                   <th>
-                    <div className="d-flex justify-content-between">
-                      <span>Name</span>
-                      <i className="fa-solid fa-filter"></i>
-                    </div>
+                    <span>Name</span>
                   </th>
                   <th>
-                    <div className="d-flex justify-content-between">
-                      <span>Sales A/c Name</span>
-                      <i className="fa-solid fa-filter"></i>
-                    </div>
+                    <span>Sales A/c Name</span>
                   </th>
                   <th>
-                    <div className="d-flex justify-content-between">
-                      <span>Tax Type</span>
-                      <i className="fa-solid fa-filter"></i>
-                    </div>
+                    <span>Tax Type</span>
                   </th>
                   <th>
-                    <div className="d-flex justify-content-between">
-                      <span>Form Name</span>
-                      <i className="fa-solid fa-filter"></i>
-                    </div>
+                    <span>Form Name</span>
                   </th>
+                  <th>Multi Tax</th>
+                  <th>Fixed Amount</th>
+                  {/* <th>Tax Calculation</th> */}
+                  <th>RCM</th>
+                  <th>Reverse Charge</th>
+                  <th>Export Type</th>
+                  <th>POS Type</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {sales.map((item) => (
-                  <tr key={item.id}>
+                {data?.map((item, i) => (
+                  <tr role="row" className="odd" key={item?._id}>
+                    <td>{(i + 1) + (page * count)}</td>
+                    <td>{item?.name}</td>
+                    <td>{item?.sales_acc_id?.name}</td>
+                    <td>{item?.tax_master?.name}</td>
+                    <td>{item?.form_name}</td>
+                    <td>{item?.isMultiTax ? "Yes" : "No"}</td>
+                    <td>{item?.fixed_amount ? "Yes" : "No"}</td>
+                    <td>{item?.rcm}</td>
+                    <td>{item?.reverse_charge ? "Yes" : "No"}</td>
+                    <td>{item?.export_type}</td>
+                    <td>{item?.pos_type}</td>
                     <td>
-                      <div className="form-check">
-                        <input
-                          type="checkbox"
-                          className="form-check-input"
-                          id={`checkbox-${item.id}`}
-                        />
+                      <div className="d-flex">
+                        <Link
+                          to={`/add-purchase-invoice-type/${item?._id}`}
+                          className="btn btn-primary shadow btn-xs sharp me-1"
+                        >
+                          <i className="fa fa-pencil" />
+                        </Link>
+                        <Popconfirm
+                          title="Delete!"
+                          description="Are you sure to delete?"
+                          onConfirm={() => confirm(item?._id)}
+                          onCancel={cancel}
+                          okText="Yes"
+                          cancelText="No"
+                        >
+                          <Link to="#" className="btn btn-danger shadow btn-xs sharp">
+                            <i className="fa fa-trash" />
+                          </Link>
+                        </Popconfirm>
                       </div>
                     </td>
-                    <td>{item.name}</td>
-                    <td>{item.salesName}</td>
-                    <td>{item.taxType}</td>
-                    <td>{item.formName || "-"}</td>{" "}
-                    {/* Display '-' if formName is empty */}
                   </tr>
                 ))}
               </tbody>
+
             </table>
           </div>
         </div>

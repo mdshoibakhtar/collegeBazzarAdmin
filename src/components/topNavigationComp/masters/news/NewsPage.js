@@ -42,7 +42,7 @@ function NewsPage() {
         try {
             await DeleteNews(id)
             let backList = totalCount % 11 === 0 ? page - 1 : page
-            getFloorMasters(backList)
+            getFloorMasters(0)
         } catch (error) {
             // toastSuccessMessage(error.message)
         }

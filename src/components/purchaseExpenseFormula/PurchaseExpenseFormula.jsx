@@ -1,55 +1,78 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  deleteAccPurchaseExpenseFormulaById,
+  getAccPurchaseExpenseFormulaByPage,
+} from "../../api/login/Login";
+import { message, Popconfirm } from "antd";
 
 export const PurchaseExpenseFormula = () => {
-  const sales = [
-    {
-      id: 1,
-      name: "TEX FREE",
-      acEffect: "TEX FREE",
-      account: "FREE",
-      basedOn: "Some Basis",
-      basedCalculationOn: "Account 1",
-      calculationType: "Basis 1",
-      addDeduct: "Add",
-      percentage: "10%",
-    },
-    {
-      id: 2,
-      name: "TEX FREE",
-      acEffect: "TEX FREE",
-      account: "FREE",
-      basedOn: "Some Basis",
-      basedCalculationOn: "Account 2",
-      calculationType: "Basis 2",
-      addDeduct: "Deduct",
-      percentage: "15%",
-    },
-    {
-      id: 3,
-      name: "TEX FREE",
-      acEffect: "TEX FREE",
-      account: "FREE",
-      basedOn: "Some Basis",
-      basedCalculationOn: "Account 3",
-      calculationType: "Basis 3",
-      addDeduct: "Add",
-      percentage: "20%",
-    },
-  ];
+  const [data, setData] = useState();
+  const [loading, setLoading] = useState(false);
+  const [count, setCount] = useState(10);
+  const [page, setPage] = useState(0);
+  const [totalCount, setTotalCount] = useState();
 
-  console.log(sales);
+  // ----------list Api----------
+  const getFloorMasters = async (page) => {
+    setLoading(true);
+    try {
+      const res = await getAccPurchaseExpenseFormulaByPage(page, count);
+      setTotalCount(res?.totalCount);
+      setData(res?.data);
+      setPage(page);
+    } catch (error) {}
+    setLoading(false);
+  };
+  // add Area
+
+  const onChangeVal = (e) => {
+    // console.log(e);
+    getFloorMasters(e - 1);
+  };
+  const deleteBlockAdd = async (id) => {
+    setLoading(true);
+    try {
+      await deleteAccPurchaseExpenseFormulaById(id);
+      let backList = totalCount % 11 === 0 ? page - 1 : page;
+      getFloorMasters(backList);
+    } catch (error) {
+      // toastSuccessMessage(error.message)
+    }
+    setLoading(false);
+  };
+
+  const confirm = (id) => {
+    console.log(id);
+    deleteBlockAdd(id);
+    message.success("Delete Successfull!");
+  };
+  const cancel = (e) => {
+    // console.log(e);
+    message.error("Cancle Successfull!");
+  };
+
+  useEffect(() => {
+    getFloorMasters(page);
+  }, []);
   return (
     <div className="row m-4">
       <div className="col-xl-12">
         <div className="card">
           <div className="d-flex flex-col flex-lg-row justify-content-between">
-            <h2>List Of Sales Invoice</h2>
+            <h2>List Of Purchase Expense</h2>
             <div className="mb-3 d-flex align-items-center gap-2">
-              <label htmlFor="fastSearch" className="form-label text-nowrap">
+              <label
+                for="exampleInputPassword1"
+                className="form-label text-nowrap"
+              >
                 Fast Search (F1) :
               </label>
-              <input type="text" className="form-control" id="fastSearch" />
+              <input
+                type="text"
+                className=" form-control"
+                id="exampleInputPassword1 "
+              />
             </div>
           </div>
 
@@ -58,11 +81,11 @@ export const PurchaseExpenseFormula = () => {
               <i className="fa-solid fa-plus"></i>
               <Link to="/add-purchase-expense-formula">ADD</Link>
             </button>
-            <button className="btn btn-link d-flex flex-col align-items-center">
+            {/* <button className="btn btn-link d-flex flex-col align-items-center">
               <i className="fa-solid fa-pen-to-square"></i>
               <span>EDIT</span>
-            </button>
-            <button className="btn btn-link d-flex flex-col align-items-center">
+            </button> */}
+            {/* <button className="btn btn-link d-flex flex-col align-items-center">
               <i className="fa-solid fa-eye"></i>
               <span>VIEW</span>
             </button>
@@ -73,7 +96,7 @@ export const PurchaseExpenseFormula = () => {
             <button className="btn btn-link d-flex flex-col align-items-center">
               <i className="fa-solid fa-arrow-rotate-right"></i>
               <span>REFRESH</span>
-            </button>
+            </button> */}
           </div>
 
           <div className="d-flex gap-4 justify-content-between bg-light">
@@ -88,85 +111,65 @@ export const PurchaseExpenseFormula = () => {
             <table className="table table-striped table-hover">
               <thead>
                 <tr className="align-items-center">
+                  <th>#</th>
                   <th>
-                    <div className="form-check">
-                      <input
-                        type="checkbox"
-                        className="form-check-input"
-                        id="selectAll"
-                      />
-                    </div>
+                    <span>Name</span>
                   </th>
-                  <th>
-                    <div className="d-flex justify-content-between">
-                      <span>Name</span>
-                      <i className="fa-solid fa-filter"></i>
-                    </div>
-                  </th>
-                  <th>
-                    <div className="d-flex justify-content-between">
-                      <span>A/C Effect</span>
-                      <i className="fa-solid fa-filter"></i>
-                    </div>
-                  </th>
-                  <th>
-                    <div className="d-flex justify-content-between">
-                      <span>Account</span>
-                      <i className="fa-solid fa-filter"></i>
-                    </div>
-                  </th>
-                  <th>
-                    <div className="d-flex justify-content-between">
-                      <span>Based On</span>
-                      <i className="fa-solid fa-filter"></i>
-                    </div>
-                  </th>
-                  <th>
-                    <div className="d-flex justify-content-between">
-                      <span>Based Calculation On</span>
-                      <i className="fa-solid fa-filter"></i>
-                    </div>
-                  </th>
-                  <th>
-                    <div className="d-flex justify-content-between">
-                      <span>Calculation Type</span>
-                      <i className="fa-solid fa-filter"></i>
-                    </div>
-                  </th>
-                  <th>
-                    <div className="d-flex justify-content-between">
-                      <span>Add/Deduct</span>
-                      <i className="fa-solid fa-filter"></i>
-                    </div>
-                  </th>
-                  <th>
-                    <div className="d-flex justify-content-between">
-                      <span>Percentage</span>
-                      <i className="fa-solid fa-filter"></i>
-                    </div>
-                  </th>
+                  <th>Unique Column Name</th>
+                  <th>Acc Effect</th>
+                  <th>Type</th>
+                  <th>Add/Deduct</th>
+                  <th>Tax Type</th>
+                  <th>Calculation</th>
+                  <th>Calculation % (P)</th>
+                  <th>Calculation Based On</th>
+                  <th>Expense Name</th>
+                  <th>Expense Account</th>
+                  <th>Column Name</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {sales.map((item) => (
-                  <tr key={item.id}>
+                {data?.map((item, i) => (
+                  <tr role="row" className="odd" key={item?._id}>
+                    <td>{i + 1 + page * count}</td>
+                    <td>{item?.name}</td>
+                    <td>{item?.uniq_column_name?.name}</td>
+                    <td>{item?.acc_effect ? "Yes" : "No"}</td>
+                    <td>{item?.type}</td>
+                    <td>{item?.add_deduct}</td>
+                    <td>{item?.tax_type}</td>
+                    <td>{item?.calculation}</td>
+                    <td>{item?.P}</td>
+                    <td>{item?.calculation_based_on}</td>
+                    <td>{item?.expense_name}</td>
+                    <td>{item?.expense_account}</td>
+                    <td>{item?.column_name}</td>
                     <td>
-                      <div className="form-check">
-                        <input
-                          type="checkbox"
-                          className="form-check-input"
-                          id={`checkbox-${item.id}`}
-                        />
+                      <div className="d-flex">
+                        <Link
+                          to={`/add-purchase-expense-formula/${item?._id}`}
+                          className="btn btn-primary shadow btn-xs sharp me-1"
+                        >
+                          <i className="fa fa-pencil" />
+                        </Link>
+                        <Popconfirm
+                          title="Delete!"
+                          description="Are you sure to delete?"
+                          onConfirm={() => confirm(item?._id)}
+                          onCancel={cancel}
+                          okText="Yes"
+                          cancelText="No"
+                        >
+                          <Link
+                            to="#"
+                            className="btn btn-danger shadow btn-xs sharp"
+                          >
+                            <i className="fa fa-trash" />
+                          </Link>
+                        </Popconfirm>
                       </div>
                     </td>
-                    <td>{item.name}</td>
-                    <td>{item.acEffect}</td>
-                    <td>{item.account}</td>
-                    <td>{item.basedOn || "-"}</td>
-                    <td>{item.basedCalculationOn}</td>
-                    <td>{item.calculationType}</td>
-                    <td>{item.addDeduct}</td>
-                    <td>{item.percentage}</td>
                   </tr>
                 ))}
               </tbody>
