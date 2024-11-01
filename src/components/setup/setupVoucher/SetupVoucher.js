@@ -22,7 +22,7 @@ function SetupVoucher() {
             <div className="tbl-caption">
                 <div className="card-body p-0">
                     <div className="row">
-                        <div className="col-xl-2">
+                        <div className="col-xl-3">
                             <div className="card">
                                 <SetupVoucherAside state={state} onSelect={setActiveKey} />
                             </div>
