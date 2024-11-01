@@ -857,6 +857,12 @@ import InvoiceMaster from "./components/topNavigationComp/masters/invoiceType/In
 import TypeInvoiceAdd from "./components/topNavigationComp/masters/invoiceType/masterform/TypeInvoiceAdd";
 import ExpenseMaster from "./components/topNavigationComp/masters/expensemaster/ExpenseMaster";
 import ExpenseAdd from "./components/topNavigationComp/masters/expensemaster/masterform/ExpenseAdd";
+import PriceMasterPage from "./pages/priceList/priceMaster";
+import PriceMasterAdd from "./components/priceList/priceMaster/priceMasterAdd/PriceMasterAdd";
+import RateSheetPage from "./pages/priceList/rateSheet";
+import RateSheertAdd from "./components/priceList/rateSheert/rateSheertAdd/RateSheertAdd";
+import ProcessPage from "./pages/process";
+import ProcessAdd from "./components/process/processAdd/processAdd";
 // import CreateStageplan from "./pages/NewStagesplan";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -2628,7 +2634,7 @@ function App() {
               <Route path="ele-close-inward-product" element={<InwardProduct />} />
               {/* 21:10:21-10-24 */}
 
-             
+
               {/*-------------------------meraj Routes End ----------------------- */}
 
               {/* HAWALA ROUTES ---------------------- */}
@@ -2674,9 +2680,16 @@ function App() {
               <Route path="sms-setup" element={<SmsSetupPage />} />
               {/* Report and Reminder */}
               <Route path="report-setup" element={<ReportSetupPage />} />
-              <Route path="reminder-setup" element={<ReminderSetupPage/>} />
+              <Route path="reminder-setup" element={<ReminderSetupPage />} />
               <Route path="*" element={<PageNotFound />} />
               {/* <Route path="/busbookig" element={<BusBookingMain />} /> */}
+
+              <Route path="pricemaster/list" element={<PriceMasterPage />} />
+              <Route path="pricemaster/add" element={<PriceMasterAdd />} />
+              <Route path="ratesheet/list" element={<RateSheetPage />} />
+              <Route path="ratesheet/add" element={<RateSheertAdd />} />
+              <Route path="process/list" element={<ProcessPage />} />
+              <Route path="process/add" element={<ProcessAdd />} />
 
 
             </Route>
