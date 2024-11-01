@@ -31,12 +31,12 @@ function AddRole() {
     const [dataModule, setDataModule] = useState(null);
 
     const params = useParams();
-console.log(sortNumbers);
+    console.log(sortNumbers);
 
     const handleSortNumberChange = (mainModuleId, subModuleId, subSubModuleId, value) => {
-console.log(mainModuleId, subModuleId, subSubModuleId, value);
+        console.log(mainModuleId, subModuleId, subSubModuleId, value);
 
-// debugger
+        // debugger
         setSortNumbers(prev => ({
             ...prev,
             [mainModuleId]: {
@@ -315,7 +315,7 @@ console.log(mainModuleId, subModuleId, subSubModuleId, value);
                                                 {selectedModules.length > 0 && (
                                                     <div className="row">
                                                         {dataconntriler && dataconntriler.map((item) => (
-                                                        
+
                                                             <div className="col-xl-4 mb-3" key={item.main_module._id}>
                                                                 <div className="row">
                                                                     <div className="col-md-12">
@@ -327,7 +327,7 @@ console.log(mainModuleId, subModuleId, subSubModuleId, value);
                                                                                 name={`sort_no_${item.main_module._id}`}
                                                                                 placeholder="Sort Number"
                                                                                 value={sortNumbers[item.main_module._id]?.[''] || ''}
-                                                                                onChange={(e) => handleSortNumberChange(item.main_module._id, '', '' , e.target.value)}
+                                                                                onChange={(e) => handleSortNumberChange(item.main_module._id, '', '', e.target.value)}
                                                                                 className="form-control"
                                                                             />
                                                                             <button
@@ -377,7 +377,7 @@ console.log(mainModuleId, subModuleId, subSubModuleId, value);
                                                                                                                 <small>{subSubItem.name}</small>
                                                                                                             </label>
                                                                                                             <div className="head-combo d-flex align-items-center my-2">
-                                                                                                                 <input
+                                                                                                                <input
                                                                                                                     type="number"
                                                                                                                     name={`sort_no_${item.main_module._id}_${subItem._id}_${subSubItem._id}`}
                                                                                                                     placeholder="Sort Number"

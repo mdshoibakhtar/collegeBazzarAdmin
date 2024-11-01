@@ -853,6 +853,10 @@ import ReminderSetupPage from "./pages/setup/reminderSetup";
 // ---29:10:24---
 import ReportSetupPage from "./pages/setup/reportSetup";
 import SetupVoucher from "./components/setup/setupVoucher/SetupVoucher";
+import InvoiceMaster from "./components/topNavigationComp/masters/invoiceType/InvoiceMaster";
+import TypeInvoiceAdd from "./components/topNavigationComp/masters/invoiceType/masterform/TypeInvoiceAdd";
+import ExpenseMaster from "./components/topNavigationComp/masters/expensemaster/ExpenseMaster";
+import ExpenseAdd from "./components/topNavigationComp/masters/expensemaster/masterform/ExpenseAdd";
 // import CreateStageplan from "./pages/NewStagesplan";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -2029,13 +2033,14 @@ function App() {
               <Route path="taluka-wise-dealer-list" element={<TalukaWiseDealerListPage />} />
               <Route path="group-summary" element={<GroupSummaryPage />} />
 
-              <Route path="bankpayment/list" element={<BankPaymentPage heading={'Bank Payment'} />} />
-              <Route path="bankpayment/add" element={<AddBankPayment />} />
-              <Route path="bankreceipt/list" element={<BankPaymentPage heading={'Bank Receipt'} />} />
+              <Route path="bankpayment/list" element={<BankPaymentPage heading={'Bank Payment'} apiPass={'bank payment'} />} />
+              <Route path="bankpayment/add/:name" element={<AddBankPayment />} />
+              <Route path="bankpayment/update/:name/:id" element={<AddBankPayment />} />
+              <Route path="bankreceipt/list" element={<BankPaymentPage heading={'Bank Receipt'} apiPass={'bank receipt'} />} />
 
-              <Route path="cashreceipt/list" element={<BankPaymentPage heading={'Cash Payment'} />} />
+              <Route path="cashreceipt/list" element={<BankPaymentPage heading={'Cash Receipt'} apiPass={'cash receipt'} />} />
 
-              <Route path="cashpayment/list" element={<BankPaymentPage heading={'List Of Cash Payment'} />} />
+              <Route path="cashpayment/list" element={<BankPaymentPage heading={'Cash Payment'} apiPass={'cash payment'} />} />
               <Route path="contra/list" element={<ContraPage />} />
               <Route path="contra/Add" element={<ContraAdd />} />
               <Route path="gstexpenseentry/list" element={<GSTExpenseEntryPage />} />
@@ -2482,6 +2487,26 @@ function App() {
               <Route path="add-Sale-Expense-Formula" element={<SalesExpenseForm />} />
               <Route path="add-Sale-Expense-Formula/:id" element={<SalesExpenseForm />} />
 
+
+              <Route path="purchase-invoice-type" element={<PurchaseInvoiceType />} />
+              <Route path="add-purchase-invoice-type" element={<AddPurchaseInvoiceType />} />
+              <Route path="add-purchase-invoice-type/:id" element={<AddPurchaseInvoiceType />} />
+
+              <Route path="purchase-expense-formula" element={<PurchaseExpenseFormula />} />
+              <Route path="add-purchase-expense-formula" element={<AddPurchaseExpenseFormula />} />
+              <Route path="add-purchase-expense-formula/:id" element={<AddPurchaseExpenseFormula />} />
+
+              <Route path="Invoice-Type" element={<InvoiceMaster />} />
+              <Route path="add-Invoice-Type" element={<TypeInvoiceAdd />} />
+              <Route path="add-Invoice-Type/:id" element={<TypeInvoiceAdd />} />
+
+              {/* <Route path="Expense-Master" element={<ExpenseMaster />} />
+              <Route path="add-Expense-Master" element={<ExpenseAdd />} />
+              <Route path="add-Expense-Master/:id" element={<ExpenseAdd />} /> */}
+
+              <Route path="link-purchase-expense" element={<LinkPurchaseExpense />} />
+              <Route path="link-expense-with-invoice-type" element={<LinkExpenseWithInvoiceType />} />
+
               <Route path="Link-Sale-Expense" element={<SalesLinksForm />} />
               <Route path="payment/phonepe" element={<PhonePayForm />} />
               <Route path="payment/razorpay" element={<RzerPayPayForm />} />
@@ -2601,14 +2626,9 @@ function App() {
               <Route path="ele-generate-bill" element={<GenerateBill />} />
               <Route path="ele-close-dc-product" element={<DcProduct />} />
               <Route path="ele-close-inward-product" element={<InwardProduct />} />
-              <Route path="purchase-invoice-type" element={<PurchaseInvoiceType />} />
               {/* 21:10:21-10-24 */}
 
-              <Route path="add-purchase-invoice-type" element={<AddPurchaseInvoiceType />} />
-              <Route path="purchase-expense-formula" element={<PurchaseExpenseFormula />} />
-              <Route path="add-purchase-expense-formula" element={<AddPurchaseExpenseFormula />} />
-              <Route path="link-purchase-expense" element={<LinkPurchaseExpense />} />
-              <Route path="link-expense-with-invoice-type" element={<LinkExpenseWithInvoiceType />} />
+             
               {/*-------------------------meraj Routes End ----------------------- */}
 
               {/* HAWALA ROUTES ---------------------- */}

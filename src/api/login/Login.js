@@ -3609,11 +3609,30 @@ export const vocherAddBank = (data) => {
   });
 };
 
+export const vocherUpdateBank = (id, data) => {
+  return axiosInstance.put(`AccVoucher/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
 
 export const vocherAddBankList = (value) => {
-  console.log('vocherAddBankList', value);
+  // console.log('vocherAddBankList', value);
+  return axiosInstance.get(`AccVoucher/page?page=${value?.page}&count=${value?.count}&start_date=${value?.start_date}&end_date=${value?.end_date}&voucherType=${value?.vocherType}&accLedgerId=`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
 
-  return axiosInstance.get(`AccVoucher/page?page=${value?.page}&count=${value?.count}&start_date=&end_date=&voucherType=&accLedgerId=`, {
+export const vocherUpdateBankListById = (value) => {
+  // console.log('vocherAddBankList', value);
+
+  return axiosInstance.get(`AccVoucher/${value?.id}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
       Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
@@ -3758,7 +3777,7 @@ export const voucherSetupAside = () => {
 
 
 
-export const updatePassword = (id,data) => {
+export const updatePassword = (id, data) => {
   return axiosInstance.put(`/user/updateuser/${id}`, data, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
@@ -3766,8 +3785,385 @@ export const updatePassword = (id,data) => {
     },
   });
 };
-export const updatePin = (id,data) => {
+export const updatePin = (id, data) => {
   return axiosInstance.put(`/user/updateuser/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+// DELETE a tax master entry by ID
+export const deleteAccTaxMasterById = (id) => {
+  return axiosInstance.delete(`/acc_tax_master/delete_type/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET tax master entries with pagination
+export const getAccTaxMasterByPage = (page, count) => {
+  return axiosInstance.get(`/acc_tax_master/page?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET a tax master entry by ID
+export const getAccTaxMasterById = (id) => {
+  return axiosInstance.get(`/acc_tax_master/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new tax master entry
+export const postAccTaxMaster = (data) => {
+  return axiosInstance.post(`/acc_tax_master/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing tax master entry by ID
+export const updateAccTaxMasterById = (id, data) => {
+  return axiosInstance.put(`/acc_tax_master/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+export const getAllLegers = (page, count, start_date, end_date, AccLedgerGroupId) => {
+  return axiosInstance.get(`/Accledger/allList?start_date=${start_date}&end_date=${end_date}&AccLedgerGroupId=${AccLedgerGroupId}&page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+// DELETE a sales invoice type entry by ID
+export const deleteAccSalesInvoiceTypeById = (id) => {
+  return axiosInstance.delete(`/acc_sales_invoice_type/delete_type/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET sales invoice type entries with pagination
+export const getAccSalesInvoiceTypeByPage = (page, count) => {
+  return axiosInstance.get(`/acc_sales_invoice_type/page?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET a sales invoice type entry by ID
+export const getAccSalesInvoiceTypeById = (id) => {
+  return axiosInstance.get(`/acc_sales_invoice_type/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new sales invoice type entry
+export const postAccSalesInvoiceType = (data) => {
+  return axiosInstance.post(`/acc_sales_invoice_type/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing sales invoice type entry by ID
+export const updateAccSalesInvoiceTypeById = (id, data) => {
+  return axiosInstance.put(`/acc_sales_invoice_type/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+
+// DELETE a sales expense formula entry by ID
+export const deleteAccSalesExpenseFormulaById = (id) => {
+  return axiosInstance.delete(`/acc_sales_expense_formula/delete_type/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET sales expense formula entries with pagination
+export const getAccSalesExpenseFormulaByPage = (page, count) => {
+  return axiosInstance.get(`/acc_sales_expense_formula/page?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET a sales expense formula entry by ID
+export const getAccSalesExpenseFormulaById = (id) => {
+  return axiosInstance.get(`/acc_sales_expense_formula/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new sales expense formula entry
+export const postAccSalesExpenseFormula = (data) => {
+  return axiosInstance.post(`/acc_sales_expense_formula/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing sales expense formula entry by ID
+export const updateAccSalesExpenseFormulaById = (id, data) => {
+  return axiosInstance.put(`/acc_sales_expense_formula/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+
+
+
+
+
+// DELETE a purchase invoice type entry by ID
+export const deleteAccPurchaseInvoiceTypeById = (id) => {
+  return axiosInstance.delete(`/acc_purchase_invoice_type/delete_type/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET purchase invoice type entries with pagination
+export const getAccPurchaseInvoiceTypeByPage = (page, count) => {
+  return axiosInstance.get(`/acc_purchase_invoice_type/page?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET a purchase invoice type entry by ID
+export const getAccPurchaseInvoiceTypeById = (id) => {
+  return axiosInstance.get(`/acc_purchase_invoice_type/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new purchase invoice type entry
+export const postAccPurchaseInvoiceType = (data) => {
+  return axiosInstance.post(`/acc_purchase_invoice_type/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing purchase invoice type entry by ID
+export const updateAccPurchaseInvoiceTypeById = (id, data) => {
+  return axiosInstance.put(`/acc_purchase_invoice_type/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+
+
+// GET purchase expense formula entries with pagination
+export const getAccPurchaseExpenseFormulaByPage = (page, count) => {
+  return axiosInstance.get(`/acc_purchase_expense_formula/page?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET a purchase expense formula entry by ID
+export const getAccPurchaseExpenseFormulaById = (id) => {
+  return axiosInstance.get(`/acc_purchase_expense_formula/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new purchase expense formula entry
+export const postAccPurchaseExpenseFormula = (data) => {
+  return axiosInstance.post(`/acc_purchase_expense_formula/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing purchase expense formula entry by ID
+export const updateAccPurchaseExpenseFormulaById = (id, data) => {
+  return axiosInstance.put(`/acc_purchase_expense_formula/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// DELETE a purchase expense formula entry by ID
+export const deleteAccPurchaseExpenseFormulaById = (id) => {
+  return axiosInstance.delete(`/acc_purchase_expense_formula/delete_type/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+// GET acc_select_invoice_type entries with pagination
+export const getAccSelectInvoiceTypeByPage = (page, count) => {
+  return axiosInstance.get(`/acc_select_invoice_type/page?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET a specific acc_select_invoice_type entry by ID
+export const getAccSelectInvoiceTypeById = (id) => {
+  return axiosInstance.get(`/acc_select_invoice_type/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new acc_select_invoice_type entry
+export const postAccSelectInvoiceType = (data) => {
+  return axiosInstance.post(`/acc_select_invoice_type/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing acc_select_invoice_type entry by ID
+export const updateAccSelectInvoiceTypeById = (id, data) => {
+  return axiosInstance.put(`/acc_select_invoice_type/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// DELETE an acc_select_invoice_type entry by ID
+export const deleteAccSelectInvoiceTypeById = (id) => {
+  return axiosInstance.delete(`/acc_select_invoice_type/delete_type/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+
+
+// GET acc_available_expense_list entries with pagination
+export const getAccAvailableExpenseListByPage = (page, count) => {
+  return axiosInstance.get(`/acc_available_expense_list/page?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET a specific acc_available_expense_list entry by ID
+export const getAccAvailableExpenseListById = (id) => {
+  return axiosInstance.get(`/acc_available_expense_list/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new acc_available_expense_list entry
+export const postAccAvailableExpenseList = (data) => {
+  return axiosInstance.post(`/acc_available_expense_list/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing acc_available_expense_list entry by ID
+export const updateAccAvailableExpenseListById = (id, data) => {
+  return axiosInstance.put(`/acc_available_expense_list/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// DELETE an acc_available_expense_list entry by ID
+export const deleteAccAvailableExpenseListById = (id) => {
+  return axiosInstance.delete(`/acc_available_expense_list/delete_type/${id}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
       Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,

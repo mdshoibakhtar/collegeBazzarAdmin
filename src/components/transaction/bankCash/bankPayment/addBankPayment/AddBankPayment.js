@@ -1,11 +1,24 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import Breadcrumbs from "../../../../../common/breadcrumb/Breadcrumbs"
 import { useEffect, useRef, useState } from "react";
-import { masterget, vocherAddBank } from "../../../../../api/login/Login";
+import { masterget, vocherAddBank, vocherUpdateBank, vocherUpdateBankListById } from "../../../../../api/login/Login";
 import { toast, ToastContainer } from "react-toastify";
+import PdfBank from "./pdfBank/PdfBank";
+import { PDFViewer } from "@react-pdf/renderer";
+import { format } from 'date-fns';
 
 
 const AddBankPayment = () => {
+    const param = useParams()
+    // console.log(param);
+
+    const [pdf, setPdf] = useState(false)
+
+    const pdfGenerateDefault = () => {
+        setPdf(!pdf)
+    }
+
+
     const [heading, setHeading] = useState("Add Bank Payment");
     const location = useLocation();
     useEffect(() => {
@@ -22,13 +35,13 @@ const AddBankPayment = () => {
         id: "1",
         title_1: "Transaction",
         title_2: 'Bank / Cash',
-        title_3: heading,
+        title_3: param?.name,
         path_2: ``
     };
 
     const getCurrentDate = () => {
         const today = new Date();
-        console.log(today);
+        // console.log(today);
         return today.toISOString().split('T')[0];
     };
 
@@ -38,19 +51,27 @@ const AddBankPayment = () => {
 
     const [initialData, setInitialData] = useState({
         voucher_date: "",
-        voucher_type: 'Payment',
+        voucher_type: param?.name === 'Add Bank Receipt' || param?.name === 'Add Cash Receipt' ? "Bank Receipt" : "Bank Payment",
         voucher_no: '',
         opponent_ledgerId: '',
-        opponent_amount: '',
+        opponent_amount: 0,
         opponent_amount_type: 'DR',
         bank_ledgerId: '',
-        bank_amount: '',
+        bank_amount: 0,
         bank_amount_type: 'CR',
         narration: '',
         cheque_no: '',
-        cheque_date: ''
+        cheque_date: '',
+        diff_ledgerId: '',
+        diff_amount: 0,
+        diff_amount_type: 'DR',
+        diff_2_ledgerId: '',
+        diff_2_amount: 0,
+        diff_2_amount_type: 'DR',
 
     })
+
+
 
     useEffect(() => {
         const clone = { ...initialData, voucher_date: currentDate }
@@ -77,7 +98,7 @@ const AddBankPayment = () => {
     const [oppchange, setOppChange] = useState({
         opponent_ledgerId: ''
     })
-    console.log(oppchange);
+    // console.log(oppchange);
 
     const [filteredOppAcc, setFilteredOppAcc] = useState(null);
     // console.log(filteredOppAcc);
@@ -105,11 +126,13 @@ const AddBankPayment = () => {
     const [bankhange, setBankhange] = useState({
         bank_ledgerId: ''
     })
-    const [filterbankhangAcc, setFilterbankhangAcc] = useState(null);
-    console.log(filterbankhangAcc);
 
-    const [totalBalancebank, setTotalBalancebank] = useState(0);
-    const [balanceTypeBank, setbalanceTypeBank] = useState(filterbankhangAcc?.balance_type || "CR");
+    // console.log(bankhange);
+
+    const [filterbankhangAcc, setFilterbankhangAcc] = useState(null);
+    const [totalBalancebank, setTotalBalancebank] = useState('');
+    const [balanceTypeBank, setbalanceTypeBank] = useState("CR");
+
 
     const bankAccountChange = (e) => {
         const clone = { ...bankhange }
@@ -128,6 +151,50 @@ const AddBankPayment = () => {
     }
 
     //Bank:
+
+    // diff
+    const [diff1, setDiff1] = useState({
+        diff_ledgerId: ''
+    })
+    const diff1Change = (e) => {
+        const clone = { ...diff1 }
+        const value = e.target.value
+        const name = e.target.name
+        // console.log(value);
+        clone[name] = value
+        setDiff1(clone)
+        // const filterOppAcc = bank?.voucher?.find((item) => item?._id === value);
+        // // console.log(filterOppAcc);
+
+        // setFilterbankhangAcc(filterOppAcc || null);
+        // setTotalBalancebank(filterOppAcc?.balance || 0);
+        // setbalanceTypeBank(filterOppAcc?.balance_type || "CR");
+        // // console.log(filterOppAcc);
+    }
+
+    // diff
+
+    // diff2
+    const [diff2, setDiff2] = useState({
+        diff_2_ledgerId: ''
+    })
+    const diff2Change = (e) => {
+        const clone = { ...diff1 }
+        const value = e.target.value
+        const name = e.target.name
+        // console.log(value);
+        clone[name] = value
+        setDiff2(clone)
+        // const filterOppAcc = bank?.voucher?.find((item) => item?._id === value);
+        // // console.log(filterOppAcc);
+
+        // setFilterbankhangAcc(filterOppAcc || null);
+        // setTotalBalancebank(filterOppAcc?.balance || 0);
+        // setbalanceTypeBank(filterOppAcc?.balance_type || "CR");
+        // // console.log(filterOppAcc);
+    }
+
+    // diff2
 
 
     const handleKyeSet = (e) => {
@@ -151,9 +218,9 @@ const AddBankPayment = () => {
             setOppAcc(res1?.data)
             const res2 = await masterget('Bank')
             setBank(res2?.data)
-            const res3 = await masterget('discount')
+            const res3 = await masterget('Sundry')
             setDiscount1(res3?.data)
-            const res4 = await masterget('discount')
+            const res4 = await masterget('Sundry')
             setDiscount2(res4?.data)
             // const res = await masterget()
 
@@ -162,9 +229,6 @@ const AddBankPayment = () => {
         }
     }
 
-    useEffect(() => {
-        masterData()
-    }, [])
 
 
     const refs = {
@@ -184,14 +248,14 @@ const AddBankPayment = () => {
         naration: useRef()
     };
 
-    const handleEnterKey = (e, nextRef, isSelect = false, isDate = false) => {
+    const handleEnterKey = (e, nextRef, isSelect = false, isDate = false,) => {
         // if (e.key === "Enter" && nextRef?.current) {
         //     e.preventDefault();
         //     nextRef.current.focus();
         // }
 
         if (e.key === "Enter") {
-            console.log(isSelect);
+            // console.log(isSelect);
             e.preventDefault();
             if (isSelect && nextRef?.current) {
                 nextRef.current.focus();
@@ -211,63 +275,32 @@ const AddBankPayment = () => {
         //     setTotalBalance(updatedTotal);
         // }
 
+
         if (e.key === "Enter") {
             const amount = parseFloat(initialData.opponent_amount) || 0;
-            console.log('amount', amount);
             const clone = { ...initialData, bank_amount: amount }
             setInitialData(clone)
             const currentBalance = filteredOppAcc?.balance || 0;
-            console.log('currentBalance', currentBalance);
 
-            let updatedTotal = filteredOppAcc?.balance_type == "DR" ? currentBalance + amount :
-                currentBalance - amount < 0 ? amount - currentBalance : currentBalance - amount
-            console.log('amount - currentBalance', amount - currentBalance);
+            let updatedTotal = filteredOppAcc?.balance_type === "CR"
+                ? currentBalance - amount
+                : currentBalance + amount;
 
 
-            console.log('filteredOppAcc?.balance_type', filteredOppAcc?.balance_type);
-
-            console.log(updatedTotal);
+            let updatedBalanceType = filteredOppAcc?.balance_type;
+            if (updatedTotal < 0) {
+                updatedTotal = currentBalance;
+                updatedBalanceType = "DR";
+            }
 
             setTotalBalance(updatedTotal);
-            // setBalanceType(updatedBalanceType);
-
-            // let updatedTotal = filteredOppAcc?.balance_type === "CR"
-            //     ? currentBalance - amount
-            //     : currentBalance + amount;
-
-
-            // let updatedBalanceType = filteredOppAcc?.balance_type;
-            // if (updatedTotal < 0) {
-            //     updatedTotal = currentBalance;
-            //     updatedBalanceType = "DR";
-            // }
-
-            // setTotalBalance(updatedTotal);
-            // setBalanceType(updatedBalanceType);
+            setBalanceType(updatedBalanceType);
         }
-
-        // if (e.key === "Enter") {
-        //     const amount = parseFloat(initialData.BankAmount) || 0;
-        //     // console.log(amount);
-        //     // const clone = { ...initialData, BankAmount: amount }
-        //     // setInitialData(clone)
-        //     const currentBalance = filterbankhangAcc?.balance || 0;
-        //     let updatedTotal = filterbankhangAcc?.balance_type === "CR"
-        //         ? currentBalance - amount
-        //         : currentBalance + amount;
-
-
-        //     let updatedBalanceType = filterbankhangAcc?.balance_type;
-        //     if (updatedTotal < 0) {
-        //         updatedTotal = currentBalance;
-        //         updatedBalanceType = "DR";
-        //     }
-
-        //     setTotalBalance(updatedTotal);
-        //     setBalanceType(updatedBalanceType);
-        // }
-
-
+        if (e.key === "Enter" && filterbankhangAcc) {
+            setTotalBalancebank(prevBalance => {
+                return balanceTypeBank === "CR" ? prevBalance + parseFloat(e.target.value) : prevBalance - parseFloat(e.target.value);
+            });
+        }
     };
 
     const toastSuccessMessage = (data) => {
@@ -284,23 +317,95 @@ const AddBankPayment = () => {
         });
     };
 
+
+    const disabledButton = !initialData.voucher_no || !oppchange?.opponent_ledgerId || !initialData.opponent_amount || !bankhange?.bank_ledgerId || !initialData.bank_amount || !initialData.narration || !initialData.cheque_no || !initialData.cheque_date
+
+    const [bank_id, setBank_id] = useState()
+    const [diff1_id, setDiff1_id] = useState()
+    const [diff2_id, setDiff2_id] = useState()
+
+
+
+    useEffect(() => {
+        const getByIdData = async () => {
+            try {
+                if (param?.id) {
+                    const res = await vocherUpdateBankListById(param)
+                    // console.log('parentVoucher', res?.data?.parentVoucher);
+                    const date = format(new Date(res?.data?.parentVoucher?.voucherDate), 'yyyy-MM-dd');
+
+                    const clone = {
+                        ...res?.data?.parentVoucher, voucher_no: res?.data?.parentVoucher?.voucherNo, voucher_date: date, opponent_amount: res?.data?.parentVoucher?.drAmt,
+                        bank_amount: res?.data?.childVoucher[0]?.crAmt, diff_amount: res?.data?.childVoucher[1]?.crAmt, diff_2_amount: res?.data?.childVoucher[2]?.crAmt
+                    }
+                    // console.log(clone);
+                    // console.log(clone?.opponent_ledgerId)
+                    const clone2 = { ...res?.data?.parentVoucher, opponent_ledgerId: res?.data?.parentVoucher?.accLedgerId?._id }
+                    setInitialData(clone)
+                    setOppChange(clone2)
+
+                    const cloneBank = { ...res?.data?.childVoucher, bank_ledgerId: res?.data?.childVoucher[0]?.accLedgerId?._id }
+                    setBankhange(cloneBank)
+                    setBank_id(res?.data?.childVoucher[0]?._id)
+
+
+                    const DiffAc1 = { ...res?.data?.childVoucher, diff_ledgerId: res?.data?.childVoucher[1]?.accLedgerId?._id }
+                    setDiff1(DiffAc1)
+                    setDiff1_id(res?.data?.childVoucher[1]?._id)
+                    const DiffAc2 = { ...res?.data?.childVoucher, diff_2_ledgerId: res?.data?.childVoucher[2]?.accLedgerId?._id }
+                    setDiff2(DiffAc2)
+                    setDiff2_id(res?.data?.childVoucher[2]?._id)
+
+                    // const childVoucherFind = res?.data?.childVoucher.map((item) => {
+                    //     return item
+                    // })
+
+                    // console.log(childVoucherFind);
+                }
+            } catch (error) {
+                console.error("Error fetching currency:", error);
+            }
+        };
+        getByIdData();
+    }, [param?.id]);
+
+
+
     const submitData = async () => {
-        const clone = { ...initialData, opponent_ledgerId: oppchange?.opponent_ledgerId, bank_ledgerId: bankhange?.bank_ledgerId }
+        const clone = { ...initialData, opponent_ledgerId: oppchange?.opponent_ledgerId, bank_ledgerId: bankhange?.bank_ledgerId, diff_ledgerId: diff1?.diff_ledgerId, diff_2_ledgerId: diff2?.diff_2_ledgerId, bank_id: bank_id, diff_id: diff1_id, diff_2_id: diff2_id, opponent_id: oppchange?._id }
         // console.log(clone);
         try {
-            const res = await vocherAddBank(clone)
-            console.log(res);
-            if (res?.error == false) {
-                toastSuccessMessage(res?.message)
+            if (!param?.id) {
+                const res = await vocherAddBank(clone)
+                // console.log(res);
+                if (res?.error == false) {
+                    toastSuccessMessage(res?.message)
+                } else {
+                    toastSuccessMessageError(res?.message)
+                }
             } else {
-                toastSuccessMessageError(res?.message)
+                const res = await vocherUpdateBank(param?.id, clone)
+                // console.log(res);
+                if (res?.error == false) {
+                    toastSuccessMessage(res?.message)
+                } else {
+                    toastSuccessMessageError(res?.message)
+                }
             }
+
 
         } catch (error) {
 
         }
 
     }
+
+
+
+
+    useEffect(() => {
+        masterData()
+    }, [])
 
 
     return (
@@ -313,7 +418,7 @@ const AddBankPayment = () => {
                         <div className="card-body p-0">
                             <div className="table-responsive active-projects style-1">
                                 <div className="tbl-caption tbl-caption-2">
-                                    <h4 className="heading mb-0">Add Bank Payment</h4>
+                                    <h4 className="heading mb-0">{param?.name}</h4>
                                 </div>
                                 <form className="p-4">
                                     <div className="row">
@@ -324,10 +429,11 @@ const AddBankPayment = () => {
                                                 ref={refs.voucherType}
                                                 onKeyDown={(e) => handleEnterKey(e, refs.voucherNumber, true)}
                                                 onChange={allChangeHandle}
+                                                value={initialData?.voucher_type}
                                             >
                                                 {/* <option selected>Open this select menu</option> */}
-                                                <option value={"Payment"}>Payment</option>
-                                                <option value={"Receipt"}>Receipt</option>
+                                                <option value={"Bank Payment"}>Payment</option>
+                                                <option value={"Bank Receipt"}>Receipt</option>
                                             </select>
                                         </div>
                                         <div className="col-md-3 mb-3">
@@ -337,11 +443,12 @@ const AddBankPayment = () => {
                                                 ref={refs.voucherNumber}
                                                 onKeyDown={(e) => handleEnterKey(e, refs.Date, true)}
                                                 onChange={allChangeHandle}
+                                                value={initialData?.voucher_no}
                                             >
                                                 <option selected>Open this select menu</option>
-                                                <option value={1}>One</option>
-                                                <option value={2}>Two</option>
-                                                <option value={3}>Three</option>
+                                                <option value={'1'}>One</option>
+                                                <option value={'2'}>Two</option>
+                                                <option value={'3'}>Three</option>
                                             </select>
                                         </div>
                                         <div className="col-md-3 mt-4">
@@ -349,7 +456,7 @@ const AddBankPayment = () => {
                                         </div>
                                         <div className="col-md-3 mb-3">
                                             <label htmlFor="projectName">Date</label>
-                                            <input type="date" className="form-control" id="projectName" name="voucher_date" defaultValue={currentDate} value={initialData?.voucher_date} placeholder="Enter Group Name"
+                                            <input type="date" className="form-control" id="projectName" name="voucher_date" value={initialData?.voucher_date} placeholder="Enter Group Name"
                                                 ref={refs.Date}
                                                 onKeyDown={(e) => handleEnterKey(e, refs.oppAcc)}
                                                 onChange={allChangeHandle}
@@ -360,6 +467,7 @@ const AddBankPayment = () => {
                                             <select className="form-control" aria-label="Default select example" name="opponent_ledgerId" onChange={oppAccountChange}
                                                 ref={refs.oppAcc}
                                                 onKeyDown={(e) => handleEnterKey(e, refs.amountOpp)}
+                                                value={oppchange?.opponent_ledgerId}
                                             >
                                                 <option selected>Open this select menu</option>
                                                 {oppAcc && oppAcc?.voucher?.map((item) => {
@@ -393,6 +501,7 @@ const AddBankPayment = () => {
                                                 ref={refs.bank}
                                                 onKeyDown={(e) => handleEnterKey(e, refs.bankAmount)}
                                                 onChange={bankAccountChange}
+                                                value={bankhange?.bank_ledgerId}
                                             >
                                                 <option selected>Open this select menu</option>
                                                 {bank && bank?.voucher?.map((item) => {
@@ -405,9 +514,11 @@ const AddBankPayment = () => {
                                         <div className="col-md-4 mt-5">
                                             {/* <label htmlFor="projectName">Opp.A/c: </label> */}
 
-                                            <p style={{ textAlign: 'center', margin: '0px' }}>Balance : <span style={{ color: 'red' }}>{filterbankhangAcc?.balance} {filterbankhangAcc?.balance_type}</span> + {initialData?.amountOpp} CR = <span style={{ color: 'red' }}>{totalBalancebank} {balanceType}
-                                                {/* {filteredOppAcc?.balance_type} */}
-                                            </span></p>
+                                            <p style={{ textAlign: 'center', margin: '0px' }}>
+                                                Balance : <span style={{ color: 'red' }}>{filterbankhangAcc?.balance} {filterbankhangAcc?.balance_type}</span>
+                                                + {initialData?.opponent_amount} CR =
+                                                <span style={{ color: 'red' }}>{totalBalancebank} {balanceTypeBank}</span>
+                                            </p>
                                         </div>
                                         <div className="col-md-4">
                                             <label htmlFor="projectName">Amount :</label>
@@ -420,11 +531,14 @@ const AddBankPayment = () => {
                                         <div className="col-md-4 mb-1">
                                             <label htmlFor="projectName">Diff.A/c: </label>
                                             <select className="form-control" aria-label="Default select example"
+                                                name="diff_ledgerId"
                                                 ref={refs.diffAcc1}
                                                 onKeyDown={(e) => handleEnterKey(e, refs.diffAcc1Amount)}
+                                                onChange={diff1Change}
+                                                value={diff1?.diff_ledgerId}
                                             >
                                                 <option selected>Open this select menu</option>
-                                                {discount1 && oppAcc?.discount1?.map((item) => {
+                                                {discount1 && discount1?.voucher?.map((item) => {
                                                     return <option value={item?._id} key={item?._id}>{item?.name}</option>
                                                 })}
                                             </select>
@@ -442,14 +556,17 @@ const AddBankPayment = () => {
                                             <input type="number" className="form-control" id="projectName" placeholder="Enter Amount "
                                                 ref={refs.diffAcc1Amount}
                                                 onKeyDown={(e) => handleEnterKey(e, refs.diffAcc2)}
-                                                name="DiffAc1Amont" value={initialData?.DiffAc1Amont} onChange={allChangeHandle}
+                                                name="diff_amount" value={initialData?.diff_amount} onChange={allChangeHandle}
                                             />
                                         </div>
                                         <div className="col-md-4 mb-1">
                                             <label htmlFor="projectName">Diff.A/c 2: </label>
                                             <select className="form-control" aria-label="Default select example"
+                                                name="diff_2_ledgerId"
                                                 ref={refs.diffAcc2}
                                                 onKeyDown={(e) => handleEnterKey(e, refs.diffAcc2Amount)}
+                                                onChange={diff2Change}
+                                                value={diff2?.diff_2_ledgerId}
                                             >
                                                 <option selected>Open this select menu</option>
                                                 {discount2 && discount2?.voucher?.map((item) => {
@@ -468,12 +585,13 @@ const AddBankPayment = () => {
                                         <div className="col-md-4">
                                             <label htmlFor="projectName">Amount :</label>
                                             <input type="number" className="form-control" id="projectName" placeholder="Enter Amount "
+
                                                 ref={refs.diffAcc2Amount}
                                                 onKeyDown={(e) => handleEnterKey(e, refs.checkDdNo)}
-                                                name="DiffAc2Amont" value={initialData?.DiffAc2Amont} onChange={allChangeHandle}
+                                                name="diff_2_amount" value={initialData?.diff_2_amount} onChange={allChangeHandle}
                                             />
                                         </div>
-                                        <div className="col-md-6">
+                                        <div className="col-md-4">
                                             <label htmlFor="projectName">Chq/DD No :</label>
                                             <input type="number" className="form-control" id="projectName" placeholder="Enter Chq/DD No  "
                                                 ref={refs.checkDdNo}
@@ -481,7 +599,7 @@ const AddBankPayment = () => {
                                                 name="cheque_no" value={initialData?.cheque_no} onChange={allChangeHandle}
                                             />
                                         </div>
-                                        <div className="col-md-6">
+                                        <div className="col-md-4">
                                             <label htmlFor="projectName">Chq/DD Date :</label>
                                             <input type="date" className="form-control" id="projectName" placeholder="Enter Chq/DD Date"
                                                 ref={refs.checkDdDate}
@@ -489,27 +607,36 @@ const AddBankPayment = () => {
                                                 name="cheque_date" value={initialData?.cheque_date} onChange={allChangeHandle}
                                             />
                                         </div>
-                                        <div className="col-md-6">
+                                        <div className="col-md-4">
                                             <label htmlFor="projectName">Narration:</label>
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" cols={50}
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows={1} cols={50}
                                                 ref={refs.naration}
                                                 // onKeyDown={(e) => handleEnterKey(e, refs.naration)}
                                                 name="narration" value={initialData?.narration} onChange={allChangeHandle}
                                             ></textarea>
-
                                         </div>
-                                        <div className="col-md-12 text-align-center">
-                                            <button type="button" className="btn btn-primary" onClick={submitData}>Save</button>
+                                        <div className="col-md-12 text-align-center-set">
+                                            <button type="button" className="btn btn-primary" disabled={disabledButton} onClick={submitData}>
+                                                {param?.id ? 'Update' : 'Save'}
+                                            </button>
+                                            <button type="button" className="btn btn-primary" onClick={pdfGenerateDefault}>Default Print</button>
+                                            <button type="button" className="btn btn-primary" >Advance Print</button>
                                         </div>
                                     </div>
                                 </form>
-
                             </div>
                         </div>
                     </div>
                 </div>
+                {pdf && <PDFViewer style={{ width: '100%', height: '100vh' }}>
+                    <PdfBank />
+                </PDFViewer>}
             </div>
             <ToastContainer />
+
+            {/* {pdf && <PdfBank />} */}
+
+
         </>
     )
 }

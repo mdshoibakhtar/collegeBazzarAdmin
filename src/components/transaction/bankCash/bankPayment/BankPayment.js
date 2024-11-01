@@ -7,7 +7,8 @@ import { vocherAddBankList } from "../../../../api/login/Login";
 
 
 
-const BankPayment = ({ heading }) => {
+
+const BankPayment = ({ heading, apiPass }) => {
     const breadCrumbsTitle = {
         id: "1",
         title_1: "Transaction",
@@ -15,6 +16,8 @@ const BankPayment = ({ heading }) => {
         title_3: `${heading}`,
         path_2: ``
     };
+
+
 
 
     const getCurrentDate = () => {
@@ -55,7 +58,9 @@ const BankPayment = ({ heading }) => {
     const getTransitionReport = async (input) => {
         // console.log('iojijip');
         setLoading(true)
-        const clone = { ...filterInitial, count: count, page: input, user_id: window.localStorage.getItem('userIdToken') }
+        const clone = { ...filterInitial, count: count, page: input, vocherType: apiPass, user_id: window.localStorage.getItem('userIdToken') }
+        console.log(clone);
+
         try {
             const res = await vocherAddBankList(clone)
             console.log(res?.data);
@@ -173,7 +178,7 @@ const BankPayment = ({ heading }) => {
         allDataWalletReport()
         getTransitionReport(0)
 
-    }, [])
+    }, [apiPass])
 
 
     return (
@@ -181,7 +186,7 @@ const BankPayment = ({ heading }) => {
             <Breadcrumbs
                 breadCrumbsTitle={breadCrumbsTitle} />
             {/* <GroupSummaryFilter /> */}
-            <BankPaymentFilter />
+            <BankPaymentFilter filterInitial={filterInitial} handleChange={handleChange} getTransitionReport={getTransitionReport} />
             <div style={{ margin: "14px" }}>
                 <div className="card">
                     <div className="card-body p-0">
@@ -191,7 +196,7 @@ const BankPayment = ({ heading }) => {
                                     {heading}
                                 </h4>
                                 <div>
-                                    <Link className="btn btn-primary btn-sm" to="/bankpayment/add" role="button" aria-controls="offcanvasExample">+ Add New</Link>
+                                    <Link className="btn btn-primary btn-sm" to={`/bankpayment/add/${heading === 'Bank Payment' ? 'Add Bank Payment' : heading === 'Bank Receipt' ? 'Add Bank Receipt' : heading === 'Cash Receipt' ? 'Add Cash Receipt' : heading === 'Cash Payment' ? 'Add Cash Payment' : ''} `} role="button" aria-controls="offcanvasExample">+ Add New</Link>
                                 </div>
                             </div>
                             <div id="empoloyees-tblwrapper_wrapper" className="dataTables_wrapper no-footer">
@@ -212,6 +217,7 @@ const BankPayment = ({ heading }) => {
                                             <th style={{ width: '150px' }}>Amount</th>
                                             <th style={{ width: '150px' }}>Narration</th>
                                             <th style={{ width: '150px' }}>Created By</th>
+                                            <th style={{ width: '150px' }}>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -234,16 +240,21 @@ const BankPayment = ({ heading }) => {
                                                     {item?.city}
                                                 </td>
                                                 <td >
-                                                    --
+                                                    {item?.cheque_no}
                                                 </td>
                                                 <td >
                                                     {item?.closing_amount}
                                                 </td>
                                                 <td >
-                                                    --
+                                                    {item?.narration}
                                                 </td>
                                                 <td >
                                                     {item?.createdAt}
+                                                </td>
+                                                <td>
+                                                    <Link to={`/bankpayment/update/${heading}/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
+                                                        <i className="fa fa-pencil" />
+                                                    </Link>
                                                 </td>
                                             </tr>
                                         })}
@@ -264,6 +275,8 @@ const BankPayment = ({ heading }) => {
                     </div>
                 </div>
             </div>
+
+
         </>
     )
 }
