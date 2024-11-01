@@ -4170,3 +4170,21 @@ export const deleteAccAvailableExpenseListById = (id) => {
     },
   });
 };
+
+
+export const getTcs_certificate = (page, count) => {
+  return axiosInstance.get(`acc_tcs_certificate/page?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+export const AddTcs_certificate = (value) => {
+  return axiosInstance.get(`acc_tcs_certificate/addType`, value, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};

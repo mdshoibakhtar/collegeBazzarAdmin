@@ -3,7 +3,7 @@ import Breadcrumbs from "../../../../common/breadcrumb/Breadcrumbs";
 import { Link } from "react-router-dom";
 import BankPaymentFilter from "./bankPaymentFilter/BankPaymentFilter";
 import { useEffect, useState } from "react";
-import { vocherAddBankList } from "../../../../api/login/Login";
+import { getTcs_certificate, vocherAddBankList } from "../../../../api/login/Login";
 
 
 
@@ -62,7 +62,7 @@ const BankPayment = ({ heading, apiPass }) => {
         console.log(clone);
 
         try {
-            const res = await vocherAddBankList(clone)
+            const res = await getTcs_certificate(clone)
             console.log(res?.data);
 
             setTotalCount(res?.data?.totalCount)
