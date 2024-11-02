@@ -863,6 +863,13 @@ import RateSheetPage from "./pages/priceList/rateSheet";
 import RateSheertAdd from "./components/priceList/rateSheert/rateSheertAdd/RateSheertAdd";
 import ProcessPage from "./pages/process";
 import ProcessAdd from "./components/process/processAdd/processAdd";
+import DocumentCategoriesPage from "./pages/documentManagement/documentcategories";
+import DocumentCategoriesAdd from "./components/documentManagement/documentCategories/documentCategoriesAdd/DocumentCategoriesAdd";
+import AddChildreenCategory from "./components/documentManagement/documentCategories/addChildreenCategory/AddChildreenCategory";
+import DocumentsArchivePage from "./pages/documentManagement/documentsArchive";
+import DocumentsAuditTrailPage from "./pages/documentManagement/documentsAuditTrail";
+import AllDocumentPage from "./pages/documentManagement/allDocument";
+import AllDocumentAdd from "./components/documentManagement/allDocument/allDocumentAdd/AllDocumentAdd";
 // import CreateStageplan from "./pages/NewStagesplan";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -2690,6 +2697,14 @@ function App() {
               <Route path="ratesheet/add" element={<RateSheertAdd />} />
               <Route path="process/list" element={<ProcessPage />} />
               <Route path="process/add" element={<ProcessAdd />} />
+              <Route path="document-categories" element={<DocumentCategoriesPage />} />
+              <Route path="document-categories-add" element={<DocumentCategoriesAdd />} />
+              <Route path="children-categories-add" element={<AddChildreenCategory />} />
+              <Route path="archived-documents" element={<DocumentsArchivePage />} />
+              <Route path="document-audit-trails" element={<DocumentsAuditTrailPage />} />
+              <Route path="documents" element={<AllDocumentPage />} />
+              <Route path="documents-add" element={<AllDocumentAdd />} />
+
 
 
             </Route>
