@@ -5,8 +5,42 @@ import { Pagination } from "react-bootstrap";
 import { Popconfirm } from "antd";
 import { FaPlus } from "react-icons/fa6";
 import AddTcsCertificateForm from "./AddTcsCertificateForm";
+import { useState } from "react";
+import { AddTcs_certificate } from "../../../../../api/login/Login";
 
 function AddTcsCertificate() {
+  const [initialData, setInitialData] = useState({
+    name: '',
+    date: '',
+    form_no: '',
+    cerficate_ref_no: '',
+    voucher_type: '',
+    account: '',
+    tcs_percent: '',
+    tcs_limilt: '',
+    start_date: '',
+    last_date: '',
+    upload_document: ''
+  })
+  const changeHandle = (e) => {
+    const clone = { ...initialData }
+    const value = e.target.value
+    const name = e.target.name
+    clone[name] = value
+    setInitialData(clone)
+  }
+
+  const submitData = async () => {
+    // console.log(initialData);
+    try {
+      const res = await AddTcs_certificate(initialData)
+      console.log(res);
+
+    } catch (error) {
+
+    }
+
+  }
   return (
     <>
       <div>
@@ -35,7 +69,7 @@ function AddTcsCertificate() {
                     </div>
                   </div>
                   <div>
-                    <AddTcsCertificateForm />
+                    <AddTcsCertificateForm initialData={initialData} changeHandle={changeHandle} submitData={submitData} />
                   </div>
                 </div>
               </div>

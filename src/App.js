@@ -861,6 +861,21 @@ import Processgropmasterspage from "./pages/processgroupmaster";
 import Processgroupmasterform from "./components/processgroupmaster/processgroupmasterform/Processgroupmasterform";
 import BranchMasterPage from "./pages/branchmaster";
 import BranchMasterForm from "./components/branchMaster/branchMasterform/BranchMasterForm";
+import AssignedDocuments from "./components/topNavigationComp/masters/AssignedDoc/AssignedDocuments";
+import AssignedAdd from "./components/topNavigationComp/masters/AssignedDoc/masterform/AssignedAdd";
+import PriceMasterPage from "./pages/priceList/priceMaster";
+import PriceMasterAdd from "./components/priceList/priceMaster/priceMasterAdd/PriceMasterAdd";
+import RateSheetPage from "./pages/priceList/rateSheet";
+import RateSheertAdd from "./components/priceList/rateSheert/rateSheertAdd/RateSheertAdd";
+import ProcessPage from "./pages/process";
+import ProcessAdd from "./components/process/processAdd/processAdd";
+import DocumentCategoriesPage from "./pages/documentManagement/documentcategories";
+import DocumentCategoriesAdd from "./components/documentManagement/documentCategories/documentCategoriesAdd/DocumentCategoriesAdd";
+import AddChildreenCategory from "./components/documentManagement/documentCategories/addChildreenCategory/AddChildreenCategory";
+import DocumentsArchivePage from "./pages/documentManagement/documentsArchive";
+import DocumentsAuditTrailPage from "./pages/documentManagement/documentsAuditTrail";
+import AllDocumentPage from "./pages/documentManagement/allDocument";
+import AllDocumentAdd from "./components/documentManagement/allDocument/allDocumentAdd/AllDocumentAdd";
 // import CreateStageplan from "./pages/NewStagesplan";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -2496,9 +2511,9 @@ function App() {
               <Route path="add-Invoice-Type" element={<TypeInvoiceAdd />} />
               <Route path="add-Invoice-Type/:id" element={<TypeInvoiceAdd />} />
 
-              {/* <Route path="Expense-Master" element={<ExpenseMaster />} />
+              <Route path="Expense-Master" element={<ExpenseMaster />} />
               <Route path="add-Expense-Master" element={<ExpenseAdd />} />
-              <Route path="add-Expense-Master/:id" element={<ExpenseAdd />} /> */}
+              <Route path="add-Expense-Master/:id" element={<ExpenseAdd />} />
 
               <Route path="link-purchase-expense" element={<LinkPurchaseExpense />} />
               <Route path="link-expense-with-invoice-type" element={<LinkExpenseWithInvoiceType />} />
@@ -2544,6 +2559,10 @@ function App() {
               <Route path="TCS-Master" element={<TcsMaster />} />
               <Route path="add-TCS-Master" element={<TcsAdd />} />
               <Route path="add-TCS-Master/:id" element={<TcsAdd />} />
+
+              <Route path="assigned-doc-Master" element={<AssignedDocuments />} />
+              <Route path="add-assigned-doc" element={<AssignedAdd />} />
+              <Route path="add-assigned-doc/:id" element={<AssignedAdd />} />
 
               <Route path="wallet_report" element={<Walletreport />} />
 
@@ -2624,7 +2643,7 @@ function App() {
               <Route path="ele-close-inward-product" element={<InwardProduct />} />
               {/* 21:10:21-10-24 */}
 
-             
+
               {/*-------------------------meraj Routes End ----------------------- */}
 
               {/* HAWALA ROUTES ---------------------- */}
@@ -2670,13 +2689,28 @@ function App() {
               <Route path="sms-setup" element={<SmsSetupPage />} />
               {/* Report and Reminder */}
               <Route path="report-setup" element={<ReportSetupPage />} />
-              <Route path="reminder-setup" element={<ReminderSetupPage/>} />
+              <Route path="reminder-setup" element={<ReminderSetupPage />} />
               <Route path="process-group-master" element={<Processgropmasterspage/>} />
               <Route path="create-process-group-master" element={<Processgroupmasterform/>} />
               <Route path="branch-master" element={<BranchMasterPage/>} />
               <Route path="create-branch-master" element={<BranchMasterForm/>}/>
               <Route path="*" element={<PageNotFound />} />
               {/* <Route path="/busbookig" element={<BusBookingMain />} /> */}
+
+              <Route path="pricemaster/list" element={<PriceMasterPage />} />
+              <Route path="pricemaster/add" element={<PriceMasterAdd />} />
+              <Route path="ratesheet/list" element={<RateSheetPage />} />
+              <Route path="ratesheet/add" element={<RateSheertAdd />} />
+              <Route path="process/list" element={<ProcessPage />} />
+              <Route path="process/add" element={<ProcessAdd />} />
+              <Route path="document-categories" element={<DocumentCategoriesPage />} />
+              <Route path="document-categories-add" element={<DocumentCategoriesAdd />} />
+              <Route path="children-categories-add" element={<AddChildreenCategory />} />
+              <Route path="archived-documents" element={<DocumentsArchivePage />} />
+              <Route path="document-audit-trails" element={<DocumentsAuditTrailPage />} />
+              <Route path="documents" element={<AllDocumentPage />} />
+              <Route path="documents-add" element={<AllDocumentAdd />} />
+
 
 
             </Route>

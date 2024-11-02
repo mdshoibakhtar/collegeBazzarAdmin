@@ -6,50 +6,53 @@ import { IoEyeSharp, IoSearch } from "react-icons/io5";
 import ExportFile from "../../../../common/exportFile/ExportFile";
 import { FaPlus } from "react-icons/fa6";
 
-function TcsCertificate() {
-  const [receipts, setReceipts] = useState([]);
-  const [selectedReceipts, setSelectedReceipts] = useState(new Set());
+function TcsCertificate({ data }) {
+  // const [receipts, setReceipts] = useState([]);
+  // const [selectedReceipts, setSelectedReceipts] = useState(new Set());
 
-  useEffect(() => {
-    // Mock fetch data function
-    const fetchReceipts = async () => {
-      // Fetch data from API or some source
-      const data = [
-        {
-          id: 1,
-          date: "",
-          formNo: "",
-          certificateNo: "",
-          tcsPer: "",
-          tcsLimit: "",
-          party: "",
-          startDate: "",
-          endDate: "",
-        },
-      ];
-      setReceipts(data);
-    };
+  // useEffect(() => {
+  //   // Mock fetch data function
+  //   const fetchReceipts = async () => {
+  //     // Fetch data from API or some source
+  //     const data = [
+  //       {
+  //         id: 1,
+  //         date: "",
+  //         formNo: "",
+  //         certificateNo: "",
+  //         tcsPer: "",
+  //         tcsLimit: "",
+  //         party: "",
+  //         startDate: "",
+  //         endDate: "",
+  //       },
+  //     ];
+  //     setReceipts(data);
+  //   };
 
-    fetchReceipts();
-  }, []);
+  //   fetchReceipts();
+  // }, []);
 
-  const handleCheckboxChange = (id) => {
-    const updatedSelection = new Set(selectedReceipts);
-    if (updatedSelection.has(id)) {
-      updatedSelection.delete(id);
-    } else {
-      updatedSelection.add(id);
-    }
-    setSelectedReceipts(updatedSelection);
-  };
+  // const handleCheckboxChange = (id) => {
+  //   const updatedSelection = new Set(selectedReceipts);
+  //   if (updatedSelection.has(id)) {
+  //     updatedSelection.delete(id);
+  //   } else {
+  //     updatedSelection.add(id);
+  //   }
+  //   setSelectedReceipts(updatedSelection);
+  // };
 
-  const handleSelectAll = (event) => {
-    const isChecked = event.target.checked;
-    const newSelection = isChecked
-      ? new Set(receipts.map((receipt) => receipt.id))
-      : new Set();
-    setSelectedReceipts(newSelection);
-  };
+  // const handleSelectAll = (event) => {
+  //   const isChecked = event.target.checked;
+  //   const newSelection = isChecked
+  //     ? new Set(receipts.map((receipt) => receipt.id))
+  //     : new Set();
+  //   setSelectedReceipts(newSelection);
+  // };
+
+
+
 
   return (
     <>
@@ -63,7 +66,7 @@ function TcsCertificate() {
                   <div className="d-flex" style={{ alignItems: "center" }}>
                     <Link
                       className="btn btn-primary btn-sm"
-                      to="addTCS-certificate"
+                      to="/tcscertificate/add"
                     >
                       <FaPlus className="fs-5 mb-1" /> Add
                     </Link>
@@ -87,11 +90,11 @@ function TcsCertificate() {
                     <thead>
                       <tr role="row">
                         <th>
-                          <input
+                          {/* <input
                             type="checkbox"
                             onChange={handleSelectAll}
                             checked={selectedReceipts.size === receipts.length}
-                          />
+                          /> */}
                         </th>
 
                         <th>Date</th>
@@ -106,23 +109,23 @@ function TcsCertificate() {
                       </tr>
                     </thead>
                     <tbody>
-                      {receipts.map((receipt) => (
+                      {data && data?.map((receipt) => (
                         <tr key={receipt.id} role="row">
                           <td>
-                            <input
+                            {/* <input
                               type="checkbox"
                               checked={selectedReceipts.has(receipt.id)}
                               onChange={() => handleCheckboxChange(receipt.id)}
-                            />
+                            /> */}
                           </td>
-                          <td>{receipt.date}</td>
-                          <td>{receipt.formNo}</td>
-                          <td>{receipt.certificateNo}</td>
-                          <td>{receipt.tcsPer}</td>
-                          <td>{receipt.tcsLimit}</td>
-                          <td>{receipt.party}</td>
-                          <td>{receipt.startDate}</td>
-                          <td>{receipt.endDate}</td>
+                          <td>--</td>
+                          <td>--</td>
+                          <td>--</td>
+                          <td>--</td>
+                          <td>--</td>
+                          <td>--</td>
+                          <td>--</td>
+                          <td>--</td>
 
                           <td>
                             <div className="d-flex">
@@ -162,7 +165,7 @@ function TcsCertificate() {
                     role="status"
                     aria-live="polite"
                   >
-                    Total {receipts.length} entries
+                    Total { } entries
                   </div>
                   <div className="dataTables_paginate paging_simple_numbers">
                     <Pagination defaultCurrent={1} />
