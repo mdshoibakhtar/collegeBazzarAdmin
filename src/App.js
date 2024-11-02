@@ -832,6 +832,26 @@ import AddVoucher from "./components/kingsonreports/AccountBook/accountMaster/vo
 import VoucherMasterList from "./components/kingsonreports/AccountBook/accountMaster/voucherMaster/voucherMasterList/VoucherMasterList";
 import BusBookingMain from "./components/bus-booking-report/BusBookingMain";
 import AccountLedgerPageView from "./pages/report/accountBook/accountLedgerView";
+import TaxMasterPage from "./pages/setup/taxSetup/taxMaster";
+import AddTaxMaster from "./components/setup/taxSetup/taxMaster/addTaxMaster/AddTaxMaster";
+import TaxGroupPage from "./pages/setup/taxSetup/taxGroup";
+import AddTaxGroup from "./components/setup/taxSetup/taxGroup/addTaxGroup/AddTaxGroup";
+
+// ---26:10:24---import here---
+import TcsMasterPage from "./pages/setup/taxSetup/tcsMaster";
+import AddTcsMaster from "./components/setup/taxSetup/tcsMaster/addTcsMaster/AddTcsMaster";
+import TcsCertificatePage from "./pages/setup/taxSetup/tcsCertificate";
+import AddTcsCertificate from "./components/setup/taxSetup/tcsCertificate/addTcsCertificate/AddTcsCertificate";
+import EmailSetupPage from "./pages/setup/emailSetup";
+
+// ---28:10:24----import---here
+import NotificationSetupPage from "./pages/setup/notificationSetup";
+import SchedulerSetupPage from "./pages/setup/schedulerSetup";
+import SmsSetupPage from "./pages/setup/smsSetup";
+import ReminderSetupPage from "./pages/setup/reminderSetup";
+
+// ---29:10:24---
+import ReportSetupPage from "./pages/setup/reportSetup";
 import SetupVoucher from "./components/setup/setupVoucher/SetupVoucher";
 import InvoiceMaster from "./components/topNavigationComp/masters/invoiceType/InvoiceMaster";
 import TypeInvoiceAdd from "./components/topNavigationComp/masters/invoiceType/masterform/TypeInvoiceAdd";
@@ -839,6 +859,19 @@ import ExpenseMaster from "./components/topNavigationComp/masters/expensemaster/
 import ExpenseAdd from "./components/topNavigationComp/masters/expensemaster/masterform/ExpenseAdd";
 import AssignedDocuments from "./components/topNavigationComp/masters/AssignedDoc/AssignedDocuments";
 import AssignedAdd from "./components/topNavigationComp/masters/AssignedDoc/masterform/AssignedAdd";
+import PriceMasterPage from "./pages/priceList/priceMaster";
+import PriceMasterAdd from "./components/priceList/priceMaster/priceMasterAdd/PriceMasterAdd";
+import RateSheetPage from "./pages/priceList/rateSheet";
+import RateSheertAdd from "./components/priceList/rateSheert/rateSheertAdd/RateSheertAdd";
+import ProcessPage from "./pages/process";
+import ProcessAdd from "./components/process/processAdd/processAdd";
+import DocumentCategoriesPage from "./pages/documentManagement/documentcategories";
+import DocumentCategoriesAdd from "./components/documentManagement/documentCategories/documentCategoriesAdd/DocumentCategoriesAdd";
+import AddChildreenCategory from "./components/documentManagement/documentCategories/addChildreenCategory/AddChildreenCategory";
+import DocumentsArchivePage from "./pages/documentManagement/documentsArchive";
+import DocumentsAuditTrailPage from "./pages/documentManagement/documentsAuditTrail";
+import AllDocumentPage from "./pages/documentManagement/allDocument";
+import AllDocumentAdd from "./components/documentManagement/allDocument/allDocumentAdd/AllDocumentAdd";
 // import CreateStageplan from "./pages/NewStagesplan";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -2614,7 +2647,7 @@ function App() {
               <Route path="ele-close-inward-product" element={<InwardProduct />} />
               {/* 21:10:21-10-24 */}
 
-             
+
               {/*-------------------------meraj Routes End ----------------------- */}
 
               {/* HAWALA ROUTES ---------------------- */}
@@ -2634,16 +2667,50 @@ function App() {
               <Route path="voucher/print" element={<VoucherPrint />} />
               <Route path="barcode/utility" element={<Barcodetility />} />
 
-
               {/*-------------------------26:10:24------------------------ */}
+              <Route path="voucher-setup" element={<SetupVoucher />} />
               <Route path="voucher-type-list" element={<VoucherMasterList />} />
-              <Route path="add-voucher-type" element={<AddVoucher />} />
-              <Route path="update-voucher-type/:id" element={<AddVoucher />} />
-              <Route path="setupvoucher" element={<SetupVoucher />} />
+              <Route path="voucher-setup" element={<VoucherMasterList />} />
+              <Route path="voucher-type/add" element={<AddVoucher />} />
+              <Route path="voucher-type/edit/:id" element={<AddVoucher />} />
 
+              {/* Tax Master */}
+              <Route path="taxmaster" element={<TaxMasterPage />} />
+              <Route path="taxmaster/add" element={<AddTaxMaster />} />
+              <Route path="taxgroup" element={<TaxGroupPage />} />
+              <Route path="taxgroup/add" element={<AddTaxGroup />} />
 
+              {/* TCS Master */}
+              <Route path="tcsmaster" element={<TcsMasterPage />} />
+              <Route path="tcsmaster/add" element={<AddTcsMaster />} />
+              <Route path="tcscertificate" element={<TcsCertificatePage />} />
+              <Route path="tcscertificate/add" element={<AddTcsCertificate />} />
+
+              {/* Email and Notification */}
+              <Route path="email-setup" element={<EmailSetupPage />} />
+              <Route path="notification-setup" element={<NotificationSetupPage />} />
+              <Route path="scheduler-setup" element={<SchedulerSetupPage />} />
+              <Route path="sms-setup" element={<SmsSetupPage />} />
+              {/* Report and Reminder */}
+              <Route path="report-setup" element={<ReportSetupPage />} />
+              <Route path="reminder-setup" element={<ReminderSetupPage />} />
               <Route path="*" element={<PageNotFound />} />
               {/* <Route path="/busbookig" element={<BusBookingMain />} /> */}
+
+              <Route path="pricemaster/list" element={<PriceMasterPage />} />
+              <Route path="pricemaster/add" element={<PriceMasterAdd />} />
+              <Route path="ratesheet/list" element={<RateSheetPage />} />
+              <Route path="ratesheet/add" element={<RateSheertAdd />} />
+              <Route path="process/list" element={<ProcessPage />} />
+              <Route path="process/add" element={<ProcessAdd />} />
+              <Route path="document-categories" element={<DocumentCategoriesPage />} />
+              <Route path="document-categories-add" element={<DocumentCategoriesAdd />} />
+              <Route path="children-categories-add" element={<AddChildreenCategory />} />
+              <Route path="archived-documents" element={<DocumentsArchivePage />} />
+              <Route path="document-audit-trails" element={<DocumentsAuditTrailPage />} />
+              <Route path="documents" element={<AllDocumentPage />} />
+              <Route path="documents-add" element={<AllDocumentAdd />} />
+
 
 
             </Route>

@@ -3609,6 +3609,15 @@ export const vocherAddBank = (data) => {
   });
 };
 
+export const vocherUpdateBank = (id, data) => {
+  return axiosInstance.put(`AccVoucher/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
 
 export const vocherAddBankList = (value) => {
   // console.log('vocherAddBankList', value);
@@ -3837,8 +3846,7 @@ export const updateAccTaxMasterById = (id, data) => {
 };
 
 
-
-export const getAllLegers = (page, count,start_date,end_date,AccLedgerGroupId) => {
+export const getAllLegers = (page, count, start_date, end_date, AccLedgerGroupId) => {
   return axiosInstance.get(`/Accledger/allList?start_date=${start_date}&end_date=${end_date}&AccLedgerGroupId=${AccLedgerGroupId}&page=${page}&count=${count}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
@@ -4260,6 +4268,47 @@ export const updateAccTcsMasterById = (id, data) => {
 // DELETE an acc_tcs_master entry by ID
 export const deleteAccTcsMasterById = (id) => {
   return axiosInstance.delete(`/acc_tcs_master/delete_type/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+export const getTcs_certificate = (page, count) => {
+  return axiosInstance.get(`acc_tcs_certificate/page?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+export const AddTcs_certificate = (value) => {
+  return axiosInstance.get(`acc_tcs_certificate/addType`, value, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+
+export const addAllDocument = (data) => {
+  return axiosInstance.post(`doc_management_add_doc/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+export const doc_management_add_doc_get = (value) => {
+  // console.log(value);
+
+  return axiosInstance.get(`doc_management_add_doc/user?page=${value?.page}&count=${value?.count}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
       Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,

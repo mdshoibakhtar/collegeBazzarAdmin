@@ -1,9 +1,11 @@
 import { useLocation, useParams } from "react-router-dom";
 import Breadcrumbs from "../../../../../common/breadcrumb/Breadcrumbs"
 import { useEffect, useRef, useState } from "react";
-import { masterget, vocherAddBank, vocherUpdateBankListById } from "../../../../../api/login/Login";
+import { masterget, vocherAddBank, vocherUpdateBank, vocherUpdateBankListById } from "../../../../../api/login/Login";
 import { toast, ToastContainer } from "react-toastify";
 import PdfBank from "./pdfBank/PdfBank";
+import { PDFViewer } from "@react-pdf/renderer";
+import { format } from 'date-fns';
 
 
 const AddBankPayment = () => {
@@ -39,7 +41,7 @@ const AddBankPayment = () => {
 
     const getCurrentDate = () => {
         const today = new Date();
-        console.log(today);
+        // console.log(today);
         return today.toISOString().split('T')[0];
     };
 
@@ -124,6 +126,9 @@ const AddBankPayment = () => {
     const [bankhange, setBankhange] = useState({
         bank_ledgerId: ''
     })
+
+    // console.log(bankhange);
+
     const [filterbankhangAcc, setFilterbankhangAcc] = useState(null);
     const [totalBalancebank, setTotalBalancebank] = useState('');
     const [balanceTypeBank, setbalanceTypeBank] = useState("CR");
@@ -250,7 +255,7 @@ const AddBankPayment = () => {
         // }
 
         if (e.key === "Enter") {
-            console.log(isSelect);
+            // console.log(isSelect);
             e.preventDefault();
             if (isSelect && nextRef?.current) {
                 nextRef.current.focus();
@@ -315,6 +320,10 @@ const AddBankPayment = () => {
 
     const disabledButton = !initialData.voucher_no || !oppchange?.opponent_ledgerId || !initialData.opponent_amount || !bankhange?.bank_ledgerId || !initialData.bank_amount || !initialData.narration || !initialData.cheque_no || !initialData.cheque_date
 
+    const [bank_id, setBank_id] = useState()
+    const [diff1_id, setDiff1_id] = useState()
+    const [diff2_id, setDiff2_id] = useState()
+
 
 
     useEffect(() => {
@@ -323,11 +332,35 @@ const AddBankPayment = () => {
                 if (param?.id) {
                     const res = await vocherUpdateBankListById(param)
                     // console.log('parentVoucher', res?.data?.parentVoucher);
+                    const date = format(new Date(res?.data?.parentVoucher?.voucherDate), 'yyyy-MM-dd');
 
-                    const clone = { ...res?.data?.parentVoucher, voucher_no: res?.data?.parentVoucher?.voucherNo, voucher_date: res?.data?.parentVoucher?.voucherDate }
+                    const clone = {
+                        ...res?.data?.parentVoucher, voucher_no: res?.data?.parentVoucher?.voucherNo, voucher_date: date, opponent_amount: res?.data?.parentVoucher?.drAmt,
+                        bank_amount: res?.data?.childVoucher[0]?.crAmt, diff_amount: res?.data?.childVoucher[1]?.crAmt, diff_2_amount: res?.data?.childVoucher[2]?.crAmt
+                    }
                     // console.log(clone);
-
+                    // console.log(clone?.opponent_ledgerId)
+                    const clone2 = { ...res?.data?.parentVoucher, opponent_ledgerId: res?.data?.parentVoucher?.accLedgerId?._id }
                     setInitialData(clone)
+                    setOppChange(clone2)
+
+                    const cloneBank = { ...res?.data?.childVoucher, bank_ledgerId: res?.data?.childVoucher[0]?.accLedgerId?._id }
+                    setBankhange(cloneBank)
+                    setBank_id(res?.data?.childVoucher[0]?._id)
+
+
+                    const DiffAc1 = { ...res?.data?.childVoucher, diff_ledgerId: res?.data?.childVoucher[1]?.accLedgerId?._id }
+                    setDiff1(DiffAc1)
+                    setDiff1_id(res?.data?.childVoucher[1]?._id)
+                    const DiffAc2 = { ...res?.data?.childVoucher, diff_2_ledgerId: res?.data?.childVoucher[2]?.accLedgerId?._id }
+                    setDiff2(DiffAc2)
+                    setDiff2_id(res?.data?.childVoucher[2]?._id)
+
+                    // const childVoucherFind = res?.data?.childVoucher.map((item) => {
+                    //     return item
+                    // })
+
+                    // console.log(childVoucherFind);
                 }
             } catch (error) {
                 console.error("Error fetching currency:", error);
@@ -339,16 +372,27 @@ const AddBankPayment = () => {
 
 
     const submitData = async () => {
-        const clone = { ...initialData, opponent_ledgerId: oppchange?.opponent_ledgerId, bank_ledgerId: bankhange?.bank_ledgerId, diff_ledgerId: diff1?.diff_ledgerId, diff_2_ledgerId: diff2?.diff_2_ledgerId }
+        const clone = { ...initialData, opponent_ledgerId: oppchange?.opponent_ledgerId, bank_ledgerId: bankhange?.bank_ledgerId, diff_ledgerId: diff1?.diff_ledgerId, diff_2_ledgerId: diff2?.diff_2_ledgerId, bank_id: bank_id, diff_id: diff1_id, diff_2_id: diff2_id, opponent_id: oppchange?._id }
         // console.log(clone);
         try {
-            const res = await vocherAddBank(clone)
-            // console.log(res);
-            if (res?.error == false) {
-                toastSuccessMessage(res?.message)
+            if (!param?.id) {
+                const res = await vocherAddBank(clone)
+                // console.log(res);
+                if (res?.error == false) {
+                    toastSuccessMessage(res?.message)
+                } else {
+                    toastSuccessMessageError(res?.message)
+                }
             } else {
-                toastSuccessMessageError(res?.message)
+                const res = await vocherUpdateBank(param?.id, clone)
+                // console.log(res);
+                if (res?.error == false) {
+                    toastSuccessMessage(res?.message)
+                } else {
+                    toastSuccessMessageError(res?.message)
+                }
             }
+
 
         } catch (error) {
 
@@ -423,6 +467,7 @@ const AddBankPayment = () => {
                                             <select className="form-control" aria-label="Default select example" name="opponent_ledgerId" onChange={oppAccountChange}
                                                 ref={refs.oppAcc}
                                                 onKeyDown={(e) => handleEnterKey(e, refs.amountOpp)}
+                                                value={oppchange?.opponent_ledgerId}
                                             >
                                                 <option selected>Open this select menu</option>
                                                 {oppAcc && oppAcc?.voucher?.map((item) => {
@@ -456,6 +501,7 @@ const AddBankPayment = () => {
                                                 ref={refs.bank}
                                                 onKeyDown={(e) => handleEnterKey(e, refs.bankAmount)}
                                                 onChange={bankAccountChange}
+                                                value={bankhange?.bank_ledgerId}
                                             >
                                                 <option selected>Open this select menu</option>
                                                 {bank && bank?.voucher?.map((item) => {
@@ -489,6 +535,7 @@ const AddBankPayment = () => {
                                                 ref={refs.diffAcc1}
                                                 onKeyDown={(e) => handleEnterKey(e, refs.diffAcc1Amount)}
                                                 onChange={diff1Change}
+                                                value={diff1?.diff_ledgerId}
                                             >
                                                 <option selected>Open this select menu</option>
                                                 {discount1 && discount1?.voucher?.map((item) => {
@@ -519,6 +566,7 @@ const AddBankPayment = () => {
                                                 ref={refs.diffAcc2}
                                                 onKeyDown={(e) => handleEnterKey(e, refs.diffAcc2Amount)}
                                                 onChange={diff2Change}
+                                                value={diff2?.diff_2_ledgerId}
                                             >
                                                 <option selected>Open this select menu</option>
                                                 {discount2 && discount2?.voucher?.map((item) => {
@@ -580,9 +628,15 @@ const AddBankPayment = () => {
                         </div>
                     </div>
                 </div>
+                {pdf && <PDFViewer style={{ width: '100%', height: '100vh' }}>
+                    <PdfBank />
+                </PDFViewer>}
             </div>
             <ToastContainer />
-            {pdf && <PdfBank />}
+
+            {/* {pdf && <PdfBank />} */}
+
+
         </>
     )
 }
