@@ -837,6 +837,8 @@ import InvoiceMaster from "./components/topNavigationComp/masters/invoiceType/In
 import TypeInvoiceAdd from "./components/topNavigationComp/masters/invoiceType/masterform/TypeInvoiceAdd";
 import ExpenseMaster from "./components/topNavigationComp/masters/expensemaster/ExpenseMaster";
 import ExpenseAdd from "./components/topNavigationComp/masters/expensemaster/masterform/ExpenseAdd";
+import AssignedDocuments from "./components/topNavigationComp/masters/AssignedDoc/AssignedDocuments";
+import AssignedAdd from "./components/topNavigationComp/masters/AssignedDoc/masterform/AssignedAdd";
 // import CreateStageplan from "./pages/NewStagesplan";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -2480,9 +2482,9 @@ function App() {
               <Route path="add-Invoice-Type" element={<TypeInvoiceAdd />} />
               <Route path="add-Invoice-Type/:id" element={<TypeInvoiceAdd />} />
 
-              {/* <Route path="Expense-Master" element={<ExpenseMaster />} />
+              <Route path="Expense-Master" element={<ExpenseMaster />} />
               <Route path="add-Expense-Master" element={<ExpenseAdd />} />
-              <Route path="add-Expense-Master/:id" element={<ExpenseAdd />} /> */}
+              <Route path="add-Expense-Master/:id" element={<ExpenseAdd />} />
 
               <Route path="link-purchase-expense" element={<LinkPurchaseExpense />} />
               <Route path="link-expense-with-invoice-type" element={<LinkExpenseWithInvoiceType />} />
@@ -2528,6 +2530,10 @@ function App() {
               <Route path="TCS-Master" element={<TcsMaster />} />
               <Route path="add-TCS-Master" element={<TcsAdd />} />
               <Route path="add-TCS-Master/:id" element={<TcsAdd />} />
+
+              <Route path="assigned-doc-Master" element={<AssignedDocuments />} />
+              <Route path="add-assigned-doc" element={<AssignedAdd />} />
+              <Route path="add-assigned-doc/:id" element={<AssignedAdd />} />
 
               <Route path="wallet_report" element={<Walletreport />} />
 
