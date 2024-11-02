@@ -4188,3 +4188,26 @@ export const AddTcs_certificate = (value) => {
     },
   });
 };
+
+
+
+export const addAllDocument = (data) => {
+  return axiosInstance.post(`doc_management_add_doc/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+export const doc_management_add_doc_get = (value) => {
+  // console.log(value);
+
+  return axiosInstance.get(`doc_management_add_doc/user?page=${value?.page}&count=${value?.count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
