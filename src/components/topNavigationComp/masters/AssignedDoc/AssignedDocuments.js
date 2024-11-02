@@ -1,13 +1,13 @@
 
 import Breadcrumbs from '../../../../common/breadcrumb/Breadcrumbs'
 import React, { useEffect, useState } from 'react'
-import {  deleteAccTaxGroupById, deleteNatureById, deleteTaskRelatedToById, getAccTaxGroupByPage, getNature, getTaskRelatedTo } from '../../../../api/login/Login'
+import {  deleteAccAvailableExpenseListById, getAccAvailableExpenseListByPage } from '../../../../api/login/Login'
 import { message } from 'antd'
 import MasterList from './masterList/MasterList'
-function TaxGroup() {
+function AssignedDocuments() {
     const breadCrumbsTitle = {
         title_1: "master",
-        title_2: "Tax Group",
+        title_2: "Assigned Documents",
     }
     const [data, setData] = useState()
     const [loading, setLoading] = useState(false);
@@ -20,7 +20,7 @@ function TaxGroup() {
     const getFloorMasters = async (page) => {
         setLoading(true)
         try {
-            const res = await getAccTaxGroupByPage(page, count)
+            const res = await getAccAvailableExpenseListByPage(page, count)
             setTotalCount(res?.totalCount)
             setData(res?.data)
             setPage(page)
@@ -31,9 +31,6 @@ function TaxGroup() {
     }
     // add Area
 
-
-    
-
     const onChangeVal = (e) => {
         // console.log(e);
         getFloorMasters(e - 1)
@@ -42,7 +39,7 @@ function TaxGroup() {
     const deleteBlockAdd = async (id) => {
         setLoading(true)
         try {
-            await deleteAccTaxGroupById(id)
+            await deleteAccAvailableExpenseListById(id)
             let backList = totalCount % 11 === 0 ? page - 1 : page
             getFloorMasters(backList)
         } catch (error) {
@@ -65,14 +62,14 @@ function TaxGroup() {
 
 
     useEffect(() => {
-        getFloorMasters(page)
+        // getFloorMasters(page)
     }, [])
     return (
         <>
-            <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
+            {/* <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} /> */}
             <MasterList totalCount={totalCount} page={page} onChangeVal={onChangeVal} data={data}  count={count} confirm={confirm} cancel={cancel} loading={loading}/>
         </>
     )
 }
 
-export default TaxGroup
+export default AssignedDocuments

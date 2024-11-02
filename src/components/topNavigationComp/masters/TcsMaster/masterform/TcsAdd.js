@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Breadcrumbs from '../../../../../common/breadcrumb/Breadcrumbs';
-import { postNature, updateNatureById, getNatureById } from '../../../../../api/login/Login';
+import { getAccTcsMasterById, postAccTcsMaster, updateAccTcsMasterById } from '../../../../../api/login/Login';
 import { toast, ToastContainer } from 'react-toastify';
 
 function TcsAdd() {
@@ -11,50 +11,29 @@ function TcsAdd() {
     };
 
     const [formValues, setFormValues] = useState({
-        name: "",
-        rows: [{ taxMaster: "", effDate: "" }]
+        type_name: "",
+        tcs_limit: "",
+        tcs_percent: "",
     });
 
     const params = useParams();
     const navigate = useNavigate();
 
-    const handleAddRow = () => {
-        setFormValues((prev) => ({
-            ...prev,
-            rows: [...prev.rows, { taxMaster: "", effDate: "" }]
-        }));
-    };
-
-    const handleRemoveRow = (index) => {
-        setFormValues((prev) => ({
-            ...prev,
-            rows: prev.rows.filter((_, idx) => idx !== index)
-        }));
-    };
-
-    const handleChangeRow = (index, field, value) => {
-        const updatedRows = [...formValues.rows];
-        updatedRows[index][field] = value;
-        setFormValues((prev) => ({
-            ...prev,
-            rows: updatedRows
-        }));
-    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             if (params?.id) {
-                const res = await updateNatureById(params.id, formValues);
+                const res = await updateAccTcsMasterById(params.id, formValues);
                 if (res?.statusCode === "200") {
                     toastSuccessMessage("Updated successfully");
-                    navigate(`/nature_master`);
+                    navigate(`/TCS-Master`);
                 }
             } else {
-                const res = await postNature(formValues);
+                const res = await postAccTcsMaster(formValues);
                 if (res?.statusCode === "200") {
                     toastSuccessMessage("Added successfully");
-                    navigate(`/nature_master`);
+                    navigate(`/TCS-Master`);
                 }
             }
         } catch (error) {
@@ -66,6 +45,23 @@ function TcsAdd() {
         toast.success(`${message}`, { position: "top-right" });
     };
 
+
+    
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                if (params?.id) {
+                    const response = await getAccTcsMasterById(params.id);
+                    setFormValues(response?.data);
+                } else {
+                    // blankBtn();
+                }
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+        fetchData();
+    }, [params?.id]);
     return (
         <>
             <ToastContainer />
@@ -83,36 +79,33 @@ function TcsAdd() {
                                         <input
                                             type="text"
                                             className="form-control"
-                                            value={formValues.name}
-                                            onChange={(e) => setFormValues({ ...formValues, name: e.target.value })}
-                                            placeholder=" Name"
+                                            value={formValues.type_name}
+                                            onChange={(e) => setFormValues({ ...formValues, type_name: e.target.value })}
+                                            placeholder="Type Name"
                                             required
                                         />
                                     </div>
                                     <div className="col-xl-4 mb-3">
                                         <input
-                                            type="text"
+                                            type="number"
                                             className="form-control"
-                                            value={formValues?.tcslimit}
-                                            onChange={(e) => setFormValues({ ...formValues, name: e.target.value })}
-                                            placeholder="tcs limit"
+                                            value={formValues.tcs_limit}
+                                            onChange={(e) => setFormValues({ ...formValues, tcs_limit: e.target.value })}
+                                            placeholder="TCS Limit"
                                             required
                                         />
                                     </div>
                                     <div className="col-xl-4 mb-3">
                                         <input
-                                            type="text"
+                                            type="number"
                                             className="form-control"
-                                            value={formValues?.tcspercent}
-                                            onChange={(e) => setFormValues({ ...formValues, name: e.target.value })}
-                                            placeholder="tcs %"
+                                            value={formValues.tcs_percent}
+                                            onChange={(e) => setFormValues({ ...formValues, tcs_percent: e.target.value })}
+                                            placeholder="TCS %"
                                             required
                                         />
                                     </div>
                                 </div>
-
-                               
-
                                 <div className="row">
                                     <div className="col-xl-2 mb-3">
                                         <button className="btn btn-primary me-1" type="submit">

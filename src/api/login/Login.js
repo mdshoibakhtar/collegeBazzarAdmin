@@ -4172,6 +4172,110 @@ export const deleteAccAvailableExpenseListById = (id) => {
 };
 
 
+
+// GET acc_tax_group entries with pagination
+export const getAccTaxGroupByPage = (page, count) => {
+  return axiosInstance.get(`/acc_tax_group/page?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET a specific acc_tax_group entry by ID
+export const getAccTaxGroupById = (id) => {
+  return axiosInstance.get(`/acc_tax_group/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new acc_tax_group entry
+export const postAccTaxGroup = (data) => {
+  return axiosInstance.post(`/acc_tax_group/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing acc_tax_group entry by ID
+export const updateAccTaxGroupById = (id, data) => {
+  return axiosInstance.put(`/acc_tax_group/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// DELETE an acc_tax_group entry by ID
+export const deleteAccTaxGroupById = (id) => {
+  return axiosInstance.delete(`/acc_tax_group/delete_type/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+
+// GET acc_tcs_master entries with pagination
+export const getAccTcsMasterByPage = (page, count) => {
+  return axiosInstance.get(`/acc_tcs_master/page?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET a specific acc_tcs_master entry by ID
+export const getAccTcsMasterById = (id) => {
+  return axiosInstance.get(`/acc_tcs_master/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new acc_tcs_master entry
+export const postAccTcsMaster = (data) => {
+  return axiosInstance.post(`/acc_tcs_master/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing acc_tcs_master entry by ID
+export const updateAccTcsMasterById = (id, data) => {
+  return axiosInstance.put(`/acc_tcs_master/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// DELETE an acc_tcs_master entry by ID
+export const deleteAccTcsMasterById = (id) => {
+  return axiosInstance.delete(`/acc_tcs_master/delete_type/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
 export const getTcs_certificate = (page, count) => {
   return axiosInstance.get(`acc_tcs_certificate/page?page=${page}&count=${count}`, {
     headers: {
