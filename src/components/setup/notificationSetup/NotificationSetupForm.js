@@ -2,162 +2,113 @@ import Select from "react-select"; // Import react-select
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-
 import Row from "react-bootstrap/Row";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { notificationSetupAdd } from "../../../api/login/Login";
+import { toast } from "react-toastify";
 
 function NotificationSetupForm() {
-  const [show, setShow] = useState(false);
   const [validated, setValidated] = useState(false);
+  const params = useParams();
+  const [initialvalue, setInitialValue] = useState({
+    notification_management_email: "",
+    user_management_notification_onadd_edit_delete: false,
+    transaction_notification_ondelete: false,
+    master_notification_ondelete: false,
+  });
 
-  const handleSubmit = (event) => {
+  // Handle input change for all form fields
+  const handleChange = (e) => {
+    const { id, value, type, checked } = e.target;
+    setInitialValue((prevValues) => ({
+      ...prevValues,
+      [id]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const toastSuccessMessage = (message) => {
+    toast.success(`${params?.id ? "Update" : "Add"} ${message}`, {
+      position: "top-right",
+    });
+  };
+
+  const toastErrorMessage = (message) => {
+    toast.error(`${params?.id ? "Update" : "Add"} ${message}`, {
+      position: "top-right",
+    });
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
+      setValidated(true);
+    } else {
+      try {
+        const response = await notificationSetupAdd(initialvalue);
+        console.log("API Response:", response.data);
+        if (response?.statusCode === "200") {
+          toastSuccessMessage("Notification Setup added successfully!");
+          setInitialValue({
+            notification_management_email: "",
+            user_management_notification_onadd_edit_delete: false,
+            transaction_notification_ondelete: false,
+            master_notification_ondelete: false,
+          });
+        } else {
+          toastErrorMessage("Failed to add Notification Setup.");
+        }
+      } catch (error) {
+        console.error("API Error:", error);
+        toastErrorMessage("Failed to add Notification Setup.");
+      }
     }
-
-    setValidated(true);
   };
+
   return (
     <div className="py-3">
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Row className="mb-3">
-          {/* <Form.Group
-            as={Col}
-            md="6"
-            controlId="validationCustom03"
-            className="mb-3"
-          >
-            <Form.Label>Email Id </Form.Label>
-            <Form.Select aria-label="Default select example">
-              <option></option>
-              <option value="1">Gmail</option>
-              <option value="2">Yahoo</option>
-              <option value="3">Hotmail</option>
-            </Form.Select>
-            <Form.Control.Feedback type="invalid">
-              Please provide a Email Id .
-            </Form.Control.Feedback>
-          </Form.Group> */}
-
-          <Form.Group
-            as={Col}
-            md="6"
-            controlId="validationCustom03"
-            className="mb-3"
-          >
-            <Form.Label>Notification Management Email </Form.Label>
-            <Form.Control type="email" placeholder="" required />
-            <Form.Control.Feedback type="invalid">
-              Please provide a Notification Management Email .
-            </Form.Control.Feedback>
-          </Form.Group>
-
-          {/* <Form.Group
-            as={Col}
-            md="6"
-            controlId="validationCustom03"
-            className="mb-3"
-          >
-            <Form.Label>Re Password </Form.Label>
-            <Form.Control type="password" placeholder="Re Password" required />
-            <Form.Control.Feedback type="invalid">
-              Please provide a Re Password .
-            </Form.Control.Feedback>
-          </Form.Group>
-
-          <Form.Group
-            as={Col}
-            md="6"
-            controlId="validationCustom03"
-            className="mb-3"
-          >
-            <Form.Label>Port</Form.Label>
-            <Form.Control type="text" placeholder="Port" required />
-            <Form.Control.Feedback type="invalid">
-              Please provide a Port.
-            </Form.Control.Feedback>
-          </Form.Group>
-
-          <Form.Group
-            as={Col}
-            md="6"
-            controlId="validationCustom03"
-            className="mb-3"
-          >
-            <Form.Label>Smtp</Form.Label>
-            <Form.Control type="text" placeholder="Smtp" required />
-            <Form.Control.Feedback type="invalid">
-              Please provide a Smtp.
-            </Form.Control.Feedback>
-          </Form.Group>
-
-          <Form.Group
-            as={Col}
-            md="6"
-            controlId="validationCustom03"
-            className="mb-3"
-          >
-            <Form.Label>To Email Id</Form.Label>
-            <Form.Control type="email" placeholder="To Email Id" required />
-            <Form.Control.Feedback type="invalid">
-              Please provide a To Email Id.
-            </Form.Control.Feedback>
-          </Form.Group>
-
-          <Form.Group
-            as={Col}
-            md="6"
-            controlId="validationCustom03"
-            className="mb-3"
-          >
-            <Form.Label>Default CC</Form.Label>
-            <Form.Control type="text" placeholder="Default CC" required />
-            <Form.Control.Feedback type="invalid">
-              Please provide a Default CC.
-            </Form.Control.Feedback>
-          </Form.Group>
-
-          <Form.Group
-            as={Col}
-            md="6"
-            controlId="validationCustom03"
-            className="mb-3"
-          >
-            <Form.Label>Hidden BCC</Form.Label>
-            <Form.Control type="date" placeholder="Hidden BCC" required />
-            <Form.Control.Feedback type="invalid">
-              Please provide a Hidden BCC.
-            </Form.Control.Feedback>
-          </Form.Group> */}
-
-          <Form.Group className="mb-3">
-            <Form.Check
+          <Form.Group as={Col} md="6" controlId="notification_management_email" className="mb-3">
+            <Form.Label>Notification Management Email</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="Enter email"
+              value={initialvalue.notification_management_email}
+              onChange={handleChange}
               required
+            />
+            <Form.Control.Feedback type="invalid">
+              Please provide a valid Notification Management Email.
+            </Form.Control.Feedback>
+          </Form.Group>
+
+          <Form.Group as={Col} md="6" className="mb-3">
+            <Form.Check
+              id="user_management_notification_onadd_edit_delete"
               label="User Management Notification"
-              feedback="You must agree before submitting."
-              feedbackType="invalid"
+              checked={initialvalue.user_management_notification_onadd_edit_delete}
+              onChange={handleChange}
             />
-
             <Form.Check
-              required
-              label="Transcation Notification"
-              feedback="You must agree before submitting."
-              feedbackType="invalid"
+              id="transaction_notification_ondelete"
+              label="Transaction Notification"
+              checked={initialvalue.transaction_notification_ondelete}
+              onChange={handleChange}
             />
-
             <Form.Check
-              required
+              id="master_notification_ondelete"
               label="Master Notification"
-              feedback="You must agree before submitting."
-              feedbackType="invalid"
+              checked={initialvalue.master_notification_ondelete}
+              onChange={handleChange}
             />
           </Form.Group>
         </Row>
 
         <Button type="submit">Save</Button>
-        <Button type="submit">Cancel</Button>
       </Form>
     </div>
   );
