@@ -15,6 +15,7 @@ function MainCustomerView() {
                     <ul className="list-unstyled mt-3">
                         <li><Link to={`/customer-view/${params.id}`}><FaUser className="icon-sideb" /> Profile</Link></li>
                         <li><Link to={`/customer-view/${params.id}/ledgers`}><FaUser className="icon-sideb" /> Ledgers</Link></li>
+                        <li><Link to={`/customer-view/${params.id}/quotation`}><FaLock className="icon-sideb" /> Quotation</Link></li>
                         <li><Link to={`/customer-view/${params.id}/contacts`}><FaAddressBook className="icon-sideb" /> Contacts</Link></li>
                         <li><Link to={`/customer-view/${params.id}/service`}><FaAddressBook className="icon-sideb" /> Service Request</Link></li>
                         <li><Link to={`/customer-view/${params.id}/keep-in-touch`}><FaHandshake className="icon-sideb" /> Keep In Touch</Link></li>
