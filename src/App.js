@@ -872,6 +872,8 @@ import DocumentsArchivePage from "./pages/documentManagement/documentsArchive";
 import DocumentsAuditTrailPage from "./pages/documentManagement/documentsAuditTrail";
 import AllDocumentPage from "./pages/documentManagement/allDocument";
 import AllDocumentAdd from "./components/documentManagement/allDocument/allDocumentAdd/AllDocumentAdd";
+import QuotationList from "./pages/CustomerView/Quate/QuotationList";
+import QuotationAdd from "./pages/CustomerView/Quate/QuotationAdd";
 // import CreateStageplan from "./pages/NewStagesplan";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -2400,6 +2402,7 @@ function App() {
                 <Route path="keep-in-touch-configration" element={<KitConfigration title='KIT Configration' />} />
                 <Route path="notes" element={<NotesCunstomer title='Notes' />} />
                 <Route path="proposals-view" element={<ProposalList style={true} />} />
+                <Route path="proposal/create" element={<AddProposalPage />} />
                 <Route path="expenses-view" element={<ExpenseListPage style={true} />} />
                 <Route path="expense-add" element={<ExpenseListAdd />} />
                 <Route path="projects-view" element={<Project style={true} />} />
@@ -2418,6 +2421,10 @@ function App() {
                 <Route path="ledgers" element={<LeagerPage style={true} title='Ledgers' />} />
                 <Route path="add-leager" element={<AddLeager style={true} title='Ledgers' />} />
                 <Route path="add-leager/:update" element={<AddLeager style={true} title='Ledgers' />} />
+
+                <Route path="quotation" element={<QuotationList style={true} title='Quotation' />} />
+                <Route path="add-quotation" element={<QuotationAdd style={true} title='Quotation' />} />
+                <Route path="add-quotation/:update" element={<QuotationAdd style={true} title='Quotation' />} />
               </Route>
               <Route path="ticket-add" element={<TicketForm />} />
 

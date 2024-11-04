@@ -1,12 +1,13 @@
 import { Pagination } from 'antd';
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
-function ProposalList({style}) {
+function ProposalList({ style }) {
+    const parems = useParams()
     return (
         <>
-            <div style={style && {width:"1000px"}}>
+            <div style={style && { width: "1000px" }}>
                 <div className="row m-2">
                     <div className="col-xl-12">
                         <div className="card">
@@ -15,7 +16,7 @@ function ProposalList({style}) {
                                     <div className="tbl-caption">
                                         <h4 className="heading mb-0">Proposal List</h4>
                                         <div>
-                                            <Link className="btn btn-primary btn-sm" to="/proposal/create" role="button" aria-controls="offcanvasExample">+ New Proposal</Link>
+                                            <Link className="btn btn-primary btn-sm" to={`/customer-view/${parems.id}/proposal/create`} role="button" aria-controls="offcanvasExample">+ New Proposal</Link>
                                         </div>
                                     </div>
                                     <div id="empoloyees-tblwrapper_wrapper" className="dataTables_wrapper no-footer">
