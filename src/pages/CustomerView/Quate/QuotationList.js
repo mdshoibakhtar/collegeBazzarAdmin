@@ -124,7 +124,7 @@ const QuotationList = ({ title }) => {
                                     <td>{ledger.mobile}</td>
                                     <td>{ledger.Email}</td>
                                     <td>
-                                        <button className="btn btn-sm btn-success ms-2" onClick={pdfGenerateDefault}>Download PDF</button>
+                                        <button className="btn btn-sm btn-success ms-2" onClick={pdfGenerateDefault}>Print PDF</button>
                                         <Link className="btn btn-sm btn-warning" to={`/customer-view/${paremss.id}/add-quotation/${ledger._id}`}>Edit</Link>
                                         <button className="btn btn-sm btn-danger ms-2" onClick={() => { deleteBlockAdd(ledger._id) }}>Delete</button>
                                     </td>
