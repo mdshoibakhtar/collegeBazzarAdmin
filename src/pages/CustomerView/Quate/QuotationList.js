@@ -3,6 +3,8 @@ import { Link, useParams } from "react-router-dom";
 import { deleteAccLedgerById, getAccLedgerByPage } from "../../../api/login/Login";
 import { Pagination } from "antd";
 import Loadar from "../../../common/loader/Loader";
+import { PDFViewer } from "@react-pdf/renderer";
+import PdfBanks from "./pdfBank/PdfBanks";
 
 const dummyData = [
     {
@@ -74,10 +76,14 @@ const QuotationList = ({ title }) => {
         getFloorMasters(e - 1)
 
     };
-  
+    const [pdf, setPdf] = useState(false)
+
+    const pdfGenerateDefault = () => {
+      setPdf(!pdf)
+    }
     return (
         <div style={{ width: "1000px" }}>
-            {loading && <Loadar/>}
+            {loading && <Loadar />}
             <h4>{title}</h4>
             <div className="container mt-4 card">
                 <div className="d-flex justify-content-between align-items-center mb-3">
@@ -108,7 +114,7 @@ const QuotationList = ({ title }) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {data?.map((ledger, i) => (
+                            {[{}]?.map((ledger, i) => (
                                 <tr key={ledger.id}>
                                     <td>{i + 1}</td>
                                     <td>{ledger.name}</td>
@@ -118,8 +124,9 @@ const QuotationList = ({ title }) => {
                                     <td>{ledger.mobile}</td>
                                     <td>{ledger.Email}</td>
                                     <td>
+                                        <button className="btn btn-sm btn-success ms-2" onClick={pdfGenerateDefault}>Download PDF</button>
                                         <Link className="btn btn-sm btn-warning" to={`/customer-view/${paremss.id}/add-quotation/${ledger._id}`}>Edit</Link>
-                                        <button className="btn btn-sm btn-danger ms-2" onClick={()=>{deleteBlockAdd(ledger._id)}}>Delete</button>
+                                        <button className="btn btn-sm btn-danger ms-2" onClick={() => { deleteBlockAdd(ledger._id) }}>Delete</button>
                                     </td>
                                 </tr>
                             ))}
@@ -132,6 +139,14 @@ const QuotationList = ({ title }) => {
                     />
                 </div>
             </div>
+            {pdf && <div className="pdfcs">
+                <div className="loader-overlay">
+                    <PDFViewer style={{ width: '100%', height: '100vh' }}>
+                        <PdfBanks />
+                    </PDFViewer>
+                </div>
+
+            </div>}
         </div>
     );
 };
