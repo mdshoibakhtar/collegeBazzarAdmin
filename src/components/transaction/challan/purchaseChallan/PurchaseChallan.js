@@ -2,7 +2,9 @@ import { Pagination } from "antd";
 import { Link } from "react-router-dom";
 import Breadcrumbs from "../../../../common/breadcrumb/Breadcrumbs";
 
-
+import { PDFViewer } from "@react-pdf/renderer";
+import PdfBanks from "../pdfBank/PdfBanks";
+import { useState } from "react";
 
 const PurchaseChallan = () => {
     const breadCrumbsTitle = {
@@ -13,6 +15,11 @@ const PurchaseChallan = () => {
 `,
         path_2: ``
     };
+    const [pdf, setPdf] = useState(false)
+
+    const pdfGenerateDefault = () => {
+        setPdf(!pdf)
+    }
     return (
         <>
             <Breadcrumbs
@@ -45,16 +52,43 @@ const PurchaseChallan = () => {
                                             <th style={{ width: '150px' }}>Account Name</th>
                                             <th style={{ width: '150px' }}>Amount</th>
                                             <th style={{ width: '150px' }}>Created By</th>
+                                            <th style={{ width: '150px' }}>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr role="row" className="odd" >
                                             <td >
-                                                No Data Found
+                                                ----
+                                            </td>
+                                            <td >
+                                                ----
+                                            </td>
+                                            <td >
+                                                ----
+                                            </td>
+                                            <td >
+                                                ----
+                                            </td>
+                                            <td >
+                                                ----
+                                            </td>
+                                            <td >
+                                                ----
+                                            </td>
+                                            <td >
+                                                <button className="btn btn-sm btn-success ms-2" onClick={pdfGenerateDefault}>Print PDF</button>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
+                                {pdf && <div className="pdfcs">
+                                    <div className="loader-overlay">
+                                        <PDFViewer style={{ width: '100%', height: '100vh' }}>
+                                            <PdfBanks title='Purchase Challan'/>
+                                        </PDFViewer>
+                                    </div>
+
+                                </div>}
                                 <div className="dataTables_info" id="empoloyees-tblwrapper_info" role="status" aria-live="polite">
                                     Total 0 entries
                                 </div>

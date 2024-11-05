@@ -4403,3 +4403,200 @@ export const deleteAccContactById = (id) => {
     },
   });
 };
+
+
+
+// GET acc_rate_sheet entries with pagination
+export const getAccRateSheetByPage = (page, count) => {
+  return axiosInstance.get(`/acc_rate_sheet/page?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET a specific acc_rate_sheet entry by ID
+export const getAccRateSheetById = (id) => {
+  return axiosInstance.get(`/acc_rate_sheet/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new acc_rate_sheet entry
+export const postAccRateSheet = (data) => {
+  return axiosInstance.post(`/acc_rate_sheet/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing acc_rate_sheet entry by ID
+export const updateAccRateSheetById = (id, data) => {
+  return axiosInstance.put(`/acc_rate_sheet/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// DELETE an acc_rate_sheet entry by ID
+export const deleteAccRateSheetById = (id) => {
+  return axiosInstance.delete(`/acc_rate_sheet/delete_type/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET add_mistry entries with pagination
+export const getAddMistryByPage = (page, count) => {
+  return axiosInstance.get(`/add_mistry/page?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET a specific add_mistry entry by ID
+export const getAddMistryById = (id) => {
+  return axiosInstance.get(`/add_mistry/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new add_mistry entry
+export const postAddMistry = (data) => {
+  return axiosInstance.post(`/add_mistry/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing add_mistry entry by ID
+export const updateAddMistryById = (id, data) => {
+  return axiosInstance.put(`/add_mistry/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// DELETE an add_mistry entry by ID
+export const deleteAddMistryById = (id) => {
+  return axiosInstance.delete(`/add_mistry/delete_type/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+export const doc_management_delete = (id) => {
+  // console.log(value);
+
+  return axiosInstance.delete(`doc_management_add_doc/delete_type/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+export const doc_management_idGet = (id) => {
+  // console.log(value);
+
+  return axiosInstance.get(`doc_management_add_doc/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const UpdateAllDocument = (id, data) => {
+  return axiosInstance.put(`doc_management_add_doc/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const doc_management_doc_category = (data) => {
+  return axiosInstance.post(`doc_management_doc_category/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+export const doc_management_docAdmin = (id) => {
+  // console.log(value);
+
+  return axiosInstance.get(`doc_management_doc_category/admin`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const doc_management_add_doc_catagory = (value) => {
+  // console.log(value);
+  return axiosInstance.get(`doc_management_doc_category/user?page=${value?.page}&count=${value?.count}&id=${value?.userId}&start_date=${value?.start_date}&end_date=${value?.end_date}&is_archieve=${value?.is_archieve}&parent_id=${value?.parent_id}&search =${value?.search}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const doc_management_doc_category_delete_type = (id) => {
+  // console.log(value);
+  return axiosInstance.delete(`doc_management_doc_category/delete_type/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const ddoc_management_doc_categoryidGet = (id) => {
+  // console.log(value);
+
+  return axiosInstance.get(`doc_management_doc_category/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const ddoc_management_docupdate_type = (id, data) => {
+  // console.log(value);
+
+  return axiosInstance.put(`doc_management_doc_category/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+

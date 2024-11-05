@@ -50,12 +50,18 @@ const StockTransfer = () => {
                                             <th style={{ width: '150px' }}>No</th>
                                             <th style={{ width: '150px' }}>Quantity</th>
                                             <th style={{ width: '150px' }}>Created By</th>
+                                            <th style={{ width: '150px' }}>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr role="row" className="odd" >
-                                            <td >
-                                                No Data Found
+                                        <tr >
+                                            <td>----</td>
+                                            <td>----</td>
+                                            <td>----</td>
+                                            <td>----</td>
+                                            <td>----</td>
+                                            <td>
+                                                <button className="btn btn-sm btn-success ms-2" onClick={pdfGenerateDefault}>Print PDF</button>
                                             </td>
                                         </tr>
                                     </tbody>

@@ -2,7 +2,9 @@ import { Pagination } from "antd";
 import Breadcrumbs from "../../../../common/breadcrumb/Breadcrumbs";
 import { Link } from "react-router-dom";
 
-
+import { PDFViewer } from "@react-pdf/renderer";
+import PdfBanks from "../pdfBank/PdfBanks";
+import { useState } from "react";
 const ChallanReturn = () => {
     const breadCrumbsTitle = {
         id: "1",
@@ -11,11 +13,24 @@ const ChallanReturn = () => {
         title_3: `List Of Challan Return`,
         path_2: ``
     };
+    const [pdf, setPdf] = useState(false)
+
+    const pdfGenerateDefault = () => {
+        setPdf(!pdf)
+    }
     return (
         <>
             <Breadcrumbs
                 breadCrumbsTitle={breadCrumbsTitle} />
             {/* <GroupSummaryFilter /> */}
+            {pdf && <div className="pdfcs">
+                <div className="loader-overlay">
+                    <PDFViewer style={{ width: '100%', height: '100vh' }}>
+                        <PdfBanks title='Challan Return' />
+                    </PDFViewer>
+                </div>
+
+            </div>}
             <div style={{ margin: "14px" }}>
                 <div className="card">
                     <div className="card-body p-0">
@@ -43,12 +58,31 @@ const ChallanReturn = () => {
                                             <th style={{ width: '150px' }}>Account Name</th>
                                             <th style={{ width: '150px' }}>Narration</th>
                                             <th style={{ width: '150px' }}>Created By</th>
+                                            <th style={{ width: '150px' }}>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr role="row" className="odd" >
                                             <td >
-                                                No Data Found
+                                                ----
+                                            </td>
+                                            <td >
+                                                ----
+                                            </td>
+                                            <td >
+                                                ----
+                                            </td>
+                                            <td >
+                                                ----
+                                            </td>
+                                            <td >
+                                                ----
+                                            </td>
+                                            <td >
+                                                ----
+                                            </td>
+                                            <td >
+                                                <button className="btn btn-sm btn-success ms-2" onClick={pdfGenerateDefault}>Print PDF</button>
                                             </td>
                                         </tr>
                                     </tbody>

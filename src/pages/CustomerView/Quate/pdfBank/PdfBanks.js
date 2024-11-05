@@ -89,8 +89,8 @@ const PdfBanks = () => {
                     </View>
 
                     {/* Recipient Details */}
-                    <Text>M/s: <Text style={styles.boldText}>AGRI COMPANY PVT. LTD.</Text></Text>
-                    <Text>M: 9512875420</Text>
+                    <Text>M/s: <Text style={styles.boldText}>ABARIS SOFTCH PVT. LTD..</Text></Text>
+                    <Text>M: 8851746286</Text>
 
                     {/* Subject and Message */}
                     <Text>Subject: TITLE HERE</Text>

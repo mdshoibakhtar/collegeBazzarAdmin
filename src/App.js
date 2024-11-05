@@ -878,6 +878,8 @@ import AllDocumentPage from "./pages/documentManagement/allDocument";
 import AllDocumentAdd from "./components/documentManagement/allDocument/allDocumentAdd/AllDocumentAdd";
 import QuotationList from "./pages/CustomerView/Quate/QuotationList";
 import QuotationAdd from "./pages/CustomerView/Quate/QuotationAdd";
+import MistryMaster from "./components/topNavigationComp/masters/mistry/MistryMaster";
+import MistryAdd from "./components/topNavigationComp/masters/mistry/masterform/MistryAdd";
 // import CreateStageplan from "./pages/NewStagesplan";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -2573,6 +2575,10 @@ function App() {
 
               <Route path="wallet_report" element={<Walletreport />} />
 
+              <Route path="mistry-list" element={<MistryMaster />} />
+              <Route path="add-mistry" element={<MistryAdd />} />
+              <Route path="add-mistry/:id" element={<MistryAdd />} />
+
 
               {/* junaid ends */}
 
@@ -2707,15 +2713,18 @@ function App() {
               <Route path="pricemaster/add" element={<PriceMasterAdd />} />
               <Route path="ratesheet/list" element={<RateSheetPage />} />
               <Route path="ratesheet/add" element={<RateSheertAdd />} />
+              <Route path="ratesheet/add/:id" element={<RateSheertAdd />} />
               <Route path="process/list" element={<ProcessPage />} />
               <Route path="process/add" element={<ProcessAdd />} />
               <Route path="document-categories" element={<DocumentCategoriesPage />} />
               <Route path="document-categories-add" element={<DocumentCategoriesAdd />} />
+              <Route path="document-categories-update/:id" element={<DocumentCategoriesAdd />} />
               <Route path="children-categories-add" element={<AddChildreenCategory />} />
               <Route path="archived-documents" element={<DocumentsArchivePage />} />
               <Route path="document-audit-trails" element={<DocumentsAuditTrailPage />} />
               <Route path="documents" element={<AllDocumentPage />} />
               <Route path="documents-add" element={<AllDocumentAdd />} />
+              <Route path="documents-update/:id" element={<AllDocumentAdd />} />
 
 
 
