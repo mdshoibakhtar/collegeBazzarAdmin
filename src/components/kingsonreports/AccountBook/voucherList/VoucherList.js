@@ -11,7 +11,6 @@ function VoucherList() {
   const [show, setShow] = useState(false);
   return (
     <>
-      <div>
         <div className="row m-2">
           <div className="col-xl-12">
             <div className="card">
@@ -238,7 +237,6 @@ function VoucherList() {
             </div>
           </div>
         </div>
-      </div>
       <ToastContainer className="text-center" />
     </>
   );

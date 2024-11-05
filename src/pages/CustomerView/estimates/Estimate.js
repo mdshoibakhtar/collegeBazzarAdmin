@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import { PDFViewer } from "@react-pdf/renderer";
+import PdfBanks from "./pdfBank/PdfBanks";
 
 const Estimate = () => {
   const estimateDetails = {
@@ -17,36 +19,12 @@ const Estimate = () => {
     subTotal: 1,
     total: 1,
   };
+  const [pdf, setPdf] = useState(false)
 
-  const downloadPDF = () => {
-    const doc = new jsPDF();
-    doc.text("Estimate", 10, 10);
-    doc.text(`EST-${estimateDetails.estimateNumber}`, 10, 20);
-    doc.text(`To: ${estimateDetails.to}`, 10, 30);
-    doc.text(estimateDetails.address, 10, 40);
-    doc.text(estimateDetails.city, 10, 50);
-    doc.text(`Estimate Date: ${estimateDetails.estimateDate}`, 10, 60);
-    doc.text(`Expiry Date: ${estimateDetails.expiryDate}`, 10, 70);
-    doc.text(`Sale Agent: ${estimateDetails.saleAgent}`, 10, 80);
-    
-    doc.autoTable({
-      startY: 90,
-      head: [["#", "Item", "Qty", "Rate", "Tax", "Amount"]],
-      body: estimateDetails.items.map(item => [
-        item.id,
-        item.name,
-        item.qty,
-        `$${item.rate.toFixed(2)}`,
-        item.tax,
-        `$${item.amount.toFixed(2)}`,
-      ]),
-    });
+  const pdfGenerateDefault = () => {
+    setPdf(!pdf)
+  }
 
-    doc.text(`Sub Total: $${estimateDetails.subTotal.toFixed(2)}`, 140, doc.lastAutoTable.finalY + 10);
-    doc.text(`Total: $${estimateDetails.total.toFixed(2)}`, 140, doc.lastAutoTable.finalY + 20);
-
-    doc.save("estimate.pdf");
-  };
 
   return (
     <div className="custom-container">
@@ -100,8 +78,15 @@ const Estimate = () => {
           </tbody>
         </table>
       </div>
+      <button onClick={pdfGenerateDefault} className="custom-btn">Download PDF</button>
+      {pdf && <div className="pdfcs">
+        <div className="loader-overlay">
+          <PDFViewer style={{ width: '100%', height: '100vh' }}>
+            <PdfBanks />
+          </PDFViewer>
+        </div>
 
-      <button onClick={downloadPDF} className="custom-btn">Download PDF</button>
+      </div>}
     </div>
   );
 };

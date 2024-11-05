@@ -4098,7 +4098,6 @@ export const postAccSelectInvoiceType = (data) => {
   });
 };
 
-// PUT (update) an existing acc_select_invoice_type entry by ID
 export const updateAccSelectInvoiceTypeById = (id, data) => {
   return axiosInstance.put(`/acc_select_invoice_type/update_type/${id}`, data, {
     headers: {
@@ -4108,7 +4107,6 @@ export const updateAccSelectInvoiceTypeById = (id, data) => {
   });
 };
 
-// DELETE an acc_select_invoice_type entry by ID
 export const deleteAccSelectInvoiceTypeById = (id) => {
   return axiosInstance.delete(`/acc_select_invoice_type/delete_type/${id}`, {
     headers: {
@@ -4171,6 +4169,148 @@ export const deleteAccAvailableExpenseListById = (id) => {
   });
 };
 
+// ----------E-Account Setup Apis----------------
+export const smsSetupAdd = (data) => {
+  return axiosInstance.put(`${baseUrl}acc_sms_setup/update`, data);
+};
+export const smsSetupGet = () => {
+  return axiosInstance.get(`${baseUrl}acc_sms_setup/admin`);
+};
+export const notificationSetupAdd = (data) => {
+  return axiosInstance.put(`${baseUrl}acc_notification_setup/update`, data);
+};
+export const notificationSetupGet = () => {
+  return axiosInstance.get(`${baseUrl}acc_notification_setup/admin`);
+};
+export const remainderSetupAdd = (data) => {
+  return axiosInstance.put(`${baseUrl}acc_reminder_setup/update`, data);
+};
+export const remainderSetupGet = () => {
+  return axiosInstance.get(`${baseUrl}acc_reminder_setup/admin`);
+};
+export const reportSetupSetupAdd = (data) => {
+  return axiosInstance.put(`${baseUrl}accReportSetup/update`, data);
+};
+export const reportSetupSetupGet = (data) => {
+  return axiosInstance.get(`${baseUrl}accReportSetup/admin`, data);
+};
+export const emailSetupGet = () => {
+  return axiosInstance.get(`${baseUrl}acc_email_setup/admin`);
+};
+export const emailSetupSetupAdd = (data) => {
+  return axiosInstance.put(`${baseUrl}acc_email_setup/update`, data);
+};
+export const sedulerSetupAdd = (data) => {
+  return axiosInstance.put(`${baseUrl}acc_reminder_setup/update`, data);
+};
+export const sedulerSetupGet = () => {
+  return axiosInstance.get(`${baseUrl}acc_reminder_setup/admin`);
+};
+
+
+
+// GET acc_tax_group entries with pagination
+export const getAccTaxGroupByPage = (page, count) => {
+  return axiosInstance.get(`/acc_tax_group/page?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET a specific acc_tax_group entry by ID
+export const getAccTaxGroupById = (id) => {
+  return axiosInstance.get(`/acc_tax_group/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new acc_tax_group entry
+export const postAccTaxGroup = (data) => {
+  return axiosInstance.post(`/acc_tax_group/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing acc_tax_group entry by ID
+export const updateAccTaxGroupById = (id, data) => {
+  return axiosInstance.put(`/acc_tax_group/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// DELETE an acc_tax_group entry by ID
+export const deleteAccTaxGroupById = (id) => {
+  return axiosInstance.delete(`/acc_tax_group/delete_type/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+
+// GET acc_tcs_master entries with pagination
+export const getAccTcsMasterByPage = (page, count) => {
+  return axiosInstance.get(`/acc_tcs_master/page?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET a specific acc_tcs_master entry by ID
+export const getAccTcsMasterById = (id) => {
+  return axiosInstance.get(`/acc_tcs_master/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new acc_tcs_master entry
+export const postAccTcsMaster = (data) => {
+  return axiosInstance.post(`/acc_tcs_master/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing acc_tcs_master entry by ID
+export const updateAccTcsMasterById = (id, data) => {
+  return axiosInstance.put(`/acc_tcs_master/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// DELETE an acc_tcs_master entry by ID
+export const deleteAccTcsMasterById = (id) => {
+  return axiosInstance.delete(`/acc_tcs_master/delete_type/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
 
 export const getTcs_certificate = (page, count) => {
   return axiosInstance.get(`acc_tcs_certificate/page?page=${page}&count=${count}`, {
@@ -4205,6 +4345,58 @@ export const doc_management_add_doc_get = (value) => {
   // console.log(value);
 
   return axiosInstance.get(`doc_management_add_doc/user?page=${value?.page}&count=${value?.count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+
+// GET accContact entries with pagination
+export const getAccContactByPage = (page, count) => {
+  return axiosInstance.get(`/accContact/page?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET a specific accContact entry by ID
+export const getAccContactById = (id) => {
+  return axiosInstance.get(`/accContact/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new accContact entry
+export const postAccContact = (data) => {
+  return axiosInstance.post(`/accContact/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing accContact entry by ID
+export const updateAccContactById = (id, data) => {
+  return axiosInstance.put(`/accContact/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// DELETE an accContact entry by ID
+export const deleteAccContactById = (id) => {
+  return axiosInstance.delete(`/accContact/delete_type/${id}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
       Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,

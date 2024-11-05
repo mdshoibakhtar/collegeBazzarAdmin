@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Breadcrumbs from '../../../../../common/breadcrumb/Breadcrumbs';
-import { postNature, updateNatureById, getNatureById, getAccTaxMasterByPage } from '../../../../../api/login/Login';
+import { postNature, updateNatureById, getNatureById, getAccTaxMasterByPage, postAccTaxGroup, updateAccTaxGroupById, getAccTaxGroupById } from '../../../../../api/login/Login';
 import { toast, ToastContainer } from 'react-toastify';
 
 function TaxGroupAdd() {
@@ -12,7 +12,7 @@ function TaxGroupAdd() {
 
     const [formValues, setFormValues] = useState({
         name: "",
-        rows: [{ taxMaster: "", effDate: "" }]
+        table: [{ tax_master: "", eff_date: "" }]
     });
 
     const params = useParams();
@@ -21,23 +21,23 @@ function TaxGroupAdd() {
     const handleAddRow = () => {
         setFormValues((prev) => ({
             ...prev,
-            rows: [...prev.rows, { taxMaster: "", effDate: "" }]
+            table: [...prev.table, { tax_master: "", eff_date: "" }]
         }));
     };
 
     const handleRemoveRow = (index) => {
         setFormValues((prev) => ({
             ...prev,
-            rows: prev.rows.filter((_, idx) => idx !== index)
+            table: prev.table.filter((_, idx) => idx !== index)
         }));
     };
 
     const handleChangeRow = (index, field, value) => {
-        const updatedRows = [...formValues.rows];
+        const updatedRows = [...formValues.table];
         updatedRows[index][field] = value;
         setFormValues((prev) => ({
             ...prev,
-            rows: updatedRows
+            table: updatedRows
         }));
     };
 
@@ -45,13 +45,13 @@ function TaxGroupAdd() {
         e.preventDefault();
         try {
             if (params?.id) {
-                const res = await updateNatureById(params.id, formValues);
+                const res = await updateAccTaxGroupById(params.id, formValues);
                 if (res?.statusCode === "200") {
                     toastSuccessMessage("Updated successfully");
                     navigate(`/nature_master`);
                 }
             } else {
-                const res = await postNature(formValues);
+                const res = await postAccTaxGroup(formValues);
                 if (res?.statusCode === "200") {
                     toastSuccessMessage("Added successfully");
                     navigate(`/nature_master`);
@@ -74,6 +74,23 @@ function TaxGroupAdd() {
     useEffect(() => {
         getDatas();
     }, []);
+    
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                if (params?.id) {
+                    const response = await getAccTaxGroupById(params.id);
+                    setFormValues(response?.data);
+                } else {
+                    // blankBtn();
+                }
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+        fetchData();
+    }, [params?.id]);
+
     return (
         <>
             <ToastContainer />
@@ -110,13 +127,13 @@ function TaxGroupAdd() {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {formValues.rows.map((row, index) => (
+                                            {formValues.table.map((row, index) => (
                                                 <tr key={index}>
                                                     <td>
                                                         <select
                                                             className="form-select"
-                                                            value={row.taxMaster}
-                                                            onChange={(e) => handleChangeRow(index, 'taxMaster', e.target.value)}
+                                                            value={row.tax_master}
+                                                            onChange={(e) => handleChangeRow(index, 'tax_master', e.target.value)}
                                                             required
                                                         >
                                                             <option value="">Select Tax Master</option>
@@ -131,8 +148,8 @@ function TaxGroupAdd() {
                                                         <input
                                                             type="date"
                                                             className="form-control"
-                                                            value={row.effDate}
-                                                            onChange={(e) => handleChangeRow(index, 'effDate', e.target.value)}
+                                                            value={row.eff_date}
+                                                            onChange={(e) => handleChangeRow(index, 'eff_date', e.target.value)}
                                                             required
                                                         />
                                                     </td>

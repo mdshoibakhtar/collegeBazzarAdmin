@@ -1,7 +1,10 @@
 import Modal from 'react-bootstrap/Modal';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
-
+import { useNavigate, useParams } from 'react-router-dom';
+import { clodinaryImage, getAccContactById, postAccContact, updateAccContactById } from '../../../api/login/Login';
+import { baseUrlImage } from '../../../baseUrl';
+import { toast, ToastContainer } from 'react-toastify';
 function AddContact(props) {
   const [formData, setFormData] = useState({
     profileImage: null,
@@ -55,11 +58,125 @@ function AddContact(props) {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const parem = useParams()
+  const toastSuccessMessage = (message) => {
+    toast.success(`${parem?.update ? "Update" : "Add"} ${message}`, {
+      position: "top-right",
+    });
+  };
+  const navigate = useNavigate()
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Data Submitted: ", formData);
+    const transformedData = {
+      profile_image: image,
+      first_name: formData.firstName,
+      last_name: formData.lastName,
+      position: formData.position,
+      email: formData.email,
+      phone: formData.phone,
+      direction: formData.direction,
+      password: formData.password,
+      primary_contact: formData.primaryContact,
+      do_not_send_welcome_email: formData.sendWelcomeEmail,
+      send_set_password_email: formData.sendSetPasswordEmail,
+      permission_invoives: formData.permissions.invoices,
+      permission_estimates: formData.permissions.estimates,
+      permission_contracts: formData.permissions.contracts,
+      permission_proposals: formData.permissions.proposals,
+      permission_support: formData.permissions.support,
+      permission_projects: formData.permissions.projects,
+      email_notifications_invoice: formData.emailNotifications.invoice,
+      email_notifications_creditnote: formData.emailNotifications.creditNote,
+      email_notifications_tickets: formData.emailNotifications.tickets,
+      email_notifications_estimate: formData.emailNotifications.estimate,
+      email_notifications_project: formData.emailNotifications.project,
+      email_notifications_contract: formData.emailNotifications.contract,
+      email_notifications_task: formData.emailNotifications.task,
+      user_id: parem.id,  // Set this as needed, if available in context
+    };
+
+    try {
+
+      if (!parem?.update) {
+        const res = await postAccContact(transformedData);
+        if (res?.statusCode == "200") {
+          toastSuccessMessage("Contact Successfully Added");
+          setTimeout(() => navigate(props.onHide()), 2000);
+        }
+      } else {
+        const res = await updateAccContactById(parem.update, transformedData);
+        if (res?.statusCode == "200") {
+          toastSuccessMessage("Contact Successfully Updated");
+          setTimeout(() => navigate(props.onHide()), 2000);
+        }
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+
+    }
+
   };
 
+
+  useEffect(() => {
+    const fetchTask = async () => {
+      try {
+        if (parem?.update) {
+          const response = await getAccContactById(parem.update);
+          setImage(response?.data.profile_image);
+
+          setFormData((prevData) => ({
+            ...prevData,
+            firstName: response?.data?.first_name,
+            lastName: response?.data?.last_name,
+            position: response?.data?.position,
+            email: response?.data?.email,
+            phone: response?.data?.phone,
+            direction: response?.data?.direction,
+            password: response?.data?.password,
+            primaryContact: response?.data?.primary_contact,
+            sendWelcomeEmail: response?.data?.do_not_send_welcome_email,
+            sendSetPasswordEmail: response?.data?.send_set_password_email,
+            permissions: {
+              invoices: response?.data?.permission_invoives,
+              estimates: response?.data?.permission_estimates,
+              contracts: response?.data?.permission_contracts,
+              proposals: response?.data?.permission_proposals,
+              support: response?.data?.permission_support,
+              projects: response?.data?.permission_projects,
+            },
+            emailNotifications: {
+              invoice: response?.data?.email_notifications_invoice,
+              creditNote: response?.data
+            }
+          }))
+
+
+        }
+      } catch (error) {
+        console.error("Error fetching task:", error);
+      }
+    };
+
+    fetchTask();
+  }, [parem?.id]);
+
+
+
+  const [image, setImage] = useState()
+  const changeImageHandle = async (e) => {
+    const formData = new FormData()
+    formData.append('image', e.target.files[0])
+    try {
+      const res = await clodinaryImage(formData)
+      setTimeout(() => {
+        setImage(res.data?.data?.url)
+      }, 1000);
+    } catch (error) {
+
+    }
+  }
   return (
     <Modal
       {...props}
@@ -67,6 +184,7 @@ function AddContact(props) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
+      <ToastContainer />
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
           Add New Contact
@@ -81,13 +199,9 @@ function AddContact(props) {
                 <Form.Control
                   type="file"
                   name="profileImage"
-                  onChange={(e) =>
-                    setFormData((prevData) => ({
-                      ...prevData,
-                      profileImage: e.target.files[0],
-                    }))
-                  }
+                  onChange={changeImageHandle}
                 />
+                {image && <img style={{ width: "100px", height: "100px" }} src={`${baseUrlImage}${image}`} />}
               </Form.Group>
             </Col>
           </Row>

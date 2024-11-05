@@ -857,6 +857,12 @@ import InvoiceMaster from "./components/topNavigationComp/masters/invoiceType/In
 import TypeInvoiceAdd from "./components/topNavigationComp/masters/invoiceType/masterform/TypeInvoiceAdd";
 import ExpenseMaster from "./components/topNavigationComp/masters/expensemaster/ExpenseMaster";
 import ExpenseAdd from "./components/topNavigationComp/masters/expensemaster/masterform/ExpenseAdd";
+import Processgropmasterspage from "./pages/processgroupmaster";
+import Processgroupmasterform from "./components/processgroupmaster/processgroupmasterform/Processgroupmasterform";
+import BranchMasterPage from "./pages/branchmaster";
+import BranchMasterForm from "./components/branchMaster/branchMasterform/BranchMasterForm";
+import AssignedDocuments from "./components/topNavigationComp/masters/AssignedDoc/AssignedDocuments";
+import AssignedAdd from "./components/topNavigationComp/masters/AssignedDoc/masterform/AssignedAdd";
 import PriceMasterPage from "./pages/priceList/priceMaster";
 import PriceMasterAdd from "./components/priceList/priceMaster/priceMasterAdd/PriceMasterAdd";
 import RateSheetPage from "./pages/priceList/rateSheet";
@@ -870,6 +876,8 @@ import DocumentsArchivePage from "./pages/documentManagement/documentsArchive";
 import DocumentsAuditTrailPage from "./pages/documentManagement/documentsAuditTrail";
 import AllDocumentPage from "./pages/documentManagement/allDocument";
 import AllDocumentAdd from "./components/documentManagement/allDocument/allDocumentAdd/AllDocumentAdd";
+import QuotationList from "./pages/CustomerView/Quate/QuotationList";
+import QuotationAdd from "./pages/CustomerView/Quate/QuotationAdd";
 // import CreateStageplan from "./pages/NewStagesplan";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -2118,14 +2126,6 @@ function App() {
               <Route path="bank-Payment-Quick" element={<BankPaymenttPage heading={'Bank Payment (Quick)'} />} />
               <Route path="bank-Receipt-Quick" element={<BankPaymenttPage heading={'Bank Receipt (Quick)'} />} />
 
-
-
-
-
-
-
-
-
               {/* -----------------Goatx Routes-------- */}
               <Route path="flight-booking-txn-list" element={<FlightRequestPages />} />
               <Route path="flight-amendments-list" element={<FlightAmbd />} />
@@ -2398,6 +2398,7 @@ function App() {
                 <Route path="keep-in-touch-configration" element={<KitConfigration title='KIT Configration' />} />
                 <Route path="notes" element={<NotesCunstomer title='Notes' />} />
                 <Route path="proposals-view" element={<ProposalList style={true} />} />
+                <Route path="proposal/create" element={<AddProposalPage />} />
                 <Route path="expenses-view" element={<ExpenseListPage style={true} />} />
                 <Route path="expense-add" element={<ExpenseListAdd />} />
                 <Route path="projects-view" element={<Project style={true} />} />
@@ -2416,6 +2417,10 @@ function App() {
                 <Route path="ledgers" element={<LeagerPage style={true} title='Ledgers' />} />
                 <Route path="add-leager" element={<AddLeager style={true} title='Ledgers' />} />
                 <Route path="add-leager/:update" element={<AddLeager style={true} title='Ledgers' />} />
+
+                <Route path="quotation" element={<QuotationList style={true} title='Quotation' />} />
+                <Route path="add-quotation" element={<QuotationAdd style={true} title='Quotation' />} />
+                <Route path="add-quotation/:update" element={<QuotationAdd style={true} title='Quotation' />} />
               </Route>
               <Route path="ticket-add" element={<TicketForm />} />
 
@@ -2513,9 +2518,9 @@ function App() {
               <Route path="add-Invoice-Type" element={<TypeInvoiceAdd />} />
               <Route path="add-Invoice-Type/:id" element={<TypeInvoiceAdd />} />
 
-              {/* <Route path="Expense-Master" element={<ExpenseMaster />} />
+              <Route path="Expense-Master" element={<ExpenseMaster />} />
               <Route path="add-Expense-Master" element={<ExpenseAdd />} />
-              <Route path="add-Expense-Master/:id" element={<ExpenseAdd />} /> */}
+              <Route path="add-Expense-Master/:id" element={<ExpenseAdd />} />
 
               <Route path="link-purchase-expense" element={<LinkPurchaseExpense />} />
               <Route path="link-expense-with-invoice-type" element={<LinkExpenseWithInvoiceType />} />
@@ -2561,6 +2566,10 @@ function App() {
               <Route path="TCS-Master" element={<TcsMaster />} />
               <Route path="add-TCS-Master" element={<TcsAdd />} />
               <Route path="add-TCS-Master/:id" element={<TcsAdd />} />
+
+              <Route path="assigned-doc-Master" element={<AssignedDocuments />} />
+              <Route path="add-assigned-doc" element={<AssignedAdd />} />
+              <Route path="add-assigned-doc/:id" element={<AssignedAdd />} />
 
               <Route path="wallet_report" element={<Walletreport />} />
 
@@ -2688,9 +2697,12 @@ function App() {
               {/* Report and Reminder */}
               <Route path="report-setup" element={<ReportSetupPage />} />
               <Route path="reminder-setup" element={<ReminderSetupPage />} />
+              <Route path="process-group-master" element={<Processgropmasterspage/>} />
+              <Route path="create-process-group-master" element={<Processgroupmasterform/>} />
+              <Route path="branch-master" element={<BranchMasterPage/>} />
+              <Route path="create-branch-master" element={<BranchMasterForm/>}/>
               <Route path="*" element={<PageNotFound />} />
               {/* <Route path="/busbookig" element={<BusBookingMain />} /> */}
-
               <Route path="pricemaster/list" element={<PriceMasterPage />} />
               <Route path="pricemaster/add" element={<PriceMasterAdd />} />
               <Route path="ratesheet/list" element={<RateSheetPage />} />
