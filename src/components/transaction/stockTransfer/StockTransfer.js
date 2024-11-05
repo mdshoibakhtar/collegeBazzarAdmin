@@ -1,9 +1,9 @@
 import { Pagination } from "antd";
 import Breadcrumbs from "../../../common/breadcrumb/Breadcrumbs";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import StockTransferPdf from "./stockTransferPdf/StockTransferPdf";
 import { PDFViewer } from "@react-pdf/renderer";
-import PdfBanks from "./pdfBank/PdfBanks";
+import { useState } from "react";
 
 
 const StockTransfer = () => {
@@ -13,7 +13,7 @@ const StockTransfer = () => {
         title_2: 'List Of Stock Tranfer',
         path_2: ``
     };
-    const [pdf, setPdf] = useState(false)
+    const [pdf, setPdf] = useState  (false)
 
     const pdfGenerateDefault = () => {
         setPdf(!pdf)
@@ -33,6 +33,7 @@ const StockTransfer = () => {
                                 </h4>
                                 <div>
                                     <Link className="btn btn-primary btn-sm" to="/stocktransfer/add" role="button" aria-controls="offcanvasExample">+ Add New</Link>
+                                    <button className="btn btn-sm btn-success ms-2" onClick={pdfGenerateDefault}>Print PDF</button>
                                 </div>
                             </div>
                             <div id="empoloyees-tblwrapper_wrapper" className="dataTables_wrapper no-footer">
@@ -76,18 +77,18 @@ const StockTransfer = () => {
                                     />
                                 </div>
                             </div>
-                            {pdf && <div className="pdfcs">
-                                <div className="loader-overlay">
-                                    <PDFViewer style={{ width: '100%', height: '100vh' }}>
-                                        <PdfBanks />
-                                    </PDFViewer>
-                                </div>
-
-                            </div>}
                         </div>
                     </div>
                 </div>
             </div>
+            {pdf && <div className="pdfcs">
+                <div className="loader-overlay">
+                    <PDFViewer style={{ width: '100%', height: '100vh' }}>
+                        <StockTransferPdf />
+                    </PDFViewer>
+                </div>
+
+            </div>}
         </>
     )
 }
