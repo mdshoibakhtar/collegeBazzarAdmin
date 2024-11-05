@@ -213,7 +213,7 @@ function ActiveAccountLedger() {
                           </td>
                           <td></td>
 
-                          <td>AGRI COMPANY PVT. LTD.</td>
+                          <td>ABARIS SOFTCH PVT. LTD..</td>
                           <td>AHMEDABAD</td>
                           <td>1,76,323.36</td>
                           <td>Cr</td>

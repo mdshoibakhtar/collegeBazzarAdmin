@@ -1,7 +1,9 @@
 import { Pagination } from "antd";
 import { Link } from "react-router-dom";
 import Breadcrumbs from "../../../../common/breadcrumb/Breadcrumbs";
-
+import { PDFViewer } from "@react-pdf/renderer";
+import PdfBanks from "./pdfBank/PdfBanks";
+import { useState } from "react";
 
 const SalseOrder = () => {
     const breadCrumbsTitle = {
@@ -11,6 +13,11 @@ const SalseOrder = () => {
         title_3: `List Of Sales Order`,
         path_2: ``
     };
+    const [pdf, setPdf] = useState(false)
+
+    const pdfGenerateDefault = () => {
+        setPdf(!pdf)
+    }
     return (
         <>
             <Breadcrumbs
@@ -42,12 +49,18 @@ const SalseOrder = () => {
                                             <th style={{ width: '150px' }}>No</th>
                                             <th style={{ width: '150px' }}>Amount</th>
                                             <th style={{ width: '150px' }}>Created By</th>
+                                            <th style={{ width: '150px' }}>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr role="row" className="odd" >
-                                            <td >
-                                                No Data Found
+                                        <tr>
+                                            <td> --</td>
+                                            <td> --</td>
+                                            <td> --</td>
+                                            <td> --</td>
+                                            <td> --</td>
+                                            <td>
+                                                <button className="btn btn-sm btn-success ms-2" onClick={pdfGenerateDefault}>Print PDF</button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -63,6 +76,14 @@ const SalseOrder = () => {
                                     />
                                 </div>
                             </div>
+                            {pdf && <div className="pdfcs">
+                                <div className="loader-overlay">
+                                    <PDFViewer style={{ width: '100%', height: '100vh' }}>
+                                        <PdfBanks />
+                                    </PDFViewer>
+                                </div>
+
+                            </div>}
                         </div>
                     </div>
                 </div>
