@@ -4351,3 +4351,55 @@ export const doc_management_add_doc_get = (value) => {
     },
   });
 };
+
+
+
+// GET accContact entries with pagination
+export const getAccContactByPage = (page, count) => {
+  return axiosInstance.get(`/accContact/page?page=${page}&count=${count}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// GET a specific accContact entry by ID
+export const getAccContactById = (id) => {
+  return axiosInstance.get(`/accContact/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new accContact entry
+export const postAccContact = (data) => {
+  return axiosInstance.post(`/accContact/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing accContact entry by ID
+export const updateAccContactById = (id, data) => {
+  return axiosInstance.put(`/accContact/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// DELETE an accContact entry by ID
+export const deleteAccContactById = (id) => {
+  return axiosInstance.delete(`/accContact/delete_type/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
