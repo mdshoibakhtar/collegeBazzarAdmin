@@ -88,7 +88,7 @@ const AddUsertType = () => {
     }, [params?.id]);
 
 
-    const [listusers ,setUsers] = useState()
+    const [listusers, setUsers] = useState()
     useEffect(() => {
 
         const fetchUserType = async () => {
@@ -187,10 +187,10 @@ const AddUsertType = () => {
                                                             onChange={handleChange}
                                                         >
                                                             <option >Select Option</option>
-                                                            {listusers && listusers?.map((item)=>{
+                                                            {listusers && listusers?.map((item) => {
                                                                 return <option value={item._id}>{item?.user_type}</option>
                                                             })}
-                                                            
+
                                                         </select>
                                                     </div>
                                                     <div className="col-xl-4 mb-3">

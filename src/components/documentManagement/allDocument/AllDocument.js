@@ -2,8 +2,9 @@ import { Pagination, Popconfirm } from "antd";
 import Breadcrumbs from "../../../common/breadcrumb/Breadcrumbs";
 import AllDocumentFilter from "./allDocumentFilter/AllDocumentFilter";
 import { Link } from "react-router-dom";
-import { doc_management_add_doc_get } from "../../../api/login/Login";
+import { doc_management_add_doc_get, doc_management_delete } from "../../../api/login/Login";
 import { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
 
 const AllDocument = () => {
@@ -16,7 +17,7 @@ const AllDocument = () => {
 
     const [openMenuId, setOpenMenuId] = useState(null);
 
-    console.log(openMenuId);
+    // console.log(openMenuId);
 
 
     const getCurrentDate = () => {
@@ -174,6 +175,30 @@ const AllDocument = () => {
         setOpenMenuId(openMenuId === id ? null : id);
     };
 
+    const confirm = (id) => {
+        console.log(id);
+
+        deleteaData(id)
+    }
+
+    const toastSuccessMessage = (message) => {
+        toast.success(`${message}`, {
+            position: "top-center",
+        });
+    };
+
+    const deleteaData = async (id) => {
+        try {
+            const res = await doc_management_delete(id)
+            if (res?.error == false) {
+                toastSuccessMessage(res?.message)
+                getTransitionReport()
+            }
+        } catch (error) {
+
+        }
+    }
+
     return (
         <>
             <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
@@ -185,7 +210,7 @@ const AllDocument = () => {
                             <div className="card-body p-0">
                                 <div className="table-responsive active-projects style-1">
                                     <div className="tbl-caption">
-                                        <h4 className="heading mb-0"><b>All Documents </b></h4>
+                                        <h4 className="heading mb-0"><b>All Documents List</b></h4>
                                         <div>
                                             <Link className="btn btn-primary btn-sm" to="/documents-add" role="button" aria-controls="offcanvasExample">+  ADD DOCUMENT  </Link>
                                             {/* <button type="button" className="btn btn-secondary btn-sm" >
@@ -208,15 +233,19 @@ const AllDocument = () => {
                                                 </th> */}
 
                                                     <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Employee Name: activate to sort column ascending" style={{ width: '203.45px' }}>
-                                                        Name
+                                                        Document Name
                                                     </th>
                                                     <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Employee Name: activate to sort column ascending" style={{ width: '203.45px' }}>
                                                         Document Category
-
+                                                    </th>
+                                                    <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Employee Name: activate to sort column ascending" style={{ width: '203.45px' }}>
+                                                        Tags
+                                                    </th>
+                                                    <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Employee Name: activate to sort column ascending" style={{ width: '203.45px' }}>
+                                                        Shared With Users
                                                     </th>
                                                     <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Employee Name: activate to sort column ascending" style={{ width: '203.45px' }}>
                                                         Storage
-
                                                     </th>
                                                     <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Employee Name: activate to sort column ascending" style={{ width: '203.45px' }}>
                                                         Created Date
@@ -225,7 +254,8 @@ const AllDocument = () => {
                                                         Created By
                                                     </th>
                                                     <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Contact Number: activate to sort column ascending" style={{ width: '161.675px' }}>
-                                                        Action	</th>
+                                                        Action
+                                                    </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -235,9 +265,22 @@ const AllDocument = () => {
                                                         <td >{item?.category?.map((item, i) => {
                                                             return <p key={i}>{item?.service_name}</p>
                                                         })}</td>
+                                                        <td >{item?.meta_tags?.map((item) => {
+                                                            return <>
+                                                                <p>{item}</p>
+                                                            </>
+                                                        })}</td>
+                                                        <td >
+                                                            {item?.assign_share_with_users?.map((item) => {
+                                                                return <>
+                                                                    <p>{item?.name}</p>
+                                                                </>
+                                                            })}
+                                                        </td>
                                                         <td >{item?.storage}</td>
                                                         <td >{item?.createdAt}</td>
                                                         <td >{item?.createdBy}</td>
+
                                                         <td>
                                                             <div className="menu-container">
                                                                 <button onClick={() => toggleMenu(item._id)} className="btn btn-secondary">Options</button>
@@ -257,7 +300,7 @@ const AllDocument = () => {
                                                                 {openMenuId === item._id && (
                                                                     <div className="menu-setdyc">
                                                                         <a href="#">View</a>
-                                                                        <a href="#">Edit</a>
+                                                                        <Link to={`/documents-update/${item._id}`}>Edit</Link>
                                                                         <a href="#">Share</a>
                                                                         <a href="#">Get Shareable Link</a>
                                                                         <a href="#">Download</a>
@@ -268,7 +311,18 @@ const AllDocument = () => {
                                                                         <a href="#">Send Email</a>
                                                                         <a href="#">Remove Indexing</a>
                                                                         <a href="#">Archive</a>
-                                                                        <a href="#">Delete</a>
+                                                                        <Link to="#">
+                                                                            <Popconfirm
+                                                                                title="Delete Document !"
+                                                                                description="Are you sure to delete ?"
+                                                                                onConfirm={() => confirm(item?._id)}
+                                                                                // onCancel={cancel}
+                                                                                okText="Yes"
+                                                                                cancelText="No"
+                                                                            >
+                                                                                Delete
+                                                                            </Popconfirm>
+                                                                        </Link>
                                                                     </div>
                                                                 )}
                                                             </div>
@@ -301,6 +355,7 @@ const AllDocument = () => {
                 </div >
 
             </section>
+            <ToastContainer />
         </>
     )
 }

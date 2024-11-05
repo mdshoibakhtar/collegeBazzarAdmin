@@ -2699,11 +2699,13 @@ function App() {
               <Route path="process/add" element={<ProcessAdd />} />
               <Route path="document-categories" element={<DocumentCategoriesPage />} />
               <Route path="document-categories-add" element={<DocumentCategoriesAdd />} />
+              <Route path="document-categories-update/:id" element={<DocumentCategoriesAdd />} />
               <Route path="children-categories-add" element={<AddChildreenCategory />} />
               <Route path="archived-documents" element={<DocumentsArchivePage />} />
               <Route path="document-audit-trails" element={<DocumentsAuditTrailPage />} />
               <Route path="documents" element={<AllDocumentPage />} />
               <Route path="documents-add" element={<AllDocumentAdd />} />
+              <Route path="documents-update/:id" element={<AllDocumentAdd />} />
 
 
 
