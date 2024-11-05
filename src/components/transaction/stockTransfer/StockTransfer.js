@@ -1,6 +1,9 @@
 import { Pagination } from "antd";
 import Breadcrumbs from "../../../common/breadcrumb/Breadcrumbs";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { PDFViewer } from "@react-pdf/renderer";
+import PdfBanks from "./pdfBank/PdfBanks";
 
 
 const StockTransfer = () => {
@@ -10,6 +13,11 @@ const StockTransfer = () => {
         title_2: 'List Of Stock Tranfer',
         path_2: ``
     };
+    const [pdf, setPdf] = useState(false)
+
+    const pdfGenerateDefault = () => {
+        setPdf(!pdf)
+    }
     return (
         <>
             <Breadcrumbs
@@ -41,12 +49,18 @@ const StockTransfer = () => {
                                             <th style={{ width: '150px' }}>No</th>
                                             <th style={{ width: '150px' }}>Quantity</th>
                                             <th style={{ width: '150px' }}>Created By</th>
+                                            <th style={{ width: '150px' }}>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr role="row" className="odd" >
-                                            <td >
-                                                No Data Found
+                                        <tr >
+                                            <td>----</td>
+                                            <td>----</td>
+                                            <td>----</td>
+                                            <td>----</td>
+                                            <td>----</td>
+                                            <td>
+                                                <button className="btn btn-sm btn-success ms-2" onClick={pdfGenerateDefault}>Print PDF</button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -62,6 +76,14 @@ const StockTransfer = () => {
                                     />
                                 </div>
                             </div>
+                            {pdf && <div className="pdfcs">
+                                <div className="loader-overlay">
+                                    <PDFViewer style={{ width: '100%', height: '100vh' }}>
+                                        <PdfBanks />
+                                    </PDFViewer>
+                                </div>
+
+                            </div>}
                         </div>
                     </div>
                 </div>

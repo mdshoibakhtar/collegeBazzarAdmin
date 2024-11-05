@@ -135,7 +135,7 @@ function PartyCrossReport() {
                         <td>
                           <input type="checkbox" />
                         </td>
-                        <td>AGRI COMPANY PVT. LTD.</td>
+                        <td>ABARIS SOFTCH PVT. LTD..</td>
                         <td></td>
                         <td>Kishan</td>
                         <td>NaN</td>

@@ -89,7 +89,7 @@ function OpeningBalance() {
                         <td>
                           <input type="checkbox" />
                         </td>
-                        <td>AGRI COMPANY PVT. LTD.</td>
+                        <td>ABARIS SOFTCH PVT. LTD..</td>
                         <td>Sundry Debtors (A/cs Receivable)</td>
                         <td>Rajkot</td>
                         <td>25,96,167.68</td>
