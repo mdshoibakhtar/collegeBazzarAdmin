@@ -2696,7 +2696,6 @@ function App() {
               <Route path="create-branch-master" element={<BranchMasterForm/>}/>
               <Route path="*" element={<PageNotFound />} />
               {/* <Route path="/busbookig" element={<BusBookingMain />} /> */}
-
               <Route path="pricemaster/list" element={<PriceMasterPage />} />
               <Route path="pricemaster/add" element={<PriceMasterAdd />} />
               <Route path="ratesheet/list" element={<RateSheetPage />} />

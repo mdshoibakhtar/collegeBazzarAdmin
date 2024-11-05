@@ -2,15 +2,17 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FaFileAlt } from "react-icons/fa";
 import { Button } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import FastTrack from "../../../common/fastTrack/FastTrack";
 import { useParams } from "react-router-dom";
-import { remainderSetupAdd } from "../../../api/login/Login";
+import { remainderSetupAdd, remainderSetupGet } from "../../../api/login/Login";
+import Loadar from "../../../common/loader/Loader";
 
 function ReminderSetup() {
   const [show, setShow] = useState(false);
   const [validated, setValidated] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const params = useParams();
   const [initialvalue, setInitialValue] = useState({
     reminder_on_birthday: false,
@@ -50,14 +52,15 @@ function ReminderSetup() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
-
+    setIsLoading(true)
     if (form.checkValidity() === false) {
       setValidated(true);
     } else {
       try {
         const response = await remainderSetupAdd(initialvalue);
         if (response?.statusCode === "200") {
-          toastSuccessMessage("SMS Setup added successfully!");
+          toastSuccessMessage("Remainder Setup added successfully!");
+          setIsLoading(false)
           setInitialValue({
             reminder_on_birthday: false,
             before_days_b: "",
@@ -72,18 +75,41 @@ function ReminderSetup() {
             sms_template_s: ""
           });
         } else {
-          toastErrorMessage("Failed to add SMS Setup.");
+          toastErrorMessage("Failed to remainder update.");
         }
       } catch (error) {
         console.error("API Error:", error);
-        toastErrorMessage("Failed to add SMS Setup.");
+        toastErrorMessage("Failed to remainder update.");
       }
+      setIsLoading(false)
     }
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const response = await remainderSetupGet();
+        if (response && response.data) {
+          setInitialValue(response.data);
+        } else {
+          toastErrorMessage("Failed to load remainder data.");
+        }
+      } catch (error) {
+        console.error("Data Fetching Error:", error);
+        toastErrorMessage("Failed to load remainder data.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>
       <div>
+        {isLoading && <Loadar />}
         <div className="row m-2">
           <div className="col-xl-12">
             <div className="card">
@@ -114,7 +140,7 @@ function ReminderSetup() {
                               className="form-check-input"
                               type="checkbox"
                               id="reminder_on_birthday"
-                              checked={initialvalue.reminder_on_birthday}
+                              checked={initialvalue?.reminder_on_birthday}
                               onChange={handleChange}
                             />
                             <label className="form-check-label" htmlFor="reminder_on_birthday">
@@ -126,7 +152,7 @@ function ReminderSetup() {
                               className="form-check-input"
                               type="checkbox"
                               id="reminder_on_anniversary"
-                              checked={initialvalue.reminder_on_anniversary}
+                              checked={initialvalue?.reminder_on_anniversary}
                               onChange={handleChange}
                             />
                             <label className="form-check-label" htmlFor="reminder_on_anniversary">
@@ -138,7 +164,7 @@ function ReminderSetup() {
                               className="form-check-input"
                               type="checkbox"
                               id="reminder_days"
-                              checked={initialvalue.reminder_days}
+                              checked={initialvalue?.reminder_days}
                               onChange={handleChange}
                             />
                             <label className="form-check-label" htmlFor="reminder_days">
@@ -156,7 +182,7 @@ function ReminderSetup() {
                             className="form-control mb-3"
                             placeholder="Birthday Days"
                             id="before_days_b"
-                            value={initialvalue.before_days_b || ""}
+                            value={initialvalue?.before_days_b || ""}
                             onChange={handleChange}
                           />
                           <input
@@ -164,7 +190,7 @@ function ReminderSetup() {
                             className="form-control mb-3"
                             placeholder="Anniversary Days"
                             id="before_days_a"
-                            value={initialvalue.before_days_a || ""}
+                            value={initialvalue?.before_days_a || ""}
                             onChange={handleChange}
                           />
                           <input
@@ -172,7 +198,7 @@ function ReminderSetup() {
                             className="form-control mb-3"
                             placeholder="Reminder Days"
                             id="before_days_r"
-                            value={initialvalue.before_days_r || ""}
+                            value={initialvalue?.before_days_r || ""}
                             onChange={handleChange}
                           />
                         </div>
@@ -186,7 +212,7 @@ function ReminderSetup() {
                             className="form-control mb-3"
                             placeholder="Days"
                             id="after_days"
-                            value={initialvalue.after_days || ""}
+                            value={initialvalue?.after_days || ""}
                             onChange={handleChange}
                           />
                         </div>
@@ -199,7 +225,7 @@ function ReminderSetup() {
                               className="form-check-input"
                               type="checkbox"
                               id="due_payment_sms_on_startup"
-                              checked={initialvalue.due_payment_sms_on_startup}
+                              checked={initialvalue?.due_payment_sms_on_startup}
                               onChange={handleChange}
                             />
                             <label className="form-check-label" htmlFor="due_payment_sms_on_startup">
@@ -214,7 +240,7 @@ function ReminderSetup() {
                               type="text"
                               className="form-control"
                               id="sms_template_p"
-                              value={initialvalue.sms_template_p}
+                              value={initialvalue?.sms_template_p}
                               onChange={handleChange}
                             />
                           </div>
@@ -223,7 +249,7 @@ function ReminderSetup() {
                               className="form-check-input"
                               type="checkbox"
                               id="credit_days_reminder_on_startup"
-                              checked={initialvalue.credit_days_reminder_on_startup}
+                              checked={initialvalue?.credit_days_reminder_on_startup}
                               onChange={handleChange}
                             />
                             <label className="form-check-label" htmlFor="credit_days_reminder_on_startup">
@@ -238,7 +264,7 @@ function ReminderSetup() {
                               type="text"
                               className="form-control"
                               id="sms_template_s"
-                              value={initialvalue.sms_template_s}
+                              value={initialvalue?.sms_template_s}
                               onChange={handleChange}
                             />
                           </div>

@@ -3,14 +3,16 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import { useState } from "react";
-import { smsSetupAdd } from "../../../api/login/Login";
+import { useEffect, useState } from "react";
+import { smsSetupAdd, smsSetupGet } from "../../../api/login/Login";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
+import Loadar from "../../../common/loader/Loader";
 
 
 function SmsSetupForm() {
   const [validated, setValidated] = useState(false);
+  const [isLoading, setIsloading] = useState(false);
   const params = useParams();
   const [initialvalue, setinitialvalue] = useState({
     company_name: "",
@@ -53,10 +55,11 @@ function SmsSetupForm() {
       setValidated(true); // Assuming you have a 'validated' state for form validation feedback
     } else {
       try {
+        setIsloading(true)
         const response = await smsSetupAdd(initialvalue);
-        console.log("API Response:", response.data);
         if (response?.statusCode == "200" || response?.statusCode === "200") {
           toastSuccessMessage("SMS Setup added successfully!");
+          setIsloading(false)
           setinitialvalue({ // Reset form values if needed
             company_name: "",
             sms_user_name: "",
@@ -72,16 +75,32 @@ function SmsSetupForm() {
         } else {
           toastErrorMessage("Failed to add SMS Setup.");
         }
+        setIsloading(false)
       } catch (error) {
         console.error("API Error:", error);
         toastErrorMessage("Failed to add SMS Setup.");
+        setIsloading(false)
       }
     }
   };
 
+  useEffect(() => {
+    const fetch = async () => {
+      setIsloading(true)
+      try {
+        const response = await smsSetupGet()
+        setinitialvalue(response?.data)
+        setIsloading(false)
+      } catch (error) {
+        toastErrorMessage("Failed to load SMS Setup Data.");
+      }
+    }
+    fetch()
+  }, [])
 
   return (
     <div className="py-3">
+       {isLoading && <Loadar />}
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Row className="mb-3">
           <Form.Group as={Col} md="4" controlId="company_name" className="mb-3">
@@ -89,7 +108,7 @@ function SmsSetupForm() {
             <Form.Control
               type="text"
               placeholder="Company Name"
-              value={initialvalue.company_name}
+              value={initialvalue?.company_name}
               onChange={handleChange}
               required
             />
@@ -103,7 +122,7 @@ function SmsSetupForm() {
             <Form.Control
               type="text"
               placeholder="SMS UserName"
-              value={initialvalue.sms_user_name}
+              value={initialvalue?.sms_user_name}
               onChange={handleChange}
               required
             />
@@ -117,7 +136,7 @@ function SmsSetupForm() {
             <Form.Control
               type="password"
               placeholder="SMS Password"
-              value={initialvalue.sms_password}
+              value={initialvalue?.sms_password}
               onChange={handleChange}
               required
             />
@@ -131,7 +150,7 @@ function SmsSetupForm() {
             <Form.Control
               type="password"
               placeholder="Re-type Password"
-              value={initialvalue.retype_password}
+              value={initialvalue?.retype_password}
               onChange={handleChange}
               required
             />
@@ -145,7 +164,7 @@ function SmsSetupForm() {
             <Form.Control
               type="text"
               placeholder="Mask"
-              value={initialvalue.mask}
+              value={initialvalue?.mask}
               onChange={handleChange}
               required
             />
@@ -159,7 +178,7 @@ function SmsSetupForm() {
             <Form.Control
               type="text"
               placeholder="SMS URL"
-              value={initialvalue.sms_url}
+              value={initialvalue?.sms_url}
               onChange={handleChange}
               required
             />
@@ -173,7 +192,7 @@ function SmsSetupForm() {
             <Form.Control
               type="text"
               placeholder="SMS Response"
-              value={initialvalue.sms_response}
+              value={initialvalue?.sms_response}
               onChange={handleChange}
               required
             />
@@ -187,7 +206,7 @@ function SmsSetupForm() {
             <Form.Control
               type="text"
               placeholder="CC Mobile"
-              value={initialvalue.cc_mobile}
+              value={initialvalue?.cc_mobile}
               onChange={handleChange}
               required
             />
@@ -201,7 +220,7 @@ function SmsSetupForm() {
             <Form.Control
               type="text"
               placeholder="Default Mobile"
-              value={initialvalue.default_mobile}
+              value={initialvalue?.default_mobile}
               onChange={handleChange}
               required
             />
@@ -215,7 +234,7 @@ function SmsSetupForm() {
             <Form.Control
               type="text"
               placeholder="SMS Auth Key"
-              value={initialvalue.sms_auth_key}
+              value={initialvalue?.sms_auth_key}
               onChange={handleChange}
               required
             />

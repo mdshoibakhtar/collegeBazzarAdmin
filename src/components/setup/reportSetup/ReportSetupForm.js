@@ -1,19 +1,19 @@
 import Select from "react-select"; // Import react-select
 import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getStateMaster, reportSetupSetupAdd } from "../../../api/login/Login";
+import { clodinaryImage, getStateMaster, reportSetupSetupAdd, reportSetupSetupGet } from "../../../api/login/Login";
 import { toast, ToastContainer } from "react-toastify";
 
 function ReportSetupForm() {
-  const [show, setShow] = useState(false);
   const [validated, setValidated] = useState(false);
+  const [fileNames, setFileNames] = useState({});
   const params = useParams();
   const [statesList, setStatesList] = useState([]);
-  const [initialvalue, setInitialValue] = useState({
+
+  const [initialValue, setInitialValue] = useState({
     company_name: '',
     header_line1: '',
     header_line2: '',
@@ -21,13 +21,13 @@ function ReportSetupForm() {
     header_line4: '',
     header_line5: '',
     header_line6: '',
-    printing_header_text_allignment: 'Left', // default value
+    printing_header_text_allignment: 'Left',
     signature: '',
     header: '',
     footer: '',
     logo: '',
     background: '',
-    image_allign: 'Left', // default value
+    image_align: 'Left',
     gst_no: '',
     gst_address: '',
     state: { type: "", ref: 'state' },
@@ -46,17 +46,7 @@ function ReportSetupForm() {
     acc_no: '',
     upi_id: '',
     upi_qr_code: ''
-
   });
-
-  // Handle input change for all form fields
-  const handleChange = (e) => {
-    const { id, value, type, checked } = e.target;
-    setInitialValue((prevValues) => ({
-      ...prevValues,
-      [id]: type === "checkbox" ? checked : value,
-    }));
-  };
 
   const toastSuccessMessage = (message) => {
     toast.success(`${params?.id ? "Update" : "Add"} ${message}`, {
@@ -70,6 +60,37 @@ function ReportSetupForm() {
     });
   };
 
+  const handleChange = async (e, label) => {
+    const { name, value, files } = e.target;
+
+    // Handle file uploads
+    if (files && files.length > 0) {
+      const formData = new FormData();
+      formData.append("image", files[0]);
+
+      try {
+        const uploadResult = await clodinaryImage(formData); // Assuming this is your upload function
+        setFileNames((prev) => ({
+          ...prev,
+          [name]: uploadResult.data.data.url,
+        }));
+        setInitialValue((prevValues) => ({
+          ...prevValues,
+          [name]: uploadResult.data.data.url, // Store uploaded image URL
+        }));
+      } catch (error) {
+        console.error("Image upload error:", error);
+        toastErrorMessage("Image upload failed.");
+      }
+    } else if (name) {
+      // Handle text and select inputs
+      setInitialValue((prevValues) => ({
+        ...prevValues,
+        [name]: value, // For regular inputs
+      }));
+    }
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -78,44 +99,12 @@ function ReportSetupForm() {
       setValidated(true);
     } else {
       try {
-        const response = await reportSetupSetupAdd(initialvalue);
-        if (response?.statusCode == "200") {
-          toastSuccessMessage("SMS Setup added successfully!");
-          setInitialValue({
-            company_name: '',
-            header_line1: '',
-            header_line2: '',
-            header_line3: '',
-            header_line4: '',
-            header_line5: '',
-            header_line6: '',
-            printing_header_text_allignment: 'Left', // default value
-            signature: '',
-            header: '',
-            footer: '',
-            logo: '',
-            background: '',
-            image_allign: 'Left', // default value
-            gst_no: '',
-            gst_address: '',
-            state: { type: "", ref: 'state' }, // Assuming this will be populated from a dropdown
-            gst_place: '',
-            gst_pincode: '',
-            pan_no: '',
-            tin_no: '',
-            tan_no: '',
-            cin_no: '',
-            msme_no: '',
-            st_no: '',
-            ecommerce_gstno: '',
-            bank_name: '',
-            branch: '',
-            ifsc_code: '',
-            acc_no: '',
-            upi_id: '',
-            upi_qr_code: ''
+        console.log(initialValue);
 
-          });
+        const response = await reportSetupSetupAdd(initialValue); // Assuming this is your submit function
+        if (response?.statusCode === "200") {
+          toastSuccessMessage("SMS Setup added successfully!");
+          setInitialValue({ ...initialValue });
         } else {
           toastErrorMessage("Failed to add SMS Setup.");
         }
@@ -125,12 +114,22 @@ function ReportSetupForm() {
       }
     }
   };
+
+
   useEffect(() => {
     const fetchStates = async () => {
       try {
-        const response = await getStateMaster();
+        const response = await getStateMaster(); // Assuming this is your API call for states
         if (response && response.data) {
           setStatesList(response.data);
+        }
+      } catch (error) {
+        console.error("Error fetching states:", error);
+      }
+      try {
+        const response = await reportSetupSetupGet(); // Assuming this is your API call for states
+        if (response && response.data) {
+          setInitialValue(response.data);
         }
       } catch (error) {
         console.error("Error fetching states:", error);
@@ -142,224 +141,247 @@ function ReportSetupForm() {
 
   return (
     <div className="container mt-5">
-      <h2>Report Setup</h2>
       <Form noValidate onSubmit={handleSubmit}>
-
         {/* Company Information */}
         <div className="row">
-            <Col md={6}>
-              <Form.Group controlId="company_name">
-                <Form.Label>Company Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter company name"
-                  value={initialvalue.company_name}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-            </Col>
-
-
-            <Col md={6}>
-              <Form.Group controlId="image_align">
-                <Form.Label>Image Align</Form.Label>
-                <Form.Select
-                  value={initialvalue.image_align}
-                  onChange={handleChange}
-                >
-                  <option value="Left">Left</option>
-                  <option value="Center">Center</option>
-                  <option value="Right">Right</option>
-                </Form.Select>
-              </Form.Group>
-            </Col>
-            <Col md={6}>
-              <Form.Group controlId="logo">
-                <Form.Label>Logo</Form.Label>
-                <Form.Control type="file" onChange={handleChange} />
-              </Form.Group>
-            </Col>
-            <Col md={6}>
-              <Form.Group controlId="background">
-                <Form.Label>Background</Form.Label>
-                <Form.Control type="file" onChange={handleChange} />
-              </Form.Group>
-            </Col>
-            {/* Header Lines */}
-            <h4>Header Lines</h4>
-            <div className="row">
-              {[1, 2, 3, 4, 5, 6].map(i => (
-                <Col md={6} key={i}>
-                  <Form.Group controlId={`header_line${i}`}>
-                    <Form.Label>{`Header Line ${i}`}</Form.Label>
+          <div className="col-xl-8">
+            <div className="card">
+              <div className="row">
+                <div className="col-xl-12">
+                  <Form.Group controlId="company_name">
+                    <Form.Label>Company Name</Form.Label>
                     <Form.Control
                       type="text"
-                      placeholder={`Enter header line ${i}`}
-                      value={initialvalue[`header_line${i}`]}
-                      onChange={handleChange}
+                      placeholder="Enter company name"
+                      name="company_name"
+                      value={initialValue?.company_name}
+                      onChange={(e) => handleChange(e)}
+                      required
                     />
                   </Form.Group>
-                </Col>
-              ))}
+                </div>
+
+                {/* Header Lines */}
+                <h4>Header Lines</h4>
+                <div className="col-xl-12">
+                  <div className="row">
+                    {[1, 2, 3, 4, 5, 6].map(i => (
+                      <div className="col-xl-6" key={i}>
+                        <Form.Group controlId={`header_line${i}`}>
+                          <Form.Label>{`Header Line ${i}`}</Form.Label>
+                          <Form.Control
+                            type="text"
+                            placeholder={`Enter header line ${i}`}
+                            name={`header_line${i}`}
+                            value={initialValue[`header_line${i}`]}
+                            onChange={(e) => handleChange(e)}
+                          />
+                        </Form.Group>
+                      </div>
+                    ))}
+                    <div className="col-xl-6">
+                      <Form.Group controlId="printing_header_text_allignment">
+                        <Form.Label>Printing Header Text Alignment</Form.Label>
+                        <Form.Select
+                          name="printing_header_text_allignment"
+                          value={initialValue?.printing_header_text_allignment}
+                          onChange={(e) => handleChange(e)}
+                        >
+                          <option value="Left">Left</option>
+                          <option value="Center">Center</option>
+                          <option value="Right">Right</option>
+                        </Form.Select>
+                      </Form.Group>
+                    </div>
+                    <div className="col-xl-6">
+                      <div className="d-flex align-items-center mt-4">
+                        {['signature', 'header', 'footer'].map((label) => (
+                          <div key={label} className="me-3">
+                            <div className="btn btn-outline-dark position-relative overflow-hidden">
+                              <i className="fa-sharp fa-regular fa-file-image"></i>
+                              <input
+                                type="file"
+                                name={label}
+                                className="position-absolute top-0 start-0 w-100 h-100 opacity-0"
+                                onChange={(e) => handleChange(e, label)}
+                              />
+                            </div>
+                            <small>{label}</small>
+                            {/* Display the selected file name if it exists */}
+                            {fileNames[label] && <small className="d-block mt-1">{fileNames[label]}</small>}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-xl-4">
+            <div className="card">
+              <div className="row">
+                <div className="col-xl-6">
+                  <Form.Group controlId="image_align">
+                    <Form.Label>Image Align</Form.Label>
+                    <Form.Select
+                      name="image_align"
+                      value={initialValue?.image_align}
+                      onChange={(e) => handleChange(e)}
+                    >
+                      <option value="Left">Left</option>
+                      <option value="Center">Center</option>
+                      <option value="Right">Right</option>
+                    </Form.Select>
+                  </Form.Group>
+                </div>
+                <div className="col-xl-6">
+                  <Form.Group controlId="logo">
+                    <Form.Label>Logo</Form.Label>
+                    <Form.Control type="file" onChange={(e) => handleChange(e, 'logo')} name="logo" />
+                  </Form.Group>
+                </div>
+                <div className="col-xl-6">
+                  <Form.Group controlId="background">
+                    <Form.Label>Background</Form.Label>
+                    <Form.Control type="file" onChange={(e) => handleChange(e, 'background')} name="background" />
+                  </Form.Group>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <Form.Group controlId="printing_header_text_alignment">
-          <Form.Label>Printing Header Text Alignment</Form.Label>
-          <Form.Select
-            value={initialvalue.printing_header_text_alignment}
-            onChange={handleChange}
-          >
-            <option value="Left">Left</option>
-            <option value="Center">Center</option>
-            <option value="Right">Right</option>
-          </Form.Select>
-        </Form.Group>
+        {/* GST and Company Details */}
+        <div className="card">
+          <div className="row">
+            {/* GST Details */}
+            <div className="col-xl-3">
+              <Form.Group controlId="gst_no">
+                <Form.Label>GST No</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter GST No"
+                  value={initialValue.gst_no || ""}
+                  name="gst_no"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </div>
 
-        {/* GST Details */}
-        <h4>GST Details</h4>
-        <Row>
-          <Col md={6}>
-            <Form.Group controlId="gst_no">
-              <Form.Label>GST No</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter GST No"
-                value={initialvalue.gst_no}
-                onChange={handleChange}
-              />
-            </Form.Group>
-          </Col>
-          <Col md={6}>
-            <Form.Group controlId="gst_address">
-              <Form.Label>GST Address</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter GST Address"
-                value={initialvalue.gst_address}
-                onChange={handleChange}
-              />
-            </Form.Group>
-          </Col>
-        </Row>
+            <div className="col-xl-3">
+              <Form.Group controlId="gst_address">
+                <Form.Label>GST Address</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter GST Address"
+                  value={initialValue.gst_address || ""}
+                  name="gst_address"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </div>
 
-        <Row>
-          <Col md={4}>
-            <Form.Group controlId="state">
-              <Form.Label>State</Form.Label>
-              <Form.Select
-                value={initialvalue.state.type} // Adjust to match the state selected
-                onChange={handleChange}
-              >
-                <option value="">Select State</option> {/* Placeholder option */}
-                {statesList.map(state => (
-                  <option key={state?._id} value={state?._id}>
-                    {state?.name}
-                  </option>
-                ))}
-              </Form.Select>
-            </Form.Group>
-          </Col>
-          <Col md={4}>
-            <Form.Group controlId="gst_place">
-              <Form.Label>GST Place</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter GST Place"
-                value={initialvalue.gst_place}
-                onChange={handleChange}
-              />
-            </Form.Group>
-          </Col>
-          <Col md={4}>
-            <Form.Group controlId="gst_pincode">
-              <Form.Label>GST Pincode</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Enter GST Pincode"
-                value={initialvalue.gst_pincode}
-                onChange={handleChange}
-              />
-            </Form.Group>
-          </Col>
-        </Row>
+            <div className="col-xl-2">
+              <Form.Group controlId="state">
+                <Form.Label>State</Form.Label>
+                <Form.Select
+                  value={initialValue.state?.type || ""}
+                  name="state"
+                  onChange={handleChange}
+                >
+                  <option value="">Select State</option>
+                  {statesList.map((state) => (
+                    <option key={state._id} value={state._id}>
+                      {state.name ? state?.name : state.ref}
+                    </option>
+                  ))}
+                </Form.Select>
+              </Form.Group>
+            </div>
 
-        {/* Bank Details */}
-        <h4>Bank Details</h4>
-        <Row>
-          <Col md={6}>
-            <Form.Group controlId="bank_name">
-              <Form.Label>Bank Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter Bank Name"
-                value={initialvalue.bank_name}
-                onChange={handleChange}
-              />
-            </Form.Group>
-          </Col>
-          <Col md={6}>
-            <Form.Group controlId="branch">
-              <Form.Label>Branch</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter Branch"
-                value={initialvalue.branch}
-                onChange={handleChange}
-              />
-            </Form.Group>
-          </Col>
-        </Row>
+            {/* Additional Fields */}
+            {[
+              "gst_place",
+              "gst_pincode",
+              "pan_no",
+              "tin_no",
+              "tan_no",
+              "cin_no",
+              "msme_no",
+              "st_no",
+              "ecommerce_gstno",
+            ].map((field, index) => (
+              <div className="col-xl-3" key={index}>
+                <Form.Group controlId={field}>
+                  <Form.Label>{field.replace("_", " ").toUpperCase()}</Form.Label>
+                  <Form.Control
+                    type={
+                      field.includes("no") || field.includes("pincode")
+                        ? "text"
+                        : "number"
+                    }
+                    placeholder={`Enter ${field.replace("_", " ")}`}
+                    value={initialValue[field] || ""}
+                    name={field}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+              </div>
+            ))}
+          </div>
+        </div>
 
-        <Row>
-          <Col md={6}>
-            <Form.Group controlId="ifsc_code">
-              <Form.Label>IFSC Code</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter IFSC Code"
-                value={initialvalue.ifsc_code}
-                onChange={handleChange}
-              />
-            </Form.Group>
-          </Col>
-          <Col md={6}>
-            <Form.Group controlId="acc_no">
-              <Form.Label>Account No</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Enter Account No"
-                value={initialvalue.acc_no}
-                onChange={handleChange}
-              />
-            </Form.Group>
-          </Col>
-        </Row>
+        {/* Bank and Payment Information */}
+        <div className="card">
+          <div className="row">
+            {["bank_name", "branch", "ifsc_code", "acc_no", "upi_id"].map(
+              (field, index) => (
+                <div className="col-xl-6" key={index}>
+                  <Form.Group controlId={field}>
+                    <Form.Label>{field.replace("_", " ").toUpperCase()}</Form.Label>
+                    <Form.Control
+                      type={
+                        field.includes("no") || field.includes("code")
+                          ? "text"
+                          : "text"
+                      }
+                      placeholder={`Enter ${field.replace("_", " ")}`}
+                      value={initialValue[field] || ""}
+                      name={field}
+                      onChange={handleChange}
+                    />
+                  </Form.Group>
+                </div>
+              )
+            )}
+            <div className="col-xl-6">
+              <Form.Group controlId="upi_qr_code">
+                <Form.Label>UPI QR Code</Form.Label>
+                <div className="position-relative">
+                  <Button variant="outline-dark" className="w-100">
+                    <i className="fa-sharp fa-regular fa-file-image me-2"></i>Browse
+                  </Button>
+                  <Form.Control
+                    type="file"
+                    onChange={(e) => handleChange(e, "upi_qr_code")}
+                    name="upi_qr_code"
+                    className="position-absolute top-0 start-0 w-100 h-100 opacity-0"
+                    style={{ cursor: "pointer" }}
+                  />
+                </div>
+              </Form.Group>
+            </div>
 
-        <Row>
-          <Col md={6}>
-            <Form.Group controlId="upi_id">
-              <Form.Label>UPI ID</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter UPI ID"
-                value={initialvalue.upi_id}
-                onChange={handleChange}
-              />
-            </Form.Group>
-          </Col>
-          <Col md={6}>
-            <Form.Group controlId="upi_qr_code">
-              <Form.Label>UPI QR Code</Form.Label>
-              <Form.Control type="file" onChange={handleChange} />
-            </Form.Group>
-          </Col>
-        </Row>
+          </div>
+        </div>
 
         <Button variant="primary" type="submit">Submit</Button>
       </Form>
+
       <ToastContainer />
-    </div>
+    </div >
 
   );
 }

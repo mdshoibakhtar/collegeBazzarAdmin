@@ -4173,14 +4173,38 @@ export const deleteAccAvailableExpenseListById = (id) => {
 export const smsSetupAdd = (data) => {
   return axiosInstance.put(`${baseUrl}acc_sms_setup/update`, data);
 };
+export const smsSetupGet = () => {
+  return axiosInstance.get(`${baseUrl}acc_sms_setup/admin`);
+};
 export const notificationSetupAdd = (data) => {
   return axiosInstance.put(`${baseUrl}acc_notification_setup/update`, data);
+};
+export const notificationSetupGet = () => {
+  return axiosInstance.get(`${baseUrl}acc_notification_setup/admin`);
 };
 export const remainderSetupAdd = (data) => {
   return axiosInstance.put(`${baseUrl}acc_reminder_setup/update`, data);
 };
+export const remainderSetupGet = () => {
+  return axiosInstance.get(`${baseUrl}acc_reminder_setup/admin`);
+};
 export const reportSetupSetupAdd = (data) => {
   return axiosInstance.put(`${baseUrl}accReportSetup/update`, data);
+};
+export const reportSetupSetupGet = (data) => {
+  return axiosInstance.get(`${baseUrl}accReportSetup/admin`, data);
+};
+export const emailSetupGet = () => {
+  return axiosInstance.get(`${baseUrl}acc_email_setup/admin`);
+};
+export const emailSetupSetupAdd = (data) => {
+  return axiosInstance.put(`${baseUrl}acc_email_setup/update`, data);
+};
+export const sedulerSetupAdd = (data) => {
+  return axiosInstance.put(`${baseUrl}acc_reminder_setup/update`, data);
+};
+export const sedulerSetupGet = () => {
+  return axiosInstance.get(`${baseUrl}acc_reminder_setup/admin`);
 };
 
 

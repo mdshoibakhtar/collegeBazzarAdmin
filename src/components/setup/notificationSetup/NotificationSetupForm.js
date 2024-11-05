@@ -3,15 +3,17 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { notificationSetupAdd } from "../../../api/login/Login";
+import { notificationSetupAdd, notificationSetupGet } from "../../../api/login/Login";
 import { toast } from "react-toastify";
+import Loadar from "../../../common/loader/Loader";
 
 function NotificationSetupForm() {
   const [validated, setValidated] = useState(false);
   const params = useParams();
-  const [initialvalue, setInitialValue] = useState({
+  const [isLoading, setIsLoading] = useState(false);
+  const [initialValue, setInitialValue] = useState({
     notification_management_email: "",
     user_management_notification_onadd_edit_delete: false,
     transaction_notification_ondelete: false,
@@ -28,13 +30,13 @@ function NotificationSetupForm() {
   };
 
   const toastSuccessMessage = (message) => {
-    toast.success(`${params?.id ? "Update" : "Add"} ${message}`, {
+    toast.success(`${message}`, {
       position: "top-right",
     });
   };
 
   const toastErrorMessage = (message) => {
-    toast.error(`${params?.id ? "Update" : "Add"} ${message}`, {
+    toast.error(`${message}`, {
       position: "top-right",
     });
   };
@@ -47,8 +49,9 @@ function NotificationSetupForm() {
     if (form.checkValidity() === false) {
       setValidated(true);
     } else {
+      setIsLoading(true);
       try {
-        const response = await notificationSetupAdd(initialvalue);
+        const response = await notificationSetupAdd(initialValue);
         console.log("API Response:", response.data);
         if (response?.statusCode === "200") {
           toastSuccessMessage("Notification Setup added successfully!");
@@ -64,12 +67,36 @@ function NotificationSetupForm() {
       } catch (error) {
         console.error("API Error:", error);
         toastErrorMessage("Failed to add Notification Setup.");
+      } finally {
+        setIsLoading(false);
       }
     }
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const response = await notificationSetupGet();
+        if (response && response.data) {
+          setInitialValue(response.data);
+        } else {
+          toastErrorMessage("Failed to load notification data.");
+        }
+      } catch (error) {
+        console.error("Data Fetching Error:", error);
+        toastErrorMessage("Failed to load notification data.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div className="py-3">
+      {isLoading && <Loadar />}
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Row className="mb-3">
           <Form.Group as={Col} md="6" controlId="notification_management_email" className="mb-3">
@@ -77,7 +104,7 @@ function NotificationSetupForm() {
             <Form.Control
               type="email"
               placeholder="Enter email"
-              value={initialvalue.notification_management_email}
+              value={initialValue.notification_management_email}
               onChange={handleChange}
               required
             />
@@ -90,19 +117,19 @@ function NotificationSetupForm() {
             <Form.Check
               id="user_management_notification_onadd_edit_delete"
               label="User Management Notification"
-              checked={initialvalue.user_management_notification_onadd_edit_delete}
+              checked={initialValue.user_management_notification_onadd_edit_delete}
               onChange={handleChange}
             />
             <Form.Check
               id="transaction_notification_ondelete"
               label="Transaction Notification"
-              checked={initialvalue.transaction_notification_ondelete}
+              checked={initialValue.transaction_notification_ondelete}
               onChange={handleChange}
             />
             <Form.Check
               id="master_notification_ondelete"
               label="Master Notification"
-              checked={initialvalue.master_notification_ondelete}
+              checked={initialValue.master_notification_ondelete}
               onChange={handleChange}
             />
           </Form.Group>

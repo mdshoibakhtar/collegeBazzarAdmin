@@ -4,21 +4,103 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 
 import Row from "react-bootstrap/Row";
-import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { sedulerSetupAdd, sedulerSetupGet } from "../../../api/login/Login";
 
 function SchedulerSetupForm() {
   const [show, setShow] = useState(false);
   const [validated, setValidated] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const params = useParams();
+  const [initialvalue, setInitialValue] = useState({
+    scheduler_subscription_email: "",
+    scheduler_subscription_mobile: null,
+    table: [{
+      schedule_type: { type: String, enum: ["Voucher", "Closing", "Outstanding to Client"] },
+      repeat: { type: String, enum: ["Daily", "Every Monday", "Every 15 Days", "Monthly"] },
+      reminder_type: { type: String, enum: ["EMAIL", "SMS", "WHATSAPP"] }
+    }],
 
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
 
-    setValidated(true);
+  });
+
+  // Handle input change for all form fields
+  const handleChange = (e) => {
+    const { id, value, type, checked } = e.target;
+    setInitialValue((prevValues) => ({
+      ...prevValues,
+      [id]: type === "checkbox" ? checked : value,
+    }));
   };
+
+  const toastSuccessMessage = (message) => {
+    toast.success(`${params?.id ? "Update" : "Add"} ${message}`, {
+      position: "top-right",
+    });
+  };
+
+  const toastErrorMessage = (message) => {
+    toast.error(`${params?.id ? "Update" : "Add"} ${message}`, {
+      position: "top-right",
+    });
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    setIsLoading(true)
+    if (form.checkValidity() === false) {
+      setValidated(true);
+    } else {
+      try {
+        const response = await sedulerSetupAdd(initialvalue);
+        if (response?.statusCode === "200") {
+          toastSuccessMessage("Scheduler  Setup added successfully!");
+          setIsLoading(false)
+          setInitialValue({
+            scheduler_subscription_email: "",
+            scheduler_subscription_mobile: null,
+            table: [{
+              schedule_type: { type: String, enum: ["Voucher", "Closing", "Outstanding to Client"] },
+              repeat: { type: String, enum: ["Daily", "Every Monday", "Every 15 Days", "Monthly"] },
+              reminder_type: { type: String, enum: ["EMAIL", "SMS", "WHATSAPP"] }
+            }],
+
+
+          });
+        } else {
+          toastErrorMessage("Failed to Scheduler  update.");
+        }
+      } catch (error) {
+        console.error("API Error:", error);
+        toastErrorMessage("Failed to Scheduler  update.");
+      }
+      setIsLoading(false)
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const response = await sedulerSetupGet();
+        if (response && response.data) {
+          setInitialValue(response.data);
+        } else {
+          toastErrorMessage("Failed to load Scheduler  data.");
+        }
+      } catch (error) {
+        console.error("Data Fetching Error:", error);
+        toastErrorMessage("Failed to load Scheduler  data.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <div className="py-3">
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
