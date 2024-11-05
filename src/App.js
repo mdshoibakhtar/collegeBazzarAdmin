@@ -857,6 +857,10 @@ import InvoiceMaster from "./components/topNavigationComp/masters/invoiceType/In
 import TypeInvoiceAdd from "./components/topNavigationComp/masters/invoiceType/masterform/TypeInvoiceAdd";
 import ExpenseMaster from "./components/topNavigationComp/masters/expensemaster/ExpenseMaster";
 import ExpenseAdd from "./components/topNavigationComp/masters/expensemaster/masterform/ExpenseAdd";
+import Processgropmasterspage from "./pages/processgroupmaster";
+import Processgroupmasterform from "./components/processgroupmaster/processgroupmasterform/Processgroupmasterform";
+import BranchMasterPage from "./pages/branchmaster";
+import BranchMasterForm from "./components/branchMaster/branchMasterform/BranchMasterForm";
 import AssignedDocuments from "./components/topNavigationComp/masters/AssignedDoc/AssignedDocuments";
 import AssignedAdd from "./components/topNavigationComp/masters/AssignedDoc/masterform/AssignedAdd";
 import PriceMasterPage from "./pages/priceList/priceMaster";
@@ -2124,14 +2128,6 @@ function App() {
               <Route path="bank-Payment-Quick" element={<BankPaymenttPage heading={'Bank Payment (Quick)'} />} />
               <Route path="bank-Receipt-Quick" element={<BankPaymenttPage heading={'Bank Receipt (Quick)'} />} />
 
-
-
-
-
-
-
-
-
               {/* -----------------Goatx Routes-------- */}
               <Route path="flight-booking-txn-list" element={<FlightRequestPages />} />
               <Route path="flight-amendments-list" element={<FlightAmbd />} />
@@ -2707,9 +2703,12 @@ function App() {
               {/* Report and Reminder */}
               <Route path="report-setup" element={<ReportSetupPage />} />
               <Route path="reminder-setup" element={<ReminderSetupPage />} />
+              <Route path="process-group-master" element={<Processgropmasterspage/>} />
+              <Route path="create-process-group-master" element={<Processgroupmasterform/>} />
+              <Route path="branch-master" element={<BranchMasterPage/>} />
+              <Route path="create-branch-master" element={<BranchMasterForm/>}/>
               <Route path="*" element={<PageNotFound />} />
               {/* <Route path="/busbookig" element={<BusBookingMain />} /> */}
-
               <Route path="pricemaster/list" element={<PriceMasterPage />} />
               <Route path="pricemaster/add" element={<PriceMasterAdd />} />
               <Route path="ratesheet/list" element={<RateSheetPage />} />
@@ -2719,11 +2718,13 @@ function App() {
               <Route path="process/add" element={<ProcessAdd />} />
               <Route path="document-categories" element={<DocumentCategoriesPage />} />
               <Route path="document-categories-add" element={<DocumentCategoriesAdd />} />
+              <Route path="document-categories-update/:id" element={<DocumentCategoriesAdd />} />
               <Route path="children-categories-add" element={<AddChildreenCategory />} />
               <Route path="archived-documents" element={<DocumentsArchivePage />} />
               <Route path="document-audit-trails" element={<DocumentsAuditTrailPage />} />
               <Route path="documents" element={<AllDocumentPage />} />
               <Route path="documents-add" element={<AllDocumentAdd />} />
+              <Route path="documents-update/:id" element={<AllDocumentAdd />} />
 
 
 

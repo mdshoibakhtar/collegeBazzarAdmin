@@ -8,7 +8,6 @@ function ReportSetup() {
     <>
       <div>
         <div className="row m-2">
-          <div className="col-xl-12">
             <div className="card">
               <div className="card-body p-0">
                 <div className="table-responsive active-projects style-1">
@@ -130,7 +129,6 @@ function ReportSetup() {
                 </div>
               </div>
             </div>
-          </div>
         </div>
       </div>
       <ToastContainer className="text-center" />
