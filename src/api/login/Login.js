@@ -4403,3 +4403,98 @@ export const deleteAccContactById = (id) => {
     },
   });
 };
+
+
+export const doc_management_delete = (id) => {
+  // console.log(value);
+
+  return axiosInstance.delete(`doc_management_add_doc/delete_type/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+export const doc_management_idGet = (id) => {
+  // console.log(value);
+
+  return axiosInstance.get(`doc_management_add_doc/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const UpdateAllDocument = (id, data) => {
+  return axiosInstance.put(`doc_management_add_doc/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const doc_management_doc_category = (data) => {
+  return axiosInstance.post(`doc_management_doc_category/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+export const doc_management_docAdmin = (id) => {
+  // console.log(value);
+
+  return axiosInstance.get(`doc_management_doc_category/admin`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const doc_management_add_doc_catagory = (value) => {
+  // console.log(value);
+  return axiosInstance.get(`doc_management_doc_category/user?page=${value?.page}&count=${value?.count}&id=${value?.userId}&start_date=${value?.start_date}&end_date=${value?.end_date}&is_archieve=${value?.is_archieve}&parent_id=${value?.parent_id}&search =${value?.search}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const doc_management_doc_category_delete_type = (id) => {
+  // console.log(value);
+  return axiosInstance.delete(`doc_management_doc_category/delete_type/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const ddoc_management_doc_categoryidGet = (id) => {
+  // console.log(value);
+
+  return axiosInstance.get(`doc_management_doc_category/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const ddoc_management_docupdate_type = (id, data) => {
+  // console.log(value);
+
+  return axiosInstance.put(`doc_management_doc_category/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+

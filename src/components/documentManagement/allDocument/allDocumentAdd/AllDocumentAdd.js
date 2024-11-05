@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import Breadcrumbs from "../../../../common/breadcrumb/Breadcrumbs";
-import { addAllDocument, clodinaryImage, getRoleSelecStaff, reailerDistIdAgainstAll, usersList } from "../../../../api/login/Login";
+import { addAllDocument, clodinaryImage, doc_management_idGet, getRoleSelecStaff, reailerDistIdAgainstAll, UpdateAllDocument, usersList } from "../../../../api/login/Login";
 import { baseUrlImage } from "../../../../baseUrl";
 import Select from 'react-select';
 import { toast, ToastContainer } from "react-toastify";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 const AllDocumentAdd = () => {
     const params = useParams()
+    const navigate = useNavigate();
+    // console.log(params);
+
     const breadCrumbsTitle = {
         id: "1",
         title_1: "Document Management",
@@ -53,13 +56,13 @@ const AllDocumentAdd = () => {
 
     const [role, setRole] = useState([])
     const [user, setUser] = useState([])
-    console.log(user)
+    // console.log(user)
 
     //cat
     const comboApiGetData = async () => {
         try {
             const resCat = await reailerDistIdAgainstAll()
-            console.log(resCat?.data);
+            // console.log(resCat?.data);
             const mapped = resCat?.data?.map((item) => ({
                 ...item,
                 label: item.service_name,
@@ -105,7 +108,7 @@ const AllDocumentAdd = () => {
         }
     };
     const [roleinitial, setRoleinitial] = useState(null)
-    console.log(roleinitial);
+    // console.log(roleinitial);
 
     const roleChange = (selectedOption) => {
         setRoleinitial(selectedOption);
@@ -183,15 +186,80 @@ const AllDocumentAdd = () => {
         // console.log(clone);
 
         try {
-            const res = await addAllDocument(clone)
-            if (res?.error == false) {
-                toastSuccessMessage()
+            if (!params?.id) {
+                const res = await addAllDocument(clone)
+                if (res?.error == false) {
+                    toastSuccessMessage()
+                }
+                setTimeout(() => {
+                    navigate('/documents')
+                }, 3000)
+            } else {
+                const res = await UpdateAllDocument(params?.id, clone)
+                if (res?.error == false) {
+                    toastSuccessMessage()
+                }
+                setTimeout(() => {
+                    navigate('/documents')
+                }, 3000)
             }
         } catch (error) {
 
         }
 
     }
+
+    useEffect(() => {
+        const fetchAddDocumentId = async () => {
+            try {
+                if (params?.id) {
+                    const response = await doc_management_idGet(params.id);
+                    // console.log(response);
+                    const userTypeData = response.data;
+                    const clone = { ...userTypeData, doc_upload: userTypeData?.doc_upload }
+                    console.log(clone);
+
+                    setInitialState(clone);
+                    setImage(userTypeData?.doc_upload)
+                    if (userTypeData.assign_share_with_roles) {
+                        const selectedRoles = userTypeData.assign_share_with_roles.map(id => role.find(r => r.value === id));
+                        // console.log('selectedRoles', selectedRoles);
+
+                        setRoleinitial(selectedRoles);
+                    }
+                    // debugger
+                    if (userTypeData.assign_share_with_users) {
+                        const selectedUsers = userTypeData.assign_share_with_users
+                            .map(id => user.find(u => u.value === id))
+                            .filter(Boolean);
+                        setUserinitial(selectedUsers);
+                    }
+                    if (userTypeData.category) {
+                        const selectedCategories = userTypeData.category
+                            .map(id => cate.find(c => c.value === id))
+                            .filter(Boolean);
+                        setCatinitial(selectedCategories);
+                    }
+
+                } else {
+                    // setInitialValues({
+                    //     user_type: "",
+                    //     lockedAmount: "",
+                    //     is_active: false,
+                    //     parent_user_type: "",
+                    //     role_prefix: "",
+                    //     isSponsored: false,
+                    //     s_no: ""
+                    // });
+                }
+            } catch (error) {
+                console.error("Error fetching User type:", error);
+            }
+        };
+        if (cate.length && role.length && user.length) {
+            fetchAddDocumentId();
+        }
+    }, [params?.id, cate, role, user]);
 
     useEffect(() => {
         comboApiGetData()
@@ -324,7 +392,7 @@ const AllDocumentAdd = () => {
                                             <div className='d-flex justify-content-start mt-3'>
                                                 <button className="btn btn-primary pd-x-20 color2 w-100" onClick={submitData} type="button">
                                                     {/* <i className="fas fa-search"></i> */}
-                                                    Save
+                                                    {params?.id ? "Update" : "Save"}
                                                 </button>
                                             </div>
                                         </div>
