@@ -4098,7 +4098,6 @@ export const postAccSelectInvoiceType = (data) => {
   });
 };
 
-// PUT (update) an existing acc_select_invoice_type entry by ID
 export const updateAccSelectInvoiceTypeById = (id, data) => {
   return axiosInstance.put(`/acc_select_invoice_type/update_type/${id}`, data, {
     headers: {
@@ -4108,7 +4107,6 @@ export const updateAccSelectInvoiceTypeById = (id, data) => {
   });
 };
 
-// DELETE an acc_select_invoice_type entry by ID
 export const deleteAccSelectInvoiceTypeById = (id) => {
   return axiosInstance.delete(`/acc_select_invoice_type/delete_type/${id}`, {
     headers: {
@@ -4169,6 +4167,44 @@ export const deleteAccAvailableExpenseListById = (id) => {
       Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
     },
   });
+};
+
+// ----------E-Account Setup Apis----------------
+export const smsSetupAdd = (data) => {
+  return axiosInstance.put(`${baseUrl}acc_sms_setup/update`, data);
+};
+export const smsSetupGet = () => {
+  return axiosInstance.get(`${baseUrl}acc_sms_setup/admin`);
+};
+export const notificationSetupAdd = (data) => {
+  return axiosInstance.put(`${baseUrl}acc_notification_setup/update`, data);
+};
+export const notificationSetupGet = () => {
+  return axiosInstance.get(`${baseUrl}acc_notification_setup/admin`);
+};
+export const remainderSetupAdd = (data) => {
+  return axiosInstance.put(`${baseUrl}acc_reminder_setup/update`, data);
+};
+export const remainderSetupGet = () => {
+  return axiosInstance.get(`${baseUrl}acc_reminder_setup/admin`);
+};
+export const reportSetupSetupAdd = (data) => {
+  return axiosInstance.put(`${baseUrl}accReportSetup/update`, data);
+};
+export const reportSetupSetupGet = (data) => {
+  return axiosInstance.get(`${baseUrl}accReportSetup/admin`, data);
+};
+export const emailSetupGet = () => {
+  return axiosInstance.get(`${baseUrl}acc_email_setup/admin`);
+};
+export const emailSetupSetupAdd = (data) => {
+  return axiosInstance.put(`${baseUrl}acc_email_setup/update`, data);
+};
+export const sedulerSetupAdd = (data) => {
+  return axiosInstance.put(`${baseUrl}acc_reminder_setup/update`, data);
+};
+export const sedulerSetupGet = () => {
+  return axiosInstance.get(`${baseUrl}acc_reminder_setup/admin`);
 };
 
 
