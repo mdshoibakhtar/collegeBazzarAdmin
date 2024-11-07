@@ -57059,3 +57059,9 @@ h3 {
 .menu-setdyc a:hover {
   background-color: #f1f1f1;
 }
+
+.set-fetal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

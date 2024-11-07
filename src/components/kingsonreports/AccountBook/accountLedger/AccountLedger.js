@@ -111,11 +111,11 @@ const AccountLedger = ({ title }) => {
                   <td><Link to={`/viewAccDetail/${ledger._id}`}>View Acc</Link></td>
                   <td>{ledger.name}</td>
                   <td>{ledger.state}</td>
-                  <td>{ledger.alias}</td>
+                  <td>{ledger.AccLedgerGroupId?.name}</td>
                   <td>{ledger.opening_balance}</td>
                   <td>{ledger.opening_balance_type}</td>
-                  <td>{ledger.mobile}</td>
-                  <td>{ledger?.bank_id?.name}</td>
+                  <td>0</td>
+                  <td>Cr</td>
                   <td>
                     <button className="btn btn-sm btn-primary ms-2">Ledger Report</button>
                     <button
