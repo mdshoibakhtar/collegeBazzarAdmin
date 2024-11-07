@@ -98,7 +98,7 @@ const AddBankPayment = () => {
     const [oppchange, setOppChange] = useState({
         opponent_ledgerId: ''
     })
-    // console.log(oppchange);
+    console.log(oppchange);
 
     const [filteredOppAcc, setFilteredOppAcc] = useState(null);
     // console.log(filteredOppAcc);
@@ -213,14 +213,19 @@ const AddBankPayment = () => {
 
 
     const masterData = async () => {
+        const dataPassApi = {
+            sundry: 'Sundry',
+            bank: 'Bank',
+            blank: ''
+        }
         try {
-            const res1 = await masterget('Sundry')
+            const res1 = await masterget(dataPassApi?.blank, dataPassApi?.bank)
             setOppAcc(res1?.data)
-            const res2 = await masterget('Bank')
+            const res2 = await masterget(dataPassApi?.bank, dataPassApi?.blank)
             setBank(res2?.data)
-            const res3 = await masterget('Sundry')
+            const res3 = await masterget(dataPassApi?.sundry, dataPassApi?.blank)
             setDiscount1(res3?.data)
-            const res4 = await masterget('Sundry')
+            const res4 = await masterget(dataPassApi?.sundry, dataPassApi?.blank)
             setDiscount2(res4?.data)
             // const res = await masterget()
 
