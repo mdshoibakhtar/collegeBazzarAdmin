@@ -79,7 +79,7 @@ const QuotationList = ({ title }) => {
     const [pdf, setPdf] = useState(false)
 
     const pdfGenerateDefault = () => {
-      setPdf(!pdf)
+        setPdf(!pdf)
     }
     return (
         <div style={{ width: "1000px" }}>

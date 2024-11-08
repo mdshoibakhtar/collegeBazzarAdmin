@@ -7,9 +7,16 @@ import { useState } from "react";
 import { Button } from "react-bootstrap";
 import { MdUpload } from "react-icons/md";
 import { IoEyeSharp } from "react-icons/io5";
+import { PDFViewer } from "@react-pdf/renderer";
+import ReceiptRegisterPrint from "./receiptRegisterPrint/ReceiptRegisterPrint";
 
 function ReceiptRegister() {
   const [show, setShow] = useState(false);
+  const [pdf, setPdf] = useState(false)
+
+  const pdfGenerateDefault = () => {
+    setPdf(!pdf)
+  }
   return (
     <>
       <div>
@@ -20,6 +27,13 @@ function ReceiptRegister() {
                 <div className="table-responsive active-projects style-1">
                   <div className="tbl-caption">
                     <h4 className="heading mb-0">Receipt Register</h4>
+                    <button
+                      className="btn btn-primary btn-sm"
+                      type="button"
+                      onClick={pdfGenerateDefault}
+                    >
+                      Print
+                    </button>
                     {/* <div>
                       <Link
                         className="btn btn-primary btn-sm"
@@ -194,6 +208,15 @@ function ReceiptRegister() {
         </div>
       </div>
       <ToastContainer className="text-center" />
+
+      {pdf && <div className="pdfcs">
+        <div className="loader-overlay">
+          <PDFViewer style={{ width: '100%', height: '100vh' }}>
+            <ReceiptRegisterPrint />
+          </PDFViewer>
+        </div>
+
+      </div>}
     </>
   );
 }

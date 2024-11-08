@@ -3536,8 +3536,10 @@ export const getreportPayment = (page, count, start_date, end_date) => {
   });
 };
 
-export const masterget = (name) => {
-  return axiosInstance.get(`ledger/admin?AccLedgerGroupId=${name}`, {
+export const masterget = (name, str) => {
+  console.log(name, str);
+
+  return axiosInstance.get(`ledger/admin?AccLedgerGroupId=${name}&exceptAccLedgerGroupId=${str}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
       Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
@@ -3756,6 +3758,12 @@ export const updateAccLedgerById = (id, data) => {
 
 export const getVoucherTypeData = (name, page, count, start_date, end_date) => {
   return axiosInstance.get(`${baseUrl}AccVoucher/page?page=${page}&count=${count}&start_date=${start_date}&end_date=${end_date}&voucherType=${name}&accLedgerId=`);
+};
+
+export const getVoucherTypeBank = (value) => {
+  console.log(value);
+
+  return axiosInstance.get(`${baseUrl}AccVoucher/page?page=${value?.page}&count=${value?.count}&start_date=${value?.start_date}&end_date=${value?.end_date}&voucherType=${value?.vocherType}&accLedgerId=`);
 };
 
 
@@ -4320,8 +4328,10 @@ export const deleteAccTcsMasterById = (id) => {
 };
 
 
-export const getTcs_certificate = (page, count) => {
-  return axiosInstance.get(`acc_tcs_certificate/page?page=${page}&count=${count}`, {
+export const getTcs_certificate = (value) => {
+  console.log(value);
+
+  return axiosInstance.get(`acc_tcs_certificate/page?page=${value?.page}&count=${value?.count}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
       Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
@@ -4627,4 +4637,14 @@ export const getByOrganisationSettingsMdlsttingTempId = (id) => {
   return axiosInstance.get(`${baseUrl}acc_project_recce_template_master/${id}`);
 };
 
+
+export const lagerIdGet = (value) => {
+  // console.log(value);
+  return axiosInstance.post(`ledger/getLedgerView`, value, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
 

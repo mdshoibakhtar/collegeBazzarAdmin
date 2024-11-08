@@ -1,14 +1,15 @@
 import { Pagination } from "antd"
 import Breadcrumbs from "../../../../common/breadcrumb/Breadcrumbs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BankPaymentFilter from "./bankPaymentFilter/BankPaymentFilter";
 import { useEffect, useState } from "react";
-import { getTcs_certificate, vocherAddBankList } from "../../../../api/login/Login";
+import { getTcs_certificate, getVoucherTypeBank, getVoucherTypeData, vocherAddBankList } from "../../../../api/login/Login";
 
 
 
 
 const BankPayment = ({ heading, apiPass }) => {
+    const navigate = useNavigate();
     const breadCrumbsTitle = {
         id: "1",
         title_1: "Transaction",
@@ -62,7 +63,7 @@ const BankPayment = ({ heading, apiPass }) => {
         console.log(clone);
 
         try {
-            const res = await getTcs_certificate(clone)
+            const res = await getVoucherTypeBank(clone)
             console.log(res?.data);
 
             setTotalCount(res?.data?.totalCount)
@@ -156,19 +157,9 @@ const BankPayment = ({ heading, apiPass }) => {
         }
     }
 
-    // const [currentDate, setCurrentDate] = useState('');
-    // console.log(currentDate);
-
-    // const getCurrentDate = () => {
-    //     const today = new Date();
-    //     const year = today.getFullYear();
-    //     const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
-    //     const day = String(today.getDate()).padStart(2, '0');
-    //     const formattedDate = `${year}-${month}-${day}`;
-    //     setCurrentDate(formattedDate);
-    //     const clone = { ...filterInitial, start_date: formattedDate, end_date: formattedDate }
-    //     setFilterInitial(clone)
-    // }
+    const openFormOnDoubleClick = (itemId) => {
+        navigate(`/bankpayment/update/${heading}/${itemId}`); // Navigate to the form page with the item ID
+    };
 
     useEffect(() => {
         getCurrentDate()
@@ -222,7 +213,7 @@ const BankPayment = ({ heading, apiPass }) => {
                                     </thead>
                                     <tbody>
                                         {data && data?.map((item) => {
-                                            return <tr role="row" className="odd" key={item?._id}>
+                                            return <tr role="row" className="odd" key={item?._id} onDoubleClick={() => openFormOnDoubleClick(item._id)}>
                                                 <td >
                                                     --
                                                 </td>
