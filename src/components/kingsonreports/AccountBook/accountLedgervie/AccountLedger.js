@@ -6,6 +6,8 @@ import html2canvas from "html2canvas";
 import { deleteAccLedgerById, getAccLedgerByPage, lagerIdGet } from "../../../../api/login/Login";
 import Loadar from "../../../../common/loader/Loader";
 import AccountSummary from "./AccountSummary";
+import AccountLedgerViewPdf from "./accountLedgerViewPdf/AccountLedgerViewPdf";
+import { PDFViewer } from "@react-pdf/renderer";
 
 const AccountLedgerView = ({ title }) => {
 
@@ -214,6 +216,13 @@ const AccountLedgerView = ({ title }) => {
 
   }, [])
 
+
+  const [pdf, setPdf] = useState(false)
+
+  const pdfGenerateDefault = () => {
+    setPdf(!pdf)
+  }
+
   return (
     <div>
       {loading && <Loadar />}
@@ -250,6 +259,9 @@ const AccountLedgerView = ({ title }) => {
           <div style={{ display: "flex", alignItems: "end" }}>
             <button className="btn btn-primary" onClick={() => getTransitionReport(0)}>
               Apply Filters
+            </button>
+            <button className="btn btn-primary" onClick={pdfGenerateDefault}>
+              Print
             </button>
           </div>
           {/* <button className="btn btn-success">
@@ -315,6 +327,15 @@ const AccountLedgerView = ({ title }) => {
 
         </div>
       </div>
+
+      {pdf && <div className="pdfcs">
+        <div className="loader-overlay">
+          <PDFViewer style={{ width: '100%', height: '100vh' }}>
+            <AccountLedgerViewPdf />
+          </PDFViewer>
+        </div>
+
+      </div>}
     </div>
   );
 };
