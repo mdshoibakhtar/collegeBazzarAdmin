@@ -45862,12 +45862,12 @@ table.dataTable thead .sorting_asc {
 }
 
 .active-projects .tbl-caption button {
-  padding: 10px 20px;
+  /* padding: 10px 20px; */
   color: #fff;
   cursor: pointer;
   border: none;
   outline: none;
-  background: transparent;
+  /* background: transparent; */
 
 }
 

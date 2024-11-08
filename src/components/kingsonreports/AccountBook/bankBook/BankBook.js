@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { Empty, Pagination } from "antd";
 import ExportPdf from "../../../../common/exportPdf/ExportPdf";
 import { DownloadExcel } from "../../../../common/downloadExcel/DownLoadExcel";
 import { Button } from "react-bootstrap";
 import { downloadJSON } from "../../../../common/exportJson/exportJson";
+import BankBookPdf from "./bankBookPdf/BankBookPdf";
+import { PDFViewer } from "@react-pdf/renderer";
 
 function BankBook({ title, data, page, count, handleSelectAll, handlePageChange, handleCheckboxChange, selectedItems, selectAll }) {
+  const [pdf, setPdf] = useState(false)
+
+  const pdfGenerateDefault = () => {
+    setPdf(!pdf)
+  }
 
   return (
     <>
@@ -20,6 +27,9 @@ function BankBook({ title, data, page, count, handleSelectAll, handlePageChange,
                     <h4 className="heading mb-0"><b>{title} Book</b></h4>
                     <div>
                       <ExportPdf />
+                      <button className='btn-sm py-1 px-2 bg-primary me-2' onClick={pdfGenerateDefault}>
+                        Print
+                      </button>
                       <button className='btn-sm py-1 px-2 bg-primary' onClick={DownloadExcel}>
                         <span><i className="fa-sharp fa-solid fa-file-excel"></i></span> &nbsp;Export Excel
                       </button>
@@ -101,6 +111,14 @@ function BankBook({ title, data, page, count, handleSelectAll, handlePageChange,
         </div>
       </div>
       <ToastContainer className="text-center" />
+      {pdf && <div className="pdfcs">
+        <div className="loader-overlay">
+          <PDFViewer style={{ width: '100%', height: '100vh' }}>
+            <BankBookPdf />
+          </PDFViewer>
+        </div>
+
+      </div>}
     </>
   );
 }
