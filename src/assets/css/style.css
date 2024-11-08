@@ -457,7 +457,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
 
 body {
   margin: 0;
-  font-family: var(--bs-body-font-family);
+  /* font-family: var(--bs-body-font-family); */
   font-size: var(--bs-body-font-size);
   font-weight: var(--bs-body-font-weight);
   line-height: var(--bs-body-line-height);
@@ -55961,11 +55961,11 @@ input[type="number"]::-webkit-inner-spin-button {
   margin: 0;
 }
 
-.Apps {
+/* .Apps {
   font-family: Arial, sans-serif;
   margin: 20px;
   padding: 10px;
-}
+} */
 
 .top-controls {
   display: flex;
