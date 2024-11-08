@@ -4,7 +4,7 @@ import Breadcrumbs from '../../common/breadcrumb/Breadcrumbs'
 import '../../components/distributer/distributer.css'
 import DistributerList from './distributerList/DistributerList'
 import { useEffect, useState } from 'react'
-import { getCompanyInfo, getLength, reailerDistIdAgainst, reailerDistIdAgainstFillers, reailerDistIdAgainstFillersPlay, updateDistributerApproval, userDelete } from '../../api/login/Login'
+import { afterLogingetCompanyInfo, getLength, reailerDistIdAgainst, reailerDistIdAgainstFillers, reailerDistIdAgainstFillersPlay, updateDistributerApproval, userDelete } from '../../api/login/Login'
 import { toast } from 'react-toastify'
 import DisterbuterFIlter from './distributerKycStatus/DisterbuterFIlter'
 import { message } from 'antd'
@@ -143,7 +143,7 @@ function ListCustomercom() {
     useEffect(() => {
       const getData = async ()=>{
         try {
-            const res = await getCompanyInfo()
+            const res = await afterLogingetCompanyInfo()
             setDynemic(res.data.companyType)
         } catch (error) {
 

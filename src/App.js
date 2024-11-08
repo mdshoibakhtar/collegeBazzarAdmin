@@ -880,6 +880,9 @@ import QuotationList from "./pages/CustomerView/Quate/QuotationList";
 import QuotationAdd from "./pages/CustomerView/Quate/QuotationAdd";
 import MistryMaster from "./components/topNavigationComp/masters/mistry/MistryMaster";
 import MistryAdd from "./components/topNavigationComp/masters/mistry/masterform/MistryAdd";
+import OrganisationSettings from "./components/organisationSettings/OrganisationSettings";
+import Reccetemplet from "./components/organisationSettings/moduleSettings/reccetemplete/Reccetemplet";
+import DesignSection from "./components/organisationSettings/designSection/DesignSection";
 // import CreateStageplan from "./pages/NewStagesplan";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -2703,10 +2706,10 @@ function App() {
               {/* Report and Reminder */}
               <Route path="report-setup" element={<ReportSetupPage />} />
               <Route path="reminder-setup" element={<ReminderSetupPage />} />
-              <Route path="process-group-master" element={<Processgropmasterspage/>} />
-              <Route path="create-process-group-master" element={<Processgroupmasterform/>} />
-              <Route path="branch-master" element={<BranchMasterPage/>} />
-              <Route path="create-branch-master" element={<BranchMasterForm/>}/>
+              <Route path="process-group-master" element={<Processgropmasterspage />} />
+              <Route path="create-process-group-master" element={<Processgroupmasterform />} />
+              <Route path="branch-master" element={<BranchMasterPage />} />
+              <Route path="create-branch-master" element={<BranchMasterForm />} />
               <Route path="*" element={<PageNotFound />} />
               {/* <Route path="/busbookig" element={<BusBookingMain />} /> */}
               <Route path="pricemaster/list" element={<PriceMasterPage />} />
@@ -2725,9 +2728,10 @@ function App() {
               <Route path="documents" element={<AllDocumentPage />} />
               <Route path="documents-add" element={<AllDocumentAdd />} />
               <Route path="documents-update/:id" element={<AllDocumentAdd />} />
-
-
-
+              <Route path="organisation-setting/module-settings" element={<OrganisationSettings />} >
+                <Route path="" element={<Reccetemplet />} />
+                <Route path="design" element={<DesignSection />} />
+              </Route>
             </Route>
           </>
         )}

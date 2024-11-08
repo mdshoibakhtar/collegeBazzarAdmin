@@ -61,7 +61,7 @@ function VoucherMasterList() {
                                     <h4 className="heading mb-0">Voucher Type List</h4>
                                     <Link
                                         className="btn btn-primary btn-sm"
-                                        to="/add-voucher-type"
+                                        to="/voucher-type/add"
                                         role="button"
                                         aria-controls="offcanvasExample"
                                     >
@@ -105,7 +105,7 @@ function VoucherMasterList() {
                                                         </td>
                                                         <td className="text-center">
                                                             <Link
-                                                                to={`/update-voucher-type/${item?._id}`}
+                                                                to={`/voucher-type/edit/${item?._id}`}
                                                                 className="btn btn-sm btn-light mx-1"
                                                                 title="Edit"
                                                             >
