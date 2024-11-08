@@ -65,7 +65,7 @@ function MistryMaster() {
 
 
     useEffect(() => {
-        // getFloorMasters(page)
+        getFloorMasters(0)
     }, [])
     return (
         <>

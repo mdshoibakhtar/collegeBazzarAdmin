@@ -70,7 +70,7 @@ function MistryAdd() {
     };
 
     const toastSuccessMessage = (message) => {
-        toast.success(`${params?.id ? "Update" : "Add"} ${message}`, {
+        toast.success(` ${message}`, {
             position: "top-right",
         });
     };
@@ -86,7 +86,7 @@ function MistryAdd() {
                     // blankBtn();
                 }
                 const response = await getAccLedgerByPage(0 ,100);
-                const response2 = await paginationstaffMaster(0 ,100);
+                // const response2 = await paginationstaffMaster(0 ,100);
                 // setStaff(response2.data);
                 setAccountOptions(response.data);
             } catch (error) {

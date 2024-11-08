@@ -881,6 +881,26 @@ import QuotationAdd from "./pages/CustomerView/Quate/QuotationAdd";
 import MistryMaster from "./components/topNavigationComp/masters/mistry/MistryMaster";
 import MistryAdd from "./components/topNavigationComp/masters/mistry/masterform/MistryAdd";
 // import CreateStageplan from "./pages/NewStagesplan";
+import UnitPage from "./pages/unitPage";
+import BrandPage from "./pages/brandPage";
+import CategoryPage from "./pages/categoryPage";
+import IndustryPage from "./pages/indstryPage";
+import ColorsPage from "./pages/colorsPage";
+import SizePage from "./pages/sizePage";
+import InhouseOrderPage from "./pages/inhouseOrderPage";
+import SellerOrdersPage from "./pages/sellerOrdersPage";
+import AllPickupPointsOrderPage from "./pages/allPickupPointOrdersPage";
+import AllCancelledOrdersPage from "./pages/allCancelledOrdersPage";
+import OrdersStatuspage from "./pages/ordersStatusPage";
+import AllOrdersPage from "./pages/allOrdersPage";
+import SubjectMasters from "./components/topNavigationComp/masters/subject/SubjectMasters";
+import SubjectForm from "./components/topNavigationComp/masters/subject/MasterForm/SubjectForm";
+import BookCodeMasters from "./components/topNavigationComp/masters/bookcode/BookCodeMasters";
+import BookCodeForm from "./components/topNavigationComp/masters/bookcode/MasterForm/BookCodeForm";
+import AttributesPage from "./pages/attributesPage";
+import ProjectMasters from "./components/topNavigationComp/masters/projects/ProjectMasters";
+import ProjectDetailMasters from "./components/topNavigationComp/masters/projectDetail/ProjectDetailMasters";
+import ProjectAddForm from "./components/topNavigationComp/masters/projects/MasterForm/ProjectAddForm";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -2579,6 +2599,22 @@ function App() {
               <Route path="add-mistry" element={<MistryAdd />} />
               <Route path="add-mistry/:id" element={<MistryAdd />} />
 
+              <Route path="subject_list" element={<SubjectMasters />} />
+              <Route path="add-subject" element={<SubjectForm />} />
+              <Route path="add-subject/:id" element={<SubjectForm />} />
+
+              <Route path="book-code-list" element={<BookCodeMasters />} />
+              <Route path="add-book-code" element={<BookCodeForm />} />
+              <Route path="add-book-code/:id" element={<BookCodeForm />} />
+
+              <Route path="account-management" element={<LeagerPage sty={false} />} />
+              <Route path="add-leager" element={<AddLeager style={true} sty={false} rout={true} title='Ledgers' />} />
+              <Route path="add-leager/:update" element={<AddLeager style={true} rout={true} title='Ledgers' />} />
+
+              <Route path="projects" element={<ProjectMasters />} />
+              <Route path="add-projects" element={<ProjectAddForm />} />
+              {/*<Route path="add-book-code/:id" element={<BookCodeForm />} /> */}
+              <Route path="projects/:id" element={<ProjectDetailMasters />} />
 
               {/* junaid ends */}
 
@@ -2703,10 +2739,10 @@ function App() {
               {/* Report and Reminder */}
               <Route path="report-setup" element={<ReportSetupPage />} />
               <Route path="reminder-setup" element={<ReminderSetupPage />} />
-              <Route path="process-group-master" element={<Processgropmasterspage/>} />
-              <Route path="create-process-group-master" element={<Processgroupmasterform/>} />
-              <Route path="branch-master" element={<BranchMasterPage/>} />
-              <Route path="create-branch-master" element={<BranchMasterForm/>}/>
+              <Route path="process-group-master" element={<Processgropmasterspage />} />
+              <Route path="create-process-group-master" element={<Processgroupmasterform />} />
+              <Route path="branch-master" element={<BranchMasterPage />} />
+              <Route path="create-branch-master" element={<BranchMasterForm />} />
               <Route path="*" element={<PageNotFound />} />
               {/* <Route path="/busbookig" element={<BusBookingMain />} /> */}
               <Route path="pricemaster/list" element={<PriceMasterPage />} />
@@ -2726,7 +2762,20 @@ function App() {
               <Route path="documents-add" element={<AllDocumentAdd />} />
               <Route path="documents-update/:id" element={<AllDocumentAdd />} />
 
+              <Route path="product_unit" element={<UnitPage />} />
+              <Route path="product_brand" element={<BrandPage />} />
+              <Route path="product_category" element={<CategoryPage />} />
+              <Route path="product_industry" element={<IndustryPage />} />
+              <Route path="product_attribute" element={<AttributesPage />} />
+              <Route path="product_color" element={<ColorsPage />} />
+              <Route path="product_size" element={<SizePage />} />
 
+              <Route path="all_orders" element={<AllOrdersPage />} />
+              <Route path="inhouse_orders" element={<InhouseOrderPage />} />
+              <Route path="seller_orders" element={<SellerOrdersPage />} />
+              <Route path="pickupPoint_orders" element={<AllPickupPointsOrderPage />} />
+              <Route path="cancelled_orders" element={<AllCancelledOrdersPage />} />
+              <Route path="orders_status" element={<OrdersStatuspage />} />
 
             </Route>
           </>

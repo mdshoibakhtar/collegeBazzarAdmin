@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getAccGroupByPage, getAccLedgerById, getBankMaster, postAccLedger, updateAccLedgerById } from "../../../api/login/Login";
 import { toast, ToastContainer } from 'react-toastify';
 
-function AddLedger() {
+function AddLedger({sty,rout}) {
   const [formData, setFormData] = useState({
     name: "",
     alias: "",
@@ -17,7 +17,7 @@ function AddLedger() {
     bsrCode: "",
     voucherDate: "",
     voucherNo: "",
-    underGroup: "",
+    AccLedgerGroupId: "",
     accBalanceType: "",
     selectBank: "",
     accountHoldersName: "",
@@ -65,7 +65,13 @@ function AddLedger() {
         if (res?.statusCode == "200") {
           toastSuccessMessage("Ledger added successfully");
           setTimeout(() => {
-            navigate(`/customer-view/${params.id}/ledgers`);
+            if (rout) {
+              
+              navigate(`/account-management`);
+            } else {
+              navigate(`/customer-view/${params.id}/ledgers`);
+              
+            }
           }, 1000);
         }
       } else {
@@ -73,7 +79,13 @@ function AddLedger() {
         if (res?.statusCode == "200") {
           toastSuccessMessage("Ledger updated successfully");
           setTimeout(() => {
-            navigate(`/customer-view/${params.id}/ledgers`);
+            if (rout) {
+              
+              navigate(`/account-management`);
+            } else {
+              navigate(`/customer-view/${params.id}/ledgers`);
+              
+            }
           }, 1000);
         }
       }
@@ -111,7 +123,7 @@ function AddLedger() {
 }, [params?.update]);
 
   return (
-    <div style={{ width: "1000px" }}>
+    <div style={{ width: sty && "1000px" }}>
       <ToastContainer />
       <h4>Add Ledger</h4>
       <div className="container mt-4 card">
@@ -272,8 +284,8 @@ function AddLedger() {
               <input type="text" className="form-control" id="taxRegistrationDetails" name="taxRegistrationDetails" value={formData.taxRegistrationDetails} onChange={handleInputChange} />
             </div>
             <div className="mb-3 col-4">
-              <label htmlFor="underGroup" className="form-label">Under Group</label>
-              <select className="form-select" id="underGroup" name="underGroup" value={formData.underGroup} onChange={handleInputChange}>
+              <label htmlFor="AccLedgerGroupId" className="form-label">Under Group</label>
+              <select className="form-select" id="AccLedgerGroupId" name="AccLedgerGroupId" value={formData.AccLedgerGroupId} onChange={handleInputChange}>
                 <option value="">Select</option>
                 {groups && groups?.map((group)=>{
                   return <option value={group._id}>{group.name}</option>
