@@ -25,7 +25,7 @@ function DasBoardRight() {
     const getCountData = async () => {
         const today = new Date();
         const dates = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
-        console.log(dates);
+      
         try {
             const response = await getLength()
             const response1 = await getContestDash()
@@ -142,7 +142,7 @@ function DasBoardRight() {
                                             <span className="">Total Customer Won     </span>
                                         </h4>
                                         <h4 className="retailers-title text-center px-4 text-white my-3">
-                                            <span className="">{data?.customer_won}</span>
+                                            <span className="">{data?.customer_won.count}</span>
                                         </h4>
                                     </div>
                                 </div>

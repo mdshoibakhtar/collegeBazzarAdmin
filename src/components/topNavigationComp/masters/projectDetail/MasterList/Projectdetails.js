@@ -3,6 +3,8 @@ import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import ProjectDetail from "../projectdetail/ProjectDetail";
 import RecceMain from "../Recce/RecceMain";
+import Quatation from "../boq/Quatation";
+import BoqMain from "../boq/BoqMain";
 
 function Projectdetails() {
    
@@ -37,7 +39,7 @@ function Projectdetails() {
                                         Design
                                     </Tab>
                                     <Tab eventKey="BOQ" title="BOQ">
-                                        BOQ
+                                        <BoqMain/>
                                     </Tab>
                                     <Tab eventKey="Order" title="Order">
                                         Order
