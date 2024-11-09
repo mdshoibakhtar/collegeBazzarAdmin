@@ -2889,6 +2889,14 @@ export const getCompanyInfo = (data) => {
     },
   });
 };
+export const afterLogingetCompanyInfo = (data) => {
+  return axiosInstance.get(`/company/public/afterLogin`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
 
 
 
@@ -4609,6 +4617,26 @@ export const ddoc_management_docupdate_type = (id, data) => {
     },
   });
 };
+
+
+// -------------------------organisation Templete Module -------------------------
+export const getListOrganisationSettingsMdlsttingTemp = (page, count) => {
+  return axiosInstance.get(`${baseUrl}acc_project_recce_template_master/user?page=${page}&count=${count}`);
+};
+
+export const addOrganisationSettingsMdlsttingTemp = (data) => {
+  return axiosInstance.post(`${baseUrl}acc_project_recce_template_master/addType`, data);
+};
+export const deleteOrganisationSettingsMdlsttingTemp = (id) => {
+  return axiosInstance.delete(`${baseUrl}acc_project_recce_template_master/delete_type/${id}`);
+};
+export const updateOrganisationSettingsMdlsttingTemp = (id, value) => {
+  return axiosInstance.put(`${baseUrl}acc_project_recce_template_master/update_type/${id}`, value);
+};
+export const getByOrganisationSettingsMdlsttingTempId = (id) => {
+  return axiosInstance.get(`${baseUrl}acc_project_recce_template_master/${id}`);
+};
+
 
 export const lagerIdGet = (value) => {
   // console.log(value);

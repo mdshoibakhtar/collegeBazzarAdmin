@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom'
 import logo from '../../../assets/images/logo/AbarisSoftectLogo.png'
-import { getCompanyInfo } from '../../../api/login/Login';
 import { useEffect, useState } from 'react';
 import { baseUrlImage } from '../../../baseUrl';
+import { afterLogingetCompanyInfo } from '../../../api/login/Login';
 function HeaderLogo({showAsideBar}) {
 
     const [state , setData] = useState(null)
     const getData = async ()=>{
-        const res = await getCompanyInfo()
+        const res = await afterLogingetCompanyInfo()
         setData(res.data);
     }
     useEffect(()=>{
