@@ -4623,12 +4623,7 @@ export const ddoc_management_docupdate_type = (id, data) => {
 
 // GET add_subject entries with pagination
 export const getAddSubjectByPage = (page, count) => {
-  return axiosInstance.get(`/add_subject/user?page=${page}&count=${count}`, {
-    headers: {
-      "Content-Type": "application/json; charset=UTF-8",
-      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
-    },
-  });
+  return axiosInstance.get(`/add_subject/user?page=${page}&count=${count}`);
 };
 
 // GET a specific add_subject entry by ID
