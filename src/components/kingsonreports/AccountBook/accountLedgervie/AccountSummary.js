@@ -1,16 +1,10 @@
 import React from "react";
 
-const AccountSummary = () => {
+const AccountSummary = ({ data }) => {
   // Sample data to render in the table
-  const data = {
-    account: "Pulkit",
-    group: "Sundry Creditors (A/cs Payble)",
-    opening: "50000 Cr",
-    closing: "7000 Cr",
-    salesmanName: "",
-    limitDay: 0,
-    limitAmount: 0,
-  };
+  console.log(data);
+
+
 
   return (
     <div className="account-summary">
@@ -28,13 +22,13 @@ const AccountSummary = () => {
         </thead>
         <tbody>
           <tr>
-            <td>{data.account}</td>
-            <td>{data.group}</td>
-            <td>{data.opening}</td>
-            <td>{data.closing}</td>
-            <td>{data.salesmanName || "-"}</td>
-            <td>{data.limitDay}</td>
-            <td>{data.limitAmount}</td>
+            <td>{data?.ledger?.name}</td>
+            <td>{data?.ledger?.AccLedgerGroupId?.name}</td>
+            <td>{data?.ledger?.opening_balance} {data?.ledger?.opening_balance_type}</td>
+            <td>{data?.ledger?.balance} {data?.ledger?.balance_type}</td>
+            <td>{data?.ledger?.AccLedgerGroupId?.name} </td>
+            <td>{data?.ledger?.credit_days}</td>
+            <td>{data?.ledger?.credit_limit}</td>
           </tr>
         </tbody>
       </table>

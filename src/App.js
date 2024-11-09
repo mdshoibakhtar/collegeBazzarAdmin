@@ -880,6 +880,9 @@ import QuotationList from "./pages/CustomerView/Quate/QuotationList";
 import QuotationAdd from "./pages/CustomerView/Quate/QuotationAdd";
 import MistryMaster from "./components/topNavigationComp/masters/mistry/MistryMaster";
 import MistryAdd from "./components/topNavigationComp/masters/mistry/masterform/MistryAdd";
+import OrganisationSettings from "./components/organisationSettings/OrganisationSettings";
+import Reccetemplet from "./components/organisationSettings/moduleSettings/reccetemplete/Reccetemplet";
+import DesignSection from "./components/organisationSettings/designSection/DesignSection";
 // import CreateStageplan from "./pages/NewStagesplan";
 import UnitPage from "./pages/unitPage";
 import BrandPage from "./pages/brandPage";
@@ -2777,6 +2780,10 @@ function App() {
               <Route path="cancelled_orders" element={<AllCancelledOrdersPage />} />
               <Route path="orders_status" element={<OrdersStatuspage />} />
 
+              <Route path="organisation-setting/module-settings" element={<OrganisationSettings />} >
+                <Route path="" element={<Reccetemplet />} />
+                <Route path="design" element={<DesignSection />} />
+              </Route>
             </Route>
           </>
         )}

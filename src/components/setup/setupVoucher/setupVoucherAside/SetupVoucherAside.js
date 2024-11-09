@@ -19,7 +19,7 @@ function SetupVoucherAside({ state, onSelect }) {
 
     const handleSelect = (selectedKey) => {
         setActiveKey(selectedKey);
-        onSelect(selectedKey); // Update parent state
+        // onSelect(selectedKey);  Update parent state
     };
 
     return (

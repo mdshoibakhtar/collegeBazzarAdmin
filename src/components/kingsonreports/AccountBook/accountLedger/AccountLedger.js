@@ -3,6 +3,8 @@ import { Link, useParams } from "react-router-dom";
 import { Pagination } from "antd";
 import { deleteAccLedgerById, getAccLedgerByPage } from "../../../../api/login/Login";
 import Loadar from "../../../../common/loader/Loader";
+import { PDFViewer } from "@react-pdf/renderer";
+import AccountLedgerPdf from "./accountLedgerPdf/AccountLedgerPdf";
 
 const AccountLedger = ({ title }) => {
   const [data, setData] = useState([]);
@@ -54,6 +56,12 @@ const AccountLedger = ({ title }) => {
     getFloorMasters(0);
   };
 
+  const [pdf, setPdf] = useState(false)
+
+  const pdfGenerateDefault = () => {
+    setPdf(!pdf)
+  }
+
   return (
     <div>
       {loading && <Loadar />}
@@ -81,6 +89,9 @@ const AccountLedger = ({ title }) => {
           <div style={{ display: "flex", alignItems: "end" }}>
             <button className="btn btn-primary" onClick={handleDateFilterChange}>
               Apply Filters
+            </button>
+            <button className="btn btn-primary" onClick={pdfGenerateDefault}>
+              Print
             </button>
           </div>
         </div>
@@ -111,11 +122,11 @@ const AccountLedger = ({ title }) => {
                   <td><Link to={`/viewAccDetail/${ledger._id}`}>View Acc</Link></td>
                   <td>{ledger.name}</td>
                   <td>{ledger.state}</td>
-                  <td>{ledger.alias}</td>
+                  <td>{ledger.AccLedgerGroupId?.name}</td>
                   <td>{ledger.opening_balance}</td>
                   <td>{ledger.opening_balance_type}</td>
-                  <td>{ledger.mobile}</td>
-                  <td>{ledger?.bank_id?.name}</td>
+                  <td>0</td>
+                  <td>Cr</td>
                   <td>
                     <button className="btn btn-sm btn-primary ms-2">Ledger Report</button>
                     <button
@@ -136,6 +147,14 @@ const AccountLedger = ({ title }) => {
           />
         </div>
       </div>
+      {pdf && <div className="pdfcs">
+        <div className="loader-overlay">
+          <PDFViewer style={{ width: '100%', height: '100vh' }}>
+            <AccountLedgerPdf />
+          </PDFViewer>
+        </div>
+
+      </div>}
     </div>
   );
 };
