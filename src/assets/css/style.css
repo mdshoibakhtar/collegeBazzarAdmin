@@ -57059,6 +57059,16 @@ h3 {
 .menu-setdyc a:hover {
   background-color: #f1f1f1;
 }
+.cusnav{
+  background-color: #f1f1f1;
+}
+.redCol{
+  height: 100px;
+  background-color: #feeeee;
+  border: 1px solid #f9bcbe;
+  margin: 10px !important;
+  border-radius: 7px;
+}
 
 .set-fetal {
   display: flex;

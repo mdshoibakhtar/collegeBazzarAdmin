@@ -139,7 +139,7 @@ button {
 }
 
 button:hover {
-    background-color: #3653bf;
+    /* background-color: #3653bf; */
 }
 
 /* Dropdown */
