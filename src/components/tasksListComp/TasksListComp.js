@@ -56,12 +56,12 @@ function TasksListComp({ style }) {
     const [count, setCount] = useState(10)
     const [data, setData] = useState([])
     const getFloorMasters = async (page) => {
-        try {
+        /* try {
             const res = await getTaskList(page, count, params.id)
-            setData(res.data)
+            setData(res?.data)
         } catch (error) {
 
-        }
+        } */
     }
     useEffect(() => {
         getFloorMasters(0)
