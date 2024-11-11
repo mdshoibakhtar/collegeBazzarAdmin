@@ -30,7 +30,7 @@ const dummyData = [
     // Add more dummy data here if needed
 ];
 
-const LeagerPage = ({ title }) => {
+const LeagerPage = ({ sty, title }) => {
     const paremss = useParams()
     const [data, setData] = useState()
     const [loading, setLoading] = useState(false);
@@ -74,14 +74,14 @@ const LeagerPage = ({ title }) => {
         getFloorMasters(e - 1)
 
     };
-  
+
     return (
-        <div style={{ width: "1000px" }}>
-            {loading && <Loadar/>}
+        <div style={{ width: sty && "1000px" }}>
+            {loading && <Loadar />}
             <h4>{title}</h4>
             <div className="container mt-4 card">
                 <div className="d-flex justify-content-between align-items-center mb-3">
-                    <Link className="btn btn-primary" to={`/customer-view/${paremss.id}/add-leager`} >
+                    <Link className="btn btn-primary" to={`/add-leager`} >
                         + New {title}
                     </Link>
                     <div className="form-group">
@@ -100,12 +100,17 @@ const LeagerPage = ({ title }) => {
                                 <th scope="col">S.no</th>
                                 <th scope="col">Acc Ledger Name</th>
                                 <th scope="col">Acc Ledger Alias</th>
-                                <th scope="col">AC Name</th>
-                                <th scope="col">AC No</th>
+                                <th scope="col">Group Under</th>
+                                <th scope="col">Opening Balance</th>
+                                <th scope="col">Bal Type</th>
                                 <th scope="col">Mobile</th>
                                 <th scope="col">Email</th>
-                                <th scope="col">Address</th>
-                                <th scope="col">Bank Detail</th>
+                                <th scope="col">AC Name</th>
+                                <th scope="col">AC No</th>
+                             
+                                <th scope="col">City</th>
+                                <th scope="col">State</th>
+                                <th scope="col">GST No</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -115,15 +120,20 @@ const LeagerPage = ({ title }) => {
                                     <td>{i + 1}</td>
                                     <td>{ledger.name}</td>
                                     <td>{ledger.alias}</td>
-                                    <td>{ledger.AC_name}</td>
-                                    <td>{ledger.AC_no}</td>
+                                    <td>{ledger.AccLedgerGroupId?.name}</td>
+                                    <td>{ledger.opening_balance}</td>
+                                    <td>{ledger.opening_balance_type}</td>
                                     <td>{ledger.mobile}</td>
                                     <td>{ledger.Email}</td>
+                                    <td>{ledger.AC_name}</td>
+                                    <td>{ledger.AC_no}</td>
+                                    
+                                    <td>{ledger.city}</td>
                                     <td>{ledger.state}</td>
-                                    <td>{ledger?.bank_id?.name}</td>
+                                    <td>{ledger?.GSTIN}</td>
                                     <td>
-                                        <Link className="btn btn-sm btn-warning" to={`/customer-view/${paremss.id}/add-leager/${ledger._id}`}>Edit</Link>
-                                        <button className="btn btn-sm btn-danger ms-2" onClick={()=>{deleteBlockAdd(ledger._id)}}>Delete</button>
+                                        <Link className="btn btn-sm btn-warning" to={`/add-leager/${ledger._id}`}>Edit</Link>
+                                        <button className="btn btn-sm btn-danger ms-2" onClick={() => { deleteBlockAdd(ledger._id) }}>Delete</button>
                                     </td>
                                 </tr>
                             ))}

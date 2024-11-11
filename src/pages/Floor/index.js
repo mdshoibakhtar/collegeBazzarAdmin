@@ -10,7 +10,7 @@ export default function Floor(){
         <div>
             <PSMunit title={"Floors List"}/>
             <LookIn />
-            <StanderLayout link={"/newfloor"} title={"new Floor"}/>
+            <StanderLayout link={"/newfloor"} title={"New Floor"}/>
             <AlphabeticFilter />
             <VarturesTable />
         </div>

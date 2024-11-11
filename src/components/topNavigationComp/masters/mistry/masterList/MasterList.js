@@ -31,6 +31,12 @@ function MasterList({data,totalCount,page,count,onChangeVal,confirm,cancel}) {
                                                 <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Employee Name: activate to sort column ascending" style={{ width: '203.45px',textAlign: 'center' }}>
                                                      Name
                                                 </th>
+                                                <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Employee Name: activate to sort column ascending" style={{ width: '203.45px',textAlign: 'center' }}>
+                                                     Account
+                                                </th>
+                                                <th className="sorting" tabIndex={0} aria-controls="empoloyees-tblwrapper" rowSpan={1} colSpan={1} aria-label="Employee Name: activate to sort column ascending" style={{ width: '203.45px',textAlign: 'center' }}>
+                                                     Detail
+                                                </th>
                                                
                                                
 
@@ -47,7 +53,15 @@ function MasterList({data,totalCount,page,count,onChangeVal,confirm,cancel}) {
                                                     </td>
 
                                                     <td>
-                                                        {item?.name}
+                                                        {item?.mistry_name}
+                                                    </td>
+
+                                                    <td>
+                                                        {item?.account?.name}
+                                                    </td>
+
+                                                    <td>
+                                                        {item?.detail}
                                                     </td>
                                                   
                                                     
