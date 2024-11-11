@@ -1,8 +1,11 @@
+import LeadCreatedWise from "../../../components/travelCrmReports/leadCreatedWise/LeadCreatedWise"
 
 
 const LeadCreatedWisePage = () => {
     return (
-        <div>LeadCreatedWisePage</div>
+        <>
+            <LeadCreatedWise />
+        </>
     )
 }
 

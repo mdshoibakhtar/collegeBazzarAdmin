@@ -1,5 +1,6 @@
 import { Pagination } from "antd";
 import Breadcrumbs from "../../../common/breadcrumb/Breadcrumbs";
+import LeadCreatedWiseFilter from "./leadCreatedWiseFilter/LeadCreatedWiseFilter";
 
 
 const LeadCreatedWise = () => {
@@ -12,6 +13,7 @@ const LeadCreatedWise = () => {
     return (
         <>
             <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
+            <LeadCreatedWiseFilter />
             <div>
                 <div className="row m-2">
                     <div className="col-xl-12">
