@@ -12,17 +12,25 @@ const SalseOrderAdd = () => {
     };
 
     const [formData, setFormData] = useState({
-        voucher: '',
         date: '',
-        voucherAmount: '',
-        taxType: ''
+        taxType: '',
+        orderNo: '',
+        broker: '',
+        transportName: '',
+        deliveryDestination: '',
+        narration: ''
     });
 
     const handleInputChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
+        const clone = { ...formData }
+        const value = e.target.value
+        const name = e.target.name
+        clone[name] = value
+        setFormData(clone)
+        // setFormData({
+        //     ...formData,
+        //     [e.target.name]: e.target.value
+        // });
 
         // Update expenses when tax type is selected
         // if (e.target.name === 'taxType') {
@@ -38,7 +46,6 @@ const SalseOrderAdd = () => {
         { id: 3, item: '', Tax: 0, CaseQty: '', Location: '', SizeofCase: '', Quantity2: 0, Quantity: 0 },
         { id: 4, item: '', Tax: 0, CaseQty: '', Location: '', SizeofCase: '', Quantity2: 0, Quantity: 0 },
     ]);
-
     // Function to handle value changes in the input fields
     const handleChange = (index, key, value) => {
         const updatedRows = rows.map((row, i) =>
@@ -50,7 +57,6 @@ const SalseOrderAdd = () => {
     // Function to render each row of the table
     const renderRow = (row, index) => (
         <tr key={row.id}>
-            {/* Cr/Db Select */}
             <td>
                 <select
                     value={row.item}
@@ -61,8 +67,6 @@ const SalseOrderAdd = () => {
                     <option value="Db">Db</option>
                 </select>
             </td>
-
-            {/* Account Name Select */}
             <td>
                 <input
                     type="number"
@@ -77,8 +81,6 @@ const SalseOrderAdd = () => {
                     onChange={(e) => handleChange(index, 'CaseQty', e.target.value)}
                 />
             </td>
-
-            {/* HSNCode Input */}
             <td>
                 <input
                     type="number"
@@ -86,7 +88,6 @@ const SalseOrderAdd = () => {
                     onChange={(e) => handleChange(index, 'Location', e.target.value)}
                 />
             </td>
-
             <td>
                 <input
                     type="number"
@@ -94,10 +95,6 @@ const SalseOrderAdd = () => {
                     onChange={(e) => handleChange(index, 'SizeofCase', e.target.value)}
                 />
             </td>
-
-
-            {/* Amount Input */}
-
             <td>
                 <input
                     type="number"
@@ -112,8 +109,6 @@ const SalseOrderAdd = () => {
                     onChange={(e) => handleChange(index, 'Quantity', e.target.value)}
                 />
             </td>
-
-            {/* Delete Button */}
             <td>
                 <button onClick={() => handleDeleteRow(index)}>🗑️</button>
             </td>
@@ -134,12 +129,16 @@ const SalseOrderAdd = () => {
         ]);
     };
 
+    const submitData = () => {
+        console.log(formData);
+
+    }
+
 
     /////
     return (
         <>
-            <Breadcrumbs
-                breadCrumbsTitle={breadCrumbsTitle} />
+            <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
             <div className="row m-4">
                 <div className="col-xl-12">
                     <div className="card">
@@ -150,25 +149,22 @@ const SalseOrderAdd = () => {
                                 </div>
                                 <div className="row">
                                     <div className="col-md-3 mb-3">
-                                        <label htmlFor="voucher">Date </label>
+                                        <label htmlFor="date">Date</label>
                                         <input
                                             type="date"
                                             className="form-control"
-                                            name="voucher"
-                                            value={formData.voucher}
+                                            name="date"
+                                            value={formData.date}
                                             onChange={handleInputChange}
-                                            placeholder="Enter Voucher"
                                         />
                                     </div>
-
-
-
                                     <div className="col-md-3 mb-3">
                                         <label htmlFor="taxType">Account</label>
                                         <select
                                             className="form-control"
                                             name="taxType"
-
+                                            value={formData.taxType}
+                                            onChange={handleInputChange}
                                         >
                                             <option value="">Select Tax Type</option>
                                             <option value="GST 5%">GST 5%</option>
@@ -177,60 +173,55 @@ const SalseOrderAdd = () => {
                                         </select>
                                     </div>
                                     <div className="col-md-3 mb-3">
-                                        <label htmlFor="voucher">Order No </label>
+                                        <label htmlFor="orderNo">Order No</label>
                                         <input
                                             type="number"
                                             className="form-control"
-                                            name="voucher"
-
+                                            name="orderNo"
+                                            value={formData.orderNo}
+                                            onChange={handleInputChange}
                                             placeholder="Enter Order No"
                                         />
                                     </div>
-
                                     <div className="col-md-3 mb-3">
-                                        <label htmlFor="taxType">Broker:</label>
-                                        <select
-                                            className="form-control"
-                                            name="taxType"
-
-                                        >
-                                            <option value="">Select Tax Type</option>
-                                            <option value="GST 5%">GST 5%</option>
-                                            <option value="GST 12%">GST 12%</option>
-                                            <option value="GST MULTIPLE">GST MULTIPLE</option>
-                                        </select>
-                                    </div>
-
-                                    <div className="col-md-3 mb-3">
-                                        <label htmlFor="voucher">Transport Name : </label>
+                                        <label htmlFor="broker">Broker</label>
                                         <input
-                                            type="number"
+                                            type="text"
                                             className="form-control"
-                                            name="voucher"
-
+                                            name="broker"
+                                            value={formData.broker}
+                                            onChange={handleInputChange}
+                                            placeholder="Enter Broker"
+                                        />
+                                    </div>
+                                    <div className="col-md-3 mb-3">
+                                        <label htmlFor="transportName">Transport Name</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            name="transportName"
+                                            value={formData.transportName}
+                                            onChange={handleInputChange}
                                             placeholder="Enter Transport Name"
                                         />
                                     </div>
-
                                     <div className="col-md-3 mb-3">
-                                        <label htmlFor="voucher">Delivery Destination: </label>
+                                        <label htmlFor="deliveryDestination">Delivery Destination</label>
                                         <input
-                                            type="number"
+                                            type="text"
                                             className="form-control"
-                                            name="voucher"
-
+                                            name="deliveryDestination"
+                                            value={formData.deliveryDestination}
+                                            onChange={handleInputChange}
                                             placeholder="Enter Delivery Destination"
                                         />
                                     </div>
-
-
                                 </div>
-
                                 <div className="col-lg-12">
                                     <table border="1" cellPadding="10">
                                         <thead>
                                             <tr>
-                                                <th>	Item</th>
+                                                <th>Item</th>
                                                 <th>Tax %</th>
                                                 <th>CaseQty</th>
                                                 <th>Location</th>
@@ -244,23 +235,26 @@ const SalseOrderAdd = () => {
                                             {rows.map((row, index) => renderRow(row, index))}
                                         </tbody>
                                     </table>
-                                    {/* <button type="button" onClick={handleAddRow}>Add Row</button>    */}
-                                </div>
-
-                                <div className="col-lg-12">
-                                    <label htmlFor="taxType">Narration:</label>
-                                    <textarea name="" id="" cols={180}></textarea>
+                                    {/* <button type="button" onClick={handleAddRow}>Add Row</button> */}
                                 </div>
                                 <div className="col-lg-12">
-                                    <button type="button" className="btn btn-success" >Save</button>
+                                    <label htmlFor="narration">Narration:</label>
+                                    <textarea
+                                        name="narration"
+                                        id="narration"
+                                        cols="180"
+                                        value={formData.narration}
+                                        onChange={handleInputChange}
+                                    ></textarea>
+                                </div>
+                                <div className="col-lg-12">
+                                    <button type="button" className="btn btn-success" onClick={submitData}>Save</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-
         </>
     )
 }
