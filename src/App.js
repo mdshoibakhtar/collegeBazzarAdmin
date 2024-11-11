@@ -883,6 +883,11 @@ import MistryAdd from "./components/topNavigationComp/masters/mistry/masterform/
 import OrganisationSettings from "./components/organisationSettings/OrganisationSettings";
 import Reccetemplet from "./components/organisationSettings/moduleSettings/reccetemplete/Reccetemplet";
 import DesignSection from "./components/organisationSettings/designSection/DesignSection";
+import SalesPersonPage from "./pages/travelCrmReports/salesperson";
+import SalesPersonWisePage from "./pages/travelCrmReports/salespersonWise";
+import ContactWisePage from "./pages/travelCrmReports/contactWise";
+import LeadWisePage from "./pages/travelCrmReports/leadWise";
+import LeadCreatedWisePage from "./pages/travelCrmReports/leadCreatedWise";
 // import CreateStageplan from "./pages/NewStagesplan";
 import UnitPage from "./pages/unitPage";
 import BrandPage from "./pages/brandPage";
@@ -2667,6 +2672,16 @@ function App() {
               />
               <Route path="kng-saleorder" element={<SalesOrderBookPage />} />
               <Route path="kng-purorder" element={<PurchaseOrderBookPage />} />
+
+              {/* travocrm */}
+
+              <Route path="sales-count" element={<SalesPersonPage />} />
+              <Route path="salesperson-wise" element={<SalesPersonWisePage />} />
+              <Route path="contact-wise" element={<ContactWisePage />} />
+              <Route path="lead-wise" element={<LeadWisePage />} />
+              <Route path="lead-createdby" element={<LeadCreatedWisePage />} />
+
+              {/* travocrm */}
 
               {/* ----------------Moin's Route start-------------------------------*/}
               <Route path="ele-sales-invoice" element={<SalesIvoiceListPage />} />
