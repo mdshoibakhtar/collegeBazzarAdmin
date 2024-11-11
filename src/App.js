@@ -904,6 +904,8 @@ import AttributesPage from "./pages/attributesPage";
 import ProjectMasters from "./components/topNavigationComp/masters/projects/ProjectMasters";
 import ProjectDetailMasters from "./components/topNavigationComp/masters/projectDetail/ProjectDetailMasters";
 import ProjectAddForm from "./components/topNavigationComp/masters/projects/MasterForm/ProjectAddForm";
+import Taskmanager from "./components/taskManager/Taskmanager";
+import TaskComent from "./components/taskManager/taskComment/TaskComent";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -2782,6 +2784,10 @@ function App() {
 
               <Route path="organisation-setting/module-settings" element={<OrganisationSettings />} >
                 <Route path="" element={<Reccetemplet />} />
+                <Route path="design" element={<DesignSection />} />
+              </Route>
+              <Route path="my-task/task-manager" element={<Taskmanager />} >
+                <Route path="" element={<TaskComent />} />
                 <Route path="design" element={<DesignSection />} />
               </Route>
             </Route>
