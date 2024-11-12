@@ -909,6 +909,17 @@ import AttributesPage from "./pages/attributesPage";
 import ProjectMasters from "./components/topNavigationComp/masters/projects/ProjectMasters";
 import ProjectDetailMasters from "./components/topNavigationComp/masters/projectDetail/ProjectDetailMasters";
 import ProjectAddForm from "./components/topNavigationComp/masters/projects/MasterForm/ProjectAddForm";
+import MiscellaneousPage from "./pages/travelCrmReports/miscellaneous";
+import CompanyInvoicelistPage from "./pages/travelCrmReports/companyInvoicelist";
+import CompanyRecieptlistPage from "./pages/travelCrmReports/companyRecieptlist";
+import UserHistoryPage from "./pages/travelCrmReports/userHistory";
+import LoginHistoryyPage from "./pages/travelCrmReports/loginHistory";
+import CustomerCallsStatusPage from "./pages/travelCrmReports/customerCallsStatus";
+import CallByUserPage from "./pages/travelCrmReports/callByUser";
+import AllLeadWiseHistoryPage from "./pages/travelCrmReports/allLeadWiseHistory";
+import PassportVisaExpiryPage from "./pages/travelCrmReports/passportVisaExpiry";
+import TaskRemindersPage from "./pages/travelCrmReports/taskReminders";
+import ContactReportUserWisePage from "./pages/travelCrmReports/contactReportUserWise/ContactReportUserWise";
 import Taskmanager from "./components/taskManager/Taskmanager";
 import TaskComent from "./components/taskManager/taskComment/TaskComent";
 function App() {
@@ -2680,6 +2691,19 @@ function App() {
               <Route path="contact-wise" element={<ContactWisePage />} />
               <Route path="lead-wise" element={<LeadWisePage />} />
               <Route path="lead-createdby" element={<LeadCreatedWisePage />} />
+              {/* // */}
+              <Route path="customer-type" element={<MiscellaneousPage />} />
+              <Route path="invoice-company" element={<CompanyInvoicelistPage />} />
+              <Route path="receipt-company" element={<CompanyRecieptlistPage />} />
+              <Route path="history" element={<UserHistoryPage />} />
+              <Route path="login-history-report" element={<LoginHistoryyPage />} />
+              <Route path="calls-report" element={<CustomerCallsStatusPage />} />
+              <Route path="user-calls-report" element={<CallByUserPage />} />
+              <Route path="allleadshistory" element={<AllLeadWiseHistoryPage />} />
+              <Route path="passport-visa" element={<PassportVisaExpiryPage />} />
+              <Route path="todo-reminder" element={<TaskRemindersPage />} />
+              <Route path="contact-user" element={<ContactReportUserWisePage />} />
+
 
               {/* travocrm */}
 
