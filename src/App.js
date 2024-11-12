@@ -2509,9 +2509,9 @@ function App() {
               <Route path="add-sales-return" element={<SalesAddRetuen />} />
               <Route path="add-sales-return/:id" element={<SalesAddRetuen />} />
 
-              <Route path="priority_task" element={<PrirotyMaster />} />
+              {/* <Route path="priority_task" element={<PrirotyMaster />} />
               <Route path="add-priority_task" element={<PrirotyAdd />} />
-              <Route path="add-priority_task/:id" element={<PrirotyAdd />} />
+              <Route path="add-priority_task/:id" element={<PrirotyAdd />} /> */}
 
               <Route path="related_master" element={<RelatedMaster />} />
               <Route path="add-related_master" element={<RelatedAdd />} />
