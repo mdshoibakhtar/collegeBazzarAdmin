@@ -13,7 +13,7 @@ function Reccetemplet() {
     const [page, setPage] = useState(0);
 
     const [initialValues, setInitialValues] = useState({
-        module_id: templeteId,
+        module_id: "66b5ca29faf49a2bd9a44ec2", 
         name: "",
         isActive: true,
         sort_no: 1,
@@ -49,12 +49,20 @@ function Reccetemplet() {
 
     const submitForm = async (e) => {
         e.preventDefault();
+    
+        // Check if module_id is valid or required
+        if (!initialValues.module_id || initialValues.module_id === "") {
+            toastErrorMessage("Module ID is required and should be a valid ObjectId.");
+            return;
+        }
+    
         try {
             if (!initialValues._id) {
                 const res = await addOrganisationSettingsMdlsttingTemp(initialValues);
                 if (res?.statusCode === "200") {
                     toastSuccessMessage("Template Added Successfully");
-                    setInitialValues({ module_id: "668e5daefb64e62951f47e6b", name: "", isActive: true, sort_no: 1, assigned_to: [], stack_holders: [], instructions: "" });
+                    // Reset form values, keeping module_id if needed
+                    setInitialValues({ module_id: "66b5ca29faf49a2bd9a44ec2", name: "", isActive: true, sort_no: 1, assigned_to: [], stack_holders: [], instructions: "" });
                     getListData(page);
                     setShow(false);
                 } else {
@@ -156,7 +164,7 @@ function Reccetemplet() {
                             data?.map((item, i) => (
                                 <div key={i} className="my-3">
                                     <div className="d-flex align-items-center justify-content-between">
-                                        <span onClick={() => setUpdateData(item?._id)} className='cursor-pointer'>
+                                        <span onClick={() => assignStaff(item?._id)} className='cursor-pointer'>
                                             <b>{item?.name}</b>
                                         </span>
                                         <span>
