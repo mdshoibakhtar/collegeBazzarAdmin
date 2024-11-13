@@ -239,6 +239,11 @@ export const getcityUpdate = () => {
 export const cityListbyPagination = (page, count) => {
   return axiosInstance.get(`${baseUrl}city/page?page=${page}&count=${count}&state_id=&country_id=`);
 };
+
+export const cityMainGet = () => {
+  return axiosInstance.get(`${baseUrl}city`);
+};
+
 export const cityUpdate = (id, value) => {
   return axiosInstance.put(`${baseUrl}city/updateCity/${id}`, value);
 };
@@ -4670,7 +4675,7 @@ export const deleteAddSubjectById = (id) => {
 
 // atif code 
 // block
-export const getCreblock = (page, count) =>{
+export const getCreblock = (page, count) => {
   return axiosInstance.get(`prop_block/user?page=${page}&count=${count}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
@@ -4680,7 +4685,7 @@ export const getCreblock = (page, count) =>{
 };
 
 // Property stage
-export const getCrePropertyStage = (page, count) =>{
+export const getCrePropertyStage = (page, count) => {
   return axiosInstance.get(`prop_property_stage/user?page=${page}&count=${count}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
@@ -4690,7 +4695,7 @@ export const getCrePropertyStage = (page, count) =>{
 };
 
 // Property Stage Plane
-export const getCrePropertyStagePlane = (page, count) =>{
+export const getCrePropertyStagePlane = (page, count) => {
   return axiosInstance.get(`prop_property_stage_plan/user?page=${page}&count=${count}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
@@ -4700,7 +4705,7 @@ export const getCrePropertyStagePlane = (page, count) =>{
 };
 
 // Property unit
-export const getCrePropertyUnit = (page, count) =>{
+export const getCrePropertyUnit = (page, count) => {
   return axiosInstance.get(`prop_property_unit/user?page=${page}&count=${count}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
@@ -4710,7 +4715,7 @@ export const getCrePropertyUnit = (page, count) =>{
 };
 
 // Property        
-export const getCreProperty = (page, count) =>{
+export const getCreProperty = (page, count) => {
   return axiosInstance.get(`prop_property/user?page=${page}&count=${count}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
@@ -4720,7 +4725,7 @@ export const getCreProperty = (page, count) =>{
 };
 
 // Floor
-export const getCreFloor = (page, count) =>{
+export const getCreFloor = (page, count) => {
   return axiosInstance.get(`prop_floor/user?page=${page}&count=${count}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
@@ -4730,7 +4735,7 @@ export const getCreFloor = (page, count) =>{
 };
 
 // Property_Unit
-export const getCreUnit = (page, count) =>{
+export const getCreUnit = (page, count) => {
   return axiosInstance.get(`prop_opportunity/user?page=${page}&count=${count}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
@@ -4740,7 +4745,7 @@ export const getCreUnit = (page, count) =>{
 };
 
 // Opportunity_Unit
-export const getCreOpportunityUnit = (page, count) =>{
+export const getCreOpportunityUnit = (page, count) => {
   return axiosInstance.get(`prop_opportunity/user?page=${page}&count=${count}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
@@ -4750,7 +4755,7 @@ export const getCreOpportunityUnit = (page, count) =>{
 };
 
 // Opportunity_Unit
-export const getCreBuilding = (page, count) =>{
+export const getCreBuilding = (page, count) => {
   return axiosInstance.get(`prop_building/user?page=${page}&count=${count}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
@@ -4760,7 +4765,7 @@ export const getCreBuilding = (page, count) =>{
 };
 
 // Property charges
-export const getCrePropertyChages = (page, count) =>{
+export const getCrePropertyChages = (page, count) => {
   return axiosInstance.get(`prop_property_charges/user?page=${page}&count=${count}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
@@ -4770,7 +4775,7 @@ export const getCrePropertyChages = (page, count) =>{
 };
 
 // Property Showing
-export const getCrePropertyShowing = (page, count) =>{
+export const getCrePropertyShowing = (page, count) => {
   return axiosInstance.get(`prop_property_showing/user?page=${page}&count=${count}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
@@ -5036,5 +5041,13 @@ export const lagerIdGet = (value) => {
       Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
     },
   });
+};
+
+export const AddTRCRM_sight_seeing_master = (data) => {
+  return axiosInstance.post(`${baseUrl}TRCRM_sight_seeing_master/addType`, data);
+};
+
+export const GetTRCRM_sight_seeing_master = (value) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_sight_seeing_master/user?page=${value?.page}&count=${value?.count}`);
 };
 

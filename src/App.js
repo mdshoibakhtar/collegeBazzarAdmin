@@ -883,6 +883,11 @@ import MistryAdd from "./components/topNavigationComp/masters/mistry/masterform/
 import OrganisationSettings from "./components/organisationSettings/OrganisationSettings";
 import Reccetemplet from "./components/organisationSettings/moduleSettings/reccetemplete/Reccetemplet";
 import DesignSection from "./components/organisationSettings/designSection/DesignSection";
+import SalesPersonPage from "./pages/travelCrmReports/salesperson";
+import SalesPersonWisePage from "./pages/travelCrmReports/salespersonWise";
+import ContactWisePage from "./pages/travelCrmReports/contactWise";
+import LeadWisePage from "./pages/travelCrmReports/leadWise";
+import LeadCreatedWisePage from "./pages/travelCrmReports/leadCreatedWise";
 // import CreateStageplan from "./pages/NewStagesplan";
 import UnitPage from "./pages/unitPage";
 import BrandPage from "./pages/brandPage";
@@ -904,6 +909,30 @@ import AttributesPage from "./pages/attributesPage";
 import ProjectMasters from "./components/topNavigationComp/masters/projects/ProjectMasters";
 import ProjectDetailMasters from "./components/topNavigationComp/masters/projectDetail/ProjectDetailMasters";
 import ProjectAddForm from "./components/topNavigationComp/masters/projects/MasterForm/ProjectAddForm";
+import MiscellaneousPage from "./pages/travelCrmReports/miscellaneous";
+import CompanyInvoicelistPage from "./pages/travelCrmReports/companyInvoicelist";
+import CompanyRecieptlistPage from "./pages/travelCrmReports/companyRecieptlist";
+import UserHistoryPage from "./pages/travelCrmReports/userHistory";
+import LoginHistoryyPage from "./pages/travelCrmReports/loginHistory";
+import CustomerCallsStatusPage from "./pages/travelCrmReports/customerCallsStatus";
+import CallByUserPage from "./pages/travelCrmReports/callByUser";
+import AllLeadWiseHistoryPage from "./pages/travelCrmReports/allLeadWiseHistory";
+import PassportVisaExpiryPage from "./pages/travelCrmReports/passportVisaExpiry";
+import TaskRemindersPage from "./pages/travelCrmReports/taskReminders";
+import ContactReportUserWisePage from "./pages/travelCrmReports/contactReportUserWise/ContactReportUserWise";
+import Taskmanager from "./components/taskManager/Taskmanager";
+import TaskComent from "./components/taskManager/taskComment/TaskComent";
+import SightseeingPage from "./pages/manageTravelBussiness/sightseeing";
+import Addsightseeing from "./components/manageTravelBussiness/sightseeing/Addsightseeing/Addsightseeing";
+import SightseeingView from "./components/manageTravelBussiness/sightseeing/sightseeingView/SightseeingView";
+import LeadFollowUpCallsPage from "./pages/travelCrmReports/leadFollowUpCalls";
+import SupplierPurchagePage from "./pages/travelCrmReports/supplierPurchage";
+import SuplierPaidReportPage from "./pages/travelCrmReports/suplierPaidReport";
+import CustomerPaymentReportPage from "./pages/travelCrmReports/customerPaymentReport";
+import CustomerSaleReportPage from "./pages/travelCrmReports/customerSaleReport";
+import BillPaymentReminderReportPage from "./pages/travelCrmReports/billPaymentReminderReport";
+import TravelProfitLossPage from "./pages/travelCrmReports/profitLoss";
+import CancleReportPage from "./pages/travelCrmReports/cancleReport";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -2666,6 +2695,45 @@ function App() {
               <Route path="kng-saleorder" element={<SalesOrderBookPage />} />
               <Route path="kng-purorder" element={<PurchaseOrderBookPage />} />
 
+              {/* travocrm */}
+
+              <Route path="sales-count" element={<SalesPersonPage />} />
+              <Route path="salesperson-wise" element={<SalesPersonWisePage />} />
+              <Route path="contact-wise" element={<ContactWisePage />} />
+              <Route path="lead-wise" element={<LeadWisePage />} />
+              <Route path="lead-createdby" element={<LeadCreatedWisePage />} />
+              {/* // */}
+              <Route path="customer-type" element={<MiscellaneousPage />} />
+              <Route path="invoice-company" element={<CompanyInvoicelistPage />} />
+              <Route path="receipt-company" element={<CompanyRecieptlistPage />} />
+              <Route path="history" element={<UserHistoryPage />} />
+              <Route path="login-history-report" element={<LoginHistoryyPage />} />
+              <Route path="calls-report" element={<CustomerCallsStatusPage />} />
+              <Route path="user-calls-report" element={<CallByUserPage />} />
+              <Route path="allleadshistory" element={<AllLeadWiseHistoryPage />} />
+              <Route path="passport-visa" element={<PassportVisaExpiryPage />} />
+              <Route path="todo-reminder" element={<TaskRemindersPage />} />
+              <Route path="contact-user" element={<ContactReportUserWisePage />} />
+              {/* // */}
+              <Route path="lead-followup" element={<LeadFollowUpCallsPage />} />
+              <Route path="purchase-report" element={<SupplierPurchagePage />} />
+              <Route path="supplier-payment-paid-report" element={<SuplierPaidReportPage />} />
+              <Route path="customer-payment-received-report" element={<CustomerPaymentReportPage />} />
+              <Route path="sale-report" element={<CustomerSaleReportPage />} />
+              <Route path="bill-payment-reminder-report" element={<BillPaymentReminderReportPage />} />
+              <Route path="profit-loss" element={<TravelProfitLossPage />} />
+              <Route path="cancel-refund" element={<CancleReportPage />} />
+
+
+              <Route path="sightseen-list" element={<SightseeingPage />} />
+              <Route path="sightseen-add" element={<Addsightseeing />} />
+              <Route path="viewsightseeing" element={<SightseeingView />} />
+
+
+
+
+              {/* travocrm */}
+
               {/* ----------------Moin's Route start-------------------------------*/}
               <Route path="ele-sales-invoice" element={<SalesIvoiceListPage />} />
               <Route path="ele-sales-invoice/create" element={<AddNewSaleInvoicePage />} />
@@ -2782,6 +2850,10 @@ function App() {
 
               <Route path="organisation-setting/module-settings" element={<OrganisationSettings />} >
                 <Route path="" element={<Reccetemplet />} />
+                <Route path="design" element={<DesignSection />} />
+              </Route>
+              <Route path="my-task/task-manager" element={<Taskmanager />} >
+                <Route path="" element={<TaskComent />} />
                 <Route path="design" element={<DesignSection />} />
               </Route>
             </Route>
