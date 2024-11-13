@@ -3,17 +3,16 @@ import { Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Dropdown, Button, ButtonGroup } from "react-bootstrap";
 import CreateTask from '../taskComment/CreateTask';
-import { getAllAssign } from '../../../api/login/Login';
+import { addTaskType, getAllAssign } from '../../../api/login/Login';
+import { toast } from 'react-toastify';
 
 function TaskManagerAside() {
     const [activeKey, setActiveKey] = useState("Important");
     const [staffData, setStaffData] = useState([]);
     const [show, setShow] = useState(false);
     const [initialValues, setInitialValues] = useState(
-        /* {
+        {
             task_name: "",
-            task_type_id: { type: task._Id, ref: 'taskId' },
-            task_stage_id: { type: taskStageMaster, ref: 'taskStageMaster' },
             public: false,
             billable: false,
             attach_files: "",
@@ -23,22 +22,22 @@ function TaskManagerAside() {
             complition_date_time: "",
             end_date_time: "",
             expect_due_date_time: "",
-            priority: { type: priority._Id, ref: 'priority' },
+            priority: { type: "", ref: 'priority' },
             repeat_every: { type: String, enum: ["days", "week", "month", "year"] },
-            repeated_no: { type: Number },
-            assignees: [{ type: staff._Id, ref: 'staff' }],
-            followers: { type: staff._Id, ref: 'staff' },
+            repeated_no: null,
+            assignees: [{ type: [], ref: 'staff' }],
+            followers: { type: "", ref: 'staff' },
             tags: [""],
             task_description: "",
-            total_cycle: { type: Number },
-
-            user_id: { type: user._Id, ref: "user" },
-        } */
+            total_cycle: null,
+            user_id: { type: "", ref: "user" },
+        }
     );
-    const [expandedItems, setExpandedItems] = useState({}); // State to track expanded items
+    const [expandedItems, setExpandedItems] = useState({});
 
     const handleCreateTask = () => setShow(!show);
-
+    const toastSuccessMessage = (message) => toast .success(message, { position: "top-right" });
+    const toastErrorMessage = (message) => toast.error(message, { position: "top-right" });
     const linkStyle = {
         fontSize: "16px",
         fontWeight: 700,
@@ -100,6 +99,61 @@ function TaskManagerAside() {
             [label]: !prevExpanded[label] // Toggle the expanded state for the clicked label
         }));
     };
+    const handleChange = (e) => {
+
+        const { name, value } = e.target;
+        setInitialValues((prevValues) => ({ ...prevValues, [name]: value }));
+    }
+    const formSubmit = async (e) => {
+        e.preventDefault()
+
+
+        try {
+            if (!initialValues._id) {
+                const res = await addTaskType(initialValues);
+                if (res?.statusCode === "200") {
+                    toastSuccessMessage("Template Added Successfully");
+                    // Reset form values, keeping module_id if needed
+                    setInitialValues({
+                        task_name: "",
+                        public: false,
+                        billable: false,
+                        attach_files: "",
+                        subject: "",
+                        hourly_rate: "",
+                        start_date_time: "",
+                        complition_date_time: "",
+                        end_date_time: "",
+                        expect_due_date_time: "",
+                        priority: { type: "", ref: 'priority' },
+                        repeat_every: { type: String, enum: ["days", "week", "month", "year"] },
+                        repeated_no: null,
+                        assignees: [{ type: [], ref: 'staff' }],
+                        followers: { type: "", ref: 'staff' },
+                        tags: [""],
+                        task_description: "",
+                        total_cycle: null,
+                        user_id: { type: "", ref: "user" },
+                    });
+                    // getListData(page);
+                } else {
+                    toastErrorMessage("Failed to Add Template");
+                }
+            } else {
+                // const res = await updateOrganisationSettingsMdlsttingTemp(initialValues._id, initialValues);
+                // if (res?.statusCode === "200") {
+                //     toastSuccessMessage("Template Updated Successfully");
+                //     getListData(page);
+                //     setShow(false);
+                // } else {
+                //     toastErrorMessage("Failed to Update Template");
+                // }
+            }
+        } catch (error) {
+            toastErrorMessage("Error processing the form.");
+        }
+
+    }
 
     return (
         <>
@@ -185,6 +239,8 @@ function TaskManagerAside() {
                 handleCreateTask={handleCreateTask}
                 staffData={staffData.length > 0 ? staffData : []}
                 initialValues={initialValues}
+                handleChange={handleChange}
+                formSubmit={formSubmit}
             />
         </>
     );

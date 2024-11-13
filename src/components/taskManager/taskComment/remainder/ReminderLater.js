@@ -21,7 +21,7 @@ function ReminderLater(props) {
                 <div className='border d-flex align-items-center  w-100'>
                     <input
                         type='search'
-                        placeholder='try 8 am , 3 days, june 7'
+                        placeholder='try 8 am , 3 days, june 7                                                                                                                                       if no reply'
                         className='px-2 py-0 w-100  w-100 border-0'
                         name='name'
 
