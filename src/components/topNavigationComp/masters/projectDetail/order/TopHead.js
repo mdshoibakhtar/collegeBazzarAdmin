@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-function PaymentStatus() {
+function TopHead() {
   // State to store payment data from the API
   const [paymentData, setPaymentData] = useState({
     requested: { count: 0, amount: 0 },
@@ -29,65 +29,69 @@ function PaymentStatus() {
     container: {
       display: 'flex',
       gap: '1rem',
-      justifyContent:"space-around",
-      margin:"20px 0"
+      justifyContent: "space-around",
+      margin: "20px 0"
     },
     card: {
       border: '1px solid #e0e0e0',
       borderRadius: '8px',
       padding: '1rem',
-      width: '300px',
+      width: '250px',
       textAlign: 'center',
     },
     header: {
       fontSize: '1rem',
       fontWeight: '500',
-      margin: '0',
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
+      margin: '0 0 10px 0',
+    },
+    subHeader: {
+      fontSize: '0.875rem',
+      color: '#666',
+      marginBottom: '0.5rem',
     },
     countBadge: {
-      backgroundColor: '#e0e0e0',
-      borderRadius: '50%',
-      padding: '0.25rem 0.5rem',
-      fontSize: '0.875rem',
+      fontSize: '1.75rem',
+      fontWeight: 'bold',
+      margin: '0.5rem 0',
     },
-    amount: {
+    progressCircle: {
       fontSize: '1.5rem',
       fontWeight: 'bold',
-      margin: '0.5rem 0 0',
+      borderRadius: '50%',
+      width: '50px',
+      height: '50px',
+      lineHeight: '50px',
+      backgroundColor: '#e0e0e0',
+      margin: '0.5rem auto',
     },
   };
 
   return (
     <div style={styles.container}>
+      {/* Items Card */}
       <div style={styles.card}>
-        <h6 style={styles.header}>
-          🛒 Payment Requested <span style={styles.countBadge}>{paymentData.requested.count}</span>
-        </h6>
-        <p style={styles.amount}>₹ {paymentData.requested.amount}</p>
+        <h6 style={styles.header}>Items</h6>
+        <div style={styles.subHeader}>0 Orders</div>
+        <div style={styles.countBadge}>0 Items</div>
       </div>
+
+      {/* Overall Progress Card */}
       <div style={styles.card}>
-        <h6 style={styles.header}>
-          📄 Payment Approved <span style={styles.countBadge}>{paymentData.approved.count}</span>
-        </h6>
-        <p style={styles.amount}>₹ {paymentData.approved.amount}</p>
+        <h6 style={styles.header}>Overall Progress</h6>
+        <div style={styles.subHeader}>Total Items</div>
+        <div style={styles.countBadge}>0</div>
+        <div style={styles.progressCircle}>0%</div>
       </div>
+
+      {/* Today's Progress Card */}
       <div style={styles.card}>
-        <h6 style={styles.header}>
-          🕒 Pending Approval <span style={styles.countBadge}>{paymentData.pending.count}</span>
-        </h6>
-        <p style={styles.amount}>₹ {paymentData.pending.amount}</p>
-      </div>
-      <div style={styles.card}>
-        <h6 style={styles.header}>
-          ✔️ Payments Done <span style={styles.countBadge}>{paymentData.done.count}</span>
-        </h6>
-        <p style={styles.amount}>₹ {paymentData.done.amount}</p>
+        <h6 style={styles.header}>Today's Progress</h6>
+        <div style={styles.subHeader}>Items updated today</div>
+        <div style={styles.countBadge}>0</div>
+        <div style={styles.progressCircle}>0%</div>
       </div>
     </div>
   );
 }
 
-export default PaymentStatus;
+export default TopHead;

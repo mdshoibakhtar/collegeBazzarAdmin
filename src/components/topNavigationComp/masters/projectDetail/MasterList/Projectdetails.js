@@ -5,6 +5,7 @@ import ProjectDetail from "../projectdetail/ProjectDetail";
 import RecceMain from "../Recce/RecceMain";
 import Quatation from "../boq/Quatation";
 import BoqMain from "../boq/BoqMain";
+import OrderMain from "../order/OrderMain";
 
 function Projectdetails() {
    
@@ -42,7 +43,7 @@ function Projectdetails() {
                                         <BoqMain/>
                                     </Tab>
                                     <Tab eventKey="Order" title="Order">
-                                        Order
+                                        <OrderMain/>
                                     </Tab>
                                     <Tab eventKey="Work Progress" title="Work Progress">
                                         Work Progress
