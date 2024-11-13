@@ -922,6 +922,12 @@ import TaskRemindersPage from "./pages/travelCrmReports/taskReminders";
 import ContactReportUserWisePage from "./pages/travelCrmReports/contactReportUserWise/ContactReportUserWise";
 import Taskmanager from "./components/taskManager/Taskmanager";
 import TaskComent from "./components/taskManager/taskComment/TaskComent";
+import HotelVoucherPage from "./pages/travelCrmReports/hotelVoucher";
+import TransportVoucher from "./pages/travelCrmReports/transportVoucher";
+import FlightVoucher from "./pages/travelCrmReports/flightVoucher";
+import AllCustomer from "./pages/travelCrmReports/allCustomer";
+import InvouceReciept from "./pages/travelCrmReports/invoiceReciept";
+import BirthdatAnniversary from "./pages/travelCrmReports/birthdayAnniversary";
 import SightseeingPage from "./pages/manageTravelBussiness/sightseeing";
 import Addsightseeing from "./components/manageTravelBussiness/sightseeing/Addsightseeing/Addsightseeing";
 import SightseeingView from "./components/manageTravelBussiness/sightseeing/sightseeingView/SightseeingView";
@@ -2531,9 +2537,9 @@ function App() {
               <Route path="add-sales-return" element={<SalesAddRetuen />} />
               <Route path="add-sales-return/:id" element={<SalesAddRetuen />} />
 
-              <Route path="priority_task" element={<PrirotyMaster />} />
+              {/* <Route path="priority_task" element={<PrirotyMaster />} />
               <Route path="add-priority_task" element={<PrirotyAdd />} />
-              <Route path="add-priority_task/:id" element={<PrirotyAdd />} />
+              <Route path="add-priority_task/:id" element={<PrirotyAdd />} /> */}
 
               <Route path="related_master" element={<RelatedMaster />} />
               <Route path="add-related_master" element={<RelatedAdd />} />
@@ -2854,8 +2860,15 @@ function App() {
               </Route>
               <Route path="my-task/task-manager" element={<Taskmanager />} >
                 <Route path="" element={<TaskComent />} />
-                <Route path="design" element={<DesignSection />} />
+                {/* <Route path="design" element={<DesignSection />} /> */}
               </Route>
+              {/* Shoib's Travel Crm Report Statics */}
+              <Route path="hotel_voucher" element={<HotelVoucherPage />} />
+              <Route path="transport_voucher" element={<TransportVoucher />} />
+              <Route path="flight_voucher" element={<FlightVoucher />} />
+              <Route path="all-customer-reports" element={<AllCustomer />} />
+              <Route path="invoice-reciept" element={<InvouceReciept />} />
+              <Route path="birthday-anniversary-reports" element={<BirthdatAnniversary />} />
             </Route>
           </>
         )}
