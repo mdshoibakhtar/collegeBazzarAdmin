@@ -928,6 +928,17 @@ import FlightVoucher from "./pages/travelCrmReports/flightVoucher";
 import AllCustomer from "./pages/travelCrmReports/allCustomer";
 import InvouceReciept from "./pages/travelCrmReports/invoiceReciept";
 import BirthdatAnniversary from "./pages/travelCrmReports/birthdayAnniversary";
+import SightseeingPage from "./pages/manageTravelBussiness/sightseeing";
+import Addsightseeing from "./components/manageTravelBussiness/sightseeing/Addsightseeing/Addsightseeing";
+import SightseeingView from "./components/manageTravelBussiness/sightseeing/sightseeingView/SightseeingView";
+import LeadFollowUpCallsPage from "./pages/travelCrmReports/leadFollowUpCalls";
+import SupplierPurchagePage from "./pages/travelCrmReports/supplierPurchage";
+import SuplierPaidReportPage from "./pages/travelCrmReports/suplierPaidReport";
+import CustomerPaymentReportPage from "./pages/travelCrmReports/customerPaymentReport";
+import CustomerSaleReportPage from "./pages/travelCrmReports/customerSaleReport";
+import BillPaymentReminderReportPage from "./pages/travelCrmReports/billPaymentReminderReport";
+import TravelProfitLossPage from "./pages/travelCrmReports/profitLoss";
+import CancleReportPage from "./pages/travelCrmReports/cancleReport";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -2709,6 +2720,22 @@ function App() {
               <Route path="passport-visa" element={<PassportVisaExpiryPage />} />
               <Route path="todo-reminder" element={<TaskRemindersPage />} />
               <Route path="contact-user" element={<ContactReportUserWisePage />} />
+              {/* // */}
+              <Route path="lead-followup" element={<LeadFollowUpCallsPage />} />
+              <Route path="purchase-report" element={<SupplierPurchagePage />} />
+              <Route path="supplier-payment-paid-report" element={<SuplierPaidReportPage />} />
+              <Route path="customer-payment-received-report" element={<CustomerPaymentReportPage />} />
+              <Route path="sale-report" element={<CustomerSaleReportPage />} />
+              <Route path="bill-payment-reminder-report" element={<BillPaymentReminderReportPage />} />
+              <Route path="profit-loss" element={<TravelProfitLossPage />} />
+              <Route path="cancel-refund" element={<CancleReportPage />} />
+
+
+              <Route path="sightseen-list" element={<SightseeingPage />} />
+              <Route path="sightseen-add" element={<Addsightseeing />} />
+              <Route path="viewsightseeing" element={<SightseeingView />} />
+
+
 
 
               {/* travocrm */}
