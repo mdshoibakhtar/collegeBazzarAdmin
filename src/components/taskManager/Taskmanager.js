@@ -12,7 +12,7 @@ function Taskmanager() {
     return (
         <>
             <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
-            <section className='m-4 h-72vh'>
+            <section className='m-4 h-71vh'>
                 <div className='card'>
                     <div className='row '>
                         <div className='col-xl-3'>

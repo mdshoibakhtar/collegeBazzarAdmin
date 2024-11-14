@@ -134,13 +134,13 @@ function PriorityMasterForm() {
                                                     </div>
                                                     <div className='col-xl-4 mb-3'>
                                                         <select class="form-select" aria-label="Default select example" id="status" name="status"
-                                                            value={values?.status} onChange={handleChange}><option disabled> Select Status</option><option value={true}>ACTIVE</option><option value={false}>IN ACTIVE</option></select>
+                                                            value={values?.status} onChange={handleChange}><option disabled> Select Status</option><option value={true}>Active</option><option value={false}>In Active</option></select>
                                                     </div>
                                                     <div className="col-xl-4 mb-4 mt-2">
                                                         <div>
-                                                            <Link to='/priority-master/welcome' className="btn btn-danger light ms-1">Cancel</Link>
+                                                            <Link to='/priority-master/welcome' className="btn btn-danger btn-sm">Cancel</Link>
                                                             <button
-                                                                className="btn btn-primary me-1"
+                                                                className="btn btn-primary me-1 btn-sm"
                                                                 type="submit"
 
                                                                 disabled={!isValid || !dirty}

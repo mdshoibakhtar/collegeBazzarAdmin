@@ -922,6 +922,12 @@ import TaskRemindersPage from "./pages/travelCrmReports/taskReminders";
 import ContactReportUserWisePage from "./pages/travelCrmReports/contactReportUserWise/ContactReportUserWise";
 import Taskmanager from "./components/taskManager/Taskmanager";
 import TaskComent from "./components/taskManager/taskComment/TaskComent";
+import HotelVoucherPage from "./pages/travelCrmReports/hotelVoucher";
+import TransportVoucher from "./pages/travelCrmReports/transportVoucher";
+import FlightVoucher from "./pages/travelCrmReports/flightVoucher";
+import AllCustomer from "./pages/travelCrmReports/allCustomer";
+import InvouceReciept from "./pages/travelCrmReports/invoiceReciept";
+import BirthdatAnniversary from "./pages/travelCrmReports/birthdayAnniversary";
 import SightseeingPage from "./pages/manageTravelBussiness/sightseeing";
 import Addsightseeing from "./components/manageTravelBussiness/sightseeing/Addsightseeing/Addsightseeing";
 import SightseeingView from "./components/manageTravelBussiness/sightseeing/sightseeingView/SightseeingView";
@@ -933,6 +939,14 @@ import CustomerSaleReportPage from "./pages/travelCrmReports/customerSaleReport"
 import BillPaymentReminderReportPage from "./pages/travelCrmReports/billPaymentReminderReport";
 import TravelProfitLossPage from "./pages/travelCrmReports/profitLoss";
 import CancleReportPage from "./pages/travelCrmReports/cancleReport";
+import B2bInvoicePage from "./pages/travelCrmReports/b2bInvoice";
+import B2cInvoicePage from "./pages/travelCrmReports/b2cInvoice";
+import SightseeingRateList from "./components/manageTravelBussiness/sightseeing/sightseeingRateList/SightseeingRateList";
+import SightseeingRateAdd from "./components/manageTravelBussiness/sightseeing/sightseeingRateList/sightseeingRateAdd/SightseeingRateAdd";
+import AllHotalPage from "./pages/manageTravelBussiness/hotel";
+import HotelAdd from "./components/manageTravelBussiness/hotel/hotelAdd/HotelAdd";
+import TagsPage from "./pages/manageTravelBussiness/tags";
+import TagsAdd from "./components/manageTravelBussiness/tags/tagsAdd/TagsAdd";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -2531,9 +2545,9 @@ function App() {
               <Route path="add-sales-return" element={<SalesAddRetuen />} />
               <Route path="add-sales-return/:id" element={<SalesAddRetuen />} />
 
-              <Route path="priority_task" element={<PrirotyMaster />} />
+              {/* <Route path="priority_task" element={<PrirotyMaster />} />
               <Route path="add-priority_task" element={<PrirotyAdd />} />
-              <Route path="add-priority_task/:id" element={<PrirotyAdd />} />
+              <Route path="add-priority_task/:id" element={<PrirotyAdd />} /> */}
 
               <Route path="related_master" element={<RelatedMaster />} />
               <Route path="add-related_master" element={<RelatedAdd />} />
@@ -2723,11 +2737,19 @@ function App() {
               <Route path="bill-payment-reminder-report" element={<BillPaymentReminderReportPage />} />
               <Route path="profit-loss" element={<TravelProfitLossPage />} />
               <Route path="cancel-refund" element={<CancleReportPage />} />
-
+              <Route path="b2b-invoice" element={<B2bInvoicePage />} />
+              <Route path="b2c-invoice" element={<B2cInvoicePage />} />
 
               <Route path="sightseen-list" element={<SightseeingPage />} />
               <Route path="sightseen-add" element={<Addsightseeing />} />
+              <Route path="sightseen-update/:id" element={<Addsightseeing />} />
               <Route path="viewsightseeing" element={<SightseeingView />} />
+              <Route path="sightseeing-ratelist/:id" element={<SightseeingRateList />} />
+              <Route path="add-sightseeingrate" element={<SightseeingRateAdd />} />
+              <Route path="hotel-list" element={<AllHotalPage />} />
+              <Route path="hotel-add" element={<HotelAdd />} />
+              <Route path="tags" element={<TagsPage />} />
+              <Route path="tags-add" element={<TagsAdd />} />
 
 
 
@@ -2854,8 +2876,15 @@ function App() {
               </Route>
               <Route path="my-task/task-manager" element={<Taskmanager />} >
                 <Route path="" element={<TaskComent />} />
-                <Route path="design" element={<DesignSection />} />
+                {/* <Route path="design" element={<DesignSection />} /> */}
               </Route>
+              {/* Shoib's Travel Crm Report Statics */}
+              <Route path="hotel_voucher" element={<HotelVoucherPage />} />
+              <Route path="transport_voucher" element={<TransportVoucher />} />
+              <Route path="flight_voucher" element={<FlightVoucher />} />
+              <Route path="all-customer-reports" element={<AllCustomer />} />
+              <Route path="invoice-reciept" element={<InvouceReciept />} />
+              <Route path="birthday-anniversary-reports" element={<BirthdatAnniversary />} />
             </Route>
           </>
         )}
