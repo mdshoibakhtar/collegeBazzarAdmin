@@ -3315,8 +3315,8 @@ export const deleteTaskById = (id) => {
 };
 
 // GET task priorities with pagination
-export const getTaskList = (page = 0, count = 10, id) => {
-  return axiosInstance.get(`/task/user?page=${page}&count=${count}&id=${id}`, {
+export const getTaskList = (page = 0, count = 10,) => {
+  return axiosInstance.get(`/task/admin?page=${page}&count=${count}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
       Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
@@ -5042,6 +5042,28 @@ export const lagerIdGet = (value) => {
     },
   });
 };
+
+
+
+
+// -------------------------Task Manager -------------------------
+export const getListTaskManager = (page, count) => {
+  return axiosInstance.get(`${baseUrl}acc_project_recce_template_master/user?page=${page}&count=${count}`);
+};
+
+export const addTaskType = (data) => {
+  return axiosInstance.post(`${baseUrl}task/addType`, data);
+};
+
+/* export const deleteOrganisationSettingsMdlsttingTemp = (id) => {
+  return axiosInstance.delete(`${baseUrl}acc_project_recce_template_master/delete_type/${id}`);
+};
+export const updateOrganisationSettingsMdlsttingTemp = (id, value) => {
+  return axiosInstance.put(`${baseUrl}acc_project_recce_template_master/update_type/${id}`, value);
+};
+export const getByOrganisationSettingsMdlsttingTempId = (id) => {
+  return axiosInstance.get(`${baseUrl}acc_project_recce_template_master/${id}`);
+}; */
 
 export const AddTRCRM_sight_seeing_master = (data) => {
   return axiosInstance.post(`${baseUrl}TRCRM_sight_seeing_master/addType`, data);

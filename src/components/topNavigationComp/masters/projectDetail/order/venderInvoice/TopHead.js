@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-function PaymentStatus() {
+function TopHead() {
   // State to store payment data from the API
   const [paymentData, setPaymentData] = useState({
     requested: { count: 0, amount: 0 },
@@ -64,30 +64,27 @@ function PaymentStatus() {
     <div style={styles.container}>
       <div style={styles.card}>
         <h6 style={styles.header}>
-          🛒 Payment Requested <span style={styles.countBadge}>{paymentData.requested.count}</span>
+          🛒 Invoice Uploaded <span style={styles.countBadge}>{paymentData.requested.count}</span>
         </h6>
         <p style={styles.amount}>₹ {paymentData.requested.amount}</p>
       </div>
       <div style={styles.card}>
         <h6 style={styles.header}>
-          📄 Payment Approved <span style={styles.countBadge}>{paymentData.approved.count}</span>
+          📄 Invoice Approved
+          <span style={styles.countBadge}>{paymentData.approved.count}</span>
         </h6>
         <p style={styles.amount}>₹ {paymentData.approved.amount}</p>
       </div>
       <div style={styles.card}>
         <h6 style={styles.header}>
-          🕒 Pending Approval <span style={styles.countBadge}>{paymentData.pending.count}</span>
+          🕒 Pending Approval
+          <span style={styles.countBadge}>{paymentData.pending.count}</span>
         </h6>
         <p style={styles.amount}>₹ {paymentData.pending.amount}</p>
       </div>
-      <div style={styles.card}>
-        <h6 style={styles.header}>
-          ✔️ Payments Done <span style={styles.countBadge}>{paymentData.done.count}</span>
-        </h6>
-        <p style={styles.amount}>₹ {paymentData.done.amount}</p>
-      </div>
+    
     </div>
   );
 }
 
-export default PaymentStatus;
+export default TopHead;
