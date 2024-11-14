@@ -1,23 +1,15 @@
 import React from 'react';
 import { Space, Tabs } from 'antd';
-import FromVender from './FromVender';
-import OrderVender from './OrderVender';
-import VenderInvoice from './venderInvoice/VenderInvoice';
-import OtherExpense from './otherexpense/OtherExpense';
-import VenderScope from './VenderScope';
-import OrderReport from './OrderReport';
-import PaymentForVender from './PaymentForVender';
+import Quatation from './Quatation';
 
-function OrderMain() {
+function DesignMain() {
 
     const data = [
-        { name: 'Proposals From Vendor', compo: <FromVender/> },
-        { name: 'Vendor Orders', compo: <OrderVender/> },
-        { name: 'Vendor Invoices', compo: <VenderInvoice/> },
-        { name: 'Other Expense', compo: <OtherExpense/> },
-        { name: 'Vendor Wise Scope', compo: <VenderScope/> },
-        { name: 'Vendor Wise Progress Report', compo: <OrderReport/> },
-        { name: 'Payment From Vendor', compo: <PaymentForVender/> },
+        { name: '2D Layout / Adaptation', compo: <Quatation /> },
+        { name: '3D Layout / Adaptation', compo: <Quatation/> },
+        { name: 'Moodboard', compo: <Quatation/> },
+        { name: 'GFC', compo: <Quatation/> },
+        { name: 'Production Files', compo: <Quatation/> },
     ]
     return <div>
         <div className="row">
@@ -46,4 +38,4 @@ function OrderMain() {
         </div>
     </div>
 }
-export default OrderMain
+export default DesignMain

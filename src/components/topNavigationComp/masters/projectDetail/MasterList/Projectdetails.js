@@ -6,6 +6,9 @@ import RecceMain from "../Recce/RecceMain";
 import Quatation from "../boq/Quatation";
 import BoqMain from "../boq/BoqMain";
 import OrderMain from "../order/OrderMain";
+import ProgressMain from "../workprog/ProgressMain";
+import Snagmain from "../snag/SnagMain";
+import DesignMain from "../design/DesignMain";
 
 function Projectdetails() {
    
@@ -15,9 +18,10 @@ function Projectdetails() {
             <div>
                 <div className="row m-2">
                     <div className="col-xl-12">
-                        <div>
+                        <div className="d-flex">
 
                             <h5> Abaris Office Interior Work / JOB ID :ABRIS21448</h5>
+                            <h5 style={{margin:"0 10px"}}> Client : Abaris Softech</h5>
 
                         </div>
                         <div className="card">
@@ -37,7 +41,7 @@ function Projectdetails() {
                                         <RecceMain/>
                                     </Tab>
                                     <Tab eventKey="Design" title="Design">
-                                        Design
+                                        <DesignMain/>
                                     </Tab>
                                     <Tab eventKey="BOQ" title="BOQ">
                                         <BoqMain/>
@@ -46,10 +50,10 @@ function Projectdetails() {
                                         <OrderMain/>
                                     </Tab>
                                     <Tab eventKey="Work Progress" title="Work Progress">
-                                        Work Progress
+                                       <ProgressMain/>
                                     </Tab>
                                     <Tab eventKey="Snag" title="Snag">
-                                        Snag
+                                        <Snagmain/>
                                     </Tab>
                                     
 
