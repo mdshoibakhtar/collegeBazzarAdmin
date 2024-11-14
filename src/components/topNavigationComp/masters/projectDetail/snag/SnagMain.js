@@ -1,23 +1,17 @@
 import React from 'react';
 import { Space, Tabs } from 'antd';
-import FromVender from './FromVender';
-import OrderVender from './OrderVender';
-import VenderInvoice from './venderInvoice/VenderInvoice';
-import OtherExpense from './otherexpense/OtherExpense';
-import VenderScope from './VenderScope';
-import OrderReport from './OrderReport';
-import PaymentForVender from './PaymentForVender';
+import Quatation from './Quatation';
+import SalseOrder from './SalseOrder';
+import SaleInvoice from './SaleInvoice';
+import PaymentForClient from './PaymentForClient';
 
-function OrderMain() {
+function Snagmain() {
 
     const data = [
-        { name: 'Proposals From Vendor', compo: <FromVender/> },
-        { name: 'Vendor Orders', compo: <OrderVender/> },
-        { name: 'Vendor Invoices', compo: <VenderInvoice/> },
-        { name: 'Other Expense', compo: <OtherExpense/> },
-        { name: 'Vendor Wise Scope', compo: <VenderScope/> },
-        { name: 'Vendor Wise Progress Report', compo: <OrderReport/> },
-        { name: 'Payment From Vendor', compo: <PaymentForVender/> },
+        { name: 'All', compo: <Quatation /> },
+        { name: 'Open Resolved', compo: <SalseOrder/> },
+        { name: 'Open Unresolved', compo: <SaleInvoice/> },
+        { name: 'Closed', compo: <PaymentForClient/> },
     ]
     return <div>
         <div className="row">
@@ -46,4 +40,4 @@ function OrderMain() {
         </div>
     </div>
 }
-export default OrderMain
+export default Snagmain

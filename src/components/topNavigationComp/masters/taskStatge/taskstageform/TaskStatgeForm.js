@@ -8,7 +8,7 @@ import Breadcrumbs from '../../../../../common/breadcrumb/Breadcrumbs';
 import { toast } from 'react-toastify';
 import { addTaskStageMaster, getByTaskStageMasterId, updateTaskStageMaster } from '../../../../../api/login/Login';
 
-function AffilatedTypesForm
+function TaskStageForm
 () {
     const breadCrumbsTitle = {
         title_1: "master",
@@ -44,8 +44,8 @@ function AffilatedTypesForm
                 try {
                     const res = await addTaskStageMaster(values);
                     if (res?.statusCode == "200") {
-                        toastSuccessMessage(" Affilated Successfully");
-                        navigate(`/affilated-by`)
+                        toastSuccessMessage(" Task Stage Successfully");
+                        navigate(`/task-stage`)
                     }
                     blankBtn()
                 } catch (error) {
@@ -57,12 +57,12 @@ function AffilatedTypesForm
                     const res = await updateTaskStageMaster(params.id, values);
 
                     if (res?.statusCode == "200") {
-                        toastSuccessMessage("Affilated Successfully");
+                        toastSuccessMessage("Task Stage Successfully");
                         blankBtn()
-                        navigate(`/affilated-by`)
+                        navigate(`/task-stage`)
                     }
                     if (res?.statusCode == "403") {
-                        toastSuccessMessage("Affilated Successfully");
+                        toastSuccessMessage("Task Stage Successfully");
                         blankBtn()
                     }
                     // getFloorMasters(page)
@@ -192,5 +192,5 @@ function AffilatedTypesForm
     )
 }
 
-export default AffilatedTypesForm
+export default TaskStageForm
 

@@ -5070,7 +5070,7 @@ export const AddTRCRM_sight_seeing_master = (data) => {
 };
 
 export const GetTRCRM_sight_seeing_master = (value) => {
-  return axiosInstance.get(`${baseUrl}TRCRM_sight_seeing_master/user?page=${value?.page}&count=${value?.count}`);
+  return axiosInstance.get(`${baseUrl}TRCRM_sight_seeing_master/user?page=${value?.page}&count=${value?.count}&country_id=${value?.country_id}&city_id=${value?.city_id}&start_date=${value?.start_date}&end_date=${value?.end_date}`);
 };
 
 // -----------master task type api
@@ -5111,4 +5111,12 @@ export const updateTaskStageMaster = (id, value) => {
 export const getByTaskStageMasterId = (id) => {
   return axiosInstance.get(`${baseUrl}lead_task_stage/${id}`);
 }; 
-
+export const deleteRCRM_sight_seeing_master = (id) => {
+  return axiosInstance.delete(`${baseUrl}TRCRM_sight_seeing_master/delete_type/${id}`);
+};
+export const getByIdRCRM_sight_seeing_master = (id) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_sight_seeing_master/${id}`);
+};
+export const updateTRCRM_sight_seeing_master = (id, value) => {
+  return axiosInstance.put(`${baseUrl}TRCRM_sight_seeing_master/update_type/${id}`, value);
+};
