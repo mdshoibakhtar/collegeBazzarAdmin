@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import Breadcrumbs from "../../../../common/breadcrumb/Breadcrumbs";
-import { AddTRCRM_sight_seeing_master, cityAddCollageSelectList, cityGetData, cityListbyPagination, cityMainGet, clodinaryImage, countryList, getStateMaster } from "../../../../api/login/Login";
+import { AddTRCRM_sight_seeing_master, cityAddCollageSelectList, cityGetData, cityListbyPagination, cityMainGet, clodinaryImage, countryList, getByIdRCRM_sight_seeing_master, getStateMaster, updateTRCRM_sight_seeing_master } from "../../../../api/login/Login";
 import { baseUrlImage } from "../../../../baseUrl";
 import { toast, ToastContainer } from "react-toastify";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 const Addsightseeing = () => {
@@ -16,6 +16,7 @@ const Addsightseeing = () => {
     };
 
     const params = useParams()
+    const navigate = useNavigate()
 
     const [formData, setData] = useState({
         country: '',
@@ -88,25 +89,59 @@ const Addsightseeing = () => {
     }
 
     const toastSuccessMessage = (message) => {
-        toast.success(`${params?.id ? "Update" : "Add"} ${message}`, {
+        toast.success(`${params?.id ? "Update" : "Add"} ${'Success'}`, {
             position: "top-right",
         });
     };
     const submitData = async () => {
         const clone = { ...formData, upload_images: image }
-        try {
-            // console.log(formData);
-            const res = await AddTRCRM_sight_seeing_master(clone)
-            if (res?.error == false) {
-                toastSuccessMessage(res?.data?.message)
-            } else {
-                alert(res?.message)
+        if (!params?.id) {
+            try {
+                // console.log(formData);
+                const res = await AddTRCRM_sight_seeing_master(clone)
+                if (res?.error == false) {
+                    toastSuccessMessage()
+                    setTimeout(() => {
+                        navigate('/sightseen-list')
+                    }, 2000)
+                } else {
+                    alert(res?.message)
+                }
+
+            } catch (error) {
+
             }
+        } else {
+            try {
+                const res = await updateTRCRM_sight_seeing_master(params.id, clone)
+                if (res?.error == false) {
+                    toastSuccessMessage()
+                    setTimeout(() => {
+                        navigate('/sightseen-list')
+                    }, 2000)
+                } else {
+                    alert(res?.message)
+                }
+            } catch (error) {
 
-        } catch (error) {
-
+            }
         }
+
     }
+
+    useEffect(() => {
+        const detbyIdData = async () => {
+            try {
+                const res = await getByIdRCRM_sight_seeing_master(params?.id)
+                // console.log(res);
+                setData(res?.data)
+                setImage(res?.data?.upload_images)
+            } catch (error) {
+
+            }
+        }
+        detbyIdData()
+    }, [params?.id])
 
     useEffect(() => {
         countrygetData()
@@ -262,7 +297,7 @@ const Addsightseeing = () => {
 
                                     <div className="col-xl-12 text-center">
                                         <button type="button" className="btn btn-primary" onClick={submitData}>
-                                            Search
+                                            {params?.id ? 'Update' : 'Add'}
                                         </button>
                                     </div>
                                 </div>
