@@ -939,6 +939,14 @@ import CustomerSaleReportPage from "./pages/travelCrmReports/customerSaleReport"
 import BillPaymentReminderReportPage from "./pages/travelCrmReports/billPaymentReminderReport";
 import TravelProfitLossPage from "./pages/travelCrmReports/profitLoss";
 import CancleReportPage from "./pages/travelCrmReports/cancleReport";
+import B2bInvoicePage from "./pages/travelCrmReports/b2bInvoice";
+import B2cInvoicePage from "./pages/travelCrmReports/b2cInvoice";
+import SightseeingRateList from "./components/manageTravelBussiness/sightseeing/sightseeingRateList/SightseeingRateList";
+import SightseeingRateAdd from "./components/manageTravelBussiness/sightseeing/sightseeingRateList/sightseeingRateAdd/SightseeingRateAdd";
+import AllHotalPage from "./pages/manageTravelBussiness/hotel";
+import HotelAdd from "./components/manageTravelBussiness/hotel/hotelAdd/HotelAdd";
+import TagsPage from "./pages/manageTravelBussiness/tags";
+import TagsAdd from "./components/manageTravelBussiness/tags/tagsAdd/TagsAdd";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -2729,11 +2737,19 @@ function App() {
               <Route path="bill-payment-reminder-report" element={<BillPaymentReminderReportPage />} />
               <Route path="profit-loss" element={<TravelProfitLossPage />} />
               <Route path="cancel-refund" element={<CancleReportPage />} />
-
+              <Route path="b2b-invoice" element={<B2bInvoicePage />} />
+              <Route path="b2c-invoice" element={<B2cInvoicePage />} />
 
               <Route path="sightseen-list" element={<SightseeingPage />} />
               <Route path="sightseen-add" element={<Addsightseeing />} />
+              <Route path="sightseen-update/:id" element={<Addsightseeing />} />
               <Route path="viewsightseeing" element={<SightseeingView />} />
+              <Route path="sightseeing-ratelist/:id" element={<SightseeingRateList />} />
+              <Route path="add-sightseeingrate" element={<SightseeingRateAdd />} />
+              <Route path="hotel-list" element={<AllHotalPage />} />
+              <Route path="hotel-add" element={<HotelAdd />} />
+              <Route path="tags" element={<TagsPage />} />
+              <Route path="tags-add" element={<TagsAdd />} />
 
 
 

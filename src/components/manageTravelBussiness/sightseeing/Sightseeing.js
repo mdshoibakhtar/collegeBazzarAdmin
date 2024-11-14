@@ -3,15 +3,18 @@ import Breadcrumbs from "../../../common/breadcrumb/Breadcrumbs";
 import { Link } from "react-router-dom";
 import SightseeingFilter from "./sightseeingFilter/SightseeingFilter";
 import { useEffect, useState } from "react";
-import { GetTRCRM_sight_seeing_master } from "../../../api/login/Login";
+import { countryList, deleteRCRM_sight_seeing_master, GetTRCRM_sight_seeing_master } from "../../../api/login/Login";
 import { FaEye } from "react-icons/fa";
+import { toast, ToastContainer } from "react-toastify";
+import Loadar from "../../../common/loader/Loader";
+import { BsTicketPerforatedFill } from "react-icons/bs";
 
 
 
 const Sightseeing = () => {
     const breadCrumbsTitle = {
         id: "1",
-        title_1: "Travel CRM Reports",
+        title_1: "Manage Travel Business",
         title_2: 'All Sightseeings',
         path_2: ``
     };
@@ -35,6 +38,8 @@ const Sightseeing = () => {
         page: '',
         end_date: getCurrentDate(),
         start_date: getCurrentDate(),
+        country_id: '',
+        city_id: "",
 
         // sortType: '',
         // sortType: ''
@@ -50,14 +55,26 @@ const Sightseeing = () => {
         setFilterInitial(clone)
     }
 
+    const [countryData, setCountryData] = useState([])
+
+    const countrygetData = async () => {
+        try {
+            const res = await countryList()
+            setCountryData(res?.data);
+
+        } catch (error) {
+
+        }
+    }
+
     const getTransitionReport = async (input) => {
         // console.log('iojijip');
         setLoading(true)
         const clone = { ...filterInitial, count: count, page: input, user_id: window.localStorage.getItem('userIdToken') }
         try {
             const res = await GetTRCRM_sight_seeing_master(clone)
-            console.log(res?.data);
-            setTotalCount(res?.data?.total)
+            // console.log(res?.data);
+            setTotalCount(res?.totalCount)
             setData(res?.data)
 
         } catch (error) {
@@ -149,23 +166,34 @@ const Sightseeing = () => {
         }
     }
 
-    // const [currentDate, setCurrentDate] = useState('');
-    // console.log(currentDate);
 
-    // const getCurrentDate = () => {
-    //     const today = new Date();
-    //     const year = today.getFullYear();
-    //     const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
-    //     const day = String(today.getDate()).padStart(2, '0');
-    //     const formattedDate = `${year}-${month}-${day}`;
-    //     setCurrentDate(formattedDate);
-    //     const clone = { ...filterInitial, start_date: formattedDate, end_date: formattedDate }
-    //     setFilterInitial(clone)
-    // }
 
-    const confirm = () => {
+    const toastSuccessMessage = (message) => {
+        toast.success(`Delete Success`, {
+            position: "top-right",
+        });
+    };
+
+    const confirm = (id) => {
         console.log('setMental');
+        deleteData(id)
 
+    }
+
+    const deleteData = async (id) => {
+        try {
+            const res = await deleteRCRM_sight_seeing_master(id)
+            console.log(res);
+            if (res?.error == false) {
+                toastSuccessMessage()
+                getTransitionReport(0)
+            } else {
+                alert(res?.message)
+            }
+
+        } catch (error) {
+
+        }
     }
 
     useEffect(() => {
@@ -175,12 +203,14 @@ const Sightseeing = () => {
     useEffect(() => {
         allDataWalletReport()
         getTransitionReport(0)
+        countrygetData()
 
     }, [])
     return (
         <>
+            {loading && <Loadar />}
             <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
-            <SightseeingFilter />
+            <SightseeingFilter countryData={countryData} filterInitial={filterInitial} handleChange={handleChange} getTransitionReport={getTransitionReport} />
             <div>
                 <div className="row m-2">
                     <div className="col-xl-12">
@@ -219,7 +249,10 @@ const Sightseeing = () => {
                                                                 <Link to={`/viewsightseeing`} className="btn btn-primary shadow btn-xs sharp me-1">
                                                                     <FaEye />
                                                                 </Link>
-                                                                <Link to={`#`} className="btn btn-primary shadow btn-xs sharp me-1">
+                                                                <Link to={`/sightseeing-ratelist/${item?._id}}`} className="btn btn-primary shadow btn-xs sharp me-1">
+                                                                    <BsTicketPerforatedFill />
+                                                                </Link>
+                                                                <Link to={`/sightseen-update/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
                                                                     <i className="fa fa-pencil" />
                                                                 </Link>
                                                                 <Popconfirm
@@ -243,13 +276,13 @@ const Sightseeing = () => {
                                         </table>
 
                                         <div className="dataTables_info" role="status" aria-live="polite">
-                                            Total 0 entries
+                                            Total {totalCount} entries
                                         </div>
                                         <div className="dataTables_paginate paging_simple_numbers">
                                             <Pagination
                                                 defaultCurrent={1}
-                                            // onChange={onChangeVal}
-                                            // total={totalCount}
+                                                onChange={onChangeVal}
+                                                total={totalCount}
                                             />
                                         </div>
                                     </div>
@@ -259,6 +292,7 @@ const Sightseeing = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </>
     )
 }
