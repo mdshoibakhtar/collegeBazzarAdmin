@@ -939,6 +939,10 @@ import CustomerSaleReportPage from "./pages/travelCrmReports/customerSaleReport"
 import BillPaymentReminderReportPage from "./pages/travelCrmReports/billPaymentReminderReport";
 import TravelProfitLossPage from "./pages/travelCrmReports/profitLoss";
 import CancleReportPage from "./pages/travelCrmReports/cancleReport";
+import TaskType from "./components/topNavigationComp/masters/taskType/TaskType";
+import Tasktypeform from "./components/topNavigationComp/masters/taskType/tasktype/Tasktypeform";
+import TaskStage from "./components/topNavigationComp/masters/taskStatge/TaskStage";
+import TaskStageForm from "./components/topNavigationComp/masters/taskStatge/taskstageform/TaskStatgeForm";
 import B2bInvoicePage from "./pages/travelCrmReports/b2bInvoice";
 import B2cInvoicePage from "./pages/travelCrmReports/b2cInvoice";
 import SightseeingRateList from "./components/manageTravelBussiness/sightseeing/sightseeingRateList/SightseeingRateList";
@@ -2750,12 +2754,7 @@ function App() {
               <Route path="hotel-add" element={<HotelAdd />} />
               <Route path="tags" element={<TagsPage />} />
               <Route path="tags-add" element={<TagsAdd />} />
-
-
-
-
               {/* travocrm */}
-
               {/* ----------------Moin's Route start-------------------------------*/}
               <Route path="ele-sales-invoice" element={<SalesIvoiceListPage />} />
               <Route path="ele-sales-invoice/create" element={<AddNewSaleInvoicePage />} />
@@ -2879,12 +2878,18 @@ function App() {
                 {/* <Route path="design" element={<DesignSection />} /> */}
               </Route>
               {/* Shoib's Travel Crm Report Statics */}
-              <Route path="hotel_voucher" element={<HotelVoucherPage />} />
-              <Route path="transport_voucher" element={<TransportVoucher />} />
-              <Route path="flight_voucher" element={<FlightVoucher />} />
-              <Route path="all-customer-reports" element={<AllCustomer />} />
-              <Route path="invoice-reciept" element={<InvouceReciept />} />
-              <Route path="birthday-anniversary-reports" element={<BirthdatAnniversary />} />
+              <Route path="hotel-voucher-report" element={<HotelVoucherPage />} />
+              <Route path="transport-voucher-report" element={<TransportVoucher />} />
+              <Route path="flight-voucher-report" element={<FlightVoucher />} />
+              <Route path="customer-report" element={<AllCustomer />} />
+              <Route path="invoice-receipt" element={<InvouceReciept />} />
+              <Route path="birthday" element={<BirthdatAnniversary />} />
+              <Route path="task-type" element={<TaskType />} />
+              <Route path="create-task-type" element={<Tasktypeform />} />
+              <Route path="update-task-type/:id" element={<Tasktypeform />} />
+              <Route path="task-stage" element={<TaskStage />} />
+              <Route path="create-task-stage" element={<TaskStageForm />} />
+              <Route path="update-task-stage/:id" element={<TaskStageForm />} />
             </Route>
           </>
         )}

@@ -88,3 +88,9 @@
         padding: 6px 12px;
     }
 }
+.icon-group i {
+    font-size: 1.2em;
+    cursor: pointer;
+    color: #6c757d; /* Adjust icon color */
+}
+
