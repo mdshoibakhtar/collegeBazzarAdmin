@@ -3,28 +3,33 @@ import { Input, Button, DatePicker } from 'antd';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Breadcrumbs from '../../../../../common/breadcrumb/Breadcrumbs';
-import { getVoucherTypeData, postAddBookCode, updateAddBookCodeById } from '../../../../../api/login/Login';
-
+import {  cityAddCollageSelectList, countryList, getAccProjectBusinessCategoryByPage, getAllAssign, postAddBookCode, StateAddCollageSelectList, updateAddBookCodeById } from '../../../../../api/login/Login';
+import Loadar from '../../../../../common/loader/Loader'
 function ProjectAddForm() {
     const navigate = useNavigate();
     const params = useParams();
-    const [clientOptions, setClientOptions] = useState([]);
     const [formData, setFormData] = useState({
-        projectName: '',
+        project_name: '',
         client: '',
-        businessCategory: '',
-        projectAddress: '',
+        business_category: '',
+        prj_address_line1: '',
+        prj_address_line2: '',
+        country: '',
         state: '',
         city: '',
-        projectScope: '',
-        projectEstimate: '',
-        projectArea: '',
-        clientPOCName: '',
-        clientPOCNumber: '',
-        recceDueDate: null,
-        expectedStartDate: null,
-        executionDueDate: null,
-        projectUsers: [{ user: '', role: '' }]
+        zip_code: '',
+        currency: '',
+        tax_type: '',
+        time_zone: '',
+        prj_scope: '',
+        prj_estimate: '',
+        prj_area_in_sqft: '',
+        client_poc_name: '',
+        client_poc_nmber: '',
+        recce_due_date: null,
+        expected_start_date: null,
+        executation_due_date_assign_prj_user: null,
+        projectUsers: [{ assign_prj_user: '', user_role: '' }]
     });
 
     const handleChange = (e) => {
@@ -42,9 +47,10 @@ function ProjectAddForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        console.log(formData);
+        return
         // Basic validation
-        if (!formData.projectName || !formData.client || !formData.projectAddress || !formData.projectEstimate) {
+        if (!formData.project_name || !formData.client || !formData.prj_address_line1 || !formData.prj_estimate) {
             toast.error("All required fields must be filled");
             return;
         }
@@ -64,18 +70,63 @@ function ProjectAddForm() {
         }
     };
 
-    useEffect(() => {
-        const fetchOptions = async () => {
-            const voucherData = await getVoucherTypeData('', 0, 100, '', '');
-            const options = voucherData.data.voucher.map((item) => ({
-                value: item?.accLedgerId?.name,
-                label: item?.voucherType?.name,
-            }));
-            setClientOptions(options);
-        };
+    const [masterStore, setMasterStore] = useState({
+        business_category: [],
+        client: [],
+        country: [],
+        state: [],
+        city: [],
+        zip_code: [],
+        currency: [],
+        tax_type: [],
+        prj_scope: [],
+        role: [],
+        user: [],
+    })
 
-        fetchOptions();
+    const getAllMaster = async () => {
+        const businescat = await getAccProjectBusinessCategoryByPage(0, 100)
+        const clients = await getAllAssign(0, 100)
+        const countrys = await countryList(0, 100)
+
+        const obj = {
+            business_category: businescat.data,
+            client: clients.data,
+            country: countrys.data,
+            state: [],
+            city: [],
+            zip_code: [],
+            currency: [],
+            tax_type: [],
+            prj_scope: [],
+            role: [],
+            user: [],
+        }
+        setMasterStore(obj);
+    };
+
+    useEffect(() => {
+        getAllMaster();
     }, []);
+
+    const [loade , setLoad] = useState(false)
+    const handleChangeLocation = async (str, id) => {
+        setLoad(true)
+        if (str == 'country') {
+            const stat = await StateAddCollageSelectList(id)
+            const obj = {...masterStore , state:stat.data}
+            setMasterStore(obj);
+        }
+        if (str == 'state') {
+            const res = await cityAddCollageSelectList(id)
+            const obj = {...masterStore , city:res.data}
+            setMasterStore(obj);
+        }
+        handleDateChange(str,id)
+        setLoad(false)
+    }
+
+
 
     const handleAddUser = () => {
         setFormData({
@@ -105,6 +156,7 @@ function ProjectAddForm() {
         <>
             <Breadcrumbs breadCrumbsTitle={{ title_2: "Add Project" }} />
             <div style={{ margin: "14px" }}>
+                {loade && <Loadar/>}
                 <div className="card">
                     <div className="card-body p-0">
                         <div className="table-responsive active-projects style-1">
@@ -120,9 +172,9 @@ function ProjectAddForm() {
                                     <div className="col-xl-6 mb-3">
                                         <label>Project Name *</label>
                                         <Input
-                                            name="projectName"
+                                            name="project_name"
                                             onChange={handleChange}
-                                            value={formData.projectName}
+                                            value={formData.project_name}
                                             placeholder="Enter Project Name"
                                         />
                                     </div>
@@ -135,49 +187,121 @@ function ProjectAddForm() {
                                             className="form-control"
                                         >
                                             <option value="">Select Client</option>
-                                            <option value="Playnif">Playnif</option>
-                                            <option value="Expert Eyr">Expert Eyr</option>
+                                            {masterStore.client?.map((item) => {
+                                                return <option value={item._id}>{item.name}</option>
+                                            })}
+
                                         </select>
                                     </div>
                                     <div className="col-xl-6 mb-3">
                                         <label>Business Category</label>
+
+                                        <select
+                                            name="business_category"
+                                            onChange={(e) => handleSelectChange("business_category", e.target.value)}
+                                            value={formData.business_category}
+                                            className="form-control"
+                                        >
+                                            <option value="">Select business_category</option>
+                                            {masterStore.business_category?.map((item) => {
+                                                return <option value={item._id}>{item.name}</option>
+                                            })}
+
+                                        </select>
+                                    </div>
+                                    <div className="col-xl-6 mb-3">
+                                        <label>Project Address Line 1 *</label>
                                         <Input
-                                            name="businessCategory"
+                                            name="prj_address_line1"
                                             onChange={handleChange}
-                                            value={formData.businessCategory}
-                                            placeholder="Enter Business Category"
+                                            value={formData.prj_address_line1}
+                                            placeholder="Enter Project Address"
                                         />
                                     </div>
                                     <div className="col-xl-6 mb-3">
-                                        <label>Project Address *</label>
+                                        <label>Project Address Line 2 *</label>
                                         <Input
-                                            name="projectAddress"
+                                            name="prj_address_line2"
                                             onChange={handleChange}
-                                            value={formData.projectAddress}
+                                            value={formData.prj_address_line2}
                                             placeholder="Enter Project Address"
                                         />
+                                    </div>
+                                    <div className="col-xl-6 mb-3">
+                                        <label>Country *</label>
+                                        <select
+                                            name="country"
+                                            onChange={(e) => handleChangeLocation("country", e.target.value)}
+                                            value={formData.country}
+                                            className="form-control"
+                                        >
+                                            <option value="">Select country</option>
+                                            {masterStore.country?.map((item) => {
+                                                return <option value={item.id}>{item.name}</option>
+                                            })}
+
+                                        </select>
                                     </div>
                                     <div className="col-xl-6 mb-3">
                                         <label>State *</label>
                                         <select
                                             name="state"
-                                            onChange={(e) => handleSelectChange("state", e.target.value)}
+                                            onChange={(e) => handleChangeLocation("state", e.target.value)}
                                             value={formData.state}
                                             className="form-control"
                                         >
                                             <option value="">Select State</option>
-                                            <option value="Bihar">Bihar</option>
+                                            {masterStore.state?.map((item)=>{
+                                                return <option value={item._id}>{item.name}</option>
+                                            })}
+                                            
                                         </select>
                                     </div>
                                     <div className="col-xl-6 mb-3">
                                         <label>City *</label>
                                         <select
                                             name="city"
-                                            onChange={(e) => handleSelectChange("city", e.target.value)}
+                                            onChange={(e) => handleChangeLocation("city", e.target.value)}
                                             value={formData.city}
                                             className="form-control"
                                         >
                                             <option value="">Select City</option>
+                                            <option value="Gaya">Gaya</option>
+                                        </select>
+                                    </div>
+                                    <div className="col-xl-6 mb-3">
+                                        <label>Zip Code *</label>
+                                        <select
+                                            name="zip_code"
+                                            onChange={(e) => handleSelectChange("zip_code", e.target.value)}
+                                            value={formData.zip_code}
+                                            className="form-control"
+                                        >
+                                            <option value="">Select City</option>
+                                            <option value="Gaya">Gaya</option>
+                                        </select>
+                                    </div>
+                                    <div className="col-xl-6 mb-3">
+                                        <label>Currency *</label>
+                                        <select
+                                            name="currency"
+                                            onChange={(e) => handleSelectChange("currency", e.target.value)}
+                                            value={formData.currency}
+                                            className="form-control"
+                                        >
+                                            <option value="">Select currency</option>
+                                            <option value="Gaya">Gaya</option>
+                                        </select>
+                                    </div>
+                                    <div className="col-xl-6 mb-3">
+                                        <label>Tax Type *</label>
+                                        <select
+                                            name="tax_type"
+                                            onChange={(e) => handleSelectChange("tax_type", e.target.value)}
+                                            value={formData.tax_type}
+                                            className="form-control"
+                                        >
+                                            <option value="">Select tax_type</option>
                                             <option value="Gaya">Gaya</option>
                                         </select>
                                     </div>
@@ -187,9 +311,9 @@ function ProjectAddForm() {
                                     <div className="col-xl-6 mb-3">
                                         <label>Project Scope *</label>
                                         <select
-                                            name="projectScope"
-                                            onChange={(e) => handleSelectChange("projectScope", e.target.value)}
-                                            value={formData.projectScope}
+                                            name="prj_scope"
+                                            onChange={(e) => handleSelectChange("prj_scope", e.target.value)}
+                                            value={formData.prj_scope}
                                             className="form-control"
                                         >
                                             <option value="">Enter Project Scope</option>
@@ -201,9 +325,9 @@ function ProjectAddForm() {
                                         <label>Project Estimate (in INR) *</label>
                                         <Input
                                             type="number"
-                                            name="projectEstimate"
+                                            name="prj_estimate"
                                             onChange={handleChange}
-                                            value={formData.projectEstimate}
+                                            value={formData.prj_estimate}
                                             placeholder="Enter Project Estimate"
                                         />
                                     </div>
@@ -211,9 +335,9 @@ function ProjectAddForm() {
                                         <label>Project Area (in SQFT)</label>
                                         <Input
                                             type="number"
-                                            name="projectArea"
+                                            name="prj_area_in_sqft"
                                             onChange={handleChange}
-                                            value={formData.projectArea}
+                                            value={formData.prj_area_in_sqft}
                                             placeholder="Enter Project Area"
                                         />
                                     </div>
@@ -223,9 +347,9 @@ function ProjectAddForm() {
                                     <div className="col-xl-6 mb-3">
                                         <label>Client POC Name</label>
                                         <Input
-                                            name="clientPOCName"
+                                            name="client_poc_name"
                                             onChange={handleChange}
-                                            value={formData.clientPOCName}
+                                            value={formData.client_poc_name}
                                             placeholder="Enter Client POC Name"
                                         />
                                     </div>
@@ -233,9 +357,9 @@ function ProjectAddForm() {
                                         <label>Client POC Number</label>
                                         <Input
                                             type="tel"
-                                            name="clientPOCNumber"
+                                            name="client_poc_nmber"
                                             onChange={handleChange}
-                                            value={formData.clientPOCNumber}
+                                            value={formData.client_poc_nmber}
                                             placeholder="Enter Client POC Number"
                                         />
                                     </div>
@@ -243,29 +367,39 @@ function ProjectAddForm() {
                                     {/* Due Dates */}
                                     <h5 style={{ backgroundColor: "gray", margin: "10px", padding: "10px", color: "#ffff" }}>Due Dates</h5>
                                     <div className="col-xl-6 mb-3">
+                                        <label>Time Zone</label>
+                                        <input
+                                            name="time_zone"
+                                            type='time'
+                                            onChange={(date) => handleDateChange("time_zone", date)}
+                                            value={formData.time_zone}
+                                            className="form-control"
+                                        />
+                                    </div>
+                                    <div className="col-xl-6 mb-3">
                                         <label>Recce Due Date</label>
                                         <DatePicker
-                                            name="recceDueDate"
-                                            onChange={(date) => handleDateChange("recceDueDate", date)}
-                                            value={formData.recceDueDate}
+                                            name="recce_due_date"
+                                            onChange={(date) => handleDateChange("recce_due_date", date)}
+                                            value={formData.recce_due_date}
                                             className="form-control"
                                         />
                                     </div>
                                     <div className="col-xl-6 mb-3">
                                         <label>Expected Start Date</label>
                                         <DatePicker
-                                            name="expectedStartDate"
-                                            onChange={(date) => handleDateChange("expectedStartDate", date)}
-                                            value={formData.expectedStartDate}
+                                            name="expected_start_date"
+                                            onChange={(date) => handleDateChange("expected_start_date", date)}
+                                            value={formData.expected_start_date}
                                             className="form-control"
                                         />
                                     </div>
                                     <div className="col-xl-6 mb-3">
                                         <label>Execution Due Date</label>
                                         <DatePicker
-                                            name="executionDueDate"
-                                            onChange={(date) => handleDateChange("executionDueDate", date)}
-                                            value={formData.executionDueDate}
+                                            name="executation_due_date_assign_prj_user"
+                                            onChange={(date) => handleDateChange("executation_due_date_assign_prj_user", date)}
+                                            value={formData.executation_due_date_assign_prj_user}
                                             className="form-control"
                                         />
                                     </div>
@@ -278,11 +412,11 @@ function ProjectAddForm() {
                                             <div className='col-xl-5'>
                                                 <label>User</label>
                                                 <select
-                                                    name={`projectUsers[${index}].user`}
-                                                    value={user.user}
+                                                    name={`projectUsers[${index}].assign_prj_user`}
+                                                    value={user.assign_prj_user}
                                                     onChange={(e) => {
                                                         const newUsers = [...formData.projectUsers];
-                                                        newUsers[index].user = e.target.value;
+                                                        newUsers[index].assign_prj_user = e.target.value;
                                                         setFormData({ ...formData, projectUsers: newUsers });
                                                     }}
                                                     className="form-control"
@@ -298,11 +432,11 @@ function ProjectAddForm() {
                                             <div className='col-xl-5'>
                                                 <label>Role</label>
                                                 <select
-                                                    name={`projectUsers[${index}].role`}
-                                                    value={user.role}
+                                                    name={`projectUsers[${index}].user_role`}
+                                                    value={user.user_role}
                                                     onChange={(e) => {
                                                         const newUsers = [...formData.projectUsers];
-                                                        newUsers[index].role = e.target.value;
+                                                        newUsers[index].user_role = e.target.value;
                                                         setFormData({ ...formData, projectUsers: newUsers });
                                                     }}
                                                     className="form-control"
@@ -329,15 +463,15 @@ function ProjectAddForm() {
                                             )}
                                         </div>
                                     ))}
-                                     <button type="button" style={{ width: "80px" }} onClick={handleAddUser} className="btn btn-success">
+                                    <button type="button" style={{ width: "80px" }} onClick={handleAddUser} className="btn btn-success">
                                         Add User
                                     </button>
                                     <h5 style={{ backgroundColor: "gray", margin: "10px", padding: "10px", color: "#ffff" }}>Documents and attachments</h5>
                                     <div className="col-xl-6 mb-3">
-                                       <input className='form-control' type='file'/>
+                                        <input className='form-control' type='file' />
                                     </div>
 
-                                   
+
 
                                     {/* Submit Button */}
                                     <div className="col-12 mt-3">
