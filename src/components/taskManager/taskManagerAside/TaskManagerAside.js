@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 
 function TaskManagerAside() {
     const [activeKey, setActiveKey] = useState("Important");
-    const [staffData, setStaffData] = useState([]);
+    
     const [show, setShow] = useState(false);
     const [initialValues, setInitialValues] = useState(
         {
@@ -79,19 +79,9 @@ function TaskManagerAside() {
         { label: "My Comments", icon: "fa-solid fa-comments fa-bounce", route: "my-comments" }
     ];
 
-    const assignStaff = async () => {
-        try {
-            const response = await getAllAssign();
-            setStaffData(response?.data);
-        } catch (error) {
-            console.error("Error fetching assigned staff:", error);
-        }
-    };
+    
 
-    useEffect(() => {
-        assignStaff();
-    }, []);
-
+    
     const handleNavClick = (label) => {
         setActiveKey(label);
         setExpandedItems((prevExpanded) => ({
@@ -100,7 +90,6 @@ function TaskManagerAside() {
         }));
     };
     const handleChange = (e) => {
-
         const { name, value } = e.target;
         setInitialValues((prevValues) => ({ ...prevValues, [name]: value }));
     }
@@ -237,8 +226,8 @@ function TaskManagerAside() {
                 setShow={setShow}
                 show={show}
                 handleCreateTask={handleCreateTask}
-                staffData={staffData.length > 0 ? staffData : []}
                 initialValues={initialValues}
+                setInitialValues={setInitialValues}
                 handleChange={handleChange}
                 formSubmit={formSubmit}
             />

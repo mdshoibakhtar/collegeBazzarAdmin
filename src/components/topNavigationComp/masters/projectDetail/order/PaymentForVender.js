@@ -5,7 +5,7 @@ import { Space, Tabs } from 'antd';
 import AllRequest from './request/AllRequest';
 import PaymentStatus from './request/TopHead';
 import AddPaymentRequest from './AddPaymentRequest';
-function PaymentForClient({ totalCount, page, count, onChangeVal, confirm, cancel }) {
+function PaymentForVender({ totalCount, page, count, onChangeVal, confirm, cancel }) {
     const data = [
         { name: 'All Requests', compo: <AllRequest /> },
         { name: 'Pending Requests', compo: <AllRequest /> },
@@ -95,4 +95,4 @@ function PaymentForClient({ totalCount, page, count, onChangeVal, confirm, cance
     )
 }
 
-export default PaymentForClient
+export default PaymentForVender
