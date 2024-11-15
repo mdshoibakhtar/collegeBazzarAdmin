@@ -951,6 +951,10 @@ import AllHotalPage from "./pages/manageTravelBussiness/hotel";
 import HotelAdd from "./components/manageTravelBussiness/hotel/hotelAdd/HotelAdd";
 import TagsPage from "./pages/manageTravelBussiness/tags";
 import TagsAdd from "./components/manageTravelBussiness/tags/tagsAdd/TagsAdd";
+import TravelLeadPage from "./pages/travelLeads";
+import ViewLeads from "./components/travelLeads/travelLeads/LeadList/viewLeads/ViewLeads";
+import TravelVoucherPage from "./pages/travelLeads/travelVoucher";
+import AddHotelVoucher from "./components/travelLeads/Travelvouchers/voucherHotalList/addHotelVoucher/AddHotelVoucher";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -2754,6 +2758,11 @@ const [mnualData,setManualData] = useState()
               <Route path="hotel-add" element={<HotelAdd />} />
               <Route path="tags" element={<TagsPage />} />
               <Route path="tags-add" element={<TagsAdd />} />
+              <Route path="travel-leads" element={<TravelLeadPage />} />
+              <Route path="leads-details" element={<ViewLeads />} />
+              <Route path="travel-Vouchers-list" element={<TravelVoucherPage />} />
+              <Route path="travel-Vouchers-Add" element={<AddHotelVoucher />} />
+
               {/* travocrm */}
               {/* ----------------Moin's Route start-------------------------------*/}
               <Route path="ele-sales-invoice" element={<SalesIvoiceListPage />} />
