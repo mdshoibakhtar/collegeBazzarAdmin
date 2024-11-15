@@ -5050,15 +5050,18 @@ export const lagerIdGet = (value) => {
 export const getListTaskManager = (page, count) => {
   return axiosInstance.get(`${baseUrl}acc_project_recce_template_master/user?page=${page}&count=${count}`);
 };
+export const taskCreatedByGet = (page, count) => {
+  return axiosInstance.get(`${baseUrl}task/createdBy?page=${page}&count=${count}`);
+};
 
 export const addTaskType = (data) => {
   return axiosInstance.post(`${baseUrl}task/addType`, data);
 };
 
-/* export const deleteOrganisationSettingsMdlsttingTemp = (id) => {
-  return axiosInstance.delete(`${baseUrl}acc_project_recce_template_master/delete_type/${id}`);
+export const getCommentTaskById = (id) => {
+  return axiosInstance.get(`${baseUrl}task/${id}`);
 };
-export const updateOrganisationSettingsMdlsttingTemp = (id, value) => {
+/*export const updateOrganisationSettingsMdlsttingTemp = (id, value) => {
   return axiosInstance.put(`${baseUrl}acc_project_recce_template_master/update_type/${id}`, value);
 };
 export const getByOrganisationSettingsMdlsttingTempId = (id) => {
@@ -5083,7 +5086,7 @@ export const addTaskTypeMaster = (data) => {
   return axiosInstance.post(`${baseUrl}lead_task_type_id/addType`, data);
 };
 
- export const deleteTaskTypeMaster = (id) => {
+export const deleteTaskTypeMaster = (id) => {
   return axiosInstance.delete(`${baseUrl}lead_task_type_id/delete_type/${id}`);
 };
 export const updateTaskTypeMaster = (id, value) => {
@@ -5091,7 +5094,7 @@ export const updateTaskTypeMaster = (id, value) => {
 };
 export const getByTaskTypeMasterId = (id) => {
   return axiosInstance.get(`${baseUrl}lead_task_type_id/${id}`);
-}; 
+};
 // -----------master task Stage api
 
 export const getListTaskStageMaster = (page, count) => {
@@ -5102,7 +5105,7 @@ export const addTaskStageMaster = (data) => {
   return axiosInstance.post(`${baseUrl}lead_task_stage/addType`, data);
 };
 
- export const deleteTaskStageMaster = (id) => {
+export const deleteTaskStageMaster = (id) => {
   return axiosInstance.delete(`${baseUrl}lead_task_stage/delete_type/${id}`);
 };
 export const updateTaskStageMaster = (id, value) => {
@@ -5110,7 +5113,7 @@ export const updateTaskStageMaster = (id, value) => {
 };
 export const getByTaskStageMasterId = (id) => {
   return axiosInstance.get(`${baseUrl}lead_task_stage/${id}`);
-}; 
+};
 export const deleteRCRM_sight_seeing_master = (id) => {
   return axiosInstance.delete(`${baseUrl}TRCRM_sight_seeing_master/delete_type/${id}`);
 };
@@ -5119,4 +5122,14 @@ export const getByIdRCRM_sight_seeing_master = (id) => {
 };
 export const updateTRCRM_sight_seeing_master = (id, value) => {
   return axiosInstance.put(`${baseUrl}TRCRM_sight_seeing_master/update_type/${id}`, value);
+};
+
+
+// Create task api for select 
+
+export const getListTaskTypeSelect = (page, count) => {
+  return axiosInstance.get(`${baseUrl}lead_task_type_id/user`);
+};
+export const getListTaskStageSelect = (page, count) => {
+  return axiosInstance.get(`${baseUrl}lead_task_stage/user`);
 };

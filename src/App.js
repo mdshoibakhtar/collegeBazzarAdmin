@@ -1015,7 +1015,7 @@ function App() {
   }
   console.log(window.localStorage.getItem('dashRout') == null);
 
-
+const [mnualData,setManualData] = useState()
 
   return (
     <>
@@ -2873,8 +2873,8 @@ function App() {
                 <Route path="" element={<Reccetemplet />} />
                 <Route path="design" element={<DesignSection />} />
               </Route>
-              <Route path="my-task/task-manager" element={<Taskmanager />} >
-                <Route path="" element={<TaskComent />} />
+              <Route path="my-task/task-manager" element={<Taskmanager setManualData={setManualData}/>} >
+                <Route path="" element={<TaskComent mnualData={mnualData} />} />
                 {/* <Route path="design" element={<DesignSection />} /> */}
               </Route>
               {/* Shoib's Travel Crm Report Statics */}

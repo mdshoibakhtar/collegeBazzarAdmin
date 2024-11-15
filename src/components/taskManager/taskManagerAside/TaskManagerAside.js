@@ -3,40 +3,47 @@ import { Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Dropdown, Button, ButtonGroup } from "react-bootstrap";
 import CreateTask from '../taskComment/CreateTask';
-import { addTaskType, getAllAssign } from '../../../api/login/Login';
+import { addTaskType, getAllAssign, taskCreatedByGet } from '../../../api/login/Login';
 import { toast } from 'react-toastify';
+// import { getStateData } from '../taskComment/TaskComent';
+export const getStateData = async (data, taskData) => {
+    // taskData(data);
+};
 
-function TaskManagerAside() {
+function TaskManagerAside({ setManualData }) {
     const [activeKey, setActiveKey] = useState("Important");
-    
+    const handleClose = () => setShow(false);
     const [show, setShow] = useState(false);
-    const [initialValues, setInitialValues] = useState(
-        {
-            task_name: "",
-            public: false,
-            billable: false,
-            attach_files: "",
-            subject: "",
-            hourly_rate: "",
-            start_date_time: "",
-            complition_date_time: "",
-            end_date_time: "",
-            expect_due_date_time: "",
-            priority: { type: "", ref: 'priority' },
-            repeat_every: { type: String, enum: ["days", "week", "month", "year"] },
-            repeated_no: null,
-            assignees: [{ type: [], ref: 'staff' }],
-            followers: { type: "", ref: 'staff' },
-            tags: [""],
-            task_description: "",
-            total_cycle: null,
-            user_id: { type: "", ref: "user" },
-        }
-    );
+    const [count, setCount] = useState(100);
+    const [page, setPage] = useState(0);
+
+    const [initialValues, setInitialValues] = useState({
+        task_name: "",
+        task_type_id: { type: "", ref: "taskId" },
+        task_stage_id: { type: "", ref: "taskStageMaster" },
+        public: false,
+        billable: false,
+        attach_files: "",
+        subject: "",
+        hourly_rate: "",
+        start_date_time: "",
+        complition_date_time: "",
+        end_date_time: "",
+        expect_due_date_time: "",
+        priority: { type: "", ref: "priority" },
+        repeat_every: { type: "", enum: ["days", "week", "month", "year"] },
+        repeated_no: null,
+        assignees: [],
+        followers: { type: "", ref: "staff" },
+        tags: [], // Initialize as an empty array
+        task_description: "",
+        total_cycle: null,
+    });
+
     const [expandedItems, setExpandedItems] = useState({});
 
     const handleCreateTask = () => setShow(!show);
-    const toastSuccessMessage = (message) => toast .success(message, { position: "top-right" });
+    const toastSuccessMessage = (message) => toast.success(message, { position: "top-right" });
     const toastErrorMessage = (message) => toast.error(message, { position: "top-right" });
     const linkStyle = {
         fontSize: "16px",
@@ -55,12 +62,14 @@ function TaskManagerAside() {
         { label: "Reminders", icon: "fa-sharp fa-regular fa-clock", route: "design" },
         { label: "Mentions", icon: "fa-sharp fa-solid fa-at", route: "mentions" },
         {
-            label: "Task For me", icon: "fa-sharp fa-solid fa-clipboard-list", route: "task-for-me", subItems: [
+            id: "taskforme1234", label: "Task For me", icon: "fa-sharp fa-solid fa-clipboard-list", route: "task-for-me",
+            subItems: [
                 { label: "Active", count: 1 }, { label: "Archived", count: 0 }
             ]
         },
         {
-            label: "Task By me", icon: "fa-sharp fa-solid fa-clipboard", route: "task-by-me", subItems: [
+            id: "taskbyme678", label: "Task By me", icon: "fa-sharp fa-solid fa-clipboard", route: "task-by-me",
+            subItems: [
                 { label: "Active", count: 1 }, { label: "Archived", count: 0 }
             ]
         },
@@ -79,16 +88,29 @@ function TaskManagerAside() {
         { label: "My Comments", icon: "fa-solid fa-comments fa-bounce", route: "my-comments" }
     ];
 
-    
 
-    
-    const handleNavClick = (label) => {
+
+
+    const handleNavClick = async (label, id) => {
         setActiveKey(label);
         setExpandedItems((prevExpanded) => ({
             ...prevExpanded,
             [label]: !prevExpanded[label] // Toggle the expanded state for the clicked label
         }));
+        if (id) {
+            if (id === "taskbyme678") {
+                try {
+                    const response = await taskCreatedByGet(page, count)
+                    setManualData(response?.data)
+                } catch (error) {
+
+                }
+            } else {
+
+            }
+        }
     };
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setInitialValues((prevValues) => ({ ...prevValues, [name]: value }));
@@ -101,10 +123,13 @@ function TaskManagerAside() {
             if (!initialValues._id) {
                 const res = await addTaskType(initialValues);
                 if (res?.statusCode === "200") {
-                    toastSuccessMessage("Template Added Successfully");
-                    // Reset form values, keeping module_id if needed
+                    toastSuccessMessage("Task Create Successfully");
+                    handleClose(!show)
+                    handleNavClick("Task For me", "taskforme1234")
                     setInitialValues({
                         task_name: "",
+                        task_type_id: { type: "", ref: 'taskId' },
+                        task_stage_id: { type: "", ref: 'taskStageMaster' },
                         public: false,
                         billable: false,
                         attach_files: "",
@@ -115,14 +140,14 @@ function TaskManagerAside() {
                         end_date_time: "",
                         expect_due_date_time: "",
                         priority: { type: "", ref: 'priority' },
-                        repeat_every: { type: String, enum: ["days", "week", "month", "year"] },
+                        repeat_every: { type: String, enum: [] },
                         repeated_no: null,
                         assignees: [{ type: [], ref: 'staff' }],
                         followers: { type: "", ref: 'staff' },
                         tags: [""],
                         task_description: "",
                         total_cycle: null,
-                        user_id: { type: "", ref: "user" },
+
                     });
                     // getListData(page);
                 } else {
@@ -182,7 +207,7 @@ function TaskManagerAside() {
                                         to={link.subItems ? "" : link.route}
                                         style={activeKey === link.label ? activeLinkStyle : linkStyle}
                                         className="my-2 border"
-                                        onClick={() => handleNavClick(link.label)}
+                                        onClick={() => handleNavClick(link?.label, link?.id)}
                                     >
                                         <span>
                                             <i className={link.icon}></i>
@@ -225,6 +250,7 @@ function TaskManagerAside() {
                 placement="end"
                 setShow={setShow}
                 show={show}
+                handleClose={handleClose}
                 handleCreateTask={handleCreateTask}
                 initialValues={initialValues}
                 setInitialValues={setInitialValues}
