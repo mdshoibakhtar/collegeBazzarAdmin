@@ -5120,3 +5120,230 @@ export const getByIdRCRM_sight_seeing_master = (id) => {
 export const updateTRCRM_sight_seeing_master = (id, value) => {
   return axiosInstance.put(`${baseUrl}TRCRM_sight_seeing_master/update_type/${id}`, value);
 };
+
+
+
+// GET acc_project_module entries with pagination
+export const getAccProjectModuleByPage = (page, count) => {
+  return axiosInstance.get(`/acc_project_module/user?page=${page}&count=${count}`);
+};
+
+// GET a specific acc_project_module entry by ID
+export const getAccProjectModuleById = (id) => {
+  return axiosInstance.get(`/acc_project_module/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new acc_project_module entry
+export const postAccProjectModule = (data) => {
+  return axiosInstance.post(`/acc_project_module/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing acc_project_module entry by ID
+export const updateAccProjectModuleById = (id, data) => {
+  return axiosInstance.put(`/acc_project_module/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// DELETE an acc_project_module entry by ID
+export const deleteAccProjectModuleById = (id) => {
+  return axiosInstance.delete(`/acc_project_module/delete_type/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+// GET acc_project_module_template entries with pagination
+export const getAccProjectModuleTemplateByPage = (page, count) => {
+  return axiosInstance.get(`/acc_project_module_template/user?page=${page}&count=${count}`);
+};
+
+// GET a specific acc_project_module_template entry by ID
+export const getAccProjectModuleTemplateById = (id) => {
+  return axiosInstance.get(`/acc_project_module_template/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new acc_project_module_template entry
+export const postAccProjectModuleTemplate = (data) => {
+  return axiosInstance.post(`/acc_project_module_template/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing acc_project_module_template entry by ID
+export const updateAccProjectModuleTemplateById = (id, data) => {
+  return axiosInstance.put(`/acc_project_module_template/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// DELETE an acc_project_module_template entry by ID
+export const deleteAccProjectModuleTemplateById = (id) => {
+  return axiosInstance.delete(`/acc_project_module_template/delete_type/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+
+
+
+// GET acc_project_business_category entries with pagination
+export const getAccProjectBusinessCategoryByPage = (page, count) => {
+  return axiosInstance.get(`/acc_project_business_category/user?page=${page}&count=${count}`);
+};
+
+// GET a specific acc_project_business_category entry by ID
+export const getAccProjectBusinessCategoryById = (id) => {
+  return axiosInstance.get(`/acc_project_business_category/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new acc_project_business_category entry
+export const postAccProjectBusinessCategory = (data) => {
+  return axiosInstance.post(`/acc_project_business_category/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing acc_project_business_category entry by ID
+export const updateAccProjectBusinessCategoryById = (id, data) => {
+  return axiosInstance.put(`/acc_project_business_category/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// DELETE an acc_project_business_category entry by ID
+export const deleteAccProjectBusinessCategoryById = (id) => {
+  return axiosInstance.delete(`/acc_project_business_category/delete_type/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+
+
+// export const getZipCodeById = (id) => {
+//   return axiosInstance.get(`/pin/pincode/${id}`, {
+//     headers: {
+//       "Content-Type": "application/json; charset=UTF-8",
+//       Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+//     },
+//   });
+// };
+
+export const getTaxtype = (id) => {
+  return axiosInstance.get(`/acc_tax_type_master/admin`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getListprojectScope = (id) => {
+  return axiosInstance.get(`/lead_project_scope/admin`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const roleListAdmin = (id) => {
+  return axiosInstance.get(`/user_type`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+// GET acc_add_project entries with pagination
+export const getAccAddProjectByPage = (page, count) => {
+  return axiosInstance.get(`/acc_add_project/user?page=${page}&count=${count}`);
+};
+
+// GET a specific acc_add_project entry by ID
+export const getAccAddProjectById = (id) => {
+  return axiosInstance.get(`/acc_add_project/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new acc_add_project entry
+export const postAccAddProject = (data) => {
+  return axiosInstance.post(`/acc_add_project/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing acc_add_project entry by ID
+export const updateAccAddProjectById = (id, data) => {
+  return axiosInstance.put(`/acc_add_project/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// DELETE an acc_add_project entry by ID
+export const deleteAccAddProjectById = (id) => {
+  return axiosInstance.delete(`/acc_add_project/delete_type/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};

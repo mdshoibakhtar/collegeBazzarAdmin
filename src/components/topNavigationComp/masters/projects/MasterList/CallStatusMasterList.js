@@ -3,68 +3,20 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
-function CallStatusMasterList({ data = [], totalCount, page, count, onChangeVal, confirm, cancel }) {
+function CallStatusMasterList({ data, totalCount, page, count, onChangeVal, confirm, cancel }) {
     const [activeTab, setActiveTab] = useState("all");
 
-    // Fallback data if none is provided
-    const mockData = [
-        {
-            _id: '1',
-            job_id: 'JOB001',
-            project_name: 'Abaris Office Interior Work',
-            client_name: 'Client A',
-            business_category: 'Category 1',
-            state: 'State 1',
-            city: 'City A',
-            project_stage: 'Planning',
-            project_estimate: '$10000',
-            recce_due_date: '2024-10-01',
-            created_on: '2024-09-15',
-            execution_due_date: '2024-12-01',
-            actual_completion_date: '2024-11-10',
-            created_by: 'Admin',
-            recce_completion_date: '2024-09-30',
-        },
-        {
-            _id: '1',
-            job_id: 'JOB001',
-            project_name: 'Abaris Office Interior Work',
-            client_name: 'Client A',
-            business_category: 'Category 1',
-            state: 'State 1',
-            city: 'City A',
-            project_stage: 'Planning',
-            project_estimate: '$10000',
-            recce_due_date: '2024-10-01',
-            created_on: '2024-09-15',
-            execution_due_date: '2024-12-01',
-            actual_completion_date: '2024-11-10',
-            created_by: 'Admin',
-            recce_completion_date: '2024-09-30',
-        },
-        // Additional mock data...
-    ];
+    const changeStatus = (key) => {
+        // Update the active tab
+        setActiveTab(key);
 
-    const tableData = data.length ? data : mockData;
+        // Add logic to handle tab-specific actions here
+        console.log(`Selected Tab: ${key}`);
 
-    // Filter data based on active tab
-    const filteredData = tableData.filter((item) => {
-        if (activeTab === "all") return true;
-        if (activeTab === "created") return item.project_stage === "Project Created";
-        if (activeTab === "reccePending") return item.project_stage === "Recce Pending";
-        if (activeTab === "designPending") return item.project_stage === "Design Pending";
-        if (activeTab === "designFreeze") return item.project_stage === "Design Freeze";
-        if (activeTab === "scopeApprovalAwaited") return item.project_stage === "Scope Approval Awaited";
-        if (activeTab === "partialScopeApproved") return item.project_stage === "Partial Scope Approved";
-        if (activeTab === "fullScopeApproved") return item.project_stage === "Full Scope Approved";
-        if (activeTab === "executionInProgress") return item.project_stage === "Execution In Progress";
-        if (activeTab === "executionCompleted") return item.project_stage === "Execution Completed";
-        if (activeTab === "hold") return item.project_stage === "Hold";
-        if (activeTab === "lost") return item.project_stage === "Lost";
-        if (activeTab === "rectification") return item.project_stage === "Rectification";
-        if (activeTab === "archived") return item.project_stage === "Archived";
-        return true;
-    });
+        // Example: Fetch new data based on tab
+        // You can call a function or API to update the data based on the active tab
+        // fetchDataForTab(key);
+    };
 
     return (
         <>
@@ -74,8 +26,8 @@ function CallStatusMasterList({ data = [], totalCount, page, count, onChangeVal,
                         <div className="card">
                             <div className="card-body p-0">
                                 <Tabs
-                                    defaultActiveKey="all"
-                                    onChange={setActiveTab}
+                                    activeKey={activeTab}
+                                    onChange={changeStatus}
                                     style={{ marginBottom: 16 }}
                                 >
                                     <Tabs.TabPane tab="All Projects" key="all" />
@@ -95,7 +47,7 @@ function CallStatusMasterList({ data = [], totalCount, page, count, onChangeVal,
                                 </Tabs>
                                 <div className="table-responsive active-projects style-1" style={{ overflowX: 'auto' }}>
                                     <div className="tbl-caption">
-                                        <h4 className="heading mb-0" style={{padding:"10px"}}>My Projects List</h4>
+                                        <h4 className="heading mb-0" style={{ padding: "10px" }}>Projects List</h4>
                                         <div>
                                             <Link
                                                 className="btn btn-primary btn-sm"
@@ -133,35 +85,35 @@ function CallStatusMasterList({ data = [], totalCount, page, count, onChangeVal,
                                                     <th>Business Category</th>
                                                     <th>State</th>
                                                     <th>City</th>
-                                                    <th>Project Stage</th>
+                                                    <th>Project Scop</th>
                                                     <th>Project Estimate</th>
                                                     <th>Recce Due Date</th>
                                                     <th>Created On</th>
                                                     <th>Execution Due Date</th>
                                                     <th>Actual Completion Date</th>
                                                     <th>Created By</th>
-                                                    <th>Recce Completion Date</th>
+                                                    <th>Recce Due Date</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {filteredData.map((item, i) => (
+                                                {data?.map((item, i) => (
                                                     <tr key={item._id} role="row">
                                                         <td>{(i + 1) + (page * count)}</td>
                                                         <td>{item.job_id}</td>
                                                         <td><b><Link to={`/projects/${item._id}`}>{item.project_name}</Link></b></td>
-                                                        <td>{item.client_name}</td>
+                                                        <td>{item.client.name}</td>
                                                         <td>{item.business_category}</td>
-                                                        <td>{item.state}</td>
-                                                        <td>{item.city}</td>
-                                                        <td>{item.project_stage}</td>
-                                                        <td>{item.project_estimate}</td>
+                                                        <td>{item.state.name}</td>
+                                                        <td>{item.city.name}</td>
+                                                        <td>{item.prj_scope}</td>
+                                                        <td>{item.prj_estimate}</td>
                                                         <td>{item.recce_due_date}</td>
-                                                        <td>{item.created_on}</td>
-                                                        <td>{item.execution_due_date}</td>
+                                                        <td>{item.createdAt}</td>
+                                                        <td>{item.executation_due_date_assign_prj_user}</td>
                                                         <td>{item.actual_completion_date}</td>
-                                                        <td>{item.created_by}</td>
-                                                        <td>{item.recce_completion_date}</td>
+                                                        <td>{item.createdBy?.name}</td>
+                                                        <td>{item.recce_due_date}</td>
                                                         <td>
                                                             <div className="d-flex">
                                                                 <Link
@@ -172,7 +124,7 @@ function CallStatusMasterList({ data = [], totalCount, page, count, onChangeVal,
                                                                     Archive
                                                                 </Link>
                                                                 <Link
-                                                                    to={`#`}
+                                                                    to={`/add-projects/${item._id}`}
                                                                     className="btn btn-primary shadow btn-xs sharp me-1"
                                                                 >
                                                                     <i className="fa fa-pencil" />
