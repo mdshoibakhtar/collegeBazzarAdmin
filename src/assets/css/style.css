@@ -57059,10 +57059,12 @@ h3 {
 .menu-setdyc a:hover {
   background-color: #f1f1f1;
 }
-.cusnav{
+
+.cusnav {
   background-color: #f1f1f1;
 }
-.redCol{
+
+.redCol {
   height: 100px;
   background-color: #feeeee;
   border: 1px solid #f9bcbe;
@@ -57076,5 +57078,43 @@ h3 {
   justify-content: space-between;
 }
 
+.side-buttons {
+  display: block;
+  rotate: 90deg;
+}
 
+.tbl-captionn-lead .row {
+  position: relative;
+}
 
+.inneline {
+  border: 1px dotted black;
+  padding: 10px;
+}
+
+.Connectingflight {
+  width: 300px;
+}
+
+.addmoreFlight {
+  width: 300px;
+}
+
+/* 
+@keyframes floatUpDown {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.side-buttons .btn {
+  animation: floatUpDown 2s ease-in-out infinite;
+} */

@@ -939,6 +939,10 @@ import CustomerSaleReportPage from "./pages/travelCrmReports/customerSaleReport"
 import BillPaymentReminderReportPage from "./pages/travelCrmReports/billPaymentReminderReport";
 import TravelProfitLossPage from "./pages/travelCrmReports/profitLoss";
 import CancleReportPage from "./pages/travelCrmReports/cancleReport";
+import TaskType from "./components/topNavigationComp/masters/taskType/TaskType";
+import Tasktypeform from "./components/topNavigationComp/masters/taskType/tasktype/Tasktypeform";
+import TaskStage from "./components/topNavigationComp/masters/taskStatge/TaskStage";
+import TaskStageForm from "./components/topNavigationComp/masters/taskStatge/taskstageform/TaskStatgeForm";
 import B2bInvoicePage from "./pages/travelCrmReports/b2bInvoice";
 import B2cInvoicePage from "./pages/travelCrmReports/b2cInvoice";
 import SightseeingRateList from "./components/manageTravelBussiness/sightseeing/sightseeingRateList/SightseeingRateList";
@@ -953,6 +957,13 @@ import ProjectModualTemplate from "./components/topNavigationComp/masters/projec
 import ProjectModualTempForm from "./components/topNavigationComp/masters/project-module-template/MasterForm/ProjectModualTempForm";
 import BussnessCateg from "./components/topNavigationComp/masters/bussnescateg/BussnessCateg";
 import BcategForm from "./components/topNavigationComp/masters/bussnescateg/MasterForm/BcategForm";
+import TravelLeadPage from "./pages/travelLeads";
+import ViewLeads from "./components/travelLeads/travelLeads/LeadList/viewLeads/ViewLeads";
+import TravelVoucherPage from "./pages/travelLeads/travelVoucher";
+import AddHotelVoucher from "./components/travelLeads/Travelvouchers/voucherHotalList/addHotelVoucher/AddHotelVoucher";
+import AddServiceVoucher from "./components/travelLeads/Travelvouchers/voucherServiceList/addServiceVoucher/AddServiceVoucher";
+import AddFlightVoucher from "./components/travelLeads/Travelvouchers/voucherFlightList/addFlightVoucher/AddFlightVoucher";
+import TravelInvoice from "./components/travelLeads/travelInvoice/TravelInvoice";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -2775,12 +2786,15 @@ function App() {
               <Route path="hotel-add" element={<HotelAdd />} />
               <Route path="tags" element={<TagsPage />} />
               <Route path="tags-add" element={<TagsAdd />} />
-
-
-
+              <Route path="travel-leads" element={<TravelLeadPage />} />
+              <Route path="leads-details" element={<ViewLeads />} />
+              <Route path="travel-Vouchers-list" element={<TravelVoucherPage />} />
+              <Route path="travel-Vouchers-Add" element={<AddHotelVoucher />} />
+              <Route path="travel-service-Add" element={<AddServiceVoucher />} />
+              <Route path="travel-flight-Add" element={<AddFlightVoucher />} />
+              <Route path="travel-invoice-list" element={<TravelInvoice />} />
 
               {/* travocrm */}
-
               {/* ----------------Moin's Route start-------------------------------*/}
               <Route path="ele-sales-invoice" element={<SalesIvoiceListPage />} />
               <Route path="ele-sales-invoice/create" element={<AddNewSaleInvoicePage />} />
@@ -2904,12 +2918,18 @@ function App() {
                 {/* <Route path="design" element={<DesignSection />} /> */}
               </Route>
               {/* Shoib's Travel Crm Report Statics */}
-              <Route path="hotel_voucher" element={<HotelVoucherPage />} />
-              <Route path="transport_voucher" element={<TransportVoucher />} />
-              <Route path="flight_voucher" element={<FlightVoucher />} />
-              <Route path="all-customer-reports" element={<AllCustomer />} />
-              <Route path="invoice-reciept" element={<InvouceReciept />} />
-              <Route path="birthday-anniversary-reports" element={<BirthdatAnniversary />} />
+              <Route path="hotel-voucher-report" element={<HotelVoucherPage />} />
+              <Route path="transport-voucher-report" element={<TransportVoucher />} />
+              <Route path="flight-voucher-report" element={<FlightVoucher />} />
+              <Route path="customer-report" element={<AllCustomer />} />
+              <Route path="invoice-receipt" element={<InvouceReciept />} />
+              <Route path="birthday" element={<BirthdatAnniversary />} />
+              <Route path="task-type" element={<TaskType />} />
+              <Route path="create-task-type" element={<Tasktypeform />} />
+              <Route path="update-task-type/:id" element={<Tasktypeform />} />
+              <Route path="task-stage" element={<TaskStage />} />
+              <Route path="create-task-stage" element={<TaskStageForm />} />
+              <Route path="update-task-stage/:id" element={<TaskStageForm />} />
             </Route>
           </>
         )}

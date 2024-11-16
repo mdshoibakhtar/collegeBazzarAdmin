@@ -1,14 +1,108 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Offcanvas } from 'react-bootstrap';
 import Select from 'react-select';
+import { dmtDisputePriority, getAllAssign } from '../../../api/login/Login';
 import './createTask.css';
 
-function CreateTask({ show, setShow, handleCreateTask, staffdata, initialValues, handleChange, formSubmit }) {
+function CreateTask({ show, setShow, setInitialValues, initialValues, handleChange, formSubmit }) {
     const handleClose = () => setShow(false);
+    const [priorityState, setPriorityState] = useState([]);
+    const [staffData, setStaffData] = useState([]);
+    const [tags, setTags] = useState([]);
 
-    const handleMultiSelectChange = (name, selectedOptions) => {
-        // handle multi-select change
+    const getPriorityData = async () => {
+        try {
+            const response = await dmtDisputePriority();
+            setPriorityState(response?.data || []);
+        } catch (error) {
+            alert(`Failed to fetch priority data: ${error.message}`);
+            console.error("Priority data fetch error:", error);
+        }
     };
+
+    const getStaffData = async () => {
+        try {
+            const response = await getAllAssign();
+            setStaffData(response?.data || []);
+        } catch (error) {
+            console.error("Error fetching assigned staff:", error);
+        }
+    };
+
+    useEffect(() => {
+        getPriorityData();
+        getStaffData();
+    }, []);
+
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter' || e.key === ',') {
+            e.preventDefault();
+            if (initialValues?.tags?.trim()) {
+                addTag(initialValues.tags.trim());
+                setInitialValues((prev) => ({ ...prev, tags: '' })); 
+            }
+        }
+    };
+    
+    const addTag = (tag) => {
+        if (tag && !tags.includes(tag)) {
+            const updatedTags = [...tags, tag];
+            setTags(updatedTags);
+            handleChange({ target: { name: 'tags', value: updatedTags } });
+        }
+    };
+
+    const removeTag = (indexToRemove) => {
+        const updatedTags = tags.filter((_, index) => index !== indexToRemove);
+        setTags(updatedTags);
+        handleChange({ target: { name: 'tags', value: updatedTags } });
+    };
+    const handleFileUpload = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            console.log("File uploaded:", file.name);
+        }
+    };
+    const handleMultiSelectChange = (name, selectedOptions) => {
+        handleChange({
+            target: {
+                name: name,
+                value: selectedOptions,
+            },
+        });
+    };
+    const styles = {
+        tagInputContainer: {
+            display: 'flex',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            border: '1px solid #ddd',
+            padding: '5px',
+            borderRadius: '5px',
+            gap: '5px',
+        },
+        tag: {
+            display: 'flex',
+            alignItems: 'center',
+            background: '#e0e0e0',
+            borderRadius: '3px',
+            padding: '3px 8px',
+            fontSize: '0.9em',
+        },
+        removeTag: {
+            marginLeft: '5px',
+            cursor: 'pointer',
+            color: '#555',
+        },
+        input: {
+            border: 'none',
+            outline: 'none',
+            flex: '1',
+            fontSize: '0.9em',
+            minWidth: '120px',
+        },
+    };
+
 
     return (
         <>
@@ -83,21 +177,33 @@ function CreateTask({ show, setShow, handleCreateTask, staffdata, initialValues,
                                 <select id="priority" className="w-100" name="priority"
                                     value={initialValues?.priority || ''} onChange={handleChange}>
                                     <option value="">Select priority</option>
-                                    <option value="John Doe">John Doe</option>
-                                    <option value="Jane Smith">Jane Smith</option>
-                                    <option value="Alice Johnson">Alice Johnson</option>
+                                    {priorityState?.map((item, i) =>
+                                        <option value={item?._id}>{item?.priority}</option>
+                                    )}
                                 </select>
                             </div>
 
                             <div className="form-group col-xl-6">
                                 <label htmlFor="tags">Tags</label>
-                                <Select
-                                    isMulti
-                                    onChange={(selected) => handleMultiSelectChange("tags", selected)}
-                                    value={initialValues?.tags || []}
-                                    options={[]}
-                                    placeholder="Select Tags"
-                                />
+                                <div style={styles.tagInputContainer}>
+                                    {tags.map((tag, index) => (
+                                        <div key={index} style={styles.tag}>
+                                            {tag}
+                                            <span style={styles.removeTag} onClick={() => removeTag(index)}>
+                                                &times;
+                                            </span>
+                                        </div>
+                                    ))}
+                                    <input
+                                        type="text"
+                                        name="tags"
+                                        value={initialValues?.tags}
+                                        onChange={handleChange}
+                                        onKeyDown={handleKeyPress}
+                                        placeholder="Type a tag and press Enter"
+                                        style={styles.input}
+                                    />
+                                </div>
                             </div>
 
                             <div className="form-group col-xl-6">
@@ -106,13 +212,13 @@ function CreateTask({ show, setShow, handleCreateTask, staffdata, initialValues,
                                     value={initialValues?.total_cycle || ''} onChange={handleChange} />
                             </div>
 
-                            {/* Assignee Selection */}
                             <div className="form-group col-xl-6">
                                 <label htmlFor="assignee">Assignee</label>
                                 <Select
-                                    options={staffdata?.map(staff => ({ label: staff.name, value: staff._id }))}
+                                    name="assignees"
+                                    options={staffData.map(staff => ({ label: staff.name, value: staff._id }))}
                                     placeholder="Select Assignee"
-                                    value={initialValues?.assignees || []}
+                                    value={initialValues?.assignees?.ref}
                                     onChange={(selected) => handleMultiSelectChange("assignees", selected)}
                                     isMulti
                                 />
@@ -120,13 +226,21 @@ function CreateTask({ show, setShow, handleCreateTask, staffdata, initialValues,
 
                             <div className="form-group col-xl-6">
                                 <label htmlFor="followers">Followers</label>
-                                <Select
-                                    options={staffdata?.map(staff => ({ label: staff.name, value: staff._id }))}
+                                {/* <Select
+                                    name="followers"
+                                    options={staffData.map(staff => ({ label: staff.name, value: staff._id }))}
                                     placeholder="Select Followers"
-                                    value={initialValues?.followers || []}
+                                    value={initialValues?.followers?.ref}
                                     onChange={(selected) => handleMultiSelectChange("followers", selected)}
                                     isMulti
-                                />
+                                /> */}
+                                <select id="priority" className="w-100" name="priority"
+                                    value={initialValues?.priority || ''} onChange={handleChange}>
+                                    <option value="">Select Follower</option>
+                                    {staffData.map((item, i) =>
+                                        <option value={item?._id}>{item?.name}</option>
+                                    )}
+                                </select>
                             </div>
 
                             {/* Checkboxes */}
@@ -163,8 +277,10 @@ function CreateTask({ show, setShow, handleCreateTask, staffdata, initialValues,
                         </div>
 
                         {/* Task Description */}
-                        <div className="form-group">
-                            <label htmlFor="taskDescription">Task Description <span className="required">*</span></label>
+                        <div className="form-group position-relative">
+                            <label htmlFor="taskDescription">
+                                Task Description <span className="required">*</span>
+                            </label>
                             <textarea
                                 id="taskDescription"
                                 placeholder="Enter Task Description"
@@ -175,7 +291,43 @@ function CreateTask({ show, setShow, handleCreateTask, staffdata, initialValues,
                                 value={initialValues?.task_description || ''}
                                 onChange={handleChange}
                             ></textarea>
+
+                            {/* Hidden file input */}
+                            <input
+                                type="file"
+                                id="fileInput"
+                                style={{ display: 'none' }}
+                                name='attach_files'
+                                value={initialValues?.attach_files}
+                                onChange={handleFileUpload} // Define this function to handle file uploads
+                            />
+
+                            {/* Icon buttons */}
+                            <div
+                                className="icon-group position-absolute"
+                                style={{
+                                    bottom: '10px',
+                                    right: '10px',
+                                    display: 'flex',
+                                    gap: '8px',
+                                    alignItems: 'center',
+                                }}
+                            >
+                                <i
+                                    className="bi bi-link cursor-pointer"
+                                    onClick={() => document.getElementById('fileInput').click()}
+                                    title="Attach a link"
+                                    style={{ fontSize: '1.2em' }}
+                                ></i>
+                                <i
+                                    className="bi bi-image cursor-pointer"
+                                    onClick={() => document.getElementById('fileInput').click()}
+                                    title="Attach an image"
+                                    style={{ fontSize: '1.2em' }}
+                                ></i>
+                            </div>
                         </div>
+
                         {/* Form Actions */}
                         <div className="button-group d-flex justify-content-end mt-4">
                             <Button type="submit" variant="danger" className="submit-button me-2">Submit</Button>
