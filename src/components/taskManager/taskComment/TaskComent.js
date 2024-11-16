@@ -378,7 +378,7 @@ function TaskComent({ mnualData }) {
                                 </div>
                                 {state && state?.map((item) => {
                                     return (
-                                        <div key={item?.id || Math.random()} className="border-top border-bottom">
+                                        <div key={item?.id || Math.random()} >
                                             {item?.createdBy?.map((subItem) => (
                                                 <div key={subItem?.id || Math.random()}>
                                                     <div className=''>
@@ -393,18 +393,9 @@ function TaskComent({ mnualData }) {
                                                             {subItem?.name?.charAt(0).toUpperCase()}
                                                         </Badge>
                                                         <b>{subItem?.name}</b>
-                                                        <small>
-                                                           {/*  {item?.createdAt
-                                                                ? new Intl.DateTimeFormat("en-GB", {
-                                                                    day: "2-digit",
-                                                                    month: "short",
-                                                                    year: "numeric",
-                                                                    hour: "2-digit",
-                                                                    minute: "2-digit",
-                                                                    hour12: true,
-                                                                }).format(new Date(item?.createdAt))
-                                                                : ""} */}
-                                                        </small>
+                                                        <p><small>
+                                                                {item?.createdAt}
+                                                        </small></p>
                                                     </div>
 
                                                     <div className={`message ${item?.isSelf ? 'sent' : 'received'}`}>

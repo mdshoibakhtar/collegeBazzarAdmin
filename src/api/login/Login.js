@@ -5125,7 +5125,6 @@ export const updateTRCRM_sight_seeing_master = (id, value) => {
 };
 
 
-<<<<<<< HEAD
 // Create task api for select 
 
 export const getListTaskTypeSelect = (page, count) => {
@@ -5145,7 +5144,6 @@ export const getCommentAccTask = (count,page, id) => {
   );
 };
 
-=======
 
 // GET acc_project_module entries with pagination
 export const getAccProjectModuleByPage = (page, count) => {
@@ -5371,4 +5369,3 @@ export const deleteAccAddProjectById = (id) => {
     },
   });
 };
->>>>>>> 959f8169819fbb766e0f91063187875fbd23c7e7
