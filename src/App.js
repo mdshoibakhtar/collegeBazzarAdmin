@@ -2665,6 +2665,7 @@ function App() {
 
               <Route path="projects" element={<ProjectMasters />} />
               <Route path="add-projects" element={<ProjectAddForm />} />
+              <Route path="add-projects/:id" element={<ProjectAddForm />} />
               {/*<Route path="add-book-code/:id" element={<BookCodeForm />} /> */}
               <Route path="projects/:id" element={<ProjectDetailMasters />} />
 

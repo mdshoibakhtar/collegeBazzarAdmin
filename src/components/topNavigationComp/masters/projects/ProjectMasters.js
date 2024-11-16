@@ -1,6 +1,6 @@
 import Breadcrumbs from '../../../../common/breadcrumb/Breadcrumbs'
 import React, { useEffect, useState } from 'react'
-import {  deleteAddSubjectById,getAddSubjectByPage } from '../../../../api/login/Login'
+import {  deleteAccAddProjectById, deleteAddSubjectById,getAccAddProjectByPage } from '../../../../api/login/Login'
 import { message } from 'antd'
 import CallStatusMasterList from './MasterList/CallStatusMasterList'
 import { useParams } from 'react-router-dom'
@@ -22,7 +22,7 @@ function ProjectMasters() {
         
         setLoading(true)
         try {
-            const res = await getAddSubjectByPage(page ,count)
+            const res = await getAccAddProjectByPage(page ,count)
             setTotalCount(res?.totalCount)
             setData(res?.data)
             setPage(page)
@@ -40,7 +40,7 @@ function ProjectMasters() {
     const deleteBlockAdd = async (id) => {
         setLoading(true)
         try {
-            await deleteAddSubjectById(id)
+            await deleteAccAddProjectById(id)
             let backList = totalCount % 11 === 0 ? page - 1 : page
             getFloorMasters(backList)
         } catch (error) {
@@ -60,7 +60,7 @@ function ProjectMasters() {
         message.error('Cancle Successfull!');
     };
     useEffect(() => {
-        getFloorMasters(page)
+        getFloorMasters(0)
     }, [])
     return (
         <>

@@ -5223,3 +5223,88 @@ export const deleteAccProjectBusinessCategoryById = (id) => {
     },
   });
 };
+
+
+
+
+// export const getZipCodeById = (id) => {
+//   return axiosInstance.get(`/pin/pincode/${id}`, {
+//     headers: {
+//       "Content-Type": "application/json; charset=UTF-8",
+//       Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+//     },
+//   });
+// };
+
+export const getTaxtype = (id) => {
+  return axiosInstance.get(`/acc_tax_type_master/admin`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getListprojectScope = (id) => {
+  return axiosInstance.get(`/lead_project_scope/admin`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const roleListAdmin = (id) => {
+  return axiosInstance.get(`/user_type`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+// GET acc_add_project entries with pagination
+export const getAccAddProjectByPage = (page, count) => {
+  return axiosInstance.get(`/acc_add_project/user?page=${page}&count=${count}`);
+};
+
+// GET a specific acc_add_project entry by ID
+export const getAccAddProjectById = (id) => {
+  return axiosInstance.get(`/acc_add_project/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// POST a new acc_add_project entry
+export const postAccAddProject = (data) => {
+  return axiosInstance.post(`/acc_add_project/addType`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// PUT (update) an existing acc_add_project entry by ID
+export const updateAccAddProjectById = (id, data) => {
+  return axiosInstance.put(`/acc_add_project/update_type/${id}`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// DELETE an acc_add_project entry by ID
+export const deleteAccAddProjectById = (id) => {
+  return axiosInstance.delete(`/acc_add_project/delete_type/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
