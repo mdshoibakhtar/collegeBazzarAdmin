@@ -90,7 +90,7 @@ const ViewLeads = () => {
             <div className="side-buttons position-fixed" style={{ top: "408px", right: "-99px" }}>
                 <Link to={'#'} className="btn btn-info mb-2 mb-2">Flight Quote</Link>
                 <Link to="/travel-Vouchers-list" className="btn btn-info mb-2">Voucher</Link>
-                <Link to={'#'} className="btn btn-info mb-2">Invoice</Link>
+                <Link to={'/travel-invoice-list'} className="btn btn-info mb-2">Invoice</Link>
             </div>
         </>
     )

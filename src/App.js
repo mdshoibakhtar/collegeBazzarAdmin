@@ -951,10 +951,19 @@ import AllHotalPage from "./pages/manageTravelBussiness/hotel";
 import HotelAdd from "./components/manageTravelBussiness/hotel/hotelAdd/HotelAdd";
 import TagsPage from "./pages/manageTravelBussiness/tags";
 import TagsAdd from "./components/manageTravelBussiness/tags/tagsAdd/TagsAdd";
+import ProjectModual from "./components/topNavigationComp/masters/projectModuel/ProjectModual";
+import ProjectModualForm from "./components/topNavigationComp/masters/projectModuel/MasterForm/ProjectModualForm";
+import ProjectModualTemplate from "./components/topNavigationComp/masters/project-module-template/ProjectModualTemplate";
+import ProjectModualTempForm from "./components/topNavigationComp/masters/project-module-template/MasterForm/ProjectModualTempForm";
+import BussnessCateg from "./components/topNavigationComp/masters/bussnescateg/BussnessCateg";
+import BcategForm from "./components/topNavigationComp/masters/bussnescateg/MasterForm/BcategForm";
 import TravelLeadPage from "./pages/travelLeads";
 import ViewLeads from "./components/travelLeads/travelLeads/LeadList/viewLeads/ViewLeads";
 import TravelVoucherPage from "./pages/travelLeads/travelVoucher";
 import AddHotelVoucher from "./components/travelLeads/Travelvouchers/voucherHotalList/addHotelVoucher/AddHotelVoucher";
+import AddServiceVoucher from "./components/travelLeads/Travelvouchers/voucherServiceList/addServiceVoucher/AddServiceVoucher";
+import AddFlightVoucher from "./components/travelLeads/Travelvouchers/voucherFlightList/addFlightVoucher/AddFlightVoucher";
+import TravelInvoice from "./components/travelLeads/travelInvoice/TravelInvoice";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -2667,8 +2676,27 @@ const [mnualData,setManualData] = useState()
 
               <Route path="projects" element={<ProjectMasters />} />
               <Route path="add-projects" element={<ProjectAddForm />} />
+              <Route path="add-projects/:id" element={<ProjectAddForm />} />
               {/*<Route path="add-book-code/:id" element={<BookCodeForm />} /> */}
               <Route path="projects/:id" element={<ProjectDetailMasters />} />
+
+
+
+              <Route path="project-module" element={<ProjectModual />} />
+              <Route path="create-project-module" element={<ProjectModualForm />} />
+              <Route path="create-project-module/:id" element={<ProjectModualForm />} />
+
+              <Route path="project-module-template" element={<ProjectModualTemplate />} />
+              <Route path="create-project-module-template" element={<ProjectModualTempForm />} />
+              <Route path="create-project-module-template/:id" element={<ProjectModualTempForm />} />
+
+              <Route path="business-category" element={<BussnessCateg />} />
+              <Route path="create-business-category" element={<BcategForm />} />
+              <Route path="create-business-category/:id" element={<BcategForm />} />
+
+
+
+
 
               {/* junaid ends */}
 
@@ -2762,6 +2790,9 @@ const [mnualData,setManualData] = useState()
               <Route path="leads-details" element={<ViewLeads />} />
               <Route path="travel-Vouchers-list" element={<TravelVoucherPage />} />
               <Route path="travel-Vouchers-Add" element={<AddHotelVoucher />} />
+              <Route path="travel-service-Add" element={<AddServiceVoucher />} />
+              <Route path="travel-flight-Add" element={<AddFlightVoucher />} />
+              <Route path="travel-invoice-list" element={<TravelInvoice />} />
 
               {/* travocrm */}
               {/* ----------------Moin's Route start-------------------------------*/}
