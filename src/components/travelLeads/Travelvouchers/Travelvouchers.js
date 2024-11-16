@@ -3,6 +3,8 @@ import Breadcrumbs from "../../../common/breadcrumb/Breadcrumbs";
 import { Tab, Tabs } from "react-bootstrap";
 import VoucherHotalList from "./voucherHotalList/VoucherHotalList";
 import { Link } from "react-router-dom";
+import VoucherServiceList from "./voucherServiceList/VoucherServiceList";
+import VoucherFlightList from "./voucherFlightList/VoucherFlightList";
 
 
 const Travelvouchers = () => {
@@ -25,8 +27,8 @@ const Travelvouchers = () => {
                                         <h4 className="heading mb-0 p-2">Vouchers</h4>
                                         <div>
                                             <Link to='/travel-Vouchers-Add' className="btn btn-primary">Add Hotel Voucher</Link>
-                                            <Link to='#' className="btn btn-primary">Add Service Voucher</Link>
-                                            <Link to='#' className="btn btn-primary">Add Flight Voucher</Link>
+                                            <Link to='/travel-service-Add' className="btn btn-primary">Add Service Voucher</Link>
+                                            <Link to='/travel-flight-Add' className="btn btn-primary">Add Flight Voucher</Link>
                                         </div>
 
                                     </div>
@@ -37,14 +39,10 @@ const Travelvouchers = () => {
                                                     <VoucherHotalList />
                                                 </Tab>
                                                 <Tab eventKey="service" title="Service">
-                                                    <div className="p-3">
-                                                        <p>Service</p>
-                                                    </div>
+                                                    <VoucherServiceList />
                                                 </Tab>
                                                 <Tab eventKey="flight" title="Flight">
-                                                    <div className="p-3">
-                                                        <p>Reminders Content</p>
-                                                    </div>
+                                                    <VoucherFlightList />
                                                 </Tab>
                                             </Tabs>
                                         </div>

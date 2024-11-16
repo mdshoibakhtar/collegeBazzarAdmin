@@ -955,6 +955,9 @@ import TravelLeadPage from "./pages/travelLeads";
 import ViewLeads from "./components/travelLeads/travelLeads/LeadList/viewLeads/ViewLeads";
 import TravelVoucherPage from "./pages/travelLeads/travelVoucher";
 import AddHotelVoucher from "./components/travelLeads/Travelvouchers/voucherHotalList/addHotelVoucher/AddHotelVoucher";
+import AddServiceVoucher from "./components/travelLeads/Travelvouchers/voucherServiceList/addServiceVoucher/AddServiceVoucher";
+import AddFlightVoucher from "./components/travelLeads/Travelvouchers/voucherFlightList/addFlightVoucher/AddFlightVoucher";
+import TravelInvoice from "./components/travelLeads/travelInvoice/TravelInvoice";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -2762,6 +2765,9 @@ function App() {
               <Route path="leads-details" element={<ViewLeads />} />
               <Route path="travel-Vouchers-list" element={<TravelVoucherPage />} />
               <Route path="travel-Vouchers-Add" element={<AddHotelVoucher />} />
+              <Route path="travel-service-Add" element={<AddServiceVoucher />} />
+              <Route path="travel-flight-Add" element={<AddFlightVoucher />} />
+              <Route path="travel-invoice-list" element={<TravelInvoice />} />
 
               {/* travocrm */}
               {/* ----------------Moin's Route start-------------------------------*/}
