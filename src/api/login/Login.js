@@ -5133,3 +5133,14 @@ export const getListTaskTypeSelect = (page, count) => {
 export const getListTaskStageSelect = (page, count) => {
   return axiosInstance.get(`${baseUrl}lead_task_stage/user`);
 };
+
+// post comment 
+export const postCommentAccTask = (value) => {
+  return axiosInstance.post(`${baseUrl}lead_taskwise_comment/addType`, value);
+};
+export const getCommentAccTask = (count,page, id) => {
+  return axiosInstance.get(
+    `${baseUrl}lead_taskwise_comment/fetch?task_id=${id ? id : localStorage.getItem("wqeqwe")}&page=${page}&count=${count}`
+  );
+};
+

@@ -1,25 +1,146 @@
-import React, { useState } from 'react'
-import { ToastContainer } from 'react-toastify'
+import React, { useEffect, useState } from 'react'
+import { toast, ToastContainer } from 'react-toastify'
 import { Badge, Button, Form } from 'react-bootstrap';
 import ReminderLater from './remainder/ReminderLater';
-import { getCommentTaskById } from '../../../api/login/Login';
-
+import { clodinaryImage, getCommentAccTask, getCommentTaskById, postCommentAccTask } from '../../../api/login/Login';
+import { baseUrlImage } from '../../../baseUrl';
+import "./Taskcomment.css"
 function TaskComent({ mnualData }) {
     const [modalShow, setModalShow] = React.useState(false);
-    const [taskDetails, setTaskDetails] = useState()
+    const [count, setCount] = React.useState(100);
+    const [page, setPage] = React.useState(0);
+    const [state, setState] = React.useState(false);
+    const [initialValues, setInitialValues] = useState({
+        task_id: "",
+        comment: "",
+        attachments: [],
+    });
+    const [taskDetails, setTaskDetails] = useState(null);
+    const [sendBtn, setSendBtn] = useState(false);
+
+    const toastErrorMessage = (message) => toast.error(message, { position: "top-right" });
+    const getCommenetData = async (id) => {
+        const response = await getCommentAccTask(count, page, id)
+        setState(response?.data)
+    }
+    useEffect(() => {
+        getCommenetData()
+    }, [])
+    useEffect((id) => {
+        getCommenetData(id)
+    }, [localStorage.getItem("wqeqwe")])
     const handleTaskDetails = async (id) => {
+        localStorage.setItem("wqeqwe", id); // Save task_id in localStorage
+
         try {
-            const resp = await getCommentTaskById(id)
-            setTaskDetails(resp?.data)
-            handleTaskDetails(resp?.data[0]._id)
+            const resp = await getCommentTaskById(id); // API call
+            if (resp?.data) {
+                setTaskDetails(resp.data);
+                // Update state with task_id
+                setInitialValues((prev) => ({
+                    ...prev,
+                    task_id: resp.data[0]?._id || id, // Use the response ID or fallback to `id`
+                }));
+            }
         } catch (error) {
-            console.log("Network Api Error")
+            console.error("Network API Error:", error);
         }
+    };
+
+    const handleFileUpload = async (event) => {
+        if (!event.target.files) return;
+
+        const files = Array.from(event.target.files);
+        const uploadedFiles = [];
+
+        for (const file of files) {
+            const formData = new FormData();
+            formData.append("image", file);
+
+            try {
+                const res = await clodinaryImage(formData); // Replace with actual upload function
+                if (res?.data?.data?.url) {
+                    uploadedFiles.push(res.data.data.url);
+                }
+            } catch (error) {
+                console.error("Error uploading file:", error);
+            }
+        }
+
+        setTimeout(() => {
+            setInitialValues((prev) => ({
+                ...prev,
+                attachments: [...prev.attachments, ...uploadedFiles],
+            }));
+        }, 1000);
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setInitialValues((prevValues) => ({
+            ...prevValues,
+            [name]: value,
+        }));
+        setSendBtn(true);
+    };
+
+    const formSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const taskId = localStorage.getItem("wqeqwe");
+            if (!taskId) {
+                toastErrorMessage("Task ID is missing!");
+                return;
+            }
+
+            setInitialValues((prev) => ({
+                ...prev,
+                task_id: taskId,
+            }));
+
+            // Submit form with `initialValues`
+            console.log("Form submitted:", initialValues);
+            // Add your API call or submission logic here
+        } catch (error) {
+            console.error("Form submission error:", error);
+        }
+
+        try {
+            if (!initialValues._id) {
+                const res = await postCommentAccTask(initialValues);
+                if (res?.statusCode === "200") {
+                    // toastSuccessMessage("Task Create Successfully");
+                    getCommenetData(localStorage.getItem(`wqeqwe`))
+                    setInitialValues({
+                        task_id: "",
+                        comment: "",
+                        attachments: [],
+
+                    });
+                    // getListData(page);
+                } else {
+                    // toastErrorMessage("Failed to Post Comment");
+                }
+            } else {
+                // const res = await updateOrganisationSettingsMdlsttingTemp(initialValues._id, initialValues);
+                // if (res?.statusCode === "200") {
+                //     toastSuccessMessage("Template Updated Successfully");
+                //     getListData(page);
+                //     setShow(false);
+                // } else {
+                //     toastErrorMessage("Failed to Update Template");
+                // }
+            }
+        } catch (error) {
+            toastErrorMessage("Error processing the form.");
+        }
+
     }
     return (
         <>
             <div className='col-xl-4 h-100'>
-                <div className='card ' style={{ overflowY: "scroll", scrollbarColor: "rgb(33 37 41)" }}>
+                <div className="card overflow-y-scroll" style={{ height: "500px" }}>
                     <div className=''>
                         <div className='border-bottom'>
                             <div className=''>
@@ -120,7 +241,7 @@ function TaskComent({ mnualData }) {
             </div>
 
             <div className='col-xl-5 h-100'>
-                <div className='card' >
+                <div className="card overflow-y-scroll" style={{ height: "500px" }}>
                     <div
                         className=""
                         style={{
@@ -133,8 +254,6 @@ function TaskComent({ mnualData }) {
                         <div
                             style={{
                                 padding: '20px',
-                                maxWidth: '600px',
-                                margin: 'auto',
                                 fontFamily: 'Arial, sans-serif',
                                 flexGrow: 1,
                             }}
@@ -174,7 +293,7 @@ function TaskComent({ mnualData }) {
                                 )}
 
                                 <div
-                                    className="d-flex justify-content-between align-items-center mb-3"
+                                    className="mb-3"
                                     style={{ fontSize: '14px' }}
                                 >
                                     {taskDetails?.assignees && taskDetails.assignees?.length > 0 ? (
@@ -199,15 +318,14 @@ function TaskComent({ mnualData }) {
                                                     >
                                                         {assignee.name.charAt(0).toUpperCase()}
                                                     </Badge>
-                                                    {assignee.name}
+                                                    <b>{assignee.name}</b>
                                                 </span>
                                             ))}
                                         </span>
                                     ) : (
-                                        <span>No Assignees Found</span>
+                                        <span className='text-center'> <b>NO COMMENTS</b></span>
                                     )}
-
-                                    <span>
+                                    {taskDetails?.expect_due_date_time ? <span>
                                         Due Date:{" "}
                                         {taskDetails?.expect_due_date_time
                                             ? new Intl.DateTimeFormat("en-GB", {
@@ -218,8 +336,9 @@ function TaskComent({ mnualData }) {
                                                 minute: "2-digit",
                                                 hour12: true,
                                             }).format(new Date(taskDetails.expect_due_date_time))
-                                            : "Not Specified"}
-                                    </span>
+                                            : ""}
+                                    </span> : ""}
+
 
                                 </div>
 
@@ -227,7 +346,7 @@ function TaskComent({ mnualData }) {
 
                                 {/* Comments */}
                                 <div className="mb-3">
-                                    <div className="d-flex align-items-start mb-2">
+                                    {/* <div className="d-flex align-items-start mb-2">
                                         <Badge bg="info" style={{ borderRadius: '50%', padding: '5px 10px', marginRight: '10px' }}>A</Badge>
                                         <div>
                                             <div style={{ fontWeight: 'bold', fontSize: '14px' }}>Abdul Quadir</div>
@@ -235,12 +354,17 @@ function TaskComent({ mnualData }) {
                                             <div style={{ fontSize: '14px', marginTop: '5px' }}>See the software</div>
                                             <div style={{ fontSize: '12px', color: '#007bff', cursor: 'pointer' }}>1 Reply</div>
                                         </div>
-                                    </div>
+                                    </div> */}
                                     <div className="d-flex align-items-start">
-                                        <Badge bg="info" style={{ borderRadius: '50%', padding: '5px 10px', marginRight: '10px' }}>A</Badge>
+                                        {/* <Badge bg="info" style={{ borderRadius: '50%', padding: '5px 10px', marginRight: '10px' }}>A</Badge> */}
                                         <div>
-                                            <div style={{ fontWeight: 'bold', fontSize: '14px' }}>Abdul Quadir</div>
-                                            <div style={{ fontSize: '12px', color: '#6c757d' }}>5 Nov 2024, 04:48 PM</div>
+                                            {/* <div style={{ fontWeight: 'bold', fontSize: '14px' }}>Abdul Quadir</div> */}
+                                            {/* <div style={{ fontSize: '12px', color: '#6c757d' }}>5 Nov 2024, 04:48 PM</div> */}
+                                            {taskDetails?.attach_files ? <div className=''>
+                                                <pictures>
+                                                    <img src={`${baseUrlImage}${taskDetails?.attach_files}`} alt='image' />
+                                                </pictures>
+                                            </div> : ""}
                                             {taskDetails?.task_description ?
 
                                                 <div style={{ fontSize: '14px', marginTop: '5px' }}>
@@ -252,26 +376,143 @@ function TaskComent({ mnualData }) {
                                         </div>
                                     </div>
                                 </div>
+                                {state && state?.map((item) => {
+                                    return (
+                                        <div key={item?.id || Math.random()} className="border-top border-bottom">
+                                            {item?.createdBy?.map((subItem) => (
+                                                <div key={subItem?.id || Math.random()}>
+                                                    <div className=''>
+                                                        <Badge
+                                                            bg="info"
+                                                            style={{
+                                                                borderRadius: "50%",
+                                                                padding: "5px 10px",
+                                                                marginRight: "5px",
+                                                            }}
+                                                        >
+                                                            {subItem?.name?.charAt(0).toUpperCase()}
+                                                        </Badge>
+                                                        <b>{subItem?.name}</b>
+                                                        <small>
+                                                           {/*  {item?.createdAt
+                                                                ? new Intl.DateTimeFormat("en-GB", {
+                                                                    day: "2-digit",
+                                                                    month: "short",
+                                                                    year: "numeric",
+                                                                    hour: "2-digit",
+                                                                    minute: "2-digit",
+                                                                    hour12: true,
+                                                                }).format(new Date(item?.createdAt))
+                                                                : ""} */}
+                                                        </small>
+                                                    </div>
+
+                                                    <div className={`message ${item?.isSelf ? 'sent' : 'received'}`}>
+                                                        <p>{item?.comment}</p>
+                                                    </div>
+
+                                                </div>
+                                            ))}
+                                        </div>
+                                    );
+
+                                })}
                             </>
-
-
-
-                            {/* Reply Input */}
-                            <Form.Group controlId="replyInput" style={{ marginTop: 'auto' }}>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Reply or mention others with @..."
-                                    style={{ fontSize: '14px' }}
-                                />
-                            </Form.Group>
                         </div>
+                        {/* Reply Input */}
+                        {taskDetails ? (
+                            <form className="task-form" onSubmit={formSubmit}>
+                                <Form.Group controlId="replyInput" style={{ marginTop: 'auto' }} >
+                                    {/* <Form.Control
+                                type="text"
+                                placeholder="Reply or mention others with @..."
+                                style={{ fontSize: '14px' }}
+                            /> */}
+                                    {/* Task Description */}
+                                    {/* {initialValues?.attachments && initialValues?.attachments?.at((item) => {
+                                        return <img style={{ width: "100px", height: "100px" }} src={`${baseUrlImage}${item}`} alt='hero' />
+                                    })} */}
+                                    <div className="form-group position-relative">
+                                        <label htmlFor="taskDescription">
+                                            Reply or mention others with @... <span className="required"></span>
+                                            <span classNmae="text-danger">*</span></label>
+                                        <textarea
+                                            id="taskDescription"
+                                            placeholder="Enter Reply or mention others with @..."
+                                            name="comment"
+                                            rows="4"
+                                            required
+                                            className="form-control border-bottom-0"
+                                            value={initialValues?.comment || ''}
+                                            onChange={handleChange}
+                                        />
+
+
+                                        {/* Hidden file input */}
+                                        <input
+                                            type="file"
+                                            id="fileInput"
+                                            style={{ display: 'none' }}
+                                            name="attach_files"
+                                            multiple
+                                            onChange={handleFileUpload}
+                                        />
+
+                                        {/* Icon buttons */}
+                                        <div
+                                            className="icon-group position-absolute"
+                                            style={{
+                                                bottom: '10px',
+                                                right: '10px',
+                                                display: 'flex',
+                                                gap: '8px',
+                                                alignItems: 'center',
+                                            }}
+                                        >
+                                            <i
+                                                className="bi bi-link cursor-pointer"
+                                                onClick={() => document.getElementById('fileInput').click()}
+                                                title="Attach a link"
+                                                style={{ fontSize: '1.2em' }}
+                                            ></i>
+                                            <i
+                                                className="bi bi-image cursor-pointer"
+                                                onClick={() => document.getElementById('fileInput').click()}
+                                                title="Attach an image"
+                                                style={{ fontSize: '1.2em' }}
+                                            ></i>
+                                        </div>
+
+                                        {/* Display uploaded files */}
+                                        <div style={{ marginTop: '20px' }}>
+                                            {console.log(initialValues)}
+                                            {initialValues?.attachments?.map((item, index) => (
+                                                <img
+                                                    key={index}
+                                                    style={{ width: '100px', height: '100px', marginRight: '10px' }}
+                                                    src={`${baseUrlImage}${item}`}
+                                                    alt={`Uploaded file ${index + 1}`}
+                                                />
+                                            ))}
+                                        </div>
+
+                                    </div>
+
+                                </Form.Group>
+                                {sendBtn ? <div className='text-end'>
+                                    <button className='btn btn-sm btn-danger' >
+                                        cancel
+                                    </button>
+                                    <button className='btn btn-sm btn-outline-primary' >
+                                        Send <span><i class="fa-sharp fa-solid fa-paper-plane"></i></span>
+                                    </button>
+                                </div> : ""}
+                            </form>) : ""}
 
                         <div className='accor-btn'></div>
                     </div>
 
-                    {/* <button className='btn btn-sm btn-primary' type='button' >
-                        Save
-                    </button> */}
+
                 </div>
                 <ToastContainer className={"text-center"} />
             </div>

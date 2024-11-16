@@ -355,7 +355,7 @@ function CreateTask({ show, handleClose, setInitialValues, initialValues, handle
                         {/* Task Description */}
                         <div className="form-group position-relative">
                             <label htmlFor="taskDescription">
-                                Task Description <span className="required">*</span>
+                                {/* Task Description <span className="required"></span> */}
                                 <span classNmae="text-danger">*</span></label>
                             <textarea
                                 id="taskDescription"

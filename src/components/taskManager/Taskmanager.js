@@ -12,11 +12,11 @@ function Taskmanager({ setManualData }) {
     return (
         <>
             <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
-            <section className='m-4 h-71vh'>
-                <div className='card'>
-                    <div className='row '>
-                        <div className='col-xl-3'>
-                            <div className='card'>
+            <section className="m-4 h-100">
+                <div className="card">
+                    <div className="row">
+                        <div className="col-xl-3">
+                            <div className="card  overflow-y-scroll" style={{height:"500px"}}>
                                 <TaskManagerAside setManualData={setManualData} />
                             </div>
                         </div>
@@ -24,6 +24,7 @@ function Taskmanager({ setManualData }) {
                     </div>
                 </div>
             </section>
+
         </>
     )
 }

@@ -171,7 +171,7 @@ function TaskManagerAside({ setManualData }) {
 
     return (
         <>
-            <div className='d-flex flex-column h-100'>
+            <div className='d-flex flex-column'>
                 {/* Dropdown Button Group */}
                 <Dropdown as={ButtonGroup} className="create-task-dropdown">
                     <Button variant="light" style={{ color: "red", borderColor: "red" }}>
