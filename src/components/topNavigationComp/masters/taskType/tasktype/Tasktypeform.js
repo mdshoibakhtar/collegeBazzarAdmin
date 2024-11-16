@@ -126,7 +126,7 @@ function Tasktypeform
                                 <h4 className="heading mb-0">
                                     {params?.id ? "UPDATE" : "ADD"}
                                     &nbsp;
-                                    Affilated By
+                                    Task Type
                                 </h4>
                             </div>
                             <Formik
