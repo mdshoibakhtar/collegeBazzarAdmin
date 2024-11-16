@@ -5083,7 +5083,7 @@ export const addTaskTypeMaster = (data) => {
   return axiosInstance.post(`${baseUrl}lead_task_type_id/addType`, data);
 };
 
- export const deleteTaskTypeMaster = (id) => {
+export const deleteTaskTypeMaster = (id) => {
   return axiosInstance.delete(`${baseUrl}lead_task_type_id/delete_type/${id}`);
 };
 export const updateTaskTypeMaster = (id, value) => {
@@ -5091,7 +5091,7 @@ export const updateTaskTypeMaster = (id, value) => {
 };
 export const getByTaskTypeMasterId = (id) => {
   return axiosInstance.get(`${baseUrl}lead_task_type_id/${id}`);
-}; 
+};
 // -----------master task Stage api
 
 export const getListTaskStageMaster = (page, count) => {
@@ -5102,7 +5102,7 @@ export const addTaskStageMaster = (data) => {
   return axiosInstance.post(`${baseUrl}lead_task_stage/addType`, data);
 };
 
- export const deleteTaskStageMaster = (id) => {
+export const deleteTaskStageMaster = (id) => {
   return axiosInstance.delete(`${baseUrl}lead_task_stage/delete_type/${id}`);
 };
 export const updateTaskStageMaster = (id, value) => {
@@ -5110,7 +5110,7 @@ export const updateTaskStageMaster = (id, value) => {
 };
 export const getByTaskStageMasterId = (id) => {
   return axiosInstance.get(`${baseUrl}lead_task_stage/${id}`);
-}; 
+};
 export const deleteRCRM_sight_seeing_master = (id) => {
   return axiosInstance.delete(`${baseUrl}TRCRM_sight_seeing_master/delete_type/${id}`);
 };

@@ -57087,6 +57087,19 @@ h3 {
   position: relative;
 }
 
+.inneline {
+  border: 1px dotted black;
+  padding: 10px;
+}
+
+.Connectingflight {
+  width: 300px;
+}
+
+.addmoreFlight {
+  width: 300px;
+}
+
 /* 
 @keyframes floatUpDown {
   0% {
