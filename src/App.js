@@ -964,6 +964,10 @@ import AddHotelVoucher from "./components/travelLeads/Travelvouchers/voucherHota
 import AddServiceVoucher from "./components/travelLeads/Travelvouchers/voucherServiceList/addServiceVoucher/AddServiceVoucher";
 import AddFlightVoucher from "./components/travelLeads/Travelvouchers/voucherFlightList/addFlightVoucher/AddFlightVoucher";
 import TravelInvoice from "./components/travelLeads/travelInvoice/TravelInvoice";
+import InvoiceAdd from "./components/travelLeads/travelInvoice/invoice/invoiceAdd/InvoiceAdd";
+import AddpaymentReceipt from "./components/travelLeads/travelInvoice/paymentReceipt/AddpaymentReceipt/AddpaymentReceipt";
+import CreditNoteAdd from "./components/travelLeads/travelInvoice/creditNote/creditNoteAdd/CreditNoteAdd";
+import FlightInvoiceAdd from "./components/travelLeads/travelInvoice/flightInvoiceList/flightInvoiceAdd/FlightInvoiceAdd";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -2793,6 +2797,10 @@ const [mnualData,setManualData] = useState()
               <Route path="travel-service-Add" element={<AddServiceVoucher />} />
               <Route path="travel-flight-Add" element={<AddFlightVoucher />} />
               <Route path="travel-invoice-list" element={<TravelInvoice />} />
+              <Route path="travel-invoice-create" element={<InvoiceAdd />} />
+              <Route path="travel-payment-receipt-create" element={<AddpaymentReceipt />} />
+              <Route path="travel-Credit Note" element={<CreditNoteAdd />} />
+              <Route path="travel-create-flight" element={<FlightInvoiceAdd />} />
 
               {/* travocrm */}
               {/* ----------------Moin's Route start-------------------------------*/}
