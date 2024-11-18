@@ -1,19 +1,10 @@
-import { Pagination, Popconfirm } from "antd"
-import { BsTicketPerforatedFill } from "react-icons/bs"
-import { CiMail } from "react-icons/ci"
-import { FaEye } from "react-icons/fa"
-import { TiDownload, TiTick } from "react-icons/ti"
-import { Link } from "react-router-dom"
-import SendMailModal from "./sendMailModal/SendMailModal"
-import { useState } from "react"
-import { VoucherAfterPayment } from "../../../../common/voucherAfterPaymentPdf/voucherAfterPaymentPdf/VoucherAfterPaymentPdf"
 import { PDFDownloadLink } from "@react-pdf/renderer"
+import { Pagination, Popconfirm } from "antd"
+import { Link } from "react-router-dom"
+import { TravelAgencyPdfPrint } from "../../../../common/travelAgencyPdf/travelAgencyPdf/TravelAgencyPdf"
 import { Button } from "react-bootstrap"
 
-
-const VoucherHotalList = () => {
-    const [modalShow, setModalShow] = useState(false);
-
+const CreditNote = () => {
     return (
         <>
             <div id="banner-tblwrapper_wrapper" className="dataTables_wrapper no-footer">
@@ -26,31 +17,30 @@ const VoucherHotalList = () => {
                     <thead>
                         <tr role="row">
                             <th style={{ width: '50px' }}>S.No</th>
-                            <th style={{ width: '150px' }}>City</th>
-                            <th style={{ width: '150px' }}>Hotal</th>
-                            <th style={{ width: '150px' }}>Checkin</th>
-                            <th style={{ width: '150px' }}>Stay (Days)</th>
-                            <th style={{ width: '150px' }}>Create Date</th>
+                            <th style={{ width: '150px' }}>Invoice Number</th>
+                            <th style={{ width: '150px' }}>Credit No.</th>
+                            <th style={{ width: '150px' }}>Amount</th>
+                            <th style={{ width: '150px' }}>Credit Date</th>
                             <th style={{ width: '150px' }}>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr role="row" >
-                            <td className="text-center" colSpan={6}>No data available in table</td>
+                            <td className="text-center" colSpan={5}>No data available in table</td>
                             <td>
                                 <div className="d-flex">
-                                    <Link to={`#`} className="btn btn-primary shadow btn-xs sharp me-1">
+                                    {/* <Link to={`#`} className="btn btn-primary shadow btn-xs sharp me-1">
                                         <TiTick style={{ marginBottom: '8px' }} />
                                     </Link>
                                     <button type="button" className="btn btn-primary shadow btn-xs sharp me-1" onClick={() => setModalShow(true)}>
                                         <CiMail style={{ marginBottom: '8px' }} />
                                     </button>
-                                    {/* <Link to={`#`} className="btn btn-primary shadow btn-xs sharp me-1">
+                                    <Link to={`#`} className="btn btn-primary shadow btn-xs sharp me-1">
                                         <TiDownload style={{ marginBottom: '8px' }} />
                                     </Link> */}
                                     <Button variant="" className="btn-sm py-1 px-2 bg-primary">
-                                        <PDFDownloadLink style={{ color: 'white', textDecoration: 'none' }} document={<VoucherAfterPayment abc={'Downloaded pdf'} />} fileName="invoice.pdf">
-                                            {({ loading }) => (loading ? 'Loading document...' : 'VOUCHER AFTER PAYMENT')}
+                                        <PDFDownloadLink style={{ color: 'white', textDecoration: 'none' }} document={<TravelAgencyPdfPrint abc={'Downloaded pdf'} />} fileName="invoice.pdf">
+                                            {({ loading }) => (loading ? 'Loading document...' : 'PDF')}
                                         </PDFDownloadLink>
                                     </Button>
                                     <Link to={`#`} className="btn btn-primary shadow btn-xs sharp me-1">
@@ -85,13 +75,8 @@ const VoucherHotalList = () => {
                     />
                 </div>
             </div>
-
-            <SendMailModal
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-            />
         </>
     )
 }
 
-export default VoucherHotalList
+export default CreditNote
