@@ -951,6 +951,12 @@ import AllHotalPage from "./pages/manageTravelBussiness/hotel";
 import HotelAdd from "./components/manageTravelBussiness/hotel/hotelAdd/HotelAdd";
 import TagsPage from "./pages/manageTravelBussiness/tags";
 import TagsAdd from "./components/manageTravelBussiness/tags/tagsAdd/TagsAdd";
+import ProjectModual from "./components/topNavigationComp/masters/projectModuel/ProjectModual";
+import ProjectModualForm from "./components/topNavigationComp/masters/projectModuel/MasterForm/ProjectModualForm";
+import ProjectModualTemplate from "./components/topNavigationComp/masters/project-module-template/ProjectModualTemplate";
+import ProjectModualTempForm from "./components/topNavigationComp/masters/project-module-template/MasterForm/ProjectModualTempForm";
+import BussnessCateg from "./components/topNavigationComp/masters/bussnescateg/BussnessCateg";
+import BcategForm from "./components/topNavigationComp/masters/bussnescateg/MasterForm/BcategForm";
 import TravelLeadPage from "./pages/travelLeads";
 import ViewLeads from "./components/travelLeads/travelLeads/LeadList/viewLeads/ViewLeads";
 import TravelVoucherPage from "./pages/travelLeads/travelVoucher";
@@ -1026,7 +1032,7 @@ function App() {
   }
   console.log(window.localStorage.getItem('dashRout') == null);
 
-
+const [mnualData,setManualData] = useState()
 
   return (
     <>
@@ -2674,8 +2680,27 @@ function App() {
 
               <Route path="projects" element={<ProjectMasters />} />
               <Route path="add-projects" element={<ProjectAddForm />} />
+              <Route path="add-projects/:id" element={<ProjectAddForm />} />
               {/*<Route path="add-book-code/:id" element={<BookCodeForm />} /> */}
               <Route path="projects/:id" element={<ProjectDetailMasters />} />
+
+
+
+              <Route path="project-module" element={<ProjectModual />} />
+              <Route path="create-project-module" element={<ProjectModualForm />} />
+              <Route path="create-project-module/:id" element={<ProjectModualForm />} />
+
+              <Route path="project-module-template" element={<ProjectModualTemplate />} />
+              <Route path="create-project-module-template" element={<ProjectModualTempForm />} />
+              <Route path="create-project-module-template/:id" element={<ProjectModualTempForm />} />
+
+              <Route path="business-category" element={<BussnessCateg />} />
+              <Route path="create-business-category" element={<BcategForm />} />
+              <Route path="create-business-category/:id" element={<BcategForm />} />
+
+
+
+
 
               {/* junaid ends */}
 
@@ -2896,8 +2921,8 @@ function App() {
                 <Route path="" element={<Reccetemplet />} />
                 <Route path="design" element={<DesignSection />} />
               </Route>
-              <Route path="my-task/task-manager" element={<Taskmanager />} >
-                <Route path="" element={<TaskComent />} />
+              <Route path="my-task/task-manager" element={<Taskmanager setManualData={setManualData}/>} >
+                <Route path="" element={<TaskComent mnualData={mnualData} />} />
                 {/* <Route path="design" element={<DesignSection />} /> */}
               </Route>
               {/* Shoib's Travel Crm Report Statics */}

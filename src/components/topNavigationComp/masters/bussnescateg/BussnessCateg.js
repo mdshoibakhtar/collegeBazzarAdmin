@@ -1,13 +1,13 @@
 import Breadcrumbs from '../../../../common/breadcrumb/Breadcrumbs'
 import React, { useEffect, useState } from 'react'
-import {  deleteAccAddProjectById, deleteAddSubjectById,getAccAddProjectByPage } from '../../../../api/login/Login'
+import {  deleteAccProjectBusinessCategoryById, deleteAccProjectModuleById, getAccProjectBusinessCategoryByPage, getAccProjectModuleByPage } from '../../../../api/login/Login'
 import { message } from 'antd'
-import CallStatusMasterList from './MasterList/CallStatusMasterList'
 import { useParams } from 'react-router-dom'
-function ProjectMasters() {
+import TypeMasterList from './MasterList/TypeMasterList'
+function BussnessCateg() {
     const breadCrumbsTitle = {
-        // title_1: "master",
-        title_2: "My Projects",
+        title_1: "master",
+        title_2: "Business Category ",
     }
     const [data, setData] = useState()
     const [loading, setLoading] = useState(false);
@@ -22,7 +22,7 @@ function ProjectMasters() {
         
         setLoading(true)
         try {
-            const res = await getAccAddProjectByPage(page ,count)
+            const res = await getAccProjectBusinessCategoryByPage( page , count)
             setTotalCount(res?.totalCount)
             setData(res?.data)
             setPage(page)
@@ -40,7 +40,7 @@ function ProjectMasters() {
     const deleteBlockAdd = async (id) => {
         setLoading(true)
         try {
-            await deleteAccAddProjectById(id)
+            await deleteAccProjectBusinessCategoryById(id)
             let backList = totalCount % 11 === 0 ? page - 1 : page
             getFloorMasters(backList)
         } catch (error) {
@@ -62,12 +62,13 @@ function ProjectMasters() {
     useEffect(() => {
         getFloorMasters(0)
     }, [])
+    
     return (
         <>
             <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
-            <CallStatusMasterList totalCount={totalCount} page={page} onChangeVal={onChangeVal} data={data}  count={count} confirm={confirm} cancel={cancel} loading={loading}/>
+            <TypeMasterList totalCount={totalCount} page={page} onChangeVal={onChangeVal} data={data}  count={count} confirm={confirm} cancel={cancel} loading={loading}/>
         </>
     )
 }
 
-export default ProjectMasters
+export default BussnessCateg
