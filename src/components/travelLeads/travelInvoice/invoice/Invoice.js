@@ -1,5 +1,8 @@
+import { PDFDownloadLink } from "@react-pdf/renderer"
 import { Pagination, Popconfirm } from "antd"
 import { Link } from "react-router-dom"
+import { TravelAgencyPdfPrint } from "../../../../common/travelAgencyPdf/travelAgencyPdf/TravelAgencyPdf"
+import { Button } from "react-bootstrap"
 
 
 
@@ -37,6 +40,11 @@ const Invoice = () => {
                                     <Link to={`#`} className="btn btn-primary shadow btn-xs sharp me-1">
                                         <TiDownload style={{ marginBottom: '8px' }} />
                                     </Link> */}
+                                    <Button variant="" className="btn-sm py-1 px-2 bg-primary">
+                                        <PDFDownloadLink style={{ color: 'white', textDecoration: 'none' }} document={<TravelAgencyPdfPrint abc={'Downloaded pdf'} />} fileName="invoice.pdf">
+                                            {({ loading }) => (loading ? 'Loading document...' : 'PDF')}
+                                        </PDFDownloadLink>
+                                    </Button>
                                     <Link to={`#`} className="btn btn-primary shadow btn-xs sharp me-1">
                                         <i className="fa fa-pencil" />
                                     </Link>
