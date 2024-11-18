@@ -16,7 +16,7 @@ function Taskmanager({ setManualData }) {
                 <div className="card">
                     <div className="row">
                         <div className="col-xl-3">
-                            <div className="card  overflow-y-scroll" style={{height:"500px"}}>
+                            <div className="card  overflow-y-scroll" style={{height:"630px"}}>
                                 <TaskManagerAside setManualData={setManualData} />
                             </div>
                         </div>

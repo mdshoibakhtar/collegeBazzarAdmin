@@ -5138,9 +5138,24 @@ export const getListTaskStageSelect = (page, count) => {
 export const postCommentAccTask = (value) => {
   return axiosInstance.post(`${baseUrl}lead_taskwise_comment/addType`, value);
 };
-export const getCommentAccTask = (count,page, id) => {
+export const getCommentAccTask = (count, page, id) => {
   return axiosInstance.get(
-    `${baseUrl}lead_taskwise_comment/fetch?task_id=${id ? id : localStorage.getItem("wqeqwe")}&page=${page}&count=${count}`
+    `${baseUrl}lead_taskwise_comment/fetch?task_id=${id ? id : null}&page=${page}&count=${count}`
+  );
+};
+export const deleteCommentAccTask = (id) => {
+  return axiosInstance.delete(
+    `${baseUrl}lead_taskwise_comment/delete_type/${id}`
+  );
+};
+export const updateCommentAccTask = (id, value) => {
+  return axiosInstance.put(
+    `${baseUrl}lead_taskwise_comment/update_type/${id}`, value
+  );
+};
+export const GetUpdateCommentAccTaskByid = (id) => {
+  return axiosInstance.get(
+    `${baseUrl}lead_taskwise_comment/${id}`
   );
 };
 
