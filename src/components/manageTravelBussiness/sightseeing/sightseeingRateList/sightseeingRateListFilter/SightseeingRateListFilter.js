@@ -1,7 +1,7 @@
 import { FaGlobe, FaMapMarkerAlt } from "react-icons/fa"
 
 
-const SightseeingRateListFilter = () => {
+const SightseeingRateListFilter = ({ filterInitial, handleChange, getTransitionReport }) => {
     return (
         <div style={{ margin: "14px" }}>
             <div className="card">
@@ -27,7 +27,10 @@ const SightseeingRateListFilter = () => {
                                     <input
                                         type="date"
                                         className="form-control"
-                                        name="title"
+                                        value={filterInitial?.start_date}
+                                        name="start_date"
+                                        onChange={handleChange}
+
                                     />
                                 </div>
                                 <div className="col-xl-4 mb-3">
@@ -35,11 +38,14 @@ const SightseeingRateListFilter = () => {
                                     <input
                                         type="date"
                                         className="form-control"
-                                        name="title"
+                                        value={filterInitial?.end_date}
+                                        name="start_date"
+                                        onChange={handleChange}
+
                                     />
                                 </div>
                                 <div className="col-xl-12 text-center">
-                                    <button type="button" className="btn btn-primary">
+                                    <button type="button" className="btn btn-primary" onClick={() => getTransitionReport(0)}>
                                         Search
                                     </button>
                                 </div>

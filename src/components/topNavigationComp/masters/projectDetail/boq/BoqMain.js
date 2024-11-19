@@ -12,7 +12,6 @@ function BoqMain() {
         { name: 'Client Orders', compo: <SalseOrder/> },
         { name: 'Client Invoices', compo: <SaleInvoice/> },
         { name: 'Payments From Client', compo: <PaymentForClient/> },
-        // { name: 'Payments From Client', compo: '<Wendow />' },
     ]
     return <div>
         <div className="row">

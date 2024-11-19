@@ -1,6 +1,7 @@
-import { baseUrl } from "../../baseUrl";
+import { baseproductUrl, baseUrl } from "../../baseUrl";
 import axiosInstance from "../../axiosServiseFactory/AxiosServiseFactory";
 import axios from "axios";
+import axiosInstance2 from "../../axiosServiseFactory/AxiosServiseFactoryProduct";
 // Export  Excel Apis  ---------------------!
 
 export const exportExcelDmt_txnList = (data) => {
@@ -5076,6 +5077,57 @@ export const GetTRCRM_sight_seeing_master = (value) => {
   return axiosInstance.get(`${baseUrl}TRCRM_sight_seeing_master/user?page=${value?.page}&count=${value?.count}&country_id=${value?.country_id}&city_id=${value?.city_id}&start_date=${value?.start_date}&end_date=${value?.end_date}`);
 };
 
+export const TRCRM_sight_seeing_rate_master = (value) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_sight_seeing_rate_master/user?page=${value?.page}&count=${value?.count}&id=${value?.id}&start_date=${value?.start_date}&end_date=${value?.end_date}`);
+};
+export const addTRCRM_sight_seeing_rate_master = (data) => {
+  return axiosInstance.post(`${baseUrl}TRCRM_sight_seeing_rate_master/addType`, data);
+};
+export const deleteTRCRM_sight_seeing_rate_master = (id) => {
+  return axiosInstance.delete(`${baseUrl}TRCRM_sight_seeing_rate_master/delete_type/${id}`);
+};
+
+export const getByIdTRCRM_sight_seeing_rate_master = (id) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_sight_seeing_rate_master/${id}`);
+};
+
+export const updateRCRM_sight_seeing_rate_master = (id, value) => {
+  return axiosInstance.put(`${baseUrl}TRCRM_sight_seeing_rate_master/update_type/${id}`, value);
+};
+
+export const addTRCRM_hotel_type_master = (data) => {
+  return axiosInstance.post(`${baseUrl}TRCRM_hotel_type_master/addType`, data);
+};
+export const GetRCRM_hotel_type_master = (value) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_hotel_type_master/user?page=${value?.page}&count=${value?.count}&start_date=${value?.start_date}&end_date=${value?.end_date}`);
+};
+export const deleteTRCRM_hotel_type_master = (id) => {
+  return axiosInstance.delete(`${baseUrl}TRCRM_hotel_type_master/delete_type/${id}`);
+};
+export const getByIdTRCRM_hotel_type_master = (id) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_hotel_type_master/${id}`);
+};
+export const updateTRCRM_hotel_type_master = (id, value) => {
+  return axiosInstance.put(`${baseUrl}TRCRM_hotel_type_master/update_type/${id}`, value);
+};
+
+export const addTRCRM_star_rating_master = (data) => {
+  return axiosInstance.post(`${baseUrl}TRCRM_star_rating_master/addType`, data);
+};
+export const GetTRCRM_star_rating_master = (value) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_star_rating_master/user?page=${value?.page}&count=${value?.count}&start_date=${value?.start_date}&end_date=${value?.end_date}`);
+};
+
+export const deleteTRCRM_star_rating_master = (id) => {
+  return axiosInstance.delete(`${baseUrl}TRCRM_star_rating_master/delete_type/${id}`);
+};
+export const getByIdTRCRM_star_rating_master = (id) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_star_rating_master/${id}`);
+};
+export const updateTRCRM_star_rating_master = (id, value) => {
+  return axiosInstance.put(`${baseUrl}TRCRM_star_rating_master/update_type/${id}`, value);
+};
+
 // -----------master task type api
 
 export const getListTasktypeMaster = (page, count) => {
@@ -5124,8 +5176,34 @@ export const updateTRCRM_sight_seeing_master = (id, value) => {
   return axiosInstance.put(`${baseUrl}TRCRM_sight_seeing_master/update_type/${id}`, value);
 };
 
+export const addTRCRM_hotel_master = (data) => {
+  return axiosInstance.post(`${baseUrl}TRCRM_hotel_master/addType`, data);
+};
+
+export const GetTRCRM_hotel_master = (value) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_hotel_master/user?page=${value?.page}&count=${value?.count}&country_id=${value?.country_id}&city_id=${value?.city_id}&start_date=${value?.start_date}&end_date=${value?.end_date}`);
+};
+export const deleteTRCRM_hotel_master = (id) => {
+  return axiosInstance.delete(`${baseUrl}TRCRM_hotel_master/delete_type/${id}`);
+};
+
+export const getByTRCRM_hotel_master = (id) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_hotel_master/${id}`);
+};
+export const updateRCRM_hotel_master = (id, value) => {
+  return axiosInstance.put(`${baseUrl}TRCRM_hotel_master/update_type/${id}`, value);
+};
+
+
+
 
 // Create task api for select 
+export const getTRCRM_hotel_type_master = (id) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_hotel_type_master/admin`);
+};
+export const getTRCRM_star_rating_master = (id) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_star_rating_master/admin`);
+};
 
 export const getListTaskTypeSelect = (page, count) => {
   return axiosInstance.get(`${baseUrl}lead_task_type_id/user`);
@@ -5378,6 +5456,152 @@ export const updateAccAddProjectById = (id, data) => {
 // DELETE an acc_add_project entry by ID
 export const deleteAccAddProjectById = (id) => {
   return axiosInstance.delete(`/acc_add_project/delete_type/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+
+export const updateConfigSetting = (data) => {
+  return axios.put(`${baseproductUrl}generalSetting/siteConfig`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getConfigSetting = (data) => {
+  return axios.get(`${baseproductUrl}generalSetting/siteConfig`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+export const updateConfigsales = (data) => {
+  return axios.put(`${baseproductUrl}generalSetting/sales`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getConfigSettingsales = (data) => {
+  return axios.get(`${baseproductUrl}generalSetting/sales`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+export const updateSettingProducts = (data) => {
+  return axios.put(`${baseproductUrl}generalSetting/product`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getSettingProducts = (data) => {
+  return axios.get(`${baseproductUrl}generalSetting/product`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const updateSystemSettingPrefix = (data) => {
+  return axios.put(`${baseproductUrl}generalSetting/prefix`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getSystemSettingPrefix = (data) => {
+  return axios.get(`${baseproductUrl}generalSetting/prefix`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const updateSettingMoneyAndNumberFormat = (data) => {
+  return axios.put(`${baseproductUrl}generalSetting/moneyAndNumberFormat`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getSettingMoneyAndNumberFormat = (data) => {
+  return axios.get(`${baseproductUrl}generalSetting/moneyAndNumberFormat`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const updateSettingWeighingScale = (data) => {
+  return axios.put(`${baseproductUrl}generalSetting/weight`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getSettingWeighingScale = (data) => {
+  return axios.get(`${baseproductUrl}generalSetting/weight`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+export const updateSettingEmail = (data) => {
+  return axios.put(`${baseproductUrl}generalSetting/email`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getSettingEmail = (data) => {
+  return axios.get(`${baseproductUrl}generalSetting/email`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+export const updateSettingaward = (data) => {
+  return axios.put(`${baseproductUrl}generalSetting/award`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getSettingaward = (data) => {
+  return axios.get(`${baseproductUrl}generalSetting/award`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
       Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,

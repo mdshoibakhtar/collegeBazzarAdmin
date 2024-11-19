@@ -1,6 +1,9 @@
 
 import { FaGlobe, FaMapMarkerAlt, FaLandmark, FaClock, FaCalendarAlt, FaComment } from 'react-icons/fa';
 import Breadcrumbs from '../../../../common/breadcrumb/Breadcrumbs';
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { getByIdRCRM_sight_seeing_master } from '../../../../api/login/Login';
 const SightseeingView = () => {
     const breadCrumbsTitle = {
         id: "1",
@@ -9,6 +12,19 @@ const SightseeingView = () => {
         title_3: 'View Sightseeing',
         path_2: ``
     };
+    const param = useParams()
+    const [data, setData] = useState(null)
+    const ViewData = async () => {
+        try {
+            const res = await getByIdRCRM_sight_seeing_master(param?.id)
+            setData(res?.data)
+        } catch (error) {
+
+        }
+    }
+    useEffect(() => {
+        ViewData()
+    }, [])
     return (
         <>
             <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
@@ -25,66 +41,66 @@ const SightseeingView = () => {
                                 <div className="row">
                                     <div className="col-md-3">
                                         <p><FaGlobe color="red" /> <strong>Countries</strong></p>
-                                        <p>India</p>
+                                        <p>{data?.country}</p>
                                     </div>
                                     <div className="col-md-3">
                                         <p><FaMapMarkerAlt color="red" /> <strong>City</strong></p>
-                                        <p>Delhi</p>
+                                        <p>{data?.city}</p>
                                     </div>
                                     <div className="col-md-3">
                                         <p><FaLandmark color="red" /> <strong>Place Name</strong></p>
-                                        <p>Visit</p>
+                                        <p>{'--'}</p>
                                     </div>
                                     <div className="col-md-3">
                                         <p><FaComment color="red" /> <strong>Description</strong></p>
-                                        <p>Visit the Lal Qila</p>
+                                        <p>{data?.description}</p>
                                     </div>
 
                                     <div className="col-md-3">
                                         <p><FaCalendarAlt color="red" /> <strong>Inclusion</strong></p>
-                                        <p>Lunch</p>
+                                        <p>{data?.inclusion}</p>
                                     </div>
                                     <div className="col-md-3">
                                         <p><FaCalendarAlt color="red" /> <strong>Exclusion</strong></p>
-                                        <p>Dinner, Snacks</p>
+                                        <p>{data?.exclusion}</p>
                                     </div>
                                     <div className="col-md-3">
                                         <p><FaClock color="red" /> <strong>Duration</strong></p>
-                                        <p>2</p>
+                                        <p>{data?.duration}</p>
                                     </div>
                                     <div className="col-md-3">
                                         <p><FaCalendarAlt color="red" /> <strong>Time</strong></p>
-                                        <p>Any Time</p>
+                                        <p>{data?.createdAt}</p>
                                     </div>
 
                                     <div className="col-md-3">
                                         <p><FaClock color="red" /> <strong>Timings (Open - Close)</strong></p>
-                                        <p>10:00 AM</p>
+                                        <p>{data?.timing_open_close}</p>
                                     </div>
                                     <div className="col-md-3">
                                         <p><FaComment color="red" /> <strong>Remark</strong></p>
-                                        <p>Good to visit</p>
+                                        <p>{data?.remark}</p>
                                     </div>
                                     <div className="col-md-3">
                                         <p><FaCalendarAlt color="red" /> <strong>Internal Remark 1</strong></p>
-                                        <p>Good site</p>
+                                        <p>{data?.internal_remark1}</p>
                                     </div>
                                     <div className="col-md-3">
                                         <p><FaCalendarAlt color="red" /> <strong>Internal Remark 2</strong></p>
-                                        <p>Old Heritage</p>
+                                        <p>{data?.internal_remark2}</p>
                                     </div>
 
                                     <div className="col-md-3">
                                         <p><FaClock color="red" /> <strong>Start Time</strong></p>
-                                        <p>10:00</p>
+                                        <p>{data?.start_time}</p>
                                     </div>
                                     <div className="col-md-3">
                                         <p><FaCalendarAlt color="red" /> <strong>Close Day</strong></p>
-                                        <p>-</p>
+                                        <p>{data?.close_day}</p>
                                     </div>
                                     <div className="col-md-3">
                                         <p><FaCalendarAlt color="red" /> <strong>Transport</strong></p>
-                                        <p>PVT</p>
+                                        <p>{data?.transport}</p>
                                     </div>
                                 </div>
                             </form>

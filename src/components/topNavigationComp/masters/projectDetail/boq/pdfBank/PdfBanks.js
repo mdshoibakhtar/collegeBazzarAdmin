@@ -1,7 +1,6 @@
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 
-const PdfBanks = ({title}) => {
-
+const PdfBanks = ({ title }) => {
     const styles = StyleSheet.create({
         page: {
             backgroundColor: '#FFFFFF',
@@ -13,18 +12,13 @@ const PdfBanks = ({title}) => {
             fontSize: 10,
         },
         header: {
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
+            textAlign: 'center',
             marginBottom: 10,
         },
         title: {
-            fontSize: 18,
+            fontSize: 16,
             fontWeight: 'bold',
-            textAlign: 'center',
-        },
-        boldText: {
-            fontWeight: 'bold',
+            marginBottom: 5,
         },
         row: {
             flexDirection: 'row',
@@ -34,85 +28,110 @@ const PdfBanks = ({title}) => {
         table: {
             display: 'table',
             width: '100%',
-            border: '1px solid black',
             marginTop: 10,
+            border: '1px solid black',
         },
         tableRow: {
             flexDirection: 'row',
+            borderBottom: '1px solid black',
         },
         tableCol: {
-            width: '20%',
+            flex: 1,
+            borderRight: '1px solid black',
+            padding: 5,
+        },
+        tableColWide: {
+            flex: 2,
             borderRight: '1px solid black',
             padding: 5,
         },
         tableHeader: {
-            width: '20%',
-            borderRight: '1px solid black',
             backgroundColor: '#f0f0f0',
-            padding: 5,
             fontWeight: 'bold',
-        },
-        totalRow: {
-            flexDirection: 'row',
-            borderTop: '1px solid black',
-            padding: 5,
-        },
-        noteSection: {
-            borderTop: '1px solid black',
-            marginTop: 10,
-            paddingTop: 5,
         },
         footer: {
             marginTop: 20,
-            textAlign: 'right',
-            fontStyle: 'italic',
-        }
+            fontSize: 10,
+            textAlign: 'center',
+        },
+        noteSection: {
+            marginTop: 10,
+            fontSize: 10,
+            borderTop: '1px solid black',
+            paddingTop: 5,
+        },
     });
 
     return (
         <Document>
             <Page size="A4" style={styles.page}>
                 <View style={styles.container}>
-
                     {/* Header */}
-                    <View style={styles.header}>
-                        <Text>HEAD OFFICE</Text>
-                        <Text style={styles.title}>{title}</Text>
-                        <Text>Original</Text>
-                    </View>
+                    <Text style={styles.header}>HEAD OFFICE {title}</Text>
+                    <Text style={styles.header}>{title}</Text>
 
-                    {/* Quote Details */}
+                    {/* Order Info */}
                     <View style={styles.row}>
-                        <Text>Quote No: <Text style={styles.boldText}>1</Text></Text>
-                        <Text>Quote Date: <Text style={styles.boldText}>04/11/2024</Text></Text>
-                        <Text>Valid Till: <Text style={styles.boldText}>15/11/2024</Text></Text>
+                        <Text>Order No.: <Text style={{ fontWeight: 'bold' }}>12</Text></Text>
+                        <Text>Order Date: <Text style={{ fontWeight: 'bold' }}>29/11/2024</Text></Text>
                     </View>
 
-                    {/* Recipient Details */}
-                    <Text>M/s: <Text style={styles.boldText}>ABARIS SOFTCH PVT. LTD..</Text></Text>
-                    <Text>M: 8851746286</Text>
+                    {/* Customer Details */}
+                    <Text>M/s: Abaris Softech.</Text>
+                    <Text>Address: Delhi</Text>
+                    <Text>M: 884356563</Text>
 
-                    {/* Subject and Message */}
-                    <Text>Subject: TITLE HERE</Text>
-                    <Text>We thank you for giving us the opportunity to Quote for valuable goods. We are pleased to quote you our best rate offer for the same as under.</Text>
+                    {/* Table */}
+                    <View style={styles.table}>
+                        {/* Header Row */}
+                        <View style={[styles.tableRow, styles.tableHeader]}>
+                            <Text style={styles.tableCol}>No.</Text>
+                            <Text style={styles.tableColWide}>Particular</Text>
+                            <Text style={styles.tableCol}>Qty</Text>
+                            <Text style={styles.tableCol}>Unit</Text>
+                            <Text style={styles.tableCol}>Rate</Text>
+                            <Text style={styles.tableCol}>Amount</Text>
+                        </View>
+                        {/* Sample Data Row */}
+                        <View style={styles.tableRow}>
+                            <Text style={styles.tableCol}>1</Text>
+                            <Text style={styles.tableColWide}>DRAGON 1 LTR</Text>
+                            <Text style={styles.tableCol}>2</Text>
+                            <Text style={styles.tableCol}>-</Text>
+                            <Text style={styles.tableCol}>0.00</Text>
+                            <Text style={styles.tableCol}>0.00</Text>
+                        </View>
+                        <View style={styles.tableRow}>
+                            <Text style={styles.tableCol}>2</Text>
+                            <Text style={styles.tableColWide}>ACID SLURY</Text>
+                            <Text style={styles.tableCol}>8</Text>
+                            <Text style={styles.tableCol}>-</Text>
+                            <Text style={styles.tableCol}>200.00</Text>
+                            <Text style={styles.tableCol}>200.00</Text>
+                        </View>
+                    </View>
 
-                    {/* Notes Section */}
+                    {/* Totals */}
+                    <View style={[styles.row, { marginTop: 10 }]}>
+                        <Text>Total Qty: 10.00</Text>
+                        <Text>Sub Total: 200.00</Text>
+                    </View>
+                    <View style={styles.row}>
+                        <Text>Grand Total: 200.00</Text>
+                    </View>
+
+                    {/* Notes */}
                     <View style={styles.noteSection}>
-                        <Text>Notes: Suddep</Text>
-                        <Text>Bank: 123 | A/C: 125231184616 | IFSC No: 123</Text>
+                        <Text>Notes: Thanks</Text>
+                        <Text>Terms & Condition: HEAD OFFICE</Text>
                     </View>
-
-                    {/* Terms & Conditions */}
-                    <Text>Terms & Condition:</Text>
-                    <Text>1. Incase item(s) offered have any adverse impact on Environment, Health & Safety, please specify relevant details in your quote categorically. Kindly provide applicable legislation for the same.</Text>
 
                     {/* Footer */}
-                    <Text style={styles.footer}>HEAD OFFICE</Text>
                     <Text style={styles.footer}>( Authorized Signatory )</Text>
                 </View>
             </Page>
         </Document>
     );
-}
+};
 
 export default PdfBanks;
