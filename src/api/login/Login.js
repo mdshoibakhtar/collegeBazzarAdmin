@@ -1,6 +1,7 @@
-import { baseUrl } from "../../baseUrl";
+import { baseproductUrl, baseUrl } from "../../baseUrl";
 import axiosInstance from "../../axiosServiseFactory/AxiosServiseFactory";
 import axios from "axios";
+import axiosInstance2 from "../../axiosServiseFactory/AxiosServiseFactoryProduct";
 // Export  Excel Apis  ---------------------!
 
 export const exportExcelDmt_txnList = (data) => {
@@ -5341,6 +5342,152 @@ export const updateAccAddProjectById = (id, data) => {
 // DELETE an acc_add_project entry by ID
 export const deleteAccAddProjectById = (id) => {
   return axiosInstance.delete(`/acc_add_project/delete_type/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+
+export const updateConfigSetting = (data) => {
+  return axios.put(`${baseproductUrl}generalSetting/siteConfig`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getConfigSetting = (data) => {
+  return axios.get(`${baseproductUrl}generalSetting/siteConfig`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+export const updateConfigsales = (data) => {
+  return axios.put(`${baseproductUrl}generalSetting/sales`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getConfigSettingsales = (data) => {
+  return axios.get(`${baseproductUrl}generalSetting/sales`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+export const updateSettingProducts = (data) => {
+  return axios.put(`${baseproductUrl}generalSetting/product`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getSettingProducts = (data) => {
+  return axios.get(`${baseproductUrl}generalSetting/product`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const updateSystemSettingPrefix = (data) => {
+  return axios.put(`${baseproductUrl}generalSetting/prefix`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getSystemSettingPrefix = (data) => {
+  return axios.get(`${baseproductUrl}generalSetting/prefix`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const updateSettingMoneyAndNumberFormat = (data) => {
+  return axios.put(`${baseproductUrl}generalSetting/moneyAndNumberFormat`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getSettingMoneyAndNumberFormat = (data) => {
+  return axios.get(`${baseproductUrl}generalSetting/moneyAndNumberFormat`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const updateSettingWeighingScale = (data) => {
+  return axios.put(`${baseproductUrl}generalSetting/weight`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getSettingWeighingScale = (data) => {
+  return axios.get(`${baseproductUrl}generalSetting/weight`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+export const updateSettingEmail = (data) => {
+  return axios.put(`${baseproductUrl}generalSetting/email`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getSettingEmail = (data) => {
+  return axios.get(`${baseproductUrl}generalSetting/email`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+export const updateSettingaward = (data) => {
+  return axios.put(`${baseproductUrl}generalSetting/award`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getSettingaward = (data) => {
+  return axios.get(`${baseproductUrl}generalSetting/award`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
       Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
