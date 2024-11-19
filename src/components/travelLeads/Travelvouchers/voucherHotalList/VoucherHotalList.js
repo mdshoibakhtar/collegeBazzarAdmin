@@ -6,9 +6,9 @@ import { TiDownload, TiTick } from "react-icons/ti"
 import { Link } from "react-router-dom"
 import SendMailModal from "./sendMailModal/SendMailModal"
 import { useState } from "react"
-import { VoucherAfterPayment } from "../../../../common/voucherAfterPaymentPdf/voucherAfterPaymentPdf/VoucherAfterPaymentPdf"
 import { PDFDownloadLink } from "@react-pdf/renderer"
 import { Button } from "react-bootstrap"
+import { VoucherAfterPayment } from "../../../../common/voucherAfterPaymentPdf/voucherAfterPaymentPdf/VoucherAfterPaymentPdf"
 
 
 const VoucherHotalList = () => {

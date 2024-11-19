@@ -241,15 +241,15 @@ const Sightseeing = () => {
                                                 {data && data?.map((item, i) => {
                                                     return <tr role="row" key={item?._id}>
                                                         <td valign="top" className="dataTables_empty">{(i + 1) + (page * count)}</td>
-                                                        <td valign="top" className="dataTables_empty">{item?.city}</td>
+                                                        <td valign="top" className="dataTables_empty">{item?.city?.name}</td>
                                                         <td valign="top" className="dataTables_empty">{item?.sightsseing_activity}</td>
                                                         <td valign="top" className="dataTables_empty">{item?.internal_remark1}</td>
                                                         <td>
                                                             <div className="d-flex">
-                                                                <Link to={`/viewsightseeing`} className="btn btn-primary shadow btn-xs sharp me-1">
+                                                                <Link to={`/viewsightseeing/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
                                                                     <FaEye />
                                                                 </Link>
-                                                                <Link to={`/sightseeing-ratelist/${item?._id}}`} className="btn btn-primary shadow btn-xs sharp me-1">
+                                                                <Link to={`/sightseeing-ratelist/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
                                                                     <BsTicketPerforatedFill />
                                                                 </Link>
                                                                 <Link to={`/sightseen-update/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
