@@ -976,6 +976,10 @@ import SocialRewardSharePointPage from "./pages/socialRewardSharePointPage";
 import SocailMediaLikeRewardPointPage from "./pages/socialMediaLikeRewardPointPage";
 import AddProductPage from "./pages/addProductPage";
 import ListProductPage from "./pages/listProductPage";
+import InvoiceAdd from "./components/travelLeads/travelInvoice/invoice/invoiceAdd/InvoiceAdd";
+import AddpaymentReceipt from "./components/travelLeads/travelInvoice/paymentReceipt/AddpaymentReceipt/AddpaymentReceipt";
+import CreditNoteAdd from "./components/travelLeads/travelInvoice/creditNote/creditNoteAdd/CreditNoteAdd";
+import FlightInvoiceAdd from "./components/travelLeads/travelInvoice/flightInvoiceList/flightInvoiceAdd/FlightInvoiceAdd";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -1040,7 +1044,7 @@ function App() {
   }
   console.log(window.localStorage.getItem('dashRout') == null);
 
-
+const [mnualData,setManualData] = useState()
 
   return (
     <>
@@ -2803,6 +2807,10 @@ function App() {
               <Route path="travel-service-Add" element={<AddServiceVoucher />} />
               <Route path="travel-flight-Add" element={<AddFlightVoucher />} />
               <Route path="travel-invoice-list" element={<TravelInvoice />} />
+              <Route path="travel-invoice-create" element={<InvoiceAdd />} />
+              <Route path="travel-payment-receipt-create" element={<AddpaymentReceipt />} />
+              <Route path="travel-Credit Note" element={<CreditNoteAdd />} />
+              <Route path="travel-create-flight" element={<FlightInvoiceAdd />} />
 
               {/* travocrm */}
               {/* ----------------Moin's Route start-------------------------------*/}
@@ -2935,8 +2943,8 @@ function App() {
                 <Route path="" element={<Reccetemplet />} />
                 <Route path="design" element={<DesignSection />} />
               </Route>
-              <Route path="my-task/task-manager" element={<Taskmanager />} >
-                <Route path="" element={<TaskComent />} />
+              <Route path="my-task/task-manager" element={<Taskmanager setManualData={setManualData}/>} >
+                <Route path="" element={<TaskComent mnualData={mnualData} />} />
                 {/* <Route path="design" element={<DesignSection />} /> */}
               </Route>
               {/* Shoib's Travel Crm Report Statics */}

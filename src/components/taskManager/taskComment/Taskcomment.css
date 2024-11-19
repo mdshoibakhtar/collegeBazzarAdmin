@@ -1,0 +1,22 @@
+.message {
+    max-width: 70%;
+    padding: 6px 15px;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    word-wrap: break-word;
+    display: inline-block;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.message.sent {
+    background-color: #d1f7d6; /* Light green for sender */
+    align-self: flex-end;
+    border-bottom-right-radius: 0;
+}
+
+.message.received {
+    background-color: #f1f0f0; /* Light gray for receiver */
+    align-self: flex-start;
+    border-bottom-left-radius: 0;
+}
