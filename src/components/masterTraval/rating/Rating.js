@@ -1,19 +1,22 @@
-import { Pagination, Popconfirm } from "antd";
-import { Link } from "react-router-dom";
-import Breadcrumbs from "../../../common/breadcrumb/Breadcrumbs";
-import HotelFilter from "./hotelFilter/HotelFilter";
 import { useEffect, useState } from "react";
-import { countryList, deleteTRCRM_hotel_master, GetTRCRM_hotel_master } from "../../../api/login/Login";
-import { toast, ToastContainer } from "react-toastify";
+import { Link, useParams } from "react-router-dom";
+import Breadcrumbs from "../../../common/breadcrumb/Breadcrumbs";
+import { Pagination, Popconfirm } from "antd";
+import { ToastContainer } from "react-bootstrap";
+import { toast } from "react-toastify";
+import RatingFilter from "./ratingFilter/RatingFilter";
+import { deleteTRCRM_star_rating_master, GetTRCRM_star_rating_master } from "../../../api/login/Login";
 
-
-const AllHotle = () => {
+const Rating = () => {
     const breadCrumbsTitle = {
         id: "1",
-        title_1: " Manage Travel Business",
-        title_2: 'All Hotels',
+        title_1: "Travel Master",
+        title_2: 'Hotel Rating',
         path_2: ``
     };
+
+    const params = useParams()
+    // console.log(params);
 
     const getCurrentDate = () => {
         const today = new Date();
@@ -34,9 +37,6 @@ const AllHotle = () => {
         page: '',
         end_date: getCurrentDate(),
         start_date: getCurrentDate(),
-        country_id: '',
-        city_id: "",
-
         // sortType: '',
         // sortType: ''
     })
@@ -51,25 +51,14 @@ const AllHotle = () => {
         setFilterInitial(clone)
     }
 
-    const [countryData, setCountryData] = useState([])
 
-    const countrygetData = async () => {
-        try {
-            const res = await countryList()
-            setCountryData(res?.data);
-
-        } catch (error) {
-
-        }
-    }
 
     const getTransitionReport = async (input) => {
         // console.log('iojijip');
         setLoading(true)
         const clone = { ...filterInitial, count: count, page: input, user_id: window.localStorage.getItem('userIdToken') }
         try {
-            const res = await GetTRCRM_hotel_master(clone)
-            // console.log(res?.data);
+            const res = await GetTRCRM_star_rating_master(clone)
             setTotalCount(res?.totalCount)
             setData(res?.data)
 
@@ -85,85 +74,6 @@ const AllHotle = () => {
         getTransitionReport(e - 1)
     };
 
-
-    const ResetData = async () => {
-        setLoading(true)
-        const obj = {
-            count: 10,
-            page: 0,
-            min_amt: 0,
-            max_amt: 0,
-            end_date: '',
-            start_date: '',
-            type: '',
-            trans_type: '',
-            order_id: '',
-            txn_id: '',
-            sortType: '',
-            sortType: '',
-            user_id: window.localStorage.getItem('userIdToken')
-        }
-        try {
-            // const res = await walletsREports(obj)
-            // setTotalCount(res?.data?.data?.total)
-            // setData(res?.data?.data?.wallet)
-            // setFilterInitial({
-            //     end_date: '',
-            //     start_date: '',
-            //     type: '',
-            //     trans_type: '',
-            //     order_id: '',
-            //     txn_id: '',
-            // })
-        } catch (error) {
-
-        }
-        setLoading(false)
-    }
-
-
-    const [sortDirection, setSortDirection] = useState();
-    // console.log(sortDirection);
-
-    const [assending, setDecending] = useState(1)
-
-    const sortByColumn = async (key) => {
-        if (sortDirection == 'asc') {
-            setDecending(1)
-        } else {
-            setDecending(-1)
-        }
-
-        setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
-
-        setLoading(true)
-
-        const clone = { ...filterInitial, count: count, page: page, min_amt: +filterInitial.min_amt, max_amt: +filterInitial.max_amt, sortType: +assending, sortKey: key, user_id: window.localStorage.getItem('userIdToken') }
-        // console.log(clone);
-        try {
-            // const res = await walletsREports(clone)
-            // // console.log(res?.data?.data?.wallet);
-            // setTotalCount(res?.data?.data?.total)
-            // setData(res?.data?.data?.wallet)
-
-        } catch (error) {
-
-        }
-        setLoading(false)
-    };
-
-    const allDataWalletReport = async () => {
-        const clone = { ...filterInitial, count: count, page: page, min_amt: +filterInitial.min_amt, max_amt: +filterInitial.max_amt, user_id: window.localStorage.getItem('userIdToken') }
-        try {
-            // const res = await allDataWallets(clone)
-            // setAllData(res?.data?.data?.wallet);
-        } catch (error) {
-
-        }
-    }
-
-
-
     const toastSuccessMessage = (message) => {
         toast.success(`Delete Success`, {
             position: "top-right",
@@ -171,14 +81,14 @@ const AllHotle = () => {
     };
 
     const confirm = (id) => {
-        console.log('setMental');
+        // console.log('setMental');
         deleteData(id)
 
     }
 
     const deleteData = async (id) => {
         try {
-            const res = await deleteTRCRM_hotel_master(id)
+            const res = await deleteTRCRM_star_rating_master(id)
             // console.log(res);
             if (res?.error == false) {
                 toastSuccessMessage()
@@ -197,15 +107,12 @@ const AllHotle = () => {
     }, [])
 
     useEffect(() => {
-        allDataWalletReport()
         getTransitionReport(0)
-        countrygetData()
-
     }, [])
     return (
         <>
             <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
-            <HotelFilter countryData={countryData} filterInitial={filterInitial} handleChange={handleChange} getTransitionReport={getTransitionReport} />
+            <RatingFilter filterInitial={filterInitial} handleChange={handleChange} getTransitionReport={getTransitionReport} />
             <div>
                 <div className="row m-2">
                     <div className="col-xl-12">
@@ -213,8 +120,8 @@ const AllHotle = () => {
                             <div className="card-body p-0">
                                 <div className="table-responsive active-projects style-1">
                                     <div className="tbl-caption">
-                                        <h4 className="heading mb-0 p-2">All Hotels</h4>
-                                        <Link to='/hotel-add' className="btn btn-primary">Add Hotel</Link>
+                                        <h4 className="heading mb-0 p-2">Travel Rating </h4>
+                                        <Link to={`/travel-rating-add`} className="btn btn-primary">Add Travel Rating</Link>
                                     </div>
                                     <div id="banner-tblwrapper_wrapper" className="dataTables_wrapper no-footer">
                                         <div className="dt-buttons">
@@ -226,30 +133,25 @@ const AllHotle = () => {
                                             <thead>
                                                 <tr role="row">
                                                     <th style={{ width: '50px' }}>S.No</th>
-                                                    <th style={{ width: '150px' }}>Hotel Name</th>
-                                                    <th style={{ width: '150px' }}>City Name</th>
-                                                    <th style={{ width: '150px' }}>Address</th>
-                                                    <th style={{ width: '150px' }}>Contact</th>
+                                                    <th style={{ width: '150px' }}>Rating Name</th>
                                                     <th style={{ width: '150px' }}>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 {data && data?.map((item, i) => {
-                                                    return <tr role="row" key={item?._id}>
+                                                    return <tr role="row" >
                                                         <td valign="top" className="dataTables_empty">{(i + 1) + (page * count)}</td>
-                                                        <td valign="top" className="dataTables_empty">{item?.hotel_name}</td>
-                                                        <td valign="top" className="dataTables_empty">{item?.city?.name}</td>
-                                                        <td valign="top" className="dataTables_empty">{item?.address}</td>
-                                                        <td valign="top" className="dataTables_empty">{item?.contact}</td>
+                                                        <td valign="top" className="dataTables_empty">{item?.name}</td>
+
                                                         <td>
                                                             <div className="d-flex">
-                                                                <Link to={`/hotel-update/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
+                                                                <Link to={`/travel-rating-Update/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
                                                                     <i className="fa fa-pencil" />
                                                                 </Link>
                                                                 <Popconfirm
                                                                     title="Delete cow feed!"
-                                                                    description="Are you sure to delete?"
-                                                                    // onConfirm={() => confirm(item?._id)}
+                                                                    description="Are you sure to delete ?"
+                                                                    onConfirm={() => confirm(item?._id)}
                                                                     // onCancel={cancel}
                                                                     okText="Yes"
                                                                     cancelText="No"
@@ -262,7 +164,6 @@ const AllHotle = () => {
                                                         </td>
                                                     </tr>
                                                 })}
-
                                             </tbody>
                                         </table>
 
@@ -288,4 +189,4 @@ const AllHotle = () => {
     )
 }
 
-export default AllHotle
+export default Rating
