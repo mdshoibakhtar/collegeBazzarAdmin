@@ -9,10 +9,12 @@ import CreateTask from './CreateTask';
 import { message, Popconfirm } from 'antd';
 function TaskComent({ mnualData }) {
     const [modalShow, setModalShow] = React.useState(false);
-    const [show, setshow] = React.useState(false);
+    const [show, setShow] = React.useState(true);
     const [count, setCount] = React.useState(100);
     const [page, setPage] = React.useState(0);
     const [state, setState] = React.useState([]);
+    const handleCreateTask = () => setShow(!show);
+    const handleClose = () => setShow(false);
     const taskId = window.localStorage.getItem("66565478543478654765376547")
 
     const [initialValues, setInitialValues] = useState({
@@ -173,6 +175,8 @@ function TaskComent({ mnualData }) {
         }
         // message.error('Edit Successful!');
     };
+
+
     return (
         <>
             <div className='col-xl-4 h-100'>
@@ -301,15 +305,15 @@ function TaskComent({ mnualData }) {
                                         onHide={() => setModalShow(false)}
                                     />
                                 </div>
-                                <Button variant="link" size="sm" onClick={() => setshow(true)}>
-                                    <i className="fas fa-ellipsis-h"></i>
+                                <Button className='btn-outline' variant="link" size="m" onClick={() => setShow(!show)}>
+                                    Edit Task <i class="fa-solid fa-pen-to-square"></i>
                                 </Button>
                             </div>
 
                             {/* Task Information */}
 
 
-                            <div className="overflow-y-scroll tScrollbarHide" style={{ height: "320px", fontSize:"12px" }}>
+                            <div className="overflow-y-scroll tScrollbarHide" style={{ height: "320px", fontSize: "12px" }}>
                                 {taskDetails?.createdBy && (
                                     <div
                                         style={{
@@ -466,6 +470,10 @@ function TaskComent({ mnualData }) {
                                         <label htmlFor="taskDescription">
                                             Reply or mention others with @... <span className="required"></span>
                                             <span classNmae="text-danger">*</span></label>
+                                        {/* Display uploaded files */}
+                                        <div style={{ marginTop: '20px' }}>
+
+                                        </div>
                                         <textarea
                                             id="taskDescription"
                                             placeholder="Enter Reply or mention others with @..."
@@ -513,30 +521,33 @@ function TaskComent({ mnualData }) {
                                             ></i>
                                         </div>
 
-                                        {/* Display uploaded files */}
-                                        <div style={{ marginTop: '20px' }}>
-                                            {console.log(initialValues)}
-                                            {initialValues?.attachments?.map((item, index) => (
-                                                <img
-                                                    key={index}
-                                                    style={{ width: '100px', height: '100px', marginRight: '10px' }}
-                                                    src={`${baseUrlImage}${item}`}
-                                                    alt={`Uploaded file ${index + 1}`}
-                                                />
-                                            ))}
-                                        </div>
+
 
                                     </div>
 
                                 </Form.Group>
-                                {sendBtn ? <div className='text-end'>
-                                    <button className='btn btn-sm btn-danger' >
-                                        cancel
-                                    </button>
-                                    <button className='btn btn-sm btn-outline-primary' >
-                                        Send <span><i class="fa-sharp fa-solid fa-paper-plane"></i></span>
-                                    </button>
-                                </div> : ""}
+                                <div className="d-flex align-items-center">
+                                    {initialValues?.attachments?.map((item, index) => (
+                                        <img
+                                            key={index}
+                                            style={{ width: "30px", height: "30px", marginRight: "10px" }}
+                                            src={`${baseUrlImage}${item}`}
+                                            alt={`Uploaded file ${index + 1}`}
+                                        />
+                                    ))}
+
+                                    {sendBtn && (
+                                        <div className="text-end ms-auto"> {/* Ensures buttons align to the right */}
+                                            <button className="btn btn-sm btn-danger me-2">
+                                                Cancel
+                                            </button>
+                                            <button className="btn btn-sm btn-outline-primary">
+                                                Send <i className="fa-sharp fa-solid fa-paper-plane"></i>
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
+
                             </form>) : ""}
 
                         <div className='accor-btn'></div>
@@ -546,7 +557,17 @@ function TaskComent({ mnualData }) {
                 </div>
                 <ToastContainer className={"text-center"} />
             </div>
-            {show && <CreateTask />}
+            <CreateTask
+                placement="end"
+                setShow={setShow}
+                show={show}
+                handleClose={handleClose}
+                handleCreateTask={handleCreateTask}
+                initialValues={initialValues}
+                setInitialValues={setInitialValues}
+                handleChange={handleChange}
+                formSubmit={formSubmit}
+            />
 
         </>
     )

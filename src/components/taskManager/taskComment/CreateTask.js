@@ -7,7 +7,6 @@ import { baseUrlImage } from '../../../baseUrl';
 import { toast } from 'react-toastify';
 
 function CreateTask({ show, handleClose, setInitialValues, initialValues, handleChange, formSubmit }) {
-
     const [priorityState, setPriorityState] = useState([]);
     const [staffData, setStaffData] = useState([]);
     const [taskType, setTaskType] = useState([]);
@@ -334,8 +333,8 @@ function CreateTask({ show, handleClose, setInitialValues, initialValues, handle
                                     closeMenuOnSelect={false}
                                     onChange={handleMultiSelectChange('assignees')}
                                     id="assignees"
-                                    value={staffData.filter(option => initialValues?.assignees.includes(option.value))}
-                                    defaultValue={staffData.filter(option => initialValues?.assignees.includes(option.value))}
+                                    value={staffData.filter(option => initialValues?.assignees?.includes(option.value))}
+                                    defaultValue={staffData.filter(option => initialValues?.assignees?.includes(option.value))}
                                 />
                             </div>
 

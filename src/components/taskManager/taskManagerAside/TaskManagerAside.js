@@ -3,14 +3,11 @@ import { Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Dropdown, Button, ButtonGroup } from "react-bootstrap";
 import CreateTask from '../taskComment/CreateTask';
-import { addTaskType, getAllAssign, taskCreatedByGet } from '../../../api/login/Login';
+import { addTaskType, getAllAssign, getCommentTaskById, getTaskById, taskCreatedByGet } from '../../../api/login/Login';
 import { toast } from 'react-toastify';
-// import { getStateData } from '../taskComment/TaskComent';
-export const getStateData = async (data, taskData) => {
-    // taskData(data);
-};
 
-function TaskManagerAside({ setManualData }) {
+
+function TaskManagerAside({ setManualData, mnualData }) {
     const [activeKey, setActiveKey] = useState("Important");
     const handleClose = () => setShow(false);
     const [show, setShow] = useState(false);
@@ -87,6 +84,7 @@ function TaskManagerAside({ setManualData }) {
         },
         { label: "My Comments", icon: "fa-solid fa-comments fa-bounce", route: "my-comments" }
     ];
+
 
 
 
@@ -168,6 +166,46 @@ function TaskManagerAside({ setManualData }) {
         }
 
     }
+    useEffect(() => {
+        const fetchCurrency = async () => {
+            try {
+                if (localStorage.getItem("66565478543478654765376547")) {
+                    const response = await getTaskById(localStorage.getItem("66565478543478654765376547"));
+                    setInitialValues(response.data);
+                } else {
+                    setInitialValues({
+                        task_name: "",
+                        task_type_id: { type: "", ref: "taskId" },
+                        task_stage_id: { type: "", ref: "taskStageMaster" },
+                        public: false,
+                        billable: false,
+                        attach_files: "",
+                        subject: "",
+                        hourly_rate: "",
+                        start_date_time: "",
+                        complition_date_time: "",
+                        end_date_time: "",
+                        expect_due_date_time: "",
+                        priority: { type: "", ref: "priority" },
+                        repeat_every: { type: "", enum: ["days", "week", "month", "year"] },
+                        repeated_no: null,
+                        assignees: [],
+                        followers: { type: "", ref: "staff" },
+                        tags: [], // Initialize as an empty array
+                        task_description: "",
+                        total_cycle: null,
+
+                    });
+                }
+            } catch (error) {
+                console.error("Error fetching currency:", error);
+            }
+        };
+
+        fetchCurrency();
+    }, [localStorage.getItem("66565478543478654765376547")]);
+
+
 
     return (
         <>
@@ -262,3 +300,5 @@ function TaskManagerAside({ setManualData }) {
 }
 
 export default TaskManagerAside;
+
+
