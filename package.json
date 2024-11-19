@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/styled": "^11.13.0",
     "@firebase/app": "^0.10.7",
+    "@mui/lab": "^6.0.0-beta.15",
+    "@mui/material": "^6.1.7",
     "@react-pdf/renderer": "^4.0.0",
     "@reduxjs/toolkit": "^2.2.1",
     "@testing-library/jest-dom": "^5.17.0",
@@ -31,6 +34,7 @@
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.8.3",
     "jwt-decode": "^4.0.0",
+    "multiselect-react-dropdown": "^2.0.25",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.0",
     "react-chartjs-2": "^5.2.0",
