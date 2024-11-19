@@ -964,6 +964,18 @@ import AddHotelVoucher from "./components/travelLeads/Travelvouchers/voucherHota
 import AddServiceVoucher from "./components/travelLeads/Travelvouchers/voucherServiceList/addServiceVoucher/AddServiceVoucher";
 import AddFlightVoucher from "./components/travelLeads/Travelvouchers/voucherFlightList/addFlightVoucher/AddFlightVoucher";
 import TravelInvoice from "./components/travelLeads/travelInvoice/TravelInvoice";
+import SystemSettingss from "./pages/system_settings/systemSettings/SystemSettings";
+import ListCouponPage from "./pages/listCouponPage";
+import AddNewCouponPage from "./pages/addNewCouponPage";
+import ClubUserPointPage from "./pages/clubUserPointsPage";
+import UpdateClubUserPoints from "./components/clubUserPointsComp/UpdateClubUserPoints";
+import ClubPointConfigurationPage from "./pages/clubPointConfigurationPage";
+import ListSetProductPointPage from "./pages/listSetProductPointPage";
+import AddSetProductPointPage from "./pages/addSetProductPointPage";
+import SocialRewardSharePointPage from "./pages/socialRewardSharePointPage";
+import SocailMediaLikeRewardPointPage from "./pages/socialMediaLikeRewardPointPage";
+import AddProductPage from "./pages/addProductPage";
+import ListProductPage from "./pages/listProductPage";
 import InvoiceAdd from "./components/travelLeads/travelInvoice/invoice/invoiceAdd/InvoiceAdd";
 import AddpaymentReceipt from "./components/travelLeads/travelInvoice/paymentReceipt/AddpaymentReceipt/AddpaymentReceipt";
 import CreditNoteAdd from "./components/travelLeads/travelInvoice/creditNote/creditNoteAdd/CreditNoteAdd";
@@ -2684,8 +2696,6 @@ const [mnualData,setManualData] = useState()
               {/*<Route path="add-book-code/:id" element={<BookCodeForm />} /> */}
               <Route path="projects/:id" element={<ProjectDetailMasters />} />
 
-
-
               <Route path="project-module" element={<ProjectModual />} />
               <Route path="create-project-module" element={<ProjectModualForm />} />
               <Route path="create-project-module/:id" element={<ProjectModualForm />} />
@@ -2910,6 +2920,18 @@ const [mnualData,setManualData] = useState()
               <Route path="product_color" element={<ColorsPage />} />
               <Route path="product_size" element={<SizePage />} />
 
+              <Route path="add-product" element={<AddProductPage />} />
+              <Route path="list-product" element={<ListProductPage />} />
+              <Route path="coupons" element={<ListCouponPage />} />
+              <Route path="coupons/create" element={<AddNewCouponPage />} />
+              <Route path="club-point-configuration" element={<ClubPointConfigurationPage />} />
+              <Route path="set-product-point" element={<ListSetProductPointPage />} />
+              <Route path="set-product-point/create" element={<AddSetProductPointPage />} />
+              <Route path="club-user-points" element={<ClubUserPointPage />} />
+              <Route path="club-user-points/edit/:id" element={<UpdateClubUserPoints />} />
+              <Route path="social-share-reward-point" element={<SocialRewardSharePointPage />} />
+              <Route path="socialMedia-like-reward-point" element={<SocailMediaLikeRewardPointPage />} />
+
               <Route path="all_orders" element={<AllOrdersPage />} />
               <Route path="inhouse_orders" element={<InhouseOrderPage />} />
               <Route path="seller_orders" element={<SellerOrdersPage />} />
@@ -2938,6 +2960,7 @@ const [mnualData,setManualData] = useState()
               <Route path="task-stage" element={<TaskStage />} />
               <Route path="create-task-stage" element={<TaskStageForm />} />
               <Route path="update-task-stage/:id" element={<TaskStageForm />} />
+              <Route path="system_settings" element={<SystemSettingss />} />
             </Route>
           </>
         )}
