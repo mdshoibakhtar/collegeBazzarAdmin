@@ -20,7 +20,7 @@ function MoneyAddNumberFormat() {
     };
 
     useEffect(() => {
-        fetchSiteConfig();
+        // fetchSiteConfig();
     }, []);
 
     // Handle input changes

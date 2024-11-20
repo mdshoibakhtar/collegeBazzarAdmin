@@ -5139,7 +5139,7 @@ export const getListTaskStageSelect = (page, count) => {
 export const postCommentAccTask = (value) => {
   return axiosInstance.post(`${baseUrl}lead_taskwise_comment/addType`, value);
 };
-export const getCommentAccTask = (count,page, id) => {
+export const getCommentAccTask = (count, page, id) => {
   return axiosInstance.get(
     `${baseUrl}lead_taskwise_comment/fetch?task_id=${id ? id : localStorage.getItem("wqeqwe")}&page=${page}&count=${count}`
   );
@@ -5510,6 +5510,131 @@ export const updateSettingaward = (data) => {
 
 export const getSettingaward = (data) => {
   return axios.get(`${baseproductUrl}generalSetting/award`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+
+
+
+// brand
+
+
+export const getBrandByPage = () => {
+  return axios.get(`${baseproductUrl}brand/admin`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getBrandById = (id) => {
+  return axios.get(`${baseproductUrl}brand/admin/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const deleteBrandById = (id) => {
+  return axios.delete(`${baseproductUrl}brand/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+// attribute
+
+export const getattributePage = () => {
+  return axios.get(`${baseproductUrl}attribute/admin`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getattributeId = (id) => {
+  return axios.get(`${baseproductUrl}attribute/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const deleteattributeId = (id) => {
+  return axios.delete(`${baseproductUrl}attribute/delete_attributes/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// unit
+
+export const getunitPage = () => {
+  return axios.get(`${baseproductUrl}unit/public`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getunitId = (id) => {
+  return axios.get(`${baseproductUrl}unit/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const deleteunitId = (id) => {
+  return axios.delete(`${baseproductUrl}unit/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+
+// size
+
+
+export const getsizePage = () => {
+  return axios.get(`${baseproductUrl}size`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getsizeId = (id) => {
+  return axios.get(`${baseproductUrl}size/admin/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const deletesizeId = (id) => {
+  return axios.delete(`${baseproductUrl}size/${id}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
       Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,

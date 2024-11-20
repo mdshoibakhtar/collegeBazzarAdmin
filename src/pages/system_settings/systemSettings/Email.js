@@ -20,7 +20,7 @@ function Email() {
     };
 
     useEffect(() => {
-        fetchSiteConfig();
+        // fetchSiteConfig();
     }, []);
 
     // Handle input changes

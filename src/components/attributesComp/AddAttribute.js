@@ -4,30 +4,48 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import { clodinaryImage, languageList } from '../../api/login/Login';
-import { baseUrlImage } from '../../baseUrl';
+import { clodinaryImage, getattributeId, getBrandById, languageList } from '../../api/login/Login';
+import { baseproductUrl, baseUrlImage } from '../../baseUrl';
 import Loadar from '../../common/loader/Loader';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
-function AddAttribute() {
+function AddAttribute({getData}) {
     const [val, setVal] = useState([]);
     const [value, setValue] = useState(0);
     const [data, setData] = useState([]);
 
     const getLang = async () => {
-        const res = await languageList();
+        const res = await languageList(); // Assuming `languageList` fetches the language data
         setData(res.data);
+
         const mapped = res.data.map((item) => ({
             name: '',
+            image: null,
+            meta_title: '',
+            meta_description: '',
             language_id: item._id,
-            approve: false,
             label: item.name,
         }));
-        setVal(mapped);
+        if (params?.uid) {
+            getDataId()
+        } else {
+            setVal(mapped);
+        }
     };
 
+    const params = useParams()
     useEffect(() => {
         getLang();
-    }, []);
+    }, [params?.uid]);
+
+    const getDataId = async () => {
+        const res = await getattributeId(params?.uid)
+        console.log(res);
+        setVal(res.data)
+    }
+   
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -40,13 +58,7 @@ function AddAttribute() {
             )
         );
     };
-
-    const handleSubmit = (event, index) => {
-        event.preventDefault();
-        console.log('Submitted Data:', val);
-    };
-
-    const [load , setLoad] = useState(false)
+    const [load, setLoad] = useState(false)
     const handleChangeImage = async (index, field, file) => {
         setLoad(true)
         const formData = new FormData();
@@ -55,25 +67,57 @@ function AddAttribute() {
         try {
             const res = await clodinaryImage(formData); // Assuming `clodinaryImage` handles the image upload
             const imageUrl = res?.data?.data?.url;
-
-            // Update the specific item's image field in val
             setTimeout(() => {
                 setLoad(false)
                 setVal((prev) =>
                     prev.map((item, i) =>
-                        i === index ? { ...item, [field]: imageUrl } : item
+                        i === index ? { ...item, image: imageUrl } : item
                     )
                 );
             }, 1000);
+
         } catch (error) {
             console.error('Image upload failed', error);
+        }
+    };
+    const toastSuccessMessage = (message) => {
+        toast.success(`${message}`, {
+            position: "top-right",
+        });
+    };
+
+    const navigate = useNavigate()
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            if (params?.uid) {
+                await axios.put(`${baseproductUrl}attribute/update_attributes/${params?.uid}`, { list: val }, {
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8",
+                        Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+                    },
+                });
+                navigate('/product_attribute')
+            } else {
+                await axios.post(`${baseproductUrl}attribute/add_attributes`, { list: val }, {
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8",
+                        Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+                    },
+                });
+            }
+            getData()
+            toastSuccessMessage(params?.uid ? "Updated successfully" : "Added successfully");
+            // alert('brand  Request Send Successfully')
+        } catch (error) {
+            // alert('brand  Request Send Fail !')
         }
     };
 
     return (
         <>
             <div className="row m-4">
-                {load && <Loadar/>}
+                {load && <Loadar />}
                 <div className="col-xl-12" style={{ padding: '0' }}>
                     <div className="card">
                         <div className="card-body p-0">
