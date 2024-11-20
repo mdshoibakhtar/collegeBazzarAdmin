@@ -5687,3 +5687,128 @@ export const getSettingaward = (data) => {
     },
   });
 };
+
+
+
+
+
+// brand
+
+
+export const getBrandByPage = () => {
+  return axios.get(`${baseproductUrl}brand/admin`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getBrandById = (id) => {
+  return axios.get(`${baseproductUrl}brand/admin/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const deleteBrandById = (id) => {
+  return axios.delete(`${baseproductUrl}brand/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+// attribute
+
+export const getattributePage = () => {
+  return axios.get(`${baseproductUrl}attribute/admin`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getattributeId = (id) => {
+  return axios.get(`${baseproductUrl}attribute/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const deleteattributeId = (id) => {
+  return axios.delete(`${baseproductUrl}attribute/delete_attributes/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// unit
+
+export const getunitPage = () => {
+  return axios.get(`${baseproductUrl}unit/admin`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getunitId = (id) => {
+  return axios.get(`${baseproductUrl}unit/admin/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const deleteunitId = (id) => {
+  return axios.delete(`${baseproductUrl}unit/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+
+// size
+
+
+export const getsizePage = () => {
+  return axios.get(`${baseproductUrl}size`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getsizeId = (id) => {
+  return axios.get(`${baseproductUrl}size/admin/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const deletesizeId = (id) => {
+  return axios.delete(`${baseproductUrl}size/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};

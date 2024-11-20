@@ -5,13 +5,13 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { baseproductUrl, baseUrlImage } from '../../baseUrl';
-import { clodinaryImage, languageList } from '../../api/login/Login';
+import { clodinaryImage, getBrandById, languageList } from '../../api/login/Login';
 import Loadar from '../../common/loader/Loader';
 import { toast, ToastContainer } from 'react-toastify';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-function AddBrand() {
+function AddBrand({ getData }) {
     const [val, setVal] = useState([]);
     const [value, setValue] = useState(0);
     const [data, setData] = useState([]);
@@ -28,12 +28,28 @@ function AddBrand() {
             language_id: item._id,
             label: item.name,
         }));
-        setVal(mapped);
+        if (params?.uid) {
+            getDataId()
+        } else {
+            setVal(mapped);
+        }
     };
 
+    const params = useParams()
     useEffect(() => {
         getLang();
-    }, []);
+    }, [params?.uid]);
+
+    const getDataId = async () => {
+        const res = await getBrandById(params?.uid)
+        console.log(res);
+        setVal(res.data)
+    }
+    // useEffect(() => {
+    //     if (params?.uid) {
+    //         getDataId()
+    //     }
+    // }, [params?.uid]);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -73,19 +89,29 @@ function AddBrand() {
             position: "top-right",
         });
     };
-    const params = useParams()
+
+    const navigate = useNavigate()
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log('Submitted Data:', val);
         try {
-            const res = await axios.post(`${baseproductUrl}brand/add`, { list: val }, {
-
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8",
-                    Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
-                },
-            });
-            toastSuccessMessage(params?.id ? "Updated successfully" : "Added successfully");
+            if (params?.uid) {
+                await axios.put(`${baseproductUrl}brand/${params?.uid}`, { list: val }, {
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8",
+                        Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+                    },
+                });
+                navigate('/product_brand')
+            } else {
+                await axios.post(`${baseproductUrl}brand/add`, { list: val }, {
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8",
+                        Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+                    },
+                });
+            }
+            getData()
+            toastSuccessMessage(params?.uid ? "Updated successfully" : "Added successfully");
             // alert('brand  Request Send Successfully')
         } catch (error) {
             // alert('brand  Request Send Fail !')
