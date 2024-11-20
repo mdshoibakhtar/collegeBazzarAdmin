@@ -984,6 +984,7 @@ import HotelTypePage from "./pages/masterTraval/hotalType";
 import HotelTypeAdd from "./components/masterTraval/hotelType/hotelTypeAdd/HotelTypeAdd";
 import RatingPage from "./pages/masterTraval/rating";
 import RatingAdd from "./components/masterTraval/rating/ratingAdd/RatingAdd";
+import InvoiceTab from "./components/billings/InvoiceTab";
 import TravelVisaTypePage from "./pages/travelCrmMaster/travelVisaType";
 import TravelVisaTypeAdd from "./components/travelCrmMaster/travelVisaType/travelVisaTypeAdd/TravelVisaTypeAdd";
 import TravelVisaCategoryPage from "./pages/travelCrmMaster/travelVisaCategory";
@@ -3006,6 +3007,7 @@ function App() {
               <Route path="create-task-stage" element={<TaskStageForm />} />
               <Route path="update-task-stage/:id" element={<TaskStageForm />} />
               <Route path="system_settings" element={<SystemSettingss />} />
+              <Route path="billings-invoice" element={<InvoiceTab />} />
 
 
             </Route>

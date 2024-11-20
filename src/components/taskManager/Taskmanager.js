@@ -3,7 +3,7 @@ import Breadcrumbs from '../../common/breadcrumb/Breadcrumbs'
 import TaskManagerAside from './taskManagerAside/TaskManagerAside'
 import { Outlet } from 'react-router-dom'
 
-function Taskmanager({ setManualData }) {
+function Taskmanager({ setManualData,mnualData }) {
     const breadCrumbsTitle = {
         id: "121231",
         title_1: "Organisation Settings",
@@ -16,8 +16,8 @@ function Taskmanager({ setManualData }) {
                 <div className="card">
                     <div className="row">
                         <div className="col-xl-3">
-                            <div className="card  overflow-y-scroll" style={{height:"500px"}}>
-                                <TaskManagerAside setManualData={setManualData} />
+                            <div className="card  overflow-y-scroll" style={{height:"630px"}}>
+                                <TaskManagerAside setManualData={setManualData} mnualData={mnualData} />
                             </div>
                         </div>
                         <Outlet />

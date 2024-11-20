@@ -5062,10 +5062,10 @@ export const addTaskType = (data) => {
 export const getCommentTaskById = (id) => {
   return axiosInstance.get(`${baseUrl}task/${id}`);
 };
-/*export const updateOrganisationSettingsMdlsttingTemp = (id, value) => {
-  return axiosInstance.put(`${baseUrl}acc_project_recce_template_master/update_type/${id}`, value);
+export const updateTaskCreated = (id, value) => {
+  return axiosInstance.put(`${baseUrl}task/update_type/${id}`, value);
 };
-export const getByOrganisationSettingsMdlsttingTempId = (id) => {
+/*export const getByOrganisationSettingsMdlsttingTempId = (id) => {
   return axiosInstance.get(`${baseUrl}acc_project_recce_template_master/${id}`);
 }; */
 
@@ -5312,7 +5312,22 @@ export const postCommentAccTask = (value) => {
 };
 export const getCommentAccTask = (count, page, id) => {
   return axiosInstance.get(
-    `${baseUrl}lead_taskwise_comment/fetch?task_id=${id ? id : localStorage.getItem("wqeqwe")}&page=${page}&count=${count}`
+    `${baseUrl}lead_taskwise_comment/fetch?task_id=${id ? id : null}&page=${page}&count=${count}`
+  );
+};
+export const deleteCommentAccTask = (id) => {
+  return axiosInstance.delete(
+    `${baseUrl}lead_taskwise_comment/delete_type/${id}`
+  );
+};
+export const updateCommentAccTask = (id, value) => {
+  return axiosInstance.put(
+    `${baseUrl}lead_taskwise_comment/update_type/${id}`, value
+  );
+};
+export const GetUpdateCommentAccTaskByid = (id) => {
+  return axiosInstance.get(
+    `${baseUrl}lead_taskwise_comment/${id}`
   );
 };
 
