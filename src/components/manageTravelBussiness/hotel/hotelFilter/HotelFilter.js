@@ -1,6 +1,6 @@
 
 
-const HotelFilter = () => {
+const HotelFilter = ({ countryData, filterInitial, handleChange, getTransitionReport }) => {
     return (
         <div style={{ margin: "14px" }}>
             <div className="card">
@@ -12,25 +12,50 @@ const HotelFilter = () => {
                         <form className="tbl-captionn">
                             <div className="row">
                                 <div className="col-xl-4 mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Start Date</label>
+                                    <input
+                                        type="date"
+                                        className="form-control"
+                                        value={filterInitial?.start_date}
+                                        name="start_date"
+                                        onChange={handleChange}
+
+                                    />
+                                </div>
+                                <div className="col-xl-4 mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Start Date</label>
+                                    <input
+                                        type="date"
+                                        className="form-control"
+                                        value={filterInitial?.end_date}
+                                        name="end_date"
+                                        onChange={handleChange}
+
+                                    />
+                                </div>
+                                <div className="col-xl-4 mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Country</label>
-                                    <select className="form-control" aria-label="Default select example">
+                                    <select className="form-control" aria-label="Default select example" name="country_id" onChange={handleChange}>
                                         <option selected>Open this select Country</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        {countryData && countryData?.map((item) => {
+                                            return <option value={item?._id} key={item?._id}>{item?.name}</option>
+                                        })}
                                     </select>
+
                                 </div>
                                 <div className="col-xl-4 mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">City Name</label>
                                     <input
                                         type="text"
                                         className="form-control"
-                                        name="title"
-                                        placeholder="City Name"
+                                        value={filterInitial?.city_id}
+                                        name="city_id"
+                                        onChange={handleChange}
+                                        placeholder='Search City Name'
                                     />
                                 </div>
                                 <div className="col-xl-12 text-center">
-                                    <button type="button" className="btn btn-primary">
+                                    <button type="button" className="btn btn-primary" onClick={() => getTransitionReport(0)}>
                                         Search
                                     </button>
                                 </div>

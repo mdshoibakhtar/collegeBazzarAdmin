@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react";
-import Breadcrumbs from "../../../../common/breadcrumb/Breadcrumbs";
 import { toast, ToastContainer } from "react-toastify";
+import Breadcrumbs from "../../../../common/breadcrumb/Breadcrumbs";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { addTRCRM_tag_name_master, getByTRCRM_tag_name_master, updateTRCRM_tag_name_master } from "../../../../api/login/Login";
+import { addTRCRM_visa_category_master, getByTRCRM_visa_category_master, updateTRCRM_visa_category_master } from "../../../../api/login/Login";
 
-
-const TagsAdd = () => {
+const TravelVisaCategoryAdd = () => {
     const breadCrumbsTitle = {
         id: "1",
-        title_1: " Manage Travel Business",
-        title_2: 'Tags Add',
+        title_1: "Travel CRM Master",
+        title_2: 'Travel Visa Type Add',
         path_2: ``
     };
 
@@ -24,7 +23,7 @@ const TagsAdd = () => {
     };
 
     const [formData, setFormData] = useState({
-        tag_name: '',
+        name: '',
     })
 
     const changeHandle = (e) => {
@@ -50,11 +49,11 @@ const TagsAdd = () => {
         if (!params?.id) {
             try {
                 // console.log(formData);
-                const res = await addTRCRM_tag_name_master(clone)
+                const res = await addTRCRM_visa_category_master(clone)
                 if (res?.error == false) {
                     toastSuccessMessage()
                     setTimeout(() => {
-                        navigate(`/tags`)
+                        navigate(`/travel-visa-category`)
                     }, 2000)
                 } else {
                     alert(res?.message)
@@ -64,11 +63,11 @@ const TagsAdd = () => {
             }
         } else {
             try {
-                const res = await updateTRCRM_tag_name_master(params.id, clone)
+                const res = await updateTRCRM_visa_category_master(params.id, clone)
                 if (res?.error == false) {
                     toastSuccessMessage()
                     setTimeout(() => {
-                        navigate(`/tags`)
+                        navigate(`/travel-visa-category`)
                     }, 2000)
                 } else {
                     alert(res?.message)
@@ -83,7 +82,7 @@ const TagsAdd = () => {
     useEffect(() => {
         const detbyIdData = async () => {
             try {
-                const res = await getByTRCRM_tag_name_master(params?.id)
+                const res = await getByTRCRM_visa_category_master(params?.id)
                 setFormData(res?.data)
             } catch (error) {
 
@@ -103,22 +102,21 @@ const TagsAdd = () => {
                     <div className="card-body p-0">
                         <div className="table-responsive active-projects style-1">
                             <div className="tbl-caption tbl-caption-2">
-                                <h4 className="heading mb-0 p-2">{params?.id ? 'Update' : 'Add'} Tags </h4>
+                                <h4 className="heading mb-0 p-2">{params?.id ? 'Update' : 'Add'} Travel Visa Category </h4>
                             </div>
                             <form className="tbl-captionn">
                                 <div className="row">
                                     <div className="col-xl-4 mb-3">
-                                        <label for="exampleFormControlInput1" className="form-label">Tag Name <span style={{ color: 'red' }}>*</span></label>
+                                        <label for="exampleFormControlInput1" className="form-label">Visa Category Name <span style={{ color: 'red' }}>*</span></label>
                                         <input
                                             type="text"
                                             className="form-control"
-                                            placeholder="Enter Tag Name "
-                                            name="tag_name"
-                                            value={formData?.tag_name}
+                                            placeholder="Enter Visa Category"
+                                            name="name"
+                                            value={formData?.name}
                                             onChange={changeHandle}
                                         />
                                     </div>
-
                                     <div className="col-xl-12 text-center">
                                         <button type="button" className="btn btn-primary" onClick={submitData}>
                                             {params?.id ? 'Update' : 'Add'}
@@ -135,4 +133,4 @@ const TagsAdd = () => {
     )
 }
 
-export default TagsAdd
+export default TravelVisaCategoryAdd

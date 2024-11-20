@@ -980,6 +980,18 @@ import InvoiceAdd from "./components/travelLeads/travelInvoice/invoice/invoiceAd
 import AddpaymentReceipt from "./components/travelLeads/travelInvoice/paymentReceipt/AddpaymentReceipt/AddpaymentReceipt";
 import CreditNoteAdd from "./components/travelLeads/travelInvoice/creditNote/creditNoteAdd/CreditNoteAdd";
 import FlightInvoiceAdd from "./components/travelLeads/travelInvoice/flightInvoiceList/flightInvoiceAdd/FlightInvoiceAdd";
+import HotelTypePage from "./pages/masterTraval/hotalType";
+import HotelTypeAdd from "./components/masterTraval/hotelType/hotelTypeAdd/HotelTypeAdd";
+import RatingPage from "./pages/masterTraval/rating";
+import RatingAdd from "./components/masterTraval/rating/ratingAdd/RatingAdd";
+import TravelVisaTypePage from "./pages/travelCrmMaster/travelVisaType";
+import TravelVisaTypeAdd from "./components/travelCrmMaster/travelVisaType/travelVisaTypeAdd/TravelVisaTypeAdd";
+import TravelVisaCategoryPage from "./pages/travelCrmMaster/travelVisaCategory";
+import TravelVisaCategoryAdd from "./components/travelCrmMaster/travelVisaCategory/travelVisaCategoryAdd/TravelVisaCategoryAdd";
+import TravelVisaMasterPage from "./pages/travelCrmMaster/travelVisaMaster";
+import TravelVisaMasterAdd from "./components/travelCrmMaster/travelVisaMaster/travelVisaMasterAdd/TravelVisaMasterAdd";
+import TravelInsurencePage from "./pages/travelCrmMaster/travelInsurence";
+import TravelInsurenceAdd from "./components/travelCrmMaster/travelInsurence/travelInsurenceAdd/TravelInsurenceAdd";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -1044,7 +1056,7 @@ function App() {
   }
   console.log(window.localStorage.getItem('dashRout') == null);
 
-const [mnualData,setManualData] = useState()
+  const [mnualData, setManualData] = useState()
 
   return (
     <>
@@ -2793,13 +2805,29 @@ const [mnualData,setManualData] = useState()
               <Route path="sightseen-list" element={<SightseeingPage />} />
               <Route path="sightseen-add" element={<Addsightseeing />} />
               <Route path="sightseen-update/:id" element={<Addsightseeing />} />
-              <Route path="viewsightseeing" element={<SightseeingView />} />
+              <Route path="viewsightseeing/:id" element={<SightseeingView />} />
               <Route path="sightseeing-ratelist/:id" element={<SightseeingRateList />} />
-              <Route path="add-sightseeingrate" element={<SightseeingRateAdd />} />
+              <Route path="add-sightseeingrate/:id" element={<SightseeingRateAdd />} />
+              <Route path="update-sightseeingrate/:id/:_id" element={<SightseeingRateAdd />} />
               <Route path="hotel-list" element={<AllHotalPage />} />
               <Route path="hotel-add" element={<HotelAdd />} />
+              <Route path="hotel-update/:id" element={<HotelAdd />} />
               <Route path="tags" element={<TagsPage />} />
               <Route path="tags-add" element={<TagsAdd />} />
+              <Route path="tags-update/:id" element={<TagsAdd />} />
+              <Route path="travel-visa-type" element={<TravelVisaTypePage />} />
+              <Route path="travel-visa-add" element={<TravelVisaTypeAdd />} />
+              <Route path="travel-visa-Update/:id" element={<TravelVisaTypeAdd />} />
+              <Route path="travel-visa-category" element={<TravelVisaCategoryPage />} />
+              <Route path="travel-visa-category-add" element={<TravelVisaCategoryAdd />} />
+              <Route path="travel-visa-category-update/:id" element={<TravelVisaCategoryAdd />} />
+              <Route path="visa-master" element={<TravelVisaMasterPage />} />
+              <Route path="visa-master-add" element={<TravelVisaMasterAdd />} />
+              <Route path="visa-master-update/:id" element={<TravelVisaMasterAdd />} />
+              <Route path="travel-insurance" element={<TravelInsurencePage />} />
+              <Route path="travel-insurance-add" element={<TravelInsurenceAdd />} />
+              <Route path="travel-insurance-update/:id" element={<TravelInsurenceAdd />} />
+
               <Route path="travel-leads" element={<TravelLeadPage />} />
               <Route path="leads-details" element={<ViewLeads />} />
               <Route path="travel-Vouchers-list" element={<TravelVoucherPage />} />
@@ -2947,12 +2975,20 @@ const [mnualData,setManualData] = useState()
               <Route path="pickupPoint_orders" element={<AllPickupPointsOrderPage />} />
               <Route path="cancelled_orders" element={<AllCancelledOrdersPage />} />
               <Route path="orders_status" element={<OrdersStatuspage />} />
+              <Route path="travel-hotel-type" element={<HotelTypePage />} />
+              <Route path="travel-hotel-type-add" element={<HotelTypeAdd />} />
+              <Route path="travel-hotel-type-Update/:id" element={<HotelTypeAdd />} />
+              <Route path="travel-rating" element={<RatingPage />} />
+              <Route path="travel-rating-add" element={<RatingAdd />} />
+              <Route path="travel-rating-Update/:id" element={<RatingAdd />} />
+
+
 
               <Route path="organisation-setting/module-settings" element={<OrganisationSettings />} >
                 <Route path="" element={<Reccetemplet />} />
                 <Route path="design" element={<DesignSection />} />
               </Route>
-              <Route path="my-task/task-manager" element={<Taskmanager setManualData={setManualData}/>} >
+              <Route path="my-task/task-manager" element={<Taskmanager setManualData={setManualData} />} >
                 <Route path="" element={<TaskComent mnualData={mnualData} />} />
                 {/* <Route path="design" element={<DesignSection />} /> */}
               </Route>
@@ -2970,6 +3006,8 @@ const [mnualData,setManualData] = useState()
               <Route path="create-task-stage" element={<TaskStageForm />} />
               <Route path="update-task-stage/:id" element={<TaskStageForm />} />
               <Route path="system_settings" element={<SystemSettingss />} />
+
+
             </Route>
           </>
         )}

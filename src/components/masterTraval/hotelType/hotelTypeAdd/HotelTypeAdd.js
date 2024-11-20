@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
-import Breadcrumbs from "../../../../common/breadcrumb/Breadcrumbs";
-import { toast, ToastContainer } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
-import { addTRCRM_tag_name_master, getByTRCRM_tag_name_master, updateTRCRM_tag_name_master } from "../../../../api/login/Login";
+import { toast, ToastContainer } from "react-toastify";
+import Breadcrumbs from "../../../../common/breadcrumb/Breadcrumbs";
+import { addTRCRM_hotel_type_master, getByIdTRCRM_hotel_type_master, updateTRCRM_hotel_type_master } from "../../../../api/login/Login";
 
 
-const TagsAdd = () => {
+const HotelTypeAdd = () => {
     const breadCrumbsTitle = {
         id: "1",
-        title_1: " Manage Travel Business",
-        title_2: 'Tags Add',
+        title_1: " Travel Master",
+        title_2: 'Add Hotel Type',
         path_2: ``
     };
 
     const params = useParams()
-    // console.log(params);
+    console.log(params);
 
     const navigate = useNavigate()
 
@@ -24,7 +24,8 @@ const TagsAdd = () => {
     };
 
     const [formData, setFormData] = useState({
-        tag_name: '',
+        hotel_type: '',
+        isActive: '',
     })
 
     const changeHandle = (e) => {
@@ -43,32 +44,33 @@ const TagsAdd = () => {
         });
     };
 
-    const disabled = !formData?.tag_name
+    const disabled = !formData?.hotel_type || !formData?.isActive
     const submitData = async () => {
         const clone = { ...formData }
         // console.log(clone);
         if (!params?.id) {
             try {
                 // console.log(formData);
-                const res = await addTRCRM_tag_name_master(clone)
+                const res = await addTRCRM_hotel_type_master(clone)
                 if (res?.error == false) {
                     toastSuccessMessage()
                     setTimeout(() => {
-                        navigate(`/tags`)
+                        navigate(`/travel-hotel-type`)
                     }, 2000)
                 } else {
                     alert(res?.message)
                 }
+
             } catch (error) {
 
             }
         } else {
             try {
-                const res = await updateTRCRM_tag_name_master(params.id, clone)
+                const res = await updateTRCRM_hotel_type_master(params.id, clone)
                 if (res?.error == false) {
                     toastSuccessMessage()
                     setTimeout(() => {
-                        navigate(`/tags`)
+                        navigate(`/travel-hotel-type`)
                     }, 2000)
                 } else {
                     alert(res?.message)
@@ -83,7 +85,7 @@ const TagsAdd = () => {
     useEffect(() => {
         const detbyIdData = async () => {
             try {
-                const res = await getByTRCRM_tag_name_master(params?.id)
+                const res = await getByIdTRCRM_hotel_type_master(params?.id)
                 setFormData(res?.data)
             } catch (error) {
 
@@ -95,33 +97,44 @@ const TagsAdd = () => {
     useEffect(() => {
         getCurrentDate()
     }, [])
+
     return (
         <>
+
             <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
             <div style={{ margin: "14px" }}>
                 <div className="card">
                     <div className="card-body p-0">
                         <div className="table-responsive active-projects style-1">
                             <div className="tbl-caption tbl-caption-2">
-                                <h4 className="heading mb-0 p-2">{params?.id ? 'Update' : 'Add'} Tags </h4>
+                                <h4 className="heading mb-0 p-2">{params?.id ? 'Update' : 'Add'} Hotel Type</h4>
                             </div>
                             <form className="tbl-captionn">
                                 <div className="row">
                                     <div className="col-xl-4 mb-3">
-                                        <label for="exampleFormControlInput1" className="form-label">Tag Name <span style={{ color: 'red' }}>*</span></label>
+                                        <label for="exampleFormControlInput1" class="form-label">Hotel Name <span style={{ color: 'red' }}>*</span></label>
                                         <input
                                             type="text"
                                             className="form-control"
-                                            placeholder="Enter Tag Name "
-                                            name="tag_name"
-                                            value={formData?.tag_name}
+                                            placeholder="Enter Hotel Name"
+                                            name="hotel_type"
+                                            value={formData?.hotel_type}
                                             onChange={changeHandle}
                                         />
                                     </div>
-
+                                    <div className="col-xl-4 mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Status<span style={{ color: 'red' }}>*</span></label>
+                                        <select className="form-control" aria-label="Default select example" name="isActive"
+                                            value={formData?.isActive}
+                                            onChange={changeHandle}>
+                                            <option selected>Open this select Currency</option>
+                                            <option value={true}>Active</option>
+                                            <option value={false}>InActive</option>
+                                        </select>
+                                    </div>
                                     <div className="col-xl-12 text-center">
-                                        <button type="button" className="btn btn-primary" onClick={submitData}>
-                                            {params?.id ? 'Update' : 'Add'}
+                                        <button type="button" className="btn btn-primary" disabled={disabled} onClick={submitData}>
+                                            {params?.id ? 'Update' : 'Save'}
                                         </button>
                                     </div>
                                 </div>
@@ -135,4 +148,4 @@ const TagsAdd = () => {
     )
 }
 
-export default TagsAdd
+export default HotelTypeAdd

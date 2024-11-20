@@ -1,21 +1,20 @@
-import { Pagination, Popconfirm } from "antd";
-import Breadcrumbs from "../../../common/breadcrumb/Breadcrumbs";
-import { Link, useParams } from "react-router-dom";
-import { BsTicketPerforatedFill } from "react-icons/bs";
 import { useEffect, useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
-import { deleteTRCRM_tag_name_master, TRCRM_tag_name_master } from "../../../api/login/Login";
-import TagsFilter from "./tagsFilter/TagsFilter";
+import { Link, useParams } from "react-router-dom";
+import Breadcrumbs from "../../../common/breadcrumb/Breadcrumbs";
+import { Pagination, Popconfirm } from "antd";
+import { ToastContainer } from "react-bootstrap";
+import { toast } from "react-toastify";
+import RatingFilter from "./ratingFilter/RatingFilter";
+import { deleteTRCRM_star_rating_master, GetTRCRM_star_rating_master } from "../../../api/login/Login";
 
-
-
-const Tags = () => {
+const Rating = () => {
     const breadCrumbsTitle = {
         id: "1",
-        title_1: " Manage Travel Business",
-        title_2: 'Tags list',
+        title_1: "Travel Master",
+        title_2: 'Hotel Rating',
         path_2: ``
     };
+
     const params = useParams()
     // console.log(params);
 
@@ -59,7 +58,7 @@ const Tags = () => {
         setLoading(true)
         const clone = { ...filterInitial, count: count, page: input, user_id: window.localStorage.getItem('userIdToken') }
         try {
-            const res = await TRCRM_tag_name_master(clone)
+            const res = await GetTRCRM_star_rating_master(clone)
             setTotalCount(res?.totalCount)
             setData(res?.data)
 
@@ -89,7 +88,7 @@ const Tags = () => {
 
     const deleteData = async (id) => {
         try {
-            const res = await deleteTRCRM_tag_name_master(id)
+            const res = await deleteTRCRM_star_rating_master(id)
             // console.log(res);
             if (res?.error == false) {
                 toastSuccessMessage()
@@ -113,7 +112,7 @@ const Tags = () => {
     return (
         <>
             <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
-            <TagsFilter filterInitial={filterInitial} handleChange={handleChange} getTransitionReport={getTransitionReport} />
+            <RatingFilter filterInitial={filterInitial} handleChange={handleChange} getTransitionReport={getTransitionReport} />
             <div>
                 <div className="row m-2">
                     <div className="col-xl-12">
@@ -121,9 +120,8 @@ const Tags = () => {
                             <div className="card-body p-0">
                                 <div className="table-responsive active-projects style-1">
                                     <div className="tbl-caption">
-                                        <h4 className="heading mb-0 p-2">Tags list
-                                        </h4>
-                                        <Link to='/tags-add' className="btn btn-primary">Add Tags</Link>
+                                        <h4 className="heading mb-0 p-2">Travel Rating </h4>
+                                        <Link to={`/travel-rating-add`} className="btn btn-primary">Add Travel Rating</Link>
                                     </div>
                                     <div id="banner-tblwrapper_wrapper" className="dataTables_wrapper no-footer">
                                         <div className="dt-buttons">
@@ -135,25 +133,24 @@ const Tags = () => {
                                             <thead>
                                                 <tr role="row">
                                                     <th style={{ width: '50px' }}>S.No</th>
-                                                    <th style={{ width: '150px' }}>Tags Name</th>
-                                                    <th style={{ width: '150px' }}>Created Date</th>
+                                                    <th style={{ width: '150px' }}>Rating Name</th>
                                                     <th style={{ width: '150px' }}>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 {data && data?.map((item, i) => {
-                                                    return <tr role="row" key={item?._id}>
+                                                    return <tr role="row" >
                                                         <td valign="top" className="dataTables_empty">{(i + 1) + (page * count)}</td>
-                                                        <td valign="top" className="dataTables_empty" >{item?.tag_name}</td>
-                                                        <td valign="top" className="dataTables_empty" >{item?.createdAt}</td>
+                                                        <td valign="top" className="dataTables_empty">{item?.name}</td>
+
                                                         <td>
                                                             <div className="d-flex">
-                                                                <Link to={`/tags-update/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
+                                                                <Link to={`/travel-rating-Update/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
                                                                     <i className="fa fa-pencil" />
                                                                 </Link>
                                                                 <Popconfirm
                                                                     title="Delete cow feed!"
-                                                                    description="Are you sure to delete?"
+                                                                    description="Are you sure to delete ?"
                                                                     onConfirm={() => confirm(item?._id)}
                                                                     // onCancel={cancel}
                                                                     okText="Yes"
@@ -167,7 +164,6 @@ const Tags = () => {
                                                         </td>
                                                     </tr>
                                                 })}
-
                                             </tbody>
                                         </table>
 
@@ -193,4 +189,4 @@ const Tags = () => {
     )
 }
 
-export default Tags
+export default Rating
