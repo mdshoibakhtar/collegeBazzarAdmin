@@ -1,19 +1,16 @@
 import { Pagination, Popconfirm } from "antd";
-import Breadcrumbs from "../../../common/breadcrumb/Breadcrumbs";
 import { Link, useParams } from "react-router-dom";
-import { BsTicketPerforatedFill } from "react-icons/bs";
+import Breadcrumbs from "../../../common/breadcrumb/Breadcrumbs";
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import { deleteTRCRM_tag_name_master, TRCRM_tag_name_master } from "../../../api/login/Login";
-import TagsFilter from "./tagsFilter/TagsFilter";
+import TravelVisaMasterFilter from "./travelVisaMasterFilter/TravelVisaMasterFilter";
+import { deleteTRCRM_visa_master, gitTRCRM_visa_master } from "../../../api/login/Login";
 
-
-
-const Tags = () => {
+const TravelVisaMaster = () => {
     const breadCrumbsTitle = {
         id: "1",
-        title_1: " Manage Travel Business",
-        title_2: 'Tags list',
+        title_1: "Travel CRM Master",
+        title_2: 'Travel Visa Category',
         path_2: ``
     };
     const params = useParams()
@@ -42,8 +39,6 @@ const Tags = () => {
         // sortType: ''
     })
 
-
-
     const handleChange = (e) => {
         const clone = { ...filterInitial }
         const value = e.target.value
@@ -52,24 +47,21 @@ const Tags = () => {
         setFilterInitial(clone)
     }
 
-
-
     const getTransitionReport = async (input) => {
         // console.log('iojijip');
         setLoading(true)
         const clone = { ...filterInitial, count: count, page: input, user_id: window.localStorage.getItem('userIdToken') }
         try {
-            const res = await TRCRM_tag_name_master(clone)
+            const res = await gitTRCRM_visa_master(clone)
             setTotalCount(res?.totalCount)
             setData(res?.data)
-
         } catch (error) {
 
         }
         setLoading(false)
     }
     const onChangeVal = (e) => {
-        console.log(e - 1);
+        // console.log(e - 1);
 
         setPage(e - 1)
         getTransitionReport(e - 1)
@@ -89,7 +81,7 @@ const Tags = () => {
 
     const deleteData = async (id) => {
         try {
-            const res = await deleteTRCRM_tag_name_master(id)
+            const res = await deleteTRCRM_visa_master(id)
             // console.log(res);
             if (res?.error == false) {
                 toastSuccessMessage()
@@ -97,7 +89,6 @@ const Tags = () => {
             } else {
                 alert(res?.message)
             }
-
         } catch (error) {
 
         }
@@ -113,7 +104,7 @@ const Tags = () => {
     return (
         <>
             <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
-            <TagsFilter filterInitial={filterInitial} handleChange={handleChange} getTransitionReport={getTransitionReport} />
+            <TravelVisaMasterFilter filterInitial={filterInitial} handleChange={handleChange} getTransitionReport={getTransitionReport} />
             <div>
                 <div className="row m-2">
                     <div className="col-xl-12">
@@ -121,9 +112,9 @@ const Tags = () => {
                             <div className="card-body p-0">
                                 <div className="table-responsive active-projects style-1">
                                     <div className="tbl-caption">
-                                        <h4 className="heading mb-0 p-2">Tags list
+                                        <h4 className="heading mb-0 p-2">Travel Visa Master
                                         </h4>
-                                        <Link to='/tags-add' className="btn btn-primary">Add Tags</Link>
+                                        <Link to='/visa-master-add' className="btn btn-primary">Add Travel Visa Master</Link>
                                     </div>
                                     <div id="banner-tblwrapper_wrapper" className="dataTables_wrapper no-footer">
                                         <div className="dt-buttons">
@@ -135,8 +126,15 @@ const Tags = () => {
                                             <thead>
                                                 <tr role="row">
                                                     <th style={{ width: '50px' }}>S.No</th>
-                                                    <th style={{ width: '150px' }}>Tags Name</th>
-                                                    <th style={{ width: '150px' }}>Created Date</th>
+                                                    <th style={{ width: '150px' }}>Country</th>
+                                                    <th style={{ width: '150px' }}>Visa Category</th>
+                                                    <th style={{ width: '150px' }}>Visa Type</th>
+                                                    <th style={{ width: '150px' }}>Duration</th>
+                                                    <th style={{ width: '150px' }}>Travel Date</th>
+                                                    <th style={{ width: '150px' }}>Job Profile</th>
+                                                    <th style={{ width: '150px' }}>Age</th>
+                                                    <th style={{ width: '150px' }}>Qualification</th>
+                                                    <th style={{ width: '150px' }}>Description</th>
                                                     <th style={{ width: '150px' }}>Action</th>
                                                 </tr>
                                             </thead>
@@ -144,11 +142,18 @@ const Tags = () => {
                                                 {data && data?.map((item, i) => {
                                                     return <tr role="row" key={item?._id}>
                                                         <td valign="top" className="dataTables_empty">{(i + 1) + (page * count)}</td>
-                                                        <td valign="top" className="dataTables_empty" >{item?.tag_name}</td>
-                                                        <td valign="top" className="dataTables_empty" >{item?.createdAt}</td>
+                                                        <td valign="top" className="dataTables_empty" >{item?.country?.name}</td>
+                                                        <td valign="top" className="dataTables_empty" >{item?.visa_category?.name}</td>
+                                                        <td valign="top" className="dataTables_empty" >{item?.visa_type?.name}</td>
+                                                        <td valign="top" className="dataTables_empty" >{item?.duration}</td>
+                                                        <td valign="top" className="dataTables_empty" >{item?.travel_date}</td>
+                                                        <td valign="top" className="dataTables_empty" >{item?.job_profile}</td>
+                                                        <td valign="top" className="dataTables_empty" >{item?.age}</td>
+                                                        <td valign="top" className="dataTables_empty" >{item?.qualification}</td>
+                                                        <td valign="top" className="dataTables_empty" >{item?.description}</td>
                                                         <td>
                                                             <div className="d-flex">
-                                                                <Link to={`/tags-update/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
+                                                                <Link to={`/visa-master-update/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
                                                                     <i className="fa fa-pencil" />
                                                                 </Link>
                                                                 <Popconfirm
@@ -193,4 +198,4 @@ const Tags = () => {
     )
 }
 
-export default Tags
+export default TravelVisaMaster

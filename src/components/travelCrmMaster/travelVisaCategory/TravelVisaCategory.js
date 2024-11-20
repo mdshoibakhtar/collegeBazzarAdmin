@@ -1,19 +1,17 @@
 import { Pagination, Popconfirm } from "antd";
-import Breadcrumbs from "../../../common/breadcrumb/Breadcrumbs";
 import { Link, useParams } from "react-router-dom";
-import { BsTicketPerforatedFill } from "react-icons/bs";
-import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import { deleteTRCRM_tag_name_master, TRCRM_tag_name_master } from "../../../api/login/Login";
-import TagsFilter from "./tagsFilter/TagsFilter";
+import Breadcrumbs from "../../../common/breadcrumb/Breadcrumbs";
+import { useEffect, useState } from "react";
+import TravelVisaCategoryFilter from "./travelVisaCategoryFilter/TravelVisaCategoryFilter";
+import { deleteTRCRM_visa_category_master, gitTRCRM_visa_category_master } from "../../../api/login/Login";
 
 
-
-const Tags = () => {
+const TravelVisaCategory = () => {
     const breadCrumbsTitle = {
         id: "1",
-        title_1: " Manage Travel Business",
-        title_2: 'Tags list',
+        title_1: "Travel CRM Master",
+        title_2: 'Travel Visa Category',
         path_2: ``
     };
     const params = useParams()
@@ -59,10 +57,9 @@ const Tags = () => {
         setLoading(true)
         const clone = { ...filterInitial, count: count, page: input, user_id: window.localStorage.getItem('userIdToken') }
         try {
-            const res = await TRCRM_tag_name_master(clone)
+            const res = await gitTRCRM_visa_category_master(clone)
             setTotalCount(res?.totalCount)
             setData(res?.data)
-
         } catch (error) {
 
         }
@@ -89,7 +86,7 @@ const Tags = () => {
 
     const deleteData = async (id) => {
         try {
-            const res = await deleteTRCRM_tag_name_master(id)
+            const res = await deleteTRCRM_visa_category_master(id)
             // console.log(res);
             if (res?.error == false) {
                 toastSuccessMessage()
@@ -97,7 +94,6 @@ const Tags = () => {
             } else {
                 alert(res?.message)
             }
-
         } catch (error) {
 
         }
@@ -113,7 +109,7 @@ const Tags = () => {
     return (
         <>
             <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
-            <TagsFilter filterInitial={filterInitial} handleChange={handleChange} getTransitionReport={getTransitionReport} />
+            <TravelVisaCategoryFilter filterInitial={filterInitial} handleChange={handleChange} getTransitionReport={getTransitionReport} />
             <div>
                 <div className="row m-2">
                     <div className="col-xl-12">
@@ -121,9 +117,9 @@ const Tags = () => {
                             <div className="card-body p-0">
                                 <div className="table-responsive active-projects style-1">
                                     <div className="tbl-caption">
-                                        <h4 className="heading mb-0 p-2">Tags list
+                                        <h4 className="heading mb-0 p-2">Travel Visa Category
                                         </h4>
-                                        <Link to='/tags-add' className="btn btn-primary">Add Tags</Link>
+                                        <Link to='/travel-visa-category-add' className="btn btn-primary">Add Travel Visa Category</Link>
                                     </div>
                                     <div id="banner-tblwrapper_wrapper" className="dataTables_wrapper no-footer">
                                         <div className="dt-buttons">
@@ -135,7 +131,7 @@ const Tags = () => {
                                             <thead>
                                                 <tr role="row">
                                                     <th style={{ width: '50px' }}>S.No</th>
-                                                    <th style={{ width: '150px' }}>Tags Name</th>
+                                                    <th style={{ width: '150px' }}>Visa Name</th>
                                                     <th style={{ width: '150px' }}>Created Date</th>
                                                     <th style={{ width: '150px' }}>Action</th>
                                                 </tr>
@@ -144,11 +140,11 @@ const Tags = () => {
                                                 {data && data?.map((item, i) => {
                                                     return <tr role="row" key={item?._id}>
                                                         <td valign="top" className="dataTables_empty">{(i + 1) + (page * count)}</td>
-                                                        <td valign="top" className="dataTables_empty" >{item?.tag_name}</td>
+                                                        <td valign="top" className="dataTables_empty" >{item?.name}</td>
                                                         <td valign="top" className="dataTables_empty" >{item?.createdAt}</td>
                                                         <td>
                                                             <div className="d-flex">
-                                                                <Link to={`/tags-update/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
+                                                                <Link to={`/travel-visa-category-update/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
                                                                     <i className="fa fa-pencil" />
                                                                 </Link>
                                                                 <Popconfirm
@@ -193,4 +189,4 @@ const Tags = () => {
     )
 }
 
-export default Tags
+export default TravelVisaCategory
