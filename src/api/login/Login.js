@@ -5194,6 +5194,100 @@ export const updateRCRM_hotel_master = (id, value) => {
   return axiosInstance.put(`${baseUrl}TRCRM_hotel_master/update_type/${id}`, value);
 };
 
+export const TRCRM_tag_name_master = (value) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_tag_name_master/user?page=${value?.page}&count=${value?.count}&start_date=${value?.start_date}&end_date=${value?.end_date}`);
+};
+export const addTRCRM_tag_name_master = (data) => {
+  return axiosInstance.post(`${baseUrl}TRCRM_tag_name_master/addType`, data);
+};
+
+export const getByTRCRM_tag_name_master = (id) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_tag_name_master/${id}`);
+};
+export const deleteTRCRM_tag_name_master = (id) => {
+  return axiosInstance.delete(`${baseUrl}TRCRM_tag_name_master/delete_type/${id}`);
+};
+export const updateTRCRM_tag_name_master = (id, value) => {
+  return axiosInstance.put(`${baseUrl}TRCRM_tag_name_master/update_type/${id}`, value);
+};
+
+export const addTRCRM_visa_type_master = (data) => {
+  return axiosInstance.post(`${baseUrl}TRCRM_visa_type_master/addType`, data);
+};
+export const gitTRCRM_visa_type_master = (value) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_visa_type_master/user?page=${value?.page}&count=${value?.count}&start_date=${value?.start_date}&end_date=${value?.end_date}`);
+};
+export const deleteTRCRM_visa_type_master = (id) => {
+  return axiosInstance.delete(`${baseUrl}TRCRM_visa_type_master/delete_type/${id}`);
+};
+export const getByTRCRM_visa_type_master = (id) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_visa_type_master/${id}`);
+};
+export const updateTRCRM_visa_type_master = (id, value) => {
+  return axiosInstance.put(`${baseUrl}TRCRM_visa_type_master/update_type/${id}`, value);
+};
+export const addTRCRM_visa_category_master = (data) => {
+  return axiosInstance.post(`${baseUrl}TRCRM_visa_category_master/addType`, data);
+};
+export const gitTRCRM_visa_category_master = (value) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_visa_category_master/user?page=${value?.page}&count=${value?.count}&start_date=${value?.start_date}&end_date=${value?.end_date}`);
+};
+export const deleteTRCRM_visa_category_master = (id) => {
+  return axiosInstance.delete(`${baseUrl}TRCRM_visa_category_master/delete_type/${id}`);
+};
+export const getByTRCRM_visa_category_master = (id) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_visa_category_master/${id}`);
+};
+export const updateTRCRM_visa_category_master = (id, value) => {
+  return axiosInstance.put(`${baseUrl}TRCRM_visa_category_master/update_type/${id}`, value);
+};
+
+export const gitTRCRM_visa_master = (value) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_visa_master/user?page=${value?.page}&count=${value?.count}&start_date=${value?.start_date}&end_date=${value?.end_date}`);
+};
+export const addTRCRM_visa_master = (data) => {
+  return axiosInstance.post(`${baseUrl}TRCRM_visa_master/addType`, data);
+};
+export const deleteTRCRM_visa_master = (id) => {
+  return axiosInstance.delete(`${baseUrl}TRCRM_visa_master/delete_type/${id}`);
+};
+export const getByTRCRM_visa_master = (id) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_visa_master/${id}`);
+};
+export const updateTRCRM_visa_master = (id, value) => {
+  return axiosInstance.put(`${baseUrl}TRCRM_visa_master/update_type/${id}`, value);
+};
+export const gitTRCRM_travel_insurance = (value) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_travel_insurance/user?page=${value?.page}&count=${value?.count}&start_date=${value?.start_date}&end_date=${value?.end_date}`);
+};
+export const addTRCRM_travel_insurance = (data) => {
+  return axiosInstance.post(`${baseUrl}TRCRM_travel_insurance/addType`, data);
+};
+export const deleteTRCRM_travel_insurance = (id) => {
+  return axiosInstance.delete(`${baseUrl}TRCRM_travel_insurance/delete_type/${id}`);
+};
+export const getByTRCRM_travel_insurance = (id) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_travel_insurance/${id}`);
+};
+export const updateTRCRM_travel_insurance = (id, value) => {
+  return axiosInstance.put(`${baseUrl}TRCRM_travel_insurance/update_type/${id}`, value);
+};
+
+
+
+
+
+
+
+export const TRCRM_visa_category_masterGet = () => {
+  return axiosInstance.get(`${baseUrl}TRCRM_visa_category_master/admin`);
+};
+export const TTRCRM_visa_type_masterGet = () => {
+  return axiosInstance.get(`${baseUrl}TRCRM_visa_type_master/admin`);
+};
+
+
+
 
 
 
