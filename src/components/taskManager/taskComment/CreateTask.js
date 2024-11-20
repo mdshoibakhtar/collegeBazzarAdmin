@@ -6,7 +6,7 @@ import './createTask.css';
 import { baseUrlImage } from '../../../baseUrl';
 import { toast } from 'react-toastify';
 
-function CreateTask({ show, handleClose, setInitialValues, initialValues, handleChange, formSubmit }) {
+function CreateTask({ editValue, show, handleClose, setInitialValues, initialValues, handleChange, formSubmit }) {
     const [priorityState, setPriorityState] = useState([]);
     const [staffData, setStaffData] = useState([]);
     const [taskType, setTaskType] = useState([]);
@@ -23,7 +23,11 @@ function CreateTask({ show, handleClose, setInitialValues, initialValues, handle
             console.error("Priority data fetch error:", error);
         }
     };
-
+    useEffect(() => {
+        if (editValue) {
+            setInitialValues(editValue)
+        }
+    }, [editValue])
     const getStaffData = async () => {
         try {
             const response = await getAllAssign();
@@ -163,7 +167,10 @@ function CreateTask({ show, handleClose, setInitialValues, initialValues, handle
         },
     };
 
-
+    console.log(initialValues);
+    const submitData = () => {
+        formSubmit(initialValues)
+    }
     return (
         <>
             <Offcanvas show={show} onHide={handleClose} placement="end" className="responsive-offcanvas" style={{ width: "600px" }}>
@@ -171,7 +178,7 @@ function CreateTask({ show, handleClose, setInitialValues, initialValues, handle
                     <Offcanvas.Title className="text-white">Create Task</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
-                    <form className="task-form" onSubmit={formSubmit}>
+                    <form className="task-form" >
                         {/* Task Details */}
                         <div className="row">
                             <div className="form-group col-xl-4">
@@ -200,26 +207,26 @@ function CreateTask({ show, handleClose, setInitialValues, initialValues, handle
                                 </select>
                             </div>
                             <div className="form-group col-xl-4">
-                                <label htmlFor="subject">Subject  <span classNmae="text-danger">*</span></label>
+                                <label htmlFor="subject">Subject </label>
                                 <input type="text" id="subject" name="subject" placeholder="Subject" className="form-control"
                                     value={initialValues?.subject || ''} onChange={handleChange} />
                             </div>
 
                             <div className="form-group col-xl-4">
-                                <label htmlFor="hourlyRate">Hourly Rate  <span classNmae="text-danger">*</span></label>
+                                <label htmlFor="hourlyRate">Hourly Rate </label>
                                 <input type="number" id="hourlyRate" name="hourly_rate" placeholder="Hourly Rate" className="form-control"
                                     value={initialValues?.hourly_rate || ''} onChange={handleChange} />
                             </div>
 
                             <div className="form-group col-xl-4">
-                                <label htmlFor="repeatedNo">Repeated No  <span classNmae="text-danger">*</span></label>
+                                <label htmlFor="repeatedNo">Repeated No </label>
                                 <input type="text" id="repeatedNo" name="repeated_no" placeholder="Repeated No" className="form-control"
                                     value={initialValues?.repeated_no || ''} onChange={handleChange} />
                             </div>
 
                             <div className="form-group col-xl-4">
                                 <label htmlFor="startDate">
-                                    Start Date Time <span className="text-danger">*</span>
+                                    Start Date Time 
                                 </label>
                                 <input
                                     type="date"
@@ -245,7 +252,7 @@ function CreateTask({ show, handleClose, setInitialValues, initialValues, handle
                             </div>
                             <div className="form-group col-xl-4">
                                 <label htmlFor="complition_date_time">
-                                    Completion Date Time <span className="text-danger">*</span>
+                                    Completion Date Time 
                                 </label>
                                 <input
                                     type="date"
@@ -272,7 +279,7 @@ function CreateTask({ show, handleClose, setInitialValues, initialValues, handle
 
 
                             <div className="form-group col-xl-4">
-                                <label htmlFor="repeat">Repeat Every  <span classNmae="text-danger">*</span></label>
+                                <label htmlFor="repeat">Repeat Every </label>
                                 <select id="repeat" className="w-100" name="repeat_every"
                                     value={initialValues?.repeat_every || ''} onChange={handleChange}>
                                     <option value={"day"} selected>Day</option>
@@ -287,7 +294,7 @@ function CreateTask({ show, handleClose, setInitialValues, initialValues, handle
                             </div>
 
                             <div className="form-group col-xl-4">
-                                <label htmlFor="priority">Priority  <span classNmae="text-danger">*</span></label>
+                                <label htmlFor="priority">Priority </label>
                                 <select id="priority" className="w-100" name="priority"
                                     value={initialValues?.priority ? initialValues?.priority : "" || ''} onChange={handleChange}>
                                     {priorityState?.map((item, i) =>
@@ -297,7 +304,7 @@ function CreateTask({ show, handleClose, setInitialValues, initialValues, handle
                             </div>
 
                             <div className="form-group col-xl-4">
-                                <label htmlFor="tags">Tags  <span classNmae="text-danger">*</span></label>
+                                <label htmlFor="tags">Tags </label>
                                 <div style={styles.tagInputContainer}>
                                     {initialValues?.tags?.map((tag, index) => (
                                         <div key={index} style={styles.tag}>
@@ -319,13 +326,13 @@ function CreateTask({ show, handleClose, setInitialValues, initialValues, handle
                                 </div>
                             </div>
                             <div className="form-group col-xl-4">
-                                <label htmlFor="total_cycle">Total Cycle  <span classNmae="text-danger">*</span></label>
+                                <label htmlFor="total_cycle">Total Cycle </label>
                                 <input type="text" id="total_cycle" name="total_cycle" placeholder="Total Cycle" className="form-control"
                                     value={initialValues?.total_cycle || ''} onChange={handleChange} />
                             </div>
 
                             <div className="form-group col-xl-4">
-                                <label htmlFor="assignee">Assignee  <span classNmae="text-danger">*</span></label>
+                                <label htmlFor="assignee">Assignee <span classNmae="text-danger">*</span></label>
                                 <Select
                                     name="assignees"
                                     options={staffData}
@@ -362,7 +369,7 @@ function CreateTask({ show, handleClose, setInitialValues, initialValues, handle
                                                 checked={initialValues?.public || false}
                                                 onChange={() => handleChange({ target: { name: "public", value: !initialValues?.public } })}
                                             />
-                                            <label htmlFor="public" className="form-check-label">Public  <span classNmae="text-danger">*</span></label>
+                                            <label htmlFor="public" className="form-check-label">Public  </label>
                                         </div>
                                     </div>
                                     <div className="form-group col-xl-6 col-md-6 col-12">
@@ -375,7 +382,7 @@ function CreateTask({ show, handleClose, setInitialValues, initialValues, handle
                                                 checked={initialValues?.billable || false}
                                                 onChange={() => handleChange({ target: { name: "billable", value: !initialValues?.billable } })}
                                             />
-                                            <label htmlFor="billable" className="form-check-label">Billable  <span classNmae="text-danger">*</span></label>
+                                            <label htmlFor="billable" className="form-check-label">Billable  </label>
                                         </div>
                                     </div>
                                 </div>
@@ -405,7 +412,7 @@ function CreateTask({ show, handleClose, setInitialValues, initialValues, handle
                                 id="fileInput"
                                 style={{ display: 'none' }}
                                 name='attach_files'
-                                value={initialValues?.attach_files}
+                                // value={initialValues?.attach_files}
                                 onChange={handleFileUpload}
                             />
                             {imgloading ? (
@@ -449,7 +456,8 @@ function CreateTask({ show, handleClose, setInitialValues, initialValues, handle
 
                         {/* Form Actions */}
                         <div className="button-group d-flex justify-content-end">
-                            <Button type="submit" disabled={!isFormValid()} className="btn btn-primary">
+                            <Button type="button" 
+                             onClick={submitData} className="btn btn-primary">
                                 Submit
                             </Button>
                             <Button type="button" variant="outline-secondary" onClick={handleClose} className="cancel-button">Cancel</Button>

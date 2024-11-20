@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
 import { Badge, Button, Form } from 'react-bootstrap';
 import ReminderLater from './remainder/ReminderLater';
-import { clodinaryImage, deleteCommentAccTask, getCommentAccTask, getCommentTaskById, GetUpdateCommentAccTaskByid, postCommentAccTask, updateCommentAccTask } from '../../../api/login/Login';
+import { clodinaryImage, deleteCommentAccTask, deleteTaskById, getCommentAccTask, getCommentTaskById, GetUpdateCommentAccTaskByid, postCommentAccTask, updateCommentAccTask, updateTaskCreated } from '../../../api/login/Login';
 import { baseUrlImage } from '../../../baseUrl';
 import "./Taskcomment.css"
 import CreateTask from './CreateTask';
 import { message, Popconfirm } from 'antd';
 function TaskComent({ mnualData }) {
     const [modalShow, setModalShow] = React.useState(false);
-    const [show, setShow] = React.useState(true);
+    const [show, setShow] = React.useState(false);
     const [count, setCount] = React.useState(100);
     const [page, setPage] = React.useState(0);
     const [state, setState] = React.useState([]);
@@ -22,8 +22,7 @@ function TaskComent({ mnualData }) {
         comment: "",
         attachments: [],
     });
-    console.log(initialValues);
-
+    const [editValue, setEditValue] = useState(null)
     const [taskDetails, setTaskDetails] = useState(null);
     const [sendBtn, setSendBtn] = useState(false);
 
@@ -42,8 +41,10 @@ function TaskComent({ mnualData }) {
     }, [])
     const handleTaskDetails = async (id) => {
         localStorage.setItem("66565478543478654765376547", id);
+        localStorage.setItem("taskid", id);
         try {
             const resp = await getCommentTaskById(id);
+            setEditValue(resp.data)
             if (resp?.data) {
                 setTaskDetails(resp.data);
                 setInitialValues((prev) => ({
@@ -79,9 +80,10 @@ function TaskComent({ mnualData }) {
         setTimeout(() => {
             setInitialValues((prev) => ({
                 ...prev,
-                attachments: [...prev.attachments, ...uploadedFiles],
+                attachments: [...(prev.attachments || []), ...uploadedFiles],
             }));
         }, 1000);
+
     };
 
     const handleChange = (e) => {
@@ -90,10 +92,14 @@ function TaskComent({ mnualData }) {
             ...prevValues,
             [name]: value,
         }));
+        setEditValue((prevValues) => ({
+            ...prevValues,
+            [name]: value,
+        }));
         setSendBtn(true);
     };
 
-    const formSubmit = async (e) => {
+    const formSubmits = async (e) => {
         e.preventDefault();
 
         try {
@@ -175,8 +181,34 @@ function TaskComent({ mnualData }) {
         }
         // message.error('Edit Successful!');
     };
+    const taskDeleted = async (id) => {
+        if (1) {
+            try {
+                const respo = await deleteTaskById(id)
+                respo?.statusCode === "200" ? message.success("Task Deleted Successfull") : message.error("Task Deleted Failed")
+            } catch (error) {
+                message.error("Task Deleted Failed")
+            }
+        }
+    }
 
+    const formSubmit = async (update) => {
+        console.log(update);
+        try {
 
+            const res = await updateTaskCreated(initialValues._id, update);
+            if (res?.statusCode === "200") {
+                toastSuccessMessage("Task Updated Successfully");
+                // getListData(page);
+                setShow(false);
+            } else {
+                toastErrorMessage("Failed to Update Task");
+            }
+        } catch (error) {
+            toastErrorMessage("Error processing the form.");
+        }
+
+    }
     return (
         <>
             <div className='col-xl-4 h-100'>
@@ -263,8 +295,8 @@ function TaskComent({ mnualData }) {
                                                 : ''}
                                         </div>
 
-                                        <Badge style={{ backgroundColor: '#f0ad4e', color: '#fff', fontSize: '12px', fontWeight: '500' }}>
-                                            Delayed
+                                        <Badge style={{ backgroundColor: '#f0ad4e', color: '#fff', fontWeight: '500' }} onClick={() => taskDeleted(data?._id)}>
+                                            <i class="fa-sharp fa-solid fa-trash-can fa-2xs"></i>
                                         </Badge>
                                     </div>
                                 </div>
@@ -455,7 +487,7 @@ function TaskComent({ mnualData }) {
                         </div>
                         {/* Reply Input */}
                         {taskDetails ? (
-                            <form className="task-form" onSubmit={formSubmit}>
+                            <form className="task-form" onSubmit={formSubmits}>
                                 <Form.Group controlId="replyInput" style={{ marginTop: 'auto' }} >
                                     {/* <Form.Control
                                 type="text"
@@ -563,10 +595,11 @@ function TaskComent({ mnualData }) {
                 show={show}
                 handleClose={handleClose}
                 handleCreateTask={handleCreateTask}
-                initialValues={initialValues}
+                initialValues={editValue ? editValue : initialValues}
                 setInitialValues={setInitialValues}
                 handleChange={handleChange}
                 formSubmit={formSubmit}
+                editValue={editValue}
             />
 
         </>

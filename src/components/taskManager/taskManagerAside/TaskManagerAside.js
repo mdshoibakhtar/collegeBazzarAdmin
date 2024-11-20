@@ -3,11 +3,11 @@ import { Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Dropdown, Button, ButtonGroup } from "react-bootstrap";
 import CreateTask from '../taskComment/CreateTask';
-import { addTaskType, getAllAssign, getCommentTaskById, getTaskById, taskCreatedByGet } from '../../../api/login/Login';
+import { addTaskType, getTaskById, taskCreatedByGet } from '../../../api/login/Login';
 import { toast } from 'react-toastify';
 
 
-function TaskManagerAside({ setManualData, mnualData }) {
+function TaskManagerAside({ setManualData }) {
     const [activeKey, setActiveKey] = useState("Important");
     const handleClose = () => setShow(false);
     const [show, setShow] = useState(false);
@@ -20,7 +20,7 @@ function TaskManagerAside({ setManualData, mnualData }) {
         task_stage_id: { type: "", ref: "taskStageMaster" },
         public: false,
         billable: false,
-        attach_files: "",
+        attach_files: null,
         subject: "",
         hourly_rate: "",
         start_date_time: "",
@@ -39,7 +39,10 @@ function TaskManagerAside({ setManualData, mnualData }) {
 
     const [expandedItems, setExpandedItems] = useState({});
 
-    const handleCreateTask = () => setShow(!show);
+    const handleCreateTask = () => {
+        localStorage.removeItem('66565478543478654765376547')
+        setShow(!show);
+    }
     const toastSuccessMessage = (message) => toast.success(message, { position: "top-right" });
     const toastErrorMessage = (message) => toast.error(message, { position: "top-right" });
     const linkStyle = {
@@ -113,13 +116,11 @@ function TaskManagerAside({ setManualData, mnualData }) {
         const { name, value } = e.target;
         setInitialValues((prevValues) => ({ ...prevValues, [name]: value }));
     }
-    const formSubmit = async (e) => {
-        e.preventDefault()
-
-
+    const formSubmit = async (add) => {
+        // e.preventDefault()
         try {
             if (!initialValues._id) {
-                const res = await addTaskType(initialValues);
+                const res = await addTaskType(add);
                 if (res?.statusCode === "200") {
                     toastSuccessMessage("Task Create Successfully");
                     handleClose(!show)
@@ -151,15 +152,6 @@ function TaskManagerAside({ setManualData, mnualData }) {
                 } else {
                     toastErrorMessage("Failed to Add Template");
                 }
-            } else {
-                // const res = await updateOrganisationSettingsMdlsttingTemp(initialValues._id, initialValues);
-                // if (res?.statusCode === "200") {
-                //     toastSuccessMessage("Template Updated Successfully");
-                //     getListData(page);
-                //     setShow(false);
-                // } else {
-                //     toastErrorMessage("Failed to Update Template");
-                // }
             }
         } catch (error) {
             toastErrorMessage("Error processing the form.");

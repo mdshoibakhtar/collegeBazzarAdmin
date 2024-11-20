@@ -5062,10 +5062,10 @@ export const addTaskType = (data) => {
 export const getCommentTaskById = (id) => {
   return axiosInstance.get(`${baseUrl}task/${id}`);
 };
-/*export const updateOrganisationSettingsMdlsttingTemp = (id, value) => {
-  return axiosInstance.put(`${baseUrl}acc_project_recce_template_master/update_type/${id}`, value);
+export const updateTaskCreated = (id, value) => {
+  return axiosInstance.put(`${baseUrl}task/update_type/${id}`, value);
 };
-export const getByOrganisationSettingsMdlsttingTempId = (id) => {
+/*export const getByOrganisationSettingsMdlsttingTempId = (id) => {
   return axiosInstance.get(`${baseUrl}acc_project_recce_template_master/${id}`);
 }; */
 
