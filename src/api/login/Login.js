@@ -5755,7 +5755,7 @@ export const deleteattributeId = (id) => {
 // unit
 
 export const getunitPage = () => {
-  return axios.get(`${baseproductUrl}unit/public`, {
+  return axios.get(`${baseproductUrl}unit/admin`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
       Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
@@ -5764,7 +5764,7 @@ export const getunitPage = () => {
 };
 
 export const getunitId = (id) => {
-  return axios.get(`${baseproductUrl}unit/${id}`, {
+  return axios.get(`${baseproductUrl}unit/admin/${id}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
       Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,

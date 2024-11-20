@@ -35,7 +35,7 @@ function ListUnit({ data, cancel, confirm }) {
 
                                                     <th style={{ textAlign: 'center' }}>#</th>
                                                     <th style={{ textAlign: 'center' }}>Unit name</th>
-                                                    <th >Status</th>
+                                                    {/* <th >Status</th> */}
                                                     <th >Action</th>
                                                 </tr>
                                             </thead>
@@ -46,7 +46,7 @@ function ListUnit({ data, cancel, confirm }) {
                                                         <td className="sorting_1" style={{ textAlign: 'center' }}>{item.name}</td>
                                                        
                                                         <td style={{ position: 'relative' }} className="d-flex align-item-center" >
-                                                            <Link to={`/product_brand/${item.uid}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                            <Link to={`/product_unit/${item.uid}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
                                                             <Popconfirm
                                                                 title="Delete !"
                                                                 description="Are you sure to delete ?"
