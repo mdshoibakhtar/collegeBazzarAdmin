@@ -202,3 +202,6 @@ body {
 .tScrollbarHide::-webkit-scrollbar {
     display: none;
 }
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+    border: none; 
+}

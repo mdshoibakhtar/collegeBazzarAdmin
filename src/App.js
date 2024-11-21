@@ -993,6 +993,9 @@ import TravelVisaMasterPage from "./pages/travelCrmMaster/travelVisaMaster";
 import TravelVisaMasterAdd from "./components/travelCrmMaster/travelVisaMaster/travelVisaMasterAdd/TravelVisaMasterAdd";
 import TravelInsurencePage from "./pages/travelCrmMaster/travelInsurence";
 import TravelInsurenceAdd from "./components/travelCrmMaster/travelInsurence/travelInsurenceAdd/TravelInsurenceAdd";
+import CancilaionTab from "./components/billings/cancillation/CancilaionTab";
+import MultiplePrintings from "./components/billings/mltiplePrintings/MultiplePrintings";
+import HotelCruieseVoucher from "./components/billings/hotelCruieseVoucher/HotelCruieseVoucher";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -3008,8 +3011,9 @@ function App() {
               <Route path="update-task-stage/:id" element={<TaskStageForm />} />
               <Route path="system_settings" element={<SystemSettingss />} />
               <Route path="billings-invoice" element={<InvoiceTab />} />
-
-
+              <Route path="billings-credit" element={<CancilaionTab />} />
+              <Route path="billings-multiprinting" element={<MultiplePrintings />} />
+              <Route path="billings-hotel/cruisevoucher" element={<HotelCruieseVoucher />} />
             </Route>
           </>
         )}
