@@ -2,44 +2,54 @@ import React, { useEffect, useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
 import { Badge, Button, Form } from 'react-bootstrap';
 import ReminderLater from './remainder/ReminderLater';
-import { clodinaryImage, getCommentAccTask, getCommentTaskById, postCommentAccTask } from '../../../api/login/Login';
+import { clodinaryImage, deleteCommentAccTask, deleteTaskById, getCommentAccTask, getCommentTaskById, GetUpdateCommentAccTaskByid, postCommentAccTask, updateCommentAccTask, updateTaskCreated } from '../../../api/login/Login';
 import { baseUrlImage } from '../../../baseUrl';
 import "./Taskcomment.css"
+import CreateTask from './CreateTask';
+import { message, Popconfirm } from 'antd';
 function TaskComent({ mnualData }) {
     const [modalShow, setModalShow] = React.useState(false);
+    const [show, setShow] = React.useState(false);
     const [count, setCount] = React.useState(100);
     const [page, setPage] = React.useState(0);
-    const [state, setState] = React.useState(false);
+    const [state, setState] = React.useState([]);
+    const handleCreateTask = () => setShow(!show);
+    const handleClose = () => setShow(false);
+    const taskId = window.localStorage.getItem("66565478543478654765376547")
+
     const [initialValues, setInitialValues] = useState({
         task_id: "",
         comment: "",
         attachments: [],
     });
+    const [editValue, setEditValue] = useState(null)
     const [taskDetails, setTaskDetails] = useState(null);
     const [sendBtn, setSendBtn] = useState(false);
 
+    const toastSuccessMessage = (message) => toast.success(message, { position: "top-right" });
     const toastErrorMessage = (message) => toast.error(message, { position: "top-right" });
     const getCommenetData = async (id) => {
         const response = await getCommentAccTask(count, page, id)
         setState(response?.data)
     }
-    useEffect(() => {
-        getCommenetData()
-    }, [])
-    useEffect((id) => {
-        getCommenetData(id)
-    }, [localStorage.getItem("wqeqwe")])
-    const handleTaskDetails = async (id) => {
-        localStorage.setItem("wqeqwe", id); // Save task_id in localStorage
 
+    useEffect(() => {
+        getCommenetData(taskId)
+    }, [taskId])
+    useEffect(() => {
+        localStorage.removeItem("66565478543478654765376547");
+    }, [])
+    const handleTaskDetails = async (id) => {
+        localStorage.setItem("66565478543478654765376547", id);
+        localStorage.setItem("taskid", id);
         try {
-            const resp = await getCommentTaskById(id); // API call
+            const resp = await getCommentTaskById(id);
+            setEditValue(resp.data)
             if (resp?.data) {
                 setTaskDetails(resp.data);
-                // Update state with task_id
                 setInitialValues((prev) => ({
                     ...prev,
-                    task_id: resp.data[0]?._id || id, // Use the response ID or fallback to `id`
+                    task_id: resp.data[0]?._id || id,
                 }));
             }
         } catch (error) {
@@ -70,9 +80,10 @@ function TaskComent({ mnualData }) {
         setTimeout(() => {
             setInitialValues((prev) => ({
                 ...prev,
-                attachments: [...prev.attachments, ...uploadedFiles],
+                attachments: [...(prev.attachments || []), ...uploadedFiles],
             }));
         }, 1000);
+
     };
 
     const handleChange = (e) => {
@@ -81,14 +92,18 @@ function TaskComent({ mnualData }) {
             ...prevValues,
             [name]: value,
         }));
+        setEditValue((prevValues) => ({
+            ...prevValues,
+            [name]: value,
+        }));
         setSendBtn(true);
     };
 
-    const formSubmit = async (e) => {
+    const formSubmits = async (e) => {
         e.preventDefault();
 
         try {
-            const taskId = localStorage.getItem("wqeqwe");
+            const taskId = localStorage.getItem("66565478543478654765376547");
             if (!taskId) {
                 toastErrorMessage("Task ID is missing!");
                 return;
@@ -111,7 +126,7 @@ function TaskComent({ mnualData }) {
                 const res = await postCommentAccTask(initialValues);
                 if (res?.statusCode === "200") {
                     // toastSuccessMessage("Task Create Successfully");
-                    getCommenetData(localStorage.getItem(`wqeqwe`))
+                    getCommenetData(localStorage.getItem(`66565478543478654765376547`))
                     setInitialValues({
                         task_id: "",
                         comment: "",
@@ -123,14 +138,71 @@ function TaskComent({ mnualData }) {
                     // toastErrorMessage("Failed to Post Comment");
                 }
             } else {
-                // const res = await updateOrganisationSettingsMdlsttingTemp(initialValues._id, initialValues);
-                // if (res?.statusCode === "200") {
-                //     toastSuccessMessage("Template Updated Successfully");
-                //     getListData(page);
-                //     setShow(false);
-                // } else {
-                //     toastErrorMessage("Failed to Update Template");
-                // }
+                const res = await updateCommentAccTask(initialValues._id, initialValues);
+                if (res?.statusCode === "200") {
+                    toastSuccessMessage("Comment Edited Successfully");
+                    getCommenetData(localStorage.getItem(`66565478543478654765376547`))
+                    setInitialValues({
+                        task_id: localStorage.getItem(`66565478543478654765376547`),
+                        comment: "",
+                        attachments: [],
+                    })
+                } else {
+                    toastErrorMessage("Failed to Comment Edited");
+                }
+            }
+        } catch (error) {
+            toastErrorMessage("Error processing the form.");
+        }
+
+    }
+    const confirm = (id) => {
+        deleteCommentAccTask(id);
+        message.success(' Chat Delete Successful!');
+        getCommenetData(localStorage.getItem(`66565478543478654765376547`))
+    };
+
+    const cancel = async (id) => {
+        try {
+            if (id) {
+                const response = await GetUpdateCommentAccTaskByid(id)
+                setInitialValues(response?.data)
+            } else {
+                setInitialValues(
+                    {
+                        task_id: "",
+                        comment: "",
+                        attachments: [],
+                    }
+                )
+            }
+        } catch (error) {
+
+        }
+        // message.error('Edit Successful!');
+    };
+    const taskDeleted = async (id) => {
+        if (1) {
+            try {
+                const respo = await deleteTaskById(id)
+                respo?.statusCode === "200" ? message.success("Task Deleted Successfull") : message.error("Task Deleted Failed")
+            } catch (error) {
+                message.error("Task Deleted Failed")
+            }
+        }
+    }
+
+    const formSubmit = async (update) => {
+        console.log(update);
+        try {
+
+            const res = await updateTaskCreated(initialValues._id, update);
+            if (res?.statusCode === "200") {
+                toastSuccessMessage("Task Updated Successfully");
+                // getListData(page);
+                setShow(false);
+            } else {
+                toastErrorMessage("Failed to Update Task");
             }
         } catch (error) {
             toastErrorMessage("Error processing the form.");
@@ -140,7 +212,7 @@ function TaskComent({ mnualData }) {
     return (
         <>
             <div className='col-xl-4 h-100'>
-                <div className="card overflow-y-scroll" style={{ height: "500px" }}>
+                <div className="card overflow-y-scroll" style={{ height: "630px" }}>
                     <div className=''>
                         <div className='border-bottom'>
                             <div className=''>
@@ -223,8 +295,8 @@ function TaskComent({ mnualData }) {
                                                 : ''}
                                         </div>
 
-                                        <Badge style={{ backgroundColor: '#f0ad4e', color: '#fff', fontSize: '12px', fontWeight: '500' }}>
-                                            Delayed
+                                        <Badge style={{ backgroundColor: '#f0ad4e', color: '#fff', fontWeight: '500' }} onClick={() => taskDeleted(data?._id)}>
+                                            <i class="fa-sharp fa-solid fa-trash-can fa-2xs"></i>
                                         </Badge>
                                     </div>
                                 </div>
@@ -241,14 +313,12 @@ function TaskComent({ mnualData }) {
             </div>
 
             <div className='col-xl-5 h-100'>
-                <div className="card overflow-y-scroll" style={{ height: "500px" }}>
+                <div className="card " style={{ height: "630px" }}>
                     <div
                         className=""
                         style={{
-                            overflowY: "scroll",
-                            scrollbarColor: "rgb(33 37 41)",
                             display: "flex",
-                            flexDirection: "column", // Ensures content inside this div is stacked vertically
+                            flexDirection: "column",
                         }}
                     >
                         <div
@@ -258,7 +328,6 @@ function TaskComent({ mnualData }) {
                                 flexGrow: 1,
                             }}
                         >
-                            {/* Header Buttons */}
                             <div className="d-flex justify-content-between align-items-center mb-3">
                                 <div>
                                     <Button variant="outline-secondary" size="sm" className="mr-2">Mark as Done</Button>
@@ -268,15 +337,15 @@ function TaskComent({ mnualData }) {
                                         onHide={() => setModalShow(false)}
                                     />
                                 </div>
-                                <Button variant="link" size="sm">
-                                    <i className="fas fa-ellipsis-h"></i>
+                                <Button className='btn-outline' variant="link" size="m" onClick={() => setShow(!show)}>
+                                    Edit Task <i class="fa-solid fa-pen-to-square"></i>
                                 </Button>
                             </div>
 
                             {/* Task Information */}
 
 
-                            <>
+                            <div className="overflow-y-scroll tScrollbarHide" style={{ height: "320px", fontSize: "12px" }}>
                                 {taskDetails?.createdBy && (
                                     <div
                                         style={{
@@ -293,8 +362,9 @@ function TaskComent({ mnualData }) {
                                 )}
 
                                 <div
-                                    className="mb-3"
+                                    className="mb-3 "
                                     style={{ fontSize: '14px' }}
+
                                 >
                                     {taskDetails?.assignees && taskDetails.assignees?.length > 0 ? (
                                         <span>
@@ -346,42 +416,33 @@ function TaskComent({ mnualData }) {
 
                                 {/* Comments */}
                                 <div className="mb-3">
-                                    {/* <div className="d-flex align-items-start mb-2">
-                                        <Badge bg="info" style={{ borderRadius: '50%', padding: '5px 10px', marginRight: '10px' }}>A</Badge>
-                                        <div>
-                                            <div style={{ fontWeight: 'bold', fontSize: '14px' }}>Abdul Quadir</div>
-                                            <div style={{ fontSize: '12px', color: '#6c757d' }}>5 Nov 2024, 04:46 PM</div>
-                                            <div style={{ fontSize: '14px', marginTop: '5px' }}>See the software</div>
-                                            <div style={{ fontSize: '12px', color: '#007bff', cursor: 'pointer' }}>1 Reply</div>
-                                        </div>
-                                    </div> */}
                                     <div className="d-flex align-items-start">
                                         {/* <Badge bg="info" style={{ borderRadius: '50%', padding: '5px 10px', marginRight: '10px' }}>A</Badge> */}
                                         <div>
                                             {/* <div style={{ fontWeight: 'bold', fontSize: '14px' }}>Abdul Quadir</div> */}
                                             {/* <div style={{ fontSize: '12px', color: '#6c757d' }}>5 Nov 2024, 04:48 PM</div> */}
                                             {taskDetails?.attach_files ? <div className=''>
-                                                <pictures>
-                                                    <img src={`${baseUrlImage}${taskDetails?.attach_files}`} alt='image' />
-                                                </pictures>
+                                                <img src={`${baseUrlImage}${taskDetails?.attach_files}`} alt='image' />
                                             </div> : ""}
                                             {taskDetails?.task_description ?
 
                                                 <div style={{ fontSize: '14px', marginTop: '5px' }}>
-                                                    <small>*Task Description*</small>
-                                                    <p>{taskDetails?.task_description}</p>
-                                                    {/* Hi, Dear <Badge bg="light" text="dark" style={{ borderRadius: '4px', padding: '2px 5px' }}>Imran khan</Badge>, sir, I’m seeing the software. Soon I’ll revert to you.
-                                                Right now I created a task, so it’s listing in Task By Me tab, but not listing in Tasks for me tab? */}
+
+                                                    <div className={`message received`}>
+                                                        <small>Task</small>
+                                                        <p>{taskDetails?.task_description}</p>
+                                                    </div>
+
                                                 </div> : ""}
                                         </div>
                                     </div>
                                 </div>
-                                {state && state?.map((item) => {
-                                    return (
-                                        <div key={item?.id || Math.random()} >
-                                            {item?.createdBy?.map((subItem) => (
-                                                <div key={subItem?.id || Math.random()}>
-                                                    <div className=''>
+                                {state && state.length > 0 && state.every(item => item?.createdBy?.length > 0 && item?.comment && item?.createdAt) ? (
+                                    state.map((item) => (
+                                        <div key={item?.id || `item-${Math.random()}`} className="d-flex justify-content-end">
+                                            {item?.createdBy.map((subItem) => (
+                                                <div key={`${item?.id}-${subItem?.id || Math.random()}`}>
+                                                    <div>
                                                         <Badge
                                                             bg="info"
                                                             style={{
@@ -390,29 +451,43 @@ function TaskComent({ mnualData }) {
                                                                 marginRight: "5px",
                                                             }}
                                                         >
-                                                            {subItem?.name?.charAt(0).toUpperCase()}
+                                                            {subItem?.name?.charAt(0)?.toUpperCase() || "?"}
                                                         </Badge>
-                                                        <b>{subItem?.name}</b>
-                                                        <p><small>
-                                                                {item?.createdAt}
-                                                        </small></p>
+                                                        <b>{subItem?.name || "Unknown"}</b>
+                                                        <p>
+                                                            <small>{item?.createdAt || "Unknown date"}</small>
+                                                        </p>
                                                     </div>
 
-                                                    <div className={`message ${item?.isSelf ? 'sent' : 'received'}`}>
-                                                        <p>{item?.comment}</p>
-                                                    </div>
+                                                    <div className={`message ${item?.isSelf ? "sent" : "received"}`}>
+                                                        <p>{item?.comment || "No comment provided"}</p>
+                                                        <span className="arrow-icon">
+                                                            <Popconfirm
+                                                                title="Edit Delete Chat"
+                                                                // description="Are you sure to delete?"
+                                                                onConfirm={() => confirm(item?._id)}
+                                                                onCancel={() => cancel(item?._id)}
+                                                                okText={<i class="fa-solid fa-trash fa-2xs"></i>}
+                                                                cancelText={<i class="fa-solid fa-pen fa-2xs"></i>}
+                                                            >
+                                                                <i className="fa-solid fa-angle-down"></i>
+                                                            </Popconfirm>
 
+                                                        </span>
+
+                                                    </div>
                                                 </div>
                                             ))}
                                         </div>
-                                    );
-
-                                })}
-                            </>
+                                    ))
+                                ) : (
+                                    <div className="text-center text-uppercase bg-primary rounded text-white">No Comment Available To Display.</div>
+                                )}
+                            </div>
                         </div>
                         {/* Reply Input */}
                         {taskDetails ? (
-                            <form className="task-form" onSubmit={formSubmit}>
+                            <form className="task-form" onSubmit={formSubmits}>
                                 <Form.Group controlId="replyInput" style={{ marginTop: 'auto' }} >
                                     {/* <Form.Control
                                 type="text"
@@ -427,6 +502,10 @@ function TaskComent({ mnualData }) {
                                         <label htmlFor="taskDescription">
                                             Reply or mention others with @... <span className="required"></span>
                                             <span classNmae="text-danger">*</span></label>
+                                        {/* Display uploaded files */}
+                                        <div style={{ marginTop: '20px' }}>
+
+                                        </div>
                                         <textarea
                                             id="taskDescription"
                                             placeholder="Enter Reply or mention others with @..."
@@ -474,30 +553,33 @@ function TaskComent({ mnualData }) {
                                             ></i>
                                         </div>
 
-                                        {/* Display uploaded files */}
-                                        <div style={{ marginTop: '20px' }}>
-                                            {console.log(initialValues)}
-                                            {initialValues?.attachments?.map((item, index) => (
-                                                <img
-                                                    key={index}
-                                                    style={{ width: '100px', height: '100px', marginRight: '10px' }}
-                                                    src={`${baseUrlImage}${item}`}
-                                                    alt={`Uploaded file ${index + 1}`}
-                                                />
-                                            ))}
-                                        </div>
+
 
                                     </div>
 
                                 </Form.Group>
-                                {sendBtn ? <div className='text-end'>
-                                    <button className='btn btn-sm btn-danger' >
-                                        cancel
-                                    </button>
-                                    <button className='btn btn-sm btn-outline-primary' >
-                                        Send <span><i class="fa-sharp fa-solid fa-paper-plane"></i></span>
-                                    </button>
-                                </div> : ""}
+                                <div className="d-flex align-items-center">
+                                    {initialValues?.attachments?.map((item, index) => (
+                                        <img
+                                            key={index}
+                                            style={{ width: "30px", height: "30px", marginRight: "10px" }}
+                                            src={`${baseUrlImage}${item}`}
+                                            alt={`Uploaded file ${index + 1}`}
+                                        />
+                                    ))}
+
+                                    {sendBtn && (
+                                        <div className="text-end ms-auto"> {/* Ensures buttons align to the right */}
+                                            <button className="btn btn-sm btn-danger me-2">
+                                                Cancel
+                                            </button>
+                                            <button className="btn btn-sm btn-outline-primary">
+                                                Send <i className="fa-sharp fa-solid fa-paper-plane"></i>
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
+
                             </form>) : ""}
 
                         <div className='accor-btn'></div>
@@ -507,7 +589,18 @@ function TaskComent({ mnualData }) {
                 </div>
                 <ToastContainer className={"text-center"} />
             </div>
-
+            <CreateTask
+                placement="end"
+                setShow={setShow}
+                show={show}
+                handleClose={handleClose}
+                handleCreateTask={handleCreateTask}
+                initialValues={editValue ? editValue : initialValues}
+                setInitialValues={setInitialValues}
+                handleChange={handleChange}
+                formSubmit={formSubmit}
+                editValue={editValue}
+            />
 
         </>
     )

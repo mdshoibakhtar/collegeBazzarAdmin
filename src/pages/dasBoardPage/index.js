@@ -29,7 +29,7 @@ function DasBoardPage() {
             <Aside showAsideBar={showAsideBar} />
             <div
               className={`content-body ${!showAsideBar ? "hide" : ""}`}
-              style={{ minHeight: "816px" }}
+              style={{ minHeight: "" }}
             >
               <div className="">
                 <Outlet />

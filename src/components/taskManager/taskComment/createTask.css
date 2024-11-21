@@ -11,7 +11,7 @@
 .task-form {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 6px;
 }
 
 
@@ -93,4 +93,6 @@
     cursor: pointer;
     color: #6c757d; /* Adjust icon color */
 }
+
+
 
