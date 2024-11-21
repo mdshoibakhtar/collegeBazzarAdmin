@@ -996,6 +996,24 @@ import TravelInsurenceAdd from "./components/travelCrmMaster/travelInsurence/tra
 import CancilaionTab from "./components/billings/cancillation/CancilaionTab";
 import MultiplePrintings from "./components/billings/mltiplePrintings/MultiplePrintings";
 import HotelCruieseVoucher from "./components/billings/hotelCruieseVoucher/HotelCruieseVoucher";
+import RoomTypePage from "./pages/travelCrmMaster/roomType";
+import RoomTypeAdd from "./components/travelCrmMaster/roomType/roomTypeAdd/RoomTypeAdd";
+import ServiceeMasterrPage from "./pages/travelCrmMaster/serviceMaster";
+import ServiceMasterAdd from "./components/travelCrmMaster/serviceMaster/serviceMasterAdd/ServiceMasterAdd";
+import TravelPasswordPage from "./pages/travelCrmMaster/travelPassport";
+import TravelPassportAdd from "./components/travelCrmMaster/travelPassport/travelPassportAdd/TravelPassportAdd";
+import OtherMasterPage from "./pages/travelCrmMaster/otherMaster";
+import OtherMasterAdd from "./components/travelCrmMaster/otherMaster/otherMasterAdd/OtherMasterAdd";
+import LeadBookingReport from "./pages/lead-booked-wise";
+import LeadStatusChange from "./pages/Lead-Status-Changes";
+import NoReminderLead from "./pages/No-Reminder-Leads";
+import UpComingTravel from "./pages/Upcoming-Travel";
+import HotelRatesReport from "./pages/Hotel-Rates-Report";
+import BranchWiseReport from "./pages/Branch-Wise-Report";
+import ScheduleSMS from "./pages/Schedule-SMS";
+import ContactSgainstCompany from "./pages/Contact-against-company";
+import TagWise from "./pages/Tag-wise-Report";
+import AddLeadForm from "./components/travelLeads/travelLeads/AddLead/AddLeadForm";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -2805,6 +2823,15 @@ function App() {
               <Route path="cancel-refund" element={<CancleReportPage />} />
               <Route path="b2b-invoice" element={<B2bInvoicePage />} />
               <Route path="b2c-invoice" element={<B2cInvoicePage />} />
+              <Route path="lead-booked-wise" element={<LeadBookingReport />} />
+              <Route path="leadstatus-change" element={<LeadStatusChange />} />
+              <Route path="no-reminderleadlist" element={<NoReminderLead />} />
+              <Route path="upcomingtravelleadbooked" element={<UpComingTravel />} />
+              <Route path="hotelratesreport" element={<HotelRatesReport />} />
+              <Route path="branch-report" element={<BranchWiseReport />} />
+              <Route path="schedulesms-report" element={<ScheduleSMS />} />
+              <Route path="company-contacts" element={<ContactSgainstCompany />} />
+              <Route path="tagwise" element={<TagWise />} />
 
               <Route path="sightseen-list" element={<SightseeingPage />} />
               <Route path="sightseen-add" element={<Addsightseeing />} />
@@ -2831,8 +2858,21 @@ function App() {
               <Route path="travel-insurance" element={<TravelInsurencePage />} />
               <Route path="travel-insurance-add" element={<TravelInsurenceAdd />} />
               <Route path="travel-insurance-update/:id" element={<TravelInsurenceAdd />} />
+              <Route path="room-type-master" element={<RoomTypePage />} />
+              <Route path="room-type-master-add" element={<RoomTypeAdd />} />
+              <Route path="room-type-master-update/:id" element={<RoomTypeAdd />} />
+              <Route path="travel-service" element={<ServiceeMasterrPage />} />
+              <Route path="travel-service-add" element={<ServiceMasterAdd />} />
+              <Route path="travel-service-update/:id" element={<ServiceMasterAdd />} />
+              <Route path="travel-passport" element={<TravelPasswordPage />} />
+              <Route path="travel-passport-add" element={<TravelPassportAdd />} />
+              <Route path="travel-passport-update/:id" element={<TravelPassportAdd />} />
+              <Route path="travel-other-master" element={<OtherMasterPage />} />
+              <Route path="travel-other-master-add" element={<OtherMasterAdd />} />
+              <Route path="travel-other-master-update/:id" element={<OtherMasterAdd />} />
 
               <Route path="travel-leads" element={<TravelLeadPage />} />
+              <Route path="travel-leads-add" element={<AddLeadForm />} />
               <Route path="leads-details" element={<ViewLeads />} />
               <Route path="travel-Vouchers-list" element={<TravelVoucherPage />} />
               <Route path="travel-Vouchers-Add" element={<AddHotelVoucher />} />
@@ -2947,22 +2987,29 @@ function App() {
               <Route path="product_unit" element={<UnitPage />} />
               <Route path="product_unit/:uid" element={<UnitPage />} />
 
-              <Route path="product_brand" element={<BrandPage />} />
-              <Route path="product_brand/:uid" element={<BrandPage />} />
-
               <Route path="product_attribute" element={<AttributesPage />} />
               <Route path="product_attribute/:uid" element={<AttributesPage />} />
 
+              <Route path="product_brand" element={<BrandPage />} />
+              <Route path="product_brand/:uid" element={<BrandPage />} />
+
               <Route path="product_size" element={<SizePage />} />
               <Route path="product_size/:uid" element={<SizePage />} />
+
+              <Route path="product_color" element={<ColorsPage />} />
+              <Route path="product_color/:uid" element={<ColorsPage />} />
               
               <Route path="product_category" element={<CategoryPage />} />
+              <Route path="product_category/:uid" element={<CategoryPage />} />
+
               <Route path="product_industry" element={<IndustryPage />} />
-              <Route path="product_color" element={<ColorsPage />} />
+              <Route path="product_industry/:uid" element={<IndustryPage />} />
+              
               
 
               <Route path="add-product" element={<AddProductPage />} />
               <Route path="list-product" element={<ListProductPage />} />
+              
               <Route path="coupons" element={<ListCouponPage />} />
               <Route path="coupons/create" element={<AddNewCouponPage />} />
               <Route path="club-point-configuration" element={<ClubPointConfigurationPage />} />

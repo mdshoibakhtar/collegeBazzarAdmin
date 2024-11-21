@@ -22,10 +22,8 @@ function AddSize({ getData }) {
         setData(res.data);
 
         const mapped = res.data.map((item) => ({
-            name: '',
-            image: null,
-            meta_title: '',
-            meta_description: '',
+            size: '',
+            size_code: '',
             language_id: item._id,
             label: item.name,
         }));
@@ -76,7 +74,7 @@ function AddSize({ getData }) {
         event.preventDefault();
         try {
             if (params?.uid) {
-                await axios.put(`${baseproductUrl}brand/${params?.uid}`, { list: val }, {
+                await axios.put(`${baseproductUrl}size/${params?.uid}`, { list: val }, {
                     headers: {
                         "Content-type": "application/json; charset=UTF-8",
                         Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
@@ -84,7 +82,7 @@ function AddSize({ getData }) {
                 });
                 navigate('/product_brand')
             } else {
-                await axios.post(`${baseproductUrl}brand/add`, { list: val }, {
+                await axios.post(`${baseproductUrl}size/add`, { list: val }, {
                     headers: {
                         "Content-type": "application/json; charset=UTF-8",
                         Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
@@ -157,7 +155,7 @@ function AddSize({ getData }) {
                                                             <button type="button" className="btn btn-warning float-end" >
                                                                 RESET
                                                             </button>
-                                                            <button type="submit" className="btn btn-primary float-end">
+                                                            <button onClick={handleSubmit} type="button" className="btn btn-primary float-end">
                                                                 SAVE
                                                             </button>
                                                         </div>

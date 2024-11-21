@@ -2,8 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import ExportPdf from '../../common/exportPdf/ExportPdf'
 import { ToastContainer } from 'react-toastify'
-
-function ListColor() {
+import { Popconfirm } from 'antd'
+function ListColor({ data, cancel, confirm }) {
     return (
         <>
             <ToastContainer />
@@ -39,15 +39,27 @@ function ListColor() {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr role="row" className="odd">
-                                                    <td className="sorting_1" style={{ textAlign: 'center' }}>1</td>
-                                                    <td className="sorting_1" style={{ textAlign: 'center' }}>Abc</td>
-                                                    <td className="sorting_1" style={{ textAlign: 'center' }}>Abc </td>
-                                                    <td style={{ position: 'relative' }} className="d-flex align-item-center" >
-                                                        <Link to={`#`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-refresh" /></Link>
-                                                        <Link to={`#`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
-                                                    </td>
-                                                </tr>
+                                            {data?.map((item, i) => {
+                                                    return <tr role="row" className="odd">
+                                                        <td className="sorting_1" style={{ textAlign: 'center' }}>{i + 1}</td>
+                                                        <td className="sorting_1" style={{ textAlign: 'center' }}>{item.name}</td>
+                                                      
+                                                      
+                                                        <td style={{ position: 'relative' }} className="d-flex align-item-center" >
+                                                            <Link to={`/product_color/${item.uid}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                            <Popconfirm
+                                                                title="Delete !"
+                                                                description="Are you sure to delete ?"
+                                                                onConfirm={() => confirm(item?.uid)}
+                                                                onCancel={cancel}
+                                                                okText="Yes"
+                                                                cancelText="No"
+                                                            >
+                                                                <Link to="#" className="btn btn-danger shadow btn-xs sharp"><i className="fa fa-trash" /></Link>
+                                                            </Popconfirm>
+                                                        </td>
+                                                    </tr>
+                                                })}
                                             </tbody>
                                         </table>
                                         {/* <Pagination className="pagination_gutter pagination_primary pagination_sm" /> */}
