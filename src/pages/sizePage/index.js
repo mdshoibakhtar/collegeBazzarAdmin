@@ -19,8 +19,8 @@ function SizePage() {
     const getData = async (page) => {
         setLoading(true)
         try {
-            const res = await getsizePage()
-            setData(res.data)
+            // const res = await getsizePage()
+            // setData(res.data)
         } catch (error) {
 
         }
@@ -32,8 +32,8 @@ function SizePage() {
     const deleteBlockAdd = async (id) => {
         setLoading(true)
         try {
-            await deletesizeId(id)
-            getData()
+            // await deletesizeId(id)
+            // getData()
         } catch (error) {
             // toastSuccessMessage(error.message)
         }
