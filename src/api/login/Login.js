@@ -5062,10 +5062,10 @@ export const addTaskType = (data) => {
 export const getCommentTaskById = (id) => {
   return axiosInstance.get(`${baseUrl}task/${id}`);
 };
-/*export const updateOrganisationSettingsMdlsttingTemp = (id, value) => {
-  return axiosInstance.put(`${baseUrl}acc_project_recce_template_master/update_type/${id}`, value);
+export const updateTaskCreated = (id, value) => {
+  return axiosInstance.put(`${baseUrl}task/update_type/${id}`, value);
 };
-export const getByOrganisationSettingsMdlsttingTempId = (id) => {
+/*export const getByOrganisationSettingsMdlsttingTempId = (id) => {
   return axiosInstance.get(`${baseUrl}acc_project_recce_template_master/${id}`);
 }; */
 
@@ -5373,7 +5373,22 @@ export const postCommentAccTask = (value) => {
 };
 export const getCommentAccTask = (count, page, id) => {
   return axiosInstance.get(
-    `${baseUrl}lead_taskwise_comment/fetch?task_id=${id ? id : localStorage.getItem("wqeqwe")}&page=${page}&count=${count}`
+    `${baseUrl}lead_taskwise_comment/fetch?task_id=${id ? id : null}&page=${page}&count=${count}`
+  );
+};
+export const deleteCommentAccTask = (id) => {
+  return axiosInstance.delete(
+    `${baseUrl}lead_taskwise_comment/delete_type/${id}`
+  );
+};
+export const updateCommentAccTask = (id, value) => {
+  return axiosInstance.put(
+    `${baseUrl}lead_taskwise_comment/update_type/${id}`, value
+  );
+};
+export const GetUpdateCommentAccTaskByid = (id) => {
+  return axiosInstance.get(
+    `${baseUrl}lead_taskwise_comment/${id}`
   );
 };
 
@@ -5742,6 +5757,131 @@ export const updateSettingaward = (data) => {
 
 export const getSettingaward = (data) => {
   return axios.get(`${baseproductUrl}generalSetting/award`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+
+
+
+// brand
+
+
+export const getBrandByPage = () => {
+  return axios.get(`${baseproductUrl}brand/admin`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getBrandById = (id) => {
+  return axios.get(`${baseproductUrl}brand/admin/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const deleteBrandById = (id) => {
+  return axios.delete(`${baseproductUrl}brand/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+// attribute
+
+export const getattributePage = () => {
+  return axios.get(`${baseproductUrl}attribute/admin`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getattributeId = (id) => {
+  return axios.get(`${baseproductUrl}attribute/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const deleteattributeId = (id) => {
+  return axios.delete(`${baseproductUrl}attribute/delete_attributes/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+// unit
+
+export const getunitPage = () => {
+  return axios.get(`${baseproductUrl}unit/admin`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getunitId = (id) => {
+  return axios.get(`${baseproductUrl}unit/admin/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const deleteunitId = (id) => {
+  return axios.delete(`${baseproductUrl}unit/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+
+// size
+
+
+export const getsizePage = () => {
+  return axios.get(`${baseproductUrl}size`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const getsizeId = (id) => {
+  return axios.get(`${baseproductUrl}size/admin/${id}`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+export const deletesizeId = (id) => {
+  return axios.delete(`${baseproductUrl}size/${id}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
       Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,

@@ -3,12 +3,9 @@ import { Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Dropdown, Button, ButtonGroup } from "react-bootstrap";
 import CreateTask from '../taskComment/CreateTask';
-import { addTaskType, getAllAssign, taskCreatedByGet } from '../../../api/login/Login';
+import { addTaskType, getTaskById, taskCreatedByGet } from '../../../api/login/Login';
 import { toast } from 'react-toastify';
-// import { getStateData } from '../taskComment/TaskComent';
-export const getStateData = async (data, taskData) => {
-    // taskData(data);
-};
+
 
 function TaskManagerAside({ setManualData }) {
     const [activeKey, setActiveKey] = useState("Important");
@@ -23,7 +20,7 @@ function TaskManagerAside({ setManualData }) {
         task_stage_id: { type: "", ref: "taskStageMaster" },
         public: false,
         billable: false,
-        attach_files: "",
+        attach_files: null,
         subject: "",
         hourly_rate: "",
         start_date_time: "",
@@ -42,7 +39,10 @@ function TaskManagerAside({ setManualData }) {
 
     const [expandedItems, setExpandedItems] = useState({});
 
-    const handleCreateTask = () => setShow(!show);
+    const handleCreateTask = () => {
+        localStorage.removeItem('66565478543478654765376547')
+        setShow(!show);
+    }
     const toastSuccessMessage = (message) => toast.success(message, { position: "top-right" });
     const toastErrorMessage = (message) => toast.error(message, { position: "top-right" });
     const linkStyle = {
@@ -91,6 +91,7 @@ function TaskManagerAside({ setManualData }) {
 
 
 
+
     const handleNavClick = async (label, id) => {
         setActiveKey(label);
         setExpandedItems((prevExpanded) => ({
@@ -115,13 +116,11 @@ function TaskManagerAside({ setManualData }) {
         const { name, value } = e.target;
         setInitialValues((prevValues) => ({ ...prevValues, [name]: value }));
     }
-    const formSubmit = async (e) => {
-        e.preventDefault()
-
-
+    const formSubmit = async (add) => {
+        // e.preventDefault()
         try {
             if (!initialValues._id) {
-                const res = await addTaskType(initialValues);
+                const res = await addTaskType(add);
                 if (res?.statusCode === "200") {
                     toastSuccessMessage("Task Create Successfully");
                     handleClose(!show)
@@ -153,21 +152,52 @@ function TaskManagerAside({ setManualData }) {
                 } else {
                     toastErrorMessage("Failed to Add Template");
                 }
-            } else {
-                // const res = await updateOrganisationSettingsMdlsttingTemp(initialValues._id, initialValues);
-                // if (res?.statusCode === "200") {
-                //     toastSuccessMessage("Template Updated Successfully");
-                //     getListData(page);
-                //     setShow(false);
-                // } else {
-                //     toastErrorMessage("Failed to Update Template");
-                // }
             }
         } catch (error) {
             toastErrorMessage("Error processing the form.");
         }
 
     }
+    useEffect(() => {
+        const fetchCurrency = async () => {
+            try {
+                if (localStorage.getItem("66565478543478654765376547")) {
+                    const response = await getTaskById(localStorage.getItem("66565478543478654765376547"));
+                    setInitialValues(response.data);
+                } else {
+                    setInitialValues({
+                        task_name: "",
+                        task_type_id: { type: "", ref: "taskId" },
+                        task_stage_id: { type: "", ref: "taskStageMaster" },
+                        public: false,
+                        billable: false,
+                        attach_files: "",
+                        subject: "",
+                        hourly_rate: "",
+                        start_date_time: "",
+                        complition_date_time: "",
+                        end_date_time: "",
+                        expect_due_date_time: "",
+                        priority: { type: "", ref: "priority" },
+                        repeat_every: { type: "", enum: ["days", "week", "month", "year"] },
+                        repeated_no: null,
+                        assignees: [],
+                        followers: { type: "", ref: "staff" },
+                        tags: [], // Initialize as an empty array
+                        task_description: "",
+                        total_cycle: null,
+
+                    });
+                }
+            } catch (error) {
+                console.error("Error fetching currency:", error);
+            }
+        };
+
+        fetchCurrency();
+    }, [localStorage.getItem("66565478543478654765376547")]);
+
+
 
     return (
         <>
@@ -262,3 +292,5 @@ function TaskManagerAside({ setManualData }) {
 }
 
 export default TaskManagerAside;
+
+

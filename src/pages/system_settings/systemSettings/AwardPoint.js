@@ -20,7 +20,7 @@ function AwardPoint() {
     };
 
     useEffect(() => {
-        fetchSiteConfig();
+        // fetchSiteConfig();
     }, []);
 
     // Handle input changes

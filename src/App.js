@@ -984,6 +984,7 @@ import HotelTypePage from "./pages/masterTraval/hotalType";
 import HotelTypeAdd from "./components/masterTraval/hotelType/hotelTypeAdd/HotelTypeAdd";
 import RatingPage from "./pages/masterTraval/rating";
 import RatingAdd from "./components/masterTraval/rating/ratingAdd/RatingAdd";
+import InvoiceTab from "./components/billings/InvoiceTab";
 import TravelVisaTypePage from "./pages/travelCrmMaster/travelVisaType";
 import TravelVisaTypeAdd from "./components/travelCrmMaster/travelVisaType/travelVisaTypeAdd/TravelVisaTypeAdd";
 import TravelVisaCategoryPage from "./pages/travelCrmMaster/travelVisaCategory";
@@ -2981,12 +2982,21 @@ function App() {
               <Route path="documents-update/:id" element={<AllDocumentAdd />} />
 
               <Route path="product_unit" element={<UnitPage />} />
+              <Route path="product_unit/:uid" element={<UnitPage />} />
+
               <Route path="product_brand" element={<BrandPage />} />
+              <Route path="product_brand/:uid" element={<BrandPage />} />
+
+              <Route path="product_attribute" element={<AttributesPage />} />
+              <Route path="product_attribute/:uid" element={<AttributesPage />} />
+
+              <Route path="product_size" element={<SizePage />} />
+              <Route path="product_size/:uid" element={<SizePage />} />
+              
               <Route path="product_category" element={<CategoryPage />} />
               <Route path="product_industry" element={<IndustryPage />} />
-              <Route path="product_attribute" element={<AttributesPage />} />
               <Route path="product_color" element={<ColorsPage />} />
-              <Route path="product_size" element={<SizePage />} />
+              
 
               <Route path="add-product" element={<AddProductPage />} />
               <Route path="list-product" element={<ListProductPage />} />
@@ -3037,6 +3047,7 @@ function App() {
               <Route path="create-task-stage" element={<TaskStageForm />} />
               <Route path="update-task-stage/:id" element={<TaskStageForm />} />
               <Route path="system_settings" element={<SystemSettingss />} />
+              <Route path="billings-invoice" element={<InvoiceTab />} />
 
 
             </Route>

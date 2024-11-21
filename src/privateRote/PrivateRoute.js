@@ -1,4 +1,4 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import DasBoardPage from "../pages/dasBoardPage";
 
 function PrivateRoute({ componet: componet, isAuthenticated, ...rest }) {
