@@ -2943,22 +2943,29 @@ function App() {
               <Route path="product_unit" element={<UnitPage />} />
               <Route path="product_unit/:uid" element={<UnitPage />} />
 
-              <Route path="product_brand" element={<BrandPage />} />
-              <Route path="product_brand/:uid" element={<BrandPage />} />
-
               <Route path="product_attribute" element={<AttributesPage />} />
               <Route path="product_attribute/:uid" element={<AttributesPage />} />
 
+              <Route path="product_brand" element={<BrandPage />} />
+              <Route path="product_brand/:uid" element={<BrandPage />} />
+
               <Route path="product_size" element={<SizePage />} />
               <Route path="product_size/:uid" element={<SizePage />} />
+
+              <Route path="product_color" element={<ColorsPage />} />
+              <Route path="product_color/:uid" element={<ColorsPage />} />
               
               <Route path="product_category" element={<CategoryPage />} />
+              <Route path="product_category/:uid" element={<CategoryPage />} />
+
               <Route path="product_industry" element={<IndustryPage />} />
-              <Route path="product_color" element={<ColorsPage />} />
+              <Route path="product_industry/:uid" element={<IndustryPage />} />
+              
               
 
               <Route path="add-product" element={<AddProductPage />} />
               <Route path="list-product" element={<ListProductPage />} />
+              
               <Route path="coupons" element={<ListCouponPage />} />
               <Route path="coupons/create" element={<AddNewCouponPage />} />
               <Route path="club-point-configuration" element={<ClubPointConfigurationPage />} />

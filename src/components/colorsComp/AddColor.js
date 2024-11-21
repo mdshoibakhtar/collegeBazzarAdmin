@@ -9,9 +9,9 @@ import { languageList } from '../../api/login/Login';
 import Loadar from '../../common/loader/Loader';
 import { toast, ToastContainer } from 'react-toastify';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-function AddColor() {
+function AddColor({ getData }) {
     const [val, setVal] = useState([]);
     const [value, setValue] = useState(0);
     const [data, setData] = useState([]);
@@ -23,12 +23,24 @@ function AddColor() {
         const mapped = res.data.map((item) => ({
             name: '', color_code: ''
         }));
-        setVal(mapped);
+        if (params?.uid) {
+            getDataId()
+        } else {
+            setVal(mapped);
+        }
     };
 
+    const params = useParams()
     useEffect(() => {
         getLang();
-    }, []);
+    }, [params?.uid]);
+
+    const getDataId = async () => {
+        // const res = await getattributeId(params?.uid)
+        // console.log(res);
+        // setVal(res.data)
+    }
+
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -47,25 +59,33 @@ function AddColor() {
             position: "top-right",
         });
     };
-    const params = useParams()
+
+    const navigate = useNavigate()
     const handleSubmit = async (event) => {
         event.preventDefault();
-        setLoad(true)
-        console.log('Submitted Data:', val);
         try {
-            const res = await axios.post(`${baseproductUrl}brand/add`, { list: val }, {
-
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8",
-                    Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
-                },
-            });
-            toastSuccessMessage(params?.id ? "Updated successfully" : "Added successfully");
-            
+            if (params?.uid) {
+                await axios.put(`${baseproductUrl}attribute/update_attributes/${params?.uid}`, { list: val }, {
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8",
+                        Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+                    },
+                });
+                navigate('/product_attribute')
+            } else {
+                await axios.post(`${baseproductUrl}attribute/add_attributes`, { list: val }, {
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8",
+                        Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+                    },
+                });
+            }
+            getData()
+            toastSuccessMessage(params?.uid ? "Updated successfully" : "Added successfully");
+            // alert('brand  Request Send Successfully')
         } catch (error) {
-            
+            // alert('brand  Request Send Fail !')
         }
-        setLoad(false)
     };
 
     return (

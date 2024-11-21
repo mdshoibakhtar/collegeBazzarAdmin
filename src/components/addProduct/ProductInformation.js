@@ -1,22 +1,43 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Multiselect } from 'multiselect-react-dropdown';
 import { BiFontSize } from 'react-icons/bi';
 import TagsInput from 'react-tagsinput';
+import { getCategory, getIndustry } from './Apimasters';
+import { getBrandByPage, getunitPage } from '../../api/login/Login';
 
 function ProductInformation() {
     const [tags, setTags] = useState([]);
-    const options = [
+    const [brand, setBrand] = useState()
+    const [unit, setUnit] = useState()
+    const [options, setOpion] = useState([
         { name: 'Category 1', id: 1 },
         { name: 'Category 2', id: 2 },
         { name: 'Category 3', id: 3 },
         { name: 'Category 4', id: 4 }
-    ];
-    const options2 = [
+    ])
+
+    const [options2, setOpion2] = useState([
         { name: 'Attribute 1', id: 1 },
         { name: 'Attribute 2', id: 2 },
         { name: 'Attribute 3', id: 3 },
         { name: 'Attribute 4', id: 4 }
-    ];
+    ])
+    const getallMaster = async () => {
+        const res = await getCategory()
+        const res2 = await getIndustry()
+        const res3 = await getBrandByPage()
+        const res4 = await getunitPage()
+        setOpion(res.category)
+        setOpion2(res2.category)
+        setBrand(res3.data)
+        setUnit(res4.data)
+    }
+
+    useEffect(() => {
+        getallMaster()
+    }, [])
+
+
     const options1 = [
         { name: 'Industry 1', id: 1 },
         { name: 'Industry 2', id: 2 },
@@ -113,18 +134,20 @@ function ProductInformation() {
                                 <label htmlFor="fromDate">Brand</label>
                                 <select className="form-select form-control" aria-label="Default select example">
                                     <option selected>Select Brand</option>
-                                    <option value={111}>One</option>
-                                    <option value={211}>Two</option>
-                                    <option value={311}>Three</option>
+                                    {brand && brand?.map((item) => {
+                                        return <option value={item._id}>{item?.name}</option>
+                                    })}
+
                                 </select>
                             </div>
                             <div className="form-group col-12 mt-2">
                                 <label htmlFor="fromDate">Unit</label>
                                 <select className="form-select form-control" aria-label="Default select example">
                                     <option selected>Select Unit</option>
-                                    <option value={1111}>One</option>
-                                    <option value={2111}>Two</option>
-                                    <option value={3111}>Three</option>
+                                    {unit && unit?.map((item) => {
+                                          return <option value={item._id}>{item?.name}</option>
+                                    })}
+
                                 </select>
                             </div>
 
