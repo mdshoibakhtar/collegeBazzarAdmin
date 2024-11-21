@@ -10,7 +10,7 @@ export default function AllLeadS() {
                     <div>
                         <Link className="btn btn-primary btn-sm" to="/lead-search" role="button" aria-controls="offcanvasExample"><i class="fa-solid fa-rocket"></i> Search</Link>
                         <Link className="btn btn-primary btn-sm" to="/lead-list" role="button" aria-controls="offcanvasExample"> Bulk Change Lead User</Link>
-                        <Link className="btn btn-primary btn-sm" to="/add-lead" role="button" aria-controls="offcanvasExample"><i class="fa-solid fa-plus"></i>  Add Lead</Link>
+                        <Link className="btn btn-primary btn-sm" to="/travel-leads-add" role="button" aria-controls="offcanvasExample"><i class="fa-solid fa-plus"></i>  Add Lead</Link>
                     </div>
                 </div>
             </div>
