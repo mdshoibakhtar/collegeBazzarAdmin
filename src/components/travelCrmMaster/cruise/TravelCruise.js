@@ -3,16 +3,14 @@ import { Link, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import Breadcrumbs from "../../../common/breadcrumb/Breadcrumbs";
 import { useEffect, useState } from "react";
-import { deleteTRCRM_service_master, gitTRCRM_service_master } from "../../../api/login/Login";
-import ServiceMasterFilter from "./serviceMasterFilter/ServiceMasterFilter";
+import { deleteTRCRM_cruise, getTRCRM_cruise } from "../../../api/login/Login";
+import CruiseFilter from "./cruiseFilter/CruiseFilter";
 
-
-
-const ServiceeMasterr = () => {
+const TravelCruise = () => {
     const breadCrumbsTitle = {
         id: "1",
         title_1: "Travel CRM Master",
-        title_2: 'Travel Service Master',
+        title_2: 'Travel Cruise Master',
         path_2: ``
     };
     const params = useParams()
@@ -54,7 +52,7 @@ const ServiceeMasterr = () => {
         setLoading(true)
         const clone = { ...filterInitial, count: count, page: input, user_id: window.localStorage.getItem('userIdToken') }
         try {
-            const res = await gitTRCRM_service_master(clone)
+            const res = await getTRCRM_cruise(clone)
             setTotalCount(res?.totalCount)
             setData(res?.data)
         } catch (error) {
@@ -78,12 +76,11 @@ const ServiceeMasterr = () => {
     const confirm = (id) => {
         // console.log('setMental');
         deleteData(id)
-
     }
 
     const deleteData = async (id) => {
         try {
-            const res = await deleteTRCRM_service_master(id)
+            const res = await deleteTRCRM_cruise(id)
             // console.log(res);
             if (res?.error == false) {
                 toastSuccessMessage()
@@ -106,7 +103,7 @@ const ServiceeMasterr = () => {
     return (
         <>
             <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
-            <ServiceMasterFilter filterInitial={filterInitial} handleChange={handleChange} getTransitionReport={getTransitionReport} />
+            <CruiseFilter filterInitial={filterInitial} handleChange={handleChange} getTransitionReport={getTransitionReport} />
             <div>
                 <div className="row m-2">
                     <div className="col-xl-12">
@@ -114,9 +111,9 @@ const ServiceeMasterr = () => {
                             <div className="card-body p-0">
                                 <div className="table-responsive active-projects style-1">
                                     <div className="tbl-caption">
-                                        <h4 className="heading mb-0 p-2">Travel Service Master
+                                        <h4 className="heading mb-0 p-2">Travel Cruise Master
                                         </h4>
-                                        <Link to='/travel-servicee-add' className="btn btn-primary">Add Travel Service Master</Link>
+                                        <Link to='/travel-cruise-add' className="btn btn-primary">Add Travel Cruise Master</Link>
                                     </div>
                                     <div id="banner-tblwrapper_wrapper" className="dataTables_wrapper no-footer">
                                         <div className="dt-buttons">
@@ -128,7 +125,16 @@ const ServiceeMasterr = () => {
                                             <thead>
                                                 <tr role="row">
                                                     <th style={{ width: '50px' }}>S.No</th>
-                                                    <th style={{ width: '150px' }}>Service Name</th>
+                                                    <th style={{ width: '150px' }}>Country</th>
+                                                    <th style={{ width: '150px' }}>State</th>
+                                                    <th style={{ width: '150px' }}>City</th>
+                                                    <th style={{ width: '150px' }}>Days</th>
+                                                    <th style={{ width: '150px' }}>Cruise Name</th>
+                                                    <th style={{ width: '150px' }}>Type</th>
+                                                    <th style={{ width: '150px' }}>Departure Date</th>
+                                                    <th style={{ width: '150px' }}>Return Date</th>
+                                                    <th style={{ width: '150px' }}>Room Preference</th>
+                                                    <th style={{ width: '150px' }}>Remark</th>
                                                     <th style={{ width: '150px' }}>Action</th>
                                                 </tr>
                                             </thead>
@@ -136,10 +142,14 @@ const ServiceeMasterr = () => {
                                                 {data && data?.map((item, i) => {
                                                     return <tr role="row" key={item?._id}>
                                                         <td valign="top" className="dataTables_empty">{(i + 1) + (page * count)}</td>
-                                                        <td valign="top" className="dataTables_empty" >{item?.name}</td>
+                                                        <td valign="top" className="dataTables_empty" >{item?.country?.name}</td>
+                                                        <td valign="top" className="dataTables_empty" >{item?.travel_date}</td>
+                                                        <td valign="top" className="dataTables_empty" >{item?.number_of_days}</td>
+                                                        <td valign="top" className="dataTables_empty" >{item?.sub_category}</td>
+                                                        <td valign="top" className="dataTables_empty" >{item?.description}</td>
                                                         <td>
                                                             <div className="d-flex">
-                                                                <Link to={`/travel-servicee-update/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
+                                                                <Link to={`/travel-other-master-update/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
                                                                     <i className="fa fa-pencil" />
                                                                 </Link>
                                                                 <Popconfirm
@@ -184,4 +194,4 @@ const ServiceeMasterr = () => {
     )
 }
 
-export default ServiceeMasterr
+export default TravelCruise
