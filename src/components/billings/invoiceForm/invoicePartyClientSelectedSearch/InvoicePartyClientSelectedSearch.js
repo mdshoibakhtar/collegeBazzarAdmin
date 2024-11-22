@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { FaSearch } from 'react-icons/fa';
 function InvoicePartyClientSelectedSearch(props) {
     const data = [
         { name: "AKBAR TRAVELS OF INDIA PVT. LTD.", group: "Sundry creditors - Supplier" },
@@ -66,7 +67,7 @@ function InvoicePartyClientSelectedSearch(props) {
                                                 cursor: "pointer",
                                             }}
                                         >
-                                            🔍
+                                        <FaSearch />
                                         </button>
                                     </td>
                                     <td style={{ border: "1px solid #ccc", padding: "8px" }}>{item.name}</td>

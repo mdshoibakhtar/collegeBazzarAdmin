@@ -993,6 +993,9 @@ import TravelVisaMasterPage from "./pages/travelCrmMaster/travelVisaMaster";
 import TravelVisaMasterAdd from "./components/travelCrmMaster/travelVisaMaster/travelVisaMasterAdd/TravelVisaMasterAdd";
 import TravelInsurencePage from "./pages/travelCrmMaster/travelInsurence";
 import TravelInsurenceAdd from "./components/travelCrmMaster/travelInsurence/travelInsurenceAdd/TravelInsurenceAdd";
+import CancilaionTab from "./components/billings/cancillation/CancilaionTab";
+import MultiplePrintings from "./components/billings/mltiplePrintings/MultiplePrintings";
+import HotelCruieseVoucher from "./components/billings/hotelCruieseVoucher/HotelCruieseVoucher";
 import RoomTypePage from "./pages/travelCrmMaster/roomType";
 import RoomTypeAdd from "./components/travelCrmMaster/roomType/roomTypeAdd/RoomTypeAdd";
 import ServiceeMasterrPage from "./pages/travelCrmMaster/serviceMaster";
@@ -3002,22 +3005,29 @@ function App() {
               <Route path="product_unit" element={<UnitPage />} />
               <Route path="product_unit/:uid" element={<UnitPage />} />
 
-              <Route path="product_brand" element={<BrandPage />} />
-              <Route path="product_brand/:uid" element={<BrandPage />} />
-
               <Route path="product_attribute" element={<AttributesPage />} />
               <Route path="product_attribute/:uid" element={<AttributesPage />} />
+
+              <Route path="product_brand" element={<BrandPage />} />
+              <Route path="product_brand/:uid" element={<BrandPage />} />
 
               <Route path="product_size" element={<SizePage />} />
               <Route path="product_size/:uid" element={<SizePage />} />
 
-              <Route path="product_category" element={<CategoryPage />} />
-              <Route path="product_industry" element={<IndustryPage />} />
               <Route path="product_color" element={<ColorsPage />} />
+              <Route path="product_color/:uid" element={<ColorsPage />} />
+
+              <Route path="product_category" element={<CategoryPage />} />
+              <Route path="product_category/:uid" element={<CategoryPage />} />
+
+              <Route path="product_industry" element={<IndustryPage />} />
+              <Route path="product_industry/:uid" element={<IndustryPage />} />
+
 
 
               <Route path="add-product" element={<AddProductPage />} />
               <Route path="list-product" element={<ListProductPage />} />
+
               <Route path="coupons" element={<ListCouponPage />} />
               <Route path="coupons/create" element={<AddNewCouponPage />} />
               <Route path="club-point-configuration" element={<ClubPointConfigurationPage />} />
@@ -3066,8 +3076,9 @@ function App() {
               <Route path="update-task-stage/:id" element={<TaskStageForm />} />
               <Route path="system_settings" element={<SystemSettingss />} />
               <Route path="billings-invoice" element={<InvoiceTab />} />
-
-
+              <Route path="billings-credit" element={<CancilaionTab />} />
+              <Route path="billings-multiprinting" element={<MultiplePrintings />} />
+              <Route path="billings-hotel/cruisevoucher" element={<HotelCruieseVoucher />} />
             </Route>
           </>
         )}
