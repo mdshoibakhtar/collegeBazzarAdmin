@@ -1,18 +1,18 @@
 import { Pagination, Popconfirm } from "antd";
 import { Link, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import Breadcrumbs from "../../../common/breadcrumb/Breadcrumbs";
+import OtherMasterFilter from "../otherMaster/otherMasterFilter/OtherMasterFilter";
 import { useEffect, useState } from "react";
-import { deleteTRCRM_service_master, gitTRCRM_service_master } from "../../../api/login/Login";
-import ServiceMasterFilter from "./serviceMasterFilter/ServiceMasterFilter";
+import Breadcrumbs from "../../../common/breadcrumb/Breadcrumbs";
+import { deleteTRCRM_forex, getTRCRM_forex } from "../../../api/login/Login";
+import TravelForexFilter from "./travelForexFilter/TravelForexFilter";
 
 
-
-const ServiceeMasterr = () => {
+const TravelForex = () => {
     const breadCrumbsTitle = {
         id: "1",
         title_1: "Travel CRM Master",
-        title_2: 'Travel Service Master',
+        title_2: 'Travel Forex Master',
         path_2: ``
     };
     const params = useParams()
@@ -54,7 +54,7 @@ const ServiceeMasterr = () => {
         setLoading(true)
         const clone = { ...filterInitial, count: count, page: input, user_id: window.localStorage.getItem('userIdToken') }
         try {
-            const res = await gitTRCRM_service_master(clone)
+            const res = await getTRCRM_forex(clone)
             setTotalCount(res?.totalCount)
             setData(res?.data)
         } catch (error) {
@@ -64,7 +64,6 @@ const ServiceeMasterr = () => {
     }
     const onChangeVal = (e) => {
         // console.log(e - 1);
-
         setPage(e - 1)
         getTransitionReport(e - 1)
     };
@@ -78,12 +77,11 @@ const ServiceeMasterr = () => {
     const confirm = (id) => {
         // console.log('setMental');
         deleteData(id)
-
     }
 
     const deleteData = async (id) => {
         try {
-            const res = await deleteTRCRM_service_master(id)
+            const res = await deleteTRCRM_forex(id)
             // console.log(res);
             if (res?.error == false) {
                 toastSuccessMessage()
@@ -106,7 +104,7 @@ const ServiceeMasterr = () => {
     return (
         <>
             <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
-            <ServiceMasterFilter filterInitial={filterInitial} handleChange={handleChange} getTransitionReport={getTransitionReport} />
+            <TravelForexFilter filterInitial={filterInitial} handleChange={handleChange} getTransitionReport={getTransitionReport} />
             <div>
                 <div className="row m-2">
                     <div className="col-xl-12">
@@ -114,9 +112,9 @@ const ServiceeMasterr = () => {
                             <div className="card-body p-0">
                                 <div className="table-responsive active-projects style-1">
                                     <div className="tbl-caption">
-                                        <h4 className="heading mb-0 p-2">Travel Service Master
+                                        <h4 className="heading mb-0 p-2">Travel Forex Master
                                         </h4>
-                                        <Link to='/travel-servicee-add' className="btn btn-primary">Add Travel Service Master</Link>
+                                        <Link to='/travel-forex-add' className="btn btn-primary">Add Travel Forex Master</Link>
                                     </div>
                                     <div id="banner-tblwrapper_wrapper" className="dataTables_wrapper no-footer">
                                         <div className="dt-buttons">
@@ -128,7 +126,9 @@ const ServiceeMasterr = () => {
                                             <thead>
                                                 <tr role="row">
                                                     <th style={{ width: '50px' }}>S.No</th>
-                                                    <th style={{ width: '150px' }}>Service Name</th>
+                                                    <th style={{ width: '150px' }}>Country</th>
+                                                    <th style={{ width: '150px' }}>Currency</th>
+                                                    <th style={{ width: '150px' }}>Amount</th>
                                                     <th style={{ width: '150px' }}>Action</th>
                                                 </tr>
                                             </thead>
@@ -136,10 +136,12 @@ const ServiceeMasterr = () => {
                                                 {data && data?.map((item, i) => {
                                                     return <tr role="row" key={item?._id}>
                                                         <td valign="top" className="dataTables_empty">{(i + 1) + (page * count)}</td>
-                                                        <td valign="top" className="dataTables_empty" >{item?.name}</td>
+                                                        <td valign="top" className="dataTables_empty" >{item?.country?.name}</td>
+                                                        <td valign="top" className="dataTables_empty" >{item?.currency?.name}</td>
+                                                        <td valign="top" className="dataTables_empty" >{item?.amount}</td>
                                                         <td>
                                                             <div className="d-flex">
-                                                                <Link to={`/travel-servicee-update/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
+                                                                <Link to={`/travel-forex-update/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
                                                                     <i className="fa fa-pencil" />
                                                                 </Link>
                                                                 <Popconfirm
@@ -184,4 +186,4 @@ const ServiceeMasterr = () => {
     )
 }
 
-export default ServiceeMasterr
+export default TravelForex
