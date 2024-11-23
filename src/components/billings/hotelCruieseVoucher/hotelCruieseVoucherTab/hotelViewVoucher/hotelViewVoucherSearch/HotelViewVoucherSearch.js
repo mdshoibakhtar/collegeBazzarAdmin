@@ -20,7 +20,7 @@ function HotelViewVoucherSearch() {
   };
 
   return (
-    <div className="container mt-4">
+    <div className="card mt-4">
       {/* Filters Section */}
       <div className="row g-3 align-items-center mb-3">
         <div className="col-xl-2 col-md-3 col-sm-6">

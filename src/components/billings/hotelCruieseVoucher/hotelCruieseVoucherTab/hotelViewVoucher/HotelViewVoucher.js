@@ -4,12 +4,9 @@ import HotelViewVoucherList from './hotelViewVoucherList/HotelViewVoucherList'
 
 function HotelViewVoucher() {
     return (
-        <section className='m-4'>
-            <div className='card'>
-                <HotelViewVoucherSearch />
-                <HotelViewVoucherList />
-            </div>
-        </section >
+        <div className='card'>
+            <HotelViewVoucherList />
+        </div>
     )
 }
 
