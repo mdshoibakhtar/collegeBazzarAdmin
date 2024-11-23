@@ -5888,3 +5888,36 @@ export const deletesizeId = (id) => {
     },
   });
 };
+
+// TRCRM travelInvoiceMaster API :
+
+// Get: /api/TRCRM_travelInvoice_master/user?page=0&count=10
+// Get: /api/TRCRM_travelInvoice_master/:id
+// Post: /api/TRCRM_travelInvoice_master/addType
+// Put: /api/TRCRM_travelInvoice_master/update_type/:id
+// Delete: /api/TRCRM_travelInvoice_master/delete_type/:id
+
+
+export const posttravelInvoice = (value) => {
+  return axiosInstance.post(`${baseUrl}TRCRM_travelInvoice_master/addType`, value);
+};
+export const gettravelInvoice = (count, page, id) => {
+  return axiosInstance.get(
+    `${baseUrl}TRCRM_travelInvoice_master/user?&page=${page}&count=${count}`
+  );
+};
+export const deletetravelInvoice = (id) => {
+  return axiosInstance.delete(
+    `${baseUrl}TRCRM_travelInvoice_master/delete_type/${id}`
+  );
+};
+export const updatetravelInvoice = (id, value) => {
+  return axiosInstance.put(
+    `${baseUrl}TRCRM_travelInvoice_master/update_type/${id}`, value
+  );
+};
+export const GetUpdatetravelInvoiceByid = (id) => {
+  return axiosInstance.get(
+    `${baseUrl}TRCRM_travelInvoice_master/${id}`
+  );
+};

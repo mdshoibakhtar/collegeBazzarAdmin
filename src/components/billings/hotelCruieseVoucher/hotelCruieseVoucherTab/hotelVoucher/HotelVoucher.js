@@ -1,9 +1,9 @@
 import React from 'react'
 import { Form, Row, Col, Button, Tab, Tabs } from "react-bootstrap";
-function HotelVoucher() {
+function HotelVouchers() {
     return (
-        <>
-            <div className="">
+        <section className='m-4'>
+            <div className="card">
                 {/* Tabs for Voucher and View Voucher */}
                 <Form>
                     {/* Radio Buttons for Hotel, Cruise, Taxi */}
@@ -200,8 +200,8 @@ function HotelVoucher() {
                     </Row>
                 </Form>
             </div>
-        </>
+        </section>
     )
 }
 
-export default HotelVoucher
+export default HotelVouchers

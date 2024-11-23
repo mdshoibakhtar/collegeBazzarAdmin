@@ -6,7 +6,6 @@ function InvoiceSearch() {
     return (
         <>
             <InvoiceSearchFilter />
-            <InvoiceSearchList />
         </>
     )
 }

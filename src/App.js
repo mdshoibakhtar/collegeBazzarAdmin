@@ -1014,6 +1014,9 @@ import ScheduleSMS from "./pages/Schedule-SMS";
 import ContactSgainstCompany from "./pages/Contact-against-company";
 import TagWise from "./pages/Tag-wise-Report";
 import AddLeadForm from "./components/travelLeads/travelLeads/AddLead/AddLeadForm";
+import HotelVoucher from "./components/travelCrmReports/hotelVoucher/HotelVoucher";
+import HotelVouchers from "./components/billings/hotelCruieseVoucher/hotelCruieseVoucherTab/hotelVoucher/HotelVoucher";
+import InvoiceForm from "./components/billings/invoiceForm/InvoiceForm";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -3058,9 +3061,11 @@ function App() {
               <Route path="update-task-stage/:id" element={<TaskStageForm />} />
               <Route path="system_settings" element={<SystemSettingss />} />
               <Route path="billings-invoice" element={<InvoiceTab />} />
+              <Route path="create-billings-invoice" element={<InvoiceForm />} />
               <Route path="billings-credit" element={<CancilaionTab />} />
               <Route path="billings-multiprinting" element={<MultiplePrintings />} />
-              <Route path="billings-hotel/cruisevoucher" element={<HotelCruieseVoucher />} />
+              {/* <Route path="billings-hotel/cruisevoucher" element={<HotelCruieseVoucher />} /> */}
+              {/* <Route path="create-billings-hotel/cruisevoucher" element={<HotelVouchers/>} /> */}
             </Route>
           </>
         )}
