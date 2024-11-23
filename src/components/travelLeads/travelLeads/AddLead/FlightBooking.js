@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import CustomInputField from "../../../../common/CustomInputField";
-
 
 export default function FlightBooking() {
     const [rows, setRows] = useState([
@@ -48,52 +46,44 @@ export default function FlightBooking() {
                 <div className="row" key={index}>
                     <div className="col-6">
                         <div className="mt-2">
-                            <label className="d-block my-1">
+                            <label className="form-label">
                                 From <span className="text-danger fs-5">*</span>
                             </label>
-                            <div className="w-100">
-                                <CustomInputField type={"date"} />
-                            </div>
+                            <input  type="date" className="form-control" />
                         </div>
                     </div>
                     <div className="col-6">
                         <div className="mt-2">
-                            <label className="d-block my-1">
+                            <label className="form-label">
                                 To <span className="text-danger fs-5">*</span>
                             </label>
-                            <div className="w-100">
-                                <CustomInputField type={"date"} />
-                            </div>
+                            <input  type="date" className="form-control" />
                         </div>
                     </div>
                     <div className="col-6">
                         <div className="row">
                             <div className="col-6">
                                 <div className="mt-2">
-                                    <label className="d-block my-1">
+                                    <label className="form-label my-1">
                                         Departure
                                         <span className="text-danger fs-5">*</span>
                                     </label>
-                                    <div className="w-100">
-                                        <CustomInputField type={"text"} />
-                                    </div>
+                                    <input  type="text" className="form-control" placeholder="Departure"/>
                                 </div>
                             </div>
                             <div className="col-6">
                                 <div className="mt-2">
-                                    <label className="d-block my-1">Return</label>
-                                    <div className="w-100">
-                                        <CustomInputField type={"text"} disabled />
-                                    </div>
+                                    <label className="form-label my-1">Return</label>
+                                    <input  type="text" className="form-control" placeholder="Return"/>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="col-6">
                         <div className="mt-2">
-                            <label className="d-block my-1">Class</label>
+                            <label className="form-label my-1">Class</label>
                             <div className="w-100">
-                                <select className="form-select" name="Status">
+                                <select className="form-select shadow" name="Status">
                                     <option></option>
                                     <option>Economy</option>
                                 </select>
@@ -102,7 +92,7 @@ export default function FlightBooking() {
                     </div>
                     <div className="col-6">
                         <div className="mt-2">
-                            <label className="d-block my-1">Category</label>
+                            <label className="form-label ">Category</label>
                             <div className="d-flex gap-4">
                                 <div className="d-flex gap-2 align-items-center">
                                     <input type="checkbox" />
@@ -119,9 +109,9 @@ export default function FlightBooking() {
                         <div className="row">
                             <div className="col-6">
                                 <div className="mt-2">
-                                    <label className="d-block my-1">Flexibility</label>
+                                    <label className="form-label my-1">Flexibility</label>
                                     <div className="w-100">
-                                        <select className="form-select" name="Status">
+                                        <select className="form-select shadow" name="Status">
                                             <option></option>
                                             <option>Flexible</option>
                                         </select>
@@ -130,9 +120,9 @@ export default function FlightBooking() {
                             </div>
                             <div className="col-6">
                                 <div className="mt-2">
-                                    <label className="d-block my-1">Preference</label>
+                                    <label className="form-label my-1">Preference</label>
                                     <div className="w-100">
-                                        <select className="form-select" name="Status">
+                                        <select className="form-select shadow" name="Status">
                                             <option></option>
                                             <option>Window Seat</option>
                                         </select>
@@ -140,10 +130,10 @@ export default function FlightBooking() {
                                 </div>
                             </div>
                         </div>
-
+                        
                     </div>
                     <div className="col-12 my-2 d-flex justify-content-end">
-                        <button className={`btn btn-outline-danger m-0 ${index == 0 ? "d-none" : "d-block"}`} onClick={() => removeRow(index)}><i class="fa-solid fa-xmark"></i></button>
+                        <button className={`btn btn-outline-danger m-0 ${index == 0 ? "d-none" : "form-label"}`} onClick={()=>removeRow(index)}><i class="fa-solid fa-xmark"></i></button>
                     </div>
                 </div>
             ))}

@@ -1022,6 +1022,22 @@ import TravelCruisePage from "./pages/travelCrmMaster/cruise";
 import CruiseAdd from "./components/travelCrmMaster/cruise/cruiseAdd/CruiseAdd";
 import TravelAdventurePage from "./pages/travelCrmMaster/travelAdventure";
 import TravelAdventureAdd from "./components/travelCrmMaster/travelAdventure/travelAdventureAdd/TravelAdventureAdd";
+import BusMasterPage from "./pages/travelCrmMaster/busMaster";
+import BusMasterAdd from "./components/travelCrmMaster/busMaster/busMasterAdd/BusMasterAdd";
+// import TravelQuotationAddPage from "./pages/travelQuotationAddPage";
+// import ItenaryAdd from "./components/travelQuotationAddComp/ItenaryAdd";
+// import FilghtAdd from "./components/travelQuotationAddComp/FilghtAdd";
+// import QuotationInformation from "./components/travelQuotationAddComp/QuotationInformation";
+// import TransportInformation from "./components/travelQuotationAddComp/TransportInformation";
+import TravelPackageListPage from "./pages/travelPackageListPage";
+import TravelPackageAddPage from "./pages/travelPackageAddPage";
+import MasterPackageListPage from "./pages/masterPackageListPage";
+import MasterPackageDetailPage from "./pages/masterPackageDetailPage";
+import TravelPackageEditPage from "./pages/travelPackageEditPage";
+import TravelsaleRegister from "./pages/TravelSaleRegister/index.js";
+import TravelSaleSummery from "./pages/saleSummery/index.js";
+import TravelPurchaseReport from "./pages/TravelpurchaseReport/index.js";
+
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -2841,6 +2857,10 @@ function App() {
               <Route path="company-contacts" element={<ContactSgainstCompany />} />
               <Route path="tagwise" element={<TagWise />} />
 
+              <Route path="travelsaleregister" element={<TravelsaleRegister />} />
+              <Route path="travelsummery" element={<TravelSaleSummery />} />
+              <Route path="travelpurchasereport" element={<TravelPurchaseReport />} />
+
               <Route path="sightseen-list" element={<SightseeingPage />} />
               <Route path="sightseen-add" element={<Addsightseeing />} />
               <Route path="sightseen-update/:id" element={<Addsightseeing />} />
@@ -2854,6 +2874,17 @@ function App() {
               <Route path="tags" element={<TagsPage />} />
               <Route path="tags-add" element={<TagsAdd />} />
               <Route path="tags-update/:id" element={<TagsAdd />} />
+              <Route path="travel-package-list" element={<TravelPackageListPage />} />
+              <Route path="travel-package/edit/:id" element={<TravelPackageEditPage />} />
+              <Route path="travel-package/create" element={<TravelPackageAddPage />} />
+              <Route path="travel-master-package" element={<MasterPackageListPage />} />
+              <Route path="travel-master-package/detail/:id" element={<MasterPackageDetailPage />} />
+              {/* <Route path="travel-quote-list" element={<TravelQuoteListPage />} /> */}
+              {/* <Route path="create-quotation" element={<QuotationInformation />} />
+              <Route path="hotel-information" element={<TravelQuotationAddPage />} />
+              <Route path="itenarary" element={<ItenaryAdd />} />
+              <Route path="itenarary/flight" element={<FilghtAdd />} />
+              <Route path="transport-information" element={<TransportInformation />} /> */}
               <Route path="travel-visa-type" element={<TravelVisaTypePage />} />
               <Route path="travel-visa-add" element={<TravelVisaTypeAdd />} />
               <Route path="travel-visa-Update/:id" element={<TravelVisaTypeAdd />} />
@@ -2888,6 +2919,9 @@ function App() {
               <Route path="travel-cruise-add" element={<CruiseAdd />} />
               <Route path="travel-adventure" element={<TravelAdventurePage />} />
               <Route path="travel-adventure-add" element={<TravelAdventureAdd />} />
+              <Route path="travel-adventure-update/:id" element={<TravelAdventureAdd />} />
+              <Route path="travel-bus-master" element={<BusMasterPage />} />
+              <Route path="travel-bus-master-add" element={<BusMasterAdd />} />
 
               <Route path="travel-leads" element={<TravelLeadPage />} />
               <Route path="travel-leads-add" element={<AddLeadForm />} />

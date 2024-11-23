@@ -18,9 +18,9 @@ export function SaleRegisterFilter() {
                         <div className="row">
                         <div className="col-3">
                                         <div className="mt-2">
-                                            <label className="d-block my-1">Filter</label>
+                                            <label className="form-label">Filter</label>
                                             <div className="w-100">
-                                                <select className="form-select" name="Status">
+                                                <select className="form-select shadow" name="Status">
                                                     <option>Today</option>
                                                     <option>This Month</option>
                                                 </select>
@@ -29,29 +29,21 @@ export function SaleRegisterFilter() {
                                     </div>
                                     <div className="col-3">
                                         <div className="mt-2">
-                                            <label className="d-block my-1">Form</label>
-                                            <div className="w-100">
-                                                <CustomInputField
-                                                    type={"date"}
-                                                />
-                                            </div>
+                                            <label className="form-label">Form</label>
+                                            <input className="form-control" type="date"/>
                                         </div>
                                     </div>
                                     <div className="col-3">
                                         <div className="mt-2">
-                                            <label className="d-block my-1">To</label>
-                                            <div className="w-100">
-                                                <CustomInputField
-                                                    type={"date"}
-                                                />
-                                            </div>
+                                            <label className="form-label">To</label>
+                                            <input className="form-control" type="date"/>
                                         </div>
                                     </div>
                                     <div className="col-3">
                                         <div className="mt-2">
-                                            <label className="d-block my-1">Bill Type</label>
+                                            <label className="form-label">Bill Type</label>
                                             <div className="w-100">
-                                                <select className="form-select" name="Status">
+                                                <select className="form-select shadow" name="Status">
                                                     <option>Domectic</option>
                                                     <option>Internatonal</option>
                                                 </select>
@@ -60,9 +52,9 @@ export function SaleRegisterFilter() {
                                     </div>
                                     <div className="col-3">
                                         <div className="mt-2">
-                                            <label className="d-block my-1">State</label>
+                                            <label className="form-label">State</label>
                                             <div className="w-100">
-                                                <select className="form-select" name="Status">
+                                                <select className="form-select shadow" name="Status">
                                                     <option>Dehli</option>
                                                     <option>UP</option>
                                                     <option>Jharkhand</option>
@@ -72,20 +64,20 @@ export function SaleRegisterFilter() {
                                     </div>
                                     <div className="col-5">
                                         <div className="mt-2">
-                                        <label className="d-block my-1">Wise</label>
+                                        <label className="form-label">Wise</label>
                                         <div className="w-100">
                                             <div className="d-flex gap-1">
                                                 <div className="d-flex align-items-center">
                                                     <input className="" type="radio" checked name="wise"/>
-                                                    <label className="d-block my-1 fs-6 fw-normal mx-1">Summary</label>
+                                                    <label className="form-label fs-6 fw-normal mx-1">Summary</label>
                                                 </div>
                                                 <div className="d-flex align-items-center">
                                                     <input className="" type="radio" name="wise"/>
-                                                    <label className="d-block my-1 fs-6 fw-normal mx-1">Bill wise</label>
+                                                    <label className="form-label fs-6 fw-normal mx-1">Bill wise</label>
                                                 </div>
                                                 <div className="d-flex align-items-center">
                                                     <input className="" type="radio" name="wise"/>
-                                                    <label className="d-block my-1 fs-6 fw-normal mx-1">Party wise</label>
+                                                    <label className="form-label fs-6 fw-normal mx-1">Party wise</label>
                                                 </div>
                                                 <div className="d-flex align-items-center">
                                                     <input className="" type="radio" name="wise"/>
@@ -97,30 +89,26 @@ export function SaleRegisterFilter() {
                                     </div>
                                     <div className="col-4">
                                     <div className="mt-2">
-                                            <label className="d-block my-1">Party </label>
-                                            <div className="w-100">
-                                                <CustomInputField
-                                                    type={"text"}
-                                                />
-                                            </div>
+                                            <label className="form-label">Party </label>
+                                            <input className="form-control" type="text" placeholder="party"/>
                                         </div>
                                     </div>
                                     <div className="col-3">
                                         <div className="mt-2">
-                                        <label className="d-block my-1">Transaction Type</label>
+                                        <label className="form-label">Transaction Type</label>
                                         <div className="w-100">
                                             <div className="d-flex gap-1">
                                                 <div className="d-flex align-items-center">
                                                     <input className="" type="radio" checked name="Transaction"/>
-                                                    <label className="d-block my-1 fs-6 fw-normal mx-1">All</label>
+                                                    <label className="form-label fs-6 fw-normal mx-1">All</label>
                                                 </div>
                                                 <div className="d-flex align-items-center">
                                                     <input className="" type="radio" name="Transaction"/>
-                                                    <label className="d-block my-1 fs-6 fw-normal mx-1">B2B</label>
+                                                    <label className="form-label fs-6 fw-normal mx-1">B2B</label>
                                                 </div>
                                                 <div className="d-flex align-items-center">
                                                     <input className="" type="radio" name="Transaction"/>
-                                                    <label className="d-block my-1 fs-6 fw-normal mx-1">B2c</label>
+                                                    <label className="form-label fs-6 fw-normal mx-1">B2c</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -128,8 +116,8 @@ export function SaleRegisterFilter() {
                                     </div>
                                     <div className="col-2">
                                     <div className="mt-2">
-                                            <label className="d-block my-1">Tax %</label>
-                                            <select className="form-select" name="Status">
+                                            <label className="form-label">Tax %</label>
+                                            <select className="form-select shadow" name="Status">
                                                     <option>5</option>
                                                     <option>10</option>
                                                 </select>

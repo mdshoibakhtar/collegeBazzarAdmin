@@ -57118,3 +57118,7 @@ h3 {
 .side-buttons .btn {
   animation: floatUpDown 2s ease-in-out infinite;
 } */
+
+.tab-color-change .nav-tabs .nav-item button {
+  color: #fff;
+}

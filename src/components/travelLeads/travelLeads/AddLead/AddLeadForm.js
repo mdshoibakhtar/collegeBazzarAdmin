@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { Checkbox } from "antd";
-
 import FlightBooking from "./FlightBooking";
 import HotelBooking from "./HotelBooking";
 import Visa from "./Visa";
@@ -17,7 +15,6 @@ import Cruise from "./Cruise";
 import Adventure from "./Adventure";
 import Package from "./Package";
 import Other from "./Other";
-import CustomInputField from "../../../../common/CustomInputField";
 
 export default function AddLeadForm() {
     const [Enquiry, setEnquiry] = useState({
@@ -63,9 +60,9 @@ export default function AddLeadForm() {
                             <div className="row">
                                 <div className="col-6">
                                     <div className="mt-2">
-                                        <label className="d-block my-1">Customer Type</label>
+                                        <label className="form-label">Customer Type</label>
                                         <div className="w-100">
-                                            <select className="form-select" name="Status">
+                                            <select className="form-select shadow " name="Status">
                                                 <option>B2B</option>
                                                 <option>B2C</option>
                                             </select>
@@ -73,32 +70,24 @@ export default function AddLeadForm() {
                                     </div>
                                 </div>
                                 <div className="col-6">
-                                    <div className="mt-2">
-                                        <label className="d-block my-1">Mobile Number</label>
-                                        <div className="w-100">
-                                            <CustomInputField
-                                                type={"number"}
-                                            />
-                                        </div>
+                                    <div class="mt-2">
+                                        <label class="form-label">Mobile</label>
+                                        <input type="number" class="form-control" placeholder="Mobile number" />
                                     </div>
                                 </div>
                                 <div className="col-6">
                                     <div className="mt-2">
-                                        <label className="d-block my-1">Email</label>
-                                        <div className="w-100">
-                                            <CustomInputField
-                                                type={"email"}
-                                            />
-                                        </div>
+                                        <label className="form-label">Email</label>
+                                        <input className="form-control" placeholder="email " type="email"/>
                                     </div>
                                 </div>
                                 <div className="col-6">
                                     <div className="row">
-                                        <div className="col-3">
+                                        <div className="col-4">
                                             <div className="mt-2">
-                                                <label className="d-block my-1">Salutation <span className="text-danger fs-5">*</span></label>
+                                                <label className="Form-label">Salutation <span className="text-danger fs-5">*</span></label>
                                                 <div className="w-100">
-                                                    <select className="form-select" name="Status">
+                                                    <select className="form-select shadow" >
                                                         <option>Mr</option>
                                                         <option>Mrs</option>
                                                         <option>Miss</option>
@@ -106,75 +95,49 @@ export default function AddLeadForm() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="col-9">
+                                        <div className="col-8">
                                             <div className="mt-2">
-                                                <label className="d-block my-1">First Name <span className="text-danger fs-5">*</span></label>
-                                                <div className="w-100">
-                                                    <CustomInputField
-                                                        type={"text"}
-                                                    />
-                                                </div>
+                                                <label className="form-labe;">First Name <span className="text-danger fs-5">*</span></label>
+                                                <input type="text" placeholder="first name" className="form-control"/>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="col-6">
                                     <div className="mt-2">
-                                        <label className="d-block my-1">Last Name</label>
-                                        <div className="w-100">
-                                            <div className="w-100">
-                                                <CustomInputField
-                                                    type={"text"}
-                                                />
-                                            </div>
-                                        </div>
+                                        <label className="form-label">Last Name</label>
+                                        <input type="text" placeholder="Last name" className="form-control"/>
                                     </div>
                                 </div>
                                 <div className="col-6">
                                     <div className="mt-2">
-                                        <label className="d-block my-1">Address</label>
-                                        <div className="w-100">
-                                            <CustomInputField
-                                                type={"text"}
-                                            />
-                                        </div>
+                                        <label className="form-label">Address</label>
+                                        <input type="text" placeholder="addres" className="form-control"/>
                                     </div>
                                 </div>
                                 <div className="col-6">
                                     <div className="mt-2">
-                                        <label className="d-block my-1">City</label>
-                                        <div className="w-100">
-                                            <CustomInputField
-                                                type={"text"}
-                                            />
-                                        </div>
+                                        <label className="form-label">City</label>
+                                        <input type="text" placeholder="City" className="form-control"/>
                                     </div>
                                 </div>
                                 <div className="col-6">
                                     <div className="mt-2">
-                                        <label className="d-block my-1">Alternate Mobile Number</label>
-                                        <div className="w-100">
-                                            <CustomInputField
-                                                type={"number"}
-                                            />
-                                        </div>
+                                        <label className="form-label">Alternate Mobile Number</label>
+                                        <input type="text" placeholder="Alternate Mobile Number" className="form-control"/>
                                     </div>
                                 </div>
                                 <div className="col-6">
                                     <div className="mt-2">
-                                        <label className="d-block my-1">Alternate Email Id</label>
-                                        <div className="w-100">
-                                            <CustomInputField
-                                                type={"email"}
-                                            />
-                                        </div>
+                                        <label className="form-label my-1">Alternate Email Id</label>
+                                        <input className="form-control" type="email" placeholder="Alternate Email Id"/>
                                     </div>
                                 </div>
                                 <div className="col-6">
                                     <div className="mt-2">
-                                        <label className="d-block my-1">Lead Source</label>
+                                        <label className="form-label my-1">Lead Source</label>
                                         <div className="w-100">
-                                            <select className="form-select" name="Status">
+                                            <select className="form-select shadow" name="Status">
                                                 <option></option>
                                                 <option>Cold Call</option>
                                                 <option>External Referral</option>
@@ -184,9 +147,9 @@ export default function AddLeadForm() {
                                 </div>
                                 <div className="col-6">
                                     <div className="mt-2">
-                                        <label className="d-block my-1">Lead Priority</label>
+                                        <label className="form-label my-1">Lead Priority</label>
                                         <div className="w-100">
-                                            <select className="form-select" name="Status">
+                                            <select className="form-select shadow" name="Status">
                                                 <option></option>
                                                 <option>Cold </option>
                                                 <option>wram</option>
@@ -196,9 +159,9 @@ export default function AddLeadForm() {
                                 </div>
                                 <div className="col-6">
                                     <div className="mt-2">
-                                        <label className="d-block my-1">Lead Status</label>
+                                        <label className="form-label my-1">Lead Status</label>
                                         <div className="w-100">
-                                            <select className="form-select" name="Status">
+                                            <select className="form-select shadow " name="Status">
                                                 <option></option>
                                                 <option>New Dehli</option>
                                                 <option>Working</option>
@@ -210,41 +173,29 @@ export default function AddLeadForm() {
                                     <div className="row">
                                         <div className="col-4">
                                             <div className="mt-2">
-                                                <label className="d-block my-1">No. of Adults <span className="text-danger fs-5">*</span></label>
-                                                <div className="w-100">
-                                                    <CustomInputField
-                                                        type={"email"}
-                                                    />
-                                                </div>
+                                                <label className="form-label">No. of Adults </label>
+                                                <input className="form-control" type="number" placeholder="No.of Adult"></input>
                                             </div>
                                         </div>
                                         <div className="col-4">
                                             <div className="mt-2">
-                                                <label className="d-block my-1">No. of Children</label>
-                                                <div className="w-100">
-                                                    <CustomInputField
-                                                        type={"email"}
-                                                    />
-                                                </div>
+                                                <label className="form-label">No. of Children</label>
+                                               <input type="number" placeholder="No.of Children" className="form-control"/>
                                             </div>
                                         </div>
                                         <div className="col-4">
                                             <div className="mt-2">
-                                                <label className="d-block my-1">No. of Infant</label>
-                                                <div className="w-100">
-                                                    <CustomInputField
-                                                        type={"email"}
-                                                    />
-                                                </div>
+                                                <label className="form-label">No. of Infant</label>
+                                                <input type="no" className="form-control" placeholder="No.of Infant"/>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="col-6">
                                     <div className="mt-2">
-                                        <label className="d-block my-1">Trip Type</label>
+                                        <label className="form-label my-1">Trip Type</label>
                                         <div className="w-100">
-                                            <select className="form-select" name="Status">
+                                            <select className="form-select shadow " name="Status">
                                                 <option></option>
                                                 <option>Other</option>
                                             </select>
@@ -253,9 +204,9 @@ export default function AddLeadForm() {
                                 </div>
                                 <div className="col-6">
                                     <div className="mt-2">
-                                        <label className="d-block my-1">Tag</label>
+                                        <label className="form-label my-1">Tag</label>
                                         <div className="w-100">
-                                            <select className="form-select" name="Status">
+                                            <select className="form-select shadow " >
                                                 <option></option>
                                                 <option>New Dehli</option>
                                                 <option>Working</option>
@@ -265,9 +216,9 @@ export default function AddLeadForm() {
                                 </div>
                                 <div className="col-6">
                                     <div className="mt-2">
-                                        <label className="d-block my-1">Assigned To</label>
+                                        <label className="form-label my-1">Assigned To</label>
                                         <div className="w-100">
-                                            <select className="form-select" name="Status">
+                                            <select className="form-select shadow" >
                                                 <option></option>
                                                 <option>New Dehli</option>
                                                 <option>Working</option>
@@ -458,9 +409,9 @@ export default function AddLeadForm() {
                         </div>
                         <div className="col-3">
                             <div className="mt-2">
-                                <label className="d-block my-1">Note</label>
+                                <label className="form-label">Note</label>
                                 <div className="w-100">
-                                    <textarea className="w-100" style={{ height: "120px" }}> </textarea>
+                                    <textarea className="form-control" style={{ height: "120px" }}> </textarea>
                                 </div>
                             </div>
                         </div>

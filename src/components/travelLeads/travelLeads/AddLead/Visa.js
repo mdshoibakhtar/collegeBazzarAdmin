@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CustomInputField from "../../../../common/CustomInputField";
+
 
 export default function Visa() {
     const [rows, setRows] = useState([
@@ -48,9 +48,9 @@ export default function Visa() {
                 <div className="row" key={index}>
                     <div className="col-6">
                         <div className="mt-2">
-                            <label className="d-block my-1">Country <span className="text-danger fs-5">*</span></label>
+                            <label className="form-label">Country <span className="text-danger fs-5">*</span></label>
                             <div className="w-100">
-                                <select className="form-select" name="Status">
+                                <select className="form-select shadow" name="Status">
                                     <option>Select Country</option>
                                     <option>India</option>
                                 </select>
@@ -59,9 +59,9 @@ export default function Visa() {
                     </div>
                     <div className="col-6">
                         <div className="mt-2">
-                            <label className="d-block my-1">Visa Category</label>
+                            <label className="form-label">Visa Category</label>
                             <div className="w-100">
-                                <select className="form-select" name="Status">
+                                <select className="form-select shadow " name="Status">
                                     <option>Select visa</option>
                                 </select>
                             </div>
@@ -71,9 +71,9 @@ export default function Visa() {
                         <div className="row">
                             <div className="col-3">
                                 <div className="mt-2">
-                                    <label className="d-block my-1">Visa type</label>
+                                    <label className="form-label">Visa type</label>
                                     <div className="w-100">
-                                        <select className="form-select" name="Status">
+                                        <select className="form-select shadow " name="Status">
                                             <option>Single</option>
                                         </select>
                                     </div>
@@ -81,49 +81,39 @@ export default function Visa() {
                             </div>
                             <div className="col-3">
                                 <div className="mt-2">
-                                    <label className="d-block my-1">Duration <span className="text-danger fs-5">*</span></label>
-                                    <div className="w-100">
-                                        <CustomInputField type="text" />
-                                    </div>
+                                    <label className="form-label">Duration <span className="text-danger fs-5">*</span></label>
+                                    <input className="form-control" placeholder="Duration" type="text" />
                                 </div>
                             </div>
                             <div className="col-3">
                                 <div className="mt-2">
-                                    <label className="d-block my-1">Travel Date</label>
-                                    <div className="w-100">
-                                        <CustomInputField type="date" disable="disable" />
-                                    </div>
+                                    <label className="form-label">Travel Date</label>
+                                    <input className="form-control" type="date" />
                                 </div>
                             </div>
                             <div className="col-3">
                                 <div className="mt-2">
-                                    <label className="d-block my-1">Job Profile</label>
-                                    <div className="w-100">
-                                        <CustomInputField type="text" />
-                                    </div>
+                                    <label className="form-label">Job Profile</label>
+                                    <input placeholder="Job Profile" type="text" className="form-control" />
                                 </div>
                             </div>
                             <div className="col-3">
                                 <div className="mt-2">
-                                    <label className="d-block my-1">Age</label>
-                                    <div className="w-100">
-                                        <CustomInputField type="number" />
-                                    </div>
+                                    <label className="form-label">Age</label>
+                                    <input type="number" className="form-control" placeholder="Age" />
                                 </div>
                             </div>
                             <div className="col-3">
                                 <div className="mt-2">
-                                    <label className="d-block my-1">Qualification</label>
-                                    <div className="w-100">
-                                        <CustomInputField type="text" />
-                                    </div>
+                                    <label className="form-label">Qualification</label>
+                                    <input placeholder="Qualifiction" type="text" className="form-control" />
                                 </div>
                             </div>
                             <div className="col-12">
                                 <div className="mt-2">
-                                    <label className="d-block my-1">Description</label>
+                                    <label className="form-label">Description</label>
                                     <div className="w-100">
-                                        <textarea className="w-100 border" style={{ height: "100px" }} />
+                                        <textarea className="form-control" style={{ height: "100px" }} />
                                     </div>
                                 </div>
                             </div>

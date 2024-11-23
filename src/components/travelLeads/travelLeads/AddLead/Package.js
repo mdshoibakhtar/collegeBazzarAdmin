@@ -1,4 +1,4 @@
-import CustomInputField from "../../../../common/CustomInputField";
+
 export default function Package() {
 
     return (
@@ -13,25 +13,21 @@ export default function Package() {
             <div className="row">
                 <div className="col-4">
                     <div className="mt-2">
-                        <label className="d-block my-1">Tour Start Date </label>
-                        <div className="w-100">
-                            <CustomInputField type={"date"} />
-                        </div>
+                        <label className="form-label">Tour Start Date </label>
+                        <input type="date" className="form-control" />
                     </div>
                 </div>
                 <div className="col-4">
                     <div className="mt-2">
-                        <label className="d-block my-1">Budget</label>
-                        <div className="w-100">
-                            <CustomInputField type={"text"} />
-                        </div>
+                        <label className="form-label">Budget</label>
+                        <input placeholder="Budget" className="form-control" type="text" />
                     </div>
                 </div>
                 <div className="col-12">
                     <div className="mt-2">
-                        <label className="d-block my-1">Extra Details</label>
+                        <label className="form-label">Extra Details</label>
                         <div className="w-100">
-                            <textarea className="w-100 border" style={{ height: "100px" }} />
+                            <textarea className="form-control" style={{ height: "100px" }} />
                         </div>
                     </div>
 
@@ -46,8 +42,8 @@ export default function Package() {
             <div className="row">
                 <div className="col-6">
                     <div className="mt-2">
-                        <label className="d-block my-1">Tour Start Date  <span className="text-danger fs-5">*</span></label>
-                        <select className="form-select" name="Status">
+                        <label className="form-label">Tour Start Date  <span className="text-danger fs-5">*</span></label>
+                        <select className="form-select shadow" name="Status">
                             <option>select Country</option>
                             <option>india </option>
                         </select>
@@ -55,10 +51,8 @@ export default function Package() {
                 </div>
                 <div className="col-6">
                     <div className="mt-2">
-                        <label className="d-block my-1">Search by Package Name</label>
-                        <div className="w-100">
-                            <CustomInputField type={"text"} />
-                        </div>
+                        <label className="form-label">Search by Package Name</label>
+                        <input placeholder="Search by Package Name" type="search" className="form-control" />
                     </div>
                 </div>
             </div>

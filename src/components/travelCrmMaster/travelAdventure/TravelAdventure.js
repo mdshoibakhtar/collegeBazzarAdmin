@@ -142,13 +142,15 @@ const TravelAdventure = () => {
                                                     return <tr role="row" key={item?._id}>
                                                         <td valign="top" className="dataTables_empty">{(i + 1) + (page * count)}</td>
                                                         <td valign="top" className="dataTables_empty" >{item?.country?.name}</td>
-                                                        <td valign="top" className="dataTables_empty" >{item?.travel_date}</td>
-                                                        <td valign="top" className="dataTables_empty" >{item?.number_of_days}</td>
-                                                        <td valign="top" className="dataTables_empty" >{item?.sub_category}</td>
-                                                        <td valign="top" className="dataTables_empty" >{item?.description}</td>
+                                                        <td valign="top" className="dataTables_empty" >{item?.state?.name}</td>
+                                                        <td valign="top" className="dataTables_empty" >{item?.city?.travel_date}</td>
+                                                        <td valign="top" className="dataTables_empty" >{item?.category_motorbiking == true ? 'Yes' : 'No'}</td>
+                                                        <td valign="top" className="dataTables_empty" >{item?.category_camping == true ? 'Yes' : 'No'}</td>
+                                                        <td valign="top" className="dataTables_empty" >{item?.category_safari == true ? 'Yes' : 'No'}</td>
+                                                        <td valign="top" className="dataTables_empty" >{item?.category_water_sports == true ? 'Yes' : 'No'}</td>
                                                         <td>
                                                             <div className="d-flex">
-                                                                <Link to={`/travel-other-master-update/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
+                                                                <Link to={`/travel-adventure-update/${item?._id}`} className="btn btn-primary shadow btn-xs sharp me-1">
                                                                     <i className="fa fa-pencil" />
                                                                 </Link>
                                                                 <Popconfirm

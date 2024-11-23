@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CustomInputField from "../../../../common/CustomInputField";
+
 
 export default function Forex() {
     const [rows, setRows] = useState([
@@ -33,9 +33,9 @@ export default function Forex() {
                 <div className="row" key={index}>
                     <div className="col-6">
                         <div className="mt-2">
-                            <label className="d-block my-1">Country <span className="text-danger fs-5">*</span></label>
+                            <label className="form-label">Country <span className="text-danger fs-5">*</span></label>
                             <div className="w-100">
-                                <select className="form-select" name="Status">
+                                <select className="form-select shadow" name="Status">
                                     <option>Select Country</option>
                                     <option>Inadia </option>
                                 </select>
@@ -44,12 +44,8 @@ export default function Forex() {
                     </div>
                     <div className="col-3">
                         <div className="mt-2">
-                            <label className="d-block my-1">Amont <span className="text-danger fs-5">*</span></label>
-                            <div className="w-100">
-                                <CustomInputField
-                                    type={"number"}
-                                />
-                            </div>
+                            <label className="form-label">Amont <span className="text-danger fs-5">*</span></label>
+                            <input type="number" className="form-control" placeholder="Amount" />
                         </div>
                     </div>
                     <div className="col-12 my-2 d-flex justify-content-end">

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CustomInputField from "../../../../common/CustomInputField";
+
 
 export default function Passport() {
     const [rows, setRows] = useState([
@@ -47,9 +47,9 @@ export default function Passport() {
                 <div className="row">
                     <div className="col-6">
                         <div className="mt-2">
-                            <label className="d-block my-1">Issusing Country  <span className="text-danger fs-5">*</span></label>
+                            <label className="form-label">Issusing Country  <span className="text-danger fs-5">*</span></label>
                             <div className="w-100">
-                                <select className="form-select" name="Status">
+                                <select className="form-select shadow" name="Status">
                                     <option>Select Country</option>
                                     <option>india </option>
                                 </select>
@@ -58,47 +58,31 @@ export default function Passport() {
                     </div>
                     <div className="col-3">
                         <div className="mt-2">
-                            <label className="d-block my-1">Date  <span className="text-danger fs-5">*</span></label>
-                            <div className="w-100">
-                                <CustomInputField
-                                    type={"Date"}
-                                />
-                            </div>
+                            <label className="form-label">Date  <span className="text-danger fs-5">*</span></label>
+                            <input className="form-control" type="date" />
                         </div>
                     </div>
                     <div className="col-3">
                         <div className="mt-2">
-                            <label className="d-block my-1">Current Passport No.</label>
-                            <div className="w-100">
-                                <CustomInputField
-                                    type={"text"}
-                                />
-                            </div>
+                            <label className="form-label">Current Passport No.</label>
+                            <input className="form-control" type="text" placeholder="Current Passport No." />
                         </div>
                     </div>
                     <div className="col-3">
                         <div className="mt-2">
-                            <label className="d-block my-1">Place of Apply </label>
-                            <div className="w-100">
-                                <CustomInputField
-                                    type={"text"}
-                                />
-                            </div>
+                            <label className="form-label">Place of Apply </label>
+                            <input placeholder="place of apply" type="text" className="form-control" />
                         </div>
                     </div>
                     <div className="col-3">
                         <div className="mt-2">
-                            <label className="d-block my-1">No. Of Person</label>
-                            <div className="w-100">
-                                <CustomInputField
-                                    type={"text"}
-                                />
-                            </div>
+                            <label className="form-label">No. Of Person</label>
+                            <input type="text" className="form-control" placeholder="no. of person" />
                         </div>
                     </div>
                     <div className="col-6">
                         <div className="mt-2">
-                            <label className="d-block my-1">Category  <span className="text-danger fs-5">*</span></label>
+                            <label className="form-label">Category  <span className="text-danger fs-5">*</span></label>
                             <div className="d-flex gap-4">
                                 <div className="d-flex gap-2 align-items-center">
                                     <input type="radio" name="passport" />
@@ -113,17 +97,13 @@ export default function Passport() {
                     </div>
                     <div className="col-3">
                         <div className="mt-2">
-                            <label className="d-block my-1">Current Expiry Date</label>
-                            <div className="w-100">
-                                <CustomInputField
-                                    type={"Date"}
-                                />
-                            </div>
+                            <label className="form-label">Current Expiry Date</label>
+                            <input type="date" className="form-control" />
                         </div>
                     </div>
                     <div className="col-6">
                         <div className="mt-2">
-                            <label className="d-block my-1">Urgent</label>
+                            <label className="form-label">Urgent</label>
                             <div className="d-flex gap-4">
                                 <div className="d-flex gap-2 align-items-center">
                                     <input type="checkbox" />

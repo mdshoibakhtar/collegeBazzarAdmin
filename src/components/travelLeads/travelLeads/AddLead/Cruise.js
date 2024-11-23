@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CustomInputField from "../../../../common/CustomInputField";
+
 
 export default function Cruise() {
     const [rows, setRows] = useState([
@@ -47,8 +47,8 @@ export default function Cruise() {
                 <div className="row" key={index}>
                     <div className="col-6">
                         <div className="mt-2">
-                            <label className="d-block my-1">Country  <span className="text-danger fs-5">*</span></label>
-                            <select className="form-select" name="Status">
+                            <label className="form-label">Country  <span className="text-danger fs-5">*</span></label>
+                            <select className="form-select shadow" name="Status">
                                 <option>select Country</option>
                                 <option>india </option>
                             </select>
@@ -56,69 +56,45 @@ export default function Cruise() {
                     </div>
                     <div className="col-6">
                         <div className="mt-2">
-                            <label className="d-block my-1"> City  <span className="text-danger fs-5">*</span></label>
-                            <div className="w-100">
-                                <CustomInputField
-                                    type={"Search"}
-                                />
-                            </div>
+                            <label className="form-label"> City  <span className="text-danger fs-5">*</span></label>
+                            <input className="form-control" type="search" placeholder="City" />
                         </div>
                     </div>
                     <div className="col-3">
                         <div className="mt-2">
-                            <label className="d-block my-1">Days  <span className="text-danger fs-5">*</span></label>
-                            <div className="w-100">
-                                <CustomInputField
-                                    type={"text"}
-                                />
-                            </div>
+                            <label className="form-label">Days  <span className="text-danger fs-5">*</span></label>
+                            <input className="form-control" type="date" />
                         </div>
                     </div>
 
                     <div className="col-3">
                         <div className="mt-2">
-                            <label className="d-block my-1">Cruise Name  <span className="text-danger fs-5">*</span></label>
-                            <div className="w-100">
-                                <CustomInputField
-                                    type={"text"}
-                                />
-                            </div>
+                            <label className="form-label">Cruise Name  <span className="text-danger fs-5">*</span></label>
+                            <input className="form-control" type="text" placeholder="Cruise Name" />
                         </div>
                     </div>
                     <div className="col-3">
                         <div className="mt-2">
-                            <label className="d-block my-1">Type</label>
-                            <div className="w-100">
-                                <CustomInputField
-                                    type={"text"}
-                                />
-                            </div>
+                            <label className="form-label">Type</label>
+                            <input type="text" placeholder="type" className="form-control" />
                         </div>
                     </div>
                     <div className="col-3">
                         <div className="mt-2">
-                            <label className="d-block my-1">Departure  <span className="text-danger fs-5">*</span></label>
-                            <div className="w-100">
-                                <CustomInputField
-                                    type={"text"}
-                                />
-                            </div>
+                            <label className="form-label">Departure  <span className="text-danger fs-5">*</span></label>
+                            <input type="text" placeholder="Departure" className="form-control" />
                         </div>
                     </div>
                     <div className="col-3">
                         <div className="mt-2">
-                            <label className="d-block my-1">Return</label>
-                            <div className="w-100">
-                                <CustomInputField
-                                    type={"text"}
-                                />
-                            </div>
+                            <label className="form-label">Return</label>
+                            <input type="text" placeholder="Return" className="form-control" />
                         </div>
                     </div>
                     <div className="col-3">
                         <div className="mt-2">
-                            <label className="d-block my-1">Room Preference </label>
-                            <select className="form-select" name="Status">
+                            <label className="form-label">Room Preference </label>
+                            <select className="form-select shadow" name="Status">
                                 <option></option>
                                 <option>Private </option>
                             </select>
@@ -126,9 +102,9 @@ export default function Cruise() {
                     </div>
                     <div className="col-12">
                         <div className="mt-2">
-                            <label className="d-block my-1">Remark</label>
+                            <label className="form-label">Remark</label>
                             <div className="w-100">
-                                <textarea className="w-100 border" style={{ height: "100px" }} />
+                                <textarea className="form-control" style={{ height: "100px" }} />
                             </div>
                         </div>
                     </div>

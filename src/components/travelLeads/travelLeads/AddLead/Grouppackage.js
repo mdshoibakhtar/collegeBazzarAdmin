@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CustomInputField from "../../../../common/CustomInputField";
+
 
 export default function GroupPackage() {
     const [rows, setRows] = useState([
@@ -47,9 +47,9 @@ export default function GroupPackage() {
                 <div className="row" key={index}>
                     <div className="col-6">
                         <div className="mt-2">
-                            <label className="d-block my-1">Select countries to get available package list</label>
+                            <label className="form-label">Select countries to get available package list</label>
                             <div className="w-100">
-                                <select className="form-select" name="Status">
+                                <select className="form-select shadow" name="Status">
                                     <option>Select Country</option>
                                     <option>india </option>
                                 </select>
@@ -58,17 +58,15 @@ export default function GroupPackage() {
                     </div>
                     <div className="col-6">
                         <div className="mt-2">
-                            <label className="d-block my-1">Search Package Name</label>
-                            <div className="w-100">
-                                <CustomInputField type={"Search"} />
-                            </div>
+                            <label className="form-label">Search Package Name</label>
+                            <input placeholder="Search Package Name" className="form-control" type="search" />
                         </div>
                     </div>
                     <div className="col-3">
                         <div className="mt-2">
-                            <label className="d-block my-1">Preference</label>
+                            <label className="form-label">Preference</label>
                             <div className="w-100">
-                                <select className="form-select">
+                                <select className="form-select shadow">
                                     <option></option>
                                     <option>All</option>
                                 </select>
@@ -78,9 +76,9 @@ export default function GroupPackage() {
 
                     <div className="col-12">
                         <div className="mt-2">
-                            <label className="d-block my-1">Remark</label>
+                            <label className="form-label">Remark</label>
                             <div className="w-100">
-                                <textarea className="w-100 border" style={{ height: "100px" }} />
+                                <textarea className="form-control" placeholder="Remark" style={{ height: "100px" }} />
                             </div>
                         </div>
                     </div>

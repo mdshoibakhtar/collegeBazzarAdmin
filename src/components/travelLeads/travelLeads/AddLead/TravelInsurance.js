@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CustomInputField from "../../../../common/CustomInputField";
+
 
 export default function TrvelInsurance() {
     const [rows, setRows] = useState([
@@ -37,9 +37,9 @@ export default function TrvelInsurance() {
                 <div className="row" key={index}>
                     <div className="col-6">
                         <div className="mt-2">
-                            <label className="d-block my-1">Country <span className="text-danger fs-5">*</span></label>
+                            <label className="form-label">Country <span className="text-danger fs-5">*</span></label>
                             <div className="w-100">
-                                <select className="form-select" name="Status">
+                                <select className="form-select shadow " name="Status">
                                     <option>Select Country</option>
                                     <option>india </option>
                                 </select>
@@ -48,21 +48,16 @@ export default function TrvelInsurance() {
                     </div>
                     <div className="col-6">
                         <div className="mt-2">
-                            <label className="d-block my-1">How long? <span className="text-danger fs-5">*</span></label>
-                            <div className="w-100">
-                                <CustomInputField
-                                    type={"text"}
-
-                                />
-                            </div>
+                            <label className="form-label">How long? <span className="text-danger fs-5">*</span></label>
+                            <input className="form-control" type="text" placeholder="How Long?" />
                         </div>
                     </div>
 
                     <div className="col-3">
                         <div className="mt-2">
-                            <label className="d-block my-1">Insurance for Visa </label>
+                            <label className="form-label">Insurance for Visa </label>
                             <div className="w-100">
-                                <select className="form-select" name="Status">
+                                <select className="form-select shadow " name="Status">
                                     <option>No</option>
                                 </select>
                             </div>
@@ -70,12 +65,8 @@ export default function TrvelInsurance() {
                     </div>
                     <div className="col-3">
                         <div className="mt-2">
-                            <label className="d-block my-1">Travel Date</label>
-                            <div className="w-100">
-                                <CustomInputField
-                                    type={"text"}
-                                />
-                            </div>
+                            <label className="form-label">Travel Date</label>
+                            <input placeholder="Travel Date" className="form-control" type="date" />
                         </div>
                     </div>
                     <div className="col-12 my-2 d-flex justify-content-end">

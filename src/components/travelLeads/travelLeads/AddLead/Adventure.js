@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import CustomInputField from "../../../../common/CustomInputField";
+
+import { Input } from "antd";
 
 export default function Adventure() {
     const [rows, setRows] = useState([
@@ -47,8 +48,8 @@ export default function Adventure() {
                 <div className="row" key={index}>
                     <div className="col-6">
                         <div className="mt-2">
-                            <label className="d-block my-1">Country  <span className="text-danger fs-5">*</span></label>
-                            <select className="form-select" name="Status">
+                            <label className="form-label">Country  <span className="text-danger fs-5">*</span></label>
+                            <select className="form-select shadow" name="Status">
                                 <option>select Country</option>
                                 <option>india </option>
                             </select>
@@ -56,28 +57,20 @@ export default function Adventure() {
                     </div>
                     <div className="col-6">
                         <div className="mt-2">
-                            <label className="d-block my-1"> City  <span className="text-danger fs-5">*</span></label>
-                            <div className="w-100">
-                                <CustomInputField
-                                    type={"Search"}
-                                />
-                            </div>
+                            <label className="form-label"> City  <span className="text-danger fs-5">*</span></label>
+                            <input className="form-control" type="search" placeholder="city" />
                         </div>
                     </div>
                     <div className="col-3">
                         <div className="mt-2">
-                            <label className="d-block my-1">Days  <span className="text-danger fs-5">*</span></label>
-                            <div className="w-100">
-                                <CustomInputField
-                                    type={"text"}
-                                />
-                            </div>
+                            <label className="form-label">Days  <span className="text-danger fs-5">*</span></label>
+                            <Input type="text" placeholder="Day" className="form-control" />
                         </div>
                     </div>
 
                     <div className="col-9">
                         <div className="mt-2">
-                            <label className="d-block my-1">Category  <span className="text-danger fs-5">*</span></label>
+                            <label className="form-label">Category  <span className="text-danger fs-5">*</span></label>
                             <div className="d-flex gap-4">
                                 <div className="d-flex gap-2 align-items-center">
                                     <input type="checkbox" name="passport" />
@@ -106,9 +99,9 @@ export default function Adventure() {
                     </div>
                     <div className="col-12">
                         <div className="mt-2">
-                            <label className="d-block my-1">Remark</label>
+                            <label className="form-label">Remark</label>
                             <div className="w-100">
-                                <textarea className="w-100 border" style={{ height: "100px" }} />
+                                <textarea className="form-control" placeholder="remark" style={{ height: "100px" }} />
                             </div>
                         </div>
                     </div>

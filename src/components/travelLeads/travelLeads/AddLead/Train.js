@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CustomInputField from "../../../../common/CustomInputField";
+
 
 export default function Train() {
     const [rows, setRows] = useState([
@@ -47,8 +47,8 @@ export default function Train() {
                 <div className="row">
                     <div className="col-6">
                         <div className="mt-2">
-                            <label className="d-block my-1">Country </label>
-                            <select className="form-select" name="Status">
+                            <label className="form-label">Country </label>
+                            <select className="form-select shadow" name="Status">
                                 <option>select Country</option>
                                 <option>india </option>
                             </select>
@@ -56,52 +56,36 @@ export default function Train() {
                     </div>
                     <div className="col-6">
                         <div className="mt-2">
-                            <label className="d-block my-1">From City  <span className="text-danger fs-5">*</span></label>
-                            <div className="w-100">
-                                <CustomInputField
-                                    type={"texx"}
-                                />
-                            </div>
+                            <label className="form-label">From City  <span className="text-danger fs-5">*</span></label>
+                            <input type="search" className="form-control" placeholder="from city" />
                         </div>
                     </div>
                     <div className="col-6">
                         <div className="mt-2">
-                            <label className="d-block my-1">To City  <span className="text-danger fs-5">*</span></label>
+                            <label className="form-label">To City  <span className="text-danger fs-5">*</span></label>
                             <div className="w-100">
-                                <CustomInputField
-                                    type={"text"}
-                                />
+                                <input type="search" className="form-control" placeholder="To city" />
                             </div>
                         </div>
                     </div>
 
                     <div className="col-3">
                         <div className="mt-2">
-                            <label className="d-block my-1">Departure  <span className="text-danger fs-5">*</span></label>
-                            <div className="w-100">
-                                <CustomInputField
-                                    type={"text"}
-                                    disable={"disable"}
-                                />
-                            </div>
+                            <label className="form-label">Departure  <span className="text-danger fs-5">*</span></label>
+                            <input type="text" className="form-control" placeholder="Departure" />
                         </div>
                     </div>
                     <div className="col-3">
                         <div className="mt-2">
-                            <label className="d-block my-1">Return</label>
-                            <div className="w-100">
-                                <CustomInputField
-                                    type={"text"}
-                                    disable={"disable"}
-                                />
-                            </div>
+                            <label className="form-label">Return</label>
+                            <input className="form-control" placeholder="Return" type="text" />
                         </div>
                     </div>
                     <div className="col-3">
                         <div className="mt-2">
-                            <label className="d-block my-1">Preference</label>
+                            <label className="form-label">Preference</label>
                             <div className="w-100">
-                                <select className="form-select">
+                                <select className="form-select shadow">
                                     <option></option>
                                     <option>Economy </option>
                                 </select>
@@ -110,9 +94,9 @@ export default function Train() {
                     </div>
                     <div className="col-12">
                         <div className="mt-2">
-                            <label className="d-block my-1">Remark</label>
+                            <label className="form-label">Remark</label>
                             <div className="w-100">
-                                <textarea className="w-100 border" style={{ height: "100px" }} />
+                                <textarea className="form-control" style={{ height: "100px" }} />
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CustomInputField from "../../../../common/CustomInputField";
+
 
 export default function Sightseeing() {
     const [rows, setRows] = useState([
@@ -39,8 +39,8 @@ export default function Sightseeing() {
                 <div className="row" key={index}>
                     <div className="col-6">
                         <div className="mt-2">
-                            <label className="d-block my-1">Country <span className="text-danger fs-5">*</span></label>
-                            <select className="form-select" name="Status">
+                            <label className="form-label">Country <span className="text-danger fs-5">*</span></label>
+                            <select className="form-select shadow">
                                 <option>select Country</option>
                                 <option>india </option>
                             </select>
@@ -48,30 +48,21 @@ export default function Sightseeing() {
                     </div>
                     <div className="col-6">
                         <div className="mt-2">
-                            <label className="d-block my-1">City <span className="text-danger fs-5">*</span></label>
-                            <div className="w-100">
-                                <CustomInputField
-                                    type={"Search"}
-                                    disable={"disable"}
-                                />
-                            </div>
+                            <label className="form-label">City <span className="text-danger fs-5">*</span></label>
+                            <input className="form-control" type="search" />
                         </div>
                     </div>
                     <div className="col-6">
                         <div className="mt-2">
-                            <label className="d-block my-1">Sightseeing Options</label>
-                            <div className="w-100">
-                                <CustomInputField
-                                    type={"text"}
-                                />
-                            </div>
+                            <label className="form-label">Sightseeing Options</label>
+                            <input type="text" className="form-control" placeholder="Sightseeing Options" />
                         </div>
                     </div>
 
                     <div className="col-3">
                         <div className="mt-2">
-                            <label className="d-block my-1">Preference</label>
-                            <select className="form-select">
+                            <label className="form-label">Preference</label>
+                            <select className="form-select shadow">
                                 <option></option>
                                 <option>Private </option>
                             </select>
@@ -79,13 +70,8 @@ export default function Sightseeing() {
                     </div>
                     <div className="col-3">
                         <div className="mt-2">
-                            <label className="d-block my-1">Travel Date</label>
-                            <div className="w-100">
-                                <CustomInputField
-                                    type={"date"}
-                                    disable={"disable"}
-                                />
-                            </div>
+                            <label className="form-label">Travel Date</label>
+                            <input className="form-control" type="date" />
                         </div>
                     </div>
                     <div className="col-12 my-2 d-flex justify-content-end">

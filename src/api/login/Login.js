@@ -5395,6 +5395,69 @@ export const updateTRCRM_adventure = (id, value) => {
 };
 
 
+export const getTRCRM_bus = (value) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_bus/user?page=${value?.page}&count=${value?.count}&start_date=${value?.start_date}&end_date=${value?.end_date}`);
+};
+export const addTRCRM_bus = (data) => {
+  return axiosInstance.post(`${baseUrl}TRCRM_bus/addType`, data);
+}
+export const deleteTRCRM_bus = (id) => {
+  return axiosInstance.delete(`${baseUrl}TRCRM_bus/delete_type/${id}`);
+};
+export const getIdTRCRM_bus = (id) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_bus/${id}`);
+};
+export const updateTRCRM_bus = (id, value) => {
+  return axiosInstance.put(`${baseUrl}TRCRM_bus/update_type/${id}`, value);
+};
+
+
+
+
+// jilani
+
+export const getTravelAllCountry = () => {
+  return axiosInstance.get(`${baseUrl}country`);
+};
+export const getTravelAllState = (id) => {
+  return axiosInstance.get(`${baseUrl}state/country/${id}`);
+};
+export const getTravelAllCity = (id) => {
+  return axiosInstance.get(`${baseUrl}city/state?id=${id}`);
+};
+export const getTravelAllTags = () => {
+  return axiosInstance.get(`${baseUrl}TRCRM_tag_name_master/admin`);
+};
+export const getTravelAllOthers = () => {
+  return axiosInstance.get(`${baseUrl}TRCRM_other_facilities_master/admin`);
+};
+export const getTravelAllMealType = () => {
+  return axiosInstance.get(`${baseUrl}TRCRM_meal_type_master/admin`);
+};
+export const addTravelPackage = (data) => {
+  return axiosInstance.post(`${baseUrl}TRCRM_add_package/addType`, data);
+};
+export const getTravelPackageById = (id) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_add_package/${id}`);
+};
+export const updateTravelPackage = (id, data) => {
+  return axiosInstance.put(`${baseUrl}TRCRM_add_package/update_type/${id}`, data);
+};
+export const deleteTravelPackage = (id) => {
+  return axiosInstance.delete(`${baseUrl}TRCRM_add_package/delete_type/${id}`);
+};
+export const getTravelPackageList = (page, count) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_add_package/user?page=${page}&count=${count}`);
+};
+export const addTravelRoomType = () => {
+  return axiosInstance.get(`${baseUrl}TRCRM_room_type_master/admin`);
+};
+
+
+// jilani
+
+
+
 
 
 
