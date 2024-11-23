@@ -5333,6 +5333,66 @@ export const updateTRCRM_other = (id, value) => {
   return axiosInstance.put(`${baseUrl}TRCRM_other/update_type/${id}`, value);
 };
 
+export const getTRCRM_preference = (value) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_preference/user?page=${value?.page}&count=${value?.count}&start_date=${value?.start_date}&end_date=${value?.end_date}`);
+};
+export const addTRCRM_preference = (data) => {
+  return axiosInstance.post(`${baseUrl}TRCRM_preference/addType`, data);
+};
+export const deleteTRCRM_preference = (id) => {
+  return axiosInstance.delete(`${baseUrl}TRCRM_preference/delete_type/${id}`);
+};
+export const getByTRCRM_preference = (id) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_preference/${id}`);
+};
+export const updateTRCRM_preference = (id, value) => {
+  return axiosInstance.put(`${baseUrl}TRCRM_preference/update_type/${id}`, value);
+};
+export const getTRCRM_forex = (value) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_forex/user?page=${value?.page}&count=${value?.count}&start_date=${value?.start_date}&end_date=${value?.end_date}`);
+};
+export const addTRCRM_forex = (data) => {
+  return axiosInstance.post(`${baseUrl}TRCRM_forex/addType`, data);
+};
+export const deleteTRCRM_forex = (id) => {
+  return axiosInstance.delete(`${baseUrl}TRCRM_forex/delete_type/${id}`);
+};
+export const getIdTRCRM_forex = (id) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_forex/${id}`);
+};
+export const updateTRCRM_forex = (id, value) => {
+  return axiosInstance.put(`${baseUrl}TRCRM_forex/update_type/${id}`, value);
+};
+export const getTRCRM_cruise = (value) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_cruise/user?page=${value?.page}&count=${value?.count}&start_date=${value?.start_date}&end_date=${value?.end_date}`);
+};
+export const addTRCRM_cruise = (data) => {
+  return axiosInstance.post(`${baseUrl}TRCRM_cruise/addType`, data);
+}
+export const deleteTRCRM_cruise = (id) => {
+  return axiosInstance.delete(`${baseUrl}TRCRM_cruise/delete_type/${id}`);
+};
+export const getIdTRCRM_cruise = (id) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_cruise/${id}`);
+};
+export const updateTRCRM_cruise = (id, value) => {
+  return axiosInstance.put(`${baseUrl}TRCRM_cruise/update_type/${id}`, value);
+};
+export const getTRCRM_adventure = (value) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_adventure/user?page=${value?.page}&count=${value?.count}&start_date=${value?.start_date}&end_date=${value?.end_date}`);
+};
+export const addTRCRM_adventure = (data) => {
+  return axiosInstance.post(`${baseUrl}TRCRM_adventure/addType`, data);
+}
+export const deleteTRCRM_adventure = (id) => {
+  return axiosInstance.delete(`${baseUrl}TRCRM_adventure/delete_type/${id}`);
+};
+export const getIdTRCRM_adventure = (id) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_adventure/${id}`);
+};
+export const updateTRCRM_adventure = (id, value) => {
+  return axiosInstance.put(`${baseUrl}TRCRM_adventure/update_type/${id}`, value);
+};
 
 
 
