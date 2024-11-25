@@ -5411,6 +5411,73 @@ export const updateTRCRM_bus = (id, value) => {
   return axiosInstance.put(`${baseUrl}TRCRM_bus/update_type/${id}`, value);
 };
 
+export const addTRCRM_flight_class = (data) => {
+  return axiosInstance.post(`${baseUrl}TRCRM_flight_class/addType`, data);
+}
+export const getTRCRM_flight_class = (value) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_flight_class/user?page=${value?.page}&count=${value?.count}&start_date=${value?.start_date}&end_date=${value?.end_date}`);
+};
+export const deleteTRCRM_flight_class = (id) => {
+  return axiosInstance.delete(`${baseUrl}TRCRM_flight_class/delete_type/${id}`);
+};
+export const getIdTRCRM_flight_class = (id) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_flight_class/${id}`);
+};
+export const updateTRCRM_flight_class = (id, value) => {
+  return axiosInstance.put(`${baseUrl}TRCRM_flight_class/update_type/${id}`, value);
+};
+export const addTRCRM_customer_type_master = (data) => {
+  return axiosInstance.post(`${baseUrl}TRCRM_customer_type_master/addType`, data);
+}
+export const getTRCRM_customer_type_master = (value) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_customer_type_master/user?page=${value?.page}&count=${value?.count}&start_date=${value?.start_date}&end_date=${value?.end_date}`);
+};
+export const deleteTRCRM_customer_type_master = (id) => {
+  return axiosInstance.delete(`${baseUrl}TRCRM_customer_type_master/delete_type/${id}`);
+};
+export const getIdTRCRM_customer_type_maste = (id) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_customer_type_maste/${id}`);
+};
+export const updateTRCRM_customer_type_master = (id, value) => {
+  return axiosInstance.put(`${baseUrl}TRCRM_customer_type_master/update_type/${id}`, value);
+};
+export const getTRCRM_trip_type_master = (value) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_trip_type_master/user?page=${value?.page}&count=${value?.count}&start_date=${value?.start_date}&end_date=${value?.end_date}`);
+};
+export const addTRCRM_trip_type_master = (data) => {
+  return axiosInstance.post(`${baseUrl}TRCRM_trip_type_master/addType`, data);
+}
+export const deleteTRCRM_trip_type_master = (id) => {
+  return axiosInstance.delete(`${baseUrl}TRCRM_trip_type_master/delete_type/${id}`);
+};
+export const getIdTRCRM_trip_type_master = (id) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_trip_type_master/${id}`);
+};
+export const updateTRCRM_trip_type_master = (id, value) => {
+  return axiosInstance.put(`${baseUrl}TRCRM_trip_type_master/update_type/${id}`, value);
+};
+
+// dataAll
+export const getTRCRM_customer_type_master_admin = (id) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_customer_type_master/admin`);
+};
+export const gettask_priorityadmin = (id) => {
+  return axiosInstance.get(`${baseUrl}task_priority/admin`);
+};
+export const getLead_proposal_status = (id) => {
+  return axiosInstance.get(`${baseUrl}lead_proposal_status/admin`);
+};
+export const getTRCRM_trip_type_master_admin = (id) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_trip_type_master/admin`);
+};
+export const getsource = (id) => {
+  return axiosInstance.get(`${baseUrl}source/admin`);
+};
+export const getTRCRMstaff_admin = (id) => {
+  return axiosInstance.get(`${baseUrl}staff/admin`);
+};
+
+// dataAll
 
 
 

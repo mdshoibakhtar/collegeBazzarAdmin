@@ -1040,6 +1040,12 @@ import TravelPackageEditPage from "./pages/travelPackageEditPage";
 import TravelsaleRegister from "./pages/TravelSaleRegister/index.js";
 import TravelSaleSummery from "./pages/saleSummery/index.js";
 import TravelPurchaseReport from "./pages/TravelpurchaseReport/index.js";
+import TravelClassPage from "./pages/travelCrmMaster/travelClass/index.js";
+import TravelClassAdd from "./components/travelCrmMaster/travelClass/travelClassAdd/TravelClassAdd.js";
+import CustomerTypePage from "./pages/travelCrmMaster/customerType/index.js";
+import CustomerTypeAdd from "./components/travelCrmMaster/customerType/customerTypeAdd/CustomerTypeAdd.js";
+import TripTypePage from "./pages/travelCrmMaster/tripType/index.js";
+import TripTypeAdd from "./components/travelCRM/tripType/tripTypeAdd/TripTypeAdd.js";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -2925,6 +2931,16 @@ function App() {
               <Route path="travel-adventure-update/:id" element={<TravelAdventureAdd />} />
               <Route path="travel-bus-master" element={<BusMasterPage />} />
               <Route path="travel-bus-master-add" element={<BusMasterAdd />} />
+              <Route path="travel-class" element={<TravelClassPage />} />
+              <Route path="travel-class-add" element={<TravelClassAdd />} />
+              <Route path="travel-class-update/:id" element={<TravelClassAdd />} />
+              <Route path="travel-customer-type" element={<CustomerTypePage />} />
+              <Route path="travel-customer-add" element={<CustomerTypeAdd />} />
+              <Route path="travel-customer-update/:id" element={<CustomerTypeAdd />} />
+              <Route path="travel-trip-type" element={<TripTypePage />} />
+              <Route path="travel-trip-type-add" element={<TripTypeAdd />} />
+              <Route path="travel-trip-type-update/:id" element={<TripTypeAdd />} />
+
 
               <Route path="travel-leads" element={<TravelLeadPage />} />
               <Route path="travel-leads-add" element={<AddLeadForm />} />

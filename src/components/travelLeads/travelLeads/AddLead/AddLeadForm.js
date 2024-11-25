@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FlightBooking from "./FlightBooking";
 import HotelBooking from "./HotelBooking";
 import Visa from "./Visa";
@@ -15,8 +15,198 @@ import Cruise from "./Cruise";
 import Adventure from "./Adventure";
 import Package from "./Package";
 import Other from "./Other";
+import { getLead_proposal_status, getsource, gettask_priorityadmin, getTRCRM_customer_type_master_admin, getTRCRM_trip_type_master_admin, getTRCRMstaff_admin, staffList } from "../../../../api/login/Login";
 
 export default function AddLeadForm() {
+
+
+    const [initialData, setInitialData] = useState({
+        customer_type: '',
+        mobile_number: '',
+        email_id: '',
+        salutation: ["Mr", "Mrs", "Ms", "Miss", "Dr"],
+        first_name: '',
+        last_name: '',
+        address: '',
+        city: '',
+        alternate_mobile_number: '',
+        alternate_email_id: '',
+        lead_source: '',
+        lead_priority: '',
+        lead_status: '',
+        no_of_adults: '',
+        no_of_children: '',
+        no_of_infant: '',
+        trip_type: '',
+        tag: '',
+        assigned_to: '',
+        notes: '',
+        enquiry_type_flight_booking: false,
+        enquiry_type_hotelbooking: false,
+        enquiry_type_visa: false,
+        enquiry_type_travel_insurance: false,
+        enquiry_type_forex: false,
+        enquiry_type_sightseeing: false,
+        enquiry_type_transport: false,
+        enquiry_type_other: false,
+        enquiry_type_package: [{
+            tour_start_date: '',
+            budget: '',
+            country: [],
+            package_id: ''
+        }],
+        enquiry_type_customise_package: false,
+        enquiry_type_bus: false,
+        enquiry_type_train: false,
+        enquiry_type_passport: false,
+        enquiry_type_cruise: false,
+        enquiry_type_adventure: false,
+        enquiry_type_group: false,
+        flightBookings: [{
+            from: '',
+            to: '',
+            departure: '',
+            return: '',
+            class: '',
+            category_domestic_flight: false,
+            category_international_flight: false,
+            flexibility: ["+/- 0 Days", "+/- 3 Days", "+/- 6 Days", "+/- 1 Week", "+/- 3 Week"],
+            preference: ''
+        }],
+        hotelBookingModels: [{
+            country: '',
+            city: '',
+            room_type: '',
+            star_rating: '',
+            check_in: '',
+            check_out: '',
+            number_of_nights: '',
+            budget: '',
+            hotel_name: '',
+            number_of_rooms: ''
+        }],
+        visaModel: [{
+            country: '',
+            visa_category: '',
+            visa_type: '',
+            duration: '',
+            travel_date: '',
+            job_profile: '',
+            age: '',
+            qualification: '',
+            description: ''
+        }],
+        travelInsuranceModel: [{
+            country: '',
+            how_long: '',
+            travel_date: '',
+            insurance_for_visa: ''
+        }],
+        forexModel: [{
+            country: '',
+            currency: '',
+            amount: ''
+        }],
+        sightseeingModel: [{
+            sightseeing_id: '',
+            preference: '',
+            travel_date: ''
+        }],
+        transportModel: [{
+            country: '',
+            city: '',
+            transport_date: '',
+            drop_date: '',
+            preference: '',
+            transport_type_airport_transfers: false,
+            transport_type_sightseeing_transfers: false,
+            transport_type_other: false,
+            transport_type_other_name: ''
+        }],
+        otherModel: [{
+            country: '',
+            travel_date: '',
+            number_of_days: '',
+            sub_category: '',
+            description: ''
+        }],
+        customisePackageModel: [{
+            country: '',
+            option: ["Only Countries", "Countries & Cities"],
+            cities: [{
+                city: '',
+                stay: ''
+            }],
+            services: '',
+            hotel_rating: '',
+            travel_date: '',
+            no_of_nights: '',
+            flexibility: ["+/- 0 Days", "+/- 3 Days", "+/- 6 Days", "+/- 1 Week", "+/- 3 Week"],
+            no_of_rooms: '',
+            preference: '',
+            budget: '',
+            description: ''
+        }],
+        busModel: [{
+            country: '',
+            from: '',
+            to: '',
+            departure: '',
+            return: '',
+            preference: '',
+            remark: ''
+        }],
+        trainModel: [{
+            country: '',
+            from: '',
+            to: '',
+            departure: '',
+            return: '',
+            preference: '',
+            remark: ''
+        }],
+        passportModel: [{
+            issuing_country: '',
+            date: '',
+            current_passport_number: '',
+            place_of_apply: '',
+            no_of_person: '',
+            category: '',
+            urgent: false,
+            remark: ''
+        }],
+        cruiseModel: [{
+            country: '',
+            city: '',
+            days: '',
+            cruise_name: '',
+            type: '',
+            departure: '',
+            return: '',
+            room_preference: '',
+            remark: ''
+        }],
+        adventureModel: [{
+            country: '',
+            city: '',
+            travel_date: '',
+            category_motorbiking: false,
+            category_camping: false,
+            category_safari: false,
+            category_water_sports: false,
+            remark: ''
+        }],
+        groupModel: [{
+            country: '',
+            state: '',
+            package_id: '',
+            preference: '',
+            remark: ''
+        }],
+
+    })
+
+
     const [Enquiry, setEnquiry] = useState({
         flightbooking: false,
         hotelbooking: false,
@@ -40,17 +230,49 @@ export default function AddLeadForm() {
         const clone = { ...Enquiry, [str]: val }
         console.log(clone);
         setEnquiry(clone)
-
-        // for (const element in Enquiry) {
-        //     console.log(element, Enquiry[element]);
-        //     if (element == str) {
-
-        //     } else {
-
-        //     }
-
-        // }
     }
+
+    const [customerType, setCustomer] = useState(null)
+    const [leadSource, setLeadSource] = useState(null)
+    const [leadPriority, setLeadPriority] = useState(null)
+    const [leadStatus, setLeadStatus] = useState(null)
+    const [tripType, setTripType] = useState(null)
+    const [staff, setStaff] = useState(null)
+
+    const comboDataGet = async () => {
+        try {
+            const resCustomerType = await getTRCRM_customer_type_master_admin()
+            setCustomer(resCustomerType?.data);
+            const resLeadSource = await getsource()
+            setLeadSource(resLeadSource?.data);
+            const resLeadPriority = await gettask_priorityadmin()
+            setLeadPriority(resLeadPriority?.data);
+            const resleadStatus = await getLead_proposal_status()
+            setLeadStatus(resleadStatus?.data);
+            const resTripType = await getTRCRM_trip_type_master_admin()
+            setTripType(resTripType?.data);
+            const resStaff = await getTRCRMstaff_admin()
+            setStaff(resStaff?.data);
+        } catch (error) {
+
+        }
+    }
+
+    const changeHandle = (e) => {
+        const clone = { ...initialData }
+        const value = e.target.value
+        const name = e.target.name
+        clone[name] = value
+        setInitialData(clone)
+    }
+
+    const submitData = () => {
+        console.log(initialData);
+
+    }
+    useEffect(() => {
+        comboDataGet()
+    }, [])
     return (
         <div className="row m-4">
             <div className="col-xl-12">
@@ -62,9 +284,11 @@ export default function AddLeadForm() {
                                     <div className="mt-2">
                                         <label className="form-label">Customer Type</label>
                                         <div className="w-100">
-                                            <select className="form-select shadow " name="Status">
-                                                <option>B2B</option>
-                                                <option>B2C</option>
+                                            <select className="form-select shadow " name="customer_type" value={initialData?.customer_type} onChange={changeHandle}>
+                                                <option selected>Open this select Customer Type</option>
+                                                {customerType && customerType?.map((item) => {
+                                                    return <option value={item?._id} key={item?._id}>{item?.customer_type}</option>
+                                                })}
                                             </select>
                                         </div>
                                     </div>
@@ -72,13 +296,13 @@ export default function AddLeadForm() {
                                 <div className="col-6">
                                     <div class="mt-2">
                                         <label class="form-label">Mobile</label>
-                                        <input type="number" class="form-control" placeholder="Mobile number" />
+                                        <input type="number" class="form-control" placeholder="Mobile number" name="mobile_number" value={initialData?.mobile_number} onChange={changeHandle} />
                                     </div>
                                 </div>
                                 <div className="col-6">
                                     <div className="mt-2">
                                         <label className="form-label">Email</label>
-                                        <input className="form-control" placeholder="email " type="email"/>
+                                        <input className="form-control" placeholder="email " type="email" name="email_id" value={initialData?.email_id} onChange={changeHandle} />
                                     </div>
                                 </div>
                                 <div className="col-6">
@@ -87,10 +311,13 @@ export default function AddLeadForm() {
                                             <div className="mt-2">
                                                 <label className="Form-label">Salutation <span className="text-danger fs-5">*</span></label>
                                                 <div className="w-100">
-                                                    <select className="form-select shadow" >
-                                                        <option>Mr</option>
-                                                        <option>Mrs</option>
-                                                        <option>Miss</option>
+                                                    <select className="form-select shadow" name="salutation" value={initialData?.salutation} onChange={changeHandle}>
+                                                        <option selected>Select Salutation</option>
+                                                        <option value={'Mr'}>Mr</option>
+                                                        <option value={'Mrs'}>Mrs</option>
+                                                        <option value={'Ms'}>Ms</option>
+                                                        <option value={'Miss'}>Miss</option>
+                                                        <option value={'Dr'}>Dr</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -98,7 +325,7 @@ export default function AddLeadForm() {
                                         <div className="col-8">
                                             <div className="mt-2">
                                                 <label className="form-labe;">First Name <span className="text-danger fs-5">*</span></label>
-                                                <input type="text" placeholder="first name" className="form-control"/>
+                                                <input type="text" placeholder="first name" className="form-control" name="first_name" value={initialData?.first_name} onChange={changeHandle} />
                                             </div>
                                         </div>
                                     </div>
@@ -106,41 +333,42 @@ export default function AddLeadForm() {
                                 <div className="col-6">
                                     <div className="mt-2">
                                         <label className="form-label">Last Name</label>
-                                        <input type="text" placeholder="Last name" className="form-control"/>
+                                        <input type="text" placeholder="Last name" className="form-control" name="last_name" value={initialData?.last_name} onChange={changeHandle} />
                                     </div>
                                 </div>
                                 <div className="col-6">
                                     <div className="mt-2">
                                         <label className="form-label">Address</label>
-                                        <input type="text" placeholder="addres" className="form-control"/>
+                                        <input type="text" placeholder="addres" className="form-control" name="address" value={initialData?.address} onChange={changeHandle} />
                                     </div>
                                 </div>
                                 <div className="col-6">
                                     <div className="mt-2">
                                         <label className="form-label">City</label>
-                                        <input type="text" placeholder="City" className="form-control"/>
+                                        <input type="text" placeholder="City" className="form-control" name="city" value={initialData?.city} onChange={changeHandle} />
                                     </div>
                                 </div>
                                 <div className="col-6">
                                     <div className="mt-2">
                                         <label className="form-label">Alternate Mobile Number</label>
-                                        <input type="text" placeholder="Alternate Mobile Number" className="form-control"/>
+                                        <input type="text" placeholder="Alternate Mobile Number" className="form-control" name="alternate_mobile_number" value={initialData?.alternate_mobile_number} onChange={changeHandle} />
                                     </div>
                                 </div>
                                 <div className="col-6">
                                     <div className="mt-2">
                                         <label className="form-label my-1">Alternate Email Id</label>
-                                        <input className="form-control" type="email" placeholder="Alternate Email Id"/>
+                                        <input className="form-control" type="email" placeholder="Alternate Email Id" name="alternate_email_id" value={initialData?.alternate_email_id} onChange={changeHandle} />
                                     </div>
                                 </div>
                                 <div className="col-6">
                                     <div className="mt-2">
                                         <label className="form-label my-1">Lead Source</label>
                                         <div className="w-100">
-                                            <select className="form-select shadow" name="Status">
-                                                <option></option>
-                                                <option>Cold Call</option>
-                                                <option>External Referral</option>
+                                            <select className="form-select shadow" name="lead_source" value={initialData?.lead_source} onChange={changeHandle}>
+                                                <option selected>Open this Lead Priority</option>
+                                                {leadSource && leadSource?.map((item) => {
+                                                    return <option value={item?._id} key={item?._id}>{item?.name}</option>
+                                                })}
                                             </select>
                                         </div>
                                     </div>
@@ -149,10 +377,11 @@ export default function AddLeadForm() {
                                     <div className="mt-2">
                                         <label className="form-label my-1">Lead Priority</label>
                                         <div className="w-100">
-                                            <select className="form-select shadow" name="Status">
-                                                <option></option>
-                                                <option>Cold </option>
-                                                <option>wram</option>
+                                            <select className="form-select shadow" name="lead_priority" value={initialData?.lead_priority} onChange={changeHandle}>
+                                                <option selected>Open this Lead Priority</option>
+                                                {leadPriority && leadPriority?.map((item) => {
+                                                    return <option value={item?._id} key={item?._id}>{item?.name}</option>
+                                                })}
                                             </select>
                                         </div>
                                     </div>
@@ -161,10 +390,11 @@ export default function AddLeadForm() {
                                     <div className="mt-2">
                                         <label className="form-label my-1">Lead Status</label>
                                         <div className="w-100">
-                                            <select className="form-select shadow " name="Status">
-                                                <option></option>
-                                                <option>New Dehli</option>
-                                                <option>Working</option>
+                                            <select className="form-select shadow" name="lead_status" value={initialData?.lead_status} onChange={changeHandle}>
+                                                <option selected>Open this Lead Priority</option>
+                                                {leadStatus && leadStatus?.map((item) => {
+                                                    return <option value={item?._id} key={item?._id}>{item?.name}</option>
+                                                })}
                                             </select>
                                         </div>
                                     </div>
@@ -174,19 +404,19 @@ export default function AddLeadForm() {
                                         <div className="col-4">
                                             <div className="mt-2">
                                                 <label className="form-label">No. of Adults </label>
-                                                <input className="form-control" type="number" placeholder="No.of Adult"></input>
+                                                <input className="form-control" type="number" placeholder="No.of Adult" name="no_of_adults" value={initialData?.no_of_adults} onChange={changeHandle} />
                                             </div>
                                         </div>
                                         <div className="col-4">
                                             <div className="mt-2">
                                                 <label className="form-label">No. of Children</label>
-                                               <input type="number" placeholder="No.of Children" className="form-control"/>
+                                                <input type="number" placeholder="No.of Children" className="form-control" name="no_of_children" value={initialData?.no_of_children} onChange={changeHandle} />
                                             </div>
                                         </div>
                                         <div className="col-4">
                                             <div className="mt-2">
                                                 <label className="form-label">No. of Infant</label>
-                                                <input type="no" className="form-control" placeholder="No.of Infant"/>
+                                                <input type="number" className="form-control" placeholder="No.of Infant" name="no_of_infant" value={initialData?.no_of_infant} onChange={changeHandle} />
                                             </div>
                                         </div>
                                     </div>
@@ -195,9 +425,11 @@ export default function AddLeadForm() {
                                     <div className="mt-2">
                                         <label className="form-label my-1">Trip Type</label>
                                         <div className="w-100">
-                                            <select className="form-select shadow " name="Status">
-                                                <option></option>
-                                                <option>Other</option>
+                                            <select className="form-select shadow " name="trip_type" value={initialData?.trip_type} onChange={changeHandle}>
+                                                <option selected>Open this Trip Type</option>
+                                                {tripType && tripType?.map((item) => {
+                                                    return <option value={item?._id} key={item?._id}>{item?.trip_type}</option>
+                                                })}
                                             </select>
                                         </div>
                                     </div>
@@ -206,10 +438,11 @@ export default function AddLeadForm() {
                                     <div className="mt-2">
                                         <label className="form-label my-1">Tag</label>
                                         <div className="w-100">
-                                            <select className="form-select shadow " >
-                                                <option></option>
-                                                <option>New Dehli</option>
-                                                <option>Working</option>
+                                            <select className="form-select shadow " name="tag" value={initialData?.tag} onChange={changeHandle}>
+                                                <option selected>Open this Tag</option>
+                                                {tripType && tripType?.map((item) => {
+                                                    return <option value={item?._id} key={item?._id}>{item?.trip_type}</option>
+                                                })}
                                             </select>
                                         </div>
                                     </div>
@@ -218,10 +451,11 @@ export default function AddLeadForm() {
                                     <div className="mt-2">
                                         <label className="form-label my-1">Assigned To</label>
                                         <div className="w-100">
-                                            <select className="form-select shadow" >
-                                                <option></option>
-                                                <option>New Dehli</option>
-                                                <option>Working</option>
+                                            <select className="form-select shadow " name="assigned_to" value={initialData?.assigned_to} onChange={changeHandle}>
+                                                <option selected>Open this Assigned To</option>
+                                                {staff && staff?.map((item) => {
+                                                    return <option value={item?._id} key={item?._id}>{item?.name}</option>
+                                                })}
                                             </select>
                                         </div>
                                     </div>
@@ -411,14 +645,14 @@ export default function AddLeadForm() {
                             <div className="mt-2">
                                 <label className="form-label">Note</label>
                                 <div className="w-100">
-                                    <textarea className="form-control" style={{ height: "120px" }}> </textarea>
+                                    <textarea className="form-control" style={{ height: "120px" }} name="notes" value={initialData?.notes} onChange={changeHandle}> </textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="d-flex gap-2 mt-3">
                         <div>
-                            <button className="btn btn-danger m-0 ">Add</button>
+                            <button type="button" className="btn btn-danger m-0" onClick={submitData}>Add</button>
                         </div>
                         <div>
                             <button className="btn btn-light m-0">Clear</button>
