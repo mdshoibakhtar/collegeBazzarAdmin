@@ -15,7 +15,7 @@ import Cruise from "./Cruise";
 import Adventure from "./Adventure";
 import Package from "./Package";
 import Other from "./Other";
-import { getLead_proposal_status, getsource, gettask_priorityadmin, getTRCRM_customer_type_master_admin, getTRCRM_trip_type_master_admin, getTRCRMstaff_admin, staffList } from "../../../../api/login/Login";
+import { addTravelRoomType, countryList, currencyList, getAirlLine, getLead_proposal_status, getsource, gettask_priorityadmin, getTRCRM_customer_type_master_admin, getTRCRM_flight_classadmin, getTRCRM_preferenceadmin, getTRCRM_sight_seeing_masteradmin, getTRCRM_star_rating_master, getTRCRM_trip_type_master_admin, getTRCRMstaff_admin, staffList, TRCRM_visa_category_masterGet, TTRCRM_visa_type_masterGet } from "../../../../api/login/Login";
 
 export default function AddLeadForm() {
 
@@ -24,7 +24,7 @@ export default function AddLeadForm() {
         customer_type: '',
         mobile_number: '',
         email_id: '',
-        salutation: ["Mr", "Mrs", "Ms", "Miss", "Dr"],
+        salutation: '',
         first_name: '',
         last_name: '',
         address: '',
@@ -238,6 +238,15 @@ export default function AddLeadForm() {
     const [leadStatus, setLeadStatus] = useState(null)
     const [tripType, setTripType] = useState(null)
     const [staff, setStaff] = useState(null)
+    const [preference, setPreference] = useState(null)
+    const [classData, setClassData] = useState(null)
+    const [roomType, setroomType] = useState(null)
+    const [starRatting, setStarRatting] = useState(null)
+    const [countryData, setcountryData] = useState(null)
+    const [visaCatData, setVisaCatData] = useState(null)
+    const [visaTypeData, setVisaTypeData] = useState(null)
+    const [currencyData, setCurrencyData] = useState(null)
+    const [sight_seeingData, setSight_seeing] = useState(null)
 
     const comboDataGet = async () => {
         try {
@@ -253,6 +262,35 @@ export default function AddLeadForm() {
             setTripType(resTripType?.data);
             const resStaff = await getTRCRMstaff_admin()
             setStaff(resStaff?.data);
+            const resPreference = await getTRCRM_preferenceadmin()
+            setPreference(resPreference?.data);
+            const resClassData = await getTRCRM_flight_classadmin()
+            setClassData(resClassData?.data);
+            const resRoomType = await addTravelRoomType()
+            setroomType(resRoomType?.data);
+            const resStarRating = await getTRCRM_star_rating_master()
+            setStarRatting(resStarRating?.data);
+            const resCountry = await countryList()
+            setcountryData(resCountry?.data);
+            const resvisa_category = await TRCRM_visa_category_masterGet()
+            setVisaCatData(resvisa_category?.data);
+            const resvisa_type = await TTRCRM_visa_type_masterGet()
+            setVisaTypeData(resvisa_type?.data);
+            const resCurrency = await currencyList()
+            setCurrencyData(resCurrency?.data);
+            const resSight_seeing = await getTRCRM_sight_seeing_masteradmin()
+            setSight_seeing(resSight_seeing?.data);
+        } catch (error) {
+
+        }
+    }
+
+
+    const [locations, setLocations] = useState([]);
+    const searchAirlLine = async () => {
+        try {
+            const res = await getAirlLine()
+            setLocations(res?.data);
         } catch (error) {
 
         }
@@ -266,12 +304,335 @@ export default function AddLeadForm() {
         setInitialData(clone)
     }
 
+    // flightRow
+
+    const [flightrows, setflightrowsRows] = useState([
+        {
+            from: "",
+            to: "",
+            departure: "",
+            return: "",
+            class: "",
+            category_domestic_flight: false,
+            category_international_flight: false,
+            flexibility: "",
+            preference: "",
+        },
+    ]);
+
+    const addRowFlight = () => {
+        setflightrowsRows((prevRows) => [
+            ...prevRows,
+            {
+                from: "",
+                to: "",
+                departure: "",
+                return: "",
+                class: "",
+                category_domestic_flight: false,
+                category_international_flight: false,
+                flexibility: "",
+                preference: "",
+            },
+        ]);
+    };
+
+    const handleRowChangeFlight = (index, field, value) => {
+        const updatedRows = [...flightrows];
+        updatedRows[index][field] = value;
+        setflightrowsRows(updatedRows);
+        const clone = { ...initialData, flightBookings: updatedRows }
+        setInitialData(clone)
+    };
+
+    // flightRow
+
+    // hotelRow
+    const [hotelRow, setHotelRow] = useState([
+        {
+            country: "",
+            city: "",
+            room_type: "",
+            star_rating: "",
+            check_in: "",
+            check_out: "",
+            number_of_nights: "",
+            budget: "",
+            hotel_name: "",
+            number_of_rooms: "",
+        },
+    ]);
+
+    const addHotelRow = () => {
+        setHotelRow((prevRows) => [
+            ...prevRows,
+            {
+                country: "",
+                city: "",
+                room_type: "",
+                star_rating: "",
+                check_in: "",
+                check_out: "",
+                number_of_nights: "",
+                budget: "",
+                hotel_name: "",
+                number_of_rooms: "",
+            },
+        ]);
+    };
+
+    const handleInputChangeHotel = (index, field, value) => {
+        const updatedRows = [...hotelRow];
+        updatedRows[index][field] = value;
+        setHotelRow(updatedRows);
+        const clone = { ...initialData, hotelBookingModels: updatedRows }
+        setInitialData(clone)
+    };
+    // hotelRow
+
+    // visa
+    const [rowsVisa, setRowsVisa] = useState([
+        {
+            country: "",
+            visa_category: "",
+            visa_type: "",
+            duration: "",
+            travel_date: "",
+            job_profile: '',
+            age: '',
+            qualification: "",
+            description: "",
+        }
+    ]);
+
+    const AddVisaRow = () => {
+        setRowsVisa((prevRows) => [
+            ...prevRows,
+            {
+                country: "",
+                visa_category: "",
+                visa_type: "",
+                duration: "",
+                travel_date: "",
+                job_profile: '',
+                age: '',
+                qualification: "",
+                description: "",
+            },
+        ]);
+    };
+    const handleInputChangeVisa = (index, field, value) => {
+        const updatedRows = [...rowsVisa];
+        updatedRows[index][field] = value;
+        setRowsVisa(updatedRows);
+        const clone = { ...initialData, visaModel: updatedRows }
+        setInitialData(clone)
+    };
+    // visa
+
+    //travelInsurence
+    const [rowsTravelIns, setRowsTravelIns] = useState([
+        {
+            country: "",
+            how_long: "",
+            travel_date: "",
+            insurance_for_visa: false,
+        }
+    ]);
+
+    const AddRowTravelIns = () => {
+        setRowsTravelIns((prevRows) => [
+            ...prevRows,
+            {
+                country: "",
+                how_long: "",
+                travel_date: "",
+                insurance_for_visa: false,
+            },
+        ]);
+    };
+
+    const handleInputChangeTravelInsurence = (index, field, value) => {
+        const updatedRows = [...rowsTravelIns];
+        updatedRows[index][field] = value;
+        setRowsTravelIns(updatedRows);
+        const clone = { ...initialData, travelInsuranceModel: updatedRows }
+        setInitialData(clone)
+    };
+    //travelInsurence
+
+    //forex
+    const [rowsForex, setRowsForex] = useState([
+        {
+            country: "",
+            currency: '',
+            amount: " "
+        }
+    ]);
+
+    const AddRowForex = () => {
+        setRowsForex((prevRows) => [
+            ...prevRows,
+            {
+                country: "",
+                currency: '',
+                amount: " "
+            },
+        ]);
+    };
+    const handleInputChangeForex = (index, field, value) => {
+        const updatedRows = [...rowsForex];
+        updatedRows[index][field] = value;
+        setRowsForex(updatedRows);
+        const clone = { ...initialData, forexModel: updatedRows }
+        setInitialData(clone)
+    };
+    //forex
+
+    //Sightseeing
+    const [rowsSightseeing, setRowsSightseeing] = useState([
+        {
+            country: "",
+            city: "",
+            sightseeing_id: "",
+            preference: "",
+            travel_date: "",
+        }
+    ]); // Initialize as an array
+
+    const AddRowSightseeing = () => {
+        setRowsSightseeing((prevRows) => [
+            ...prevRows,
+            {
+                country: "",
+                city: "",
+                sightseeing_id: "",
+                preference: "",
+                travel_date: "",
+            },
+        ]);
+    };
+
+    const handleInputChangeSightseeing = (index, field, value) => {
+        const updatedRows = [...rowsSightseeing];
+        updatedRows[index][field] = value;
+        setRowsSightseeing(updatedRows);
+        const clone = { ...initialData, sightseeingModel: updatedRows }
+        setInitialData(clone)
+    };
+    //Sightseeing
+
+    //trasport
+    const [rowsTrasport, setRowsTrasport] = useState([
+        {
+            country: "",
+            city: "",
+            transport_date: "",
+            drop_date: "",
+            preference: "",
+            transport_type_airport_transfers: false,
+            transport_type_sightseeing_transfers: false,
+            transport_type_other: false,
+            transport_type_other_name: "",
+        }
+    ]); // Initialize as an array
+
+    const AddRowtTrasport = () => {
+        setRowsTrasport((prevRows) => [
+            ...prevRows,
+            {
+                country: "",
+                city: "",
+                transport_date: "",
+                drop_date: "",
+                preference: "",
+                transport_type_airport_transfers: false,
+                transport_type_sightseeing_transfers: false,
+                transport_type_other: false,
+                transport_type_other_name: "",
+            },
+        ]);
+    };
+    const handleInputChangeTranport = (index, field, value) => {
+        const updatedRows = [...rowsTrasport];
+        updatedRows[index][field] = value;
+        setRowsTrasport(updatedRows);
+        const clone = { ...initialData, transportModel: updatedRows }
+        setInitialData(clone)
+    };
+    //trasport
+    //other
+    const [rowsOther, setOther] = useState([
+        {
+            country: "",
+            travel_date: "",
+            number_of_days: "",
+            sub_category: "",
+            description: "",
+        }
+    ]); // Initialize as an array
+
+    const AddOther = () => {
+        setRowsTrasport((prevRows) => [
+            ...prevRows,
+            {
+                country: "",
+                travel_date: "",
+                number_of_days: "",
+                sub_category: "",
+                description: "",
+            },
+        ]);
+    };
+    const handleInputChangeOther = (index, field, value) => {
+        const updatedRows = [...rowsOther];
+        updatedRows[index][field] = value;
+        setOther(updatedRows);
+        const clone = { ...initialData, otherModel: updatedRows }
+        setInitialData(clone)
+    };
+    //other
+
+    //package
+    const [packageRow, setpackageRow] = useState([
+        {
+            tour_start_date: "",
+            budget: "",
+            country: [],
+            package_id: "",
+            extra_details: ''
+        }
+    ]); // Initialize as an array
+
+    const addPackageRow = () => {
+        setpackageRow((prevRows) => [
+            ...prevRows,
+            {
+                tour_start_date: "",
+                budget: "",
+                country: [],
+                package_id: "",
+                extra_details: ''
+            },
+        ]);
+    };
+    const handleInputChangePackage = (index, field, value) => {
+        const updatedRows = [...packageRow];
+        updatedRows[index][field] = value;
+        setpackageRow(updatedRows);
+        const clone = { ...initialData, enquiry_type_package: updatedRows }
+        setInitialData(clone)
+    };
+
+
     const submitData = () => {
         console.log(initialData);
-
+        // console.log(flightrows);
+        // console.log(Enquiry);
     }
     useEffect(() => {
         comboDataGet()
+        searchAirlLine()
     }, [])
     return (
         <div className="row m-4">
@@ -591,31 +952,31 @@ export default function AddLeadForm() {
                                 </div>
                                 <div className="col-12">
                                     {Enquiry.flightbooking && <div className="my-4">
-                                        <FlightBooking />
+                                        <FlightBooking preference={preference} classData={classData} addRowFlight={addRowFlight} flightrows={flightrows} setflightrowsRows={setflightrowsRows} handleRowChangeFlight={handleRowChangeFlight} locations={locations} />
                                     </div>}
                                     {Enquiry.hotelbooking && <div className="my-4">
-                                        <HotelBooking />
+                                        <HotelBooking countryData={countryData} starRatting={starRatting} roomType={roomType} addHotelRow={addHotelRow} hotelRow={hotelRow} setHotelRow={setHotelRow} handleInputChangeHotel={handleInputChangeHotel} locations={locations} />
                                     </div>}
                                     {Enquiry.visa && <div className="my-4">
-                                        <Visa />
+                                        <Visa countryData={countryData} visaTypeData={visaTypeData} visaCatData={visaCatData} AddVisaRow={AddVisaRow} handleInputChangeVisa={handleInputChangeVisa} setRowsVisa={setRowsVisa} rowsVisa={rowsVisa} />
                                     </div>}
                                     {Enquiry.travelInsurance && <div className="my-4">
-                                        <TrvelInsurance />
+                                        <TrvelInsurance countryData={countryData} handleInputChangeTravelInsurence={handleInputChangeTravelInsurence} AddRowTravelIns={AddRowTravelIns} rowsTravelIns={rowsTravelIns} setRowsTravelIns={setRowsTravelIns} />
                                     </div>}
                                     {Enquiry.forex && <div className="my-4">
-                                        <Forex />
+                                        <Forex countryData={countryData} currencyData={currencyData} rowsForex={rowsForex} AddRowForex={AddRowForex} handleInputChangeForex={handleInputChangeForex} />
                                     </div>}
                                     {Enquiry.sightseeing && <div className="my-4">
-                                        <Sightseeing />
+                                        <Sightseeing countryData={countryData} locations={locations} preference={preference} sight_seeingData={sight_seeingData} handleInputChangeSightseeing={handleInputChangeSightseeing} rowsSightseeing={rowsSightseeing} setRowsSightseeing={setRowsSightseeing} AddRowSightseeing={AddRowSightseeing} />
                                     </div>}
                                     {Enquiry.transport && <div className="my-4">
-                                        <Transport />
+                                        <Transport countryData={countryData} locations={locations} preference={preference} handleInputChangeTranport={handleInputChangeTranport} rowsTrasport={rowsTrasport} setRowsTrasport={setRowsTrasport} AddRowtTrasport={AddRowtTrasport} />
                                     </div>}
                                     {Enquiry.Other && <div className="my-4">
-                                        <Other />
+                                        <Other countryData={countryData} handleInputChangeOther={handleInputChangeOther} rowsOther={rowsOther} setOther={setOther} />
                                     </div>}
                                     {Enquiry.package && <div className="my-4">
-                                        <Package />
+                                        <Package countryData={countryData} handleInputChangePackage={handleInputChangePackage} packageRow={packageRow} setpackageRow={setpackageRow} addPackageRow={addPackageRow} />
                                     </div>}
                                     {Enquiry.customisePackage && <div className="my-4">
                                         <CoustumPackage />

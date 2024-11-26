@@ -1,4 +1,4 @@
-import { baseproductUrl, baseUrl } from "../../baseUrl";
+import { baseproductUrl, baseUrl, extraBaseUrl } from "../../baseUrl";
 import axiosInstance from "../../axiosServiseFactory/AxiosServiseFactory";
 import axios from "axios";
 import axiosInstance2 from "../../axiosServiseFactory/AxiosServiseFactoryProduct";
@@ -5475,6 +5475,21 @@ export const getsource = (id) => {
 };
 export const getTRCRMstaff_admin = (id) => {
   return axiosInstance.get(`${baseUrl}staff/admin`);
+};
+export const getTRCRM_preferenceadmin = (id) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_preference/admin`);
+};
+export const getTRCRM_flight_classadmin = (id) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_flight_class/admin`);
+};
+
+export const getTRCRM_sight_seeing_masteradmin = (id) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_sight_seeing_master/admin`);
+};
+
+
+export const getAirlLine = (value) => {
+  return axiosInstance.get(`${extraBaseUrl}airlines/destination?search=&id=673b1d7c85dbbfa354004889`);
 };
 
 // dataAll
