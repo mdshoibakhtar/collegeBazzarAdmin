@@ -62,9 +62,9 @@ export default function Other({ countryData, setOther, rowsOther, handleInputCha
                         <div className="mt-2">
                             <label className="form-label">Description <span className="text-danger fs-5">*</span></label>
                             <input className="form-control" placeholder="Description" type="text"
-                                name="sub_category"
-                                value={row.sub_category}
-                                onChange={(e) => handleInputChangeOther(index, "sub_category", e.target.value)}
+                                name="description"
+                                value={row.description}
+                                onChange={(e) => handleInputChangeOther(index, "description", e.target.value)}
                             />
                             {/* <div className="w-100 shadow">
                             <JoditEditor

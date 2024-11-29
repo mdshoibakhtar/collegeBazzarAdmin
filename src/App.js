@@ -1047,6 +1047,9 @@ import CustomerTypeAdd from "./components/travelCrmMaster/customerType/customerT
 import TripTypePage from "./pages/travelCrmMaster/tripType/index.js";
 import TripTypeAdd from "./components/travelCRM/tripType/tripTypeAdd/TripTypeAdd.js";
 
+import SearchAccommodations from "./pages/DesertAdventure/Searchaccommodations/index.js";
+import Availablehotelsforyourholiday from "./pages/DesertAdventure/Availablehotelsforyourholiday/Index.js";
+
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -2944,7 +2947,7 @@ function App() {
 
               <Route path="travel-leads" element={<TravelLeadPage />} />
               <Route path="travel-leads-add" element={<AddLeadForm />} />
-              <Route path="leads-details" element={<ViewLeads />} />
+              <Route path="leads-details/:referId/:id" element={<ViewLeads />} />
               <Route path="travel-Vouchers-list" element={<TravelVoucherPage />} />
               <Route path="travel-Vouchers-Add" element={<AddHotelVoucher />} />
               <Route path="travel-service-Add" element={<AddServiceVoucher />} />
@@ -3134,6 +3137,9 @@ function App() {
               <Route path="billings-multiprinting" element={<MultiplePrintings />} />
               {/* <Route path="billings-hotel/cruisevoucher" element={<HotelCruieseVoucher />} /> */}
               {/* <Route path="create-billings-hotel/cruisevoucher" element={<HotelVouchers/>} /> */}
+
+              <Route path="searchaccommodations" element={<SearchAccommodations />} />
+              <Route path="availableholidayhotels" element={<Availablehotelsforyourholiday />} />
             </Route>
           </>
         )}

@@ -3,9 +3,9 @@ import { Modal, Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { clodinaryImage, getTaskPriorities, postLeadServiceReq } from "../../../api/login/Login";
 import { baseUrlImage } from "../../../baseUrl";
-import { toast ,ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
-const AddContact = ({ show, onHide ,getFloorMasters}) => {
+const AddContact = ({ show, onHide, getFloorMasters }) => {
     const parem = useParams()
     const [formData, setFormData] = useState({
         customer_name: "",
@@ -42,7 +42,7 @@ const AddContact = ({ show, onHide ,getFloorMasters}) => {
     };
 
     const [image, setImage] = useState(null);
-    const handleFileChange =async (e) => {
+    const handleFileChange = async (e) => {
         const image = new FormData()
         image.append('image', e.target.files[0])
         try {
@@ -66,14 +66,14 @@ const AddContact = ({ show, onHide ,getFloorMasters}) => {
         });
     };
 
-  
-    const handleSubmit =async (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         // Your submit logic here
         console.log("Form Data Submitted", formData);
-       
+
         try {
-            const res = await postLeadServiceReq({...formData , attach_photo:image});
+            const res = await postLeadServiceReq({ ...formData, attach_photo: image });
             if (res?.statusCode == "200") {
                 toastSuccessMessage("Service request added successfully");
                 setTimeout(() => {
@@ -87,14 +87,14 @@ const AddContact = ({ show, onHide ,getFloorMasters}) => {
         } catch (error) {
             console.error("Error:", error);
         }
-         // Close the modal
+        // Close the modal
     };
 
     return (
         <Modal show={show} onHide={onHide} dialogClassName="custom-modal-width">
             <Modal.Header closeButton>
                 <Modal.Title> Add Service request</Modal.Title>
-                <ToastContainer/>
+                <ToastContainer />
             </Modal.Header>
             <Modal.Body>
                 <form onSubmit={handleSubmit}>
@@ -270,7 +270,7 @@ const AddContact = ({ show, onHide ,getFloorMasters}) => {
                                     onChange={handleFileChange}
                                 />
                             </div>
-                            {image && <img style={{width:"100px" , height:"100px"}} src={`${baseUrlImage}${image}`} />}
+                            {image && <img style={{ width: "100px", height: "100px" }} src={`${baseUrlImage}${image}`} />}
                         </div>
                     </div>
 

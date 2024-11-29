@@ -112,9 +112,9 @@ const ServiceList = ({ title }) => {
         setId(id)
         const res2 = await getLeadServiceReqById(id)
         setDataId(res2.data)
-        console.log(res2.data);
-        
-       
+        // console.log(res2.data);
+
+
     }
 
     return (

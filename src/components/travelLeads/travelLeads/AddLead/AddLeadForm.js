@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import FlightBooking from "./FlightBooking";
 import HotelBooking from "./HotelBooking";
 import Visa from "./Visa";
@@ -15,10 +15,20 @@ import Cruise from "./Cruise";
 import Adventure from "./Adventure";
 import Package from "./Package";
 import Other from "./Other";
-import { addTravelRoomType, countryList, currencyList, getAirlLine, getLead_proposal_status, getsource, gettask_priorityadmin, getTRCRM_customer_type_master_admin, getTRCRM_flight_classadmin, getTRCRM_preferenceadmin, getTRCRM_sight_seeing_masteradmin, getTRCRM_star_rating_master, getTRCRM_trip_type_master_admin, getTRCRMstaff_admin, staffList, TRCRM_visa_category_masterGet, TTRCRM_visa_type_masterGet } from "../../../../api/login/Login";
+import debounce from "lodash.debounce";
+import { addTravelRoomType, addTRCRM_tr_leadaddType, countryList, currencyList, getAirlLine, getLead_proposal_status, getpackageId, getsource, getStateMaster, gettask_priorityadmin, getTRCRM_customer_type_master_admin, getTRCRM_flight_classadmin, getTRCRM_preferenceadmin, getTRCRM_service_masteradmin, getTRCRM_sight_seeing_masteradmin, getTRCRM_star_rating_master, getTRCRM_trip_type_master_admin, getTRCRMstaff_admin, staffList, TRCRM_visa_category_masterGet, TTRCRM_visa_type_masterGet } from "../../../../api/login/Login";
+import { Select } from "antd";
+import { toast, ToastContainer } from "react-toastify";
+import { useNavigate, useParams } from "react-router-dom";
+import Loadar from "../../../../common/loader/Loader";
+const { Option } = Select;
 
 export default function AddLeadForm() {
-
+    const params = useParams()
+    const naviagte = useNavigate()
+    const [packageData, setPackageData] = useState([])
+    const [searchTerm, setSearchTerm] = useState("");
+    const [loader, setLoader] = useState(false)
 
     const [initialData, setInitialData] = useState({
         customer_type: '',
@@ -49,11 +59,13 @@ export default function AddLeadForm() {
         enquiry_type_sightseeing: false,
         enquiry_type_transport: false,
         enquiry_type_other: false,
+        package: false,
         enquiry_type_package: [{
             tour_start_date: '',
             budget: '',
             country: [],
-            package_id: ''
+            package_id: '',
+            extra_details: ''
         }],
         enquiry_type_customise_package: false,
         enquiry_type_bus: false,
@@ -70,7 +82,7 @@ export default function AddLeadForm() {
             class: '',
             category_domestic_flight: false,
             category_international_flight: false,
-            flexibility: ["+/- 0 Days", "+/- 3 Days", "+/- 6 Days", "+/- 1 Week", "+/- 3 Week"],
+            flexibility: '',
             preference: ''
         }],
         hotelBookingModels: [{
@@ -132,16 +144,13 @@ export default function AddLeadForm() {
         }],
         customisePackageModel: [{
             country: '',
-            option: ["Only Countries", "Countries & Cities"],
-            cities: [{
-                city: '',
-                stay: ''
-            }],
+            option: '',
+            stayCityFields: [],
             services: '',
             hotel_rating: '',
             travel_date: '',
             no_of_nights: '',
-            flexibility: ["+/- 0 Days", "+/- 3 Days", "+/- 6 Days", "+/- 1 Week", "+/- 3 Week"],
+            flexibility: '',
             no_of_rooms: '',
             preference: '',
             budget: '',
@@ -208,28 +217,30 @@ export default function AddLeadForm() {
 
 
     const [Enquiry, setEnquiry] = useState({
-        flightbooking: false,
-        hotelbooking: false,
-        visa: false,
-        travelInsurance: false,
-        forex: false,
-        sightseeing: false,
-        transport: false,
-        Other: false,
+        enquiry_type_flight_booking: false,
+        enquiry_type_hotelbooking: false,
+        enquiry_type_visa: false,
+        enquiry_type_travel_insurance: false,
+        enquiry_type_forex: false,
+        enquiry_type_sightseeing: false,
+        enquiry_type_transport: false,
+        enquiry_type_other: false,
         package: false,
-        customisePackage: false,
-        bus: false,
-        train: false,
-        passport: false,
-        cruise: false,
-        adventure: false,
-        group: false
+        enquiry_type_customise_package: false,
+        enquiry_type_bus: false,
+        enquiry_type_train: false,
+        enquiry_type_passport: false,
+        enquiry_type_cruise: false,
+        enquiry_type_adventure: false,
+        enquiry_type_group: false
     })
     const handleEnquiry = (str, val) => {
         // setEnquiry(!run)
         const clone = { ...Enquiry, [str]: val }
-        console.log(clone);
+        // console.log(clone);
         setEnquiry(clone)
+        const clone2 = { ...initialData, enquiry_type_flight_booking: clone?.enquiry_type_flight_booking, enquiry_type_hotelbooking: clone?.enquiry_type_hotelbooking, enquiry_type_visa: clone?.enquiry_type_visa, enquiry_type_travel_insurance: clone?.enquiry_type_travel_insurance, enquiry_type_forex: clone?.enquiry_type_forex, enquiry_type_sightseeing: clone?.enquiry_type_sightseeing, enquiry_type_transport: clone?.enquiry_type_transport, enquiry_type_other: clone?.enquiry_type_other, package: clone?.package, enquiry_type_customise_package: clone?.enquiry_type_customise_package, enquiry_type_bus: clone?.enquiry_type_bus, enquiry_type_train: clone?.enquiry_type_train, enquiry_type_passport: clone?.enquiry_type_passport, enquiry_type_cruise: clone?.enquiry_type_cruise, enquiry_type_adventure: clone?.enquiry_type_adventure, enquiry_type_group: clone?.enquiry_type_group }
+        setInitialData(clone2)
     }
 
     const [customerType, setCustomer] = useState(null)
@@ -247,6 +258,8 @@ export default function AddLeadForm() {
     const [visaTypeData, setVisaTypeData] = useState(null)
     const [currencyData, setCurrencyData] = useState(null)
     const [sight_seeingData, setSight_seeing] = useState(null)
+    const [state, setstate] = useState(null)
+    const [services, setServices] = useState(null)
 
     const comboDataGet = async () => {
         try {
@@ -280,6 +293,10 @@ export default function AddLeadForm() {
             setCurrencyData(resCurrency?.data);
             const resSight_seeing = await getTRCRM_sight_seeing_masteradmin()
             setSight_seeing(resSight_seeing?.data);
+            const resState = await getStateMaster()
+            setstate(resState?.data)
+            const resService = await getTRCRM_service_masteradmin()
+            setServices(resService?.data)
         } catch (error) {
 
         }
@@ -624,9 +641,342 @@ export default function AddLeadForm() {
         setInitialData(clone)
     };
 
+    //customisePackage
+    const [rowsCustomisePackage, setRowsCustomisePackage] = useState([
+        {
+            country: [],
+            option: "",
+            stayCityFields: [],
+            services: "",
+            hotel_rating: "",
+            travel_date: "",
+            no_of_nights: "",
+            flexibility: "",
+            no_of_rooms: "",
+            preference: "",
+            budget: "",
+            description: "",
+        },
+    ]);
 
-    const submitData = () => {
-        console.log(initialData);
+    // console.log(rowsCustomisePackage);
+
+
+    const AddRowCustomisePackage = () => {
+        setRowsCustomisePackage((prevRows) => [
+            ...prevRows,
+            {
+                country: [],
+                option: "",
+                stayCityFields: [],
+                services: "",
+                hotel_rating: "",
+                travel_date: "",
+                no_of_nights: "",
+                flexibility: "",
+                no_of_rooms: "",
+                preference: "",
+                budget: "",
+                description: "",
+            },
+        ]);
+    };
+
+    // Handle input changes
+    const handleInputChangeGroupCustomisePackage = (index, field, value) => {
+        const updatedRows = [...rowsCustomisePackage];
+        updatedRows[index][field] = value;
+        setRowsCustomisePackage(updatedRows);
+        const clone = { ...initialData, customisePackageModel: updatedRows }
+        setInitialData(clone)
+    };
+    // Add Stay and City field for a specific row
+    const addStayCityField = (rowIndex) => {
+        const updatedRows = [...rowsCustomisePackage];
+        updatedRows[rowIndex].stayCityFields.push({ stay: "", city: "" });
+        setRowsCustomisePackage(updatedRows);
+        // const clone = { ...initialData, customisePackageModel: updatedRows }
+        // setInitialData(clone)
+    };
+    const handleStayCityChange = (rowIndex, fieldIndex, field, value) => {
+        const updatedRows = [...rowsCustomisePackage];
+        updatedRows[rowIndex].stayCityFields[fieldIndex][field] = value;
+        setRowsCustomisePackage(updatedRows);
+        const clone = { ...initialData, customisePackageModel: updatedRows }
+        setInitialData(clone)
+    };
+    //customisePackage
+
+    //bus
+    const [rowsBus, setRowsBus] = useState([
+        {
+            country: "",
+            from: "",
+            to: "",
+            departure: "",
+            return: "",
+            preference: '',
+            remark: '',
+        }
+    ]); // Initialize as an array
+
+    const AddRowBuss = () => {
+        setRowsBus((prevRows) => [
+            ...prevRows,
+            {
+                country: "",
+                from: "",
+                to: "",
+                departure: "",
+                return: "",
+                preference: '',
+                remark: '',
+            },
+        ]);
+    };
+    const handleInputChangeBuss = (index, field, value) => {
+        const updatedRows = [...rowsBus];
+        updatedRows[index][field] = value;
+        setRowsBus(updatedRows);
+        const clone = { ...initialData, busModel: updatedRows }
+        setInitialData(clone)
+    };
+    //bus
+
+    //train
+    const [rowsTrain, setRowsTrain] = useState([
+        {
+            country: "",
+            from: "",
+            to: "",
+            departure: "",
+            return: "",
+            preference: '',
+            remark: '',
+        }
+    ]); // Initialize as an array
+
+    const AddRowTrain = () => {
+        setRowsTrain((prevRows) => [
+            ...prevRows,
+            {
+                country: "",
+                from: "",
+                to: "",
+                departure: "",
+                return: "",
+                preference: '',
+                remark: '',
+            },
+        ]);
+    };
+    const handleInputChangeTrain = (index, field, value) => {
+        const updatedRows = [...rowsTrain];
+        updatedRows[index][field] = value;
+        setRowsTrain(updatedRows);
+        const clone = { ...initialData, trainModel: updatedRows }
+        setInitialData(clone)
+    };
+    //train
+
+    //passPort
+    const [rowsPassport, setRowsPassport] = useState([
+        {
+            issuing_country: "",
+            date: "",
+            current_passport_number: "",
+            place_of_apply: "",
+            no_of_person: "",
+            category: '',
+            urgent: false,
+            remark: ''
+        }
+    ]); // Initialize as an array
+
+    const AddRowPassport = () => {
+        setRowsPassport((prevRows) => [
+            ...prevRows,
+            {
+                issuing_country: "",
+                date: "",
+                current_passport_number: "",
+                place_of_apply: "",
+                no_of_person: "",
+                category: '',
+                urgent: false,
+                remark: ''
+            },
+        ]);
+    };
+    const handleInputChangePassport = (index, field, value) => {
+        const updatedRows = [...rowsPassport];
+        updatedRows[index][field] = value;
+        setRowsPassport(updatedRows);
+        const clone = { ...initialData, passportModel: updatedRows }
+        setInitialData(clone)
+    };
+
+    //passPort
+
+    //CRUISE
+    const [rowsCruise, setRowsCruise] = useState([
+        {
+            country: "",
+            city: "",
+            days: "",
+            cruise_name: "",
+            type: "",
+            departure: '',
+            return: '',
+            room_preference: '',
+            remark: ''
+        }
+    ]); // Initialize as an array
+
+    const AddRowCruise = () => {
+        setRowsCruise((prevRows) => [
+            ...prevRows,
+            {
+                country: "",
+                city: "",
+                days: "",
+                cruise_name: "",
+                type: "",
+                departure: '',
+                return: '',
+                room_preference: '',
+                remark: ''
+            },
+        ]);
+    };
+    const handleInputChangeCruise = (index, field, value) => {
+        const updatedRows = [...rowsCruise];
+        updatedRows[index][field] = value;
+        setRowsCruise(updatedRows);
+        const clone = { ...initialData, cruiseModel: updatedRows }
+        setInitialData(clone)
+    };
+    //CRUISE
+
+    // Adventure
+    const [rowsAdventure, setRowsAdventure] = useState([
+        {
+            country: "",
+            city: "",
+            travel_date: "",
+            category_motorbiking: false,
+            category_camping: false,
+            category_safari: false,
+            category_water_sports: false,
+            remark: ''
+        }
+    ]); // Initialize as an array
+
+    const AddRowAdventure = () => {
+        setRowsAdventure((prevRows) => [
+            ...prevRows,
+            {
+                country: "",
+                city: "",
+                travel_date: "",
+                category_motorbiking: false,
+                category_camping: false,
+                category_safari: false,
+                category_water_sports: false,
+                remark: ''
+            },
+        ]);
+    };
+    const handleInputChangeAdventure = (index, field, value) => {
+        const updatedRows = [...rowsAdventure];
+        updatedRows[index][field] = value;
+        setRowsAdventure(updatedRows);
+        const clone = { ...initialData, adventureModel: updatedRows }
+        setInitialData(clone)
+    };
+    // Adventure
+
+    // groupPackage
+
+    const packageDataGet = async (query) => {
+        try {
+            // if (query.length < 2) {
+            //     setPackageData([]);
+            //     return;
+            // }
+            const res = await getpackageId(query)
+            // console.log(res?.data);
+            setPackageData(res?.data);
+
+        } catch (error) {
+
+        }
+    }
+    const debouncedFetch = useCallback(debounce((query) => packageDataGet(query), 300), []);
+
+    const [rowsGroupPackage, setGroupPackage] = useState([
+        {
+            country: "",
+            state: "",
+            package_id: "",
+            preference: '',
+            remark: false,
+        }
+    ]); // Initialize as an array
+
+    const AddRowGroupPackage = () => {
+        setGroupPackage((prevRows) => [
+            ...prevRows,
+            {
+                country: "",
+                state: "",
+                package_id: "",
+                preference: '',
+                remark: '',
+            },
+        ]);
+    };
+    const handleInputChangeGroupPackage = (index, field, value) => {
+        const updatedRows = [...rowsGroupPackage];
+        updatedRows[index][field] = value;
+        setGroupPackage(updatedRows);
+        const clone = { ...initialData, groupModel: updatedRows }
+        setInitialData(clone)
+    };
+
+    const handleSearch = (value) => {
+        setSearchTerm(value);
+        debouncedFetch(value);
+    };
+    // groupPackage
+    const toastSuccessMessage = (message) => {
+        toast.success(`${params?.id ? `${message}` : `${message}`} ${'Success'}`, {
+            position: "top-right",
+        });
+    };
+
+    const disabled = !initialData?.customer_type || !initialData?.mobile_number || !initialData?.email_id || !initialData?.salutation || !initialData?.first_name || !initialData?.last_name || !initialData?.address || !initialData?.city || !initialData?.alternate_mobile_number || !initialData?.alternate_email_id || !initialData?.lead_source || !initialData?.lead_priority || !initialData?.lead_status || !initialData?.no_of_adults || !initialData?.no_of_children || !initialData?.no_of_infant || !initialData?.trip_type || !initialData?.tag || !initialData?.assigned_to || !initialData?.notes
+
+
+    const submitData = async () => {
+        // console.log(initialData);
+        setLoader(true)
+        try {
+            const res = await addTRCRM_tr_leadaddType(initialData)
+            // console.log(res?.error == false);
+            if (res?.error == false) {
+                toastSuccessMessage('Add')
+                setLoader(false)
+                setTimeout(() => {
+                    naviagte('/travel-leads')
+                }, 2000)
+            } else {
+                toastSuccessMessage(res?.message)
+                setLoader(false)
+            }
+        } catch (error) {
+            setLoader(false)
+        }
         // console.log(flightrows);
         // console.log(Enquiry);
     }
@@ -635,395 +985,420 @@ export default function AddLeadForm() {
         searchAirlLine()
     }, [])
     return (
-        <div className="row m-4">
-            <div className="col-xl-12">
-                <div className="card">
-                    <div className="row">
-                        <div className="col-9">
-                            <div className="row">
-                                <div className="col-6">
-                                    <div className="mt-2">
-                                        <label className="form-label">Customer Type</label>
-                                        <div className="w-100">
-                                            <select className="form-select shadow " name="customer_type" value={initialData?.customer_type} onChange={changeHandle}>
-                                                <option selected>Open this select Customer Type</option>
-                                                {customerType && customerType?.map((item) => {
-                                                    return <option value={item?._id} key={item?._id}>{item?.customer_type}</option>
-                                                })}
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-6">
-                                    <div class="mt-2">
-                                        <label class="form-label">Mobile</label>
-                                        <input type="number" class="form-control" placeholder="Mobile number" name="mobile_number" value={initialData?.mobile_number} onChange={changeHandle} />
-                                    </div>
-                                </div>
-                                <div className="col-6">
-                                    <div className="mt-2">
-                                        <label className="form-label">Email</label>
-                                        <input className="form-control" placeholder="email " type="email" name="email_id" value={initialData?.email_id} onChange={changeHandle} />
-                                    </div>
-                                </div>
-                                <div className="col-6">
-                                    <div className="row">
-                                        <div className="col-4">
-                                            <div className="mt-2">
-                                                <label className="Form-label">Salutation <span className="text-danger fs-5">*</span></label>
-                                                <div className="w-100">
-                                                    <select className="form-select shadow" name="salutation" value={initialData?.salutation} onChange={changeHandle}>
-                                                        <option selected>Select Salutation</option>
-                                                        <option value={'Mr'}>Mr</option>
-                                                        <option value={'Mrs'}>Mrs</option>
-                                                        <option value={'Ms'}>Ms</option>
-                                                        <option value={'Miss'}>Miss</option>
-                                                        <option value={'Dr'}>Dr</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-8">
-                                            <div className="mt-2">
-                                                <label className="form-labe;">First Name <span className="text-danger fs-5">*</span></label>
-                                                <input type="text" placeholder="first name" className="form-control" name="first_name" value={initialData?.first_name} onChange={changeHandle} />
+        <>
+            {loader && <Loadar />}
+            <div className="row m-4">
+                <div className="col-xl-12">
+                    <div className="card">
+                        <div className="row">
+                            <div className="col-9">
+                                <div className="row">
+                                    <div className="col-6">
+                                        <div className="mt-2">
+                                            <label className="form-label">Customer Type <span className="text-danger fs-5">*</span></label>
+                                            <div className="w-100">
+                                                <select className="form-select shadow " name="customer_type" value={initialData?.customer_type} onChange={changeHandle}>
+                                                    <option selected>Open this select Customer Type</option>
+                                                    {customerType && customerType?.map((item) => {
+                                                        return <option value={item?._id} key={item?._id}>{item?.customer_type}</option>
+                                                    })}
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="col-6">
-                                    <div className="mt-2">
-                                        <label className="form-label">Last Name</label>
-                                        <input type="text" placeholder="Last name" className="form-control" name="last_name" value={initialData?.last_name} onChange={changeHandle} />
-                                    </div>
-                                </div>
-                                <div className="col-6">
-                                    <div className="mt-2">
-                                        <label className="form-label">Address</label>
-                                        <input type="text" placeholder="addres" className="form-control" name="address" value={initialData?.address} onChange={changeHandle} />
-                                    </div>
-                                </div>
-                                <div className="col-6">
-                                    <div className="mt-2">
-                                        <label className="form-label">City</label>
-                                        <input type="text" placeholder="City" className="form-control" name="city" value={initialData?.city} onChange={changeHandle} />
-                                    </div>
-                                </div>
-                                <div className="col-6">
-                                    <div className="mt-2">
-                                        <label className="form-label">Alternate Mobile Number</label>
-                                        <input type="text" placeholder="Alternate Mobile Number" className="form-control" name="alternate_mobile_number" value={initialData?.alternate_mobile_number} onChange={changeHandle} />
-                                    </div>
-                                </div>
-                                <div className="col-6">
-                                    <div className="mt-2">
-                                        <label className="form-label my-1">Alternate Email Id</label>
-                                        <input className="form-control" type="email" placeholder="Alternate Email Id" name="alternate_email_id" value={initialData?.alternate_email_id} onChange={changeHandle} />
-                                    </div>
-                                </div>
-                                <div className="col-6">
-                                    <div className="mt-2">
-                                        <label className="form-label my-1">Lead Source</label>
-                                        <div className="w-100">
-                                            <select className="form-select shadow" name="lead_source" value={initialData?.lead_source} onChange={changeHandle}>
-                                                <option selected>Open this Lead Priority</option>
-                                                {leadSource && leadSource?.map((item) => {
-                                                    return <option value={item?._id} key={item?._id}>{item?.name}</option>
-                                                })}
-                                            </select>
+                                    <div className="col-6">
+                                        <div class="mt-2">
+                                            <label class="form-label"> Mobile <span className="text-danger fs-5">*</span></label>
+                                            <input type="number" class="form-control" placeholder="Mobile number" name="mobile_number" value={initialData?.mobile_number} onChange={changeHandle} />
                                         </div>
                                     </div>
-                                </div>
-                                <div className="col-6">
-                                    <div className="mt-2">
-                                        <label className="form-label my-1">Lead Priority</label>
-                                        <div className="w-100">
-                                            <select className="form-select shadow" name="lead_priority" value={initialData?.lead_priority} onChange={changeHandle}>
-                                                <option selected>Open this Lead Priority</option>
-                                                {leadPriority && leadPriority?.map((item) => {
-                                                    return <option value={item?._id} key={item?._id}>{item?.name}</option>
-                                                })}
-                                            </select>
+                                    <div className="col-6">
+                                        <div className="mt-2">
+                                            <label className="form-label">Email <span className="text-danger fs-5">*</span></label>
+                                            <input className="form-control" placeholder="email " type="email" name="email_id" value={initialData?.email_id} onChange={changeHandle} />
                                         </div>
                                     </div>
-                                </div>
-                                <div className="col-6">
-                                    <div className="mt-2">
-                                        <label className="form-label my-1">Lead Status</label>
-                                        <div className="w-100">
-                                            <select className="form-select shadow" name="lead_status" value={initialData?.lead_status} onChange={changeHandle}>
-                                                <option selected>Open this Lead Priority</option>
-                                                {leadStatus && leadStatus?.map((item) => {
-                                                    return <option value={item?._id} key={item?._id}>{item?.name}</option>
-                                                })}
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-6">
-                                    <div className="row">
-                                        <div className="col-4">
-                                            <div className="mt-2">
-                                                <label className="form-label">No. of Adults </label>
-                                                <input className="form-control" type="number" placeholder="No.of Adult" name="no_of_adults" value={initialData?.no_of_adults} onChange={changeHandle} />
-                                            </div>
-                                        </div>
-                                        <div className="col-4">
-                                            <div className="mt-2">
-                                                <label className="form-label">No. of Children</label>
-                                                <input type="number" placeholder="No.of Children" className="form-control" name="no_of_children" value={initialData?.no_of_children} onChange={changeHandle} />
-                                            </div>
-                                        </div>
-                                        <div className="col-4">
-                                            <div className="mt-2">
-                                                <label className="form-label">No. of Infant</label>
-                                                <input type="number" className="form-control" placeholder="No.of Infant" name="no_of_infant" value={initialData?.no_of_infant} onChange={changeHandle} />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-6">
-                                    <div className="mt-2">
-                                        <label className="form-label my-1">Trip Type</label>
-                                        <div className="w-100">
-                                            <select className="form-select shadow " name="trip_type" value={initialData?.trip_type} onChange={changeHandle}>
-                                                <option selected>Open this Trip Type</option>
-                                                {tripType && tripType?.map((item) => {
-                                                    return <option value={item?._id} key={item?._id}>{item?.trip_type}</option>
-                                                })}
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-6">
-                                    <div className="mt-2">
-                                        <label className="form-label my-1">Tag</label>
-                                        <div className="w-100">
-                                            <select className="form-select shadow " name="tag" value={initialData?.tag} onChange={changeHandle}>
-                                                <option selected>Open this Tag</option>
-                                                {tripType && tripType?.map((item) => {
-                                                    return <option value={item?._id} key={item?._id}>{item?.trip_type}</option>
-                                                })}
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-6">
-                                    <div className="mt-2">
-                                        <label className="form-label my-1">Assigned To</label>
-                                        <div className="w-100">
-                                            <select className="form-select shadow " name="assigned_to" value={initialData?.assigned_to} onChange={changeHandle}>
-                                                <option selected>Open this Assigned To</option>
-                                                {staff && staff?.map((item) => {
-                                                    return <option value={item?._id} key={item?._id}>{item?.name}</option>
-                                                })}
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-12">
-                                    <div className="mt-3">
-                                        <h1 className="fs-6">Enquiry Type</h1>
-                                        <div className="mt-2 row">
+                                    <div className="col-6">
+                                        <div className="row">
                                             <div className="col-4">
-                                                <div className="d-flex mt-2 align-items-center gap-2">
-                                                    <input type={"checkbox"} checked={Enquiry?.flightbooking} onChange={() => { handleEnquiry('flightbooking', !Enquiry?.flightbooking) }} />
-                                                    <label className=" m-0 fs-6">Flight Booking</label>
+                                                <div className="mt-2">
+                                                    <label className="Form-label">Salutation <span className="text-danger fs-5">*</span></label>
+                                                    <div className="w-100">
+                                                        <select className="form-select shadow" name="salutation" value={initialData?.salutation} onChange={changeHandle}>
+                                                            <option selected>Select Salutation</option>
+                                                            <option value={'Mr'}>Mr</option>
+                                                            <option value={'Mrs'}>Mrs</option>
+                                                            <option value={'Ms'}>Ms</option>
+                                                            <option value={'Miss'}>Miss</option>
+                                                            <option value={'Dr'}>Dr</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div className="col-4">
-                                                <div className="d-flex mt-2 align-items-center gap-2">
-                                                    <input type={"checkbox"} checked={Enquiry?.hotelbooking} onChange={() => { handleEnquiry('hotelbooking', !Enquiry?.hotelbooking) }} />
-                                                    <label className=" m-0 fs-6">Hotel Booking</label>
-                                                </div>
-                                            </div>
-                                            <div className="col-4">
-                                                <div className="d-flex mt-2 align-items-center gap-2">
-                                                    <input type={"checkbox"} checked={Enquiry?.visa}
-                                                        onChange={() => { handleEnquiry("visa", !Enquiry.visa) }}
-                                                    />
-                                                    <label className=" m-0 fs-6">Visa</label>
-                                                </div>
-                                            </div>
-                                            <div className="col-4">
-                                                <div className="d-flex mt-2 align-items-center gap-2">
-                                                    <input type={"checkbox"} checked={Enquiry.travelInsurance}
-                                                        onChange={() => { handleEnquiry('travelInsurance', !Enquiry.travelInsurance) }}
-                                                    />
-                                                    <label className=" m-0 fs-6">Travel Insurance</label>
-                                                </div>
-                                            </div>
-                                            <div className="col-4">
-                                                <div className="d-flex mt-2 align-items-center gap-2">
-                                                    <input type={"checkbox"} checked={Enquiry.forex}
-                                                        onChange={() => { handleEnquiry("forex", !Enquiry.forex) }}
-                                                    />
-                                                    <label className=" m-0 fs-6">Forex</label>
-                                                </div>
-                                            </div>
-                                            <div className="col-4">
-                                                <div className="d-flex mt-2 align-items-center gap-2">
-                                                    <input type={"checkbox"} checked={Enquiry.sightseeing}
-                                                        onChange={() => { handleEnquiry("sightseeing", !Enquiry.sightseeing) }}
-                                                    />
-                                                    <label className=" m-0 fs-6">Sightseeing</label>
-                                                </div>
-                                            </div>
-                                            <div className="col-4">
-                                                <div className="d-flex mt-2 align-items-center gap-2">
-                                                    <input type={"checkbox"} checked={Enquiry.transport}
-                                                        onChange={() => { handleEnquiry("transport", !Enquiry.transport) }}
-                                                    />
-                                                    <label className=" m-0 fs-6">Transport</label>
-                                                </div>
-                                            </div>
-                                            <div className="col-4">
-                                                <div className="d-flex mt-2 align-items-center gap-2">
-                                                    <input type={"checkbox"} Checked={Enquiry.Other}
-                                                        onChange={() => { handleEnquiry("Other", !Enquiry.Other) }}
-                                                    />
-                                                    <label className=" m-0 fs-6">Other</label>
-                                                </div>
-                                            </div>
-                                            <div className="col-4">
-                                                <div className="d-flex mt-2 align-items-center gap-2">
-                                                    <input type={"checkbox"} checked={Enquiry.package}
-                                                        onChange={() => { handleEnquiry("package", !Enquiry.package) }}
-                                                    />
-                                                    <label className=" m-0 fs-6">Package</label>
-                                                </div>
-                                            </div>
-                                            <div className="col-4">
-                                                <div className="d-flex mt-2 align-items-center gap-2">
-                                                    <input type={"checkbox"} checked={Enquiry.customisePackage}
-                                                        onChange={() => { handleEnquiry('customisePackage', !Enquiry.customisePackage) }}
-                                                    />
-                                                    <label className=" m-0 fs-6">Customise Package</label>
-                                                </div>
-                                            </div>
-                                            <div className="col-4">
-                                                <div className="d-flex mt-2 align-items-center gap-2">
-                                                    <input type={"checkbox"} checked={Enquiry.bus}
-                                                        onChange={() => { handleEnquiry('bus', !Enquiry.bus) }}
-                                                    />
-                                                    <label className=" m-0 fs-6">Bus</label>
-                                                </div>
-                                            </div>
-                                            <div className="col-4">
-                                                <div className="d-flex mt-2 align-items-center gap-2">
-                                                    <input type={"checkbox"} checked={Enquiry.train}
-                                                        onChange={() => { handleEnquiry('train', !Enquiry.train) }}
-                                                    />
-                                                    <label className=" m-0 fs-6">Train</label>
-                                                </div>
-                                            </div>
-                                            <div className="col-4">
-                                                <div className="d-flex mt-2 align-items-center gap-2">
-                                                    <input type={"checkbox"} checked={Enquiry.passport} onChange={() => { handleEnquiry('passport', !Enquiry.passport) }} />
-                                                    <label className=" m-0 fs-6">Passport</label>
-                                                </div>
-                                            </div>
-                                            <div className="col-4">
-                                                <div className="d-flex mt-2 align-items-center gap-2">
-                                                    <input type={"checkbox"} checked={Enquiry.cruise}
-                                                        onClick={() => handleEnquiry('cruise', !Enquiry.cruise)}
-                                                    />
-                                                    <label className=" m-0 fs-6">Cruise</label>
-                                                </div>
-                                            </div>
-                                            <div className="col-4">
-                                                <div className="d-flex mt-2 align-items-center gap-2">
-                                                    <input type={"checkbox"} checked={Enquiry.adventure}
-                                                        onChange={() => handleEnquiry('adventure', !Enquiry.adventure)}
-                                                    />
-                                                    <label className=" m-0 fs-6">Adventure</label>
-                                                </div>
-                                            </div>
-                                            <div className="col-4">
-                                                <div className="d-flex mt-2 align-items-center gap-2">
-                                                    <input type={"checkbox"} Checked={Enquiry.group}
-                                                        onClick={() => handleEnquiry('group', !Enquiry.group)}
-                                                    />
-                                                    <label className=" m-0 fs-6">Group</label>
+                                            <div className="col-8">
+                                                <div className="mt-2">
+                                                    <label className="form-labe;">First Name <span className="text-danger fs-5">*</span></label>
+                                                    <input type="text" placeholder="first name" className="form-control" name="first_name" value={initialData?.first_name} onChange={changeHandle} />
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <div className="col-6">
+                                        <div className="mt-2">
+                                            <label className="form-label">Last Name</label>
+                                            <input type="text" placeholder="Last name" className="form-control" name="last_name" value={initialData?.last_name} onChange={changeHandle} />
+                                        </div>
+                                    </div>
+                                    <div className="col-6">
+                                        <div className="mt-2">
+                                            <label className="form-label">Address <span className="text-danger fs-5">*</span></label>
+                                            <input type="text" placeholder="addres" className="form-control" name="address" value={initialData?.address} onChange={changeHandle} />
+                                        </div>
+                                    </div>
+                                    <div className="col-6">
+                                        <div className="mt-2">
+                                            <label className="form-label">City <span className="text-danger fs-5">*</span></label>
+                                            {/* <input type="text" placeholder="City" className="form-control" name="city" value={initialData?.city} onChange={changeHandle} /> */}
+                                            <Select
+                                                showSearch
+                                                style={{ width: "100%", height: '40px' }}
+                                                placeholder="Select Departure"
+                                                optionFilterProp="children"
+                                                className=""
+                                                name='city'
+                                                value={initialData?.city}
+                                                onChange={(value) => {
+                                                    setInitialData((prev) => ({
+                                                        ...prev,
+                                                        city: value, // Update the `city` field with the selected value
+                                                    }));
+                                                }}
+                                            >
+                                                {locations?.map((loc) => (
+                                                    <Option key={loc._id} value={loc._id}>
+                                                        {loc.city_name}
+                                                    </Option>
+                                                ))}
+                                            </Select>
+                                        </div>
+                                    </div>
+                                    <div className="col-6">
+                                        <div className="mt-2">
+                                            <label className="form-label">Alternate Mobile Number <span className="text-danger fs-5">*</span></label>
+                                            <input type="text" placeholder="Alternate Mobile Number" className="form-control" name="alternate_mobile_number" value={initialData?.alternate_mobile_number} onChange={changeHandle} />
+                                        </div>
+                                    </div>
+                                    <div className="col-6">
+                                        <div className="mt-2">
+                                            <label className="form-label my-1">Alternate Email Id <span className="text-danger fs-5">*</span></label>
+                                            <input className="form-control" type="email" placeholder="Alternate Email Id" name="alternate_email_id" value={initialData?.alternate_email_id} onChange={changeHandle} />
+                                        </div>
+                                    </div>
+                                    <div className="col-6">
+                                        <div className="mt-2">
+                                            <label className="form-label my-1">Lead Source <span className="text-danger fs-5">*</span></label>
+                                            <div className="w-100">
+                                                <select className="form-select shadow" name="lead_source" value={initialData?.lead_source} onChange={changeHandle}>
+                                                    <option selected>Open this Lead Priority</option>
+                                                    {leadSource && leadSource?.map((item) => {
+                                                        return <option value={item?._id} key={item?._id}>{item?.name}</option>
+                                                    })}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-6">
+                                        <div className="mt-2">
+                                            <label className="form-label my-1">Lead Priority <span className="text-danger fs-5">*</span></label>
+                                            <div className="w-100">
+                                                <select className="form-select shadow" name="lead_priority" value={initialData?.lead_priority} onChange={changeHandle}>
+                                                    <option selected>Open this Lead Priority</option>
+                                                    {leadPriority && leadPriority?.map((item) => {
+                                                        return <option value={item?._id} key={item?._id}>{item?.name}</option>
+                                                    })}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-6">
+                                        <div className="mt-2">
+                                            <label className="form-label my-1">Lead Status <span className="text-danger fs-5">*</span></label>
+                                            <div className="w-100">
+                                                <select className="form-select shadow" name="lead_status" value={initialData?.lead_status} onChange={changeHandle}>
+                                                    <option selected>Open this Lead Priority</option>
+                                                    {leadStatus && leadStatus?.map((item) => {
+                                                        return <option value={item?._id} key={item?._id}>{item?.name}</option>
+                                                    })}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-6">
+                                        <div className="row">
+                                            <div className="col-4">
+                                                <div className="mt-2">
+                                                    <label className="form-label">No. of Adults <span className="text-danger fs-5">*</span></label>
+                                                    <input className="form-control" type="number" placeholder="No.of Adult" name="no_of_adults" value={initialData?.no_of_adults} onChange={changeHandle} />
+                                                </div>
+                                            </div>
+                                            <div className="col-4">
+                                                <div className="mt-2">
+                                                    <label className="form-label">No. of Children <span className="text-danger fs-5">*</span></label>
+                                                    <input type="number" placeholder="No.of Children" className="form-control" name="no_of_children" value={initialData?.no_of_children} onChange={changeHandle} />
+                                                </div>
+                                            </div>
+                                            <div className="col-4">
+                                                <div className="mt-2">
+                                                    <label className="form-label">No. of Infant <span className="text-danger fs-5">*</span></label>
+                                                    <input type="number" className="form-control" placeholder="No.of Infant" name="no_of_infant" value={initialData?.no_of_infant} onChange={changeHandle} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-6">
+                                        <div className="mt-2">
+                                            <label className="form-label my-1">Trip Type <span className="text-danger fs-5">*</span></label>
+                                            <div className="w-100">
+                                                <select className="form-select shadow " name="trip_type" value={initialData?.trip_type} onChange={changeHandle}>
+                                                    <option selected>Open this Trip Type</option>
+                                                    {tripType && tripType?.map((item) => {
+                                                        return <option value={item?._id} key={item?._id}>{item?.trip_type}</option>
+                                                    })}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-6">
+                                        <div className="mt-2">
+                                            <label className="form-label my-1">Tag <span className="text-danger fs-5">*</span></label>
+                                            <div className="w-100">
+                                                <select className="form-select shadow " name="tag" value={initialData?.tag} onChange={changeHandle}>
+                                                    <option selected>Open this Tag</option>
+                                                    {tripType && tripType?.map((item) => {
+                                                        return <option value={item?._id} key={item?._id}>{item?.trip_type}</option>
+                                                    })}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-6">
+                                        <div className="mt-2">
+                                            <label className="form-label my-1">Assigned To <span className="text-danger fs-5">*</span></label>
+                                            <div className="w-100">
+                                                <select className="form-select shadow " name="assigned_to" value={initialData?.assigned_to} onChange={changeHandle}>
+                                                    <option selected>Open this Assigned To</option>
+                                                    {staff && staff?.map((item) => {
+                                                        return <option value={item?._id} key={item?._id}>{item?.name}</option>
+                                                    })}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-12">
+                                        <div className="mt-3">
+                                            <h1 className="fs-6">Enquiry Type </h1>
+                                            <div className="mt-2 row">
+                                                <div className="col-4">
+                                                    <div className="d-flex mt-2 align-items-center gap-2">
+                                                        <input type={"checkbox"} checked={Enquiry?.enquiry_type_flight_booking} onChange={() => { handleEnquiry('enquiry_type_flight_booking', !Enquiry?.enquiry_type_flight_booking) }} />
+                                                        <label className=" m-0 fs-6">Flight Booking</label>
+                                                    </div>
+                                                </div>
+                                                <div className="col-4">
+                                                    <div className="d-flex mt-2 align-items-center gap-2">
+                                                        <input type={"checkbox"} checked={Enquiry?.enquiry_type_hotelbooking} onChange={() => { handleEnquiry('enquiry_type_hotelbooking', !Enquiry?.enquiry_type_hotelbooking) }} />
+                                                        <label className=" m-0 fs-6">Hotel Booking</label>
+                                                    </div>
+                                                </div>
+                                                <div className="col-4">
+                                                    <div className="d-flex mt-2 align-items-center gap-2">
+                                                        <input type={"checkbox"} checked={Enquiry?.enquiry_type_visa}
+                                                            onChange={() => { handleEnquiry("enquiry_type_visa", !Enquiry.enquiry_type_visa) }}
+                                                        />
+                                                        <label className=" m-0 fs-6">Visa</label>
+                                                    </div>
+                                                </div>
+                                                <div className="col-4">
+                                                    <div className="d-flex mt-2 align-items-center gap-2">
+                                                        <input type={"checkbox"} checked={Enquiry.enquiry_type_travel_insurance}
+                                                            onChange={() => { handleEnquiry('enquiry_type_travel_insurance', !Enquiry.enquiry_type_travel_insurance) }}
+                                                        />
+                                                        <label className=" m-0 fs-6">Travel Insurance</label>
+                                                    </div>
+                                                </div>
+                                                <div className="col-4">
+                                                    <div className="d-flex mt-2 align-items-center gap-2">
+                                                        <input type={"checkbox"} checked={Enquiry.enquiry_type_forex}
+                                                            onChange={() => { handleEnquiry("enquiry_type_forex", !Enquiry.enquiry_type_forex) }}
+                                                        />
+                                                        <label className=" m-0 fs-6">Forex</label>
+                                                    </div>
+                                                </div>
+                                                <div className="col-4">
+                                                    <div className="d-flex mt-2 align-items-center gap-2">
+                                                        <input type={"checkbox"} checked={Enquiry.enquiry_type_sightseeing}
+                                                            onChange={() => { handleEnquiry("enquiry_type_sightseeing", !Enquiry.enquiry_type_sightseeing) }}
+                                                        />
+                                                        <label className=" m-0 fs-6">Sightseeing</label>
+                                                    </div>
+                                                </div>
+                                                <div className="col-4">
+                                                    <div className="d-flex mt-2 align-items-center gap-2">
+                                                        <input type={"checkbox"} checked={Enquiry.enquiry_type_transport}
+                                                            onChange={() => { handleEnquiry("enquiry_type_transport", !Enquiry.enquiry_type_transport) }}
+                                                        />
+                                                        <label className=" m-0 fs-6">Transport</label>
+                                                    </div>
+                                                </div>
+                                                <div className="col-4">
+                                                    <div className="d-flex mt-2 align-items-center gap-2">
+                                                        <input type={"checkbox"} Checked={Enquiry.enquiry_type_other}
+                                                            onChange={() => { handleEnquiry("enquiry_type_other", !Enquiry.enquiry_type_other) }}
+                                                        />
+                                                        <label className=" m-0 fs-6">Other</label>
+                                                    </div>
+                                                </div>
+                                                <div className="col-4">
+                                                    <div className="d-flex mt-2 align-items-center gap-2">
+                                                        <input type={"checkbox"} checked={Enquiry.package}
+                                                            onChange={() => { handleEnquiry("package", !Enquiry.package) }}
+                                                        />
+                                                        <label className=" m-0 fs-6">Package</label>
+                                                    </div>
+                                                </div>
+                                                <div className="col-4">
+                                                    <div className="d-flex mt-2 align-items-center gap-2">
+                                                        <input type={"checkbox"} checked={Enquiry.enquiry_type_customise_package}
+                                                            onChange={() => { handleEnquiry('enquiry_type_customise_package', !Enquiry.enquiry_type_customise_package) }}
+                                                        />
+                                                        <label className=" m-0 fs-6">Customise Package</label>
+                                                    </div>
+                                                </div>
+                                                <div className="col-4">
+                                                    <div className="d-flex mt-2 align-items-center gap-2">
+                                                        <input type={"checkbox"} checked={Enquiry.enquiry_type_bus}
+                                                            onChange={() => { handleEnquiry('enquiry_type_bus', !Enquiry.enquiry_type_bus) }}
+                                                        />
+                                                        <label className=" m-0 fs-6">Bus</label>
+                                                    </div>
+                                                </div>
+                                                <div className="col-4">
+                                                    <div className="d-flex mt-2 align-items-center gap-2">
+                                                        <input type={"checkbox"} checked={Enquiry.enquiry_type_train}
+                                                            onChange={() => { handleEnquiry('enquiry_type_train', !Enquiry.enquiry_type_train) }}
+                                                        />
+                                                        <label className=" m-0 fs-6">Train</label>
+                                                    </div>
+                                                </div>
+                                                <div className="col-4">
+                                                    <div className="d-flex mt-2 align-items-center gap-2">
+                                                        <input type={"checkbox"} checked={Enquiry.enquiry_type_passport} onChange={() => { handleEnquiry('enquiry_type_passport', !Enquiry.enquiry_type_passport) }} />
+                                                        <label className=" m-0 fs-6">Passport</label>
+                                                    </div>
+                                                </div>
+                                                <div className="col-4">
+                                                    <div className="d-flex mt-2 align-items-center gap-2">
+                                                        <input type={"checkbox"} checked={Enquiry.enquiry_type_cruise}
+                                                            onClick={() => handleEnquiry('enquiry_type_cruise', !Enquiry.enquiry_type_cruise)}
+                                                        />
+                                                        <label className=" m-0 fs-6">Cruise</label>
+                                                    </div>
+                                                </div>
+                                                <div className="col-4">
+                                                    <div className="d-flex mt-2 align-items-center gap-2">
+                                                        <input type={"checkbox"} checked={Enquiry.enquiry_type_adventure}
+                                                            onChange={() => handleEnquiry('enquiry_type_adventure', !Enquiry.enquiry_type_adventure)}
+                                                        />
+                                                        <label className=" m-0 fs-6">Adventure</label>
+                                                    </div>
+                                                </div>
+                                                <div className="col-4">
+                                                    <div className="d-flex mt-2 align-items-center gap-2">
+                                                        <input type={"checkbox"} Checked={Enquiry.enquiry_type_group}
+                                                            onClick={() => handleEnquiry('enquiry_type_group', !Enquiry.enquiry_type_group)}
+                                                        />
+                                                        <label className=" m-0 fs-6">Group</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-12">
+                                        {Enquiry.enquiry_type_flight_booking && <div className="my-4">
+                                            <FlightBooking preference={preference} classData={classData} addRowFlight={addRowFlight} flightrows={flightrows} setflightrowsRows={setflightrowsRows} handleRowChangeFlight={handleRowChangeFlight} locations={locations} />
+                                        </div>}
+                                        {Enquiry.enquiry_type_hotelbooking && <div className="my-4">
+                                            <HotelBooking countryData={countryData} starRatting={starRatting} roomType={roomType} addHotelRow={addHotelRow} hotelRow={hotelRow} setHotelRow={setHotelRow} handleInputChangeHotel={handleInputChangeHotel} locations={locations} />
+                                        </div>}
+                                        {Enquiry.enquiry_type_visa && <div className="my-4">
+                                            <Visa countryData={countryData} visaTypeData={visaTypeData} visaCatData={visaCatData} AddVisaRow={AddVisaRow} handleInputChangeVisa={handleInputChangeVisa} setRowsVisa={setRowsVisa} rowsVisa={rowsVisa} />
+                                        </div>}
+                                        {Enquiry.enquiry_type_travel_insurance && <div className="my-4">
+                                            <TrvelInsurance countryData={countryData} handleInputChangeTravelInsurence={handleInputChangeTravelInsurence} AddRowTravelIns={AddRowTravelIns} rowsTravelIns={rowsTravelIns} setRowsTravelIns={setRowsTravelIns} />
+                                        </div>}
+                                        {Enquiry.enquiry_type_forex && <div className="my-4">
+                                            <Forex countryData={countryData} currencyData={currencyData} rowsForex={rowsForex} AddRowForex={AddRowForex} handleInputChangeForex={handleInputChangeForex} />
+                                        </div>}
+                                        {Enquiry.enquiry_type_sightseeing && <div className="my-4">
+                                            <Sightseeing countryData={countryData} locations={locations} preference={preference} sight_seeingData={sight_seeingData} handleInputChangeSightseeing={handleInputChangeSightseeing} rowsSightseeing={rowsSightseeing} setRowsSightseeing={setRowsSightseeing} AddRowSightseeing={AddRowSightseeing} />
+                                        </div>}
+                                        {Enquiry.enquiry_type_transport && <div className="my-4">
+                                            <Transport countryData={countryData} locations={locations} preference={preference} handleInputChangeTranport={handleInputChangeTranport} rowsTrasport={rowsTrasport} setRowsTrasport={setRowsTrasport} AddRowtTrasport={AddRowtTrasport} />
+                                        </div>}
+                                        {Enquiry.enquiry_type_other && <div className="my-4">
+                                            <Other countryData={countryData} handleInputChangeOther={handleInputChangeOther} rowsOther={rowsOther} setOther={setOther} />
+                                        </div>}
+                                        {Enquiry.package && <div className="my-4">
+                                            <Package countryData={countryData} packageData={packageData} handleSearch={handleSearch} handleInputChangePackage={handleInputChangePackage} packageRow={packageRow} setpackageRow={setpackageRow} addPackageRow={addPackageRow} />
+                                        </div>}
+                                        {Enquiry.enquiry_type_customise_package && <div className="my-4">
+                                            <CoustumPackage countryData={countryData} locations={locations} services={services} starRatting={starRatting} preference={preference} rowsCustomisePackage={rowsCustomisePackage} setRowsCustomisePackage={setRowsCustomisePackage} AddRowCustomisePackage={AddRowCustomisePackage} handleInputChangeGroupCustomisePackage={handleInputChangeGroupCustomisePackage} addStayCityField={addStayCityField} handleStayCityChange={handleStayCityChange} />
+                                        </div>}
+                                        {Enquiry.enquiry_type_bus && <div className="my-4">
+                                            <Bus countryData={countryData} locations={locations} preference={preference} handleInputChangeBuss={handleInputChangeBuss} rowsBus={rowsBus} setRowsBus={setRowsBus} AddRowBuss={AddRowBuss} />
+                                        </div>}
+                                        {Enquiry.enquiry_type_train && <div className="my-4">
+                                            <Train countryData={countryData} locations={locations} preference={preference} handleInputChangeTrain={handleInputChangeTrain} rowsTrain={rowsTrain} setRowsTrain={setRowsTrain} AddRowTrain={AddRowTrain} />
+                                        </div>}
+                                        {Enquiry.enquiry_type_passport && <div className="my-4">
+                                            <Passport countryData={countryData} AddRowPassport={AddRowPassport} handleInputChangePassport={handleInputChangePassport} setRowsPassport={setRowsPassport} rowsPassport={rowsPassport} />
+                                        </div>}
+                                        {Enquiry.enquiry_type_cruise && <div className="my-4">
+                                            <Cruise countryData={countryData} preference={preference} locations={locations} handleInputChangeCruise={handleInputChangeCruise} AddRowCruise={AddRowCruise} setRowsCruise={setRowsCruise} rowsCruise={rowsCruise} />
+                                        </div>}
+                                        {Enquiry.enquiry_type_adventure && <div className="my-4">
+                                            <Adventure countryData={countryData} locations={locations} handleInputChangeAdventure={handleInputChangeAdventure} AddRowAdventure={AddRowAdventure} setRowsAdventure={setRowsAdventure} rowsAdventure={rowsAdventure} />
+                                        </div>}
+                                        {Enquiry.enquiry_type_group && <div className="my-4">
+                                            <GroupPackage countryData={countryData} packageData={packageData} state={state} handleSearch={handleSearch} preference={preference} handleInputChangeGroupPackage={handleInputChangeGroupPackage} AddRowGroupPackage={AddRowGroupPackage} setGroupPackage={setGroupPackage} rowsGroupPackage={rowsGroupPackage} />
+                                        </div>}
+                                    </div>
                                 </div>
-                                <div className="col-12">
-                                    {Enquiry.flightbooking && <div className="my-4">
-                                        <FlightBooking preference={preference} classData={classData} addRowFlight={addRowFlight} flightrows={flightrows} setflightrowsRows={setflightrowsRows} handleRowChangeFlight={handleRowChangeFlight} locations={locations} />
-                                    </div>}
-                                    {Enquiry.hotelbooking && <div className="my-4">
-                                        <HotelBooking countryData={countryData} starRatting={starRatting} roomType={roomType} addHotelRow={addHotelRow} hotelRow={hotelRow} setHotelRow={setHotelRow} handleInputChangeHotel={handleInputChangeHotel} locations={locations} />
-                                    </div>}
-                                    {Enquiry.visa && <div className="my-4">
-                                        <Visa countryData={countryData} visaTypeData={visaTypeData} visaCatData={visaCatData} AddVisaRow={AddVisaRow} handleInputChangeVisa={handleInputChangeVisa} setRowsVisa={setRowsVisa} rowsVisa={rowsVisa} />
-                                    </div>}
-                                    {Enquiry.travelInsurance && <div className="my-4">
-                                        <TrvelInsurance countryData={countryData} handleInputChangeTravelInsurence={handleInputChangeTravelInsurence} AddRowTravelIns={AddRowTravelIns} rowsTravelIns={rowsTravelIns} setRowsTravelIns={setRowsTravelIns} />
-                                    </div>}
-                                    {Enquiry.forex && <div className="my-4">
-                                        <Forex countryData={countryData} currencyData={currencyData} rowsForex={rowsForex} AddRowForex={AddRowForex} handleInputChangeForex={handleInputChangeForex} />
-                                    </div>}
-                                    {Enquiry.sightseeing && <div className="my-4">
-                                        <Sightseeing countryData={countryData} locations={locations} preference={preference} sight_seeingData={sight_seeingData} handleInputChangeSightseeing={handleInputChangeSightseeing} rowsSightseeing={rowsSightseeing} setRowsSightseeing={setRowsSightseeing} AddRowSightseeing={AddRowSightseeing} />
-                                    </div>}
-                                    {Enquiry.transport && <div className="my-4">
-                                        <Transport countryData={countryData} locations={locations} preference={preference} handleInputChangeTranport={handleInputChangeTranport} rowsTrasport={rowsTrasport} setRowsTrasport={setRowsTrasport} AddRowtTrasport={AddRowtTrasport} />
-                                    </div>}
-                                    {Enquiry.Other && <div className="my-4">
-                                        <Other countryData={countryData} handleInputChangeOther={handleInputChangeOther} rowsOther={rowsOther} setOther={setOther} />
-                                    </div>}
-                                    {Enquiry.package && <div className="my-4">
-                                        <Package countryData={countryData} handleInputChangePackage={handleInputChangePackage} packageRow={packageRow} setpackageRow={setpackageRow} addPackageRow={addPackageRow} />
-                                    </div>}
-                                    {Enquiry.customisePackage && <div className="my-4">
-                                        <CoustumPackage />
-                                    </div>}
-                                    {Enquiry.bus && <div className="my-4">
-                                        <Bus />
-                                    </div>}
-                                    {Enquiry.train && <div className="my-4">
-                                        <Train />
-                                    </div>}
-                                    {Enquiry.passport && <div className="my-4">
-                                        <Passport />
-                                    </div>}
-                                    {Enquiry.cruise && <div className="my-4">
-                                        <Cruise />
-                                    </div>}
-                                    {Enquiry.adventure && <div className="my-4">
-                                        <Adventure />
-                                    </div>}
-                                    {Enquiry.group && <div className="my-4">
-                                        <GroupPackage />
-                                    </div>}
+                            </div>
+                            <div className="col-3">
+                                <div className="mt-2">
+                                    <label className="form-label">Note</label>
+                                    <div className="w-100">
+                                        <textarea className="form-control" style={{ height: "120px" }} name="notes" value={initialData?.notes} onChange={changeHandle}> </textarea>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-3">
-                            <div className="mt-2">
-                                <label className="form-label">Note</label>
-                                <div className="w-100">
-                                    <textarea className="form-control" style={{ height: "120px" }} name="notes" value={initialData?.notes} onChange={changeHandle}> </textarea>
-                                </div>
+                        <div className="d-flex gap-2 mt-3">
+                            <div>
+                                <button type="button" disabled={disabled} className="btn btn-danger m-0" onClick={submitData}>Add</button>
                             </div>
-                        </div>
-                    </div>
-                    <div className="d-flex gap-2 mt-3">
-                        <div>
-                            <button type="button" className="btn btn-danger m-0" onClick={submitData}>Add</button>
-                        </div>
-                        <div>
+                            {/* <div>
                             <button className="btn btn-light m-0">Clear</button>
                         </div>
                         <div>
                             <button className="btn btn-primary m-0">Reset</button>
+                        </div> */}
                         </div>
                     </div>
                 </div>
+                <ToastContainer />
             </div>
-        </div>
+        </>
     )
 }

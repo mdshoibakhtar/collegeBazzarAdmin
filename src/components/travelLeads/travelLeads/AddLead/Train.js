@@ -1,40 +1,9 @@
 import React, { useState } from "react";
-
-
-export default function Train() {
-    const [rows, setRows] = useState([
-        {
-            from: "",
-            to: "",
-            departure: "",
-            return: "",
-            class: "",
-            domestic: false,
-            international: false,
-            flexibility: "",
-            preference: "",
-        }
-    ]); // Initialize as an array
-
-    const AddRow = () => {
-        setRows((prevRows) => [
-            ...prevRows,
-            {
-                from: "",
-                to: "",
-                departure: "",
-                return: "",
-                class: "",
-                domestic: false,
-                international: false,
-                flexibility: "",
-                preference: "",
-            },
-        ]);
-    };
-
+import { Select } from "antd";
+const { Option } = Select;
+export default function Train({ countryData, locations, preference, handleInputChangeTrain, rowsTrain, setRowsTrain, AddRowTrain }) {
     const removeRow = (index) => {
-        setRows(prevRows => prevRows.filter((_, i) => i !== index));
+        setRowsTrain(prevRows => prevRows.filter((_, i) => i !== index));
     };
     return (
         <div>
@@ -43,51 +12,99 @@ export default function Train() {
                     <h4 className="heading mb-0">Train</h4>
                 </div>
             </div>
-            {rows.map((row, index) =>
+            {rowsTrain.map((row, index) =>
                 <div className="row">
                     <div className="col-6">
                         <div className="mt-2">
                             <label className="form-label">Country </label>
-                            <select className="form-select shadow" name="Status">
-                                <option>select Country</option>
-                                <option>india </option>
+                            <select
+                                className="form-select shadow"
+                                name="country"
+                                value={row.country}
+                                onChange={(e) => handleInputChangeTrain(index, "country", e.target.value)}
+                            >
+                                <option selected>Open Select Country</option>
+                                {countryData && countryData?.map((item) => {
+                                    return <option value={item?._id} key={item?._id}>{item?.name}</option>
+                                })}
                             </select>
                         </div>
                     </div>
                     <div className="col-6">
                         <div className="mt-2">
                             <label className="form-label">From City  <span className="text-danger fs-5">*</span></label>
-                            <input type="search" className="form-control" placeholder="from city" />
+                            <Select
+                                showSearch
+                                style={{ width: "100%", height: '40px' }}
+                                placeholder="Select Departure"
+                                optionFilterProp="children"
+                                className=""
+                                value={row.from}
+                                onChange={(value) => handleInputChangeTrain(index, "from", value)}
+                            >
+                                {locations?.map((loc) => (
+                                    <Option key={loc._id} value={loc._id}>
+                                        {loc.city_name}
+                                    </Option>
+                                ))}
+                            </Select>
                         </div>
                     </div>
                     <div className="col-6">
                         <div className="mt-2">
                             <label className="form-label">To City  <span className="text-danger fs-5">*</span></label>
-                            <div className="w-100">
-                                <input type="search" className="form-control" placeholder="To city" />
-                            </div>
+                            <Select
+                                showSearch
+                                style={{ width: "100%", height: '40px' }}
+                                placeholder="Select Departure"
+                                optionFilterProp="children"
+                                className=""
+                                value={row.to}
+                                onChange={(value) => handleInputChangeTrain(index, "to", value)}
+                            >
+                                {locations?.map((loc) => (
+                                    <Option key={loc._id} value={loc._id}>
+                                        {loc.city_name}
+                                    </Option>
+                                ))}
+                            </Select>
                         </div>
                     </div>
 
                     <div className="col-3">
                         <div className="mt-2">
                             <label className="form-label">Departure  <span className="text-danger fs-5">*</span></label>
-                            <input type="text" className="form-control" placeholder="Departure" />
+                            <input type="date" className="form-control" placeholder="Departure"
+                                name="departure"
+                                value={row.departure}
+                                onChange={(e) => handleInputChangeTrain(index, "departure", e.target.value)}
+                            />
                         </div>
                     </div>
                     <div className="col-3">
                         <div className="mt-2">
                             <label className="form-label">Return</label>
-                            <input className="form-control" placeholder="Return" type="text" />
+                            <input type="date" className="form-control" placeholder="Departure"
+                                name="return"
+                                value={row.return}
+                                onChange={(e) => handleInputChangeTrain(index, "return", e.target.value)}
+                            />
                         </div>
                     </div>
                     <div className="col-3">
                         <div className="mt-2">
                             <label className="form-label">Preference</label>
                             <div className="w-100">
-                                <select className="form-select shadow">
-                                    <option></option>
-                                    <option>Economy </option>
+                                <select
+                                    className="form-select shadow"
+                                    name="preference"
+                                    value={row.preference}
+                                    onChange={(e) => handleInputChangeTrain(index, "preference", e.target.value)}
+                                >
+                                    <option selected>Open Select Country</option>
+                                    {preference && preference?.map((item) => {
+                                        return <option value={item?._id} key={item?._id}>{item?.name}</option>
+                                    })}
                                 </select>
                             </div>
                         </div>
@@ -96,7 +113,11 @@ export default function Train() {
                         <div className="mt-2">
                             <label className="form-label">Remark</label>
                             <div className="w-100">
-                                <textarea className="form-control" style={{ height: "100px" }} />
+                                <textarea className="form-control" placeholder="Remark" style={{ height: "100px" }}
+                                    name="remark"
+                                    value={row.remark}
+                                    onChange={(e) => handleInputChangeTrain(index, "remark", e.target.value)}
+                                />
                             </div>
                         </div>
                     </div>
@@ -106,7 +127,7 @@ export default function Train() {
                 </div>
             )}
             <div className="my-4">
-                <button className="btn m-0 btn-outline-primary" onClick={AddRow}> + Add more</button>
+                <button className="btn m-0 btn-outline-primary" onClick={AddRowTrain}> + Add more</button>
             </div>
         </div>
     )

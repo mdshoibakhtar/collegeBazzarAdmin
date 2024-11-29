@@ -1,6 +1,7 @@
 
-
 const TripTypeFilter = ({ filterInitial, handleChange, getTransitionReport }) => {
+
+
     return (
         <div style={{ margin: "14px" }}>
             <div className="card">

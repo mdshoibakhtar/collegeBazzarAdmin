@@ -4379,8 +4379,8 @@ export const doc_management_add_doc_get = (value) => {
 
 
 // GET accContact entries with pagination
-export const getAccContactByPage = (page, count) => {
-  return axiosInstance.get(`/accContact/page?page=${page}&count=${count}`, {
+export const getAccContactByPage = (page, count, id) => {
+  return axiosInstance.get(`/accContact/page?page=${page}&count=${count}&id=${id}`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
       Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
@@ -5487,9 +5487,30 @@ export const getTRCRM_sight_seeing_masteradmin = (id) => {
   return axiosInstance.get(`${baseUrl}TRCRM_sight_seeing_master/admin`);
 };
 
+export const getTRCRM_service_masteradmin = (id) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_service_master/admin`);
+};
+
+
 
 export const getAirlLine = (value) => {
   return axiosInstance.get(`${extraBaseUrl}airlines/destination?search=&id=673b1d7c85dbbfa354004889`);
+};
+
+export const getpackageId = (value) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_add_package/admin?start_date=&end_date=&search=${value}`);
+};
+
+export const addTRCRM_tr_leadaddType = (data) => {
+  return axiosInstance.post(`${baseUrl}TRCRM_tr_lead/addType`, data);
+}
+
+export const getTRCRM_tr_lead = (value) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_tr_lead/user?page=${value?.page}&count=${value?.count}&start_date=${value?.start_date}&end_date=${value?.end_date}&lead_priority=${value?.lead_priority}&lead_status=${value?.lead_status}&assigned_to=${value?.assigned_to}&lead_number=${value?.lead_number}&first_name=${value?.first_name}&last_name=${value?.last_name}&email_id=${value?.email_id}&tag=${value?.tag}&mobile_number=${value?.mobile_number}`);
+};
+
+export const deleteTRCRM_tr_lead = (id) => {
+  return axiosInstance.delete(`${baseUrl}TRCRM_tr_lead/delete_type/${id}`);
 };
 
 // dataAll

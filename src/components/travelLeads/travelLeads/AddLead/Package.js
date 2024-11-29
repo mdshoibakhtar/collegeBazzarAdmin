@@ -1,6 +1,6 @@
 import { Select } from "antd";
 const { Option } = Select;
-export default function Package({ locations, countryData, packageRow, setpackageRow, addPackageRow, handleInputChangePackage }) {
+export default function Package({ handleSearch, packageData, countryData, packageRow, setpackageRow, addPackageRow, handleInputChangePackage }) {
     const removeRow = (index) => {
         setpackageRow((prevRows) => prevRows.filter((_, i) => i !== index));
     };
@@ -80,7 +80,22 @@ export default function Package({ locations, countryData, packageRow, setpackage
                         <div className="col-6">
                             <div className="mt-2">
                                 <label className="form-label">Search by Package Name</label>
-                                <input placeholder="Search by Package Name" type="search" className="form-control" />
+                                <Select
+                                    showSearch
+                                    style={{ width: "100%", height: '40px' }}
+                                    placeholder="Select Departure"
+                                    optionFilterProp="children"
+                                    className=""
+                                    value={row.package_id}
+                                    onSearch={handleSearch}
+                                    onChange={(value) => handleInputChangePackage(index, "package_id", value)}
+                                >
+                                    {packageData?.map((loc) => (
+                                        <Option key={loc._id} value={loc._id}>
+                                            {loc.package}
+                                        </Option>
+                                    ))}
+                                </Select>
                             </div>
                         </div>
                     </div>

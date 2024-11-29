@@ -2,11 +2,15 @@
 import React from 'react'
 import Breadcrumbs from '../../../../../common/breadcrumb/Breadcrumbs';
 import { Button, Tab, Tabs } from 'react-bootstrap';
-import { Form, Link } from 'react-router-dom';
+import { Form, Link, useParams } from 'react-router-dom';
 import About from './about/About';
 import TravelQuoteListComp from './travelQuoteListComp/TravelQuoteListComp';
 import TravellerDetail from './traveller/TravellerDetail';
 import BillingDetail from './Billing/Billing';
+import Ladger from './ladger/Ladger';
+import Contacts from './contacts/Contacts';
+import ServiceRequest from './serviceRequest/ServiceRequest';
+import LeadReminder from './reminder/Reminder';
 
 const ViewLeads = () => {
     const breadCrumbsTitle = {
@@ -15,10 +19,14 @@ const ViewLeads = () => {
         title_2: 'View Lead',
         path_2: ``
     };
+
+    const paramsAll = useParams()
+    // console.log(paramsAll);
+
     return (
         <>
             <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
-            <div style={{ margin: "14px" }}>
+            <div>
                 <div className="card">
                     <div className="card-body p-0">
                         <div className="table-responsive active-projects style-1">
@@ -39,25 +47,19 @@ const ViewLeads = () => {
                                             <About />
                                         </Tab>
                                         <Tab eventKey="Ledger" title="Ledger">
-                                            <div className="p-3">
-                                                <p>Ledger</p>
-                                            </div>
+                                            <Ladger />
                                         </Tab>
                                         <Tab eventKey="Contacts" title="Contacts">
-                                            <div className="p-3">
-                                                <p>Contacts</p>
-                                            </div>
+                                            <Contacts paramsAll={paramsAll} />
                                         </Tab>
                                         <Tab eventKey="Service Request" title="Service Request">
-                                            <div className="p-3">
-                                                <p>Service Request</p>
-                                            </div>
+                                            <ServiceRequest paramsAll={paramsAll} />
                                         </Tab>
-                                        <Tab eventKey="Keep In Touch" title="Keep In Touch">
+                                        {/* <Tab eventKey="Keep In Touch" title="Keep In Touch">
                                             <div className="p-3">
                                                 <p>Keep In Touch</p>
                                             </div>
-                                        </Tab>
+                                        </Tab> */}
                                         <Tab eventKey="Tasks" title="Tasks">
                                             <div className="p-3">
                                                 <p>Tasks</p>
@@ -89,9 +91,7 @@ const ViewLeads = () => {
                                             </div>
                                         </Tab>
                                         <Tab eventKey="reminders" title="Reminders">
-                                            <div className="p-3">
-                                                <p>Reminders Content</p>
-                                            </div>
+                                            <LeadReminder />
                                         </Tab>
                                         <Tab eventKey="Files" title="Files">
                                             <div className="p-3">

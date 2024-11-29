@@ -36,6 +36,7 @@ const TripType = () => {
         page: '',
         end_date: getCurrentDate(),
         start_date: getCurrentDate(),
+
         // sortType: '',
         // sortType: ''
     })
