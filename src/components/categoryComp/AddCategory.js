@@ -162,7 +162,7 @@ function AddCategory() {
                                                                 onChange={(e) => handleInputChange(i,"parent_id", e.target.value)}
                                                             >
                                                                 <option value="">Select Parent Category</option>
-                                                                <option value={null}>Null</option>
+                                                                <option value={'null'}>Null</option>
                                                                 <option value="2">2</option>
                                                             </select>
                                                         </div>

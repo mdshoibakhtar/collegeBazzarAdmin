@@ -1,9 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import ExportPdf from '../../common/exportPdf/ExportPdf'
 import { ToastContainer } from 'react-toastify'
+import { message, Popconfirm } from 'antd'
 
-function ListProduct() {
+function ListProduct({ data }) {
+    const [loading, setLoading] = useState(false)
+    const deleteBlockAdd = async (id) => {
+        setLoading(true)
+
+        setLoading(false)
+    }
+
+    const confirm = (id) => {
+        console.log(id);
+        deleteBlockAdd(id)
+        message.success('Delete Successfull!');
+
+    };
+    const cancel = (e) => {
+        // console.log(e);
+        message.error('Cancle Successfull!');
+    };
+
     return (
         <>
             <ToastContainer />
@@ -36,39 +55,50 @@ function ListProduct() {
                                                     <th style={{ textAlign: 'center' }}>Variants</th>
                                                     <th style={{ textAlign: 'center' }}>Category</th>
                                                     <th style={{ textAlign: 'center' }}>Brand</th>
-                                                    <th style={{ textAlign: 'center' }}>Industry</th>
+                                                    {/* <th style={{ textAlign: 'center' }}>Industry</th> */}
                                                     <th style={{ textAlign: 'center' }}>Seller</th>
                                                     <th >Active</th>
-                                                    <th style={{ textAlign: 'center' }}>Info</th>
                                                     <th >Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr role="row" className="odd">
-                                                    <td className="sorting_1" style={{ textAlign: 'center' }}>1</td>
-                                                    <td className="sorting_1" style={{ textAlign: 'center' }}>Abc</td>
-                                                    <td className="sorting_1" style={{ textAlign: 'center' }}>Abc </td>
-                                                    <td className="sorting_1" style={{ textAlign: 'center' }}>Abc </td>
-                                                    <td className="sorting_1" style={{ textAlign: 'center' }}>Abc </td>
-                                                    <td className="sorting_1" style={{ textAlign: 'center' }}>Abc </td>
-                                                    <td className="sorting_1" style={{ textAlign: 'center' }}>Abc </td>
-                                                    <td className="sorting_1" style={{ textAlign: 'center' }}>
-                                                        <div className="form-check form-switch">
-                                                            <input
-                                                                style={{ border: '1px solid black' }}
-                                                                className="form-check-input"
-                                                                type="checkbox"
-                                                                role="switch"
-                                                                id="flexSwitchCheckDefault"
-                                                            />
-                                                        </div>
-                                                    </td>
-                                                    <td className="sorting_1" style={{ textAlign: 'center' }}>Abc </td>
-                                                    <td style={{ position: 'relative' }} className="d-flex align-item-center" >
-                                                        <Link to={`#`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-refresh" /></Link>
-                                                        <Link to={`#`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
-                                                    </td>
-                                                </tr>
+                                                {data && data?.map((item, i) => {
+                                                    return <tr role="row" className="odd">
+                                                        <td className="sorting_1" style={{ textAlign: 'center' }}>{1 + i}</td>
+                                                        <td className="sorting_1" style={{ textAlign: 'center' }}>{item?.product?.name}</td>
+                                                        <td className="sorting_1" style={{ textAlign: 'center' }}>{item?.product?.variations?.map((it) => { return <span>{it.weight}</span> })} </td>
+                                                        <td className="sorting_1" style={{ textAlign: 'center' }}>{item?.categories?.map((ite) => { return <span>{ite?.name} ,</span> })} </td>
+                                                        <td className="sorting_1" style={{ textAlign: 'center' }}>{item?.product?.brand_id?.map((it) => { return <span>{it.name}</span> })} </td>
+                                                        {/* <td className="sorting_1" style={{ textAlign: 'center' }}>Abc </td> */}
+                                                        <td className="sorting_1" style={{ textAlign: 'center' }}>-- </td>
+                                                        <td className="sorting_1" style={{ textAlign: 'center' }}>
+                                                            <div className="form-check form-switch">
+                                                                <input
+                                                                    style={{ border: '1px solid black' }}
+                                                                    className="form-check-input"
+                                                                    checked={item?.product?.approve}
+                                                                    type="checkbox"
+                                                                    role="switch"
+                                                                    id="flexSwitchCheckDefault"
+                                                                />
+                                                            </div>
+                                                        </td>
+                                                        <td style={{ position: 'relative' }} className="d-flex align-item-center" >
+                                                             <Popconfirm
+                                                                title="Delete !"
+                                                                description="Are you sure to delete ?"
+                                                                onConfirm={() => confirm(item?._id.uid)}
+                                                                onCancel={cancel}
+                                                                okText="Yes"
+                                                                cancelText="No"
+                                                            >
+                                                                <Link to="#" className="btn btn-danger shadow btn-xs sharp"><i className="fa fa-trash" /></Link>
+                                                            </Popconfirm>
+                                                            <Link to={`/edit-product/${item?._id.uid}`} className="btn btn-primary shadow btn-xs sharp me-1"><i className="fa fa-pencil" /></Link>
+                                                        </td>
+                                                    </tr>
+                                                })}
+
                                             </tbody>
                                         </table>
                                         {/* <Pagination className="pagination_gutter pagination_primary pagination_sm" /> */}
