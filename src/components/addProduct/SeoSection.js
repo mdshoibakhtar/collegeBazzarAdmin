@@ -1,6 +1,6 @@
 import React from 'react'
 
-function SeoSection() {
+function SeoSection({ onChangeHandler, item }) {
     return (
         <>
             <div className="card">
@@ -16,9 +16,14 @@ function SeoSection() {
                                 <label htmlFor="fromDate">Meta Title</label>
                                 <input
                                     type="text"
-                                    className="form-control mb-0"
-                                    placeholder='Enter Meta Title'
-                                    id="fromDate"
+                                    value={item?.meta_title}
+                                    className="form-control"
+                                    name="meta_title"
+                                    placeholder="Meta Title"
+                                    fdprocessedid="1hz7zu"
+                                    onChange={(e) => {
+                                        onChangeHandler(e, item?.language_id?._id);
+                                    }}
                                 />
                             </div>
 
@@ -26,9 +31,14 @@ function SeoSection() {
                                 <label htmlFor="fromDate">Meta Keyword</label>
                                 <input
                                     type="text"
-                                    className="form-control mb-0"
-                                    placeholder='Enter Meta Keyword'
-                                    id="fromDate"
+                                    value={item?.meta_keywords}
+                                    className="form-control"
+                                    name="meta_keywords"
+                                    placeholder="Meta Key Word"
+                                    fdprocessedid="1hz7zu"
+                                    onChange={(e) => {
+                                        onChangeHandler(e, item?.language_id?._id);
+                                    }}
                                 />
                             </div>
 
@@ -36,9 +46,14 @@ function SeoSection() {
                                 <label htmlFor="fromDate">Slug</label>
                                 <input
                                     type="text"
-                                    className="form-control mb-0"
-                                    placeholder='Enter Slug'
-                                    id="fromDate"
+                                    value={item?.slug}
+                                    className="form-control"
+                                    name="slug"
+                                    placeholder="Slug"
+                                    fdprocessedid="1hz7zu"
+                                    onChange={(e) => {
+                                        onChangeHandler(e, item?.language_id?._id);
+                                    }}
                                 />
                             </div>
                             <div className="form-group col-12 mt-2 ps-0">
@@ -46,7 +61,15 @@ function SeoSection() {
                             </div>
                             <div className="form-group col-12 mt-2">
                                 <label htmlFor="fromDate">Description</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" placeholder='Enter Description' rows="5"></textarea>
+                                <textarea
+                                    name="meta_description"
+                                    value={item?.meta_description}
+                                    rows={8}
+                                    className="form-control"
+                                    onChange={(e) => {
+                                        onChangeHandler(e, item?.language_id?._id);
+                                    }}
+                                />
                             </div>
                             <div className="form-group col-12 mt-2 ps-0">
                                 <button className='btn btn-primary' type='button'>Fetch AI Content</button>

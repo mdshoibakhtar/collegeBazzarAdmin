@@ -1,11 +1,23 @@
 import { Pagination, Popconfirm, Tabs } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import { listStages } from '../../../../../api/login/Login';
 
 function CallStatusMasterList({ data, totalCount, page, count, onChangeVal, confirm, cancel }) {
     const [activeTab, setActiveTab] = useState("all");
+    const [stages, setStages] = useState()
+    const getData = async () => {
+        try {
+            const res = await listStages()
+            setStages(res.data)
+        } catch (error) {
 
+        }
+    }
+    useEffect(() => {
+        getData()
+    }, [])
     const changeStatus = (key) => {
         // Update the active tab
         setActiveTab(key);
@@ -103,7 +115,7 @@ function CallStatusMasterList({ data, totalCount, page, count, onChangeVal, conf
                                                         <td>{item.job_id}</td>
                                                         <td><b><Link to={`/projects/${item._id}`}>{item.project_name}</Link></b></td>
                                                         <td>{item.client.name}</td>
-                                                        <td>{item.business_category}</td>
+                                                        <td>{item.business_category?.name}</td>
                                                         <td>{item.state.name}</td>
                                                         <td>{item.city.name}</td>
                                                         <td>{item.prj_scope}</td>

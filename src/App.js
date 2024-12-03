@@ -1014,6 +1014,7 @@ import ScheduleSMS from "./pages/Schedule-SMS";
 import ContactSgainstCompany from "./pages/Contact-against-company";
 import TagWise from "./pages/Tag-wise-Report";
 import AddLeadForm from "./components/travelLeads/travelLeads/AddLead/AddLeadForm";
+import MaintenancePlan from "./components/maintenance_plan/MaintenancePlan";
 import HotelVoucher from "./components/travelCrmReports/hotelVoucher/HotelVoucher";
 import HotelVouchers from "./components/billings/hotelCruieseVoucher/hotelCruieseVoucherTab/hotelVoucher/HotelVoucher";
 import InvoiceForm from "./components/billings/invoiceForm/InvoiceForm";
@@ -3082,6 +3083,7 @@ function App() {
 
 
               <Route path="add-product" element={<AddProductPage />} />
+              <Route path="edit-product/:uid" element={<AddProductPage />} />
               <Route path="list-product" element={<ListProductPage />} />
 
               <Route path="coupons" element={<ListCouponPage />} />
@@ -3136,7 +3138,8 @@ function App() {
               <Route path="billings-credit" element={<CancilaionTab />} />
               <Route path="billings-multiprinting" element={<MultiplePrintings />} />
               {/* <Route path="billings-hotel/cruisevoucher" element={<HotelCruieseVoucher />} /> */}
-              {/* <Route path="create-billings-hotel/cruisevoucher" element={<HotelVouchers/>} /> */}
+              {/* <Route path="create-billings-hotel/cruisevoucher" element={<HotelVouchers/>} /> */}              <Route path="maintenance_plan" element={<MaintenancePlan />} />
+
 
               <Route path="searchaccommodations" element={<SearchAccommodations />} />
               <Route path="availableholidayhotels" element={<Availablehotelsforyourholiday />} />

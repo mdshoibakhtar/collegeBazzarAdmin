@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
-function DescriptionSec() {
-    const [text, setText] = useState('');
-
+function DescriptionSec({ item, onChangeHandler }) {
+    const [text, setText] = useState(item.productDescription);
+   
     const handleChange = (value) => {
         setText(value); 
+        onChangeHandler(item?.language_id?._id ,value)
     };
 
 
