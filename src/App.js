@@ -1011,6 +1011,7 @@ import ScheduleSMS from "./pages/Schedule-SMS";
 import ContactSgainstCompany from "./pages/Contact-against-company";
 import TagWise from "./pages/Tag-wise-Report";
 import AddLeadForm from "./components/travelLeads/travelLeads/AddLead/AddLeadForm";
+import MaintenancePlan from "./components/maintenance_plan/MaintenancePlan";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [navigateState, setNavigateState] = useState(null);
@@ -3005,6 +3006,7 @@ function App() {
               
 
               <Route path="add-product" element={<AddProductPage />} />
+              <Route path="edit-product/:uid" element={<AddProductPage />} />
               <Route path="list-product" element={<ListProductPage />} />
               
               <Route path="coupons" element={<ListCouponPage />} />
@@ -3056,6 +3058,7 @@ function App() {
               <Route path="system_settings" element={<SystemSettingss />} />
               <Route path="billings-invoice" element={<InvoiceTab />} />
 
+              <Route path="maintenance_plan" element={<MaintenancePlan />} />
 
             </Route>
           </>

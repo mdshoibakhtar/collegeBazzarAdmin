@@ -6,102 +6,103 @@ import { Tab, Tabs } from "react-bootstrap";
 import { getVoucherTypeData, postAddBookCode, updateAddBookCodeById } from '../../../../../api/login/Login';
 import { MyOrganisation } from './MyOrganisation';
 import { OtherOrganisation } from './OtherOrganisation';
+import { baseUrlImage } from '../../../../../baseUrl';
 
-function ProjectDetail() {
+function ProjectDetail({ formData, masterStore }) {
     const navigate = useNavigate();
-    const params = useParams();
-    const [clientOptions, setClientOptions] = useState([]);
-    const [formData, setFormData] = useState({
-        projectName: 'Abaris Office Interior Work',
-        client: 'Abaris Client',
-        businessCategory: 'Commercial',
-        projectAddress: '98B, II Floor, NFC',
-        state: 'Delhi',
-        city: 'New Delhi',
-        projectScope: 'Design and Build',
-        projectEstimate: '1000000',
-        projectArea: '500',
-        clientPOCName: '',
-        clientPOCNumber: '',
-        recceDueDate: null,
-        expectedStartDate: null,
-        executionDueDate: null,
-        projectUsers: [{ user: '', role: '' }]
-    });
+    // const params = useParams();
+    // const [clientOptions, setClientOptions] = useState([]);
+    // // const [formData, setFormData] = useState({
+    // //     projectName: 'Abaris Office Interior Work',
+    // //     client: 'Abaris Client',
+    // //     businessCategory: 'Commercial',
+    // //     projectAddress: '98B, II Floor, NFC',
+    // //     state: 'Delhi',
+    // //     city: 'New Delhi',
+    // //     projectScope: 'Design and Build',
+    // //     projectEstimate: '1000000',
+    // //     projectArea: '500',
+    // //     clientPOCName: '',
+    // //     clientPOCNumber: '',
+    // //     recceDueDate: null,
+    // //     expectedStartDate: null,
+    // //     executionDueDate: null,
+    // //     projectUsers: [{ user: '', role: '' }]
+    // // });
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
+    // const handleChange = (e) => {
+    //     const { name, value } = e.target;
+    //     setFormData({ ...formData, [name]: value });
+    // };
 
-    const handleSelectChange = (name, value) => {
-        setFormData({ ...formData, [name]: value });
-    };
+    // const handleSelectChange = (name, value) => {
+    //     setFormData({ ...formData, [name]: value });
+    // };
 
-    const handleDateChange = (name, date) => {
-        setFormData({ ...formData, [name]: date });
-    };
+    // const handleDateChange = (name, date) => {
+    //     setFormData({ ...formData, [name]: date });
+    // };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
 
-        // Basic validation
-        if (!formData.projectName || !formData.client || !formData.projectAddress || !formData.projectEstimate) {
-            toast.error("All required fields must be filled");
-            return;
-        }
+    //     // Basic validation
+    //     if (!formData.projectName || !formData.client || !formData.projectAddress || !formData.projectEstimate) {
+    //         toast.error("All required fields must be filled");
+    //         return;
+    //     }
 
-        try {
-            const response = params?.id
-                ? await updateAddBookCodeById(params.id, formData)
-                : await postAddBookCode(formData);
+    //     try {
+    //         const response = params?.id
+    //             ? await updateAddBookCodeById(params.id, formData)
+    //             : await postAddBookCode(formData);
 
-            if (response?.statusCode === "200") {
-                toast.success(params?.id ? "Updated successfully" : "Added successfully");
-                navigate(`/project-list`);
-            }
-        } catch (error) {
-            console.error("Error:", error);
-            toast.error("Failed to submit form");
-        }
-    };
+    //         if (response?.statusCode === "200") {
+    //             toast.success(params?.id ? "Updated successfully" : "Added successfully");
+    //             navigate(`/project-list`);
+    //         }
+    //     } catch (error) {
+    //         console.error("Error:", error);
+    //         toast.error("Failed to submit form");
+    //     }
+    // };
 
-    useEffect(() => {
-        const fetchOptions = async () => {
-            const voucherData = await getVoucherTypeData('', 0, 100, '', '');
-            const options = voucherData.data.voucher.map((item) => ({
-                value: item?.accLedgerId?.name,
-                label: item?.voucherType?.name,
-            }));
-            setClientOptions(options);
-        };
+    // useEffect(() => {
+    //     const fetchOptions = async () => {
+    //         const voucherData = await getVoucherTypeData('', 0, 100, '', '');
+    //         const options = voucherData.data.voucher.map((item) => ({
+    //             value: item?.accLedgerId?.name,
+    //             label: item?.voucherType?.name,
+    //         }));
+    //         setClientOptions(options);
+    //     };
 
-        fetchOptions();
-    }, []);
+    //     fetchOptions();
+    // }, []);
 
-    const handleAddUser = () => {
-        setFormData({
-            ...formData,
-            projectUsers: [...formData.projectUsers, { user: '', role: '' }]
-        });
-    };
+    // const handleAddUser = () => {
+    //     setFormData({
+    //         ...formData,
+    //         projectUsers: [...formData.projectUsers, { user: '', role: '' }]
+    //     });
+    // };
 
-    const handleRemoveUser = (index) => {
-        const updatedUsers = formData.projectUsers.filter((_, i) => i !== index);
-        setFormData({ ...formData, projectUsers: updatedUsers });
-    };
+    // const handleRemoveUser = (index) => {
+    //     const updatedUsers = formData.projectUsers.filter((_, i) => i !== index);
+    //     setFormData({ ...formData, projectUsers: updatedUsers });
+    // };
 
-    const fakeUsers = [
-        { id: '1', name: 'John Doe', label: 'John Doe', value: 'John Doe' },
-        { id: '2', name: 'Jane Smith', label: 'Jane Smith', value: 'Jane Smith' },
-        { id: '3', name: 'David Johnson', label: 'David Johnson', value: 'David Johnson' }
-    ];
+    // const fakeUsers = [
+    //     { id: '1', name: 'John Doe', label: 'John Doe', value: 'John Doe' },
+    //     { id: '2', name: 'Jane Smith', label: 'Jane Smith', value: 'Jane Smith' },
+    //     { id: '3', name: 'David Johnson', label: 'David Johnson', value: 'David Johnson' }
+    // ];
 
-    const fakeRoles = [
-        { id: '1', role: 'Manager', label: 'Manager', value: 'Manager' },
-        { id: '2', role: 'Developer', label: 'Developer', value: 'Developer' },
-        { id: '3', role: 'Designer', label: 'Designer', value: 'Designer' }
-    ];
+    // const fakeRoles = [
+    //     { id: '1', role: 'Manager', label: 'Manager', value: 'Manager' },
+    //     { id: '2', role: 'Developer', label: 'Developer', value: 'Developer' },
+    //     { id: '3', role: 'Designer', label: 'Designer', value: 'Designer' }
+    // ];
 
     return (
         <>
@@ -109,16 +110,18 @@ function ProjectDetail() {
                 <div className="row">
                     <div className="card-body p-0 col-8">
                         <div className="table-responsive active-projects style-1">
-                            <form onSubmit={handleSubmit} style={{ padding: "10px 0" }}>
+                            <form  style={{ padding: "10px 0" }}>
                                 <div className="row">
                                     {/* Basic Details */}
                                     <h5 style={{ backgroundColor: "gray", margin: "10px", padding: "10px", color: "#ffff" }}>Basic Details</h5>
                                     <div className="col-xl-6 mb-3">
                                         <label>Project Name *</label>
-                                        <Input
-                                            name="projectName"
-                                            onChange={handleChange}
-                                            value={formData.projectName}
+                                        <input
+                                            className="form-control"
+                                            name="project_name"
+                                            // onChange={handleChange}
+                                            disabled
+                                            value={formData.project_name}
                                             placeholder="Enter Project Name"
                                         />
                                     </div>
@@ -126,55 +129,145 @@ function ProjectDetail() {
                                         <label>Select Client *</label>
                                         <select
                                             name="client"
-                                            onChange={(e) => handleSelectChange("client", e.target.value)}
+                                            // onChange={(e) => handleSelectChange("client", e.target.value)}
                                             value={formData.client}
+                                            disabled
                                             className="form-control"
                                         >
                                             <option value="">Select Client</option>
-                                            <option value="Playnif">Playnif</option>
-                                            <option value="Expert Eyr">Expert Eyr</option>
+                                            {masterStore.client?.map((item) => {
+                                                return <option value={item._id}>{item.name}</option>
+                                            })}
+
                                         </select>
                                     </div>
                                     <div className="col-xl-6 mb-3">
                                         <label>Business Category</label>
-                                        <Input
-                                            name="businessCategory"
-                                            onChange={handleChange}
-                                            value={formData.businessCategory}
-                                            placeholder="Enter Business Category"
+
+                                        <select
+                                            name="business_category"
+                                            // onChange={(e) => handleSelectChange("business_category", e.target.value)}
+                                            value={formData.business_category}
+                                            disabled
+                                            className="form-control"
+                                        >
+                                            <option value="">Select business_category</option>
+                                            {masterStore.business_category?.map((item) => {
+                                                return <option value={item._id}>{item.name}</option>
+                                            })}
+
+                                        </select>
+                                    </div>
+                                    <div className="col-xl-6 mb-3">
+                                        <label>Project Address Line 1 *</label>
+                                        <input
+                                            className="form-control"
+                                            name="prj_address_line1"
+                                            // onChange={handleChange}
+                                            disabled
+                                            value={formData.prj_address_line1}
+                                            placeholder="Enter Project Address"
                                         />
                                     </div>
                                     <div className="col-xl-6 mb-3">
-                                        <label>Project Address *</label>
-                                        <Input
-                                            name="projectAddress"
-                                            onChange={handleChange}
-                                            value={formData.projectAddress}
+                                        <label>Project Address Line 2 *</label>
+                                        <input
+                                            className="form-control"
+                                            name="prj_address_line2"
+                                            // onChange={handleChange}
+                                            disabled
+                                            value={formData.prj_address_line2}
                                             placeholder="Enter Project Address"
                                         />
+                                    </div>
+                                    <div className="col-xl-6 mb-3">
+                                        <label>Country *</label>
+                                        <select
+                                            name="country"
+                                            // onChange={(e) => handleChangeLocation("country", e.target.value)}
+                                            value={formData.country}
+                                            className="form-control"
+                                            disabled
+                                        >
+                                            <option value="">Select country</option>
+                                            {masterStore.country?.map((item) => {
+                                                return <option value={item.id}>{item.name}</option>
+                                            })}
+
+                                        </select>
                                     </div>
                                     <div className="col-xl-6 mb-3">
                                         <label>State *</label>
                                         <select
                                             name="state"
-                                            onChange={(e) => handleSelectChange("state", e.target.value)}
+                                            // onChange={(e) => handleChangeLocation("state", e.target.value)}
                                             value={formData.state}
                                             className="form-control"
+                                            disabled
                                         >
                                             <option value="">Select State</option>
-                                            <option value="Bihar">Bihar</option>
+                                            {masterStore.state?.map((item) => {
+                                                return <option value={item._id}>{item.name}</option>
+                                            })}
+
                                         </select>
                                     </div>
                                     <div className="col-xl-6 mb-3">
                                         <label>City *</label>
                                         <select
                                             name="city"
-                                            onChange={(e) => handleSelectChange("city", e.target.value)}
+                                            // onChange={(e) => handleChangeLocation("city", e.target.value)}
                                             value={formData.city}
                                             className="form-control"
+                                            disabled
                                         >
                                             <option value="">Select City</option>
-                                            <option value="Gaya">Gaya</option>
+                                            {masterStore.city?.map((item) => {
+                                                return <option value={item._id}>{item.name}</option>
+                                            })}
+                                        </select>
+                                    </div>
+                                    <div className="col-xl-6 mb-3">
+                                        <label>Zip Code *</label>
+
+                                        <input
+                                            className="form-control"
+                                            type="number"
+                                            name="zip_code"
+                                            // onChange={handleChange}
+                                            disabled
+                                            value={formData.zip_code}
+                                            placeholder="Enter Zip Code"
+                                        />
+                                    </div>
+                                    <div className="col-xl-6 mb-3">
+                                        <label>Currency *</label>
+                                        <select
+                                            name="currency"
+                                            // onChange={(e) => handleSelectChange("currency", e.target.value)}
+                                            value={formData.currency}
+                                            className="form-control"
+                                            disabled
+                                        >
+                                            <option value="">Select currency</option>
+                                            {masterStore.currency?.map((item) => {
+                                                return <option value={item._id}>{item.currency_name} </option>
+                                            })}
+                                        </select>
+                                    </div>
+                                    <div className="col-xl-6 mb-3">
+                                        <label>Tax Type *</label>
+                                        <select
+                                            name="tax_type"
+                                            // onChange={(e) => handleSelectChange("tax_type", e.target.value)}
+                                            value={formData.tax_type}
+                                            className="form-control"
+                                            disabled
+                                        >
+                                            <option value="">Select Tax Type</option>
+                                            {masterStore.tax_type?.map((item) => {
+                                                return <option value={item._id}>{item.name}</option>
+                                            })}
                                         </select>
                                     </div>
 
@@ -183,33 +276,39 @@ function ProjectDetail() {
                                     <div className="col-xl-6 mb-3">
                                         <label>Project Scope *</label>
                                         <select
-                                            name="projectScope"
-                                            onChange={(e) => handleSelectChange("projectScope", e.target.value)}
-                                            value={formData.projectScope}
+                                            name="prj_scope"
+                                            // onChange={(e) => handleSelectChange("prj_scope", e.target.value)}
+                                            value={formData.prj_scope}
                                             className="form-control"
+                                            disabled
                                         >
                                             <option value="">Enter Project Scope</option>
-                                            <option value="Developing">Developing</option>
-                                            <option value="UI">UI</option>
+                                            {masterStore.prj_scope?.map((item) => {
+                                                return <option value={item._id}>{item.name}</option>
+                                            })}
                                         </select>
                                     </div>
                                     <div className="col-xl-6 mb-3">
                                         <label>Project Estimate (in INR) *</label>
-                                        <Input
+                                        <input
+                                            className="form-control"
                                             type="number"
-                                            name="projectEstimate"
-                                            onChange={handleChange}
-                                            value={formData.projectEstimate}
+                                            name="prj_estimate"
+                                            // onChange={handleChange}
+                                            disabled
+                                            value={formData.prj_estimate}
                                             placeholder="Enter Project Estimate"
                                         />
                                     </div>
                                     <div className="col-xl-6 mb-3">
                                         <label>Project Area (in SQFT)</label>
-                                        <Input
+                                        <input
+                                            className="form-control"
                                             type="number"
-                                            name="projectArea"
-                                            onChange={handleChange}
-                                            value={formData.projectArea}
+                                            name="prj_area_in_sqft"
+                                            // onChange={handleChange}
+                                            disabled
+                                            value={formData.prj_area_in_sqft}
                                             placeholder="Enter Project Area"
                                         />
                                     </div>
@@ -218,20 +317,24 @@ function ProjectDetail() {
                                     <h5 style={{ backgroundColor: "gray", margin: "10px", padding: "10px", color: "#ffff" }}>Client Point of Contact</h5>
                                     <div className="col-xl-6 mb-3">
                                         <label>Client POC Name</label>
-                                        <Input
-                                            name="clientPOCName"
-                                            onChange={handleChange}
-                                            value={formData.clientPOCName}
+                                        <input
+                                            className="form-control"
+                                            name="client_poc_name"
+                                            // onChange={handleChange}
+                                            disabled
+                                            value={formData.client_poc_name}
                                             placeholder="Enter Client POC Name"
                                         />
                                     </div>
                                     <div className="col-xl-6 mb-3">
                                         <label>Client POC Number</label>
-                                        <Input
+                                        <input
+                                            className="form-control"
                                             type="tel"
-                                            name="clientPOCNumber"
-                                            onChange={handleChange}
-                                            value={formData.clientPOCNumber}
+                                            name="client_poc_nmber"
+                                            // onChange={handleChange}
+                                            disabled
+                                            value={formData.client_poc_nmber}
                                             placeholder="Enter Client POC Number"
                                         />
                                     </div>
@@ -239,29 +342,46 @@ function ProjectDetail() {
                                     {/* Due Dates */}
                                     <h5 style={{ backgroundColor: "gray", margin: "10px", padding: "10px", color: "#ffff" }}>Due Dates</h5>
                                     <div className="col-xl-6 mb-3">
+                                        <label>Time Zone</label>
+                                        <input
+                                            name="time_zone"
+                                            type='time'
+                                            // onChange={handleChange}
+                                            disabled
+                                            value={formData.time_zone}
+                                            className="form-control"
+                                        />
+                                    </div>
+                                    <div className="col-xl-6 mb-3">
                                         <label>Recce Due Date</label>
-                                        <DatePicker
-                                            name="recceDueDate"
-                                            onChange={(date) => handleDateChange("recceDueDate", date)}
-                                            value={formData.recceDueDate}
+                                        <input
+                                            type='datetime-local'
+                                            name="recce_due_date"
+                                            // onChange={handleChange}
+                                            disabled
+                                            value={formData.recce_due_date}
                                             className="form-control"
                                         />
                                     </div>
                                     <div className="col-xl-6 mb-3">
                                         <label>Expected Start Date</label>
-                                        <DatePicker
-                                            name="expectedStartDate"
-                                            onChange={(date) => handleDateChange("expectedStartDate", date)}
-                                            value={formData.expectedStartDate}
+                                        <input
+                                            type='datetime-local'
+                                            name="expected_start_date"
+                                            // onChange={handleChange}
+                                            disabled
+                                            value={formData.expected_start_date}
                                             className="form-control"
                                         />
                                     </div>
                                     <div className="col-xl-6 mb-3">
                                         <label>Execution Due Date</label>
-                                        <DatePicker
-                                            name="executionDueDate"
-                                            onChange={(date) => handleDateChange("executionDueDate", date)}
-                                            value={formData.executionDueDate}
+                                        <input
+                                            type='datetime-local'
+                                            name="executation_due_date_assign_prj_user"
+                                            // onChange={handleChange}
+                                            disabled
+                                            value={formData.executation_due_date_assign_prj_user}
                                             className="form-control"
                                         />
                                     </div>
@@ -269,24 +389,25 @@ function ProjectDetail() {
                                     {/* Project Users */}
                                     <h5 style={{ backgroundColor: "gray", margin: "10px", padding: "10px", color: "#ffff" }}>Project Users</h5>
 
-                                    {formData.projectUsers.map((user, index) => (
+                                    {formData?.assign_prj_user?.map((user, index) => (
                                         <div key={index} className="row mb-3">
                                             <div className='col-xl-5'>
                                                 <label>User</label>
                                                 <select
-                                                    name={`projectUsers[${index}].user`}
+                                                    name={`assign_prj_user[${index}].user`}
                                                     value={user.user}
-                                                    onChange={(e) => {
-                                                        const newUsers = [...formData.projectUsers];
-                                                        newUsers[index].user = e.target.value;
-                                                        setFormData({ ...formData, projectUsers: newUsers });
-                                                    }}
+                                                    disabled
+                                                    // onChange={(e) => {
+                                                    //     const newUsers = [...formData.assign_prj_user];
+                                                    //     newUsers[index].user = e.target.value;
+                                                    //     setFormData({ ...formData, assign_prj_user: newUsers });
+                                                    // }}
                                                     className="form-control"
                                                 >
                                                     <option value="">Select User</option>
-                                                    {fakeUsers.map((u) => (
-                                                        <option key={u.id} value={u.value}>
-                                                            {u.label}
+                                                    {masterStore.user?.map((u) => (
+                                                        <option key={u._id} value={u._id}>
+                                                            {u.name}
                                                         </option>
                                                     ))}
                                                 </select>
@@ -294,58 +415,45 @@ function ProjectDetail() {
                                             <div className='col-xl-5'>
                                                 <label>Role</label>
                                                 <select
-                                                    name={`projectUsers[${index}].role`}
-                                                    value={user.role}
-                                                    onChange={(e) => {
-                                                        const newUsers = [...formData.projectUsers];
-                                                        newUsers[index].role = e.target.value;
-                                                        setFormData({ ...formData, projectUsers: newUsers });
-                                                    }}
+                                                    name={`assign_prj_user[${index}].user_role`}
+                                                    value={user.user_role}
+                                                    disabled
+                                                    // onChange={(e) => {
+                                                    //     const newUsers = [...formData.assign_prj_user];
+                                                    //     newUsers[index].user_role = e.target.value;
+                                                    //     setFormData({ ...formData, assign_prj_user: newUsers });
+                                                    // }}
                                                     className="form-control"
                                                 >
                                                     <option value="">Select Role</option>
-                                                    {fakeRoles.map((r) => (
-                                                        <option key={r.id} value={r.value}>
-                                                            {r.label}
+                                                    {masterStore.role?.map((u) => (
+                                                        <option key={u._id} value={u._id}>
+                                                            {u.user_type}
                                                         </option>
                                                     ))}
                                                 </select>
                                             </div>
-                                            {formData.projectUsers.length > 1 && (
-                                                <div>
-                                                    <button
-                                                        type="button"
-                                                        style={{ width: "80px", height: "40px", margin: "10px 0" }}
-                                                        onClick={() => handleRemoveUser(index)}
-                                                        className="btn btn-danger"
-                                                    >
-                                                        Remove
-                                                    </button>
-                                                </div>
-                                            )}
+                                            
                                         </div>
                                     ))}
-                                    <button type="button" style={{ width: "80px" }} onClick={handleAddUser} className="btn btn-success">
-                                        Add User
-                                    </button>
                                     <h5 style={{ backgroundColor: "gray", margin: "10px", padding: "10px", color: "#ffff" }}>Documents and attachments</h5>
                                     <div className="col-xl-6 mb-3">
-                                        <input className='form-control' type='file' />
+                                    {formData?.doc_attachments && <img style={{ width: "100px", height: "100px" }} src={`${baseUrlImage}${formData?.doc_attachments}`} />}
                                     </div>
 
 
 
                                     {/* Submit Button */}
-                                    <div className="col-12 mt-3">
-                                        <Button type="submit" className="btn btn-primary">
+                                    {/* <div className="col-12 mt-3">
+                                        <Button type="submit" onClick={handleSubmit} className="btn btn-primary">
                                             {params?.id ? "Update" : "Add"} Project
                                         </Button>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </form>
                         </div>
                     </div>
-                    <div className='col-4' style={{marginTop:"16px"}}>
+                    <div className='col-4' style={{ marginTop: "16px" }}>
                         <Tabs
                             defaultActiveKey="My Organisation"
                             id="uncontrolled-tab-example"
@@ -354,10 +462,10 @@ function ProjectDetail() {
 
                         >
                             <Tab eventKey="My Organisation" title="My Organisation">
-                                <MyOrganisation/>
+                                <MyOrganisation />
                             </Tab>
                             <Tab eventKey="Other Organisation" title="Other Organisation">
-                                <OtherOrganisation/>
+                                <OtherOrganisation />
                             </Tab>
                         </Tabs>
 

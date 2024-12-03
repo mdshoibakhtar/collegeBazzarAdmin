@@ -1,6 +1,6 @@
 import React from 'react'
 
-function ProductVedioSec() {
+function ProductVedioSec({onChangeHandler ,item}) {
     return (
         <>
             <div className="card">
@@ -13,11 +13,16 @@ function ProductVedioSec() {
 
                             <div className="form-group col-12 mt-2">
                                 <label htmlFor="fromDate">Video Provider</label>
-                                <select className="form-select form-control" aria-label="Default select example">
+                                <select className="form-select form-control" aria-label="Default select example" value={item?.video_provider}
+                                   
+                                    name="video_provider"
+                                    onChange={(e) => {
+                                        onChangeHandler(e, item?.language_id?._id);
+                                    }}>
                                     <option selected>Select Video Provider</option>
-                                    <option value={111331}>One</option>
-                                    <option value={211331}>Two</option>
-                                    <option value={311331}>Three</option>
+                                    <option value="youtube">Youtube</option>
+                                    <option value="dailymotion">Dailymotion</option>
+                                    <option value="vimeo">Vimeo</option>
                                 </select>
                             </div>
                             <div className="form-group col-12 mt-2">
@@ -27,6 +32,12 @@ function ProductVedioSec() {
                                     className="form-control mb-0"
                                     placeholder='Enter Video Link'
                                     id="fromDate"
+                                    value={item?.video_link}
+                                    name="video_link"
+                                    fdprocessedid="2pggse"
+                                    onChange={(e) => {
+                                      onChangeHandler(e, item?.language_id?._id);
+                                    }}
                                 />
                                 <small>Use proper link without extra parameter. Don't use short share link/embeded iframe code.</small>
                             </div>

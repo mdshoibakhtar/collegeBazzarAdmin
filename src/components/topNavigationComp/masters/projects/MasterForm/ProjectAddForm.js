@@ -115,7 +115,6 @@ function ProjectAddForm() {
         }
         setMasterStore(obj);
     };
-    const paresm = useParams()
     useEffect(() => {
         getAllMaster();
     }, []);

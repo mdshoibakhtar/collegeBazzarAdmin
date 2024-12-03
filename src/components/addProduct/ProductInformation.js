@@ -3,12 +3,19 @@ import { Multiselect } from 'multiselect-react-dropdown';
 import { BiFontSize } from 'react-icons/bi';
 import TagsInput from 'react-tagsinput';
 import { getCategory, getIndustry } from './Apimasters';
-import { getBrandByPage, getunitPage } from '../../api/login/Login';
+import { getAccGroupByPage, getBrandByPage, getunitPage } from '../../api/login/Login';
 
-function ProductInformation() {
+function ProductInformation({
+    onChangeHandler,
+    item,
+    setCategoryIds,
+    onChangeHandlerTag
+
+}) {
     const [tags, setTags] = useState([]);
     const [brand, setBrand] = useState()
     const [unit, setUnit] = useState()
+    const [seller, setSeller] = useState()
     const [options, setOpion] = useState([
         { name: 'Category 1', id: 1 },
         { name: 'Category 2', id: 2 },
@@ -22,15 +29,40 @@ function ProductInformation() {
         { name: 'Attribute 3', id: 3 },
         { name: 'Attribute 4', id: 4 }
     ])
+
+    const [options1, setOpion1] = useState([
+        { name: 'Industry 1', id: 1 },
+        { name: 'Industry 2', id: 2 },
+        { name: 'Industry 3', id: 3 },
+        { name: 'Industry 4', id: 4 }
+    ])
+
+
+    const [selectedIndustry, setSelectedIndustry] = useState([]);
+    const [selectedProdAttribute, setSelectedProdAttribute] = useState([]);
     const getallMaster = async () => {
         const res = await getCategory()
         const res2 = await getIndustry()
         const res3 = await getBrandByPage()
         const res4 = await getunitPage()
-        setOpion(res.category)
-        setOpion2(res2.category)
+        const res5 = await getAccGroupByPage(0, 100)
+
+
+        const categ = res.data.category.map((item) => {
+            return { ...item, name: item.name, id: item._id }
+        })
+        console.log(res2.data.category);
+
+
+        const indus = res2.data.category.map((item) => {
+            return { ...item, name: item.name, id: item._id }
+        })
+
+        setOpion(categ)
+        setOpion1(indus)
         setBrand(res3.data)
         setUnit(res4.data)
+        setSeller(res5.data)
     }
 
     useEffect(() => {
@@ -38,21 +70,8 @@ function ProductInformation() {
     }, [])
 
 
-    const options1 = [
-        { name: 'Industry 1', id: 1 },
-        { name: 'Industry 2', id: 2 },
-        { name: 'Industry 3', id: 3 },
-        { name: 'Industry 4', id: 4 }
-    ];
-    const [selectedValues, setSelectedValues] = useState([]);
-    const [selectedIndustry, setSelectedIndustry] = useState([]);
-    const [selectedProdAttribute, setSelectedProdAttribute] = useState([]);
-    const onSelect = (selectedList, selectedItem) => {
-        setSelectedValues(selectedList);
-    };
-    const onRemove = (selectedList, removedItem) => {
-        setSelectedValues(selectedList);
-    };
+
+
     const onSelectIndustry = (selectedList, selectedItem) => {
         setSelectedIndustry(selectedList);
     };
@@ -67,7 +86,10 @@ function ProductInformation() {
     };
 
     const handleTagsChange = (newTags) => {
-        setTags(newTags); // Update the tags state with the new tags
+        setTags(newTags);
+        console.log(newTags);
+        onChangeHandlerTag(newTags, item?.language_id?._id);
+        // Update the tags state with the new tags
     };
 
     return (
@@ -87,6 +109,11 @@ function ProductInformation() {
                                     className="form-control"
                                     placeholder='Enter Product Name '
                                     id="fromDate"
+                                    value={item?.name}
+                                    name="name"
+                                    onChange={(e) => {
+                                        onChangeHandler(e, item?.language_id?._id);
+                                    }}
                                 />
                             </div>
 
@@ -94,15 +121,26 @@ function ProductInformation() {
                                 <label htmlFor="fromDate">Category </label>
                                 <Multiselect
                                     options={options}
-                                    selectedValues={selectedValues}
-                                    onSelect={onSelect}
-                                    onRemove={onRemove}
+                                    selectedValues={item?.category_id}
                                     displayValue="name"
                                     placeholder="Select options"
                                     style={{
                                         chips: { BiFontSize: '15px' },
                                         searchBox: { padding: '0 8px' }
                                     }}
+                                    onRemove={(selectedCat) => {
+                                        const selectedIds = selectedCat?.map((cat) => {
+                                            return cat;
+                                        });
+                                        setCategoryIds(selectedIds);
+                                    }}
+                                    onSelect={(selectedCat) => {
+                                        const selectedIds = selectedCat?.map((cat) => {
+                                            return cat;
+                                        });
+                                        setCategoryIds(selectedIds);
+                                    }}
+
                                 />
                             </div>
 
@@ -123,16 +161,22 @@ function ProductInformation() {
                             </div>
                             <div className="form-group col-12 mt-2">
                                 <label htmlFor="fromDate">Seller</label>
-                                <select className="form-select form-control" aria-label="Default select example">
+                                <select className="form-select form-control" aria-label="Default select example" value={item?.seller_id}
+                                    name="seller_id" onChange={(e) => {
+                                        onChangeHandler(e, item?.language_id?._id);
+                                    }}>
                                     <option selected>Select Seller</option>
-                                    <option value={11}>One</option>
-                                    <option value={21}>Two</option>
-                                    <option value={11}>Three</option>
+                                    {seller && seller?.map((group) => {
+                                        return <option value={group._id}>{group.name}</option>
+                                    })}
                                 </select>
                             </div>
                             <div className="form-group col-12 mt-2">
                                 <label htmlFor="fromDate">Brand</label>
-                                <select className="form-select form-control" aria-label="Default select example">
+                                <select className="form-select form-control" aria-label="Default select example" value={item?.brand_id}
+                                    name="brand_id" onChange={(e) => {
+                                        onChangeHandler(e, item?.language_id?._id);
+                                    }}>
                                     <option selected>Select Brand</option>
                                     {brand && brand?.map((item) => {
                                         return <option value={item._id}>{item?.name}</option>
@@ -142,10 +186,13 @@ function ProductInformation() {
                             </div>
                             <div className="form-group col-12 mt-2">
                                 <label htmlFor="fromDate">Unit</label>
-                                <select className="form-select form-control" aria-label="Default select example">
+                                <select className="form-select form-control" aria-label="Default select example" value={item?.unit}
+                                    name="unit" onChange={(e) => {
+                                        onChangeHandler(e, item?.language_id?._id);
+                                    }}>
                                     <option selected>Select Unit</option>
                                     {unit && unit?.map((item) => {
-                                          return <option value={item._id}>{item?.name}</option>
+                                        return <option value={item._id}>{item?.name}</option>
                                     })}
 
                                 </select>
@@ -158,6 +205,11 @@ function ProductInformation() {
                                     className="form-control"
                                     placeholder='Enter Weight'
                                     id="fromDate"
+                                    value={item?.weight}
+                                    name="weight"
+                                    onChange={(e) => {
+                                        onChangeHandler(e, item?.language_id?._id);
+                                    }}
                                 />
                             </div>
 
@@ -168,6 +220,11 @@ function ProductInformation() {
                                     className="form-control"
                                     placeholder='Enter Minimum Purchase Qty'
                                     id="fromDate"
+                                    value={item?.minimum_purchase_qty}
+                                    name="minimum_purchase_qty"
+                                    onChange={(e) => {
+                                        onChangeHandler(e, item?.language_id?._id);
+                                    }}
                                 />
                             </div>
                             <div className="form-group col-12 mt-2">
@@ -182,10 +239,15 @@ function ProductInformation() {
                                     className="form-control"
                                     placeholder='Enter Barcode'
                                     id="fromDate"
+                                    value={item?.barcode}
+                                    name="barcode"
+                                    onChange={(e) => {
+                                        onChangeHandler(e, item?.language_id?._id);
+                                    }}
                                 />
                             </div>
 
-                            <div className="form-group col-12 mt-2">
+                            {/* <div className="form-group col-12 mt-2">
                                 <label htmlFor="fromDate">Gallary Image</label>
                                 <input
                                     type="file"
@@ -202,7 +264,7 @@ function ProductInformation() {
                                     placeholder='Enter Thumbnail  Image'
                                     id="fromDate"
                                 />
-                            </div>
+                            </div> */}
                             <div className="form-group col-12 mt-2" >
                                 <label htmlFor="fromDate">Product Attribute </label>
                                 <Multiselect
@@ -233,6 +295,11 @@ function ProductInformation() {
                                         type="checkbox"
                                         role="switch"
                                         id="flexSwitchCheckDefault"
+                                        name={"refundable"}
+                                        checked={item.refundable}
+                                        onChange={(e) => {
+                                            onChangeHandler(e, item?.language_id?._id, !item.refundable);
+                                        }}
                                     />
                                 </div>
                             </div>
@@ -250,6 +317,10 @@ function ProductInformation() {
                                         type="checkbox"
                                         role="switch"
                                         id="flexSwitchCheckDefault"
+                                        checked={item.quotation}
+                                        onChange={(e) => {
+                                          onChangeHandler(e, item?.language_id?._id, !item.quotation);
+                                        }}
                                     />
                                 </div>
                             </div>

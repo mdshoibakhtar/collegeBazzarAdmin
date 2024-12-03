@@ -155,7 +155,7 @@ function AddIndustry({ getData }) {
                                                                 onChange={(e) => handleInputChange(i, "parent_id", e.target.value)}
                                                             >
                                                                 <option selected>Select Parent Category</option>
-                                                                <option value={null}>Null</option>
+                                                                <option value={'null'}>Null</option>
                                                                 <option value={2}>Two</option>
                                                                 <option value={3}>Three</option>
                                                             </select>

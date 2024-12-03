@@ -5572,6 +5572,18 @@ export const roleListAdmin = (id) => {
   });
 };
 
+// get stages
+
+export const listStages = (id) => {
+  return axiosInstance.get(`/acc_project_stage/admin`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
 
 // GET acc_add_project entries with pagination
 export const getAccAddProjectByPage = (page, count) => {
@@ -5757,6 +5769,33 @@ export const updateSettingaward = (data) => {
 
 export const getSettingaward = (data) => {
   return axios.get(`${baseproductUrl}generalSetting/award`, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+
+
+
+export const postProduct = (data) => {
+  return axios.post(`${baseproductUrl}product/add_product`, data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+export const updateProducts = (data) => {
+  return axios.put(`${baseproductUrl}/product/${data.id}`, data.data, {
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  });
+};
+export const getProductList = (data) => {
+  return axios.get(`${baseproductUrl}product/admin`, {
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
       Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,

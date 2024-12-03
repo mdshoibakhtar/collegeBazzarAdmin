@@ -1,28 +1,103 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Multiselect } from 'multiselect-react-dropdown';
 import TagsInput from 'react-tagsinput';
+import { countryList, getattributePage } from '../../api/login/Login';
+import { CustomSelectOption } from './CustomMultiselection';
+import { AttributeItem } from './AttributeItem';
+import axios from 'axios';
+import { baseproductUrl } from '../../baseUrl';
 
-function VariationSec() {
-    const [tags, setTags] = useState([]);
-    const [selectedValues, setSelectedValues] = useState([]);
-    const options = [
+function VariationSec({
+    setattributesVal,
+    setVariantsData,
+    variationForm,
+    variations,
+}) {
+    const [countryData ,setcountryData] = useState(null)
+    const [options, setoption] = useState([
         { name: 'Category 1', id: 1 },
         { name: 'Category 2', id: 2 },
         { name: 'Category 3', id: 3 },
         { name: 'Category 4', id: 4 }
-    ];
-    const onSelect = (selectedList, selectedItem) => {
-        setSelectedValues(selectedList);
+    ])
+    const getAttriBute = async () => {
+        const res = await getattributePage()
+        const maped = res.data.map((item) => {
+            return { ...item, name: item.name, id: item._id }
+        })
+        const res2 = await countryList()
+        setcountryData(res2.data)
+        setoption(maped)
+    }
+
+    useEffect(() => {
+        getAttriBute()
+    }, [])
+
+    const prevAllAttributesRef = useRef();
+    prevAllAttributesRef.current = variationForm || [];
+    const getAttributes = (attributes) => {
+        const updateExistingAttribute = attributes?.map((secondObj) => {
+            const matchingObj = variationForm.find(
+                (originalObj) => originalObj._id === secondObj._id
+            );
+
+            if (matchingObj) {
+                const updatedObj = { ...secondObj };
+                updatedObj.title = matchingObj.title;
+                updatedObj.data = matchingObj.data;
+
+                return updatedObj;
+            } else {
+                return secondObj;
+            }
+        });
+
+        prevAllAttributesRef.current = variationForm;
+        setattributesVal(updateExistingAttribute || []);
     };
-    const onRemove = (selectedList, removedItem) => {
-        setSelectedValues(selectedList);
+    const getChoiceValues = (choiceValues, currentAttr) => {
+        callVariationAPi(currentAttr);
     };
 
-    const handleTagsChange = (newTags) => {
-        setTags(newTags); // Update the tags state with the new tags
+    const callVariationAPi = async (currentAttr) => {
+        const clone = [...variationForm];
+        const findIndex = clone.findIndex(({ _id }) => _id === currentAttr?.id);
+
+        if (findIndex !== -1) {
+            const findCurrentAttributes = { ...clone[findIndex] };
+            findCurrentAttributes.data = [...currentAttr?.data];
+            findCurrentAttributes.title = currentAttr?.title;
+
+            clone[findIndex] = findCurrentAttributes;
+        }
+        let filteredData = clone.filter((item) => item?.data?.length);
+        const data = {
+            attributes: [...filteredData],
+            variations: [...variations],
+        }
+        try {
+            const res = await axios.post(`${baseproductUrl}product/form_variation`, data, {
+                headers: {
+                    "Content-Type": "application/json; charset=UTF-8",
+                    Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+                },
+            })
+            let variationLists = JSON.parse(JSON.stringify(res.data));
+
+            variationLists?.forEach((element) => {
+                element.prices = [];
+                countryData?.forEach((item) => {
+                    element.prices.push({ country_id: { ...item } });
+                });
+            });
+            setVariantsData(variationLists);
+        } catch (error) {
+
+        }
+        setattributesVal(clone || []);
     };
-
-
+   
     return (
         <>
             <div className="card">
@@ -33,35 +108,28 @@ function VariationSec() {
                             <hr />
 
                             <div className="form-group col-6 mt-2">
-                                <label htmlFor="fromDate">Attributes:</label>
-                                <Multiselect
-                                    options={options}
-                                    selectedValues={selectedValues}
-                                    onSelect={onSelect}
-                                    onRemove={onRemove}
-                                    displayValue="name"
-                                    placeholder="Select options"
-                                    style={{
-                                        chips: { BiFontSize: '15px' },
-                                        searchBox: { padding: '0 8px' }
-                                    }}
-                                />
+                                {/* <label htmlFor="fromDate">Attributes:</label> */}
+                                <CustomSelectOption
+                                    allAttributes={variationForm}
+                                    data={options}
+                                    showCheckbox={true}
+                                    getSelectedOptions={getAttributes}
+                                >
+                                    <label>Attributes:</label>
+                                </CustomSelectOption>
                             </div>
 
                             <div className='row p-0 mt-5'>
-                                <div className="form-group col-4">
-                                    <input
-                                        style={{ height: '55px' }}
-                                        type="text"
-                                        className="form-control mt-0"
-                                        placeholder='attribute'
-                                        id="fromDate"
-                                        disabled
-                                    />
-                                </div>
-                                <div className="form-group col-8">
-                                    <TagsInput value={tags} onChange={handleTagsChange} />
-                                </div>
+                                {variationForm?.map((item) => {
+                                    return (
+                                        <AttributeItem
+                                            key={item._id}
+                                            item={item}
+                                            handleChoiceValues={getChoiceValues}
+                                            setUpdatedVariants={setVariantsData}
+                                        />
+                                    );
+                                })}
                             </div>
 
 
