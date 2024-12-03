@@ -5513,6 +5513,41 @@ export const deleteTRCRM_tr_lead = (id) => {
   return axiosInstance.delete(`${baseUrl}TRCRM_tr_lead/delete_type/${id}`);
 };
 
+
+
+export const getTRCRM_tr_traveller = (value) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_tr_traveller/user?page=${value?.page}&count=${value?.count}&start_date=${value?.start_date}&end_date=${value?.end_date}`);
+};
+export const addTRCRM_tr_traveller = (data) => {
+  return axiosInstance.post(`${baseUrl}TRCRM_tr_traveller/addType`, data);
+}
+export const deleteTRCRM_tr_traveller = (id) => {
+  return axiosInstance.delete(`${baseUrl}TRCRM_tr_traveller/delete_type/${id}`);
+};
+export const getIdTRCRM_tr_traveller = (id) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_tr_traveller/${id}`);
+};
+export const updateTRCRM_tr_traveller = (id, value) => {
+  return axiosInstance.put(`${baseUrl}TRCRM_tr_traveller/update_type/${id}`, value);
+};
+
+export const addLead_reminder = (data) => {
+  return axiosInstance.post(`${baseUrl}lead_reminder/addType`, data);
+}
+
+export const getLead_reminder = (value) => {
+  return axiosInstance.get(`${baseUrl}lead_reminder/user?page=${value?.page}&count=${value?.count}&start_date=${value?.start_date}&end_date=${value?.end_date}`);
+};
+export const deleteLead_reminder = (id) => {
+  return axiosInstance.delete(`${baseUrl}lead_reminder/delete_type/${id}`);
+};
+export const getIdLead_reminder = (id) => {
+  return axiosInstance.get(`${baseUrl}lead_reminder/${id}`);
+};
+export const updateLead_reminder = (id, value) => {
+  return axiosInstance.put(`${baseUrl}lead_reminder/update_type/${id}`, value);
+};
+
 // dataAll
 
 
@@ -5537,6 +5572,14 @@ export const getTravelAllOthers = () => {
 export const getTravelAllMealType = () => {
   return axiosInstance.get(`${baseUrl}TRCRM_meal_type_master/admin`);
 };
+
+export const getTRCRM_cost_label_master = () => {
+  return axiosInstance.get(`${baseUrl}TRCRM_cost_label_master/admin`);
+};
+export const getTRCRM_cost_type_master = () => {
+  return axiosInstance.get(`${baseUrl}TRCRM_cost_type_master/admin`);
+};
+
 export const addTravelPackage = (data) => {
   return axiosInstance.post(`${baseUrl}TRCRM_add_package/addType`, data);
 };
@@ -5554,6 +5597,15 @@ export const getTravelPackageList = (page, count) => {
 };
 export const addTravelRoomType = () => {
   return axiosInstance.get(`${baseUrl}TRCRM_room_type_master/admin`);
+};
+
+
+export const addTRCRM_tr_quotation_master = (data) => {
+  return axiosInstance.post(`${baseUrl}TRCRM_tr_quotation_master/addType`, data);
+};
+
+export const getTRCRM_tr_quotation_master = (value) => {
+  return axiosInstance.get(`${baseUrl}TRCRM_tr_quotation_master/user?page=${value?.page}&count=${value?.count}&start_date=${value?.start_date}&end_date=${value?.end_date}`);
 };
 
 

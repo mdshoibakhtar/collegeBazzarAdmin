@@ -28,7 +28,6 @@ const dummyData = [
         showToCustomers: false,
         dateUpdated: "2024-09-29",
     },
-    // Add more dummy data here if needed
 ];
 
 const FilesPage = ({ title }) => {
@@ -80,7 +79,7 @@ const FilesPage = ({ title }) => {
                             {dummyData.map((contact, i) => (
                                 <tr key={contact.id}>
                                     <td>{i + 1}</td>
-                                    
+
                                     <td>{contact.file}</td>
                                     <td>
                                         <div className="form-check form-switch">

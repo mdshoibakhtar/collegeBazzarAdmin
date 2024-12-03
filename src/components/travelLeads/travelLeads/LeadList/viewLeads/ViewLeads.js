@@ -11,6 +11,8 @@ import Ladger from './ladger/Ladger';
 import Contacts from './contacts/Contacts';
 import ServiceRequest from './serviceRequest/ServiceRequest';
 import LeadReminder from './reminder/Reminder';
+import TravelNote from './travelNote/TravelNote';
+import TravelFiles from './travelFiles/TravelFiles';
 
 const ViewLeads = () => {
     const breadCrumbsTitle = {
@@ -94,14 +96,10 @@ const ViewLeads = () => {
                                             <LeadReminder />
                                         </Tab>
                                         <Tab eventKey="Files" title="Files">
-                                            <div className="p-3">
-                                                <p>Files</p>
-                                            </div>
+                                            <TravelFiles />
                                         </Tab>
                                         <Tab eventKey="Notes" title="Notes">
-                                            <div className="p-3">
-                                                <p>Notes</p>
-                                            </div>
+                                            <TravelNote />
                                         </Tab>
                                         <Tab eventKey="Traveller" title="Traveller">
                                             <TravellerDetail />
