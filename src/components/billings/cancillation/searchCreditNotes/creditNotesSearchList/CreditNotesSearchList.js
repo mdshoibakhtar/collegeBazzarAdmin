@@ -1,53 +1,47 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
-function InvoiceSearchList({ totalCount, page, onChangeVal, data, count, confirm, cancel, loading }) {
+function CreditNotesSearchList() {
     return (
         <>
-            <div className="table-responsive active-projects style-1">
-                <div className="tbl-caption">
-                    <h4 className="heading mb-0 p-2">Invoice List</h4>
-                    <Link
-                        className="btn btn-primary btn-sm"
-                        to="/create-billings-invoice"
-                        role="button"
-                        aria-controls="offcanvasExample"
-                    >
-                        <span><i className="fa-sharp fa-solid fa-plus"></i></span>
-                        <span>Add Invoice</span>
-                    </Link>
+            <div className="table-responsive">
+                <div className=''>
+                    <h4 className='heading'>
+                        Invoice List
+                    </h4>
                 </div>
                 <table className="table table-bordered text-center align-middle">
                     <thead className='heading'>
                         <tr>
                             <th>Edit</th>
                             <th>Print</th>
-                            <th>PDF</th>
-                            <th>Email</th>
-                            <th>MSG</th>
-                            <th>Bill Type</th>
-                            <th>Bill No</th>
-                            <th>Bill Date</th>
+                            <th>Type</th>
+                            <th>Credit Note</th>
+                            <th>Date</th>
+                            <th>Invoice</th>
                             <th>Party</th>
-                            <th>Bill Amount</th>
-                            <th>Copy</th>
+                            <th>Invoice Amount</th>
+                            <th>Charges</th>
+                            <th>Refund</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
                         {/* Empty row for now */}
                         <tr>
-                            <td colSpan="12" className="text-muted">No data available</td>
+                            <td colSpan="7" className="text-muted">No data available</td>
                         </tr>
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colSpan="10" className="text-end"><strong>Total:</strong></td>
-                            <td colSpan="2"></td>
+                            <td colSpan="7" className="text-end"><strong>Total:</strong></td>
+                            <td>0</td>
+                            <td colSpan="3"></td>
                         </tr>
                     </tfoot>
                 </table>
             </div>
+
+            {/* Pagination and items per page */}
             <div className="d-flex justify-content-between align-items-center mt-3">
                 <nav>
                     <ul className="pagination mb-0">
@@ -73,4 +67,4 @@ function InvoiceSearchList({ totalCount, page, onChangeVal, data, count, confirm
     )
 }
 
-export default InvoiceSearchList
+export default CreditNotesSearchList
