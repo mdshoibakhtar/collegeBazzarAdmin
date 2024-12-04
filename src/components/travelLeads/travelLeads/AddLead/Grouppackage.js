@@ -1,40 +1,11 @@
+import { Select } from "antd";
 import React, { useState } from "react";
-import CustomInputField from "../../../../common/CustomInputField";
-
-export default function GroupPackage() {
-    const [rows, setRows] = useState([
-        {
-            from: "",
-            to: "",
-            departure: "",
-            return: "",
-            class: "",
-            domestic: false,
-            international: false,
-            flexibility: "",
-            preference: "",
-        }
-    ]); // Initialize as an array
-
-    const AddRow = () => {
-        setRows((prevRows) => [
-            ...prevRows,
-            {
-                from: "",
-                to: "",
-                departure: "",
-                return: "",
-                class: "",
-                domestic: false,
-                international: false,
-                flexibility: "",
-                preference: "",
-            },
-        ]);
-    };
+const { Option } = Select;
+export default function GroupPackage({ packageData, handleSearch, state, handleInputChangeGroupPackage, countryData, preference, AddRowGroupPackage, setGroupPackage, rowsGroupPackage }) {
+    console.log(packageData);
 
     const removeRow = (index) => {
-        setRows(prevRows => prevRows.filter((_, i) => i !== index));
+        setGroupPackage(prevRows => prevRows.filter((_, i) => i !== index));
     };
     return (
         <div>
@@ -43,34 +14,77 @@ export default function GroupPackage() {
                     <h4 className="heading mb-0">Group package</h4>
                 </div>
             </div>
-            {rows.map((row, index) =>
+            {rowsGroupPackage.map((row, index) =>
                 <div className="row" key={index}>
                     <div className="col-6">
                         <div className="mt-2">
-                            <label className="d-block my-1">Select countries to get available package list</label>
+                            <label className="form-label">Select countries to get available package list</label>
                             <div className="w-100">
-                                <select className="form-select" name="Status">
-                                    <option>Select Country</option>
-                                    <option>india </option>
+                                <select
+                                    className="form-select shadow"
+                                    name="country"
+                                    value={row.country}
+                                    onChange={(e) => handleInputChangeGroupPackage(index, "country", e.target.value)}
+                                >
+                                    <option selected>Open Select Country</option>
+                                    {countryData && countryData?.map((item) => {
+                                        return <option value={item?._id} key={item?._id}>{item?.name}</option>
+                                    })}
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div className="col-6">
                         <div className="mt-2">
-                            <label className="d-block my-1">Search Package Name</label>
-                            <div className="w-100">
-                                <CustomInputField type={"Search"} />
-                            </div>
+                            <label className="form-label">Search Package Name</label>
+                            <Select
+                                showSearch
+                                style={{ width: "100%", height: '40px' }}
+                                placeholder="Select Departure"
+                                optionFilterProp="children"
+                                className=""
+                                value={row.package_id}
+                                onSearch={handleSearch}
+                                onChange={(value) => handleInputChangeGroupPackage(index, "package_id", value)}
+                            >
+                                {packageData?.map((loc) => (
+                                    <Option key={loc._id} value={loc._id}>
+                                        {loc.package}
+                                    </Option>
+                                ))}
+                            </Select>
+                        </div>
+                    </div>
+                    <div className="col-3">
+                        <label className="form-label">State</label>
+                        <div className="w-100">
+                            <select
+                                className="form-select shadow"
+                                name="state"
+                                value={row.state}
+                                onChange={(e) => handleInputChangeGroupPackage(index, "state", e.target.value)}
+                            >
+                                <option selected>Open Select State</option>
+                                {state && state?.map((item) => {
+                                    return <option value={item?._id} key={item?._id}>{item?.name}</option>
+                                })}
+                            </select>
                         </div>
                     </div>
                     <div className="col-3">
                         <div className="mt-2">
-                            <label className="d-block my-1">Preference</label>
+                            <label className="form-label">Preference</label>
                             <div className="w-100">
-                                <select className="form-select">
-                                    <option></option>
-                                    <option>All</option>
+                                <select
+                                    className="form-select shadow"
+                                    name="preference"
+                                    value={row.preference}
+                                    onChange={(e) => handleInputChangeGroupPackage(index, "preference", e.target.value)}
+                                >
+                                    <option selected>Open Select Preference</option>
+                                    {preference && preference?.map((item) => {
+                                        return <option value={item?._id} key={item?._id}>{item?.name}</option>
+                                    })}
                                 </select>
                             </div>
                         </div>
@@ -78,9 +92,13 @@ export default function GroupPackage() {
 
                     <div className="col-12">
                         <div className="mt-2">
-                            <label className="d-block my-1">Remark</label>
+                            <label className="form-label">Remark</label>
                             <div className="w-100">
-                                <textarea className="w-100 border" style={{ height: "100px" }} />
+                                <textarea className="form-control" placeholder="Remark" style={{ height: "100px" }}
+                                    name="remark"
+                                    value={row.remark}
+                                    onChange={(e) => handleInputChangeGroupPackage(index, "remark", e.target.value)}
+                                />
                             </div>
                         </div>
                     </div>
@@ -90,7 +108,7 @@ export default function GroupPackage() {
                 </div>
             )}
             <div className="my-4">
-                <button className="btn m-0 btn-outline-primary" onClick={AddRow}> + Add more</button>
+                <button className="btn m-0 btn-outline-primary" onClick={AddRowGroupPackage}> + Add more</button>
             </div>
         </div>
     )

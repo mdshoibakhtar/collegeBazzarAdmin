@@ -146,7 +146,7 @@ const CruiseAdd = () => {
                     <div className="card-body p-0">
                         <div className="table-responsive active-projects style-1">
                             <div className="tbl-caption tbl-caption-2">
-                                <h4 className="heading mb-0 p-2">{params?.id ? 'Update' : 'Add'} Travel Other Master </h4>
+                                <h4 className="heading mb-0 p-2">{params?.id ? 'Update' : 'Add'} Travel Cruise Master</h4>
                             </div>
                             <form className="tbl-captionn">
                                 <div className="row">

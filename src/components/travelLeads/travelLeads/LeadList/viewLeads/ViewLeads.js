@@ -2,8 +2,17 @@
 import React from 'react'
 import Breadcrumbs from '../../../../../common/breadcrumb/Breadcrumbs';
 import { Button, Tab, Tabs } from 'react-bootstrap';
-import { Form, Link } from 'react-router-dom';
+import { Form, Link, useParams } from 'react-router-dom';
 import About from './about/About';
+import TravelQuoteListComp from './travelQuoteListComp/TravelQuoteListComp';
+import TravellerDetail from './traveller/TravellerDetail';
+import BillingDetail from './Billing/Billing';
+import Ladger from './ladger/Ladger';
+import Contacts from './contacts/Contacts';
+import ServiceRequest from './serviceRequest/ServiceRequest';
+import LeadReminder from './reminder/Reminder';
+import TravelNote from './travelNote/TravelNote';
+import TravelFiles from './travelFiles/TravelFiles';
 
 const ViewLeads = () => {
     const breadCrumbsTitle = {
@@ -12,10 +21,14 @@ const ViewLeads = () => {
         title_2: 'View Lead',
         path_2: ``
     };
+
+    const paramsAll = useParams()
+    // console.log(paramsAll);
+
     return (
         <>
             <Breadcrumbs breadCrumbsTitle={breadCrumbsTitle} />
-            <div style={{ margin: "14px" }}>
+            <div>
                 <div className="card">
                     <div className="card-body p-0">
                         <div className="table-responsive active-projects style-1">
@@ -30,10 +43,49 @@ const ViewLeads = () => {
                                 </div>
                             </div>
                             <form className="tbl-captionn tbl-captionn-lead">
-                                <div className="row">
+                                <div className="row tab-color-change">
                                     <Tabs defaultActiveKey="about" id="lead-tabs" className="mb-3">
                                         <Tab eventKey="about" title="About">
                                             <About />
+                                        </Tab>
+                                        <Tab eventKey="Ledger" title="Ledger">
+                                            <Ladger />
+                                        </Tab>
+                                        <Tab eventKey="Contacts" title="Contacts">
+                                            <Contacts paramsAll={paramsAll} />
+                                        </Tab>
+                                        <Tab eventKey="Service Request" title="Service Request">
+                                            <ServiceRequest paramsAll={paramsAll} />
+                                        </Tab>
+                                        {/* <Tab eventKey="Keep In Touch" title="Keep In Touch">
+                                            <div className="p-3">
+                                                <p>Keep In Touch</p>
+                                            </div>
+                                        </Tab> */}
+                                        <Tab eventKey="Tasks" title="Tasks">
+                                            <div className="p-3">
+                                                <p>Tasks</p>
+                                            </div>
+                                        </Tab>
+                                        <Tab eventKey="Tickets" title="Tickets">
+                                            <div className="p-3">
+                                                <p>Tickets</p>
+                                            </div>
+                                        </Tab>
+                                        <Tab eventKey="Vault" title="Vault">
+                                            <div className="p-3">
+                                                <p>Vault</p>
+                                            </div>
+                                        </Tab>
+                                        <Tab eventKey="Map" title="Map">
+                                            <div className="p-3">
+                                                <p>Map</p>
+                                            </div>
+                                        </Tab>
+                                        <Tab eventKey="Expenses" title="Expenses">
+                                            <div className="p-3">
+                                                <p>Expenses</p>
+                                            </div>
                                         </Tab>
                                         <Tab eventKey="history" title="History">
                                             <div className="p-3">
@@ -41,24 +93,16 @@ const ViewLeads = () => {
                                             </div>
                                         </Tab>
                                         <Tab eventKey="reminders" title="Reminders">
-                                            <div className="p-3">
-                                                <p>Reminders Content</p>
-                                            </div>
+                                            <LeadReminder />
                                         </Tab>
                                         <Tab eventKey="Files" title="Files">
-                                            <div className="p-3">
-                                                <p>Files</p>
-                                            </div>
+                                            <TravelFiles />
                                         </Tab>
                                         <Tab eventKey="Notes" title="Notes">
-                                            <div className="p-3">
-                                                <p>Notes</p>
-                                            </div>
+                                            <TravelNote />
                                         </Tab>
                                         <Tab eventKey="Traveller" title="Traveller">
-                                            <div className="p-3">
-                                                <p>Traveller</p>
-                                            </div>
+                                            <TravellerDetail />
                                         </Tab>
                                         <Tab eventKey="FollowUp" title="Follow Up">
                                             <div className="p-3">
@@ -66,9 +110,7 @@ const ViewLeads = () => {
                                             </div>
                                         </Tab>
                                         <Tab eventKey="Quote" title="Quote">
-                                            <div className="p-3">
-                                                <p>Quote</p>
-                                            </div>
+                                            <TravelQuoteListComp />
                                         </Tab>
                                         <Tab eventKey="Suppliers" title="Suppliers">
                                             <div className="p-3">
@@ -76,9 +118,7 @@ const ViewLeads = () => {
                                             </div>
                                         </Tab>
                                         <Tab eventKey="Billing" title="Billing">
-                                            <div className="p-3">
-                                                <p>Billing</p>
-                                            </div>
+                                            <BillingDetail />
                                         </Tab>
                                     </Tabs>
                                 </div>

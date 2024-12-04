@@ -9,7 +9,7 @@ function AddVault(props) {
     username: '',
     password: '',
     shortDescription: '',
-    visibility: 'all_staff', // default visibility
+    visibility: 'all_staff',
     shareInProjects: false
   });
 
